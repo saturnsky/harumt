@@ -1,0 +1,595 @@
+{
+  "classes": {
+    "五段-ラ行": {
+      "posBase": [
+        "動詞",
+        "一般",
+        "*",
+        "*",
+        "五段-ラ行"
+      ],
+      "stemRule": {
+        "surfaceStrip": "る",
+        "readingStrip": "ル"
+      },
+      "idBanks": {
+        "katakana": {
+          "未然形-一般": {
+            "leftId": 1409,
+            "rightId": 1409
+          },
+          "未然形-撥音便": {
+            "leftId": 1412,
+            "rightId": 1412
+          },
+          "連用形-一般": {
+            "leftId": 1429,
+            "rightId": 1429
+          },
+          "連用形-促音便": {
+            "leftId": 1432,
+            "rightId": 1432
+          },
+          "連用形-撥音便": {
+            "leftId": 1435,
+            "rightId": 1435
+          },
+          "連用形-融合": {
+            "leftId": 1438,
+            "rightId": 1438
+          },
+          "終止形-一般": {
+            "leftId": 1415,
+            "rightId": 1415
+          },
+          "終止形-撥音便": {
+            "leftId": 1418,
+            "rightId": 1418
+          },
+          "連体形-一般": {
+            "leftId": 1422,
+            "rightId": 1422
+          },
+          "連体形-撥音便": {
+            "leftId": 1425,
+            "rightId": 1425
+          },
+          "仮定形-一般": {
+            "leftId": 1397,
+            "rightId": 1397
+          },
+          "仮定形-融合": {
+            "leftId": 1400,
+            "rightId": 1400
+          },
+          "命令形": {
+            "leftId": 1403,
+            "rightId": 1403
+          },
+          "意志推量形": {
+            "leftId": 1406,
+            "rightId": 1406
+          }
+        },
+        "kanji": {
+          "未然形-一般": {
+            "leftId": 1408,
+            "rightId": 1408
+          },
+          "未然形-撥音便": {
+            "leftId": 1411,
+            "rightId": 1411
+          },
+          "連用形-一般": {
+            "leftId": 1428,
+            "rightId": 1428
+          },
+          "連用形-促音便": {
+            "leftId": 1431,
+            "rightId": 1431
+          },
+          "連用形-撥音便": {
+            "leftId": 1434,
+            "rightId": 1434
+          },
+          "連用形-融合": {
+            "leftId": 1437,
+            "rightId": 1437
+          },
+          "終止形-一般": {
+            "leftId": 1414,
+            "rightId": 1414
+          },
+          "終止形-撥音便": {
+            "leftId": 1417,
+            "rightId": 1417
+          },
+          "連体形-一般": {
+            "leftId": 1421,
+            "rightId": 1421
+          },
+          "連体形-撥音便": {
+            "leftId": 1424,
+            "rightId": 1424
+          },
+          "仮定形-一般": {
+            "leftId": 1396,
+            "rightId": 1396
+          },
+          "仮定形-融合": {
+            "leftId": 1399,
+            "rightId": 1399
+          },
+          "命令形": {
+            "leftId": 1402,
+            "rightId": 1402
+          },
+          "意志推量形": {
+            "leftId": 1405,
+            "rightId": 1405
+          }
+        }
+      },
+      "forms": [
+        {
+          "pos6": "未然形-一般",
+          "surfaceSuffixes": [
+            "ら"
+          ],
+          "readingSuffixes": [
+            "ラ"
+          ],
+          "costDelta": 1643
+        },
+        {
+          "pos6": "未然形-撥音便",
+          "surfaceSuffixes": [
+            "ん"
+          ],
+          "readingSuffixes": [
+            "ン"
+          ],
+          "costDelta": 1785
+        },
+        {
+          "pos6": "連用形-一般",
+          "surfaceSuffixes": [
+            "り"
+          ],
+          "readingSuffixes": [
+            "リ"
+          ],
+          "costDelta": -1182
+        },
+        {
+          "pos6": "連用形-促音便",
+          "surfaceSuffixes": [
+            "っ"
+          ],
+          "readingSuffixes": [
+            "ッ"
+          ],
+          "costDelta": 925
+        },
+        {
+          "pos6": "連用形-撥音便",
+          "surfaceSuffixes": [
+            "ん"
+          ],
+          "readingSuffixes": [
+            "ン"
+          ],
+          "costDelta": 1347
+        },
+        {
+          "pos6": "連用形-融合",
+          "surfaceSuffixes": [
+            "りゃ"
+          ],
+          "readingSuffixes": [
+            "リャ"
+          ],
+          "costDelta": 1393
+        },
+        {
+          "pos6": "終止形-一般",
+          "surfaceSuffixes": [
+            "る"
+          ],
+          "readingSuffixes": [
+            "ル"
+          ],
+          "costDelta": 0,
+          "terminal": true
+        },
+        {
+          "pos6": "終止形-撥音便",
+          "surfaceSuffixes": [
+            "ん"
+          ],
+          "readingSuffixes": [
+            "ン"
+          ],
+          "costDelta": 2252
+        },
+        {
+          "pos6": "連体形-一般",
+          "surfaceSuffixes": [
+            "る"
+          ],
+          "readingSuffixes": [
+            "ル"
+          ],
+          "costDelta": 192
+        },
+        {
+          "pos6": "連体形-撥音便",
+          "surfaceSuffixes": [
+            "ん"
+          ],
+          "readingSuffixes": [
+            "ン"
+          ],
+          "costDelta": 2047
+        },
+        {
+          "pos6": "仮定形-一般",
+          "surfaceSuffixes": [
+            "れ"
+          ],
+          "readingSuffixes": [
+            "レ"
+          ],
+          "costDelta": 2855
+        },
+        {
+          "pos6": "仮定形-融合",
+          "surfaceSuffixes": [
+            "りゃ"
+          ],
+          "readingSuffixes": [
+            "リャ"
+          ],
+          "costDelta": 1142
+        },
+        {
+          "pos6": "命令形",
+          "surfaceSuffixes": [
+            "れ",
+            "ろ"
+          ],
+          "readingSuffixes": [
+            "レ",
+            "ロ"
+          ],
+          "costDelta": 710
+        },
+        {
+          "pos6": "意志推量形",
+          "surfaceSuffixes": [
+            "ろ",
+            "ろう",
+            "ろっ"
+          ],
+          "readingSuffixes": [
+            "ロ",
+            "ロウ",
+            "ロッ"
+          ],
+          "costDelta": 1005
+        }
+      ]
+    },
+    "下一段-ラ行": {
+      "posBase": [
+        "動詞",
+        "一般",
+        "*",
+        "*",
+        "下一段-ラ行"
+      ],
+      "stemRule": {
+        "surfaceStrip": "る",
+        "readingStrip": "ル"
+      },
+      "idBanks": {
+        "common": {
+          "未然形-一般": {
+            "leftId": 1272,
+            "rightId": 1272
+          },
+          "連用形-一般": {
+            "leftId": 1284,
+            "rightId": 1284
+          },
+          "終止形-一般": {
+            "leftId": 1275,
+            "rightId": 1275
+          },
+          "終止形-撥音便": {
+            "leftId": 1277,
+            "rightId": 1277
+          },
+          "連体形-一般": {
+            "leftId": 1279,
+            "rightId": 1279
+          },
+          "連体形-撥音便": {
+            "leftId": 1281,
+            "rightId": 1281
+          },
+          "仮定形-一般": {
+            "leftId": 1264,
+            "rightId": 1264
+          },
+          "仮定形-融合": {
+            "leftId": 1266,
+            "rightId": 1266
+          },
+          "命令形": {
+            "leftId": 1268,
+            "rightId": 1268
+          },
+          "意志推量形": {
+            "leftId": 1270,
+            "rightId": 1270
+          }
+        }
+      },
+      "forms": [
+        {
+          "pos6": "未然形-一般",
+          "surfaceSuffixes": [
+            ""
+          ],
+          "readingSuffixes": [
+            ""
+          ],
+          "costDelta": 1906
+        },
+        {
+          "pos6": "連用形-一般",
+          "surfaceSuffixes": [
+            ""
+          ],
+          "readingSuffixes": [
+            ""
+          ],
+          "costDelta": -447
+        },
+        {
+          "pos6": "終止形-一般",
+          "surfaceSuffixes": [
+            "る"
+          ],
+          "readingSuffixes": [
+            "ル"
+          ],
+          "costDelta": 0,
+          "terminal": true
+        },
+        {
+          "pos6": "終止形-撥音便",
+          "surfaceSuffixes": [
+            "ん"
+          ],
+          "readingSuffixes": [
+            "ン"
+          ],
+          "costDelta": 1395
+        },
+        {
+          "pos6": "連体形-一般",
+          "surfaceSuffixes": [
+            "る"
+          ],
+          "readingSuffixes": [
+            "ル"
+          ],
+          "costDelta": -610
+        },
+        {
+          "pos6": "連体形-撥音便",
+          "surfaceSuffixes": [
+            "ん"
+          ],
+          "readingSuffixes": [
+            "ン"
+          ],
+          "costDelta": 961
+        },
+        {
+          "pos6": "仮定形-一般",
+          "surfaceSuffixes": [
+            "れ"
+          ],
+          "readingSuffixes": [
+            "レ"
+          ],
+          "costDelta": 1058
+        },
+        {
+          "pos6": "仮定形-融合",
+          "surfaceSuffixes": [
+            "りゃ"
+          ],
+          "readingSuffixes": [
+            "リャ"
+          ],
+          "costDelta": 267
+        },
+        {
+          "pos6": "命令形",
+          "surfaceSuffixes": [
+            "よ",
+            "ろ"
+          ],
+          "readingSuffixes": [
+            "ヨ",
+            "ロ"
+          ],
+          "costDelta": -287
+        },
+        {
+          "pos6": "意志推量形",
+          "surfaceSuffixes": [
+            "よ",
+            "よう",
+            "よっ"
+          ],
+          "readingSuffixes": [
+            "ヨ",
+            "ヨウ",
+            "ヨッ"
+          ],
+          "costDelta": 423
+        }
+      ]
+    },
+    "形容詞": {
+      "posBase": [
+        "形容詞",
+        "一般",
+        "*",
+        "*",
+        "形容詞"
+      ],
+      "stemRule": {
+        "surfaceStrip": "い",
+        "readingStrip": "イ"
+      },
+      "idBanks": {
+        "common": {
+          "語幹-一般": {
+            "leftId": 5170,
+            "rightId": 5170
+          },
+          "連用形-一般": {
+            "leftId": 5176,
+            "rightId": 5176
+          },
+          "連用形-促音便": {
+            "leftId": 5178,
+            "rightId": 5178
+          },
+          "連用形-ウ音便": {
+            "leftId": 5174,
+            "rightId": 5174
+          },
+          "終止形-一般": {
+            "leftId": 5166,
+            "rightId": 5166
+          },
+          "連体形-一般": {
+            "leftId": 5172,
+            "rightId": 5172
+          },
+          "仮定形-一般": {
+            "leftId": 5160,
+            "rightId": 5160
+          },
+          "仮定形-融合": {
+            "leftId": 5162,
+            "rightId": 5162
+          },
+          "意志推量形": {
+            "leftId": 5164,
+            "rightId": 5164
+          }
+        }
+      },
+      "forms": [
+        {
+          "pos6": "語幹-一般",
+          "surfaceSuffixes": [
+            ""
+          ],
+          "readingSuffixes": [
+            ""
+          ],
+          "costDelta": 0
+        },
+        {
+          "pos6": "連用形-一般",
+          "surfaceSuffixes": [
+            "く"
+          ],
+          "readingSuffixes": [
+            "ク"
+          ],
+          "costDelta": 0
+        },
+        {
+          "pos6": "連用形-促音便",
+          "surfaceSuffixes": [
+            "かっ"
+          ],
+          "readingSuffixes": [
+            "カッ"
+          ],
+          "costDelta": 5000
+        },
+        {
+          "pos6": "連用形-ウ音便",
+          "fusion": "u_onbin",
+          "costDelta": 0
+        },
+        {
+          "pos6": "終止形-一般",
+          "surfaceSuffixes": [
+            "い"
+          ],
+          "readingSuffixes": [
+            "イ"
+          ],
+          "costDelta": 0,
+          "terminal": true
+        },
+        {
+          "pos6": "連体形-一般",
+          "surfaceSuffixes": [
+            "い"
+          ],
+          "readingSuffixes": [
+            "イ"
+          ],
+          "costDelta": 0
+        },
+        {
+          "pos6": "仮定形-一般",
+          "surfaceSuffixes": [
+            "けれ"
+          ],
+          "readingSuffixes": [
+            "ケレ"
+          ],
+          "costDelta": 5000
+        },
+        {
+          "pos6": "仮定形-融合",
+          "surfaceSuffixes": [
+            "きゃ",
+            "けりゃ"
+          ],
+          "readingSuffixes": [
+            "キャ",
+            "ケリャ"
+          ],
+          "costDelta": 5000
+        },
+        {
+          "pos6": "意志推量形",
+          "surfaceSuffixes": [
+            "かろ",
+            "かろう"
+          ],
+          "readingSuffixes": [
+            "カロ",
+            "カロウ"
+          ],
+          "costDelta": 5000
+        }
+      ]
+    }
+  }
+}

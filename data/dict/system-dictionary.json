@@ -1,0 +1,20 @@
+{
+  "id": "sudachi-20260116-full-861e62e11d74",
+  "url": "https://github.com/saturnsky/harumt/releases/download/dict-sudachi-20260116-full-861e62e11d74/",
+  "files": [
+    {
+      "name": "system.hrdic",
+      "size": 191821025,
+      "sha256": "9617f4e58a6e15b1ed88902dbe81267e6d508cabedad95cd21c924a435d1157c",
+      "asset": "system.hrdic.gz",
+      "assetSize": 66853635
+    },
+    {
+      "name": "system.hridx",
+      "size": 110584720,
+      "sha256": "49ef700521a59ffe6e4753f80ca1d3a9336415392b4f3712b881fe5633785514",
+      "asset": "system.hridx.gz",
+      "assetSize": 42856125
+    }
+  ]
+}

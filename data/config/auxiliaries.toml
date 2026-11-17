@@ -1,0 +1,92 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[[aux]]
+pos4 = "助動詞-マス"
+always = ["polite"]
+[[aux.variants]]
+pos5_contains = "意志推量形"
+flags = ["volitional"]
+
+
+[[aux]]
+pos4 = "助動詞-タ"
+default = ["past"]
+[[aux.variants]]
+pos5_contains = "仮定形"
+flags = ["conditional_tara"]
+
+
+[[aux]]
+pos4 = "助動詞-ナイ"
+default = ["negative"]
+[[aux.variants]]
+pos5_contains = "仮定形"
+surface_in = ["なきゃ", "なけりゃ"]
+flags = ["obligation"]
+
+
+[[aux]]
+pos4 = "助動詞-ヌ"
+default = ["negative"]
+
+
+[[aux]]
+pos4 = "助動詞-タイ"
+default = ["desire"]
+
+
+[[aux]]
+pos4 = "文語助動詞-ベシ"
+default = ["obligation"]
+
+
+[[aux]]
+pos4 = "助動詞-マイ"
+default = ["negative_volition"]
+
+
+[[aux]]
+dictionary_form = "てる"
+default = ["progressive"]
+
+
+[[aux]]
+pos4 = "助動詞-デス"
+always = ["polite"]
+default = ["copula"]
+[[aux.variants]]
+pos5_contains = "意志推量形"
+flags = ["conjecture"]
+
+
+[[aux]]
+pos4_in = ["助動詞-ダ", "助動詞-ジャ", "助動詞-ヤ"]
+default = ["copula"]
+[[aux.variants]]
+pos5_contains = "仮定形"
+flags = ["conditional_nara"]
+[[aux.variants]]
+pos5_eq = "連用形-ニ"
+flags = ["adverbial_ni"]
+[[aux.variants]]
+pos5_contains = "意志推量形"
+flags = ["conjecture"]

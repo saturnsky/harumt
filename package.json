@@ -1,0 +1,74 @@
+{
+  "name": "harumt",
+  "version": "0.1.0",
+  "description": "Japanese-to-Korean RBMT (Rule-Based Machine Translation) System",
+  "author": "saturnsky",
+  "license": "Apache-2.0",
+  "keywords": [
+    "rbmt",
+    "rule-based",
+    "machine-translation",
+    "translator",
+    "translation",
+    "japanese",
+    "korean",
+    "japanese-to-korean",
+    "sudachi"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saturnsky/harumt.git"
+  },
+  "homepage": "https://github.com/saturnsky/harumt#readme",
+  "bugs": {
+    "url": "https://github.com/saturnsky/harumt/issues"
+  },
+  "funding": "https://github.com/sponsors/saturnsky",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/public/index.d.ts",
+      "default": "./dist/public/index.js"
+    },
+    "./webext": {
+      "types": "./dist/webext-provider.d.ts",
+      "default": "./dist/webext-provider.js"
+    },
+    "./webext-manifest": {
+      "types": "./dist/webext-manifest.d.ts",
+      "default": "./dist/webext-manifest.js"
+    }
+  },
+  "bin": {
+    "harumt-diagnose": "dist/scripts/diagnose.js",
+    "harumt-fetch-dictionary": "dist/scripts/fetch-system-dictionary.js",
+    "harumt-webext-manifest": "dist/webext-manifest.js"
+  },
+  "files": [
+    "dist",
+    "data",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "README.en.md",
+    "README.md",
+    "LICENSE.Apache",
+    "THIRD_PARTY_NOTICES.md",
+    "licenses",
+    "src/third-party/**/LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "smol-toml": "^1.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^6.0.3"
+  }
+}

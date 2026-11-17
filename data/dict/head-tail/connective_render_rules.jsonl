@@ -1,0 +1,67 @@
+{"surface":"けど","korean":"지만","pastBehavior":"carry","copulaParticleKey":"이지만/지만","connectiveClass":"adversative"}
+{"surface":"けどー","korean":"지만","pastBehavior":"carry","copulaParticleKey":"이지만/지만","connectiveClass":"adversative"}
+{"surface":"が","korean":"지만","pastBehavior":"carry","copulaParticleKey":"이지만/지만","connectiveClass":"adversative"}
+{"surface":"けれど","korean":"지만","pastBehavior":"carry","copulaParticleKey":"이지만/지만","connectiveClass":"adversative"}
+{"surface":"けれども","korean":"지만","pastBehavior":"carry","copulaParticleKey":"이지만/지만","connectiveClass":"adversative"}
+{"surface":"けども","korean":"지만","pastBehavior":"carry","copulaParticleKey":"이지만/지만","connectiveClass":"adversative"}
+{"surface":"のに","korean":"는데","pastBehavior":"carry","adjEnding":"ㄴ/은데"}
+{"surface":"んに","korean":"는데","pastBehavior":"carry","adjEnding":"ㄴ/은데"}
+{"surface":"たら","korean":"면","pastBehavior":"carry","pastEnding":"았/었다면","adjPastEnding":"았/었다면","copulaParticleKey":"이면/면"}
+{"surface":"だら","korean":"면","pastBehavior":"carry","pastEnding":"았/었다면","adjPastEnding":"았/었다면","copulaParticleKey":"이면/면"}
+{"surface":"ば","korean":"면","pastBehavior":"ignore"}
+{"surface":"なけりゃ","korean":"면","pastBehavior":"ignore"}
+{"surface":"なら","korean":"ㄴ/는다면","pastBehavior":"carry","pastEnding":"았/었다면","adjEnding":"다면","adjPastEnding":"았/었다면","copulaParticleKey":"이라면/라면"}
+{"surface":"ならば","korean":"ㄴ/는다면","pastBehavior":"carry","pastEnding":"았/었다면","adjEnding":"다면","adjPastEnding":"았/었다면"}
+{"surface":"と","korean":"면","pastBehavior":"ignore"}
+{"surface":"ては","korean":"아/어서","pastBehavior":"ignore","suffixText":"는","conditionalQuoteEllipsis":"prohibitive_concern"}
+{"surface":"では","korean":"아/어서","pastBehavior":"ignore","suffixText":"는","conditionalQuoteEllipsis":"prohibitive_concern"}
+{"surface":"か","korean":"는지","pastBehavior":"carry","adjEnding":"ㄴ/은지"}
+{"surface":"のか","korean":"는지","pastBehavior":"carry","adjEnding":"ㄴ/은지"}
+{"surface":"のかあ","korean":"는지","pastBehavior":"carry","adjEnding":"ㄴ/은지"}
+{"surface":"のかー","korean":"는지","pastBehavior":"carry","adjEnding":"ㄴ/은지"}
+{"surface":"んか","korean":"는지","pastBehavior":"carry","adjEnding":"ㄴ/은지"}
+{"surface":"かと","korean":"는지","pastBehavior":"carry","adjEnding":"ㄴ/은지"}
+{"surface":"かって","korean":"냐고","pastBehavior":"carry","adjEnding":"냐고","copulaParticleKey":"이냐고/냐고"}
+{"surface":"のに対し","korean":"는 데 반해","pastBehavior":"carry","pastEnding":"ㄴ/은 데 반해","adjEnding":"ㄴ/은 데 반해","adjPastEnding":"았/었던 데 반해"}
+{"surface":"のに対して","korean":"는 데 반해","pastBehavior":"carry","pastEnding":"ㄴ/은 데 반해","adjEnding":"ㄴ/은 데 반해","adjPastEnding":"았/었던 데 반해"}
+{"surface":"のに対しては","korean":"는 데 반해서는","pastBehavior":"carry","pastEnding":"ㄴ/은 데 반해서는","adjEnding":"ㄴ/은 데 반해서는","adjPastEnding":"았/었던 데 반해서는"}
+{"surface":"のに対しても","korean":"는 데 반해서도","pastBehavior":"carry","pastEnding":"ㄴ/은 데 반해서도","adjEnding":"ㄴ/은 데 반해서도","adjPastEnding":"았/었던 데 반해서도"}
+{"surface":"し","korean":"고","pastBehavior":"carry","copulaParticleKey":"이고/고"}
+{"surface":"__shi_reason","korean":"(으)니","pastBehavior":"carry","copulaParticleKey":"이니/니"}
+{"surface":"__te_result_chain","korean":"다가","pastBehavior":"carry"}
+{"surface":"ものの","korean":"지만","pastBehavior":"carry"}
+{"surface":"くせに","korean":"ㄴ/는","pastBehavior":"carry","pastEnding":"ㄴ/은","adjEnding":"ㄴ/은","adjPastEnding":"았/었던","suffixText":" 주제에"}
+{"surface":"のくせに","korean":"ㄴ/는","pastBehavior":"carry","pastEnding":"ㄴ/은","adjEnding":"ㄴ/은","adjPastEnding":"았/었던","suffixText":" 주제에"}
+{"surface":"ずに","korean":"고","pastBehavior":"carry"}
+{"surface":"ぬに","korean":"고","pastBehavior":"carry"}
+{"surface":"であり","korean":"(으)며","pastBehavior":"carry"}
+{"surface":"__alternative_ka","korean":"거나","pastBehavior":"carry","copulaParticleKey":"이거나/거나"}
+{"surface":"たり","korean":"거나","pastBehavior":"carry","copulaParticleKey":"이거나/거나"}
+{"surface":"とか","korean":"ㄴ다/는다","pastBehavior":"carry","pastEnding":"았/었다","adjEnding":"다","adjPastEnding":"았/었다","suffixText":"든가","copulaParticleKey":"이라/라"}
+{"surface":"ながら","korean":"(으)면서","pastBehavior":"ignore","adjEnding":"(으)면서도"}
+{"surface":"ながらも","korean":"(으)면서도","pastBehavior":"ignore"}
+{"surface":"でありながら","korean":"(으)면서도","pastBehavior":"ignore"}
+{"surface":"つつ","korean":"(으)면서","pastBehavior":"ignore"}
+{"surface":"つつも","korean":"(으)면서도","pastBehavior":"ignore"}
+{"surface":"ので","korean":"아/어서","pastBehavior":"natural","copulaParticleKey":"이라서/라서"}
+{"surface":"から","korean":"(으)니까","pastBehavior":"carry","copulaParticleKey":"이니까/니까"}
+{"surface":"からこそ","korean":"(으)니까","pastBehavior":"carry"}
+{"surface":"べくして","korean":"ㄹ/을","pastBehavior":"ignore","suffixText":" 수밖에 없어서"}
+{"surface":"ても","korean":"아/어도","pastBehavior":"ignore"}
+{"surface":"でも","korean":"아/어도","pastBehavior":"ignore","copulaParticleKey":"이라도/라도"}
+{"surface":"たって","korean":"아/어도","pastBehavior":"ignore"}
+{"surface":"だって","korean":"아/어도","pastBehavior":"ignore"}
+{"surface":"てでも","korean":"아/어서","pastBehavior":"ignore","suffixText":"라도"}
+{"surface":"ででも","korean":"아/어서","pastBehavior":"ignore","suffixText":"라도"}
+{"surface":"__paired_volitional_to","korean":"든","pastBehavior":"ignore"}
+{"surface":"のであれ","korean":"든","pastBehavior":"ignore","adjEnding":"든","copulaParticleKey":"이든/든"}
+{"surface":"であれ","korean":"든","pastBehavior":"ignore","adjEnding":"든","copulaParticleKey":"이든/든"}
+{"surface":"も何も","korean":"고","pastBehavior":"natural","suffixText":" 뭐고","adjEnding":"고"}
+{"surface":"も","korean":"지만","pastBehavior":"carry"}
+{"surface":"にもかかわらず","korean":"는데","pastBehavior":"carry","adjEnding":"ㄴ/은데","suffixText":"도"}
+{"surface":"__renyou_mo","korean":"아/어도","pastBehavior":"ignore"}
+{"surface":"__renyou_mo_focus_ellipsis","korean":"지","pastBehavior":"ignore","suffixText":"도"}
+{"surface":"であれば","korean":"면","pastBehavior":"ignore","adjEnding":"다면","copulaParticleKey":"이라면/라면"}
+{"surface":"であっても","korean":"더라도","adjEnding":"더라도","copulaParticleKey":"이더라도/더라도","pastBehavior":"ignore"}
+{"surface":"であろうと","korean":"든","pastBehavior":"ignore","adjEnding":"든","copulaParticleKey":"이든/든"}
+{"surface":"とも","korean":"아/어도","pastBehavior":"ignore"}

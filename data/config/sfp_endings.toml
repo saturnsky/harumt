@@ -1,0 +1,120 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[sfp.ne]
+handled_by = "table"
+verb.casual_plain  = { ending_key = "네", polite = false }
+verb.casual_polite = { ending_key = "네", post_suffix = "요", polite = true }
+verb.formal_plain  = { ending_key = "네", polite = false }
+verb.formal_polite = { ending_key = "네", post_suffix = "요", polite = true }
+
+
+
+[sfp.na_excl]
+handled_by = "table"
+verb.casual_plain  = { ending_key = "구나", polite = false }
+verb.casual_polite = { ending_key = "군", post_suffix = "요", polite = true }
+verb.formal_plain  = { ending_key = "구나", polite = false }
+verb.formal_polite = { ending_key = "군", post_suffix = "요", polite = true }
+
+
+
+[sfp.kana]
+handled_by = "table"
+verb.casual_plain  = { ending_key = "ㄹ/을까", polite = false }
+verb.casual_polite = { ending_key = "ㄹ/을까", polite = false }
+verb.formal_plain  = { ending_key = "ㄹ/을까", polite = false }
+verb.formal_polite = { ending_key = "ㄹ/을까", polite = false }
+
+
+
+[sfp.jan]
+handled_by = "table"
+verb.casual_plain  = { ending_key = "잖아", polite = false }
+verb.casual_polite = { ending_key = "잖아", polite = false }
+verb.formal_plain  = { ending_key = "잖아", polite = false }
+verb.formal_polite = { ending_key = "잖아", polite = false }
+
+
+
+[sfp.yone_confirm]
+handled_by = "table"
+verb.casual_plain  = { ending_key = "지", polite = false }
+verb.casual_polite = { ending_key = "죠", polite = true }
+verb.formal_plain  = { ending_key = "지", polite = false }
+verb.formal_polite = { ending_key = "지", post_suffix = "요", polite = true }
+
+
+
+[sfp.kke]
+handled_by = "table"
+verb.casual_plain  = { ending_key = "던가", polite = false }
+verb.casual_polite = { ending_key = "던가", polite = false }
+verb.formal_plain  = { ending_key = "던가", polite = false }
+verb.formal_polite = { ending_key = "던가", polite = false }
+
+
+
+[sfp.explanatory]
+handled_by = "table"
+verb.casual_plain  = { ending_key = "거든", polite = false }
+verb.casual_polite = { ending_key = "거든", post_suffix = "요", polite = true }
+verb.formal_plain  = { ending_key = "거든", polite = false }
+verb.formal_polite = { ending_key = "거든", post_suffix = "요", polite = true }
+
+
+
+[sfp.volitional_resolve]
+handled_by = "table"
+verb.casual_plain  = { ending_key = "아/어야지", polite = false }
+verb.casual_polite = { ending_key = "아/어야지", polite = false }
+verb.formal_plain  = { ending_key = "아/어야지", polite = false }
+verb.formal_polite = { ending_key = "아/어야지", polite = false }
+
+
+
+[sfp.polite_q]
+handled_by = "code"
+
+[sfp.plain_q]
+handled_by = "code"
+
+[sfp.neg_confirm_q]
+handled_by = "code"
+
+[sfp.neg_invite_q]
+handled_by = "code"
+
+[sfp.neg_plain_q]
+handled_by = "code"
+
+[sfp.na_prohib]
+handled_by = "code"
+
+
+
+[sfp.role_cat_nya]
+handled_by = "special"

@@ -1,0 +1,85 @@
+
+
+
+
+
+[category_member_counters]
+values = ["つ", "人", "名"]
+
+
+
+[target_arabic_counters]
+values = ["割"]
+
+[indefinite_numeral_prefix_classes]
+interrogative = ["何", "幾"]
+vague_quantity = ["数"]
+
+
+
+[zero_quantity_numerals]
+values = ["ゼロ", "ぜろ"]
+
+
+
+
+[quantity_approximation_markers]
+"強" = { kind = "slightly_over", korean = "남짓" }
+"弱" = { kind = "slightly_under", korean = "가까이" }
+
+[tsu_prev_case_particles]
+values = ["が", "は", "も", "を", "に", "へ", "で", "と", "から", "まで"]
+
+[movement_action_predicates]
+values = []
+
+[lone_predicates]
+values = ["好き"]
+
+[outcast_predicates]
+values = ["嫌い"]
+
+[bare_tsu_nouns]
+values = ["こと"]
+
+[kind_tsu_nouns]
+values = [
+  "理由",
+  "方法",
+  "やり方",
+  "見方",
+  "条件",
+  "選択肢",
+  "案",
+  "可能性",
+  "原因",
+  "判断材料",
+  "ポイント",
+  "手がかり",
+  "ルート",
+  "種類",
+  "分類",
+  "経路",
+  "注意点",
+]
+
+[genitive_tsu_nouns]
+values = [
+  "事実",
+  "形",
+]
+
+
+
+
+[extent_numeric_duration_counters]
+values = ["秒", "分", "時間", "日", "週間", "か月", "ヶ月", "月", "年", "年間"]
+
+[extent_numeric_person_counters]
+values = ["人", "名"]
+
+[extent_numeric_repetition_counters]
+values = ["度", "回"]
+
+[extent_scalar_amount]
+values = ["少し", "ちょっと"]

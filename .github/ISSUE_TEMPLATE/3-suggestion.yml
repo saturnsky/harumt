@@ -1,0 +1,20 @@
+name: 건의 · 제안
+description: API, 사용 편의성, 문서, 기능에 대한 제안
+title: "[건의] "
+labels: ["suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: 0.x 버전에서는 API가 바뀔 수 있어서, 지금이 의견을 반영하기 가장 좋은 때입니다. 특정 단어의 역어 제안은 「번역 오류 · 역어 제안」 양식을 써 주세요.
+  - type: textarea
+    id: need
+    attributes:
+      label: 무엇을 하려고 하시나요
+      description: 어떤 상황에서 무엇이 불편하거나 부족한지 적어 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 제안 (선택)
+      description: 생각해 두신 해결 방법이 있다면 적어 주세요.

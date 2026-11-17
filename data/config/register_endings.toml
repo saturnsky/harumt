@@ -1,0 +1,34 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[register.casual_plain]
+nonpast_ending = "아/어"
+past_suffix = "어"
+
+[register.casual_polite]
+nonpast_ending = "아/어"
+nonpast_post = "요"
+past_suffix = "어요"
+
+[register.formal_plain]
+
+
+past_suffix = "다"
+
+[register.formal_polite]
+nonpast_ending = "ㅂ니다/습니다"
+past_suffix = "습니다"

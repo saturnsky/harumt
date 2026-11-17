@@ -1,0 +1,27 @@
+KANJIDIC2-derived data
+
+The files in this directory (`readings.ts`, `korean-readings.ts`) are
+derived from the KANJIDIC2 file of the KANJIDIC Project.
+
+  Source:     KANJIDIC Project
+              https://www.edrdg.org/wiki/index.php/KANJIDIC_Project
+  Copyright:  Electronic Dictionary Research and Development Group (EDRDG),
+              Monash University, Australia. https://www.edrdg.org/
+  License:    Creative Commons Attribution-ShareAlike 4.0 International
+              (CC BY-SA 4.0)
+              https://creativecommons.org/licenses/by-sa/4.0/
+              https://creativecommons.org/licenses/by-sa/4.0/legalcode
+  Licence statement of the EDRDG:
+              https://www.edrdg.org/edrdg/licence.html
+
+Modifications:
+  - readings.ts: only <ja_on>, the base portion of <ja_kun> (okurigana
+    after "." and affix "-" markers removed) and <nanori> readings are
+    kept; readings are converted to katakana.
+  - korean-readings.ts: only <reading r_type="korean_h"> (Hangul) values
+    are kept, in the original order.
+  All other KANJIDIC2 fields are removed.
+
+These files are distributed under CC BY-SA 4.0, independently of the
+Apache License 2.0 that covers the rest of this project. Redistributors
+must keep this notice and the attribution headers in the data files.

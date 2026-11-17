@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.tgz
+data/dict/system.hrdic
+data/dict/system.hridx
+data/dict/*.partial

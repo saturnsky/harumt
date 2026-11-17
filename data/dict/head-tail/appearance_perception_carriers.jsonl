@@ -1,0 +1,5 @@
+{"type":"projection_marker","surfaces":["よう","様","みたい"],"projection":"attributive_like"}
+{"type":"projection_marker","surfaces":["そう"],"projection":"sou_appearance"}
+{"type":"carrier","forms":["見える"],"perception":"visual"}
+{"type":"carrier","forms":["思える"],"perception":"inferential"}
+{"type":"carrier","forms":["感じる","感ずる"],"perception":"felt"}

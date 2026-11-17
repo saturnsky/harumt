@@ -1,0 +1,10 @@
+{"arm":"honorific_nasaru","forms":["なさる","為さる","なさい"]}
+{"arm":"benefactive_kudasaru","forms":["ください","下さい","くださる","下さる"]}
+{"arm":"benefactive_itadaku","forms":["いただく","頂く"]}
+{"arm":"benefactive_itadakeru","forms":["いただける","頂ける"]}
+{"arm":"request_negau","forms":["願う"]}
+{"arm":"request_negaeru","forms":["願える"]}
+{"arm":"honorific_naru","forms":["なる","成る"]}
+{"arm":"humble_suru","forms":["する","為る"],"stemTransform":"none"}
+{"arm":"humble_itasu","forms":["いたす","致す"],"stemTransform":"humble_light_verb"}
+{"arm":"humble_moushiageru","forms":["申し上げる"],"stemTransform":"humble_light_verb"}

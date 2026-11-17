@@ -1,0 +1,963 @@
+{"dictionary_form":"かこ","reading":"カコ","pos":["名詞","固有名詞","人名","姓"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가코","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"かに座","reading":"カニザ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"게자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"かはらめぐみ","reading":"カハラメグミ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카하라 메구미","korean_pos":"명사","irregular":null,"name_role":true}}]}
+{"dictionary_form":"かみのけ座","reading":"カミノケザ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"머리털자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"からす座","reading":"カラスザ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"까마귀자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"からゆきさん","reading":"カラユキサン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"가라유키상","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"かんぽの宿","reading":"カンポノヤド","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간포노야도","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"かんむり座","reading":"カンムリザ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"왕관자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"がっこうぐらし","reading":"ガッコウグラシ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"학교생활","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"きぐるみ","reading":"キグルミ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"인형옷","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"きょしちょう座","reading":"キョシチョウザ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"큰부리새자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"きりん座","reading":"キリンザ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기린자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ぎょしゃ座","reading":"ギョシャザ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"마차부자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"くじら座","reading":"クジラザ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"고래자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"くにおくん","reading":"クニオクン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"쿠니오군","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"くまモン","reading":"クマモン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"쿠마몬","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"くる病","reading":"クルビョウ","pos":["名詞","固有名詞","*","*"],"senses":[{"rendering":{"korean":"구루병","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"くんずほぐれつ","reading":"クンズホグレツ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"뒤엉켜","korean_pos":"부사","irregular":null}}]]}
+{"dictionary_form":"けものフレンズ","reading":"ケモノフレンズ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"케모노 프렌즈","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"こいぬ座","reading":"コイヌザ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"작은개자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"こぎつね座","reading":"コギツネザ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"여우자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"こぐま座","reading":"コグマザ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"작은곰자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ことよろ","reading":"コトヨロ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"올해 잘 부탁","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"こと座","reading":"コトザ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"거문고자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"こみっくトレジャー","reading":"コミックトレジャー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코믹 트레저","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ごまだし","reading":"ゴマダシ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"고마다시","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ごん狐","reading":"ゴンギツネ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"곤 여우","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カイエトゥール","reading":"カイエトゥール","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"카이에투르","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カイコス諸島","reading":"カイコスショトウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카이코스 제도","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カイニス","reading":"カイニス","pos":["名詞","固有名詞","人名","一般"],"senses":[[{"rendering":{"korean":"카이니스","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カイパー","reading":"カイパー","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"카이퍼","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カイパーベルト","reading":"カイパーベルト","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카이퍼 벨트","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カカオトーク","reading":"カカオトーク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카카오톡","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カカロット","reading":"カカロット","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카카로트","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カザフ","reading":"カザフ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카자흐","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カザフスタン","reading":"カザフスタン","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"카자흐스탄","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カザフスタン共和国","reading":"カザフスタンキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"카자흐스탄 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カシオペヤ座","reading":"カシオペヤザ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"카시오페이아자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カジュアルゲーム","reading":"カジュアルゲーム","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"캐주얼 게임","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"カジュラーホ","reading":"カジュラーホ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카주라호","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カジランガ","reading":"カジランガ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카지랑가","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カスケード","reading":"カスケード","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"캐스케이드","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カスケード山脈","reading":"カスケードサンミャク","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"캐스케이드산맥","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カズーイ","reading":"カズーイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카즈이","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カタール","reading":"カタール","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"카타르","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カタール国","reading":"カタールコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"카타르","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カッシーニの間隙","reading":"カッシーニノカンゲキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"카시니 간극","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カップヌードルごはん","reading":"カップヌードルゴハン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"컵누들밥","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カテガット","reading":"カテガット","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"카테가트","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カトマイ","reading":"カトマイ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"카트마이","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カトリック教会","reading":"カトリックキョウカイ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"가톨릭교회","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カドカワ","reading":"カドカワ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카도카와","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カナダ","reading":"カナダ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"캐나다","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カノープス","reading":"カノープス","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카노푸스","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カプコン","reading":"カプコン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"캡콤","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カペラ","reading":"カペラ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카펠라","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カムチャツカ半島","reading":"カムチャツカハントウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"캄차카 반도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カメックス","reading":"カメックス","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"거북왕","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カメルーン","reading":"カメルーン","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"카메룬","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カメルーン共和国","reading":"カメルーンキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"카메룬 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カラコルム山脈","reading":"カラコルムサンミャク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카라코람산맥","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カラハリ砂漠","reading":"カラハリサバク","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"칼라하리 사막","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カラパイア","reading":"カラパイア","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카라파이아","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カラムラサキツツジ","reading":"カラムラサキツツジ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"진달래","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カリオペ","reading":"カリオペ","pos":["名詞","固有名詞","人名","*"],"senses":[[{"rendering":{"korean":"칼리오페","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カリフォルニアロール","reading":"カリフォルニアロール","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"캘리포니아 롤","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カリフォルニア半島","reading":"カリフォルニアハントウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"캘리포니아 반도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カリフォルニア大学","reading":"カリフォルニアダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"캘리포니아대학교","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カリブ共同体","reading":"カリブキョウドウタイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카리브 공동체","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カリマタ","reading":"カリマタ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"카리마타","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カルタゴ","reading":"カルタゴ","pos":["名詞","固有名詞","地名","一般"],"senses":[{"rendering":{"korean":"카르타고","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カルタゴ遺跡","reading":"カルタゴイセキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"카르타고 유적","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カルタヘナ法","reading":"カルタヘナホウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카르타헤나법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カルナック神殿","reading":"カルナックシンデン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카르나크 신전","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カルビー","reading":"カルビー","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"칼비","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カルピス","reading":"カルピス","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"칼피스","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カルマル同盟","reading":"カルマルドウメイ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"칼마르 동맹","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カルメル","reading":"カルメル","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"카르멜","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カレドン","reading":"カレドン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"칼레돈","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カレン","reading":"カレン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카렌","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]}
+{"dictionary_form":"カロリーメイト","reading":"カロリーメイト","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"칼로리메이트","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カントー地方","reading":"カントーチホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"관동지방","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"칸토 지방","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カンヌ国際映画祭","reading":"カンヌコクサイエイガサイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"칸 국제 영화제","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カンヌ映画祭","reading":"カンヌエイガサイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"칸 영화제","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"カンボジア","reading":"カンボジア","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"캄보디아","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"カンボジア王国","reading":"カンボジアオウコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"캄보디아 왕국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"カーズ","reading":"カーズ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カードキャプターさくら","reading":"カードキャプターサクラ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카드캡터 사쿠라","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カービィ","reading":"カービィ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"커비","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"カーボンブラック","reading":"カーボンブラック","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카본 블랙","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"カーンプル","reading":"カーンプル","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"칸푸르","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガイアナ","reading":"ガイアナ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"가이아나","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガイル","reading":"ガイル","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가일","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ガザ","reading":"ガザ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"가자","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガザ地区","reading":"ガザチク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가자 지구","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ガスプロム","reading":"ガスプロム","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가스프롬","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ガス放出","reading":"ガスホウシュツ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"가스 방출","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ガズィアンテプ","reading":"ガズィアンテプ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가지안테프","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガチャピン","reading":"ガチャピン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가차핀","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ガット","reading":"ガット","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가트","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ガトリン","reading":"ガトリン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"개틀링","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ガニ","reading":"ガニ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"게","korean_pos":"명사","irregular":null,"transliteration":false}}]}
+{"dictionary_form":"ガボン","reading":"ガボン","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"가봉","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガボン共和国","reading":"ガボンキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"가봉 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ガムラスタン","reading":"ガムラスタン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"감라스탄","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガラス工芸","reading":"ガラスコウゲイ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"유리 공예","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ガラパゴス諸島","reading":"ガラパゴスショトウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"갈라파고스 제도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ガリア帝国","reading":"ガリアテイコク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"갈리아 제국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ガリア戦記","reading":"ガリアセンキ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"갈리아 전기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ガリポリ","reading":"ガリポリ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"갈리폴리","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガリポリの戦い","reading":"ガリポリノタタカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"갈리폴리 전투","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ガリレオ衛星","reading":"ガリレオエイセイ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"갈릴레이 위성","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ガルパン","reading":"ガルパン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"걸판","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ガロ","reading":"ガロ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"갈로","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ガンダム","reading":"ガンダム","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"건담","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガンダムシリーズ","reading":"ガンダムシリーズ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"건담시리즈","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ガンバ大阪","reading":"ガンバオオサカ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"감바 오사카","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ガンビア","reading":"ガンビア","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"감비아","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガンビア共和国","reading":"ガンビアキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"감비아 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ガンビエ","reading":"ガンビエ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"간비에","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガンマン","reading":"ガンマン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"총잡이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ガーデンシティ","reading":"ガーデンシティ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가든 시티","korean_pos":"명사","irregular":null,"transliteration":true}},{"rendering":{"korean":"정원 도시","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"ガーナ","reading":"ガーナ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"가나","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ガーナ共和国","reading":"ガーナキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"가나 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キエフ","reading":"キエフ","pos":["名詞","固有名詞","地名","一般"],"senses":[{"rendering":{"korean":"키예프","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キクラデス諸島","reading":"キクラデスショトウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"키클라데스 제도","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"キサラ","reading":"キサラ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"키사라","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]}
+{"dictionary_form":"キシナウ","reading":"キシナウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"키시너우","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"キタサンブラック","reading":"キタサンブラック","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"키타산블랙","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"キックベース","reading":"キックベース","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"발야구","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キックベースボール","reading":"キックベースボール","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"발야구","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キットカット","reading":"キットカット","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"킷캣","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"キティちゃん","reading":"キティチャン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"헬로키티","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"キノピオ","reading":"キノピオ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"키노피오","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"キプロス","reading":"キプロス","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"키프로스","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"キプロス共和国","reading":"キプロスキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"키프로스 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キム","reading":"キム","pos":["名詞","固有名詞","人名","一般"],"senses":[{"rendering":{"korean":"김","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キム","reading":"キム","pos":["名詞","固有名詞","人名","姓"],"senses":[{"rendering":{"korean":"김","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キャッシュバック","reading":"キャッシュバック","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"캐시백","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キャッシー","reading":"キャッシー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"캐시","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"キャッスルブラック","reading":"キャッスルブラック","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"캐슬 블랙","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"캐슬블랙","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"キャッツ","reading":"キャッツ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"캣츠","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"キャプ","reading":"キャプ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"캡","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"キャプテン翼","reading":"キャプテンツバサ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"캡틴 츠바사","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"キャンドルライト","reading":"キャンドルライト","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"촛불","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キヤノン","reading":"キヤノン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"캐논","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キュリー","reading":"キュリー","pos":["名詞","固有名詞","人名","一般"],"senses":[{"rendering":{"korean":"퀴리","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"キューバ","reading":"キューバ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"쿠바","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"キューピッド","reading":"キューピッド","pos":["名詞","固有名詞","人名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"큐피드","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キリキア","reading":"キリキア","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"킬리키아","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"キリスト","reading":"キリスト","pos":["名詞","固有名詞","人名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"그리스도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キリバス","reading":"キリバス","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"키리바시","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"キリル文字","reading":"キリルモジ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"키릴 문자","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キリンチャレンジカップ","reading":"キリンチャレンジカップ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기린 챌린지컵","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"キルギス","reading":"キルギス","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"키르기스스탄","korean_pos":"명사","irregular":null,"transliteration":false}}]}
+{"dictionary_form":"キルギス共和国","reading":"キルギスキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"키르기스스탄 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"キルタイムコミュニケーション","reading":"キルタイムコミュニケーション","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"킬타임커뮤니케이션","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"キログラム原器","reading":"キログラムゲンキ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"킬로그램 원기","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"キングコング","reading":"キングコング","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"킹콩","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"キングス","reading":"キングス","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"킹스","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"キングスマン","reading":"キングスマン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"킹스맨","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"キングレコード","reading":"キングレコード","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"킹 레코드","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"キンメル","reading":"キンメル","pos":["名詞","固有名詞","人名","*"],"senses":[[{"rendering":{"korean":"키멀","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"キン肉マン","reading":"キンニクマン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"킨니쿠맨","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"キーウ","reading":"キーウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"키이우","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"キール","reading":"キール","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"킬","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"キール運河","reading":"キールウンガ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"킬 운하","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ギアナ高地","reading":"ギアナコウチ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기아나 고지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ギニア","reading":"ギニア","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"기니","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ギニアビサウ","reading":"ギニアビサウ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"기니비사우","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ギニア共和国","reading":"ギニアキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"기니 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ギネス","reading":"ギネス","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기네스","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ギネス世界記録","reading":"ギネスセカイキロク","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"기네스 세계 기록","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ギャラップ","reading":"ギャラップ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"갤럽","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ギャラリーラファイエット","reading":"ギャラリーラファイエット","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"갤러리 라파예트","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ギリギリセーフ","reading":"ギリギリセーフ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"아슬아슬 세이프","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"ギリシア","reading":"ギリシア","pos":["名詞","固有名詞","地名","国"],"conjugation_type":null,"senses":[{"rendering":{"korean":"그리스","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]}
+{"dictionary_form":"ギリシア語","reading":"ギリシアゴ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"그리스어","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ギリシャ","reading":"ギリシャ","pos":["名詞","固有名詞","地名","国"],"conjugation_type":null,"senses":[{"rendering":{"korean":"그리스","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ギリシャ文字","reading":"ギリシャモジ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"그리스 문자","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ギリシャ神話","reading":"ギリシャシンワ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"그리스 신화","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ギリシャ語","reading":"ギリシャゴ","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"그리스어","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ギルガメシュ叙事詩","reading":"ギルガメシュジョジシ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"길가메시 서사시","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"クイズダービー","reading":"クイズダービー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"퀴즈 더비","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"クウェート","reading":"クウェート","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"쿠웨이트","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"クウェート国","reading":"クウェートコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"쿠웨이트","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ククル","reading":"ククル","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"쿠쿠루","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]}
+{"dictionary_form":"クシャーナ朝","reading":"クシャーナチョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"쿠샨 제국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"クシュ","reading":"クシュ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"쿠시","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"クジンシー","reading":"クジンシー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"쿠진시","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"クチン","reading":"クチン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"쿠칭","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"クッキーラン","reading":"クッキーラン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"쿠키런","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"クック","reading":"クック","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"쿡","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"クック海峡","reading":"クックカイキョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"쿡 해협","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"クッパ","reading":"クッパ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국밥","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"クラッチペダル","reading":"クラッチペダル","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"클러치 페달","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"クランチロール","reading":"クランチロール","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"크런치롤","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]}
+{"dictionary_form":"クラージュ","reading":"クラージュ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"쿠라쥬","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"クリアタイプ","reading":"クリアタイプ","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"클리어타입","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"クリオ","reading":"クリオ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"쿠리오","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"クリスピー・クリーム・ドーナツ","reading":"クリスピー・クリーム・ドーナツ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"크리스피 크림 도넛","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]}
+{"dictionary_form":"クリスマスキャロル","reading":"クリスマスキャロル","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"크리스마스 캐럴","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"クリスマスマーケット","reading":"クリスマスマーケット","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"크리스마스 마켓","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"クリボー","reading":"クリボー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"쿠리보","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"クリミア併合","reading":"クリミアヘイゴウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"크리미아 병합","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"クリー","reading":"クリー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"크리","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"クリード","reading":"クリード","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"크리드","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"クリーム玄米ブラン","reading":"クリームゲンマイブラン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"크림현미브란","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"クルアーン","reading":"クルアーン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"쿠란","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"クルクシェートラ","reading":"クルクシェートラ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"쿠루크셰트라","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"クルシュ","reading":"クルシュ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"쿠르슈","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"クルディスタン地域","reading":"クルディスタンチイキ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"쿠르디스탄 지역","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"クルド","reading":"クルド","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"쿠르드","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"クルド語","reading":"クルドゴ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"쿠르드어","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"クルーズ客船","reading":"クルーズキャクセン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"크루즈 여객선","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"크루즈선","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"クレア","reading":"クレア","pos":["名詞","固有名詞","人名","*"],"senses":[[{"rendering":{"korean":"클레어","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"クレイン","reading":"クレイン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"크레인","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"クレオール料理","reading":"クレオールリョウリ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"크레올 요리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"クレオール語","reading":"クレオールゴ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"크레올어","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"クレハ","reading":"クレハ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"쿠레하","korean_pos":"명사","irregular":null,"transliteration":false,"name_role":true}}]}
+{"dictionary_form":"クレムリン","reading":"クレムリン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"크렘린","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"クレヨンしんちゃん","reading":"クレヨンシンチャン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"짱구는 못 말려","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"クロ","reading":"クロ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"쿠로","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"クロアチア","reading":"クロアチア","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"크로아티아","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"クロアチア共和国","reading":"クロアチアキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"크로아티아 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"クロノトリガー","reading":"クロノトリガー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"크로노 트리거","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"クロノ・トリガー","reading":"クロノ・トリガー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"크로노 트리거","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"クローズアップ現代","reading":"クローズアップゲンダイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"클로즈업 현대","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"クワオアー","reading":"クワオアー","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"콰오아","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"クーフレル","reading":"クーフレル","pos":["名詞","固有名詞","人名","一般"],"senses":[[{"rendering":{"korean":"쿠글러","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"クールジャパン","reading":"クールジャパン","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"쿨재팬","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"クー・クラックス・クラン","reading":"クー・クラックス・クラン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"쿠 클럭스 클랜","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"グアテマラ","reading":"グアテマラ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"과테말라","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"グアテマラシティ","reading":"グアテマラシティ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"과테말라 시티","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"グアテマラ共和国","reading":"グアテマラキョウワコク","pos":["名詞","固有名詞","地名","国"],"conjugation_type":null,"senses":[{"rendering":{"korean":"과테말라","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"グアヤキル","reading":"グアヤキル","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"과야킬","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"グッゲンハイム美術館","reading":"グッゲンハイムビジュツカン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"구겐하임 미술관","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"グッドスマイルカンパニー","reading":"グッドスマイルカンパニー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"굿스마일컴퍼니","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"グッド・ウィル・ハンティング","reading":"グッド・ウィル・ハンティング","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"굿 윌 헌팅","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"グプタ朝","reading":"グプタチョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"굽타 제국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"グラバー園","reading":"グラバーエン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"구라바엔","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"글로버 정원","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"グラブル","reading":"グラブル","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"그랑블루","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"グラブルフェス","reading":"グラブルフェス","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"그랑블루페스","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"グラミー賞","reading":"グラミーショウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"그래미상","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"グランクラス","reading":"グランクラス","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"그랑클라스","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"グランツーリスモ","reading":"グランツーリスモ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"그란투리스모","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"グランブルーファンタジー","reading":"グランブルーファンタジー","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"그랑블루 판타지","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"グランプラス","reading":"グランプラス","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"그랑플라스","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"グルジア","reading":"グルジア","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"그루지야","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"グルムキー","reading":"グルムキー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"구르무키","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"グルメ番組","reading":"グルメバングミ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"맛집 프로그램","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"グルーヴコースター","reading":"グルーヴコースター","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"그루브 코스터","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"グレゴリオ暦","reading":"グレゴリオレキ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"그레고리력","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"グレタ","reading":"グレタ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"그레타","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"グレナダ","reading":"グレナダ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"그레나다","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"グレナディーン諸島","reading":"グレナディーンショトウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"그레나딘 제도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"グレートブリテン","reading":"グレートブリテン","pos":["名詞","固有名詞","地名","一般"],"senses":[{"rendering":{"korean":"영국","korean_pos":"명사","irregular":null,"transliteration":false}}]}
+{"dictionary_form":"グローイングアップ","reading":"グローイングアップ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"그로잉업","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"グーグル","reading":"グーグル","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"구글","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"グーグルマップ","reading":"グーグルマップ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"구글 맵","korean_pos":"명사","irregular":null,"transliteration":true}},{"rendering":{"korean":"구글 지도","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"グールド","reading":"グールド","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"굴드","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ケイマン諸島","reading":"ケイマンショトウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"케이만 제도","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ケニア","reading":"ケニア","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"케냐","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ケニア","reading":"ケニヤ","pos":["名詞","固有名詞","地名","国"],"conjugation_type":null,"senses":[{"rendering":{"korean":"케냐","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ケニア共和国","reading":"ケニアキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"케냐 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ケネディ大統領暗殺事件","reading":"ケネディダイトウリョウアンサツジケン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"케네디 대통령 암살 사건","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ケフェウス座","reading":"ケフェウスザ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"세페우스자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ケベックシティ","reading":"ケベックシティ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"퀘벡 시티","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ケルチ海峡","reading":"ケルチカイキョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"케르치 해협","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ケルト","reading":"ケルト","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"켈트","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ケルト神話","reading":"ケルトシンワ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"켈트 신화","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ケルベロス","reading":"ケルベロス","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"케르베로스","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ケレタロ","reading":"ケレタロ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"케레타로","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ケロロ軍曹","reading":"ケロログンソウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"케로로 중사","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"ケンタウリ","reading":"ケンタウリ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"켄타우리","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ケンタウルス","reading":"ケンタウルス","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"켄타우루스","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ケンタウルス座","reading":"ケンタウルスザ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"켄타우루스자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ケンブリッジ大学","reading":"ケンブリッジダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"케임브리지 대학","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ゲシュタポ","reading":"ゲシュタポ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게슈타포","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ゲマズ","reading":"ゲマズ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게마즈","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ゲラシメンコ","reading":"ゲラシメンコ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"게라시멘코","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ゲートウェイ","reading":"ゲートウェイ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"게이트웨이","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ゲーマーズ","reading":"ゲーマーズ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이머즈","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ゲームボーイアドバンス","reading":"ゲームボーイアドバンス","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게임보이 어드밴스","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ゲーム脳の恐怖","reading":"ゲームノウノキョウフ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게임뇌의 공포","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"ゲール語","reading":"ゲールゴ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게일어","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"コカコーラ","reading":"コカコーラ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코카콜라","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"コサック","reading":"コサック","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"코사크","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コシツェ","reading":"コシツェ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"코시체","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コスタリカ","reading":"コスタリカ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"코스타리카","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コストコ","reading":"コストコ","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"코스트코","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コスモ石油","reading":"コスモセキユ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코스모석유","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コスラエ","reading":"コスラエ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"코스라에","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コソボ","reading":"コソボ","pos":["名詞","固有名詞","地名","一般"],"senses":[{"rendering":{"korean":"코소보","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コタンタン半島","reading":"コタンタンハントウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코탕탱 반도","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コナミアーケードゲームス","reading":"コナミアーケードゲームス","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코나미 아케이드 게임스","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"コノエ","reading":"コノエ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"코노에","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]}
+{"dictionary_form":"コパン","reading":"コパン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"코판","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コパ・アメリカ","reading":"コパ・アメリカ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코파 아메리카","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"コピー能力","reading":"コピーノウリョク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카피 능력","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"コフレドール","reading":"コフレドール","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코프레도르","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"コプト文字","reading":"コプトモジ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"콥트 문자","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"コマンドー","reading":"コマンドー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코만도","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コミックウォーカー","reading":"コミックウォーカー","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"코믹 워커","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コミックシーモア","reading":"コミックシーモア","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"코믹 시모아","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コミックマーケット","reading":"コミックマーケット","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"코믹 마켓","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コミックヴァルキリー","reading":"コミックヴァルキリー","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"코믹 발키리","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コミンテルン","reading":"コミンテルン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코민테른","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コムソモール","reading":"コムソモール","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"콤소몰","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コムル","reading":"コムル","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고물","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コメントアウト","reading":"コメントアウト","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"주석 처리","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"コモロ","reading":"コモロ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"코모로","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コモロ連合","reading":"コモロレンゴウ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"코모로 연합","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コモンウェルスゲームズ","reading":"コモンウェルスゲームズ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"커먼웰스 게임즈","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コリアゲート","reading":"コリアゲート","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코리아게이트","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コリントス運河","reading":"コリントスウンガ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"코린토스 운하","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コルニ","reading":"コルニ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코르니","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コロッセオ","reading":"コロッセオ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"콜로세움","korean_pos":"명사","irregular":null,"transliteration":false}},{"rendering":{"korean":"코롯세오","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コロニアル様式","reading":"コロニアルヨウシキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"콜로니얼 양식","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コロムビア","reading":"コロムビア","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"콜롬비아","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コロンビア","reading":"コロンビア","pos":["名詞","固有名詞","地名","国"],"conjugation_type":null,"senses":[{"rendering":{"korean":"콜롬비아","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コロンビア共和国","reading":"コロンビアキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"콜롬비아 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コロンビア大学","reading":"コロンビアダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"컬럼비아 대학교","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"コンコルディア","reading":"コンコルディア","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"콘코르디아","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"コンゴ共和国","reading":"コンゴキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"콩고 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コンゴ民主共和国","reading":"コンゴミンシュキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"콩고민주공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コンスタンティーヌ","reading":"コンスタンティーヌ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"콘스탄틴","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コンパクトカセット","reading":"コンパクトカセット","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카세트테이프","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コンパス座","reading":"コンパスザ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"컴퍼스자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コンピューターゲーム","reading":"コンピューターゲーム","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"컴퓨터 게임","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コンヤ","reading":"コンヤ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"콘야","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コーカサス地方","reading":"コーカサスチホウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코카서스 지방","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"コーカサス山脈","reading":"コーカサスサンミャク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"코카서스 산맥","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"コートジボワール","reading":"コートジボワール","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"코트디부아르","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コーネル大学","reading":"コーネルダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코넬 대학","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"コーヒーセレモニー","reading":"コーヒーセレモニー","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"커피 세레모니","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"コーラン","reading":"コーラン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코란","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ゴイアニア","reading":"ゴイアニア","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"고이아니아","korean_pos":"명사","irregular":null,"transliteration":true}}]}
+{"dictionary_form":"ゴシック様式","reading":"ゴシックヨウシキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"고딕 양식","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ゴシップガール","reading":"ゴシップガール","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가십걸","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ゴジラ","reading":"ゴジラ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고질라","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ゴッドフィールド","reading":"ゴッドフィールド","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"갓필드","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ゴビ砂漠","reading":"ゴビサバク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고비 사막","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ゴラン高原","reading":"ゴランコウゲン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"골란 고원","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ゴーストップ","reading":"ゴーストップ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고스톱","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ゴーストワールド","reading":"ゴーストワールド","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고스트 월드","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ゴールデンゲートブリッジ","reading":"ゴールデンゲートブリッジ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"금문교","korean_pos":"명사","irregular":null,"transliteration":false}},{"rendering":{"korean":"골든게이트 교","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ゴールデンラズベリー賞","reading":"ゴールデンラズベリーショウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"골든 라즈베리상","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ゴールドマン・サックス","reading":"ゴールドマン・サックス","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"골드만 삭스","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"久留米絣","reading":"クルメカスリ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"구루메가스리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"九十九里浜","reading":"クジュウクリハマ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"구주쿠리 해변","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"九州大学","reading":"キュウシュウダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"규슈대학","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"九州新幹線","reading":"キュウシュウシンカンセン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"규슈 신칸센","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"九州朝日放送","reading":"キュウシュウアサヒホウソウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"규슈 아사히 방송","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"九州電力","reading":"キュウシュウデンリョク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"큐슈전력","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"九節板","reading":"クジョルパン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"구절판","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"九龍城","reading":"キュウリュウジョウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"구룡성","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"五条家","reading":"ゴジョウケ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고죠 가문","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"五福","reading":"ゴフク","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"오복","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"五稜","reading":"ゴリョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"고료","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"五行思想","reading":"ゴギョウシソウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"오행사상","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"五郎","reading":"ゴロウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"고로","korean_pos":"명사","irregular":null,"name_role":true}}]}
+{"dictionary_form":"交通警察","reading":"コウツウケイサツ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"교통경찰","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"享保","reading":"キョウホウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교호","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"享徳","reading":"キョウトク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교토쿠","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"京アニ","reading":"キョウアニ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"쿄애니","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"京セラ","reading":"キョウセラ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교세라","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"京城","reading":"ケイジョウ","pos":["名詞","固有名詞","地名","一般"],"senses":[{"rendering":{"korean":"경성","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"京大","reading":"キョウダイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교토대","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"京浜急行線","reading":"ケイヒンキュウコウセン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이힌급행선","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"京王線","reading":"ケイオウセン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이오선","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"京王電鉄","reading":"ケイオウデンテツ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이오 전철","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"京畿道","reading":"キョンギド","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경기도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"京葉線","reading":"ケイヨウセン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"게이요선","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"京都アニメーション","reading":"キョウトアニメーション","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교토 애니메이션","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"京都大学","reading":"キョウトダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교토 대학","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"京都線","reading":"キョウトセン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교토선","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"京都議定書","reading":"キョウトギテイショ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교토의정서","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"京都駅","reading":"キョウトエキ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교토역","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"京阪沿線","reading":"ケイハンエンセン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"게이한 연선","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"仮小屋","reading":"カリゴヤ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가건물","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"仮面ライダー","reading":"カメンライダー","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"가면라이더","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"仮面ライダーシリーズ","reading":"カメンライダーシリーズ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가면라이더 시리즈","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"企画院","reading":"キカクイン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기획원","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"会計検査院","reading":"カイケイケンサイン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"회계검사원","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"価格交渉促進月間","reading":"カカクコウショウソクシンゲッカン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"가격교섭 촉진월간","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"가격협상 촉진월간","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"偕成社","reading":"カイセイシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카이세이샤","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"健児","reading":"ケンジ","pos":["名詞","固有名詞","人名","名"],"conjugation_type":null,"senses":[{"rendering":{"korean":"건아","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"元号法","reading":"ゲンゴウホウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"연호법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"元和","reading":"ゲンナ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"겐나","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"元弘","reading":"ゲンコウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"겐코","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"元徳","reading":"ゲントク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"원덕","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"元慶","reading":"ガンギョウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간교","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"元暦","reading":"ゲンリャク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"겐랴쿠","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"元朝","reading":"ガンチョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"원나라","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"元禄","reading":"ゲンロク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"겐로쿠","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"光化門","reading":"クァンファムン","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"광화문","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"光文","reading":"コウブン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"광문","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"光文社文庫","reading":"コウブンシャブンコ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고분샤 문고","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"公健法","reading":"コウケンホウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공건법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"公共投資基本計画","reading":"コウキョウトウシキホンケイカク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"공공투자기본계획","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"公安調査庁","reading":"コウアンチョウサチョウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공안조사청","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"公害等調整委員会","reading":"コウガイトウチョウセイイインカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공해등 조정 위원회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"公文書管理法","reading":"コウブンショカンリホウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공문서 관리법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"公明党","reading":"コウメイトウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공명당","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"公正取引委員会","reading":"コウセイトリヒキイインカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공정거래위원회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"公民権運動","reading":"コウミンケンウンドウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공민권 운동","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"시민권 운동","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"公益法人等","reading":"コウエキホウジントウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공익법인 등","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"公益社","reading":"コウエキシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공익사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"公転周期","reading":"コウテンシュウキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"공전 주기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"共同債権買取機構","reading":"キョウドウサイケンカイトリキコウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"공동채권매입기구","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"共同声明","reading":"キョウドウセイメイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"공동 성명","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"共同購買","reading":"キョウドウコウバイ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"공구","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"共同通信","reading":"キョウドウツウシン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교도통신","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"共同通信社","reading":"キョウドウツウシンシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교도통신사","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"共和事件","reading":"キョウワジケン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"교와 사건","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"공화 사건","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"共和党","reading":"キョウワトウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공화당","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"共立出版","reading":"キョウリツシュッパン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"공립출판","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"兼六園","reading":"ケンロクエン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"겐로쿠엔","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"凱旋門","reading":"ガイセンモン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"개선문","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"加減乗除","reading":"カゲンジョウジョ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가감승제","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"加羅諸国","reading":"カラショコク","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가야 제국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"加計問題","reading":"カケモンダイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"가케학원 문제","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"가케 문제","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"가케학원 의혹","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"勝ち抜き戦","reading":"カチヌキセン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"토너먼트","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"勝鬨橋","reading":"カチドキバシ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"가치도키바시","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北アイルランド","reading":"キタアイルランド","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"북아일랜드","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北アフリカ","reading":"キタアフリカ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"북아프리카","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北アフリカ戦線","reading":"キタアフリカセンセン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"북아프리카 전선","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"北アメリカ","reading":"キタアメリカ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"북아메리카","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北アメリカ大陸","reading":"キタアメリカタイリク","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"북아메리카 대륙","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北アメリカ星雲","reading":"キタアメリカセイウン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"북아메리카 성운","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北イタリア","reading":"キタイタリア","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"북이탈리아","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北キプロス","reading":"キタキプロス","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"북키프로스","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"北ベトナム","reading":"キタベトナム","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"북베트남","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"北マケドニア","reading":"キタマケドニア","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"북마케도니아","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北マケドニア共和国","reading":"キタマケドニアキョウワコク","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"북마케도니아 공화국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北ヨーロッパ","reading":"キタヨーロッパ","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"북유럽","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北千住駅","reading":"キタセンジュエキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"기타센주역","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北太平洋","reading":"キタタイヘイヨウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"북태평양","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"北朝鮮","reading":"キタチョウセン","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"북한","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"危険運転致死傷罪","reading":"キケンウンテンチシショウザイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"위험운전치사상죄","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"厚労委員会","reading":"コウロウイインカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"후생노동위원회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"厚生保険特別会計","reading":"コウセイホケントクベツカイケイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"후생보험특별회계","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"厚生省","reading":"コウセイショウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"후생성","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"原始人","reading":"ゲンシジン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"원시인","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"原子力委員会","reading":"ゲンシリョクイインカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"원자력 위원회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"原子力規制委員会","reading":"ゲンシリョクキセイイインカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"원자력 규제 위원회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"原子力防災会議","reading":"ゲンシリョクボウサイカイギ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"원자력 방재 회의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"原子炉等規制法","reading":"ゲンシロトウキセイホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"원자로 등 규제법","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"원자로등규제법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"原理研","reading":"ゲンリケン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"원리연","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"原産地規則","reading":"ゲンサンチキソク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"원산지 규칙","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"口承文芸","reading":"コウショウブンゲイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"구비 문학","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"口述試験","reading":"コウジュツシケン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"구술시험","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"古事記","reading":"コジキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"고사기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"古事記伝","reading":"コジキデン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고사기전","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"古事類苑","reading":"コジルイエン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고사류원","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"古今和歌集","reading":"コキンワカシュウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고킨와카슈","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"古代エジプト","reading":"コダイエジプト","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"고대 이집트","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"古代ギリシア","reading":"コダイギリシア","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고대 그리스","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"古代ローマ","reading":"コダイローマ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고대 로마","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"古代ローマ帝国","reading":"コダイローマテイコク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고대 로마 제국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"古墳時代","reading":"コフンジダイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고분 시대","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"古朝鮮","reading":"コチョウセン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"고조선","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"古龍","reading":"コリュウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고룡","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"合流地点","reading":"ゴウリュウチテン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"합류 지점","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"合衆国","reading":"ガッシュウコク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"합중국","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"吉備団子","reading":"キビダンゴ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기비단고","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"吉桓永","reading":"キルファニョン","pos":["名詞","固有名詞","人名","*"],"senses":[[{"rendering":{"korean":"길환영","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"君が代","reading":"キミガヨ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"기미가요","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"呉","reading":"ゴ","pos":["名詞","固有名詞","人名","姓"],"senses":[{"rendering":{"korean":"오","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"嘉手納基地","reading":"カデナキチ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"가데나 기지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"嘉永","reading":"カエイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가에이","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"回転ドア","reading":"カイテンドア","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"회전문","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国会事故調","reading":"コッカイジコチョウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국회사고조","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"국회 사고조사위원회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国会図書館","pos":["名詞","固有名詞","一般","*"],"reading":"コッカイトショカン","senses":[{"rendering":{"irregular":null,"korean":"국회도서관","korean_pos":"명사"}}]}
+{"dictionary_form":"国会改革連絡会","reading":"コッカイカイカクレンラクカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국회개혁연락회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国会議事堂","reading":"コッカイギジドウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"국회 의사당","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国土地理院","reading":"コクドチリイン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국토지리원","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国土強靱化基本計画","reading":"コクドキョウジンカキホンケイカク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국토강인화 기본계획","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国境の島","reading":"コッキョウノシマ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국경의 섬","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国境画定","reading":"コッキョウカクテイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국경 획정","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国安","reading":"コクアン","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"국안","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国安法","reading":"コクアンホウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"국가보안법","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国家元首","reading":"コッカゲンシュ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국가 원수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国家公務員倫理審査会","reading":"コッカコウムインリンリシンサカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국가공무원윤리심사회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国家戦略特区諮問会議","reading":"コッカセンリャクトックシモンカイギ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국가전략특구자문회의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国家運営","reading":"コッカウンエイ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"국가 운영","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国家防衛戦略","reading":"コッカボウエイセンリャク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국가방위전략","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国旗掲揚","reading":"コッキケイヨウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"국기 게양","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国有鉄道","reading":"コクユウテツドウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국유철도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国民の館","reading":"コクミンノヤカタ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"인민 궁전","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"국민의 관","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国民儀礼","reading":"コクミンギレイ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국민의례","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国民党","reading":"コクミントウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국민당","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国民政府","reading":"コクミンセイフ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국민정부","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"国民歌謡","reading":"コクミンカヨウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국민가요","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国民生活センター","reading":"コクミンセイカツセンター","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국민생활 센터","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"国民生活審議会","reading":"コクミンセイカツシンギカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국민생활심의회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国税庁","reading":"コクゼイチョウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국세청","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国立公文書館","reading":"コクリツコウブンショカン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국립공문서관","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国立劇場","reading":"コクリツゲキジョウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국립 극장","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"国立博物館","reading":"コクリツハクブツカン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"국립 박물관","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国立図書館","reading":"コクリツトショカン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"국립도서관","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国立国会図書館法","reading":"コクリツコッカイトショカンホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국립국회도서관법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国立国語研究所","reading":"コクリツコクゴケンキュウショ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국립국어연구소","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国立国語院","reading":"コクリツコクゴイン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국립국어원","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"国立国際医療研究センター","reading":"コクリツコクサイイリョウケンキュウセンター","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국립국제의료연구센터","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"国立感染症研究所","reading":"コクリツカンセンショウケンキュウショ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국립감염증연구소","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国立環境研究所","reading":"コクリツカンキョウケンキュウショ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국립환경연구소","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国立衛生研究所","reading":"コクリツエイセイケンキュウショ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국립위생연구소","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"国連","reading":"コクレン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"유엔","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"국제 연합","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国連児童基金","reading":"コクレンジドウキキン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"유엔아동기금","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国連安保理事会","reading":"コクレンアンポリジカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"유엔 안전보장이사회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国連安全保障理事会","reading":"コクレンアンゼンホショウリジカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"유엔 안전보장이사회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国連平和協力法","reading":"コクレンヘイワキョウリョクホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"유엔평화협력법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国連平和協力法案","reading":"コクレンヘイワキョウリョクホウアン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"유엔평화협력법안","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国連教育科学文化機関","reading":"コクレンキョウイクカガクブンカキカン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"유엔교육과학문화기구","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国連総会","reading":"コクレンソウカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"유엔총회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国連難民高等弁務官事務所","reading":"コクレンナンミンコウトウベンムカンジムショ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"유엔난민고등판무관사무소","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国鉄","reading":"コクテツ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국철","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"일본국유철도","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国際オリンピック委員会","reading":"コクサイオリンピックイインカイ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"국제 올림픽 위원회","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際キログラム原器","reading":"コクサイキログラムゲンキ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국제 킬로그램 원기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国際人権規約","reading":"コクサイジンケンキヤク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국제인권규약","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国際原子力機関","reading":"コクサイゲンシリョクキカン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국제 원자력 기구","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際司法裁判所","reading":"コクサイシホウサイバンショ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"국제사법재판소","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際天文学連合","reading":"コクサイテンモンガクレンゴウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"국제천문연맹","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際宇宙ステーション","reading":"コクサイウチュウステーション","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국제우주정거장","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際度量衡総会","reading":"コクサイドリョウコウソウカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국제도량형총회","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"国際政治","reading":"コクサイセイジ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"국제 정치","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際機構","reading":"コクサイキコウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국제기구","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際河川","reading":"コクサイカセン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국제 하천","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際空港","reading":"コクサイクウコウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국제공항","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際貿易","reading":"コクサイボウエキ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국제 무역","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際通貨基金","reading":"コクサイツウカキキン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국제 통화 기금","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際連合","reading":"コクサイレンゴウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"국제 연합","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"国際連合憲章","reading":"コクサイレンゴウケンショウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국제연합헌장","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"유엔 헌장","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国際連帯税","reading":"コクサイレンタイゼイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국제 연대세","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国際連盟","reading":"コクサイレンメイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국제 연맹","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国際開発協会","reading":"コクサイカイハツキョウカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국제개발협회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"国際電気通信連合","reading":"コクサイデンキツウシンレンゴウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"국제전기통신연합","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"國學院大學","reading":"コクガクインダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고쿠가쿠인대학","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"國文學","reading":"コクブンガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"일본 문학","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"外務省大臣官房","reading":"ガイムショウダイジンカンボウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"외무성 대신관방","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"外国人技能実習機構","reading":"ガイコクジンギノウジッシュウキコウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"외국인기능실습기구","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"外来文化","reading":"ガイライブンカ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"외래문화","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"契丹","reading":"キッタン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"거란","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"契丹文字","reading":"キッタンモジ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"거란 문자","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"奥三河","reading":"キタミカワ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"오쿠미카와","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"好色一代男","reading":"コウショクイチダイオトコ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"호색일대남","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"嫌韓本","reading":"ケンカンボン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"혐한 서적","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"子どもの権利条約","reading":"コドモノケンリジョウヤク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"아동권리협약","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"子持ち銀河","reading":"コモチギンガ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"소용돌이 은하","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"孔子","reading":"コウシ","pos":["名詞","固有名詞","人名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"공자","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"学園七不思議","reading":"ガクエンナナフシギ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"학교 7대 불가사의","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"学情","reading":"ガクジョウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"학정","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"学校制服","reading":"ガッコウセイフク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교복","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"学校法人森友学園","reading":"ガッコウホウジンモリトモガクエン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"학교법인모리토모학원","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"学生さん","reading":"ガクセイサン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"학생분","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"学習指導案","reading":"ガクシュウシドウアン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"학습지도안","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"学習研究社","reading":"ガクシュウケンキュウシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"학습연구사","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"学術都市","reading":"ガクジュツトシ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"학술 도시","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"官製談合防止法","reading":"カンセイダンゴウボウシホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"관제담합방지법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"宮内庁","pos":["名詞","固有名詞","一般","*"],"reading":"クナイチョウ","senses":[{"rendering":{"irregular":null,"korean":"궁내청","korean_pos":"명사"}}]}
+{"dictionary_form":"家族八景","reading":"カゾクハッケイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가족팔경","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"家父長制","reading":"カフチョウセイ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가부장제","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"寒立馬","reading":"カンダチメ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"칸다치메","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"寛保","reading":"カンポウ","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"간포","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"寛政","reading":"カンセイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간세이","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"寛文","reading":"カンブン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간분","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"小柴","reading":"コシバ","pos":["名詞","固有名詞","人名","姓"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고시바","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"小泉内閣","reading":"コイズミナイカク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고이즈미 내각","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"小麦畑","reading":"コムギバタケ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"밀밭","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"岐阜城","reading":"ギフジョウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기후성","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"岐阜放送","reading":"ギフホウソウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기후방송","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"川の流れのように","reading":"カワノナガレノヨウニ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"강물의 흐름처럼","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"川口","reading":"カワグチ","pos":["名詞","固有名詞","人名","姓"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가와구치","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"川崎フロンターレ","reading":"カワサキフロンターレ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가와사키 프론탈레","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"川端","reading":"カワバタ","pos":["名詞","固有名詞","人名","姓"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가와바타","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"川路","reading":"カワジ","pos":["名詞","固有名詞","人名","姓"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가와지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"工業所有権","reading":"コウギョウショユウケン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"공업소유권","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"巨人軍","reading":"キョジングン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"거인군","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"幸徳事件","reading":"コウトクジケン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고토쿠 사건","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"幻冬舎","reading":"ゲントウシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"겐토샤","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"広勝寺","reading":"コウショウジ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"광승사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"広告主","reading":"コウコクヌシ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"광고주","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"広辞苑","reading":"コウジエン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고지엔","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"建久","reading":"ケンキュウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"겐큐","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"建安","reading":"ケンアン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"건안","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"弘化","reading":"コウカ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"홍화","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"弘法大師","reading":"コウボウダイシ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"홍법대사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"強制移住","reading":"キョウセイイジュウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"강제 이주","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"強震観測網","reading":"キョウシンカンソクモウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"강진관측망","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"影が薄い","reading":"カゲガウスイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"존재감이 없다","korean_pos":"형용사","irregular":null}}]}
+{"dictionary_form":"後悔先に立たず","reading":"コウカイサキニタタズ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"후회막급","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"御免なさい","reading":"ゴメンナサイ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"죄송해요","korean_pos":"감탄사","irregular":null}}]}
+{"dictionary_form":"御陵","reading":"ゴリョウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"능","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"恋するフォーチュンクッキー","reading":"コイスルフォーチュンクッキー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"사랑하는 포춘 쿠키","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"愚者のエンドロール","reading":"グシャノエンドロール","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"우자의 엔드롤","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"感染研","reading":"カンセンケン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"감염연","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"慶安","reading":"ケイアン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이안","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"慶尚道","reading":"キョンサンド","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경상도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"慶応義塾大学","reading":"ケイオウギジュクダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이오기주쿠 대학","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"慶應義塾大学","reading":"ケイオウギジュクダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이오기주쿠 대학","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"慶應義塾大学出版会","reading":"ケイオウギジュクダイガクシュッパンカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이오기주쿠대학출판회","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"慶熙宮","reading":"キョンヒグン","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경희궁","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"慶長の役","reading":"ケイチョウノエキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"정유재란","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"慶長三陸地震","reading":"ケイチョウサンリクジシン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이초 산리쿠 지진","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"憲法九条","reading":"ケンポウキュウジョウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"헌법 9조","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"懐疑主義","reading":"カイギシュギ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"회의주의","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"戸別所得補償制度","reading":"コベツショトクホショウセイド","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"호별 소득 보상 제도","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"拠点都市","reading":"キョテントシ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"거점 도시","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"改造社","reading":"カイゾウシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"개조사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"改革開放","reading":"カイカクカイホウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"개혁개방","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"教役者","reading":"キョウエキシャ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"교역자","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"教条主義","reading":"キョウジョウシュギ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"교조주의","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"教科用図書検定","reading":"キョウカヨウトショケンテイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교과용도서검정","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"教育テレビ","reading":"キョウイクテレビ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교육텔레비전","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"教育勅語","reading":"キョウイクチョクゴ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교육 칙어","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"教育部","reading":"キョウイクブ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"교육부","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"旧ユーゴスラビア","reading":"キュウユーゴスラビア","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"구유고슬라비아","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"旧国鉄","reading":"キュウコクテツ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"구 일본국철","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"옛 일본국유철도","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"旧日本軍","reading":"キュウニッポングン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"구 일본군","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"구 일본 제국군","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"旧東ドイツ","reading":"キュウヒガシドイツ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"구동독","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"旧約聖書","reading":"キュウヤクセイショ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"구약성경","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"旧統一教会","reading":"キュウトウイツキョウカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"구 통일교","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"구 통일교회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"旧西ドイツ","reading":"キュウニシドイツ","pos":["名詞","固有名詞","地名","*"],"senses":[[{"rendering":{"korean":"구서독","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"旧軽井沢銀座","reading":"キュウカルイザワギンザ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"구 가루이자와 긴자","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"旭日中綬章","reading":"キョクジツチュウジュショウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"욱일중수장","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"晃文","reading":"コウブン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고분","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"景気減速","reading":"ケイキゲンソク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"경기 둔화","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"景福宮","reading":"キョンボックン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경복궁","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"月刊コミックアライブ","reading":"ゲッカンコミックアライブ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"월간 코믹 얼라이브","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"期末考査","reading":"キマツコウサ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기말고사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"木村伊兵衛写真賞","reading":"キムライヘエシャシンショウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기무라 이헤이 사진상","korean_pos":"명사"}}]]}
+{"dictionary_form":"来島海峡","reading":"クルシマカイキョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"구루시마 해협","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"果物ナイフ","reading":"クダモノナイフ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"과도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"柏書房","reading":"カシワショボウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가시와쇼보","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"柿の木","reading":"カキノキ","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"감나무","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"校友会","reading":"コウユウカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"동문회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"核拡散防止条約","reading":"カクカクサンボウシジョウヤク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"핵확산 방지 조약","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"桂","reading":"カツラ","pos":["名詞","固有名詞","人名","姓"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가쓰라","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"桐生線","reading":"キリュウセン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기류선","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"検査対象","reading":"ケンサタイショウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"검사 대상","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"極東ロシア","reading":"キョクトウロシア","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"극동 러시아","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"楽器メーカー","reading":"ガッキメーカー","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"악기 메이커","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"악기 제조사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"楽曲制作","reading":"ガッキョクセイサク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"악곡 제작","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"構造改革特別区域法","reading":"コウゾウカイカクトクベツクイキホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"구조개혁특별구역법","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"구조개혁특구법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"権利義務","reading":"ケンリギム","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"권리의무","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"権威主義","reading":"ケンイシュギ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"권위주의","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"樺太","reading":"カラフト","pos":["名詞","固有名詞","地名","一般"],"senses":[{"rendering":{"korean":"가라후토","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"樺太アイヌ語","reading":"カラフトアイヌゴ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"사할린 아이누어","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"機会費用","reading":"キカイヒヨウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기회비용","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"機動戦士ガンダム","reading":"キドウセンシガンダム","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기동전사 건담","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"機動警察パトレイバー","reading":"キドウケイサツパトレイバー","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기동경찰 패트레이버","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"機械工業","reading":"キカイコウギョウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기계공업","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"毛皮貿易","reading":"ケガワボウエキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"모피 무역","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"気候変動枠組条約","reading":"キコウヘンドウワクグミジョウヤク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기후변화협약","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"気圧の谷","reading":"キアツノタニ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기압골","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"氷の世界","reading":"コオリノセカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"얼음의 세계","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"氷締め","reading":"コオリジメ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"얼음 조임","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"江北","reading":"コウホク","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"강북","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"江南","reading":"コウナン","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"강남","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"江原道","reading":"カンウォンド","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"강원도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"江岸","reading":"コウガン","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"강안","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"江華島","reading":"カンファド","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"강화도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"汲古書院","reading":"キュウコショイン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"규코쇼인","korean_pos":"명사"}}]]}
+{"dictionary_form":"河出ブックス","reading":"カワデブックス","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카와데북스","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"河出文庫","reading":"カワデブンコ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가와데문고","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"河出書房新社","reading":"カワデショボウシンシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가와데쇼보신샤","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"河北","reading":"カホク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"허베이","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"하북","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"河北省","reading":"カホクショウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"허베이성","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"하북성","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"河野談話","reading":"コウノダンワ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고노 담화","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"活躍ぶり","reading":"カツヤクブリ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"활약상","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浣腸プレイ","reading":"カンチョウプレイ","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"관장 플레이","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浩然の気","reading":"コウゼンノキ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"호연지기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海上交易","reading":"カイジョウコウエキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"해상 교역","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海上自衛隊","reading":"カイジョウジエイタイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"해상자위대","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"海上警察","reading":"カイジョウケイサツ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"해상 경찰","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海中道路","reading":"カイチュウドウロ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"해중도로","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海底油田","reading":"カイテイユデン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"해저 유전","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海底火山","reading":"カイテイカザン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"해저 화산","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海底遺跡","reading":"カイテイイセキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"해저 유적","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海月姫","reading":"クラゲヒメ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"쿠라게히메","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海洋国家","reading":"カイヨウコッカ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"해양 국가","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海洋安全保障","reading":"カイヨウアンゼンホショウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"해양 안보","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海洋島","reading":"カイヨウトウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"해양도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海洋水産部","reading":"カイヨウスイサンブ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"해양수산부","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"海洋警察庁","reading":"カイヨウケイサツチョウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"해양경찰청","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"海洋資源","reading":"カイヨウシゲン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"해양 자원","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海洋進出","reading":"カイヨウシンシュツ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"해양 진출","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海草","reading":"カイソウ","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"해초","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海面上昇","reading":"カイメンジョウショウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"해수면 상승","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海鮮料理","reading":"カイセンリョウリ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"해산물 요리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"混乱状態","reading":"コンランジョウタイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"혼란 상태","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"清洲橋","reading":"キヨスバシ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"기요스바시","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"清澄庭園","reading":"キヨスミテイエン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기요스미 정원","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"港湾都市","reading":"コウワントシ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"항만도시","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"湖南省","reading":"コナンショウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"후난성","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"호남성","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"湖水地方","reading":"コスイチホウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"호수 지방","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"源平盛衰記","reading":"ゲンペイセイスイキ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"겐페이세이스이키","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"源氏物語","reading":"ゲンジモノガタリ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"겐지모노가타리","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"겐지 이야기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"源泉かけ流し","reading":"ゲンセンカケナガシ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"원천 방류식","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"漁業協定","reading":"ギョギョウキョウテイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"어업협정","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"漁業資源","reading":"ギョギョウシゲン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"어업 자원","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"漢字検定","reading":"カンジケンテイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"한자 검정","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"濠洲","reading":"ゴウシュウ","pos":["名詞","固有名詞","地名","国"],"conjugation_type":null,"senses":[{"rendering":{"korean":"호주","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"灌漑農業","reading":"カンガイノウギョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"관개 농업","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"火山列島","reading":"カザンレットウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"화산 열도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"火山活動","reading":"カザンカツドウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"화산 활동","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"火星","reading":"カセイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"화성","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"火災報知機","reading":"カサイホウチキ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"화재경보기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"熊本地方","reading":"クマモトチホウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"구마모토 지방","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"熊本城","reading":"クマモトジョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"구마모토성","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"熊野古道","reading":"クマノコドウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"구마노 고도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"牽強付会","reading":"ケンキョウフカイ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"견강부회","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"玉帝","reading":"ギョクテイ","pos":["名詞","固有名詞","人名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"옥제","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"玉皇","reading":"ギョクコウ","pos":["名詞","固有名詞","人名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"옥황","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"玉皇大帝","reading":"ギョクコウタイテイ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"옥황상제","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"玉篇","reading":"ギョクヘン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"옥편","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"玉音放送","reading":"ギョクオンホウソウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"옥음방송","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"現代用語の基礎知識","reading":"ゲンダイヨウゴノキソチシキ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"현대용어의 기초지식","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"球体関節人形","reading":"キュウタイカンセツニンギョウ","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"구체관절인형","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"球状星団","reading":"キュウジョウセイダン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"구상 성단","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"環境庁","reading":"カンキョウチョウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"환경청","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"環境政策","reading":"カンキョウセイサク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"환경정책","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"環境汚染","reading":"カンキョウオセン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"환경 오염","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"環境特別委員会","reading":"カンキョウトクベツイインカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"환경특별위원회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"環境部","reading":"カンキョウブ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"환경부","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"環太平洋パートナーシップ協定","reading":"カンタイヘイヨウパートナーシップキョウテイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"환태평양 파트너십 협정","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"甲信地方","reading":"コウシンチホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"갑신 지방","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"甲信越地方","reading":"コウシンエツチホウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"고신에쓰 지방","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"甲子園","reading":"コウシエン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고시엔","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"甲論乙駁","reading":"コウロンオツバク","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"갑론을박","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"百済","reading":"クダラ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"백제","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"皇太子妃","reading":"コウタイシヒ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"황태자비","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"皇道派","reading":"コウドウハ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"황도파","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"監視活動","reading":"カンシカツドウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"감시 활동","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"研究社","reading":"ケンキュウシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"켄큐샤","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"祈祷院","reading":"キトウイン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기도원","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"神在月","reading":"カミアリヅキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"가미아리즈키","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"神奈川新聞","reading":"カナガワシンブン","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"가나가와 신문","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"神戸大学","reading":"コウベダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고베대학교","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"神戸新聞","reading":"コウベシンブン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고베신문","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"神戸港","reading":"コウベコウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고베항","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"神風タクシー","reading":"カミカゼタクシー","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가미카제 택시","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"神風特別攻撃隊","reading":"カミカゼトクベツコウゲキタイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카미카제 특별 공격대","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"禁断の果実","reading":"キンダンノカジツ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"금단의 열매","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"科学朝日","reading":"カガクアサヒ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"과학아사히","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"空気入れ","reading":"クウキイレ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"공기 펌프","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"空港線","reading":"クウコウセン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"공항선","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"空襲警報","reading":"クウシュウケイホウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"공습경보","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"窮余の一策","reading":"キュウヨノイッサク","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"궁여지책","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"競技大会","reading":"キョウギタイカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경기 대회","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"競輪祭","reading":"ケイリンサイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"경륜제","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"競輪選手","reading":"ケイリンセンシュ","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"경륜선수","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"笠間","reading":"カサマ","pos":["名詞","固有名詞","地名","一般"],"senses":[[{"rendering":{"korean":"가사마","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"笠間書院","reading":"カサマショイン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카사마쇼인","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"紅月","reading":"コウゲツ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"코게츠","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"紅魔郷","reading":"コウマキョウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"홍마향","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"紙巻タバコ","reading":"カミマキタバコ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"궐련","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"経企庁","reading":"ケイキチョウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"경제기획청","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"経団連","reading":"ケイダンレン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"경단련","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"経済協力","reading":"ケイザイキョウリョク","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"경제 협력","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"経済協力開発機構","reading":"ケイザイキョウリョクカイハツキコウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경제 협력 개발 기구","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"経済大国","reading":"ケイザイタイコク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경제 대국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"経済安全保障推進法","reading":"ケイザイアンゼンホショウスイシンホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"경제안전보장추진법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"経済審議会","reading":"ケイザイシンギカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"경제심의회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"経済戦略会議","reading":"ケイザイセンリャクカイギ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"경제전략회의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"経済統合","reading":"ケイザイトウゴウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경제 통합","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"経済規模","reading":"ケイザイキボ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"경제 규모","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"経済連携","reading":"ケイザイレンケイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"경제 연계","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"경제 협력","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"経験主義","reading":"ケイケンシュギ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경험주의","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"結合双生児","reading":"ケツゴウソウセイジ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"결합 쌍둥이","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"給水塔","reading":"キュウスイトウ","pos":["名詞","固有名詞","地名","*"],"senses":[{"rendering":{"korean":"급수탑","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"給特法","reading":"キュウトクホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"급특법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"給食センター","reading":"キュウショクセンター","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"급식센터","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"緊急包括支援交付金","reading":"キンキュウホウカツシエンコウフキン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"긴급포괄지원교부금","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"코로나19 긴급포괄지원교부금","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"緊急着陸","reading":"キンキュウチャクリク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"긴급 착륙","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"緊急農業農村対策本部","reading":"キンキュウノウギョウノウソンタイサクホンブ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"긴급농업농촌대책본부","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"緘口令","reading":"カンコウレイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"함구령","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"群像新人文学賞","reading":"グンゾウシンジンブンガクショウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"군상신인문학상","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"義務警察","reading":"ギムケイサツ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"의무경찰","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"臥薪嘗胆","reading":"ガシンショウタン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"와신상담","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"航空機メーカー","reading":"コウクウキメーカー","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"항공기 제조사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"航空機事故","reading":"コウクウキジコ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"항공기 사고","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"航空産業","reading":"コウクウサンギョウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"항공 산업","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"航空自衛隊","reading":"コウクウジエイタイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"항공자위대","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"艦これ","reading":"カンコレ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"칸코레","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"芸予地震","reading":"ゲイヨジシン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이요 지진","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"芸文社","reading":"ゲイブンシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이분샤","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"芸術社","reading":"ゲイジュツシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"게이주츠샤","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"菅内閣","reading":"カンナイカク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"칸 내각","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"菅義偉","reading":"カンヨシヒデ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"스가 요시히데","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"菊川駅","reading":"キクカワエキ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기쿠가와역","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"菊花賞","reading":"キクカショウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기쿠카쇼","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"菓子屋横丁","reading":"カシヤヨコチョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"가시야 요코초","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"華厳の滝","reading":"ケゴンノタキ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"게곤 폭포","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"蒟蒻問答","reading":"コンニャクモンドウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"동문서답","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"薬水","reading":"クスリミズ","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"약수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"虚航船団","reading":"キョコウセンダン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"허항선단","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"蚊取り線香","reading":"カトリセンコウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"모기향","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"蜘蛛男","reading":"クモオトコ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"거미 남자","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"行政の中心","reading":"ギョウセイノチュウシン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"행정의 중심","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"行政不服審査","reading":"ギョウセイフフクシンサ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"행정불복심사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"行政改革委員会","reading":"ギョウセイカイカクイインカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"행정개혁위원회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"行政改革推進本部","reading":"ギョウセイカイカクスイシンホンブ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"행정개혁추진본부","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"行政改革推進法","reading":"ギョウセイカイカクスイシンホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"행정개혁추진법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"行政監察局","reading":"ギョウセイカンサツキョク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"행정감찰국","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"行政監視院","reading":"ギョウセイカンシイン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"행정감시원","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"行政経験","reading":"ギョウセイケイケン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"행정 경험","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"行政長官","reading":"ギョウセイチョウカン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"행정장관","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"行革会議","reading":"ギョウカクカイギ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"행정개혁회의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"行革担当大臣","reading":"ギョウカクタントウダイジン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"행정개혁 담당상","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"행정개혁 담당 장관","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"行革推進法","reading":"ギョウカクスイシンホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"행정개혁추진법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"街宣活動","reading":"ガイセンカツドウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가두 선전 활동","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"街路灯","reading":"ガイロトウ","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가로등","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"観光列車","reading":"カンコウレッシャ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"관광 열차","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"観光大使","reading":"カンコウタイシ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"관광 대사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"観光庁","pos":["名詞","固有名詞","一般","*"],"reading":"カンコウチョウ","senses":[{"rendering":{"irregular":null,"korean":"관광청","korean_pos":"명사"}}]}
+{"dictionary_form":"観光施設","reading":"カンコウシセツ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"관광 시설","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"観応","reading":"カンノウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간노","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"観念主義","reading":"カンネンシュギ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"관념주의","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"観測衛星","reading":"カンソクエイセイ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"관측 위성","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"観音","reading":"カンノン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"관음","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"角川","reading":"カドカワ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카도카와","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"角川スニーカー文庫","reading":"カドカワスニーカーブンコ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카도카와 스니커 문고","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"角川文庫","reading":"カドカワブンコ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"카도카와 문고","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"角川新書","reading":"カドカワシンショ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카도카와 신서","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"角川春樹事務所","reading":"カドカワハルキジムショ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"카도카와 하루키 사무소","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"解放奴隷","reading":"カイホウドレイ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"해방 노예","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"言海","reading":"ゲンカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"겐카이","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"言語機能","reading":"ゲンゴキノウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"언어 기능","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"言語生活","reading":"ゲンゴセイカツ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"언어생활","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"言語過程説","reading":"ゲンゴカテイセツ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"언어 과정설","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"計画都市","reading":"ケイカクトシ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"계획도시","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"訓民正音","reading":"クンミンセイオン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"훈민정음","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"記念硬貨","reading":"キネンコウカ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기념주화","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"記録映画","reading":"キロクエイガ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기록영화","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"語学研修","reading":"ゴガクケンシュウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"어학연수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"講談社","reading":"コウダンシャ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고단샤","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"講談社学術文庫","reading":"コウダンシャガクジュツブンコ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고단샤 학술 문고","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"謹慎処分","reading":"キンシンショブン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"근신 처분","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"警戒レベル","reading":"ケイカイレベル","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"경계 수준","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"경계 레벨","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"警戒態勢","reading":"ケイカイタイセイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"경계태세","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"警視庁","reading":"ケイシチョウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경시청","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"議員辞職","reading":"ギインジショク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"의원사직","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"議院証言法","reading":"ギインショウゲンホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"국회증언법","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"의회증언법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"豪州","reading":"ゴウシュウ","pos":["名詞","固有名詞","地名","国"],"conjugation_type":null,"senses":[{"rendering":{"korean":"호주","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"貴族院","reading":"キゾクイン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"귀족원","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"起亜","reading":"キア","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기아","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"起亜自動車","reading":"キアジドウシャ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기아자동차","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"起爆装置","reading":"キバクソウチ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기폭 장치","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"起訴便宜主義","reading":"キソベンギシュギ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"기소편의주의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"車離れ","reading":"クルマバナレ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"자동차 기피","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"軌道傾斜角","reading":"キドウケイシャカク","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"궤도경사각","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"軌道速度","reading":"キドウソクド","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"궤도 속도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"軍艦島","reading":"グンカンジマ","pos":["名詞","固有名詞","地名","一般"],"senses":[{"rendering":{"korean":"군함도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"軽自動車税","reading":"ケイジドウシャゼイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"경자동차세","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"軽飛行機","reading":"ケイヒコウキ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"경비행기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"輝線星雲","reading":"キセンセイウン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"휘선 성운","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"近代化遺産","reading":"キンダイカイサン","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"근대화 유산","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"近東","reading":"キントウ","pos":["名詞","固有名詞","地名","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"근동","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"近畿地方","reading":"キンキチホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"긴키 지방","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"近畿財務局","reading":"キンキザイムキョク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"킨키재무국","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"近鉄百貨店","reading":"キンテツヒャッカテン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"긴테쓰백화점","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"逆転裁判","reading":"ギャクテンサイバン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"역전재판","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"還元主義","reading":"カンゲンシュギ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"환원주의","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"金剛","reading":"コンゴウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"콩고","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"金剛峯寺","reading":"コンゴウブジ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"금강봉사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"金商法","reading":"キンショウホウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"금융상품거래법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金学順","reading":"キンガクジュン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"김학순","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"金山駅","reading":"カナヤマエキ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가나야마역","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金敬姫","reading":"キムギョンヒ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"김경희","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"金時計","reading":"キンドケイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"금시계","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金正哲","reading":"キムジョンチョル","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"김정철","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"金正恩","reading":"キムジョンウン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"김정은","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金沢カレー","reading":"カナザワカレー","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가나자와 카레","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"金沢大学","reading":"カナザワダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가나자와대학","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"金王朝","reading":"キンオウチョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"김씨 왕조","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"金環日食","reading":"キンカンニッショク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"금환일식","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金田一少年の事件簿","reading":"キンダイチショウネンノジケンボ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"킨다이치 소년의 사건부","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"金細工","reading":"キンザイク","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"금세공","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"金色堂","reading":"コンジキドウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"금색당","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"金英淑","reading":"キムヨンスク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"김영숙","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金融センター","reading":"キンユウセンター","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"금융 센터","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"金融公庫","reading":"キンユウコウコ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"금융 공고","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金融再生法案","reading":"キンユウサイセイホウアン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"금융재생법안","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金融制度調査会","reading":"キンユウセイドチョウサカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"금융제도조사회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金融商品取引","reading":"キンユウショウヒントリヒキ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"금융 상품 거래","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金融教育","reading":"キンユウキョウイク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"금융 교육","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金融機能強化法","reading":"キンユウキノウキョウカホウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"금융기능강화법","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"金鍾泌","reading":"キムジョンピル","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"김종필","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"金閣寺","reading":"キンカクジ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"금각사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"金雪松","reading":"キムソルソン","pos":["名詞","固有名詞","人名","一般"],"senses":[[{"rendering":{"korean":"김설송","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"銀水晶","reading":"ギンスイアキラ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"은수정","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"銀河英雄伝説","reading":"ギンガエイユウデンセツ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"은하영웅전설","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"銀細工","reading":"ギンザイク","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"은세공","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"銀魂","reading":"ギンタマ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"은혼","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"錦帯橋","reading":"キンタイキョウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"긴타이교","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鎌倉幕府","reading":"カマクラバクフ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가마쿠라 막부","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"開化派","reading":"カイカハ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"개화파","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"関ジャニ∞","reading":"カンジャニエイト","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간자니에이토","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"関東地区","reading":"カントウチク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간토 지역","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"関東地方","reading":"カントウチホウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"간토 지방","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"関東地震","reading":"カントウジシン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간토 지진","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"関東大震災","reading":"カントウダイシンサイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"관동 대지진","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"関東軍","reading":"カントウグン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"관동군","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"関東都督府","reading":"カントウトトクフ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"관동도독부","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"関税同盟","reading":"カンゼイドウメイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"관세 동맹","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"関空","reading":"カンクウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"간사이공항","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"関西テレビ","reading":"カンサイテレビ","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"간사이 TV","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"関西テレビ放送","reading":"カンサイテレビホウソウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간사이 테레비 방송","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"関西国際空港","reading":"カンサイコクサイクウコウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"간사이 국제공항","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"関西地区","reading":"カンサイチク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간사이 지역","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"関西大学","reading":"カンサイダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간사이 대학","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"関西本線","reading":"カンサイホンセン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"간사이 본선","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"関西電力","reading":"カンサイデンリョク","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"간사이 전력","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"関門海","reading":"カンモンカイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"간몬 해","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"関門海峡","reading":"カンモンカイキョウ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"간몬 해협","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"階段国道","reading":"カイダンコクドウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"계단 국도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"隔世の感","reading":"カクセイノカン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"격세지감","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"隔年結果","reading":"カクネンケッカ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"해거리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雲霧","reading":"クモギリ","pos":["名詞","固有名詞","人名","姓"],"senses":[{"rendering":{"korean":"운무","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"霧の摩周湖","reading":"キリノマシュウコ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"안개의 마슈호","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"霧島神宮","reading":"キリシマジングウ","pos":["名詞","固有名詞","一般","*"],"senses":[{"rendering":{"korean":"기리시마 신궁","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"霧雨魔理沙","reading":"キリサメマリサ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"키리사메 마리사","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"革命防衛隊","reading":"カクメイボウエイタイ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"혁명수비대","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"이란 혁명수비대","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"革新主義","reading":"カクシンシュギ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"혁신주의","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"韓医師","reading":"カンイシ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"한의사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"韓半島","reading":"カンハントウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"한반도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"韓国","reading":"カンコク","pos":["名詞","固有名詞","地名","国"],"conjugation_type":null,"senses":[{"rendering":{"korean":"한국","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"韓国国会","reading":"カンコクコッカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"한국 국회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"韓国挺身隊問題対策協議会","reading":"カンコクテイシンタイモンダイタイサクキョウギカイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"한국정신대문제대책협의회","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"韓国政府","reading":"カンコクセイフ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"한국 정부","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"韓国料理","reading":"カンコクリョウリ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"한식","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"韓国料理店","reading":"カンコクリョウリテン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"한식당","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"韓国日報","reading":"カンコクニッポウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"한국일보","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"韓国総合株価指数","reading":"カンコクソウゴウカブカシスウ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"한국종합주가지수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"韓国軍","reading":"カンコクグン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"한국군","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"韓民族","reading":"カンミンゾク","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"한민족","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"額面価格","reading":"ガクメンカカク","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"액면가","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"駆けつけ警護","reading":"カケツケケイゴ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"긴급 구호 경호","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"駒場祭","reading":"コマバサイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고마바사이","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"高たんぱく","reading":"コウタンパク","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고단백","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"高句麗","reading":"コウクリ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"고구려","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"高校生等奨学給付金","reading":"コウコウセイトウショウガクキュウフキン","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"고등학생 등 장학급부금","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"高知大学","reading":"コウチダイガク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고치 대학","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"高知西南交通","reading":"コウチセイナンコウツウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고치세이난교통","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"高知駅","reading":"コウチエキ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고치역","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"高英姫","reading":"コヨンヒ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고영희","korean_pos":"명사","irregular":null,"transliteration":true,"name_role":true}}]]}
+{"dictionary_form":"高麗","reading":"コマ","pos":["名詞","固有名詞","人名","姓"],"senses":[{"rendering":{"korean":"고려","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"高麗人","reading":"コウライジン","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"고려인","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"高麗人参","reading":"コウライニンジン","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고려인삼","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鬼滅の刃","reading":"キメツノヤイバ","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"귀멸의 칼날","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"魏","reading":"ギ","pos":["名詞","固有名詞","地名","国"],"senses":[{"rendering":{"korean":"위","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鶏冠石","reading":"ケイカンセキ","pos":["名詞","固有名詞","*","*"],"senses":[{"rendering":{"korean":"계관석","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鹿児島空港","reading":"カゴシマクウコウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"가고시마 공항","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"黄浦区","reading":"コウホク","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"황포구","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"黒いダイヤモンド","reading":"クロイダイヤモンド","pos":["名詞","固有名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"검은 다이아몬드","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"黒板消し","reading":"コクバンケシ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"칠판지우개","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"黒海艦隊","reading":"コッカイカンタイ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"흑해 함대","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"黒牢城","reading":"コクロウジョウ","pos":["名詞","固有名詞","一般","*"],"senses":[[{"rendering":{"korean":"흑뢰성","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"黒色人種","reading":"コクショクジンシュ","pos":["名詞","固有名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"흑인종","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"黒魔導士","reading":"クロマドウシ","pos":["名詞","固有名詞","*","*"],"senses":[[{"rendering":{"korean":"흑마도사","korean_pos":"명사","irregular":null}}]]}

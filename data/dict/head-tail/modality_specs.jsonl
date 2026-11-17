@@ -1,0 +1,12 @@
+{"table":"quoted_judgment_direct","mode":"quoted","tailLemma":"여겨지다","auxiliaryLemma":"quoted_to_sareru","predicateForms":["する"],"requireCopulaForNominalHead":true}
+{"table":"quoted_judgment_direct","mode":"quoted","tailLemma":"간주되다","auxiliaryLemma":"quoted_to_minasareru","predicateForms":["みなす","見做す"]}
+{"table":"quoted_judgment_direct","mode":"role","tailLemma":"취급되다","auxiliaryLemma":"quoted_to_uketorareru","predicateForms":["受け取る"]}
+{"table":"quoted_judgment_direct","mode":"role","tailLemma":"취급되다","auxiliaryLemma":"quoted_to_atsukawareru","predicateForms":["扱う"]}
+{"table":"quoted_judgment_noun_verb","mode":"role","tailLemma":"자리매김되다","auxiliaryLemma":"quoted_to_ichizukerareru","nounDf":"位置","predicateForms":["づける","付ける"]}
+{"table":"quoted_judgment_noun_verb","mode":"quoted","tailLemma":"인정되다","auxiliaryLemma":"quoted_to_ninteisareru","nounDf":"認定","predicateForms":["する"]}
+{"table":"quoted_judgment_noun_verb","mode":"quoted","tailLemma":"이해되다","auxiliaryLemma":"quoted_to_rikaisareru","nounDf":"理解","predicateForms":["する"]}
+{"table":"quoted_judgment_noun_verb","mode":"quoted","tailLemma":"인식되다","auxiliaryLemma":"quoted_to_ninshikisareru","nounDf":"認識","predicateForms":["する"]}
+{"table":"quoted_judgment_noun_verb","mode":"quoted","tailLemma":"판단되다","auxiliaryLemma":"quoted_to_handansareru","nounDf":"判断","predicateForms":["する"]}
+{"table":"quoted_judgment_noun_verb","mode":"quoted","tailLemma":"지적되다","auxiliaryLemma":"quoted_to_shitekisareru","nounDf":"指摘","predicateForms":["する"]}
+{"table":"quoted_judgment_noun_verb","mode":"quoted","tailLemma":"추정되다","auxiliaryLemma":"quoted_to_suiteisareru","nounDf":"推定","predicateForms":["する"]}
+{"table":"quoted_judgment_noun_verb","mode":"quoted","tailLemma":"예측되다","auxiliaryLemma":"quoted_to_yosokusareru","nounDf":"予測","predicateForms":["する"]}

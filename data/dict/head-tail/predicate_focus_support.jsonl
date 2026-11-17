@@ -1,0 +1,8 @@
+{"marker":"は","polarity":"negative","focus":"는"}
+{"marker":"も","polarity":"negative","focus":"도"}
+{"marker":"さえ","polarity":"negative","focus":"조차"}
+{"marker":"すら","polarity":"negative","focus":"조차"}
+{"marker":"や","polarity":"negative","focus":"는"}
+{"marker":"は","polarity":"affirmative","focus":"contrastive"}
+{"marker":"さえ","polarity":"affirmative","supportForm":"hypothetical","focus":"sufficiency"}
+{"marker":"さえ","polarity":"affirmative","focus":"extreme"}

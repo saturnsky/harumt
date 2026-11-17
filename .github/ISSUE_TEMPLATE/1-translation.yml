@@ -1,0 +1,60 @@
+name: 번역 오류 · 역어 제안
+description: 번역 결과가 틀리거나 어색할 때, 사전에 없는 단어나 더 나은 역어를 알려 주실 때
+title: "[번역] "
+labels: ["translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        한 이슈에는 **한 가지 현상만** 적어 주세요. 같은 원인으로 보이는 문장은 함께 적어도 됩니다.
+        긴 저작물이나 개인정보가 담긴 글은 붙이지 말고, 문제가 재현되는 가장 짧은 문장으로 줄여 주세요.
+        제보된 문장은 번역 품질 검사 자료로 쓰일 수 있습니다.
+  - type: textarea
+    id: source
+    attributes:
+      label: 원문
+      description: 일본어 원문. 여러 문장이면 한 줄에 하나씩 적어 주세요.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 실제 번역 결과
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대하는 번역 (선택)
+      description: 몰라도 괜찮습니다. 어디가 어떻게 이상한지만 적어 주셔도 됩니다.
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: HaruMT 버전
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: register
+    attributes:
+      label: 문체 (register)
+      options:
+        - casual (기본값)
+        - formal
+        - 둘 다
+    validations:
+      required: true
+  - type: input
+    id: options
+    attributes:
+      label: 그 밖의 옵션 (선택)
+      description: 기본값이 아닌 파이프라인 옵션을 썼다면 적어 주세요.
+  - type: textarea
+    id: diagnose
+    attributes:
+      label: 진단 출력 (선택)
+      description: '`npx harumt-diagnose --no-color "<원문>"` 의 출력을 붙여 주시면 원인을 찾는 데 큰 도움이 됩니다.'
+      render: text

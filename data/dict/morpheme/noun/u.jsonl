@@ -1,0 +1,795 @@
+{"dictionary_form":"ういきょう","reading":"ウイキョウ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"회향 잎","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ういろう","reading":"ウイロウ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우이로","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うえ","reading":"ウエ","pos":["名詞","普通名詞","副詞可能","*"],"senses":[{"rendering":{"korean":"위","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うお","reading":"ウオ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우오","korean_pos":"감탄사","irregular":null}},{"rendering":{"korean":"우와","korean_pos":"감탄사","irregular":null}}]]}
+{"dictionary_form":"うかがい","reading":"ウカガイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"탐문","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"떠보기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うかつ","pos":["名詞","普通名詞","形状詞可能","*"],"reading":"ウカツ","senses":[{"rendering":{"irregular":null,"korean":"부주의","korean_pos":"명사"}}]}
+{"dictionary_form":"うがい","reading":"ウガイ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"가글","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うがい薬","reading":"ウガイグスリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가글액","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うぐいす","reading":"ウグイス","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"꾀꼬리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うけあい","reading":"ウケアイ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"장담","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うさ","reading":"ウサ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"토끼","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うさぎ","reading":"ウサギ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"토끼","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うさみ","reading":"ウサミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"토끼귀","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うさん","reading":"ウサン","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"수상하다","korean_pos":"형용사","irregular":"여","nominalized":"수상함"}},{"rendering":{"korean":"미심쩍다","korean_pos":"형용사","irregular":null,"nominalized":"미심쩍음"}}]]}
+{"dictionary_form":"うさんくさい","reading":"ウサンクサイ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"수상하다","korean_pos":"형용사","irregular":"여"}}]]}
+{"dictionary_form":"うし","pos":["名詞","普通名詞","一般","*"],"reading":"ウシ","senses":[{"rendering":{"irregular":null,"korean":"소","korean_pos":"명사"}}]}
+{"dictionary_form":"うしろ","reading":"ウシロ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒤","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うしろ姿","reading":"ウシロスガタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒷모습","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うじ","reading":"ウジ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"주눅","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うすら笑い","reading":"ウスラワライ","pos":["名詞","普通名詞","*","*"],"senses":[[{"rendering":{"korean":"비웃음","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うずら","reading":"ウズラ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"메추라기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うそ","reading":"ウソ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"거짓말","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うそつき","reading":"ウソツキ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"거짓말쟁이","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うそつき","reading":"ウソツキ","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"거짓말쟁이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うた","reading":"ウタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"노래","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うたた寝","reading":"ウタタネ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"선잠","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"낮잠","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うた声","reading":"ウタゴエ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"노랫소리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うだつ","reading":"ウダツ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"출세","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うちわ","reading":"ウチワ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"부채","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うっかり","reading":"ウッカリ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"부주의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うっかり","reading":"ウッカリ","pos":["名詞","普通名詞","副詞可能","*"],"senses":[{"rendering":{"korean":"무심코","korean_pos":"부사","irregular":null}}]}
+{"dictionary_form":"うっそり","reading":"ウッソリ","pos":["名詞","普通名詞","副詞可能","*"],"senses":[{"rendering":{"korean":"얼빠진 사람","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うっそー","reading":"ウッソー","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"말도 안 돼","korean_pos":"감탄사","irregular":null}}]]}
+{"dictionary_form":"うっ血","reading":"ウッケツ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"울혈","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うつぎ","reading":"ウツギ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"우츠기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うつつ","reading":"ウツツ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"정신","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"넋","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うつ伏せ","reading":"ウツブセ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"엎드린 자세","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"엎드림","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うつ状態","reading":"ウツジョウタイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우울 상태","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うつ病","reading":"ウツビョウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우울증","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うで","reading":"ウデ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"어","korean_pos":"감탄사","irregular":null}}]}
+{"dictionary_form":"うど","reading":"ウド","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うどん","reading":"ウドン","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"우동","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うなぎ","reading":"ウナギ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"장어","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うなぎ屋","reading":"ウナギヤ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"장어집","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うなぎ登り","reading":"ウナギノボリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"급상승","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"수직상승","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うなじ","reading":"ウナジ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"목덜미","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒷목","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うなじ毛","reading":"ウナジゲ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"목덜미 털","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うなずき","reading":"ウナズキ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"끄덕임","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うなり声","reading":"ウナリゴエ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"으르렁거리는 소리","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"으르렁거림","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うに","reading":"ウニ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"성게","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うぬぼれ","reading":"ウヌボレ","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"자만","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うねり","reading":"ウネリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"소용돌이","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"파동","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"물결","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うのみ","pos":["名詞","普通名詞","一般","*"],"reading":"ウノミ","senses":[{"rendering":{"irregular":null,"korean":"곧이듣기","korean_pos":"명사"}}]}
+{"dictionary_form":"うぶ","reading":"ウブ","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"순진","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"풋내기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うまごやし","reading":"ウマゴヤシ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"자주개자리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うみ","pos":["名詞","普通名詞","一般","*"],"reading":"ウミ","senses":[{"rendering":{"irregular":null,"korean":"고름","korean_pos":"명사"}}]}
+{"dictionary_form":"うみねこ","reading":"ウミネコ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"괭이갈매기","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"우미네코","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うめき声","reading":"ウメキゴエ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"신음소리","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うらやみ","reading":"ウラヤミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"부러움","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うら返し","reading":"ウラガエシ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒤집힘","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うれしさ","reading":"ウレシサ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기쁨","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うれしなき","reading":"ウレシナキ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"기쁜 울음","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うれし泣き","reading":"ウレシナキ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"기쁨의 눈물","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"기뻐서 울기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うれし涙","reading":"ウレシナミダ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"기쁨의 눈물","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"기쁜 눈물","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うろ","reading":"ウロ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우왕좌왕","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うろこ","reading":"ウロコ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"비늘","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うろこ雲","reading":"ウロコグモ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"비늘구름","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うろ覚え","reading":"ウロオボエ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"어렴풋한 기억","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"うわごと","reading":"ウワゴト","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"헛소리","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うわさ","reading":"ウワサ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"소문","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うわさ話","reading":"ウワサバナシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"소문","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"가십","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒷말","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うわの空","reading":"ウワノソラ","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"딴생각","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うわべ","reading":"ウワベ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"겉모습","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"겉치레","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うわ言","reading":"ウワゴト","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"잠꼬대","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"헛소리","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"うんこ","reading":"ウンコ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"똥","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"うんち","reading":"ウンチ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"응가","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"대변","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"う段","reading":"ウダン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"차례","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"단계","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"う蝕","reading":"ウショク","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우식","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"충치","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ゔぃ","reading":"ヴィ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"위이잉","korean_pos":"감탄사","irregular":null}}]}
+{"dictionary_form":"ゔっ","reading":"ヴッ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"욱","korean_pos":"감탄사","irregular":null}}]}
+{"dictionary_form":"ウイルス対策ソフト","reading":"ウイルスタイサクソフト","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"바이러스 백신","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ウイルス性","reading":"ウイルスセイ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"바이러스성","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"ウイルス感染","reading":"ウイルスカンセン","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"바이러스 감염","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ウェブ漫画","reading":"ウェブマンガ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"웹툰","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"ウェルニッケ脳症","reading":"ウェルニッケノウショウ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"베르니케 뇌증","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ウラシマ効果","reading":"ウラシマコウカ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우라시마 효과","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ウルドゥー語","reading":"ウルドゥーゴ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"우르두어","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ウーロン茶","reading":"ウーロンチャ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"우롱차","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"ウ段","reading":"ウダン","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우단","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"ウ音便","pos":["名詞","普通名詞","一般","*"],"reading":"ウオンビン","senses":[{"rendering":{"irregular":null,"korean":"우음편","korean_pos":"명사"}}]}
+{"dictionary_form":"上あご","reading":"ウワアゴ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"윗턱","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"입천장","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"上から目線","reading":"ウエカラメセン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"내려다보는 태도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上くちびる","reading":"ウワクチビル","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"윗입술","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上っ張り","reading":"ウワッパリ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"작업복","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上っ面","reading":"ウワッツラ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"겉치레","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"겉모습","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"上の空","reading":"ウワノソラ","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"딴생각","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"넋이 나가다","korean_pos":"형용사","irregular":null,"nominalized":"넋이 나감"}}]]}
+{"dictionary_form":"上まつげ","reading":"ウエマツゲ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"윗속눈썹","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上まぶた","reading":"ウワマブタ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"윗눈꺼풀","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上乗せ","reading":"ウワノセ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"추가","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"가산","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"上乗り","reading":"ウワノリ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"화물 감독관","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上伸","reading":"ウワノビ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"상승하다","korean_pos":"동사","irregular":"여"}}]}
+{"dictionary_form":"上側","reading":"ウエガワ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"위쪽","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"상측","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"윗쪽","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"上前","reading":"ウワマエ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"겉섶","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上向き","reading":"ウワムキ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"상향","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上唇","reading":"ウワクチビル","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"윗입술","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上塗り","reading":"ウワヌリ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"덧칠","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上履き","reading":"ウワバキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"실내화","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上張り","reading":"ウワバリ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"덧씌우기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上役","reading":"ウワヤク","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"상사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上振れ","reading":"ウワブレ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"상향 편차","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"상방 변동","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"上掛け","reading":"ウワガケ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"이불","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"上書き","reading":"ウワガキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"덮어쓰기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上歯","reading":"ウワバ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"윗니","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上滑り","reading":"ウワスベリ","pos":["名詞","普通名詞","サ変形状詞可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"겉돌다","korean_pos":"동사","irregular":"ㄹ"}}]}
+{"dictionary_form":"上澄み","reading":"ウワズミ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"상층액","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上物","reading":"ウワモノ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"상부 구조물","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上目","reading":"ウワメ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"치켜뜬 눈","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上眼","reading":"ウワメ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"상안","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上着","reading":"ウワギ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"웃옷","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上瞼","reading":"ウワマブタ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"윗눈꺼풀","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上積み","reading":"ウワヅミ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"추가 인상","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"상향 조정","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"上紙","reading":"ウワガミ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"표지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上背","reading":"ウワゼイ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"키","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上衣","reading":"ウワギ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"윗옷","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"상의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"上面","reading":"ウワツラ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"상면","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"上靴","reading":"ウワグツ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"실내화","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"丑","pos":["名詞","普通名詞","一般","*"],"reading":"ウシ","senses":[{"rendering":{"irregular":null,"korean":"축","korean_pos":"명사"}}]}
+{"dictionary_form":"丑三つ","reading":"ウシミツ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"축삼경","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"丑三つ時","reading":"ウシミツドキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"축삼경","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"丑寅","reading":"ウシトラ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"북동","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"丑年","reading":"ウシドシ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"소띠 해","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"乳母","reading":"ウバ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"유모","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"乳母車","reading":"ウバグルマ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"유모차","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"云々","reading":"ウンヌン","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운운","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"이러쿵저러쿵","korean_pos":"부사","irregular":null}}]]}
+{"dictionary_form":"云云","reading":"ウンヌン","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운운","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"五香粉","reading":"ウーシャンフェン","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"오향분","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"伺い","reading":"ウカガイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"허락을 구함","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"문의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"優曇華","reading":"ウドンゲ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우동게","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"兎馬","reading":"ウサギウマ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"당나귀","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"兔","pos":["名詞","普通名詞","一般","*"],"reading":"ウサギ","senses":[{"rendering":{"irregular":null,"korean":"토끼","korean_pos":"명사"}}]}
+{"dictionary_form":"内くるぶし","reading":"ウチクルブシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"안쪽 복사뼈","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"内もも","reading":"ウチモモ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"허벅지 안쪽","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"안쪽 허벅지","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"内側","reading":"ウチガワ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"안쪽","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"내측","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"内幕","reading":"ウチマク","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"내막","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"内張り","reading":"ウチハリ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"안감","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"内懐","reading":"ウチブトコロ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"속마음","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"内板","reading":"ウチイタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"내판","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"内股","reading":"ウチマタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"안짱걸음","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"안짱다리","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"内腿","reading":"ウチモモ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"허벅지 안쪽","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"内訳","reading":"ウチワケ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"내역","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"内訳書","pos":["名詞","普通名詞","一般","*"],"reading":"ウチワケショ","senses":[{"rendering":{"irregular":null,"korean":"내역서","korean_pos":"명사"}}]}
+{"dictionary_form":"内輪","reading":"ウチワ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"자기네끼리","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"내부 사람들","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"内輪もめ","reading":"ウチワモメ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"내부 다툼","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"내분","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"内輪ネタ","reading":"ウチワネタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"내부 밈","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"그들만의 농담","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"内輪ノリ","reading":"ウチワノリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"그들만의 분위기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"内金","reading":"ウチキン","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"내금","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"内鍵","reading":"ウチカギ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"안쪽 잠금장치","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"写し","reading":"ウツシ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"사본","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"写し物","reading":"ウツシモノ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"사본","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"写し絵","reading":"ウツシエ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"전사지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"写り","reading":"ウツリ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"나옴","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"비침","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"初陣","reading":"ウイジン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"첫 출진","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"動き","reading":"ウゴキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"움직임","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"午","reading":"ウマ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"정오","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"午年","reading":"ウマドシ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"말띠 해","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"午時","reading":"ウマドキ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"정오","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"占い","reading":"ウラナイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"점","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"점치기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"占い師","reading":"ウラナイシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"점술사","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"점쟁이","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"卯","reading":"ウ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"동쪽","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"卯月","reading":"ウヅキ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"음력 4월","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"卯木","reading":"ウツギ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우츠기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"厩","reading":"ウマヤ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"마구간","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受け付け","reading":"ウケツケ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"받아들임","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"접수","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受け入れ","reading":"ウケイレ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"수용","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"받아들임","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受け入れ態勢","reading":"ウケイレタイセイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"수용 태세","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受け取り","reading":"ウケトリ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"수령","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受け取り方","reading":"ウケトリカタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"받아들이는 방식","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受け口","reading":"ウケグチ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"주걱턱","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受け売り","reading":"ウケウリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"주워들은 말","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"남의 말을 그대로 옮김","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受け手","reading":"ウケテ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"받는 쪽","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"상대","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受け持ち","reading":"ウケモチ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"부담","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受け渡し","reading":"ウケワタシ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[[{"rendering":{"korean":"교환","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"주고받기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受け渡し","reading":"ウケワタシ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"수수","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受け皿","reading":"ウケザラ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"받침접시","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"받침","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受け答え","reading":"ウケコタエ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"응대","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"응답","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受け身","reading":"ウケミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"낙법","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受付","reading":"ウケツケ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"접수처","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受付","reading":"ウケツケ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"접수","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受付中","reading":"ウケツケチュウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"접수 중","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受付係","reading":"ウケツケカカリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"접수원","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"접수 담당자","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受付嬢","reading":"ウケツケジョウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"안내양","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受付期間","reading":"ウケツケキカン","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"접수 기간","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受入","reading":"ウケイレ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"수용","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受入れ","pos":["名詞","普通名詞","一般","*"],"reading":"ウケイレ","senses":[{"rendering":{"irregular":null,"korean":"수용","korean_pos":"명사"}}]}
+{"dictionary_form":"受入先","reading":"ウケイレサキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"수용처","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"수용 기관","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受取","reading":"ウケトリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"수취처","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"수취인","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"수령","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受取人","reading":"ウケトリニン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"수취인","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"받는 사람","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受取額","reading":"ウケトリガク","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"수령액","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受持ち","reading":"ウケモチ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"부담","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"受皿","pos":["名詞","普通名詞","一般","*"],"reading":"ウケザラ","senses":[{"rendering":{"irregular":null,"korean":"수용처","korean_pos":"명사"}}]}
+{"dictionary_form":"受皿整備","reading":"ウケザラセイビ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"수용체계 정비","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"인수 기반 정비","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"受身","reading":"ウケミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"수동","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"받는 쪽","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"右傾","reading":"ウケイ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[[{"rendering":{"korean":"우경","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"右傾化","reading":"ウケイカ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우경화","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右党","reading":"ウトウ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"우당","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右図","reading":"ウズ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"오른쪽 그림","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"右岸","reading":"ウガン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우안","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右往","reading":"ウオウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우왕","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右往左往","reading":"ウオウサオウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우왕좌왕","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右心","reading":"ウシン","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"우심","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右心室","reading":"ウシンシツ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"우심실","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右心房","reading":"ウシンボウ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"우심방","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右房","reading":"ウボウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우방","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右折","reading":"ウセツ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우회전","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右方","reading":"ウホウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우방","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"오른쪽","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"右旋","reading":"ウセン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우선","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右派","reading":"ウハ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우파","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右翼","reading":"ウヨク","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우익","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右翼的","reading":"ウヨクテキ","pos":["名詞","普通名詞","形状詞可能","*"],"senses":[[{"rendering":{"korean":"우익적","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"右脳","reading":"ウノウ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우뇌","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右舷","reading":"ウゲン","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"우현","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右葉","reading":"ウヨウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우엽","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"右辺","pos":["名詞","普通名詞","一般","*"],"reading":"ウヘン","senses":[{"rendering":{"irregular":null,"korean":"우변","korean_pos":"명사"}}]}
+{"dictionary_form":"呻き","reading":"ウメキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"신음","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"呻き声","reading":"ウメキゴエ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"신음소리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"唄","reading":"ウタ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"노래","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"唄声","reading":"ウタゴエ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"노랫소리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"唸り","reading":"ウナリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"웅웅거림","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"唸り声","reading":"ウナリゴエ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"으르렁거리는 소리","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"嗽","reading":"ウガイ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"가글하다","korean_pos":"동사","irregular":"여"}}]}
+{"dictionary_form":"嘘","reading":"ウソ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"거짓말","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"嘘つき","pos":["名詞","普通名詞","形状詞可能","*"],"reading":"ウソツキ","senses":[{"rendering":{"irregular":null,"korean":"거짓말쟁이","korean_pos":"명사"}}]}
+{"dictionary_form":"嘘偽り","reading":"ウソイツワリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"거짓","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"허위","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"嘘八百","reading":"ウソハッピャク","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"새빨간 거짓말","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"거짓말투성이","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"嘘吐き","reading":"ウソツキ","pos":["名詞","普通名詞","形状詞可能","*"],"senses":[{"rendering":{"korean":"거짓말쟁이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"噂","reading":"ウワサ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"소문","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"噂","reading":"ウワサ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"소문","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"噂の真相","reading":"ウワサノシンソウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"소문의 진상","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"噂好き","reading":"ウワサズキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"소문쟁이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"噂話","reading":"ウワサバナシ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"소문","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"噓つき","reading":"ウソツキ","pos":["名詞","普通名詞","形状詞可能","*"],"senses":[[{"rendering":{"korean":"거짓말쟁이","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"団扇","reading":"ウチワ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"부채","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"埋めあわせ","reading":"ウメアワセ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"보상","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"만회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"埋め合わせ","reading":"ウメアワセ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"만회","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"벌충","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"보상","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"埋め立て","reading":"ウメタテ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"매립","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"埋め草","reading":"ウメクサ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"채움 글","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"埋め込み","reading":"ウメコミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"매장","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"임베딩","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"埋立","reading":"ウメタテ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"매립","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"埋立て","pos":["名詞","普通名詞","一般","*"],"reading":"ウメタテ","senses":[{"rendering":{"irregular":null,"korean":"매립","korean_pos":"명사"}}]}
+{"dictionary_form":"埋立地","reading":"ウメタテチ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"매립지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"埋立工事","reading":"ウメタテコウジ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"매립공사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"埋立承認","reading":"ウメタテショウニン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"매립승인","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売り上げ","reading":"ウリアゲ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"매출","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売り主","reading":"ウリヌシ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"매도인","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売り出し","reading":"ウリダシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"세일","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売り切れ","reading":"ウリキレ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"품절","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売り台","reading":"ウリダイ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"판매대","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売り場","reading":"ウリバ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"매장","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"판매대","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売り子","reading":"ウリコ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"판매 도우미","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"판매원","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売り手","reading":"ウリテ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"판매자","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"파는 사람","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売り渡し","reading":"ウリワタシ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"매도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売り物","reading":"ウリモノ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"상품","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"팔 물건","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売り立て","reading":"ウリタテ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"경매","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売り言葉","reading":"ウリコトバ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"시비조 말","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売り言葉に買い言葉","reading":"ウリコトバニカイコトバ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"가는 말에 오는 말","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売り買い","reading":"ウリカイ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[[{"rendering":{"korean":"거래","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売り込み","reading":"ウリコミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"홍보","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"판촉","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"영업","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売れっ子","reading":"ウレッコ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"잘나가는 사람","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"인기스타","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売れ残り","reading":"ウレノコリ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"재고","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"재고품","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売れ筋","reading":"ウレスジ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"frame":{"id":"uresuji_before_product","lexical_conditions":{"next_noun_surface":["商品"]}},"rendering":{"korean":"인기","korean_pos":"관형사","irregular":null}}],[{"frame":{"id":"uresuji_attributive_no","lexical_conditions":{"next_surface":["の"]}},"rendering":{"korean":"잘 팔리는","korean_pos":"관형사","irregular":null}}],[{"rendering":{"korean":"인기 상품","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売れ行き","pos":["名詞","普通名詞","一般","*"],"reading":"ウレユキ","senses":[{"rendering":{"irregular":null,"korean":"팔림새","korean_pos":"명사"}}]}
+{"dictionary_form":"売上","reading":"ウリアゲ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"매출","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売上げ","pos":["名詞","普通名詞","一般","*"],"reading":"ウリアゲ","senses":[{"rendering":{"irregular":null,"korean":"매출","korean_pos":"명사"}}]}
+{"dictionary_form":"売上税","reading":"ウリアゲゼイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"매상세","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"판매세","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"売上高","reading":"ウリアゲダカ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"매출액","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売値","reading":"ウリネ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"판매 가격","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売場","reading":"ウリバ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"매장","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売渡","pos":["名詞","普通名詞","一般","*"],"reading":"ウリワタシ","senses":[{"rendering":{"irregular":null,"korean":"매도","korean_pos":"명사"}}]}
+{"dictionary_form":"売立","reading":"ウリタテ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"경매","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"売立て","reading":"ウリタテ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"경매","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"外郎","reading":"ウイロウ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우이로","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"奪い合い","reading":"ウバイアイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"쟁탈","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"다툼","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"姑獲鳥","reading":"ウブメ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우부메","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"嬉しさ","reading":"ウレシサ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기쁨","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"嬉し泣き","reading":"ウレシナキ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"기쁨의 눈물","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"기쁨에 겨운 울음","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"嬉し涙","reading":"ウレシナミダ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기쁨의 눈물","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙","reading":"ウチュウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙の大規模構造","reading":"ウチュウノダイキボコウゾウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주의 대규모 구조","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙ステーション","reading":"ウチュウステーション","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주 정거장","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙マイクロ波背景放射","reading":"ウチュウマイクロハハイケイホウシャ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주 마이크로파 배경 복사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙一","reading":"ウチュウイチ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"세상 최고","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"宇宙人","reading":"ウチュウニン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"외계인","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"우주인","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"宇宙旅行","pos":["名詞","普通名詞","サ変可能","*"],"reading":"ウチュウリョコウ","senses":[{"rendering":{"irregular":null,"korean":"우주여행","korean_pos":"명사"}}]}
+{"dictionary_form":"宇宙服","reading":"ウチュウフク","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주복","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙海賊","reading":"ウチュウカイゾク","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주 해적","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙港","reading":"ウチュウコウ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우주항","korean_pos":"명사","irregular":null,"transliteration":false}}]]}
+{"dictionary_form":"宇宙空間","reading":"ウチュウクウカン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주 공간","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙線","reading":"ウチュウセン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주선","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙背景放射","reading":"ウチュウハイケイホウシャ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우주 배경 복사","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"우주 배경 방사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"宇宙船","reading":"ウチュウセン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주선","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙論","reading":"ウチュウロン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주론","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙軍","reading":"ウチュウグン","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우주군","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"宇宙開発","reading":"ウチュウカイハツ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"우주 개발","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇宙飛行士","reading":"ウチュウヒコウシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우주비행사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"宇治茶","reading":"ウジチャ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"우지차","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ","reading":"ウシロ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"뒤","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒷쪽","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"後ろ下","reading":"ウシロシタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒤","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ側","reading":"ウシロガワ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒤쪽","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒷면","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"後ろ向き","reading":"ウシロムキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"소극적","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"부정적","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"後ろ姿","reading":"ウシロスガタ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒷모습","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ帯","reading":"ウシロオビ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"젊은 여성","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ手","reading":"ウシロデ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"frame":{"id":"tied_hands","lexical_conditions":{"next_surface":["縛る","縛られ","縛り","拘束","拘束する","結ぶ","結ばれ","戒め"]}},"rendering":{"korean":"등 뒤로 묶은 손","korean_pos":"명사","irregular":null}}],[{"rendering":{"korean":"뒷짐","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"後ろ抱き","reading":"ウシロダキ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"뒤에서 안기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"後ろ押し","reading":"ウシロオシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"후원","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ指","reading":"ウシロユビ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒷손가락질","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ盾","reading":"ウシロダテ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"frame":{"id":"supporter_person","lexical_conditions":{"next_surface":["が","は","も","の","に","を","と","から","として"]}},"rendering":{"korean":"후원자","korean_pos":"명사","irregular":null}}],[{"rendering":{"korean":"뒷배","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"후원","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"後ろ脚","reading":"ウシロアシ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒷다리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ裾","reading":"ウシロスソ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒤 밑단","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ見","reading":"ウシロミ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"후견","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ足","reading":"ウシロアシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷다리","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"後ろ身","reading":"ウシロミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷부분","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒤판","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"後ろ頭","reading":"ウシロアタマ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒤통수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ髪","reading":"ウシロガミ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒷머리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後ろ髪を引かれる","reading":"ウシロガミヲヒカレル","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"미련이 남음","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後向き","reading":"ウシロムキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒤를 향함","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"후향","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"後姿","reading":"ウシロスガタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒷모습","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後肩","reading":"ウシロカタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒤어깨","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後脚","reading":"ウシロアシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"뒷다리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"後身頃","reading":"ウシロミゴロ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒤몸판","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"怨み","reading":"ウラミ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"원망","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"恨み","reading":"ウラミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"원망","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"원한","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"恨みつらみ","reading":"ウラミツラミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"원망과 한탄","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"원한 섞인 푸념","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"恨み節","reading":"ウラミブシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"원망 섞인 푸념","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"한탄조","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"恨み言","reading":"ウラミゴト","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"원망","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"愁","reading":"ウレイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"시름","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"수심","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"근심","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"愁い","reading":"ウレイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"시름","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"근심","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"憂","reading":"ウレイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"근심","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"걱정","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"憂い","reading":"ウレイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"근심","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"수심","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"憂き目","reading":"ウキメ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"고초","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"憂き節","reading":"ウキフシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"고달픈 처지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"憂さ","reading":"ウサ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"시름","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"울적함","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"憂さ晴らし","reading":"ウサバラシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"분풀이","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"화풀이","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"憂世","reading":"ウキヨ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우키요","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"憾み","reading":"ウラミ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"유감","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ちあわせ","reading":"ウチアワセ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"협의","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"사전 회의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打ちこわし","reading":"ウチコワシ","pos":["名詞","普通名詞","*","*"],"senses":[[{"rendering":{"korean":"부수다","korean_pos":"동사","irregular":null}},{"rendering":{"korean":"파괴","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打ちどころ","reading":"ウチドコロ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"흠","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち上げ","reading":"ウチアゲ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒤풀이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち上げ","reading":"ウチアゲ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒤풀이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち切り","reading":"ウチキリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"중단","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"중지","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打ち合い","reading":"ウチアイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"치고받기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち合わせ","reading":"ウチアワセ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"협의","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち壊し","reading":"ウチコワシ","pos":["名詞","普通名詞","*","*"],"senses":[[{"rendering":{"korean":"부수다","korean_pos":"동사","irregular":null}},{"rendering":{"korean":"파괴","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打ち太刀","reading":"ウチダチ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"타치","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち心地","reading":"ウチゴコチ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"타건감","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"치는 느낌","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打ち所","reading":"ウチドコロ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"맞은 곳","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち手","reading":"ウチテ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"사격수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち棒","reading":"ウチボウ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"밀대","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち止め","reading":"ウチドメ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"상한선","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"한계","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打ち毀し","reading":"ウチコワシ","pos":["名詞","普通名詞","*","*"],"senses":[[{"rendering":{"korean":"부수다","korean_pos":"동사","irregular":null}},{"rendering":{"korean":"파괴","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打ち水","reading":"ウチミズ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"물 뿌리기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち消し","reading":"ウチケシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"부정","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち物","reading":"ウチモノ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"타악기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち身","reading":"ウチミ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"타박상","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打ち込み","reading":"ウチコミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"frame":{"id":"physical_driving","lexical_conditions":{"prev_surface":["杭","くい","釘","くぎ","ピン","ボルト","杙"]}},"rendering":{"korean":"박아 넣기","korean_pos":"명사","irregular":null}}],[{"rendering":{"korean":"타격 연습","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打ち間違い","reading":"ウチマチガイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"오타","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"잘못 침","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打ち首","reading":"ウチクビ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"참수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打つ手","reading":"ウツテ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"손쓸 방법","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打上げ","reading":"ウチアゲ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[[{"rendering":{"korean":"발사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打合せ","reading":"ウチアワセ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"협의","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打合わせ","reading":"ウチアワセ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"협의","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"회의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"打壊し","reading":"ウチコワシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"파괴","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打太刀","reading":"ウチダチ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"타치","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打手","reading":"ウチテ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"사수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打掛","reading":"ウチカケ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우치카케","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打毀","reading":"ウチコワシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"파괴","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打毀し","reading":"ウチコワシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"파괴","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打消","pos":["名詞","普通名詞","一般","*"],"reading":"ウチケシ","senses":[{"rendering":{"irregular":null,"korean":"부정","korean_pos":"명사"}}]}
+{"dictionary_form":"打消し","pos":["名詞","普通名詞","一般","*"],"reading":"ウチケシ","senses":[{"rendering":{"irregular":null,"korean":"부정","korean_pos":"명사"}}]}
+{"dictionary_form":"打物","reading":"ウチモノ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"타악기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"打音","reading":"ウチウトゥ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"타격음","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"두드리는 소리","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"撃ち","reading":"ウチ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"사격","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"撃ち合い","reading":"ウチアイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"총격전","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"맞사격","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"旨味","reading":"ウマミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"감칠맛","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"旨味調味料","reading":"ウマミチョウミリョウ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"화학조미료","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"有徳","reading":"ウトク","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"유덕","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"有情","reading":"ウジョウ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"인정","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"有為","reading":"ウイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"유위","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"有無","reading":"ウム","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"유무","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"有象無象","reading":"ウゾウムゾウ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"잡배","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"有頂天","reading":"ウチョウテン","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우쭐함","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"의기양양하다","korean_pos":"형용사","irregular":"여","nominalized":"의기양양함"}}]]}
+{"dictionary_form":"梅","reading":"ウメ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"매화","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"매실","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"梅の花","reading":"ウメノハナ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"매화","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"梅干し","reading":"ウメボシ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우메보시","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"매실장아찌","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"梅擬き","reading":"ウメモドキ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"낙상홍","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"梅酒","reading":"ウメシュ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"매실주","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"梅酢","reading":"ウメズ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"매실초","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"梅鉢","pos":["名詞","普通名詞","一般","*"],"reading":"ウメバチ","senses":[{"rendering":{"irregular":null,"korean":"우메바치","korean_pos":"명사"}}]}
+{"dictionary_form":"植え付け","reading":"ウエツケ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"주입","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"심어 넣기","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"심기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"植え替え","reading":"ウエカエ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"옮겨심기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"植え込み","reading":"ウエコミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"생울타리","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"植木","reading":"ウエキ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"정원수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"植木鉢","reading":"ウエキバチ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"화분","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"歌い手","reading":"ウタイテ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우타이테","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"보컬","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"歌うたい","reading":"ウタウタイ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"가수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"歌合戦","reading":"ウタガッセン","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"노래 대결","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"歌声","reading":"ウタゴエ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"노랫소리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"歌姫","reading":"ウタヒメ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"가희","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"디바","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"歌歌い","reading":"ウタウタイ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"가수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"歌番組","reading":"ウタバングミ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"음악 방송","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"氏神","reading":"ウジガミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우지가미","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"마을 수호신","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浦","pos":["名詞","普通名詞","一般","*"],"reading":"ウラ","senses":[{"rendering":{"irregular":null,"korean":"포구","korean_pos":"명사"}}]}
+{"dictionary_form":"浦々","pos":["名詞","普通名詞","一般","*"],"reading":"ウラウラ","senses":[{"rendering":{"irregular":null,"korean":"포구마다","korean_pos":"명사"}}]}
+{"dictionary_form":"浦波","reading":"ウラナミ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"파도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮かれ者","reading":"ウカレモノ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"방탕자","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮き","reading":"ウキ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"들뜸","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"부풀음","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮き名","reading":"ウキナ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"염문","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮き島","reading":"ウキシマ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"부도","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뜬섬","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮き彫り","reading":"ウキボリ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"부각","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮き木","reading":"ウキギ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"부목","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮き橋","reading":"ウキハシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"부교","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮き沈み","reading":"ウキシズミ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"부침","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"기복","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"흥망","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮き草","reading":"ウキクサ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"부평초","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮き袋","reading":"ウキブクロ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"공기주머니","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮き足","reading":"ウキアシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"들뜬 발걸음","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"들뜸","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮き輪","reading":"ウキワ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"튜브","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"물놀이 튜브","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮き輪肉","reading":"ウキワニク","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"튜브살","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"허리 군살","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮き雲","reading":"ウキグモ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"뜬구름","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮れ者","reading":"ウカレモノ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"방탕자","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮世","reading":"ウキヨ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"속세","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮世絵","reading":"ウキヨエ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우키요에","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮世絵師","reading":"ウキヨエシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우키요에 화가","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮橋","reading":"ウキハシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"부교","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮気","reading":"ウワキ","pos":["名詞","普通名詞","サ変形状詞可能","*"],"senses":[[{"rendering":{"korean":"외도","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"바람기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮気","reading":"ウワキ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"바람기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮気相手","reading":"ウワキアイテ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"바람 상대","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"불륜 상대","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮気者","reading":"ウワキモノ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"바람둥이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮気調査","reading":"ウワキチョウサ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"외도 조사","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"불륜 조사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"浮足","reading":"ウキアシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"들뜸","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"浮雲","reading":"ウキグモ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"뜬구름","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海側","reading":"ウミガワ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"바다 쪽","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海千山千","reading":"ウミセンヤマセン","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"능구렁이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海原","reading":"ウナバラ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"넓은 바다","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"바다","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"海幸","reading":"ウミサチ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"해산물","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海沿い","reading":"ウミゾイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"해안가","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"바닷가","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"海燕","reading":"ウミツバメ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"바다제비","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海牛","reading":"ウミウシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"해우류","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海猿","reading":"ウミザル","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"우미자루","korean_pos":"명사","irregular":null,"transliteration":true}}]]}
+{"dictionary_form":"海秋沙","reading":"ウミアイサ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"붉은가슴비오리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海端","reading":"ウミバタ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"바닷가","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海蛇","reading":"ウミヘビ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"바다뱀","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海蜘蛛","reading":"ウミグモ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"바다거미","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海辺","reading":"ウミベ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"바닷가","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海遊び","reading":"ウミアソビ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"바다놀이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海釣り","reading":"ウミヅリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"바다낚시","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海際","reading":"ウミギワ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"바닷가","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海風","reading":"ウミカゼ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"바닷바람","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"海鳥","reading":"ウミドリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"바닷새","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"해조","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"海鳴り","reading":"ウミナリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"바다 울음소리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"渦","reading":"ウズ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"소용돌이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"渦巻","reading":"ウズマキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"소용돌이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"渦巻き","reading":"ウズマキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"소용돌이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"渦巻銀河","reading":"ウズマキギンガ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"나선 은하","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"渦潮","reading":"ウズシオ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"소용돌이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"渦糸","reading":"ウズイト","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"와사","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"와선","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"温気","reading":"ウンキ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"온기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"漆","reading":"ウルシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"옻칠","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"옻","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"漆塗り","reading":"ウルシヌリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"옻칠","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"칠기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"漆色","reading":"ウルシイロ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"칠흑","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"칠흑색","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"潤い","reading":"ウルオイ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"촉촉함","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"수분","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"烏兎","reading":"ウト","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"세월","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"烏口","reading":"ウコウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"오구","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"烏有","reading":"ウユウ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"오유","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"烏木","reading":"ウボク","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"흑단색","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"烏骨鶏","reading":"ウコッケイ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"오골계","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"煩型","reading":"ウルサガタ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"깐깐이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"牛小屋","reading":"ウシゴヤ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"외양간","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"牛飼い","reading":"ウシカイ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"소치기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"現し世","reading":"ウツシヨ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"이승","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"瓜","reading":"ウリ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"외","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"瓜実","reading":"ウリザネ","pos":["名詞","普通名詞","*","*"],"senses":[[{"rendering":{"korean":"갸름한 얼굴","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"生まれ","reading":"ウマレ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"출생","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"태생","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"生まれたて","reading":"ウマレタテ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"갓 태어남","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"갓 태어난 상태","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"生まれつき","reading":"ウマレツキ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"선천적","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"타고남","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"生まれ付き","reading":"ウマレツキ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"선천적","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"生まれ変わり","reading":"ウマレカワリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"환생","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"生まれ年","reading":"ウマレドシ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"출생연도","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"生まれ月","reading":"ウマレヅキ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"출생월","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"生みの親","reading":"ウミノオヤ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"친부모","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"産み","reading":"ウミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"낳음","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"産みの親","reading":"ウミノオヤ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"친부모","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"産み月","reading":"ウミヅキ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"산달","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"産声","reading":"ウブゴエ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"첫울음","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"産屋","reading":"ウブヤ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"산실","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"분만실","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"産毛","reading":"ウブゲ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"솜털","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"産湯","reading":"ウブユ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"첫 목욕물","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"産着","reading":"ウブギ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"배내옷","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"畝","reading":"ウネ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"골","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"이랑","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"畝間","reading":"ウネマ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"고랑","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"疑い","reading":"ウタガイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"의심","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"疑り","reading":"ウタグリ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"의심","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"疼き","reading":"ウズキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"욱신거림","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"쑤심","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"移り","reading":"ウツリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"배어남","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"옮음","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"변화","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"移り変わり","reading":"ウツリカワリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"변화","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"변천","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"移ろい","reading":"ウツロイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"변화","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"변천","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"移替え","pos":["名詞","普通名詞","一般","*"],"reading":"ウツリガエ","senses":[{"rendering":{"irregular":null,"korean":"이체","korean_pos":"명사"}}]}
+{"dictionary_form":"空け者","reading":"ウツケモノ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"얼간이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"空ろ舟","reading":"ウツロブネ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"통나무배","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"空蝉","reading":"ウツセミ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"매미","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"粳米","reading":"ウルチマイ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"멥쌀","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"紆余","reading":"ウヨ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우여","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"紆余曲折","reading":"ウヨキョクセツ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우여곡절","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"紆曲","reading":"ウキョク","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"굴곡","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"美しい彼女","reading":"ウツクシイカノジョ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"아름다운 그녀","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"美しい村","reading":"ウツクシイムラ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"아름다운 마을","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"羨み","reading":"ウラヤミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"부러움","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"羽化","reading":"ウカ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우화","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"羽毛","reading":"ウモウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우모","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"깃털솜","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"깃털","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"羽翼","reading":"ウヨク","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"날개","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"胡散","reading":"ウサン","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"미심쩍음","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"수상하다","korean_pos":"형용사","irregular":"여","nominalized":"수상함"}}]]}
+{"dictionary_form":"胡散臭い","reading":"ウサンクサイ","pos":["名詞","普通名詞","*","*"],"senses":[[{"rendering":{"korean":"수상쩍다","korean_pos":"형용사","irregular":null}}]]}
+{"dictionary_form":"腕っこき","reading":"ウデッコキ","pos":["名詞","普通名詞","*","*"],"senses":[[{"rendering":{"korean":"재능 있다","korean_pos":"형용사","irregular":null}},{"rendering":{"korean":"솜씨꾼","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"腕っぷし","reading":"ウデップシ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"완력","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕っ節","reading":"ウデップシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"완력","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"팔힘","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"腕まくり","reading":"ウデマクリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"소매 걷기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕まわり","reading":"ウデマワリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"팔 주변","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕カバー","reading":"ウデカバー","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"팔토시","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"암커버","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"腕先","reading":"ウデサキ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"팔끝","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"팔 말단","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"腕利き","reading":"ウデキキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"고수","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"실력자","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"腕前","reading":"ウデマエ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"솜씨","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"기량","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"腕押し","reading":"ウデオシ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"헛수고","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕時計","reading":"ウデドケイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"손목시계","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕木","reading":"ウデギ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"가로대","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕枕","reading":"ウデマクラ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"팔베개","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕比べ","reading":"ウデクラベ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"실력 겨루기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕相撲","reading":"ウデズモウ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"팔씨름","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕立て","reading":"ウデタテ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"팔굽혀","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕立て伏せ","reading":"ウデタテフセ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"팔굽혀펴기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕組み","reading":"ウデグミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"팔짱","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕輪","reading":"ウデワ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"팔찌","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"腕飾り","reading":"ウデカザリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"팔 장식","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"팔찌 장식","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"自惚","reading":"ウヌボレ","pos":["名詞","普通名詞","形状詞可能","*"],"senses":[{"rendering":{"korean":"자만","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"臼","reading":"ウス","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"절구","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"艮","reading":"ウシトラ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"간","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"茨","reading":"ウバラ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"가시덤불","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"가시나무","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"茴香","reading":"ウイキョウ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"회향","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"薄","reading":"ウス","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"박함","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"옅음","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄切り","reading":"ウスギリ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"얇게 썬 것","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"얇게 썰기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄切り","reading":"ウスギリ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"얇게 썰기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄口","reading":"ウスクチ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"연한 맛","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄地","reading":"ウスジ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"얇은 천","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"薄型","reading":"ウスガタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"슬림형","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"얇은 형태","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄墨","reading":"ウスズミ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"연회색","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"薄板","reading":"ウスイタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"얇은 판","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"박판","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄桃色","reading":"ウスイモモイロ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"연분홍색","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"옅은 분홍색","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄様","reading":"ウスヨウ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"박엽지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"薄毛","reading":"ウスゲ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"숱이 적은 머리","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"탈모","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄水色","reading":"ウスイミズイロ","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"연한 하늘색","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"엷은 물색","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄物","reading":"ウスモノ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"얇은 여름옷","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"얇은 옷감","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄皮","reading":"ウスカワ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"얇은 껍질","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"얇은 피부막","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄目","reading":"ウスメ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"실눈","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"薄着","reading":"ウスギ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"얇게 입기","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"얇은 옷차림","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄笑い","reading":"ウスワライ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"비웃음","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"얄팍한 웃음","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄紅","reading":"ウスベニ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"연분홍","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"엷은 홍색","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄紅色","reading":"ウスベニイロ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"연분홍색","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"담홍색","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄紙","reading":"ウスガミ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"얇은 종이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"薄紫","reading":"ウスムラサキ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"연보라","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"薄緑色","reading":"ウスイミドリイロ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"연녹색","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"연두색","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄茶","reading":"ウスチャ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"연갈색","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄茶色","reading":"ウスイチャイロ","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"연갈색","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"엷은 갈색","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄葉","reading":"ウスヨウ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"박엽지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"薄衣","reading":"ウスギヌ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"박의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄闇","reading":"ウスヤミ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"어스름","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"薄黄色","reading":"ウスイキイロ","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"연노란색","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"연노랗다","korean_pos":"형용사","irregular":null}}]]}
+{"dictionary_form":"蘊蓄","reading":"ウンチク","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"잡지식","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"박식함","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"虚け","reading":"ウツケ","pos":["名詞","普通名詞","形状詞可能","*"],"senses":[{"rendering":{"korean":"얼간이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"蛆","reading":"ウジ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"구더기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"蛆虫","reading":"ウジムシ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"구더기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"蠢き","reading":"ウゴメキ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"꿈틀거림","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"表袴","reading":"ウエノハカマ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우에노하카마","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"袿","reading":"ウチギ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우치기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏","reading":"ウラ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"안쪽","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒤","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏ごし","reading":"ウラゴシ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"체에 거르기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏づけ","reading":"ウラヅケ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒷받침","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏もも","reading":"ウラモモ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"허벅지 뒤쪽","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏アカ","reading":"ウラアカ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷계정","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"부계정","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏スジ","reading":"ウラスジ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"밑줄기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏ボス","reading":"ウラボス","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"히든 보스","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏メニュー","reading":"ウラメニュー","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"비밀 메뉴","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"숨은 메뉴","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏世界","reading":"ウラセカイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷세계","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"이면세계","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏事情","reading":"ウラジジョウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒷사정","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏付け","reading":"ウラヅケ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷받침","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"근거","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏側","reading":"ウラガワ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"안쪽","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒷면","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏切り","reading":"ウラギリ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"배신","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏切り行為","reading":"ウラギリコウイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"배신행위","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏切者","reading":"ウラギリシャ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"배신자","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏取引","reading":"ウラトリヒキ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷거래","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"이면 거래","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏口","reading":"ウラグチ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒷문","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏向き","reading":"ウラムキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒷면","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏地","reading":"ウラジ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"안감","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏垢","reading":"ウラアカ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷계","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"부계","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏声","reading":"ウラゴエ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"팔세토","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏山","reading":"ウラヤマ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒷산","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏布","reading":"ウラヌノ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"안감","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"안감 천","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏帳簿","reading":"ウラチョウボ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"이중 장부","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"비밀 장부","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏庭","reading":"ウラニワ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒷마당","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏戸","reading":"ウラド","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒷문","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏手","reading":"ウラテ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"뒷쪽","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏打ち","reading":"ウラウチ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒷받침","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏技","reading":"ウラワザ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"비법","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"요령","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏方","reading":"ウラカタ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒤에서 일하는 사람","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒷일꾼","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏書","reading":"ウラガキ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"이서","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏書き","reading":"ウラガキ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"이서","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏書人","pos":["名詞","普通名詞","一般","*"],"reading":"ウラガキニン","senses":[{"rendering":{"irregular":null,"korean":"배서인","korean_pos":"명사"}}]}
+{"dictionary_form":"裏板","reading":"ウライタ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒤판","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏毛","reading":"ウラケ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"루프백","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"루프백 원단","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏漉し","reading":"ウラゴシ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"체에 거르다","korean_pos":"동사","irregular":"르"}}]}
+{"dictionary_form":"裏番組","reading":"ウラバングミ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"경쟁 프로그램","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏皮","reading":"ウラガワ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"안쪽 피부","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏目","reading":"ウラメ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"역효과","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"반대 결과","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏社会","reading":"ウラシャカイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"암흑가","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏窓","reading":"ウラマド","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"뒷유리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏筋","reading":"ウラスジ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"밑줄기","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"음경 밑줄기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏紙","reading":"ウラガミ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"이면지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏街道","reading":"ウラカイドウ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"암흑가","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏表","reading":"ウラオモテ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"이중성","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏設定","reading":"ウラセッテイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷설정","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"숨은 설정","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏話","reading":"ウラバナシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷얘기","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"비하인드 스토리","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏負担","reading":"ウラフタン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"이면부담","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"지방비부담","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏起毛","reading":"ウラキモウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"기모 안감","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏路地","reading":"ウラロジ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷골목","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏返し","reading":"ウラガエシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"이면","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒤집기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏通り","reading":"ウラドオリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒷골목","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏道","reading":"ウラミチ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뒷길","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"裏金","reading":"ウラガネ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"뒷돈","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"비자금","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏金問題","reading":"ウラガネモンダイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"비자금 문제","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒷돈 문제","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏門","reading":"ウラモン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"후문","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"뒷문","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"裏風俗","reading":"ウラフウゾク","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"불법 풍속","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"褂","reading":"ウチギ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"겉옷","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"討","reading":"ウチ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"토벌","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"討ち死に","reading":"ウチジニ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[[{"rendering":{"korean":"전사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"訴え","reading":"ウッタエ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"호소","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"誓","reading":"ウケイ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"맹세","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"請け","reading":"ウケ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"수주","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"인수","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"請け合い","reading":"ウケアイ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"보증","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"請負","reading":"ウケオイ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"도급","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"請負契約","reading":"ウケオイケイヤク","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"도급 계약","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"謳い文句","reading":"ウタイモンク","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"홍보 문구","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"선전 문구","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"캐치프레이즈","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"譫言","reading":"ウワゴト","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"섬어","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"迂回","reading":"ウカイ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우회","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"迂回路","reading":"ウカイロ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우회로","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"우회 경로","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"迂愚","reading":"ウグ","pos":["名詞","普通名詞","形状詞可能","*"],"senses":[{"rendering":{"korean":"우둔하다","korean_pos":"형용사","irregular":"여"}}]}
+{"dictionary_form":"迂路","reading":"ウロ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"우회로","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"迂闊","reading":"ウカツ","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"부주의","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"부주의하다","korean_pos":"형용사","irregular":"여"}}]]}
+{"dictionary_form":"運","reading":"ウン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運休","reading":"ウンキュウ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운휴","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動","reading":"ウンドウ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"운동","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動エネルギー","reading":"ウンドウエネルギー","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운동 에너지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動ニューロン","reading":"ウンドウニューロン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운동뉴런","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動不足","reading":"ウンドウフソク","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운동 부족","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運動会","reading":"ウンドウカイ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"운동회","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動員","reading":"ウンドウイン","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운동원","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動場","reading":"ウンドウジョウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운동장","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動学","reading":"ウンドウガク","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운동학","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動家","reading":"ウンドウカ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운동가","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動性","reading":"ウンドウセイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"활동성","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動着","reading":"ウンドウギ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"운동복","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動神経","reading":"ウンドウシンケイ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"운동신경","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動系","reading":"ウンドウケイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운동계","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動選手","reading":"ウンドウセンシュ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운동선수","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運動部","reading":"ウンドウブ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"운동부","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動野","reading":"ウンドウヤ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운동야","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動量","reading":"ウンドウリョウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"활동량","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動障害","reading":"ウンドウショウガイ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"운동장애","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動靴","reading":"ウンドウグツ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운동화","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運動音痴","reading":"ウンドウオンチ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"몸치","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運勢","reading":"ウンセイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운세","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運命","reading":"ウンメイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운명","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運命共同体","reading":"ウンメイキョウドウタイ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"운명 공동체","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運命的","reading":"ウンメイテキ","pos":["名詞","普通名詞","形状詞可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운명적","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運命論","reading":"ウンメイロン","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운명론","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運営","reading":"ウンエイ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운영","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運営主体","reading":"ウンエイシュタイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운영 주체","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"운영 기관","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運営会社","reading":"ウンエイカイシャ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운영 회사","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"운영사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運営団体","reading":"ウンエイダンタイ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"운영단체","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運営委員会","reading":"ウンエイイインカイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운영위원회","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運営方針","reading":"ウンエイホウシン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운영 방침","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運営組織","pos":["名詞","普通名詞","一般","*"],"reading":"ウンエイソシキ","senses":[{"rendering":{"irregular":null,"korean":"운영 조직","korean_pos":"명사"}}]}
+{"dictionary_form":"運営者","reading":"ウンエイシャ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운영자","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運営費","pos":["名詞","普通名詞","一般","*"],"reading":"ウンエイヒ","senses":[{"rendering":{"irregular":null,"korean":"운영비","korean_pos":"명사"}}]}
+{"dictionary_form":"運営費交付金","reading":"ウンエイヒコウフキン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운영비 교부금","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運指","reading":"ウンシ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"운지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運搬","reading":"ウンパン","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운반","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運搬船","reading":"ウンパンセン","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운반선","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運気","reading":"ウンキ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"운기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運河","reading":"ウンガ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운하","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運漕","reading":"ウンソウ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[[{"rendering":{"korean":"운송하다","korean_pos":"동사","irregular":"여"}},{"rendering":{"korean":"해상 운송","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運用","reading":"ウンヨウ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운용","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運用停止","reading":"ウンヨウテイシ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운용 정지","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"운영 중지","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運用利回り","pos":["名詞","普通名詞","一般","*"],"reading":"ウンヨウリマワリ","senses":[{"rendering":{"irregular":null,"korean":"운용수익률","korean_pos":"명사"}}]}
+{"dictionary_form":"運用指針","reading":"ウンヨウシシン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운용 지침","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"운영 지침","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運用方法","reading":"ウンヨウホウホウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운용 방법","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運用方針","reading":"ウンヨウホウシン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운용 방침","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"운영 방침","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運用検討会議","reading":"ウンヨウケントウカイギ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운용 검토회의","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"재검토회의","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運用状況","reading":"ウンヨウジョウキョウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운용 현황","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運用益","pos":["名詞","普通名詞","一般","*"],"reading":"ウンヨウエキ","senses":[{"rendering":{"irregular":null,"korean":"운용 수익","korean_pos":"명사"}}]}
+{"dictionary_form":"運用術","reading":"ウンヨウジュツ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운용술","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運算","reading":"ウンザン","pos":["名詞","普通名詞","サ変可能","*"],"senses":[[{"rendering":{"korean":"계산하다","korean_pos":"동사","irregular":"여"}},{"rendering":{"korean":"연산","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運航","reading":"ウンコウ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운항","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運行","reading":"ウンコウ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운행","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"운항","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運行状況","reading":"ウンコウジョウキョウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운행 상황","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運行管理","reading":"ウンコウカンリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운행 관리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運行管理者","reading":"ウンコウカンリシャ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운행 관리자","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運試し","reading":"ウンダメシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운 시험","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運賃","reading":"ウンチン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운임","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運転","reading":"ウンテン","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"frames":[{"id":"transport_operation_subject","slots":[{"role":"service","particles":["が"],"noun_lookup":"transport_service_nouns"}],"lexical_conditions":{"next_content_lookup":["transport_operation_predicates"]}},{"id":"transport_operation_previous","lexical_conditions":{"prev_noun_lookup":["transport_service_nouns"],"next_content_lookup":["transport_operation_predicates"]}},{"id":"transport_operation_following","lexical_conditions":{"following_noun_lookup":["transport_service_nouns"],"next_content_lookup":["transport_operation_predicates"]}}],"rendering":{"korean":"운행","korean_pos":"명사","irregular":null}}],[{"rendering":{"korean":"운전","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運転中","reading":"ウンテンチュウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운전 중","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運転免許","reading":"ウンテンメンキョ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"운전면허","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運転免許自主返納","reading":"ウンテンメンキョジシュヘンノウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운전면허 자주 반납","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運転免許証","reading":"ウンテンメンキョショウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운전면허증","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運転士","reading":"ウンテンシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운전사","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運転席","reading":"ウンテンセキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운전석","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運転手","reading":"ウンテンシュ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운전수","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"운전자","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運転者","pos":["名詞","普通名詞","一般","*"],"reading":"ウンテンシャ","senses":[{"rendering":{"irregular":null,"korean":"운전자","korean_pos":"명사"}}]}
+{"dictionary_form":"運転見合わせ","reading":"ウンテンミアワセ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"운행 중지","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運転資金","pos":["名詞","普通名詞","一般","*"],"reading":"ウンテンシキン","senses":[{"rendering":{"irregular":null,"korean":"운전자금","korean_pos":"명사"}}]}
+{"dictionary_form":"運輸","reading":"ウンユ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운수","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運輸業","reading":"ウンユギョウ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운수업","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運輸行政","reading":"ウンユギョウセイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운수 행정","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"교통 행정","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運送","reading":"ウンソウ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운송","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運送事業者","reading":"ウンソウジギョウシャ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운송사업자","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運送会社","reading":"ウンソウカイシャ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"운송 회사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"運送料","reading":"ウンソウリョウ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운송료","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運送業","reading":"ウンソウギョウ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운송업","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運送業者","reading":"ウンソウギョウシャ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운송업자","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運送賃","reading":"ウンソウチン","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운임","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"運針","reading":"ウンシン","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"바느질","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"閏","reading":"ウルウ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"윤","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"閏年","reading":"ウルウドシ","pos":["名詞","普通名詞","一般","*"],"senses":[[{"rendering":{"korean":"윤년","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"雨下","reading":"ウカ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[{"rendering":{"korean":"비가 내리다","korean_pos":"동사","irregular":null}}]}
+{"dictionary_form":"雨中","reading":"ウチュウ","pos":["名詞","普通名詞","副詞可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우중","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雨天","reading":"ウテン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우천","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雨天中止","reading":"ウテンチュウシ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우천 취소","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雨天決行","reading":"ウテンケッコウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우천 결행","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雨季","reading":"ウキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雨後","reading":"ウゴ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"비 온 뒤","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"우후","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"雨後の筍","reading":"ウゴノタケノコ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우후죽순","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雨月","reading":"ウゲツ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우게츠","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雨期","reading":"ウキ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"우기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雨林","reading":"ウリン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우림","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雨滴","reading":"ウテキ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"빗방울","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雨量","reading":"ウリョウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"강우량","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雲丹","reading":"ウニ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"성게","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雲梯","reading":"ウンテイ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"고가 사다리","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雲母","reading":"ウンモ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"운모","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雲泥","reading":"ウンデイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"천양지차","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"하늘과 땅","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"雲泥の差","reading":"ウンデイノサ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"천양지차","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雲海","reading":"ウンカイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운해","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雲煙","reading":"ウンエン","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"연기","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雲翳","reading":"ウンエイ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"흐림","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雲集","reading":"ウンシュウ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"운집","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"雲霞","reading":"ウンカ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"구름과 안개","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"靱","reading":"ウツボ","pos":["名詞","普通名詞","*","*"],"senses":[[{"rendering":{"korean":"곰치","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"頷き","reading":"ウナズキ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"끄덕임","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"飢え","reading":"ウエ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"굶주림","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"기아","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"飢え死に","reading":"ウエジニ","pos":["名詞","普通名詞","サ変可能","*"],"senses":[[{"rendering":{"korean":"아사","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"饂飩","reading":"ウドン","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우동","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"馬が合う","reading":"ウマガアウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"죽이 맞다","korean_pos":"동사","irregular":null}},{"rendering":{"korean":"마음이 맞다","korean_pos":"동사","irregular":null}}]]}
+{"dictionary_form":"馬の骨","reading":"ウマノホネ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"어디서 굴러먹다 온 놈","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"정체불명의 놈","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"馬乗り","reading":"ウマノリ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"올라타기","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"깔고앉기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"馬小屋","reading":"ウマゴヤ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"마구간","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"馬屋","reading":"ウマヤ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"마구간","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"馬槽","reading":"ウマブネ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"구유","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"馬追い","reading":"ウマオイ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"말몰이","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"馬面","reading":"ウマヅラ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"마면","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"馬顔","reading":"ウマガオ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"말상","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鬱","reading":"ウツ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우울","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"피폐","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"鬱屈","reading":"ウックツ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"억눌림","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"울적함","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"鬱憤","reading":"ウップン","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"울분","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"鬱気","reading":"ウッキ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우울감","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"우울","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"鬱病","reading":"ウツビョウ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"우울증","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鬱積","reading":"ウッセキ","pos":["名詞","普通名詞","サ変可能","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"응어리","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"울분","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"魚の目","reading":"ウオノメ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"티눈","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"魚市場","reading":"ウオイチバ","pos":["名詞","普通名詞","一般","*"],"senses":[{"rendering":{"korean":"어시장","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"魚河岸","reading":"ウオガシ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"어시장","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鰻","reading":"ウナギ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"장어","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鰻上り","reading":"ウナギノボリ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"급등","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鱗","reading":"ウロコ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"인","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鵜","reading":"ウ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"가마우지","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鵜呑み","reading":"ウノミ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"맹신","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"곧이듣기","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"鵜飼","reading":"ウカイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"가마우지 낚시","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"우카이","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"鵜飼い","reading":"ウカイ","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"가마우지 낚시","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"우카이","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"鶉豆","reading":"ウズラマメ","pos":["名詞","普通名詞","*","*"],"senses":[{"rendering":{"korean":"핀토콩","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"鶯","reading":"ウグイス","pos":["名詞","普通名詞","一般","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"휘파람새","korean_pos":"명사","irregular":null}}]}
+{"dictionary_form":"齲歯","reading":"ウシ","pos":["名詞","普通名詞","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"충치","korean_pos":"명사","irregular":null}}]}

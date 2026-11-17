@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 제보 방법과 처리 방식 (CONTRIBUTING)
+    url: https://github.com/saturnsky/harumt/blob/main/CONTRIBUTING.md
+    about: Pull Request는 받지 않습니다. 제보가 어떻게 처리되는지 먼저 읽어 주세요.

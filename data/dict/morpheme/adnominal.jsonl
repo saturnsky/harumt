@@ -1,0 +1,92 @@
+{"dictionary_form":"ああいう","reading":"アアイウ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"저런","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"ああいった","reading":"アアイッタ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"저런","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"あのあとの","reading":"アノアトノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그 후","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"あのころの","reading":"アノコロノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그때의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"あのような","reading":"アノヨウナ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그런","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"あまりの","reading":"アマリノ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"지나친","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"あらゆる","reading":"アラユル","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"온갖","korean_pos":"관형사","irregular":null}},{"rendering":{"korean":"모든","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"あれからの","reading":"アレカラノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그 이후의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"あれほどの","reading":"アレホドノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그 정도의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"いかな","reading":"イカナ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"어떠한","korean_pos":"관형사","irregular":null}},{"rendering":{"korean":"어떤","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"いかなる","reading":"イカナル","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"어떠한","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"いろんな","reading":"イロンナ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"여러 가지의","korean_pos":"관형사","irregular":null}},{"rendering":{"korean":"여러 가지","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"いわゆる","reading":"イワユル","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"이른바","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"うい","reading":"ウイ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"응","korean_pos":"감탄사","irregular":null}}]}
+{"dictionary_form":"おおきな","pos":["連体詞","*","*","*"],"reading":"オオキナ","senses":[{"rendering":{"irregular":null,"korean":"큰","korean_pos":"관형사"}}]}
+{"dictionary_form":"おかしな","reading":"オカシナ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"이상한","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"おっきな","reading":"オッキナ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"큰","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"かの","reading":"カノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"こういう","reading":"コウイウ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"이런","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"こういった","reading":"コウイッタ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"이런","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"こげな","reading":"コゲナ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"이런","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"この","reading":"コノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"이","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"このあとの","reading":"コノアトノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"이후","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"このうちの","reading":"コノウチノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"이 중의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"このような","reading":"コノヨウナ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"이런","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"さしたる","reading":"サシタル","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"별다른","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"さらなる","reading":"サラナル","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"한층 더한","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"そういう","reading":"ソウイウ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그런","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"そういった","reading":"ソウイッタ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그런","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"その","reading":"ソノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"そのあとの","reading":"ソノアトノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그 후","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"そのうちの","reading":"ソノウチノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그 중의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"そのような","reading":"ソノヨウナ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그런","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"それからの","reading":"ソレカラノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그 후의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"それなりの","reading":"ソレナリノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"나름의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"それほどの","reading":"ソレホドノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그 정도의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"そ知らぬ","reading":"ソシラヌ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"모르는 척하는","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"たいした","reading":"タイシタ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"대단한","korean_pos":"관형사","irregular":null}},{"rendering":{"korean":"상당한","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"ちいさな","reading":"チイサナ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"작은","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"ちっちゃな","reading":"チッチャナ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"작은","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"とある","reading":"トアル","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"어떤","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"とんだ","reading":"トンダ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"큰","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"どういう","reading":"ドウイウ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"어떤","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"どういった","reading":"ドウイッタ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"어떤","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"どの","reading":"ドノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"어느","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"どのくらいの","reading":"ドノクライノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"어느 정도의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"どのような","reading":"ドノヨウナ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"어떤","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"どれくらいの","reading":"ドレクライノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"어느 정도의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"どれほどの","reading":"ドレホドノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"어느 정도의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"における","reading":"ニオケル","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"에서의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"にわたる","reading":"ニワタル","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"에 걸친","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"ひょんな","reading":"ヒョンナ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"뜻밖의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"ほかならない","reading":"ホカナラナイ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"다름 아닌","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"ほかならぬ","reading":"ホカナラヌ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"다름 아닌","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"ほんの","reading":"ホンノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"겨우","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"ろくな","reading":"ロクナ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"변변한","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"わか","reading":"ワカ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"공감","korean_pos":"명사","irregular":null}},{"rendering":{"korean":"이해","korean_pos":"명사","irregular":null}}]]}
+{"dictionary_form":"わが","reading":"ワガ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"우리","korean_pos":"대명사","irregular":null}},{"rendering":{"korean":"나의","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"コノ","reading":"コノ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"이","korean_pos":"관형사","irregular":null,"transliteration":false}}]}
+{"dictionary_form":"主たる","reading":"シュタル","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"주된","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"主な","reading":"オモナ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"주된","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"人払いされた","reading":"ヒトバライサレタ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"사람들을 물린","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"何たる","reading":"ナンタル","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"이 얼마나","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"其","reading":"ソノ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"그","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"内々の","reading":"ナイナイノ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"은밀한","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"初めての","reading":"ハジメテノ","pos":["連体詞","*","*","*"],"senses":[[{"frame":{"id":"next_noun_surface_0","lexical_conditions":{"next_noun_surface":["受賞","旅行","舞台","出産","デート","一人暮らし","アルバイト","経験","出演","優勝","恋愛","挑戦","試合","給料","発売","公演","コンサート","ライブ","作品","就職","結婚","主演","出版","体験","映画"]}},"rendering":{"korean":"첫","korean_pos":"관형사","irregular":null}}],[{"rendering":{"korean":"처음인","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"単なる","reading":"タンナル","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"단순한","korean_pos":"관형사","irregular":null}},{"rendering":{"korean":"한낱","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"可笑しな","reading":"オカシナ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"이상한","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"名だたる","reading":"ナダタル","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"내로라하는","korean_pos":"관형사","irregular":null}},{"rendering":{"korean":"유명한","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"吾が","reading":"ワガ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"나의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"大いなる","reading":"オオイナル","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"위대한","korean_pos":"관형사","irregular":null}},{"rendering":{"korean":"큰","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"大きな","reading":"オオキナ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"큰","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"大した","reading":"タイシタ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"대단한","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"大それた","reading":"ダイソレタ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"거창하다","korean_pos":"형용사","irregular":"여"}},{"rendering":{"korean":"엄청나다","korean_pos":"형용사","irregular":null}}]]}
+{"dictionary_form":"大な","reading":"オオキナ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"커다랗다","korean_pos":"형용사","irregular":"ㅎ"}},{"rendering":{"korean":"크다","korean_pos":"형용사","irregular":"으"}}]]}
+{"dictionary_form":"如何なる","reading":"イカナル","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"어떠한","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"小さな","reading":"チイサナ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"작은","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"小っちゃな","reading":"チッチャナ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"작은","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"己が","reading":"オノガ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[{"rendering":{"korean":"자기의","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"必要欠くべからざる","reading":"ヒツヨウカクベカラザル","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"필수불가결한","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"我が","reading":"ワガ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"우리","korean_pos":"관형사","irregular":null}},{"rendering":{"korean":"나의","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"或","reading":"アル","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"어떤","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"或る","reading":"アル","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"어느","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"更なる","reading":"サラナル","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"더한","korean_pos":"관형사","irregular":null}},{"rendering":{"korean":"한층 더한","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"欠くべからざる","reading":"カクベカラザル","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"불가결한","korean_pos":"관형사","irregular":null}}]}
+{"dictionary_form":"此","pos":["連体詞","*","*","*"],"reading":"コノ","senses":[{"rendering":{"irregular":null,"korean":"이","korean_pos":"관형사"}}]}
+{"dictionary_form":"無理からぬ","reading":"ムリカラヌ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"무리가 아닌","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"碌な","reading":"ロクナ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"변변한","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"確たる","pos":["連体詞","*","*","*"],"reading":"カクタル","senses":[{"rendering":{"irregular":null,"korean":"확실한","korean_pos":"관형사"}}]}
+{"dictionary_form":"素知らぬ","reading":"ソシラヌ","pos":["連体詞","*","*","*"],"senses":[[{"rendering":{"korean":"태연한","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"色んな","reading":"イロンナ","pos":["連体詞","*","*","*"],"conjugation_type":null,"senses":[[{"rendering":{"korean":"여러","korean_pos":"관형사","irregular":null}},{"rendering":{"korean":"여러 가지의","korean_pos":"관형사","irregular":null}}]]}
+{"dictionary_form":"見知らぬ","reading":"ミシラヌ","pos":["連体詞","*","*","*"],"senses":[{"rendering":{"korean":"낯선","korean_pos":"관형사","irregular":null}}]}

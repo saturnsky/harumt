@@ -1,0 +1,5 @@
+{"nounDf":"気","predicate":"する","caseParticles":["が"],"focusPlacement":"replaces_case","allowsCaseOmission":false,"prefixKind":"proposition","tailLemma":"같다","tailKoreanPos":"형용사"}
+{"nounDf":"感じ","predicate":"する","caseParticles":["が"],"focusPlacement":"replaces_case","allowsCaseOmission":true,"prefixKind":"feeling","tailLemma":"들다","tailKoreanPos":"동사","tailIrregular":"ㄹ","acceptsQuotative":true}
+{"nounDf":"気持ち","predicate":"する","caseParticles":["が"],"focusPlacement":"replaces_case","allowsCaseOmission":false,"prefixKind":"mood","tailLemma":"들다","tailKoreanPos":"동사","tailIrregular":"ㄹ","acceptsQuotative":true}
+{"nounDf":"気","predicate":"なる","caseParticles":["に"],"focusPlacement":"after_case","allowsCaseOmission":false,"requiresLikenessPrefix":true,"potentialPredicate":"なれる","prefixKind":"mood","tailLemma":"들다","tailKoreanPos":"동사","tailIrregular":"ㄹ"}
+{"nounDf":"気持ち","predicate":"なる","caseParticles":["に"],"focusPlacement":"after_case","allowsCaseOmission":false,"requiresLikenessPrefix":true,"potentialPredicate":"なれる","prefixKind":"mood","tailLemma":"들다","tailKoreanPos":"동사","tailIrregular":"ㄹ"}

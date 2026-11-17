@@ -1,0 +1,5 @@
+{"marker":"って","closure":"direct_quote","restoredHost":{"lemma":"하다","irregular":"여","isVerb":true}}
+{"marker":"と","closure":"direct_quote","restoredHost":{"lemma":"하다","irregular":"여","isVerb":true}}
+{"marker":"とかって","closure":"direct_quote","restoredHost":{"lemma":"하다","irregular":"여","isVerb":true}}
+{"marker":"だって","closure":"hearsay","restoredHost":{"lemma":"하다","irregular":"여","isVerb":true}}
+{"marker":"とか","closure":"hedged_hearsay","restoredHost":{"lemma":"하다","irregular":"여","isVerb":true}}

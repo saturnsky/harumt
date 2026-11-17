@@ -1,0 +1,12 @@
+{"variant":"standard_nakute_wa","sampleSurface":"なくてはならない","prefix":[{"naiOrNu":true,"pos5Includes":"連用形"},{"surface":"て","pos1":"接続助詞"},{"surface":"は","pos1":"係助詞"}],"bodyVerbs":["なる","成る","いける","行ける","いく","行く"],"dialectBodyVerbs":["あく"],"lexicalBodyForms":["行ける","行く"],"allowDameBody":true,"prohibitionBody":true}
+{"variant":"standard_nakute_wa","sampleSurface":"なくてならない","prefix":[{"naiOrNu":true,"pos5Includes":"連用形"},{"surface":"て","pos1":"接続助詞"}],"bodyVerbs":["なる","成る","いける","行ける"],"lexicalBodyForms":["行ける"]}
+{"variant":"colloquial_nakucha","sampleSurface":"なくちゃならない","prefix":[{"naiOrNu":true,"pos5Includes":"連用形"},{"surface":"ちゃ","pos1":"接続助詞"}],"bodyVerbs":["なる","成る","いける","行ける","いく","行く"],"dialectBodyVerbs":["あく"],"lexicalBodyForms":["行ける","行く"],"allowDameBody":true}
+{"variant":"colloquial_nakucha","sampleSurface":"なくちゃ","prefix":[{"naiOrNu":true,"pos5Includes":"連用形"},{"surface":"ちゃ","pos1":"接続助詞"}],"bodyVerbs":[]}
+{"variant":"standard_nakereba","sampleSurface":"なければならない","prefix":[{"naiOrNu":true,"pos5Includes":"仮定形"},{"surface":"ば","pos1":"接続助詞"}],"bodyVerbs":["なる","成る","いける","行ける","いく","行く"],"dialectBodyVerbs":["あく"],"lexicalBodyForms":["行ける","行く"],"allowDameBody":true}
+{"variant":"colloquial_nakya","sampleSurface":"なきゃならない","prefix":[{"naiOrNu":true,"pos5Includes":"仮定形","surface":"なきゃ"}],"bodyVerbs":["なる","成る","いける","行ける","いく","行く"],"dialectBodyVerbs":["あく"],"lexicalBodyForms":["行ける","行く"],"allowDameBody":true}
+{"variant":"colloquial_nakya","sampleSurface":"なきゃ","prefix":[{"naiOrNu":true,"pos5Includes":"仮定形","surface":"なきゃ"}],"bodyVerbs":[]}
+{"variant":"colloquial_nakya","sampleSurface":"なけりゃならない","prefix":[{"naiOrNu":true,"pos5Includes":"仮定形","surface":"なけりゃ"}],"bodyVerbs":["なる","成る","いける","行ける","いく","行く"],"dialectBodyVerbs":["あく"],"lexicalBodyForms":["行ける","行く"],"allowDameBody":true}
+{"variant":"colloquial_nakya","sampleSurface":"なけりゃ","prefix":[{"naiOrNu":true,"pos5Includes":"仮定形","surface":"なけりゃ"}],"bodyVerbs":[]}
+{"variant":"colloquial_nakya","sampleSurface":"なならない","prefix":[{"naiOrNu":true,"pos5Includes":"仮定形","surface":"な"}],"bodyVerbs":["なる","成る"],"dialectBodyVerbs":["あく"]}
+{"variant":"colloquial_naito","sampleSurface":"ないといけない","prefix":[{"naiOrNu":true,"pos5Includes":"終止形"},{"surface":"と","pos1In":["格助詞","接続助詞"]}],"bodyVerbs":["なる","成る","いける","行ける","いく","行く"],"dialectBodyVerbs":["あく"],"lexicalBodyForms":["行ける","行く"],"allowDameBody":true}
+{"variant":"colloquial_naito_elided","sampleSurface":"ないと","prefix":[{"naiOrNu":true,"pos5Includes":"終止形"},{"surface":"と","pos1In":["格助詞","接続助詞"]}],"bodyVerbs":[]}

@@ -1,0 +1,2233 @@
+[activity]
+parallel_nouns = [ "仕事", "勤務", "研究", "教育", "経営", "活動", "勉強", "執筆", "制作", "練習", "営業", "演奏", "講義" ]
+gatera_nouns = [ "散歩", "買い物", "見学", "出張", "通勤", "通学", "確認", "挨拶", "相談", "配達", "集金" ]
+
+[adverb_copula]
+deictic_exclusions = [ "そう", "こう", "どう", "ああ" ]
+
+[adverbial_modifier]
+manner_nouns = [ "ふう", "風", "よう" ]
+bare_keijouji_hosts = [ "特別", "とくべつ", "大変", "マジ", "まじ", "存分", "好き勝手", "いかが", "さよう", "てきめん", "黙々", "むやみ" ]
+rentai_degree_adjective_hosts = [ "すごい", "凄い", "すっごい", "すごーい", "すんごい", "ものすごい", "物凄い", "すげえ", "すげー", "すげぇ" ]
+
+[artifact]
+repairable_objects = [ "パソコン", "PC", "コンピューター", "コンピュータ", "機械", "機器", "装置", "設備", "道具", "工具", "時計", "車", "自転車", "バイク", "エンジン" ]
+
+[ataru]
+duty_hosts = [ "業務", "任務", "対応", "応対", "接客", "治療", "診療", "看護", "看病", "介護", "警備", "守備", "防衛", "捜査", "捜索", "救助", "復旧", "指導", "職務" ]
+correspond_hosts = [ "娘", "息子", "父", "母", "兄", "姉", "弟", "妹", "祖父", "祖母", "曾祖父", "高祖父", "恩師", "師匠", "叔父", "叔母", "伯父", "伯母", "甥", "姪", "いとこ", "従兄弟", "親戚", "姑", "舅", "違反", "侵害" ]
+affliction_illness_hosts = [ "中毒", "食中毒", "食あたり" ]
+affliction_food_hosts = [ "牡蠣", "貝", "魚", "フグ", "河豚", "刺身", "生もの", "食べ物", "食事", "弁当" ]
+
+[attributive]
+jp_present_head_nouns = [ "習慣", "癖", "こと", "傾向", "間" ]
+jp_future_head_nouns = [ "つもり", "積もり", "心づもり", "心積もり", "はず", "筈", "予定", "意志", "意思", "意向", "決意", "決心", "覚悟", "計画", "方針", "必要", "義務", "責任", "権利", "権限", "資格", "可能性", "見込み", "見通し", "恐れ", "予感", "自信", "価値", "自由", "希望", "約束", "余裕", "余地", "勇気", "機会", "チャンス", "暇", "羽目", "際" ]
+demonstrative_adnominals = [ "その", "この", "あの", "どの", "そんな", "こんな", "あんな", "どんな", "そういう", "こういう", "ああいう", "どういう", "さような", "そのような", "このような", "あのような", "どのような" ]
+prospective_event_verbs = [ "結婚する", "卒業する", "就職する", "転職する", "退職する", "着任する", "出発する", "到着する", "移動する", "開始する", "終了する", "開催する", "実施する", "結成する", "合併する", "発売する", "公開する", "開業する", "閉店する", "移住する", "引っ越す" ]
+future_cue_terms = [ "明日", "明後日", "来週", "来月", "来年", "今後", "今から", "これから", "次", "次回", "翌日" ]
+
+[attributive.jp_verb_ending_overrides]
+"持つ" = "ㄴ/은"
+"似る" = "ㄴ/은"
+"いる" = "ㄴ/는"
+"住む" = "ㄴ/는"
+"知る" = "ㄴ/는"
+"通う" = "ㄴ/는"
+"勤める" = "ㄴ/는"
+"暮らす" = "ㄴ/는"
+"関する" = "ㄴ/은"
+"対する" = "ㄴ/은"
+"属する" = "ㄴ/는"
+
+[attributive.ko_verb_ending_overrides]
+"가지다" = "ㄴ/은"
+"닮다" = "ㄴ/은"
+"최선을 다하다" = "ㄴ/은"
+"있다" = "ㄴ/는"
+"살다" = "ㄴ/는"
+"알다" = "ㄴ/는"
+"다니다" = "ㄴ/는"
+"살아가다" = "ㄴ/는"
+"인정받다" = "ㄴ/는"
+"허용되다" = "ㄴ/는"
+"못 하다" = "ㄴ/는"
+
+[[attributive.object_ending_overrides]]
+verb = "置く"
+objects = [ "本社", "拠点", "重点" ]
+ending = "ㄴ/은"
+
+[[attributive.head_noun_required_complements]]
+korean = "채"
+ending = "ㄴ/은"
+source_heads = [ "まま" ]
+
+[[attributive.head_noun_required_complements]]
+korean = "때"
+ending = "ㄹ/을"
+source_heads = [ "時", "とき", "さい", "折", "暁", "際", "うち", "内" ]
+bare_entity_modifier_sources = [ "長い", "短い", "違う" ]
+entity_duration_matrix_predicates = [ "過ごす", "すごす", "送る", "過ぎる", "すぎる", "経つ", "たつ", "続く", "つづく", "流れる", "ながれる" ]
+demonstrative_co_modifier_block = true
+
+[[attributive.head_noun_required_complements]]
+korean = "때마다"
+ending = "ㄹ/을"
+source_heads = [ "たび", "たんび" ]
+
+[[attributive.head_noun_required_complements]]
+korean = "전"
+complement = "nominal_ki"
+source_heads = [ "前", "うち", "内" ]
+tense = "nonpast"
+expletive_negation = true
+
+[au]
+suffer_nouns = [ "事故", "被害", "攻撃", "暴力", "詐欺", "盗難", "痴漢", "スリ", "恐喝", "いじめ", "袋叩き", "返り討ち", "派遣切り" ]
+experience_nouns = [ "ひどい目", "酷い目", "偉い目", "えらい目", "災難", "災害", "火事", "トラブル", "苦労", "困難", "苦難", "苦境", "試練" ]
+weather_hit_nouns = [ "雨", "大雨", "夕立", "にわか雨", "通り雨", "雪" ]
+
+[batabata]
+action_verbs = [ "する", "走る", "走り回る", "動く", "片付ける", "準備する", "慌てる", "過ごす", "暮らす", "働く", "騒ぐ" ]
+
+[benefactive_tee_te_retag]
+host_lemmas = [ "くれる", "呉れる", "くださる", "下さる" ]
+desire_lemmas = [ "てー", "てぇ" ]
+
+[body]
+ashi_leg_predicates = [ "長い", "短い", "太い", "細い", "美しい", "きれい", "伸ばす", "組む", "開く", "閉じる", "曲げる", "揃える", "広げる" ]
+
+[bokeru]
+visual_nouns = [ "写真", "画像", "映像", "景色", "風景", "色", "ピント", "焦点", "背景", "画面", "輪郭", "文字", "像", "視界", "目" ]
+
+[building]
+structures = [ "屋", "家", "建物", "住宅", "小屋", "部屋", "アパート", "マンション", "ビル", "施設" ]
+
+[bunbetsu]
+sorting_objects = [ "ゴミ", "ごみ", "資源ごみ", "資源ゴミ", "燃えるゴミ", "燃えないゴミ", "空き缶", "空き瓶", "ペットボトル", "段ボール", "古紙", "衣類" ]
+
+[bungo_volitional_n]
+licensor_surfaces = [ "ばかり" ]
+
+[chirachira]
+glance_verbs = [ "目" ]
+glance_verbs_includes = [ "semantic.visual_glance_predicates" ]
+
+[chirari]
+glance_verbs = [ "目をやる", "視線" ]
+glance_verbs_includes = [ "semantic.visual_glance_predicates" ]
+
+[chuushi_closure]
+clause_coordination_conjunction_lemmas = [ "そして", "それから", "また", "又", "さらに", "更に", "しかも", "そのうえ", "その上", "かつ", "且つ", "加えて", "次いで", "ついで" ]
+
+[clothing]
+wearable_items = [ "服", "衣服", "洋服", "靴", "帽子" ]
+
+[colloquial_noni]
+terminal_followers = "！？、。」）】』］｝〉!?.,;:)]}> \t\n\r”’~…‥♡♥️"
+
+[concession]
+ni_series_concessive_conditional_surfaces = [ "にしても", "にしろ", "にせよ" ]
+kuse_ni_dative_predicates = [ "なる", "成る", "気づく", "気付く", "気づける", "気付ける", "効く", "よる", "依る" ]
+
+[conditional]
+counterfactual_result_forms = [ "助かる" ]
+counterfactual_modal_closer_surfaces = [ "のに", "だろ", "でしょ", "はず", "筈", "かも", "ろう" ]
+discovery_result_forms = [ "来る", "くる", "いる", "居る", "ある", "有る", "見える", "聞こえる", "現れる", "見つかる" ]
+
+[connective_elliptic_follower]
+admitted_kinds = [ "simultaneous", "predicate_projection_until", "predicate_projection_comparison", "reformulation", "predicate_projection_degree_extent", "adversative", "listing", "concession", "sequence_after", "predicate_projection_intentional_purpose" ]
+
+[container]
+soft_items = [ "鞄", "カバン", "バッグ", "袋" ]
+
+[copula_concessive]
+licensing_hosts = []
+licensing_hosts_includes = [ "indeterminate.wh_indefinite_core_heads", "interrogative.concessive_adverbial_forms" ]
+licensing_host_modifiers = []
+licensing_host_modifiers_includes = [ "nominal_frame.single_particle_demo_indefinite_modifiers" ]
+licensing_adverbs = [ "たとえ", "たとい", "仮に" ]
+prohibition_final_particles = [ "な" ]
+
+[copula_de.conn_endings]
+"が" = "지만"
+"けど" = "지만"
+"けれど" = "지만"
+"し" = "고"
+"から" = "(으)니까"
+"ば" = "면"
+
+[copula_de.preface_conn_endings]
+"が" = "는데"
+"けど" = "는데"
+"けれど" = "는데"
+
+[copula_de.preface_conn_endings_polite]
+"が" = "는데요"
+"けど" = "는데요"
+"けれど" = "는데요"
+
+[copula_de.preface_conn_endings_polite_formal]
+"が" = "ㅂ니다만"
+"けど" = "ㅂ니다만"
+"けれど" = "ㅂ니다만"
+
+[copula_de_predicate]
+extra_host_nouns = [ "これ", "それ", "あれ", "取引先", "先方", "得意先", "病気", "風邪", "怪我", "けが" ]
+
+[copula_focus_adjunct]
+fused_negative_state_change_verbs = [ "なくなる" ]
+
+[copula_focus_continuation]
+particles = [ "は", "も", "こそ" ]
+particles_includes = [ "koto_dekiru.focus_particles" ]
+
+[dabutsuku]
+market_commodity_nouns = [ "在庫", "商品", "物資", "資金", "金", "資材", "製品", "原料", "食料", "米", "石油", "鋼材", "魚", "魚介類", "水産物", "農産物", "牛肉", "豚肉", "鶏肉", "肉", "野菜", "果物", "穀物", "小麦", "供給", "生産", "輸入品", "貨物", "部品", "半導体", "お金" ]
+
+[daiya]
+railway_schedule_context_nouns = [ "改正", "通り", "乱れ", "運行", "列車", "電車", "時刻", "時刻表", "本数", "接続", "運休", "遅延" ]
+
+[dangi]
+buddhist_context = [ "仏法", "法", "法門", "法華", "説法", "経", "経文", "念仏", "僧", "僧侶", "坊主", "住職", "和尚", "法師", "寺" ]
+
+[daradara]
+liquid_verbs = [ "流れる", "流す", "垂れる", "出る", "汗", "血", "よだれ", "涎", "鼻水", "涙" ]
+
+[dasu]
+speech_topic_objects = [ "話", "話題", "問題", "議題", "用件", "件", "本題", "案", "提案", "相談", "愚痴", "不満", "秘密", "噂", "噂話", "疑問" ]
+carving_material_objects = [ "木", "木材", "丸太", "板", "石", "石材", "岩", "氷", "大理石", "材料", "素材" ]
+money_withdraw_objects = [ "お金", "金", "現金", "預金", "貯金", "貯蓄", "預貯金", "キャッシュ" ]
+farewell_person_objects = [ "娘", "息子", "子", "子供", "子ども", "孫", "新郎", "新婦", "花嫁", "花婿", "嫁", "婿", "妻", "夫" ]
+dispatch_destinations = [ "社会", "世間", "世界", "現場", "学校", "舞台", "市場", "業界", "大会", "試合", "国", "海外", "戦場", "前線", "リング", "会場" ]
+
+[demonstrative_proposition]
+adnominal_proposition_hosts = [ "そんな|그렇다|ㅎ", "そういう|그렇다|ㅎ", "んな|그렇다|ㅎ", "こんな|이렇다|ㅎ", "こういう|이렇다|ㅎ", "あんな|저렇다|ㅎ", "ああいう|저렇다|ㅎ" ]
+
+[deru]
+emergence_subjects = [ "声", "音", "涙", "汗", "血", "鼻血", "熱", "火", "芽", "咳", "くしゃみ", "匂い", "臭い", "被害", "損害", "利益", "許可", "症状", "反応", "よだれ", "涎", "冷や汗", "冷汗", "やる気", "勇気", "食欲", "元気", "力", "感じ", "感", "赤み", "重さ", "反吐" ]
+emergence_subjects_includes = [ "semantic.existence_presence_nouns", "semantic.symptom_nouns", "semantic.differential_nouns" ]
+revealed_subjects = [ "表情", "特徴", "癖", "くせ", "性格", "本性", "本音", "感情", "気持ち", "態度" ]
+surface_reveal_subjects = [ "秘密", "本心", "焦り", "不満", "欲", "欲求", "嫉妬", "執着心", "傾向" ]
+surface_reveal_subjects_includes = [ "semantic.emotion_attitude_nouns" ]
+fronting_subjects = [ "競争", "対立", "問題", "課題", "議論", "主張", "自己主張", "欲", "欲求", "野心", "本能", "理屈", "衝動", "虚勢" ]
+foreground_reveal_subjects = [ "特徴", "態度", "感情", "気持ち" ]
+foreground_reveal_subjects_includes = [ "semantic.existence_presence_nouns" ]
+surface_predicates = [ "出る" ]
+
+[desire_tee_retag]
+mistagged_surfaces = [ "てえ" ]
+
+[directive]
+you_directive_core_predicates = [ "言う", "いう", "求める", "頼む", "たのむ", "勧める", "薦める", "命じる", "命ずる", "命ず", "促す", "指示する", "命令する", "要求する", "要請する", "要望する", "勧告する" ]
+you_effort_wish_predicates = [ "努める", "つとめる", "努力する", "尽力する", "心がける", "心掛ける", "図る", "取り組む", "工夫する", "期する", "励む", "研鑽する", "推進する", "貢献する", "講じる", "講ずる", "措置する", "対応する", "検討する", "配慮する", "留意する", "注意する", "願う", "ねがう", "祈る", "いのる", "お願いする", "望む", "希望する", "支援する", "援助する", "協力する", "サポートする" ]
+you_speech_act_predicates = [ "説明する", "指摘する", "主張する", "伝える", "つたえる", "呼び掛ける", "呼びかける", "訴える", "働きかける", "申し入れる", "周知する", "通知する", "通告する", "言い渡す", "提案する", "警告する", "忠告する", "アドバイスする", "説得する", "懇願する", "強要する", "励ます", "指導する", "誘導する", "合図する", "手招きする" ]
+you_purpose_arrangement_predicates = [ "設計する", "設定する", "調整する", "最適化する", "仕組む", "区切る", "定める", "担保する", "取り決める", "取り計らう", "手配する", "徹底する", "訓練する" ]
+you_zero_predicates = [ "申し出る", "迫る", "期待する" ]
+you_zero_predicates_includes = [ "directive.you_directive_core_predicates", "directive.you_effort_wish_predicates", "directive.you_speech_act_predicates", "directive.you_purpose_arrangement_predicates" ]
+you_ni_quote_projection_predicates = [ "指導する" ]
+you_ni_quote_projection_predicates_includes = [ "directive.you_directive_core_predicates" ]
+you_ni_manner_yield_predicates = []
+you_ni_manner_yield_predicates_includes = [ "directive.you_directive_core_predicates", "directive.you_speech_act_predicates" ]
+you_ni_speech_manner_win_followers = [ "言う", "いう", "伝える", "つたえる" ]
+you_zero_pressure_object_nouns = [ "圧力" ]
+you_zero_pressure_verbs = [ "かける", "掛ける", "加える" ]
+
+[dorodoro]
+muddy_nouns = [ "道", "地面", "土", "泥", "田んぼ", "グラウンド", "ぬかるみ", "足元", "靴", "服", "汚れる", "汚す" ]
+
+[education]
+school_year_context = [ "学生", "生徒", "児童", "学年", "入学", "卒業", "在学", "在校", "履修", "進級" ]
+
+[elliptic_confirmation]
+particles = [ "が", "を", "に", "で", "へ", "も" ]
+
+[embedded_question]
+narrow_verbs = [ "分かる", "解る", "判る", "わかる", "決まる", "きまる", "教える", "おしえる", "尋ねる", "たずねる", "聞く", "きく", "問う", "とう", "伺う", "うかがう", "確かめる", "たしかめる" ]
+narrow_sahen_nouns = [ "確認", "質問", "判断" ]
+narrow_adj_da = [ "不明", "明らか" ]
+broad_verbs = [ "知る", "しる", "決める", "きめる", "考える", "かんがえる", "迷う", "まよう", "悩む", "なやむ", "調べる", "しらべる", "思う", "おもう", "疑う", "うたがう", "覚える", "おぼえる", "忘れる", "わすれる", "存ずる", "気にする", "見る", "みる", "言う", "いう", "ゆう", "述べる", "のべる", "答える", "こたえる", "返す", "かえす", "話す", "はなす", "語る", "かたる", "叫ぶ", "さけぶ", "囁く", "ささやく", "怒鳴る", "どなる", "つぶやく", "ぼやく" ]
+broad_verbs_includes = [ "embedded_question.narrow_verbs" ]
+broad_sahen_nouns = [ "心配", "思案", "懸念", "不安", "疑問", "推測", "想像", "予想", "期待", "検討", "調査", "把握", "理解", "認識", "識別", "判別", "ご存じ", "存じ" ]
+broad_sahen_nouns_includes = [ "embedded_question.narrow_sahen_nouns" ]
+broad_adj_da = [ "曖昧" ]
+broad_adj_da_includes = [ "embedded_question.narrow_adj_da" ]
+content_host_verbs = [ "知る", "しる", "決める", "きめる", "考える", "かんがえる", "迷う", "まよう", "悩む", "なやむ", "調べる", "しらべる", "思う", "おもう", "疑う", "うたがう", "覚える", "おぼえる", "忘れる", "わすれる", "思い出す", "おもいだす", "存ずる", "気にする", "見る", "みる", "教える", "聞かせる", "話し合う", "はなしあう", "話す", "はなす", "伝える", "つたえる" ]
+content_host_verbs_includes = [ "embedded_question.narrow_verbs" ]
+content_host_sahen_nouns = [ "確認", "質問", "心配", "思案", "懸念", "不安", "疑問", "推測", "想像", "予想", "期待", "検討", "調査", "把握", "理解", "認識", "識別", "判別", "ご存じ", "存じ", "共有" ]
+content_host_sahen_nouns_includes = [ "embedded_question.narrow_sahen_nouns" ]
+content_host_adj_da = [ "曖昧" ]
+content_host_adj_da_includes = [ "embedded_question.narrow_adj_da" ]
+ni_suru_nouns = [ "気", "念頭" ]
+wh_indefinite_hosts = [ "なん", "何時", "何処", "何れ" ]
+wh_indefinite_hosts_includes = [ "indeterminate.wh_indefinite_core_heads" ]
+time_adverb_nouns = [ "今", "今日", "昨日", "明日", "明後日", "一昨日", "今朝", "今晩", "今夜", "去年", "昨年", "先月", "先週", "先日", "来年", "来月", "来週", "朝", "昼", "夕方", "夜", "深夜", "未明", "先ほど", "さきほど", "さっき", "最近", "近頃", "ちかごろ" ]
+
+[food]
+nouns = [ "食べ物", "食品", "料理", "食事", "ご飯", "飯", "米", "パン", "麺", "肉", "魚", "卵", "玉子", "野菜", "白菜", "芋", "豆", "果物", "フルーツ", "苺", "いちご", "イチゴ", "ベリー", "ナッツ", "クリーム", "チーズ", "ハム", "ソース", "ケーキ", "タルト", "目玉焼き", "具", "具材", "食材", "キャベツ", "チンゲンサイ", "ほうれん草", "小松菜", "ニラ", "ネギ", "長ネギ", "玉ねぎ", "たまねぎ", "にんじん", "人参", "じゃがいも", "ジャガイモ", "ナス", "茄子", "ピーマン", "ズッキーニ", "ブロッコリー", "カリフラワー", "もやし", "えのき", "エノキ", "シメジ", "しめじ", "エリンギ", "にんにく", "ニンニク", "生姜", "しょうが", "鶏肉", "豚肉", "牛肉", "ひき肉", "豚バラ", "えび", "エビ", "いか", "イカ", "ホタテ", "鮭", "春雨", "はるさめ", "インゲン", "アスパラ", "セロリ", "小麦粉" ]
+drink_nouns = [ "お茶", "茶", "コーヒー", "紅茶", "ジュース", "ビール", "酒", "お酒", "ワイン", "水", "牛乳", "ミルク", "飲み物", "ドリンク" ]
+
+[formal_written]
+ue_de_procedure_nouns = [ "熟慮", "合意", "同意", "覚悟" ]
+ue_de_domain_nouns = [ "手続き", "手続", "制度", "実務", "法律", "法令", "規則", "規定", "運用", "契約", "書類" ]
+
+[formula]
+doumo_emphasis_heads = [ "ありがとう", "ありがとうございる", "すみません", "すむ", "済む" ]
+speech_kakeru_predicates = [ "かける", "掛ける" ]
+ki_care_predicates = [ "する", "使う", "遣う", "配る", "かける", "掛ける" ]
+ki_attention_predicates = [ "つける", "付ける" ]
+ki_awareness_predicates = [ "つく", "付く" ]
+ki_preference_predicates = [ "入る" ]
+ki_tension_predicates = [ "抜く", "緩む", "ゆるむ" ]
+ki_sense_predicates = [ "利く" ]
+ki_drain_predicates = [ "抜ける" ]
+ki_relief_predicates = [ "休まる" ]
+ki_mood_predicates = [ "滅入る", "晴れる" ]
+ki_satisfaction_predicates = [ "済む" ]
+ki_worry_predicates = [ "病む" ]
+ki_attention_keep_predicates = [ "留める", "障る" ]
+ki_dislike_predicates = [ "食う" ]
+kakeru_pressure_objects = [ "圧", "圧力", "負荷", "プレッシャー" ]
+kakeru_sauce_objects = [ "ソース", "タレ", "たれ", "醤油", "しょうゆ", "ケチャップ", "マヨネーズ", "ドレッシング", "シロップ", "蜜" ]
+kakeru_cover_objects = [ "布団", "毛布", "タオルケット", "ブランケット", "上掛け" ]
+kakeru_wear_objects = [ "眼鏡", "メガネ", "めがね", "色眼鏡", "サングラス" ]
+kakeru_weight_objects = [ "体重", "重み" ]
+niku_body_predicates = [ "付く", "つく", "落ちる", "削げる", "そげる", "撫でる", "なでる", "つまむ", "摘む", "つねる", "減る", "増える", "ふえる", "つく", "痛む", "ある", "無い" ]
+kiru_disconnect_objects = [ "電話", "通話", "接続", "連絡", "ガス", "水道", "電気", "電源", "関係", "縁", "繋がり", "つながり", "付き合い", "通信", "回線", "信号", "取引", "契約", "命", "息", "寿命", "補給", "供給" ]
+suru_samda_objects = [ "話題", "議題", "問題", "対象", "標的", "目標", "中心", "犠牲", "仲間", "友達", "弟子", "部下", "妻", "夫", "恋人", "言い訳", "口実", "規範", "基準", "模範", "手本", "養子", "養女", "嫁", "婿", "婿養子", "跡取り", "後継者", "継嗣", "世継ぎ", "候補", "候補者", "人質", "餌食", "生贄", "いけにえ", "味方", "敵", "笑い者", "笑いもの", "悪者", "のけ者", "除け者", "晒し者", "さらし者", "見せしめ", "道化", "囮", "おとり", "身代わり", "捨て駒" ]
+suru_samda_title_objects = [ "会長", "社長", "部長", "課長", "係長", "委員長", "班長", "議長", "先生", "師匠", "リーダー", "代表", "主将", "隊長", "大将", "主役", "皇帝", "王", "女王", "国王", "王妃", "皇后", "皇太子", "王太子", "王子", "王女", "王様", "女帝", "君主", "領主", "当主" ]
+suru_mandeulda_objects = [ "無料", "有料", "半額", "台無し", "ジャム", "粉", "都市", "形", "武器", "餌", "更地", "灰", "ゴミ", "ごみ", "丸裸" ]
+light_verb_speech_object_nouns = [ "話", "話し", "噂", "噂話", "うわさ", "お話", "昔話", "打ち明け話", "内緒話", "世間話" ]
+height_adjectives = [ "高い", "低い" ]
+kokorozumori_prepare_predicates = [ "する" ]
+mama_bar_establishments = [ "バー", "スナック", "クラブ", "ラウンジ", "キャバクラ", "飲み屋", "居酒屋", "店", "カウンター" ]
+forehead_context_heads = [ "汗", "冷汗", "冷や汗", "脂汗", "手汗", "発汗", "皺", "しわ", "吹き出物", "前髪", "髪", "産毛", "輪郭", "形態", "骨", "広さ", "広い", "狭い", "近く", "まわり", "周り", "奥", "皮膚", "肌", "タオル", "手", "保冷剤", "検温器", "キス", "こぶ", "押さえる", "打つ", "当てる", "触れる", "さわる", "触る", "拭う", "ぬぐう", "拭く", "ふく", "寄せる", "結ぶ", "乗せる", "近づける", "冷える", "痛む", "ぶつかる", "光る", "てかる", "張りつく", "張り付く", "くっつく", "付く", "つく", "流れる", "にじむ", "浮かぶ", "垂れる", "落ちる", "見える", "覗く", "のぞく", "相当する" ]
+frame_context_heads = [ "入れる", "飾る", "傾く", "掛ける", "かける" ]
+transport_service_nouns = [ "電車", "列車", "新幹線", "地下鉄", "バス", "路線", "鉄道", "JR", "在来線", "特急", "急行", "各駅停車" ]
+transport_operation_predicates = [ "見合わせる" ]
+
+[functional_chain.desu]
+casual = "이에요"
+formal = "입니다"
+casual_question = "이에요"
+formal_question = "입니까"
+casual_suffix = "에요"
+formal_suffix = "니다"
+casual_question_suffix = "에요"
+formal_question_suffix = "니까"
+
+[functional_chain.deshita]
+casual = "이었어요"
+formal = "이었습니다"
+casual_question = "이었어요"
+formal_question = "이었습니까"
+casual_suffix = "이었어요"
+formal_suffix = "이었습니다"
+casual_question_suffix = "이었어요"
+formal_question_suffix = "이었습니까"
+
+[functional_chain.deshou]
+casual = "이겠죠"
+formal = "이겠죠"
+casual_question = "이겠죠"
+formal_question = "이겠죠"
+casual_suffix = "겠죠"
+formal_suffix = "겠죠"
+casual_question_suffix = "겠죠"
+formal_question_suffix = "겠죠"
+
+[functional_chain.da]
+casual = "이야"
+formal = "이다"
+casual_question = "이야"
+formal_question = "인가"
+casual_suffix = "이야"
+formal_suffix = "이다"
+casual_question_suffix = "이야"
+formal_question_suffix = "인가"
+
+[functional_chain.datta]
+casual = "이었어"
+formal = "이었다"
+casual_question = "이었어"
+formal_question = "이었는가"
+casual_suffix = "이었어"
+formal_suffix = "이었다"
+casual_question_suffix = "이었어"
+formal_question_suffix = "이었는가"
+
+[functional_chain.masu]
+casual = "해요"
+formal = "합니다"
+casual_question = "해요"
+formal_question = "합니까"
+casual_suffix = "해요"
+formal_suffix = "합니다"
+casual_question_suffix = "해요"
+formal_question_suffix = "합니까"
+
+[functional_chain.mashita]
+casual = "했어요"
+formal = "했습니다"
+casual_question = "했어요"
+formal_question = "했습니까"
+casual_suffix = "했어요"
+formal_suffix = "했습니다"
+casual_question_suffix = "했어요"
+formal_question_suffix = "했습니까"
+
+[functional_chain.mashou]
+casual = "하죠"
+formal = "하죠"
+casual_question = "하죠"
+formal_question = "하죠"
+casual_suffix = "죠"
+formal_suffix = "죠"
+casual_question_suffix = "죠"
+formal_question_suffix = "죠"
+
+[furikakaru]
+misfortune_subjects = [ "不幸", "不運", "呪い", "事件", "災い", "災厄", "危険", "危機", "悲劇", "出来事", "罰", "天罰", "運命", "問題", "厄介事", "面倒", "火の粉", "疑い", "嫌疑", "危難", "悪夢", "祟り", "殺人", "暴力", "被害" ]
+
+[furniture]
+common_items = [ "机", "椅子" ]
+
+[fuwafuwa]
+float_verbs = [ "浮く", "揺れる", "上がる", "飛んでくる" ]
+float_verbs_includes = [ "semantic.float_motion_predicates" ]
+
+[fuwari]
+motion_verbs = [ "乗る", "乗せる", "置く", "被せる", "掛ける", "包む", "触れる", "抱く", "かぶせる", "覆う", "座る", "着地する" ]
+motion_verbs_includes = [ "semantic.float_motion_predicates" ]
+
+[gano_no]
+subject_stative_verbs = [ "足りる", "足る", "いる", "ある", "居る", "有る" ]
+subject_stative_verbs_nonindependent_only = [ "いる", "ある", "居る", "有る" ]
+head_subject_property_verbs = [ "間違う", "誤る", "変わる", "優れる", "偏る", "ありふれる", "馬鹿げる", "ばかげる", "凝る", "異なる", "違う" ]
+np_closing_secondary_particles = [ "まで", "ほど", "くらい", "ばかり" ]
+ability_adjunct_heads = [ "とこ", "所", "わけ", "訳", "はず", "筈", "つもり" ]
+ability_agent_nouns = [ "自分", "自身", "自ら", "人類", "人間", "国民", "住民", "我が国", "日本", "政府", "行政", "自治体", "会社", "企業", "民間", "当社", "組織", "それぞれ", "各々", "各自", "めいめい" ]
+subject_adjective_allowlist = [ "ない", "無い", "多い", "少ない" ]
+subject_adjective_pairs = [ [ "頭", "いい" ], [ "頭", "良い" ], [ "頭", "悪い" ], [ "水", "多い" ], [ "水", "少ない" ], [ "友達", "多い" ], [ "友達", "少ない" ], [ "仲", "いい" ], [ "仲", "良い" ], [ "仲", "悪い" ], [ "口", "悪い" ], [ "気味", "悪い" ], [ "気", "利く" ], [ "気", "遠い" ], [ "味", "薄い" ], [ "意地", "悪い" ], [ "肉付き", "いい" ], [ "肉付き", "良い" ], [ "都合", "いい" ], [ "都合", "良い" ], [ "都合", "悪い" ], [ "影", "薄い" ], [ "線", "細い" ], [ "材質", "違う" ], [ "相性", "いい" ], [ "相性", "良い" ], [ "相性", "悪い" ], [ "形", "いい" ], [ "形", "良い" ], [ "品", "いい" ], [ "品", "良い" ], [ "背", "高い" ], [ "頻度", "高い" ], [ "頻度", "低い" ], [ "温度", "高い" ], [ "温度", "低い" ], [ "値段", "高い" ], [ "値段", "低い" ], [ "価格", "高い" ], [ "価格", "低い" ], [ "質", "高い" ], [ "質", "低い" ], [ "プライド", "高い" ], [ "香り", "甘い" ], [ "匂い", "甘い" ], [ "味", "甘い" ], [ "料理", "うまい" ], [ "料理", "上手い" ], [ "料理", "巧い" ], [ "口先", "うまい" ], [ "口先", "上手い" ], [ "腕", "うまい" ], [ "腕", "上手い" ], [ "腕", "巧い" ], [ "字", "うまい" ], [ "字", "上手い" ], [ "歌", "うまい" ], [ "歌", "上手い" ] ]
+
+[grammar_boundary]
+clause_pause_surfaces = [ "、", "，", "," ]
+clause_terminal_surfaces = [ "。", "！", "!", "？", "?" ]
+clause_ellipsis_surfaces = [ "…", "‥", "." ]
+subtitle_terminal_trailing_surfaces = [ "-", "‐", "‑", "–", "—", "―", "−", "…", "‥", "⋯", "...", "．．．" ]
+clause_break_dash_surfaces = [ "―", "—", "–", "‒", "−", "➡" ]
+discourse_resumption_connective_surfaces = [ "が", "から", "けど", "けれど", "けれども" ]
+polite_formulaic_terminal_host_lemmas = [ "ござる", "御座る", "ありがとうございる" ]
+nominal_coordination_connective_lemmas = [ "かつ", "且つ", "及び", "および", "並びに", "や" ]
+nominal_coordination_symbol_surfaces = [ "＆", "&" ]
+nominal_coordination_case_particles = [ "と" ]
+decorative_terminal_symbol_surfaces = [ "♥", "♡", "❤", "❤︎", "♪", "♬", "☆", "★" ]
+symmetric_quote_toggle_surfaces = [ "\"", "＂" ]
+clause_result_surfaces = []
+clause_result_surfaces_includes = [ "grammar_boundary.clause_pause_surfaces", "grammar_boundary.clause_terminal_surfaces", "grammar_boundary.clause_ellipsis_surfaces" ]
+
+[hakarau]
+arrangement_objects = [ "縁談", "婚姻", "結婚", "再会", "就職", "就任", "話し合い", "相談", "交渉", "便宜", "仲", "取りなし", "手配" ]
+
+[hamaru]
+fit_nouns = [ "穴", "溝", "枠", "型", "パターン", "ピース", "リング", "輪", "指輪", "手袋", "靴", "帽子", "蓋", "栓", "コンセント", "ソケット" ]
+
+[hanazakari]
+flower_nouns = [ "花", "桜", "サクラ", "梅", "椿", "薔薇", "バラ", "菊", "蓮", "百合", "ユリ", "向日葵", "ひまわり", "紫陽花", "あじさい", "朝顔", "アサガオ", "藤", "牡丹", "芍薬", "菜の花", "コスモス" ]
+
+[hikiateru]
+lottery_objects = [ "くじ", "籤", "当たり", "番号" ]
+allocation_objects = [ "席", "部屋", "担当", "役割", "枠", "予算", "資源" ]
+
+[hineru]
+joint_nouns = [ "足", "足首", "手首", "腰", "首", "膝", "関節", "肩", "腕", "指", "親指", "捻挫" ]
+
+[hito_context]
+other_object_predicates = [ "信用", "信用する", "信頼", "信頼する", "信じる", "疑う", "責める", "見下す", "傷つける", "ねたむ" ]
+other_comparison_predicates = [ "比べる" ]
+
+[honorific]
+first_person_pronouns = [ "私", "わたし", "私たち", "わたしたち", "私ども", "僕", "ぼく", "僕ら", "ぼくら", "俺", "おれ", "俺たち", "おれたち", "我々", "われわれ", "あたし", "うち", "ウチ" ]
+respect_titles = [ "お父さん", "お母さん", "父さん", "母さん" ]
+respect_titles_includes = [ "honorific.respect_suffixes", "honorific.cluster_honorific_title_hosts", "honorific.respect_professional_titles" ]
+respect_suffixes = [ "様", "先生", "先輩", "社長", "部長", "課長", "会長" ]
+non_honorific_you_suffix_lexemes = [ "模様", "仕様", "紋様", "文様", "態様", "有様" ]
+non_honorific_you_reading_suffixes = [ "ザマ" ]
+honorific_cluster_suffixes = [ "さん", "ちゃん", "様", "さま", "殿", "君", "さーん", "ちゃーん" ]
+cluster_absorb_hosts = [ "おじ", "おば", "じい", "ばあ", "皆", "みんな", "若" ]
+cluster_honorific_title_hosts = [ "社長", "副社長", "部長", "次長", "課長", "係長", "会長", "副会長", "専務", "常務", "局長", "室長", "本部長", "支店長", "店長", "工場長", "館長", "校長", "園長", "所長", "院長", "団長", "隊長", "委員長", "議長", "理事長", "会頭", "頭取", "総長", "大将", "中将", "少将", "准将", "大佐", "中佐", "少佐", "大尉", "中尉", "少尉", "准尉", "曹長", "軍曹", "伍長", "元帥", "将軍", "知事", "市長", "町長", "村長", "区長" ]
+respect_professional_titles = [ "教授", "准教授", "助教授", "講師", "博士" ]
+cluster_bun_hosts = [ "患者", "乗客", "観客", "読者", "視聴者", "利用者", "参加者", "担当者", "受講者", "出席者", "来場者", "受験者", "加入者", "契約者", "依頼者", "購入者", "関係者", "申込者" ]
+sahen_light_verbs = [ "いたす", "致す", "申し上げる", "申しあげる", "もうしあげる", "なさる", "為さる" ]
+humble_drida_sahen_nouns = [ "설명", "안내", "연락", "소개", "보고", "부탁" ]
+realized_respect_predicate_lemmas = [ "보시다", "드시다", "계시다", "주무시다", "주시다", "하시다", "말씀하시다", "오시다", "돌아가시다" ]
+
+[honorific.respect_predicate_lemmas]
+"보다" = "보시다"
+"먹다" = "드시다"
+"마시다" = "드시다"
+"있다" = "계시다"
+"자다" = "주무시다"
+
+[indeterminate]
+wh_indefinite_core_heads = [ "誰", "だれ", "何", "なに", "どれ", "いつ", "何時", "どこ", "何処", "どちら", "何方", "どっち", "いくら", "幾ら" ]
+
+[instrument]
+nouns = [ "電話", "メール", "Ｅメール", "ファックス", "ＦＡＸ", "手紙", "スマホ", "携帯", "ケータイ", "パソコン", "バス", "電車", "車", "自動車", "自転車", "タクシー", "飛行機", "船" ]
+
+[interest]
+predicates = [ "気になる" ]
+
+[interrogative]
+adverbial_forms = [ "なぜ", "何故", "どうして", "どう", "いつ", "どこ", "何処", "いくら", "幾ら", "いかが", "如何", "いかに", "なに", "何", "どのくらい", "どれくらい" ]
+pronominal_forms = [ "誰", "だれ", "どなた", "何", "なに", "なん", "いつ", "何時", "どこ", "何処", "どれ", "何れ", "いずれ", "どちら", "どっち", "何方", "いくら", "幾ら" ]
+prenominal_forms = [ "どの", "どんな", "どういう", "いかなる" ]
+nominal_forms = [ "いくら", "幾ら", "何者" ]
+quantity_forms = [ "いくつ", "幾つ", "いくら", "幾ら" ]
+amount_forms = [ "いくら", "幾ら" ]
+indefinite_forms = [ "何ら" ]
+counter_forms = [ "人" ]
+concessive_adverbial_forms = [ "どう" ]
+nominal_prefixes = [ "何" ]
+lexicalized_compound_forms = [ "どうやって", "どういった" ]
+
+[janai_confirmation]
+absorbable_follower_sfp = [ "よ", "さ", "わ" ]
+
+[jouboku]
+abstract_predicates = [ "外れる", "外す", "越える", "守る", "従う" ]
+
+[kaafu]
+calf_leather_heads = [ "ブーツ", "靴", "シューズ", "バッグ", "鞄", "財布", "ベルト", "ジャケット", "コート", "手袋", "革", "レザー" ]
+
+[kachikachi]
+hard_verbs = [ "なる", "する", "固まる", "かたまる", "凍る", "こおる", "固める", "かためる", "に" ]
+
+[kana]
+alias_context = [ "登録", "記入", "入力", "署名", "応募", "申請", "受付", "予約", "名義", "氏名", "名前" ]
+
+[kanau]
+fitness_targets = [ "条件", "目的", "基準", "規格", "水準", "要件", "要求", "要望", "期待", "希望", "意向", "趣旨", "方針", "用途", "季節", "理", "道理", "理屈", "論理", "合理", "御眼鏡", "眼鏡" ]
+rival_targets = [ "相手", "敵", "ライバル", "強敵", "名人", "達人", "専門家", "先生", "先輩", "若い世代", "おてんばっ子", "技", "腕前", "実力" ]
+
+[kansai_polite_masse]
+se_surfaces = [ "せ", "せー", "せぇ", "せえ", "せェ" ]
+masu_mistag_lemmas = [ "まつ", "待つ" ]
+
+[karakuchi]
+food_context = [ "カレー", "ラーメン", "味噌", "みそ", "酒", "さけ", "ワイン", "ビール", "焼酎", "しょうちゅう", "日本酒", "料理", "味", "あじ", "スープ", "ソース", "唐辛子", "とうがらし" ]
+
+[karikari]
+food_verbs = [ "焼く", "やく", "揚げる", "あげる", "食べる", "たべる", "噛む", "かむ", "食感", "しょっかん", "サクサク" ]
+
+[karitoru]
+life_objects = [ "命", "生命", "意識", "魂", "息の根" ]
+
+[kayou]
+route_subjects = [ "道", "道路", "路", "道筋", "線路", "通路" ]
+flow_subjects = [ "風", "空気", "血", "血液", "水", "電気" ]
+communication_subjects = [ "心", "気持ち", "思い", "意志" ]
+attendance_destinations = [ "学校", "職場", "会社", "病院", "道場", "店" ]
+
+[keijouji_na]
+identity_type_nouns = [ "馬鹿", "バカ", "ばか", "阿呆", "アホ", "あほ", "アホウ", "間抜け", "まぬけ", "マヌケ", "やんちゃ", "わんぱく", "腕白", "おませ", "デブ", "でぶ", "でぶっちょ", "ドジ", "旋毛曲がり", "つむじ曲がり", "天邪鬼", "下手糞", "下手くそ", "ヘタクソ", "へたくそ", "虚け", "下種" ]
+identity_type_nouns_includes = [ "role.nouns" ]
+
+[kiku]
+question_object_nouns = [ "住所", "連絡先", "電話番号", "メールアドレス", "値段", "価格", "料金", "場所", "時間", "道", "道順", "行き方" ]
+question_detail_nouns = [ "質問", "名前", "年齢", "理由", "訳", "わけ", "都合", "予定", "意味", "方法" ]
+
+[korean_predicate]
+formal_plain_adjective_like_lemmas = [ "있다", "없다", "계시다" ]
+formal_plain_verb_like_lemmas = [ "계시다" ]
+
+[korean_predicate.suppletive_affirmative_lemmas]
+"ない" = "있다"
+"無い" = "있다"
+
+[korean_predicate.copula_fused_bound_nouns]
+"터" = "테"
+
+[koto_dekiru]
+focus_particles = [ "だけ", "しか", "さえ", "すら", "のみ", "ばかり" ]
+
+[kubikiri]
+execution_heads = [ "役人", "執行人", "人", "殺人", "処刑", "刑場", "執行", "犯", "事件", "斧", "包丁", "刀", "台", "刑" ]
+dismissal_heads = [ "メール", "通告", "通知", "リスト", "合理化", "攻勢" ]
+
+[kudasaru]
+forms = [ "くださる", "下さる" ]
+
+[kuromaku]
+stage_context = [ "舞台", "ぶたい", "ステージ", "劇場", "げきじょう", "幕", "まく", "カーテン", "布", "ぬの" ]
+
+[kuzusu]
+health_condition_nouns = [ "体調", "体", "身体", "健康", "体力", "体調管理", "コンディション" ]
+
+[locale]
+jimoto_hometown_predicates = [ "帰る", "戻る", "離れる", "出る" ]
+
+[maiagaru]
+physical_subjects = [ "砂", "ほこり", "埃", "塵", "ちり", "灰", "紙", "木の葉", "葉", "花びら", "鳥", "蝶", "煙", "けむり", "雪", "火の粉", "羽", "羽根", "風船", "凧", "たこ", "紙吹雪" ]
+
+[majinai]
+chant_verbs = [ "唱える", "言う", "かける", "掛ける", "つぶやく", "囁く", "叫ぶ", "繰り返す", "覚える", "教える", "書く" ]
+
+[matagaru]
+span_nouns = [ "県", "国", "地域", "時代", "世紀", "年", "分野", "領域", "期間", "範囲", "境", "境界", "川", "道", "ジャンル", "部門", "世代", "*県", "*府", "*州", "*国", "*市", "*町", "*郡", "*地方", "*地域", "*諸島", "*世紀", "*時代" ]
+
+[matomaru]
+group_nouns = [ "国人衆", "人々", "皆", "全員", "仲間", "味方", "反対派", "賛成派", "一派", "勢力", "軍勢", "チーム", "組織", "党", "派閥" ]
+concluded_nouns = [ "商談", "契約", "取引", "交渉" ]
+agreed_terms_nouns = [ "条件" ]
+selection_subject_nouns = [ "候補者", "候補", "案" ]
+
+[megurasu]
+scheme_nouns = [ "策略", "計略", "計画", "陰謀", "謀略", "謀", "策", "罠", "術策", "奸計", "悪だくみ" ]
+thought_nouns = [ "思い", "考え", "記憶", "頭", "胸", "心", "想像", "思考", "頭の中", "脳内" ]
+
+[mekuru]
+page_nouns = [ "ページ", "頁", "本", "ぺーじ", "アルバム", "カレンダー", "漫画", "まんが", "雑誌", "絵本", "えほん", "辞書", "教科書" ]
+rollup_nouns = [ "袖", "そで", "裾", "すそ", "カーテン", "幕", "まく", "腕まくり" ]
+
+[mihiraki]
+print_context = [ "ページ", "頁", "広告", "写真", "イラスト", "漫画", "マンガ", "絵", "図", "記事" ]
+
+[miseru]
+exhibit_objects = [ "様子", "表情", "顔色", "笑顔", "照れ顔", "泣き顔", "横顔", "姿", "姿勢", "態度", "反応", "気配", "傾向", "兆し", "兆候", "動き", "変化", "広がり", "伸び", "回復", "成長", "活気", "勢い", "弱さ", "強さ", "本音", "意欲", "関心", "興味", "不満", "怒り", "驚き", "戸惑い", "迷い", "欲", "執着", "色", "展開", "賑わい" ]
+appearance_complements = [ "以上", "小顔", "本物", "ラフ" ]
+
+[momu]
+rub_nouns = [ "目", "め", "手", "て", "肩", "かた", "腰", "こし", "足", "あし", "体", "からだ", "首", "くび", "頭", "あたま" ]
+
+[mono_modal]
+carrier_forms = [ "もの", "もん" ]
+default_reading_carrier_forms = [ "もん" ]
+frequency_adverbs = [ "よく", "良く", "いつも", "しょっちゅう", "毎日", "毎晩", "毎朝", "毎週", "毎年", "度々", "たびたび", "しばしば" ]
+evaluative_frequency_adverbs = [ "よく", "良く" ]
+admirative_adverbs = [ "よくも", "よくまあ", "案外", "意外と", "意外に", "結構", "随分", "ずいぶん" ]
+
+[mukeru]
+peel_nouns = [ "皮", "皮膚", "肌", "肘", "膝", "鼻", "日焼け", "かさぶた", "塗装", "ペンキ", "壁紙", "表皮", "薄皮", "殻" ]
+
+[nabe]
+dish_context = [ "食べる", "たべる", "つつく", "囲む", "かこむ", "作る", "つくる", "煮込む", "にこむ", "具", "ぐ", "材料", "ざいりょう", "出汁", "だし", "スープ", "野菜", "やさい", "肉", "にく", "豆腐", "とうふ" ]
+
+[nameru]
+lick_objects = [ "指", "唇", "くちびる", "舌", "飴", "あめ", "アイス", "ソフトクリーム", "傷", "かさぶた", "皿", "手", "血", "塩", "蜜", "氷", "口", "頬", "ほっぺ", "肌" ]
+
+[naosu]
+repair_objects_includes = [ "artifact.repairable_objects" ]
+repair_objects = [ "故障" ]
+edit_objects = [ "文章", "文", "原稿", "資料", "書類", "報告書", "レポート", "記事", "表現", "言い方", "誤字", "ミス", "間違い", "設定", "データ", "コード", "プログラム" ]
+
+[nechinechi]
+sticky_nouns = [ "する", "した", "くっつく", "張り付く", "触る", "触れる", "手", "指", "汗", "糊", "のり", "粘る" ]
+
+[nendai]
+age_range_context = [ "人", "男性", "女性", "世代", "若者", "子供", "大人", "患者", "主婦", "層" ]
+
+[neru]
+knead_nouns = [ "粘土", "土", "泥", "生地", "パン", "小麦粉", "餡", "セメント", "ねんど", "つち", "きじ", "どろ", "あん", "こむぎこ", "うどん", "蕎麦", "そば", "餅", "もち", "味噌", "みそ" ]
+
+[niru]
+similarity_subjects = [ "形", "形状", "外観", "見た目", "輪郭", "デザイン", "模様", "容姿", "性質", "性格", "価値観", "好み", "選択肢", "経験", "状況", "雰囲気", "氏名", "名前", "味付け", "背格好", "タイミング" ]
+similarity_comparison_nouns = [ "以前", "これ", "それ", "自分", "経験", "失敗", "状況", "場面", "場合", "資料", "ゲーム", "世界", "世界観", "日本", "日本語", "木星", "冥王星", "彗星", "地球", "惑星", "小惑星帯", "富士山", "星", "デニム", "リノリウム", "スター", "形", "形状", "外観", "見た目", "輪郭", "デザイン", "模様", "文字", "ラムダ", "Ω", "珠", "図法", "ニラ", "キャベツ" ]
+similarity_comparison_nouns_includes = [ "semantic.emotion_attitude_nouns" ]
+
+[no_particle]
+predicate_prenominal_genitive_heads = [ "形", "形態", "意味", "意義", "理由", "原因", "目的", "価値", "確認", "維持", "確保", "管理", "点検" ]
+adnominal_no_attributive_capable_hosts = [ "一定", "緊急", "いっぱい", "自明", "無関係", "無限", "均一", "波乱万丈" ]
+adnominal_no_attributive_capable_hosts_includes = [ "adnominal_no_attributive_corpus_hosts", "adnominal_no_attributive_capable_nominal_hosts" ]
+adnominal_no_attributive_capable_nominal_hosts = [ "永遠", "数々", "無上", "熱々", "一緒", "名うて", "知名", "身重", "硬め", "強壮", "多く" ]
+no_genitive_modifiers = [ "学校", "会社", "大学", "病院", "家", "部屋", "海外", "国内", "都内", "市内", "県内" ]
+identity_genitive_heads = [ "私", "わたし", "わたくし", "僕", "ぼく", "俺", "おれ", "あたし", "うち" ]
+identity_genitive_heads_includes = [ "semantic.reflexive_self_nouns" ]
+pronominal_ni_result_verbs = []
+pronominal_ni_result_verbs_includes = [ "particle_ni.instrumental_verbs" ]
+pronominal_ni_result_sahen_nouns = [ "交換", "変更", "決定" ]
+pronominal_ni_target_sahen_nouns = [ "感心", "賛成", "反対", "同意", "共感" ]
+noni_purpose_evaluation_predicates = [ "役立つ", "適する", "向く", "かかる", "掛かる", "要る", "費やす", "使う", "節約" ]
+noni_purpose_evaluation_adjectives = [ "十分", "必要", "必要不可欠", "便利", "最適", "有利", "ぴったり", "良い", "いい" ]
+noni_purpose_resource_nouns = [ "時間", "苦労", "手間", "力", "勇気", "準備", "支障", "集中", "使用", "費用", "労力", "工夫", "コツ" ]
+sahen_potential_light_verbs = [ "できる", "出来る" ]
+noni_quantity_approximation_markers = [ "くらい", "ほど", "程度" ]
+noni_resource_existence_predicates = [ "ある", "有る", "ない", "無い", "なし", "いる" ]
+noni_purpose_evaluation_predicate_heads = []
+noni_purpose_evaluation_predicate_heads_includes = [ "no_particle.noni_purpose_evaluation_predicates", "no_particle.noni_purpose_evaluation_adjectives" ]
+noni_purpose_evaluation_heads = []
+noni_purpose_evaluation_heads_includes = [ "no_particle.noni_purpose_evaluation_predicates", "no_particle.noni_purpose_evaluation_adjectives", "no_particle.noni_purpose_resource_nouns" ]
+koto_direct_object_verbs = [ "忘れる", "わすれる", "覚える", "おぼえる", "思う", "おもう", "愛する", "あいする", "信じる", "しんじる", "信ずる", "しんずる", "見る", "みる", "待つ", "まつ", "助ける", "たすける", "選ぶ", "えらぶ" ]
+relative_subject_blocking_spatial_heads = [ "周囲", "周辺", "付近", "近辺", "辺り", "あたり", "周り", "まわり", "内部", "外部" ]
+adnominal_no_capability_argument_particles = [ "が", "を", "は", "も" ]
+adnominal_no_attributive_corpus_hosts = [ "一定", "最高", "大量", "共通", "個別", "最悪", "固有", "生", "直接", "緊急", "逆", "オリジナル", "大型", "相応", "小型", "未知", "連続", "グレー", "多量", "大", "架空", "旬", "極度", "種々", "年長", "無限", "デジタル", "不滅", "真逆", "類似", "最新鋭", "最高級", "破格", "不可視", "中規模", "正反対", "無意識", "重度", "一杯", "不良", "豊穣", "フリー", "べつ", "三角", "応分", "純潔", "至難", "合同", "同然", "空っぽ", "純白", "自明", "ネイティブ", "同格", "未定", "運動不足", "高出力", "高温", "インスタント", "チート", "ハイテク", "フツー", "不特定", "予定外", "原因不明", "孤高", "微量", "新式", "未完成", "皆無", "第一級", "絶倫", "色白", "非公式", "高水準", "グルメ", "セレブ", "最重要", "有限", "段違い", "波乱万丈", "無敵" ]
+
+[nomikomu]
+understanding_objects = [ "意味", "事情", "内容", "理由", "話", "説明", "趣旨", "冗談", "状況", "文脈", "意図", "仕組み", "真意" ]
+
+[nominal_frame]
+niyotte_variation_predicates = [ "変わる", "変える", "異なる", "違う", "変化", "変化する", "左右", "左右する" ]
+niyotte_depending_condition_heads = [ "場合" ]
+standpoint_conclusion_heads = [ "結論" ]
+niooji_response_nouns = [ "要請", "要望", "依頼", "面談", "サイン", "相談", "取材" ]
+towa_difference_predicates = [ "違う", "異なる", "違える", "違い", "別", "裏腹", "相反", "相反する", "正反対", "対照的" ]
+towa_reciprocal_predicates = [ "関係", "無関係", "関連", "縁", "縁遠い", "無縁", "分離", "乖離", "遊離", "隔離", "独立", "切り離す", "切り離せる", "議論", "相談", "意思疎通", "協力", "連携", "提携", "交渉", "話し合う", "結婚", "離婚", "婚約", "交際", "同居", "和解", "喧嘩", "契約", "取引", "面会", "対話", "共存", "一致", "合意", "対立", "競争", "リンク", "連動", "接触", "連絡" ]
+towa_definition_predicates = [ "表す", "意味する", "意味", "指す", "示す", "定義する", "定義" ]
+towa_quote_focus_predicates = [ "思える", "信じる", "信ずる", "信じられる", "見える" ]
+towa_relational_nouns = [ "友達", "友だち", "友人", "親友", "恋人", "知り合い", "顔見知り", "幼馴染", "幼なじみ", "仲間", "相棒", "同級生", "同僚", "同期", "兄弟", "姉妹", "親戚", "婚約者", "夫婦", "ライバル", "敵", "他人", "仲", "縁", "腐れ縁", "無関係", "無縁", "別物", "別人" ]
+no_mono_hou_heads = [ "もの" ]
+no_hou_following_heads = [ "ほう", "方" ]
+apposition_referent_fixed_pronouns = []
+apposition_referent_fixed_pronouns_includes = [ "honorific.first_person_pronouns", "person.second_person_pronouns" ]
+single_particle_cause_heads = [ "せい", "おかげ", "お陰" ]
+single_particle_after_de_heads = [ "後", "あと" ]
+de_case_cause_nouns = [ "事故", "事件", "病気", "病", "風邪", "怪我", "けが", "火事", "火災", "地震", "津波", "台風", "大雪", "洪水", "噴火", "雷", "災害", "災難", "渋滞", "停電", "故障", "過労", "ストレス", "不注意", "ミス", "トラブル", "戦争", "影響", "都合", "事情" ]
+de_case_cause_nouns_includes = [ "au.weather_hit_nouns" ]
+de_case_force_nouns = [ "重力", "引力", "圧力", "風力", "電力", "熱" ]
+de_case_means_transport = [ "車", "自動車", "自転車", "バイク", "タクシー", "飛行機", "船", "汽車" ]
+de_case_means_transport_includes = [ "formula.transport_service_nouns" ]
+de_case_means_comm_language = [ "日本語", "英語", "韓国語", "中国語", "言葉", "言語", "電話", "メール", "手紙", "ネット", "インターネット" ]
+de_case_means_payment = [ "現金", "カード" ]
+de_case_method_nouns = [ "方法", "手段", "方式", "形式", "やり方", "スタイル", "様式" ]
+de_case_instrument_nouns = [ "ペン", "鉛筆", "筆", "箸", "ナイフ", "はさみ", "包丁", "スプーン", "フォーク" ]
+de_case_manner_nouns = [ "全力", "必死", "本気", "単独", "独力", "無断" ]
+de_case_nominalizer_heads = [ "こと", "もの" ]
+single_particle_de_case_adverbial_heads = []
+single_particle_de_case_adverbial_heads_includes = [ "de_case_cause_nouns", "de_case_force_nouns", "de_case_means_transport", "de_case_means_comm_language", "de_case_means_payment", "de_case_method_nouns", "de_case_instrument_nouns", "de_case_manner_nouns", "de_case_nominalizer_heads" ]
+single_particle_de_superlative_scope_heads = [ "部門", "部署", "組織", "会社", "学校", "クラス", "チーム", "業界", "地域", "国", "世界", "世代", "年代" ]
+single_particle_toki_heads = [ "時", "とき" ]
+single_particle_temporal_condition_ni_heads = [ "後", "あと" ]
+single_particle_temporal_condition_ni_heads_includes = [ "temporal.condition_ni_core_heads" ]
+single_particle_front_direction_ni_heads = [ "前" ]
+single_particle_front_direction_ni_predicates = [ "進む", "すすむ", "進める", "すすめる" ]
+single_particle_adverbial_ni_ro_heads = [ "別途" ]
+single_particle_ni_result_block_heads = [ "こと" ]
+single_particle_ni_result_block_heads_includes = [ "particle_ni.suru_idiom_nouns" ]
+single_particle_ordinal_ni_heads = [ "番目" ]
+nitsuki_topic_heads = [ "件", "本件", "点", "事", "こと", "事項", "儀", "段", "議題", "案件" ]
+nitsuki_verb_idiom_hosts = [ "身", "目", "鼻", "手", "板", "席", "職", "床", "眠り", "帰路", "家路", "帰途", "途", "任", "位置", "配置", "持ち場", "守り", "後", "側", "味方", "座", "王座", "玉座", "地位", "任務", "仕事", "眠", "火", "気" ]
+exemplar_enumeration_inclusive_markers = [ "各", "各地", "各国", "各界", "各省", "各党", "諸", "全", "全て", "すべて", "総て", "多く", "様々", "さまざま", "色々", "いろいろ", "あらゆる", "多様", "幅広い", "数々", "多数", "皆", "各位", "方々", "一同", "関係者", "など", "等" ]
+head_transparent_enumeration_suffixes = [ "等", "ら", "たち", "達", "ども" ]
+wo_mochimashite_closing_heads = [ "本日", "今日", "本年", "今年", "今年度", "本年度", "今月", "今期", "今回", "この度", "期間", "任期", "会期", "契約", "受付", "会", "式", "式典", "大会", "行事", "イベント" ]
+wo_mochimashite_closure_predicates = [ "終了", "終了する", "終わる", "終える", "閉会", "閉会する", "閉幕", "閉幕する", "終了いたす", "終了致す" ]
+phrase_owner_self_adverbial_de_heads = [ "自分" ]
+phrase_owner_self_adverbial_repair_predicates = [ "直す" ]
+external_auxiliary_predicate_tail_forms = [ "しまう", "見る", "みる", "置く", "おく", "居る", "いる", "おる", "有る", "ある" ]
+predicate_nominal_taishi_content_predicates = [ "ある", "有る" ]
+single_particle_demo_indefinite_heads = []
+single_particle_demo_indefinite_heads_includes = [ "indeterminate.wh_indefinite_core_heads" ]
+single_particle_demo_indefinite_modifiers = [ "どんな", "いかなる" ]
+single_particle_ka_partitive_pair_heads = [ "どちら", "どっち" ]
+single_particle_ka_partitive_one_heads = [ "どれ" ]
+single_particle_demo_minimum_adverb_heads = [ "多く", "遠く" ]
+
+[oboeru]
+memorization_objects = [ "名前", "顔", "住所", "電話番号", "番号", "単語", "漢字", "公式", "台詞", "セリフ", "歌詞", "手順", "ルール", "パスワード" ]
+
+[okashii]
+humor_context = [ "話", "冗談", "言い方", "しぐさ", "仕草", "顔", "表情", "格好", "振る舞い", "振舞い" ]
+
+[okuritodokeru]
+goods = [ "荷物", "にもつ", "手紙", "てがみ", "届け物", "届けもの", "品物", "しなもの", "小包", "こづつみ", "贈り物", "おくりもの", "プレゼント", "花", "はな", "弁当", "べんとう", "食べ物", "たべもの", "商品", "しょうひん", "品", "しな" ]
+
+[pachin]
+slap_verbs = [ "ぶつける" ]
+slap_verbs_includes = [ "semantic.contact_impact_predicates" ]
+
+[pachipachi]
+fire_verbs = [ "燃える", "焼ける", "弾ける", "爆ぜる", "鳴る", "割れる", "音がする", "はぜる" ]
+
+[pachiq]
+snap_verbs = [ "鳴る", "鳴らす", "弾く", "弾ける", "閉める", "閉まる", "嵌める", "留める", "止める", "押す", "打つ", "叩く", "切る" ]
+
+[pai]
+food_context = [ "食べる", "たべる", "焼く", "やく", "作る", "つくる", "切る", "きる", "生地", "きじ", "アップル", "ミート", "チョコ", "レモン", "パンプキン", "クリーム" ]
+
+[pants]
+strict_modifiers = [ "スキニー", "ワイド", "テーパード", "カーゴ", "デニム", "チノ", "スラックス" ]
+
+[paper]
+sheet_items = [ "紙" ]
+
+[particle_de]
+movement_verbs = [ "行く", "いく", "ゆく", "来る", "くる", "帰る", "かえる", "通う", "かよう", "戻る", "もどる" ]
+causal_state = [ "不安", "ふあん", "必要", "ひつよう", "暇", "ひま", "不機嫌", "ふきげん", "急", "きゅう", "不足", "ふそく", "不安定", "ふあんてい" ]
+
+[particle_ni]
+naru_verbs = [ "なる" ]
+instrumental_verbs = [ "する", "見える", "みえる", "変える", "替える", "換える", "代える", "決める" ]
+instrumental_manner_suffixes = [ "状", "形", "型", "式", "風", "調", "様" ]
+result_sahen_nouns = [ "発展", "変化", "進化", "成長", "悪化", "好転", "転化", "移行", "分類", "区分", "区別", "分化", "具体化", "拡大", "縮小" ]
+suru_idiom_nouns = [ "気", "手", "口", "目", "耳" ]
+accusative_universal = [ "乗る", "のる", "触る", "さわる", "触れる", "ふれる" ]
+accusative_person = [ "会う", "あう", "逢う", "似る", "にる" ]
+state_return_verbs = [ "戻る", "もどる", "戻れる", "もどれる" ]
+limit_complement_verbs = [ "過ぎない" ]
+return_state_nouns = [ "元", "原点", "振り出し", "正気", "正常", "白紙", "更地", "素", "ゼロ", "無", "原形", "初期状態" ]
+return_state_animate_nouns = [ "子供", "子ども", "こども", "赤ちゃん", "赤ん坊" ]
+identity_origin_qualifiers = [ "元", "昔", "かつて", "以前", "昨日", "本当", "あの頃", "若い頃", "幼い頃", "数年前" ]
+identity_first_person = [ "私", "わたし", "わたくし", "僕", "ぼく", "俺", "おれ", "あたし", "うち" ]
+direction_nouns = [ "前", "先" ]
+direction_nouns_includes = [ "semantic.ni_spatial_direction_heads" ]
+direction_locative_verbs = [ "置く", "おく", "据える", "並べる", "立てる", "貼る", "張る", "掛ける", "架ける", "吊るす", "書く", "描く", "記す", "刻む", "建てる", "築く", "作る", "造る", "入れる", "乗せる", "載せる", "積む", "盛る", "詰める", "飾る", "添える", "留める", "付ける", "取り付ける", "ある", "いる", "居る", "住む", "暮らす", "座る", "立つ", "寝る", "横たわる", "腰掛ける", "残す" ]
+
+[pause_range]
+consuming_particles = [ "から", "まで" ]
+gojuon_section_nouns = [ "段", "行" ]
+
+[person]
+nouns = [ "母", "父", "両親", "祖母", "祖父", "兄", "姉", "弟", "妹", "家族", "夫", "妻", "彼氏", "恋人", "友達", "友人", "人", "子ども", "子供", "先生", "学生", "生徒", "医者", "店員", "部下", "部長", "後輩", "先輩", "同僚", "お客", "担任", "弟子", "上司", "社長", "課長", "校長", "会長", "監督", "選手", "副官", "国民", "市民", "住民", "王", "皇帝", "王子", "王女", "王妃", "姫", "皇子", "皇女", "令嬢", "聖女", "魔王", "巫女", "神", "神様", "女神", "死神", "邪神", "天使", "悪魔", "精霊", "妖精", "仲間", "相手", "敵", "味方", "くそったれ", "クソったれ", "男", "女", "男子", "女子", "男性", "女性", "少年", "少女", "青年", "大人", "若者", "老人", "赤ちゃん", "娘", "息子", "男の子", "女の子" ]
+noun_suffixes = [ "旧友", "親友", "友", "両親", "親", "祖父", "祖母", "義父", "義母", "父", "母", "兄", "姉", "弟", "妹", "者", "師", "士", "家", "手", "員", "長", "客", "野郎", "女", "太子" ]
+noun_suffix_exact_exclusions = [ "酵母", "分母", "声母", "韻母", "前者", "後者", "手", "切手", "苦手", "上手", "下手", "相手", "家", "国家", "成長", "特長", "延長", "身長", "全長" ]
+pronouns = [ "彼", "彼女" ]
+second_person_pronouns = [ "君", "きみ", "あなた", "貴方", "あんた", "お前", "おまえ", "汝", "なんじ", "貴様", "きさま" ]
+suffixes = [ "さん", "様", "君", "ちゃん", "先生", "先輩" ]
+collective_nouns = [ "みんな", "皆", "全員", "大勢" ]
+count_counters = [ "人", "名" ]
+pronoun_bases = [ "私", "わたし", "私ども", "僕", "ぼく", "俺", "おれ", "君", "きみ", "あなた", "彼", "彼女", "誰", "だれ", "どなた" ]
+animate_nouns = [ "犬", "猫", "鳥", "魚", "兎", "うさぎ", "馬", "牛", "豚", "羊", "熊", "ペット", "虫", "蝉", "セミ", "鈴虫", "コオロギ", "蛙", "カエル", "小鳥", "百舌鳥", "モズ", "雀", "スズメ", "カラス", "鶯", "ウグイス", "狐", "きつね", "狼", "オオカミ", "鹿", "猿", "サル", "鼠", "ネズミ", "蛇", "ヘビ", "蜂", "ハチ", "蚊", "獣", "竜", "龍", "ドラゴン", "魔物", "魔獣", "モンスター", "怪物", "化け物", "妖怪" ]
+animate_noun_suffixes = [ "犬", "猫", "狼", "熊", "竜", "龍", "蛇" ]
+animate_noun_suffix_exact_exclusions = [ "狛犬", "招き猫" ]
+plural_suffixes = [ "たち", "達", "ら" ]
+human_status_nouns = [ "王", "王妃", "皇帝", "大公", "公", "将軍", "提督", "藩主", "城主", "当主", "住職", "司祭", "僧", "学者", "名医", "博士", "学長", "作家", "歌人", "画家", "役者", "記者", "祖父", "祖母", "伯父", "叔父", "恩師" ]
+
+[pishat]
+slap_verbs = [ "閉める", "閉まる", "かける" ]
+slap_verbs_includes = [ "semantic.contact_impact_predicates" ]
+
+[place]
+nouns = [ "学校", "教室", "図書館", "大学", "病院", "店", "レストラン", "カフェ", "コンビニ", "スーパー", "デパート", "銀行", "市場", "会社", "事務所", "工場", "本部", "政府", "裁判所", "議会", "家", "部屋", "アパート", "台所", "庭", "廊下", "玄関", "公園", "駅", "空港", "体育館", "プール", "映画館", "美術館", "水族館", "大会", "たいかい", "国", "各国", "地域", "各地", "地方", "都市", "田舎", "地元", "海", "山", "川", "世界", "社会", "委員会", "国会", "会議", "家庭", "テレビ", "新聞", "ラジオ", "ネット", "インターネット", "ここ", "そこ", "あそこ", "どこ", "何処", "方", "中", "背後", "後ろ", "横", "奥", "陰", "側", "向こう", "周り", "まわり", "周囲", "周辺", "隅", "端", "片隅", "足元", "目の前", "眼前", "上空", "地下", "地上", "水中", "空中", "森", "林", "島", "村", "町", "砂漠", "洞窟", "浜辺", "海辺", "川辺", "湖", "谷", "丘", "荒野", "地球", "宇宙", "異国", "外国", "全国", "天国", "地獄", "奈落", "前世", "来世", "あの世", "この世", "夢", "暗闇", "闇", "路上", "現地", "前線", "郊外", "都会", "領地", "故郷", "ホテル", "宿", "宿屋", "酒場", "屋敷", "邸", "城", "塔", "砦", "要塞", "神殿", "教会", "寺", "神社", "牢獄", "監獄", "学園", "宮廷", "ダンジョン", "ベッド", "ベンチ", "舞台", "舞台裏", "騎士団", "傭兵団", "劇団", "ギルド", "パーティ", "パーティー", "夜会", "舞踏会", "晩餐会", "茶会", "試合", "結婚式", "人前" ]
+noun_suffixes = [ "内", "外", "口", "場", "室", "館", "堂", "所", "部", "界", "都", "境", "宮", "城", "街" ]
+scope_suffix_heads = [ "内", "下" ]
+noun_suffix_exact_exclusions = [ "案内", "以内", "以外", "意外", "例外", "除外", "圏外", "場合", "立場", "本場", "全部", "ぜんぶ", "幹部", "かんぶ", "限界", "視界", "心境" ]
+
+[pokoq]
+pop_verbs = [ "出る", "飛び出る", "飛び出す", "抜ける", "外れる", "取れる", "開く", "穴が開く", "現れる", "生える", "できる" ]
+
+[ponpon]
+tap_verbs = [ "叩く", "打つ", "触る", "触れる", "撫でる", "押す", "つつく", "弾く", "はたく", "たたく" ]
+
+[postverb_kakeru]
+near_miss_hosts = [ "殺す", "死ぬ", "泣く", "倒れる", "落ちる", "転ぶ", "崩れる", "消える" ]
+
+[premium]
+value_predicates = [ "つく", "付く" ]
+
+[printed_matter]
+bound_items = [ "本", "雑誌" ]
+
+[prolonged_orthography_restoration]
+surfaces = [ "なーんか" ]
+
+[prolonged_particle_canonicalization]
+particle_subtypes = [ "係助詞", "副助詞", "接続助詞", "格助詞" ]
+
+[prolonged_reduction_relaxation]
+dependent_headword_pos0 = [ "助詞", "助動詞" ]
+candidate_inflect_classes = [ "サ行変格", "文語サ行変格" ]
+
+[purupuru]
+tremble_verbs = [ "震える", "ふるえる", "揺れる", "ゆれる", "怒る", "おこる", "泣く", "なく", "怖い", "こわい", "寒い", "さむい" ]
+
+[quantity]
+no_keep_suffixes = [ "ぶり", "分", "間", "後" ]
+indefinite_heads = [ "いくつ", "幾つ", "何" ]
+
+[quantity_extent_dake]
+hosts = [ "好き", "大好き", "十分", "充分", "必要", "欲しい" ]
+
+[quote_attributive]
+cohortative_proposal_heads = [ "提案", "意見" ]
+cohortative_appeal_heads = [ "呼びかけ", "呼掛け", "声", "訴え", "主張", "要請" ]
+cohortative_collective_action_heads = [ "運動", "キャンペーン", "決議", "スローガン", "合言葉" ]
+cohortative_heads = []
+cohortative_heads_includes = [ "quote_attributive.cohortative_proposal_heads", "quote_attributive.cohortative_appeal_heads", "quote_attributive.cohortative_collective_action_heads" ]
+bare_carrier_utterance_content_heads = [ "話", "感じ", "こと", "事", "雰囲気", "流れ", "空気", "ノリ", "気持ち" ]
+bare_carrier_volitional_quote_content_heads = []
+bare_carrier_volitional_quote_content_heads_includes = [ "quote_attributive.bare_carrier_utterance_content_heads" ]
+bare_carrier_volitional_intent_content_heads = [ "心積もり", "心づもり", "腹積もり", "腹づもり", "魂胆", "算段" ]
+
+[quote_host.direct."いのる"]
+kind = "wish"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."ねがう"]
+kind = "wish"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."のぞむ"]
+kind = "wish"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."願う"]
+kind = "wish"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."祈る"]
+kind = "wish"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."待ち望む"]
+kind = "wish"
+
+[quote_host.direct."念じる"]
+kind = "wish"
+
+[quote_host.direct."念ずる"]
+kind = "wish"
+
+[quote_host.direct."望む"]
+kind = "wish"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."ちかう"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."みとめる"]
+kind = "thought"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.direct."わかる"]
+kind = "thought"
+capabilities = [ "cognitive_complement", "plain_verb_to_blocked" ]
+
+[quote_host.direct."解る"]
+kind = "thought"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."感じる"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."感じ取る"]
+kind = "thought"
+
+[quote_host.direct."感ずる"]
+kind = "thought"
+
+[quote_host.direct."気づく"]
+kind = "thought"
+capabilities = [ "cognitive_complement" ]
+
+[quote_host.direct."気付く"]
+kind = "thought"
+capabilities = [ "cognitive_complement" ]
+
+[quote_host.direct."疑う"]
+kind = "thought"
+
+[quote_host.direct."決まる"]
+kind = "thought"
+capabilities = [ "bare_nominal_colloquial_quote", "plain_verb_to_blocked" ]
+
+[quote_host.direct."決める"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."決意する"]
+kind = "thought"
+
+[quote_host.direct."決心する"]
+kind = "thought"
+
+[quote_host.direct."見極める"]
+kind = "thought"
+
+[quote_host.direct."見受ける"]
+kind = "thought"
+
+[quote_host.direct."見抜く"]
+kind = "thought"
+
+[quote_host.direct."悟る"]
+kind = "thought"
+capabilities = [ "cognitive_complement", "surface_quotative_cue" ]
+
+[quote_host.direct."かんがえる"]
+kind = "thought"
+capabilities = [ "bare_nominal_passive_quote", "conditional_wish" ]
+
+[quote_host.direct."考える"]
+kind = "thought"
+capabilities = [ "bare_nominal_passive_quote", "conditional_wish", "surface_quotative_cue" ]
+
+[quote_host.direct."察する"]
+kind = "thought"
+
+[quote_host.direct."思い込む"]
+kind = "thought"
+
+[quote_host.direct."思い知る"]
+kind = "thought"
+
+[quote_host.direct."おもう"]
+kind = "thought"
+capabilities = [ "bare_nominal_passive_quote", "conditional_wish", "volitional_content_complement" ]
+
+[quote_host.direct."思う"]
+kind = "thought"
+capabilities = [ "bare_nominal_passive_quote", "conditional_wish", "surface_quotative_cue", "volitional_content_complement" ]
+
+[quote_host.direct."思える"]
+kind = "thought"
+
+[quote_host.direct."受け止める"]
+kind = "thought"
+
+[quote_host.direct."信じる"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."信じ込む"]
+kind = "thought"
+
+[quote_host.direct."信ずる"]
+kind = "thought"
+
+[quote_host.direct."推測する"]
+kind = "thought"
+
+[quote_host.direct."誓う"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."想像する"]
+kind = "thought"
+
+[quote_host.direct."捉える"]
+kind = "thought"
+
+[quote_host.direct."存ずる"]
+kind = "thought"
+capabilities = [ "conditional_wish", "euphemistic_judgment_kato" ]
+
+[quote_host.direct."知る"]
+kind = "thought"
+capabilities = [ "cognitive_complement", "surface_quotative_cue" ]
+
+[quote_host.direct."読み取る"]
+kind = "thought"
+
+[quote_host.direct."認める"]
+kind = "thought"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.direct."判る"]
+kind = "thought"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."分かる"]
+kind = "thought"
+capabilities = [ "cognitive_complement", "plain_verb_to_blocked", "surface_quotative_cue" ]
+
+[quote_host.direct."捕らえる"]
+kind = "thought"
+
+[quote_host.direct."約束する"]
+kind = "thought"
+
+[quote_host.direct."予感する"]
+kind = "thought"
+
+[quote_host.direct."予測する"]
+kind = "thought"
+
+[quote_host.direct."いう"]
+kind = "report"
+capabilities = [ "attributive_quote_carrier", "bare_nominal_focus_quote", "command_request", "no_quote_reporting", "passive_request", "request_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."いえる"]
+kind = "report"
+capabilities = [ "bare_nominal_focus_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."おしえる"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."おっしゃる"]
+kind = "report"
+
+[quote_host.direct."つぶやく"]
+kind = "report"
+
+[quote_host.direct."みなす"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.direct."ゆう"]
+kind = "report"
+capabilities = [ "attributive_quote_carrier", "bare_nominal_focus_quote", "command_request", "no_quote_reporting", "passive_request", "request_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."云う"]
+kind = "report"
+capabilities = [ "attributive_quote_carrier", "bare_nominal_focus_quote", "command_request", "no_quote_reporting", "passive_request", "request_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."謂う"]
+kind = "report"
+capabilities = [ "attributive_quote_carrier", "bare_nominal_focus_quote", "command_request", "no_quote_reporting", "passive_request", "request_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."言ふ"]
+kind = "report"
+capabilities = [ "attributive_quote_carrier", "bare_nominal_focus_quote", "command_request", "no_quote_reporting", "passive_request", "request_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."位置付ける"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."意味付ける"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."応える"]
+kind = "report"
+
+[quote_host.direct."勧める"]
+kind = "report"
+capabilities = [ "command_request", "request_quote" ]
+
+[quote_host.direct."関連付ける"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."記す"]
+kind = "report"
+
+[quote_host.direct."求める"]
+kind = "report"
+capabilities = [ "command_request", "request_quote" ]
+
+[quote_host.direct."叫ぶ"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."教える"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."脅す"]
+kind = "report"
+
+[quote_host.direct."仰る"]
+kind = "report"
+
+[quote_host.direct."結論付ける"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."見なす"]
+kind = "report"
+capabilities = [ "bare_nominal_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."みる"]
+kind = "report"
+capabilities = [ "bare_nominal_passive_quote", "companion_disambiguated_passive_quote", "plain_verb_to_blocked" ]
+
+[quote_host.direct."見る"]
+kind = "report"
+capabilities = [ "bare_nominal_passive_quote", "companion_disambiguated_passive_quote", "plain_verb_to_blocked" ]
+
+[quote_host.direct."見做す"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.direct."言い出す"]
+kind = "report"
+
+[quote_host.direct."言い聞かせる"]
+kind = "report"
+
+[quote_host.direct."言い切る"]
+kind = "report"
+
+[quote_host.direct."言いかける"]
+kind = "report"
+
+[quote_host.direct."言い放つ"]
+kind = "report"
+
+[quote_host.direct."言い張る"]
+kind = "report"
+
+[quote_host.direct."言い伝える"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."言う"]
+kind = "report"
+capabilities = [ "attributive_quote_carrier", "bare_nominal_focus_quote", "command_request", "no_quote_reporting", "passive_request", "request_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."言える"]
+kind = "report"
+capabilities = [ "bare_nominal_focus_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."呼ぶ"]
+kind = "report"
+capabilities = [ "bare_nominal_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."呼べる"]
+kind = "report"
+capabilities = [ "bare_nominal_focus_quote", "surface_quotative_cue" ]
+
+[quote_host.direct."語る"]
+kind = "report"
+
+[quote_host.direct."告げる"]
+kind = "report"
+
+[quote_host.direct."示す"]
+kind = "report"
+
+[quote_host.direct."主張する"]
+kind = "report"
+
+[quote_host.direct."述べる"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."書く"]
+kind = "report"
+
+[quote_host.direct."称する"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.direct."称す"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.direct."笑う"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked", "plain_verb_to_strictly_blocked" ]
+
+[quote_host.direct."振り返る"]
+kind = "report"
+
+[quote_host.direct."申し込む"]
+kind = "report"
+
+[quote_host.direct."申し出る"]
+kind = "report"
+
+[quote_host.direct."申し上げる"]
+kind = "report"
+
+[quote_host.direct."申し送る"]
+kind = "report"
+
+[quote_host.direct."申し渡す"]
+kind = "report"
+
+[quote_host.direct."申し入れる"]
+kind = "report"
+
+[quote_host.direct."申す"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.direct."説明する"]
+kind = "report"
+
+[quote_host.direct."宣言する"]
+kind = "report"
+
+[quote_host.direct."訴える"]
+kind = "report"
+
+[quote_host.direct."促す"]
+kind = "report"
+capabilities = [ "command_request", "request_quote" ]
+
+[quote_host.direct."続ける"]
+kind = "report"
+
+[quote_host.direct."題する"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.direct."断言する"]
+kind = "report"
+
+[quote_host.direct."注意する"]
+kind = "report"
+
+[quote_host.direct."喋る"]
+kind = "report"
+
+[quote_host.direct."しゃべる"]
+kind = "report"
+
+[quote_host.direct."定める"]
+kind = "report"
+capabilities = [ "bare_nominal_quote", "plain_verb_to_blocked" ]
+
+[quote_host.direct."伝える"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."答える"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."特徴付ける"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."読む"]
+kind = "report"
+capabilities = [ "bare_nominal_colloquial_quote", "bare_nominal_object_label_quote", "plain_verb_to_blocked" ]
+
+[quote_host.direct."発表する"]
+kind = "report"
+
+[quote_host.direct."表現する"]
+kind = "report"
+
+[quote_host.direct."評す"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."評する"]
+kind = "report"
+
+[quote_host.direct."評価する"]
+kind = "report"
+
+[quote_host.direct."付け加える"]
+kind = "report"
+
+[quote_host.direct."聞こえる"]
+kind = "report"
+capabilities = [ "bare_nominal_colloquial_quote", "plain_verb_to_blocked" ]
+
+[quote_host.direct."報ずる"]
+kind = "report"
+
+[quote_host.direct."報告する"]
+kind = "report"
+
+[quote_host.direct."褒める"]
+kind = "report"
+
+[quote_host.direct."名づける"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.direct."名付ける"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.direct."命じる"]
+kind = "report"
+capabilities = [ "command_request", "request_quote" ]
+
+[quote_host.direct."命ずる"]
+kind = "report"
+capabilities = [ "command_request", "request_quote" ]
+
+[quote_host.direct."明かす"]
+kind = "report"
+
+[quote_host.direct."裏付ける"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.direct."論じる"]
+kind = "report"
+
+[quote_host.direct."論ずる"]
+kind = "report"
+
+[quote_host.direct."話す"]
+kind = "report"
+capabilities = [ "bare_nominal_companion_to", "surface_quotative_cue" ]
+
+[quote_host.direct."呟く"]
+kind = "report"
+
+[quote_host.direct."囁く"]
+kind = "report"
+
+[quote_host.direct."ささやく"]
+kind = "report"
+
+[quote_host.direct."うめく"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."呻く"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."うなる"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."唸る"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."わめく"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."喚く"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."どなる"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."怒鳴る"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."ぼやく"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."喘ぐ"]
+kind = "report"
+capabilities = [ "plain_verb_to_blocked" ]
+
+[quote_host.direct."名乗る"]
+kind = "report"
+capabilities = [ "bare_nominal_quote", "plain_verb_to_blocked" ]
+
+[quote_host.direct."銘打つ"]
+kind = "report"
+capabilities = [ "bare_nominal_quote", "plain_verb_to_blocked" ]
+
+[quote_host.direct."うかがう"]
+kind = "question"
+
+[quote_host.direct."たずねる"]
+kind = "question"
+capabilities = [ "passive_request", "question_request" ]
+
+[quote_host.direct."伺う"]
+kind = "question"
+
+[quote_host.direct."尋ねる"]
+kind = "question"
+capabilities = [ "passive_request", "question_request", "surface_quotative_cue" ]
+
+[quote_host.direct."聞く"]
+kind = "question"
+capabilities = [ "bare_nominal_hearsay_quote", "passive_request", "question_request", "surface_quotative_cue" ]
+
+[quote_host.direct."訊く"]
+kind = "question"
+capabilities = [ "passive_request", "question_request" ]
+
+[quote_host.direct."問い詰める"]
+kind = "question"
+
+[quote_host.direct."問う"]
+kind = "question"
+
+[quote_host.direct."たのむ"]
+kind = "request"
+capabilities = [ "request_quote", "strong_request_quote" ]
+
+[quote_host.direct."迫る"]
+kind = "request"
+capabilities = [ "command_request" ]
+
+[quote_host.direct."頼む"]
+kind = "request"
+capabilities = [ "request_quote", "strong_request_quote" ]
+
+[quote_host.noun_suru."希望"]
+kind = "wish"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."期待"]
+kind = "wish"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."仮定"]
+kind = "thought"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.noun_suru."確信"]
+kind = "thought"
+
+[quote_host.noun_suru."確認"]
+kind = "thought"
+
+[quote_host.noun_suru."覚悟"]
+kind = "thought"
+
+[quote_host.noun_suru."危惧"]
+kind = "thought"
+
+[quote_host.noun_suru."決意"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."決心"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."懸念"]
+kind = "thought"
+
+[quote_host.noun_suru."後悔"]
+kind = "thought"
+capabilities = [ "negative_condition_preferred" ]
+
+[quote_host.noun_suru."誤解"]
+kind = "thought"
+
+[quote_host.noun_suru."承知"]
+kind = "thought"
+capabilities = [ "negative_condition_preferred" ]
+
+[quote_host.noun_suru."推測"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."推定"]
+kind = "thought"
+
+[quote_host.noun_suru."想像"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."想定"]
+kind = "thought"
+
+[quote_host.noun_suru."断定"]
+kind = "thought"
+
+[quote_host.noun_suru."認識"]
+kind = "thought"
+
+[quote_host.noun_suru."実感"]
+kind = "thought"
+
+[quote_host.noun_suru."納得"]
+kind = "thought"
+
+[quote_host.noun_suru."判断"]
+kind = "thought"
+
+[quote_host.noun_suru."反省"]
+kind = "thought"
+
+[quote_host.noun_suru."約束"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."予感"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."予想"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."予測"]
+kind = "thought"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."理解"]
+kind = "thought"
+
+[quote_host.noun_suru."コメント"]
+kind = "report"
+
+[quote_host.noun_suru."解釈"]
+kind = "report"
+
+[quote_host.noun_suru."回答"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.noun_suru."勧告"]
+kind = "report"
+
+[quote_host.noun_suru."規定"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.noun_suru."供述"]
+kind = "report"
+
+[quote_host.noun_suru."強調"]
+kind = "report"
+
+[quote_host.noun_suru."掲載"]
+kind = "report"
+
+[quote_host.noun_suru."警告"]
+kind = "report"
+
+[quote_host.noun_suru."決定"]
+kind = "report"
+
+[quote_host.noun_suru."結論"]
+kind = "report"
+
+[quote_host.noun_suru."公表"]
+kind = "report"
+
+[quote_host.noun_suru."共有"]
+kind = "report"
+
+[quote_host.noun_suru."告白"]
+kind = "report"
+
+[quote_host.noun_suru."指示"]
+kind = "report"
+capabilities = [ "command_request", "request_quote" ]
+
+[quote_host.noun_suru."指摘"]
+kind = "report"
+
+[quote_host.noun_suru."示唆"]
+kind = "report"
+
+[quote_host.noun_suru."自認"]
+kind = "report"
+
+[quote_host.noun_suru."主張"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."助言"]
+kind = "report"
+
+[quote_host.noun_suru."称賛"]
+kind = "report"
+
+[quote_host.noun_suru."紹介"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.noun_suru."証言"]
+kind = "report"
+
+[quote_host.noun_suru."証明"]
+kind = "report"
+
+[quote_host.noun_suru."賞賛"]
+kind = "report"
+
+[quote_host.noun_suru."申請"]
+kind = "report"
+
+[quote_host.noun_suru."診断"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.noun_suru."進言"]
+kind = "report"
+
+[quote_host.noun_suru."説明"]
+kind = "report"
+
+[quote_host.noun_suru."絶賛"]
+kind = "report"
+
+[quote_host.noun_suru."宣言"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."断言"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."忠告"]
+kind = "report"
+
+[quote_host.noun_suru."注意"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."提案"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.noun_suru."提言"]
+kind = "report"
+
+[quote_host.noun_suru."電話"]
+kind = "report"
+
+[quote_host.noun_suru."吐露"]
+kind = "report"
+
+[quote_host.noun_suru."答弁"]
+kind = "report"
+
+[quote_host.noun_suru."白状"]
+kind = "report"
+
+[quote_host.noun_suru."発覚"]
+kind = "report"
+
+[quote_host.noun_suru."発言"]
+kind = "report"
+
+[quote_host.noun_suru."発信"]
+kind = "report"
+
+[quote_host.noun_suru."発表"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."判定"]
+kind = "report"
+
+[quote_host.noun_suru."判明"]
+kind = "report"
+
+[quote_host.noun_suru."反論"]
+kind = "report"
+
+[quote_host.noun_suru."否定"]
+kind = "report"
+
+[quote_host.noun_suru."否認"]
+kind = "report"
+
+[quote_host.noun_suru."批判"]
+kind = "report"
+
+[quote_host.noun_suru."表記"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.noun_suru."表現"]
+kind = "report"
+
+[quote_host.noun_suru."評価"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."分析"]
+kind = "report"
+
+[quote_host.noun_suru."返事"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.noun_suru."返答"]
+kind = "report"
+capabilities = [ "bare_nominal_quote" ]
+
+[quote_host.noun_suru."報告"]
+kind = "report"
+capabilities = [ "surface_quotative_cue" ]
+
+[quote_host.noun_suru."報道"]
+kind = "report"
+
+[quote_host.noun_suru."命名"]
+kind = "report"
+
+[quote_host.noun_suru."命令"]
+kind = "report"
+capabilities = [ "command_request", "request_quote" ]
+
+[quote_host.noun_suru."要求"]
+kind = "report"
+capabilities = [ "command_request", "request_quote" ]
+
+[quote_host.noun_suru."要請"]
+kind = "report"
+capabilities = [ "command_request", "request_quote" ]
+
+[quote_host.noun_suru."要望"]
+kind = "report"
+capabilities = [ "command_request", "request_quote" ]
+
+[quote_host.noun_suru."論考"]
+kind = "report"
+
+[quote_host.noun_suru."論述"]
+kind = "report"
+
+[quote_host.noun_suru."依頼"]
+kind = "request"
+
+[quote_host.aux_host]
+"くれる" = [ "request_question_aux" ]
+"くださる" = [ "request_question_aux" ]
+"もらう" = [ "request_question_aux" ]
+"貰う" = [ "request_question_aux" ]
+"もらえる" = [ "request_question_aux" ]
+"貰える" = [ "request_question_aux" ]
+"いただく" = [ "request_question_aux" ]
+"頂く" = [ "request_question_aux" ]
+"いただける" = [ "request_question_aux" ]
+"頂ける" = [ "request_question_aux" ]
+
+[quote_host.evidence_sets]
+bare_nominal_hearsay_companion_cues = [ "ともに", "一緒", "共", "共に" ]
+marker_bound_relational_heads = [ "同時", "同じ", "同じよう", "同じように", "同様", "交換", "引き換え", "引換" ]
+bare_nominal_object_label_object_nouns = [ "単語", "名", "名前", "字", "文字", "漢字", "表記", "言葉", "語", "読み" ]
+plain_verb_to_quote_cue_sahen_nouns = [ "失敗", "成功" ]
+
+[ragu]
+rug_context = [ "敷く", "しく", "マット", "カーペット", "絨毯", "じゅうたん", "床", "ゆか", "インテリア" ]
+
+[reference]
+toori_place_nouns = [ "駅前", "海岸", "表", "裏", "路地", "街", "町", "前", "横", "角", "向かい", "辺り", "あたり", "家", "村", "商店街" ]
+
+[renyou_nominal_head]
+verbal_host_case_particles = [ "に" ]
+verbal_host_case_particle_result_predicates = [ "する", "なる" ]
+
+[role]
+nouns = [ "女神", "神", "天使", "悪魔", "英雄", "大人", "先生", "プロ" ]
+
+[saiyou]
+employment_heads = [ "面接", "応募", "選考", "内定", "求職", "就職", "人事", "募集", "雇用", "採用試験", "採用枠" ]
+adoption_heads = [ "案", "提案", "方式", "制度", "方針", "計画", "政策", "戦略", "仕様", "ルール", "手法", "基準" ]
+
+[sarasara]
+rustling_nouns = [ "揺れる", "流れる", "吹く", "風", "木の葉", "落ち葉", "髪", "川", "砂" ]
+touch_nouns = [ "髪", "肌", "肌触り", "手触り", "毛", "毛並み", "布", "シーツ" ]
+
+[sasou]
+lure_destinations = [ "罠", "わな", "トラップ", "奥", "闇", "やみ", "地獄", "死", "破滅", "落とし穴", "深み", "沼", "危険" ]
+
+[sasu]
+lockable_objects = [ "門", "扉", "戸", "ドア", "玄関", "雨戸", "窓", "金庫", "ロッカー", "倉庫" ]
+
+[secondary_particle.kosoado_dake_degree]
+"あれ" = "그렇게나"
+"どれ" = "얼마나"
+
+[secondary_particle.kosoado_dake_degree_attr]
+"これ" = "이만큼의"
+"それ" = "그만큼의"
+"あれ" = "그만큼의"
+"どれ" = "어느 정도의"
+
+[secondary_particle.kosoado_dokoro_situation]
+"これ" = "이럴"
+"それ" = "그럴"
+"あれ" = "저럴"
+
+[semantic]
+predicative_event_state_result_nouns = [ "世界新記録", "死", "ブチギレ", "最下位", "ターンエンド", "焦り", "留学中" ]
+occasion_action_event_nouns = [ "取りまとめ", "取り組み", "取組", "取り扱い", "取り調べ", "取り決め", "見直し", "引き上げ", "引上げ", "引き下げ", "引下げ", "立ち上げ", "乗り入れ", "受け入れ", "打ち合わせ", "申し込み", "積み立て", "繰り上げ", "繰り下げ", "割り当て", "割当て", "役作り", "対策", "立法", "利活用" ]
+patient_result_sahen_nouns = [ "完了", "解決", "終了", "確定", "開始", "成立", "終結", "完成", "発覚", "判明" ]
+sensory_noun_audible = [ "音", "物音", "響き" ]
+sensory_noun_audible_voice = [ "声" ]
+sensory_noun_olfactory = [ "匂い", "香り", "臭い" ]
+sensory_noun_gustatory = [ "味" ]
+sensory_noun_chill = [ "寒気" ]
+sensory_noun_presence_sign = [ "気配", "雰囲気" ]
+sensory_noun_premonition = [ "予感" ]
+self_locomotion_verbs = [ "歩く", "走る", "泳ぐ", "飛ぶ", "登る" ]
+desire_aux_subject_verbs = [ "行く", "いく", "ゆく", "来る", "くる", "帰る", "かえる", "戻る", "もどる", "通う", "急ぐ", "起きる", "寝る" ]
+desire_aux_subject_verbs_includes = [ "semantic.self_locomotion_verbs" ]
+desire_holder_nouns = [ "人", "者", "子", "学生", "社員", "店員", "先生", "客", "会社", "企業", "組織", "店", "学校", "家庭", "家族" ]
+desire_person_target_verbs = [ "会う", "逢う", "話す" ]
+emotion_nouns = [ "感情", "気持ち", "愛情", "愛着", "悲しみ", "喜び", "敬意", "達成感", "痛み", "好奇心", "不安", "怒り", "思い", "衝動", "欲望" ]
+attitude_nouns = [ "姿勢", "態度", "慣れ", "自信", "向上心", "反省", "節約", "感謝", "熱中", "競争心", "遠慮" ]
+emotion_attitude_nouns = [ "反応" ]
+emotion_attitude_nouns_includes = [ "semantic.emotion_nouns", "semantic.attitude_nouns" ]
+symbolized_value_concept_nouns = [ "純潔", "純真", "無垢", "豊穣", "繁栄", "平和", "自由", "平等", "正義", "希望", "勝利", "友情", "愛", "愛情", "幸福", "幸せ", "富", "権力", "権威", "栄光", "永遠", "無限", "不滅", "不死", "死", "生命", "命", "美", "真理", "知恵", "知性", "信仰", "忠誠", "誠実", "勇気", "力", "独立", "統一", "団結", "調和", "秩序", "混沌", "破壊", "再生", "復活", "創造", "豊かさ", "孤高", "孤独", "高潔", "気高さ", "気品", "謙虚", "寛容", "勤勉", "献身", "清廉", "高貴", "優雅", "傲慢", "怠惰", "強欲", "嫉妬", "憤怒", "純粋", "無邪気", "冷酷", "慈悲", "慈愛", "博愛", "堅実" ]
+deity_domain_nouns = [ "豊穣", "純潔", "勝利", "愛", "美", "戦", "戦争", "死", "冥界", "生命", "海", "山", "森", "川", "月", "太陽", "星", "火", "水", "風", "雷", "大地", "天", "夜", "知恵", "学問", "芸術", "商売", "幸運", "運命", "時", "破壊", "創造", "再生", "慈愛", "平和", "正義", "嵐", "農業", "狩猟" ]
+stative_period_nouns = [ "時", "とき", "ひと時", "一時", "時代", "日々", "毎日", "日常", "生活", "人生", "時間", "時期", "歳月", "年月", "生涯", "青春" ]
+body_parts = [ "頭", "アタマ", "背中", "腹", "お腹", "肌", "皮膚", "腕", "脚", "足", "頬", "ほっぺ", "首", "肩", "胸", "額", "こめかみ", "指", "手", "両手", "肘", "ひじ", "舌", "唇", "くちびる", "耳", "顔", "目", "鼻", "口", "髪", "膝", "ひざ", "腰", "関節", "股関節", "骨" ]
+naka_physical_interior_heads = [ "箱", "建物", "家", "部屋", "教室", "会議室", "図書館", "台所", "校舎", "口", "ポケット", "袋", "車", "自動車", "船", "飛行機" ]
+naka_physical_interior_heads_includes = [ "formula.transport_service_nouns" ]
+naka_countable_class_heads = [ "*類", "*系", "候補", "候補者", "選択肢", "集団", "グループ", "人", "者", "人々", "学生", "社員", "歌人", "作家", "詩人", "動物", "昆虫", "植物", "作品", "曲", "案", "方法", "修行法", "経典", "帖", "断層", "ピアノ線", "主系列星" ]
+possessor_object_nouns = [ "財布", "鞄", "バッグ", "帽子", "お金", "金", "金銭", "荷物", "服", "傘", "自転車", "車", "鍵", "スマホ", "携帯", "命", "自由", "時間", "名前", "仕事", "場所", "席", "順番", "機会", "役目", "役割" ]
+secretion_nouns = [ "汗", "冷汗", "冷や汗", "脂汗", "手汗", "寝汗" ]
+awaseru_aggregate_object_nouns = [ "力", "ちから", "二つ", "三つ", "四つ", "五つ", "ふたつ", "みっつ", "両方", "両者", "双方", "全部", "すべて", "全て", "全員" ]
+price_nouns = [ "値段", "価格", "料金", "家賃", "費用", "コスト", "運賃", "授業料", "月謝" ]
+price_related_nouns = [ "買い物", "商品" ]
+price_related_nouns_includes = [ "semantic.price_nouns" ]
+priceable_item_nouns = [ "定食", "ラーメン", "弁当", "切符", "チケット", "券", "商品", "品物", "服", "本", "部屋", "宿", "サービス" ]
+manifestation_nouns = [ "顔", "顔色", "表情", "態度", "言葉", "声", "様子", "端々", "素振り", "目つき", "口ぶり" ]
+visual_art_objects = [ "絵", "絵画", "図", "図形", "線", "イラスト", "漫画", "マンガ", "印", "模様", "図解", "図案", "図像" ]
+frame_art_objects = [ "写真", "似顔絵", "卒業証書", "賞状" ]
+frame_art_objects_includes = [ "semantic.visual_art_objects" ]
+emission_signal_objects = [ "光", "輝き", "熱", "熱気", "香", "悪臭", "毒気", "オーラ", "フェロモン", "メスフェロモン", "色香", "淫香", "媚香", "加齢臭", "火花", "音圧", "電波", "波動" ]
+emission_signal_objects_includes = [ "semantic.sensory_noun_olfactory" ]
+weapon_projectile_objects = [ "矢", "弾丸", "魔法", "ビーム", "砲弾" ]
+skill_action_objects = [ "必殺技", "技", "スキル", "攻撃", "拳", "パンチ", "タックル", "シュート", "サーブ", "スパイク", "強打", "一突き", "突き" ]
+support_aid_objects = [ "助言", "協力", "支援", "援助", "教え", "助け", "指導", "アドバイス", "加勢", "後押し" ]
+order_directive_objects = [ "命令", "勅命", "指示", "判断", "許可", "裁可" ]
+reserve_position_objects = [ "席", "座席", "チケット", "部屋", "宿", "会場", "予約", "枠" ]
+post_role_objects = [ "役職", "官職", "ポスト", "社長", "会長", "首相", "大臣", "部長", "課長", "監督", "コーチ", "議長" ]
+public_event_nouns = [ "会", "説明会", "発表会", "飲み会", "面接", "会議", "授業", "講義", "式", "式典", "集会", "会合", "パーティー", "宴会", "花見", "コンサート", "公演", "イベント" ]
+arena_field_nouns = [ "試合", "大会", "競技", "レース", "選挙", "舞台", "社会", "現場", "場", "リング", "コート", "会場", "戦場" ]
+shame_nouns = [ "恥", "赤っ恥", "大恥", "醜態", "醜聞" ]
+existence_presence_nouns = [ "存在感", "抜け感", "立体感", "季節感", "統一感", "個性", "雰囲気", "迫力", "印象", "色", "まとまり", "メリハリ", "張り", "余裕", "動き", "軽さ", "甘さ", "強さ", "正確さ", "気配" ]
+nominal_location_heads = [ "上", "下", "中", "外", "後", "前", "間", "隣", "奥", "側", "近く", "向こう", "周り", "あと", "うち", "そば" ]
+ni_spatial_direction_heads = [ "上", "下", "右", "左", "後ろ", "外", "奥" ]
+directional_nouns = [ "先", "裏", "横" ]
+directional_nouns_includes = [ "semantic.nominal_location_heads", "semantic.ni_spatial_direction_heads" ]
+suitability_standard_nouns = [ "仕事", "職業", "職種", "役", "役割", "任務", "作業", "用途", "目的", "利用", "使用", "運用", "実用", "学び", "学習", "勉強", "研究", "教育", "授業", "講義", "試験", "面接", "会議", "旅行", "移動", "通勤", "通学", "運動", "スポーツ", "稽古", "登山", "ハイク", "着用", "料理", "整理", "保護", "休養", "準備運動", "筋力トレーニング", "屋外活動", "日常使い", "普段使い", "重ね着", "小物づくり", "肌", "場面", "状況", "環境", "季節", "朝" ]
+suitability_user_target_nouns = [ "初心者", "子供", "子ども", "大人", "園児", "新生児" ]
+involuntary_reaction_verbs = [ "泣く", "倒れる", "震える", "驚く", "固まる", "青ざめる", "黙る", "吐く", "呆然とする" ]
+visual_glance_predicates = [ "見る", "見える", "見つめる", "覗く", "窺う", "伺う", "うかがう", "のぞく", "眺める" ]
+contact_impact_predicates = [ "叩く", "打つ", "殴る", "張る", "当たる", "はたく" ]
+float_motion_predicates = [ "浮かぶ", "漂う", "飛ぶ", "舞う", "落ちる", "降りる" ]
+symptom_nouns = [ "腹痛", "頭痛", "違和感", "不快感", "痛み", "腫れ", "かゆみ", "拒絶反応", "吐き気", "鳥肌", "めまい" ]
+medicine_nouns = [ "薬", "薬剤", "錠剤", "丸薬", "カプセル", "漢方薬", "風邪薬" ]
+musical_instrument_nouns = [ "楽器", "ピアノ", "ギター", "バイオリン", "ヴァイオリン", "ベース", "ドラム", "太鼓", "笛", "フルート", "サックス", "サクソフォン", "トランペット", "チェロ", "琴", "三味線" ]
+music_piece_nouns = [ "曲", "楽曲", "歌", "曲目", "新曲", "原曲", "ソロ曲", "ヒット曲" ]
+differential_nouns = [ "差", "違い", "影響", "変化", "波及" ]
+media_sources = [ "ニュース", "テレビ", "ラジオ", "新聞", "ネット", "オンライン", "番組", "放送", "記事", "動画", "サイト", "ブログ", "SNS" ]
+commitment_objects = [ "承認", "約束", "許可", "同意", "合意", "内諾", "了解", "確約", "内定", "承諾" ]
+liquid_heating_nouns = [ "お湯", "湯", "スープ", "熱湯", "水", "お茶", "鍋", "液体" ]
+smile_expression_nouns = [ "笑み", "微笑み", "笑顔", "ほほえみ", "ほほ笑み", "スマイル", "苦笑い", "苦笑", "微笑", "含み笑い", "薄笑い" ]
+reflexive_self_nouns = [ "自分", "自分自身", "自身", "己", "我が身" ]
+circumstantial_de_place_or_cause_nouns = [ "*事故", "*事件", "*災害" ]
+circumstantial_de_place_or_cause_nouns_includes = [ "place.nouns", "nominal_frame.de_case_cause_nouns" ]
+labor_employment_nouns = [ "リストラ", "解雇", "雇用", "雇用調整", "失業", "出向", "賃下げ", "人員削減", "労働者", "社員", "正社員", "従業員", "派遣", "企業", "会社", "組合", "労働組合", "経営者" ]
+male_genital_nouns = [ "ちんぽ", "チンポ", "おちんぽ", "オチンポ", "ちんこ", "チンコ", "おちんちん", "オチンチン", "ペニス", "陰茎", "男根", "肉棒", "肉茎", "亀頭", "陰嚢", "睾丸", "金玉" ]
+female_genital_nouns = [ "まんこ", "マンコ", "おまんこ", "オマンコ", "膣", "膣内", "膣口", "陰唇", "小陰唇", "大陰唇", "陰核", "クリトリス", "女陰", "陰部", "秘部", "秘所" ]
+hardship_nouns = [ "貧困", "貧苦", "貧乏", "赤貧", "困窮", "窮乏", "窮状", "窮地", "苦境", "苦難", "困難", "不況", "不景気", "不振", "低迷", "重税", "圧政", "飢饉", "飢餓", "飢え", "物価高", "赤字", "借金", "被害", "金欠", "苦海", "重荷", "*不足", "*難", "*苦" ]
+offense_nouns = [ "罪", "*罪", "過ち", "過失", "ミス", "間違い", "誤り", "誤謬", "失敗", "失態", "失策", "粗相", "不正", "悪事", "不祥事", "犯罪", "*犯罪", "殺人", "違反", "反則" ]
+bilateral_relation_nouns = [ "関係", "両国", "間", "交渉", "交流", "文化交流", "首脳", "首脳会談", "首脳会議", "外相", "外相会談", "会談", "協議", "国交", "国交正常化", "国交回復", "外交", "貿易", "友好", "協力", "共同", "合作", "合弁", "合弁企業", "戦争", "対立", "摩擦", "紛争", "条約", "協定", "同盟", "講和", "講和条約", "講和交渉", "修好", "通商" ]
+
+[sfp]
+utterance_closing_effects = [ "kana", "ka_ne", "kai", "kayo", "jan", "quotative_insistent", "ka", "neg_confirm_q", "na_excl", "realization" ]
+
+[shiboru]
+wring_nouns = [ "布巾", "手拭い", "ぞうきん", "たおる", "ふきん", "知恵", "脳", "頭", "汗", "涙", "声", "乳", "牛乳", "ミルク" ]
+wring_nouns_includes = [ "textile.cloth_items" ]
+
+[shikkari]
+grip_verbs = [ "握る", "掴む", "つかむ", "持つ", "抱く", "抱える", "捕まる", "つかまる", "掴まる", "押さえる", "結ぶ", "締める", "閉める", "固定する", "繋ぐ", "つなぐ", "守る", "支える" ]
+
+[soba]
+food_context_nouns = [ "麺", "麺類", "つゆ", "汁", "出汁", "薬味", "七味", "天ぷら", "ざる", "ざるそば", "もりそば", "かけそば", "月見そば", "鴨南蛮", "蕎麦湯", "そば湯" ]
+
+[sokuon]
+mimetic_adverbial_followers = [ "と" ]
+
+[speech]
+quotative_nouns = [ "主張", "結論", "判断", "宣言", "報告", "発表", "指摘", "解釈", "推測", "推定", "認識", "断定", "自認", "告白", "証言", "供述" ]
+datte_quotative_content_heads = [ "こと", "事", "話", "わけ", "訳", "噂" ]
+tte_topic_exclamative_predicates = [ "すごい", "凄い", "すげえ", "やばい", "ヤバい", "ヤバイ", "ひどい", "酷い", "えらい", "偉い", "おかしい", "可笑しい", "変", "妙", "最高", "最低", "すてき", "素敵", "羨ましい", "うらやましい" ]
+
+[speech_act]
+demo_anaphor_anchors = [ "そう", "そっ", "そー" ]
+receipt_interjections = [ "へえ", "へぇ", "ほう", "ほお", "ふうん", "ふーん", "あ", "あっ", "ああ", "あー", "おお", "おー", "おっ", "え", "えっ", "ええっ", "わあ", "うわ", "うわあ", "なるほど", "はあ", "はぁ" ]
+te_iisashi_report_host_verbs = [ "言う", "云う", "思う" ]
+te_iisashi_nonvolitional_verbs = [ "ある", "有る", "できる", "出来る", "わかる", "分かる", "見える", "聞こえる", "要る" ]
+te_iisashi_stative_operator_forms = [ "れる", "られる", "もらえる", "いただける" ]
+request_performative_predicates = [ "頼む", "願う", "お願い", "乞う" ]
+
+[sujime]
+abstract_predicates = [ "通す", "通る", "立てる", "立つ", "守る", "違える" ]
+
+[talk]
+companion_nouns = [ "他人", "異性", "同世代", "恋人", "隣人", "本人", "方", "彼女たち", "彼ら" ]
+topic_nouns = [ "将来", "進路", "仕事", "予定", "計画", "問題", "事情", "理由", "家族", "学校", "勉強", "結婚", "生活", "夢" ]
+place_nouns = [ "人前", "前", "舞台", "教室", "会議室", "カフェ", "ネット", "オンライン", "社務所", "外", "隅", "電車", "列車", "車", "バス" ]
+
+[tame]
+reason_predicates = [ "ある", "いる", "なる", "見える", "異なる", "残る", "含む", "要する", "出る", "変わる", "関わる", "広がる", "流れる", "続く", "通る", "増す", "生じる", "切り替わる", "伴う", "できる" ]
+reason_predicates_includes = [ "verb.te_preceding_involuntary_state" ]
+reason_suru_nouns = [ "位置", "通過", "存在", "発生", "変化", "左右", "反射", "付着", "出入り", "影響", "関与", "関係", "密着", "分散", "寄与", "屈曲", "反転", "関連", "並走" ]
+purpose_nouns = [ "安全", "維持", "環境保護", "対策", "解決", "治水", "成長", "昇進", "本人確認", "将来", "健康", "育成", "衛生管理", "歩行", "実現", "向上", "リスク管理", "公共事業", "合格" ]
+reason_nouns = [ "不安", "困難", "経験", "快感", "易怒", "病気", "事故" ]
+non_reason_tail_particles = [ "に", "の" ]
+
+[tanomu]
+call_objects = [ "タクシー", "救急車", "ハイヤー" ]
+
+[tatakidasu]
+achievement_nouns = [ "利益", "記録", "成果", "成績", "生産量", "結果", "数字", "実績", "業績", "収益", "最高益", "新記録", "最高利益", "過去最高", "高収益" ]
+
+[te_connective]
+contrastive_parallel_topic_particles = [ "は", "も" ]
+renyou_state_change_cause_predicates = [ "なる", "成る" ]
+
+[teinei]
+politeness_context_heads = [ "物腰", "態度", "挨拶", "言葉", "口調", "敬語", "お辞儀", "返事", "対応", "言い方", "話し方" ]
+
+[temporal]
+nouns = [ "今", "昔", "当時", "現在", "以前", "将来", "いつ", "何時", "今日", "本日", "明日", "昨日", "一昨日", "明後日", "今週", "来週", "先週", "今月", "来月", "先月", "今年", "同年", "来年", "去年", "午前", "午後", "朝", "夜", "今朝", "今夜", "今晩", "正午", "深夜", "初め", "最初", "最後", "春", "夏", "秋", "冬", "古く", "近年", "最近" ]
+range_nouns = [ "今まで", "これまで", "それまで" ]
+counter_nouns = [ "時", "分", "秒", "日", "週間", "月", "年", "日間", "月間", "年間", "時間" ]
+de_elapsed_duration_counters = [ "秒", "分", "時間", "日", "日間", "週", "週間", "か月", "ヶ月", "カ月", "ヵ月", "箇月", "月間", "年", "年間", "晩" ]
+de_instant_heads = [ "一瞬", "瞬時", "一瞬間", "刹那" ]
+kakeru_duration_object_nouns = [ "期間", "年月", "歳月" ]
+kakeru_duration_object_nouns_includes = [ "temporal.counter_nouns" ]
+suffix_nouns = [ "前", "後", "あと" ]
+condition_ni_core_heads = [ "場合", "際", "時", "とき" ]
+condition_ni_heads = [ "うち", "内" ]
+condition_ni_heads_includes = [ "temporal.condition_ni_core_heads" ]
+yori_source_event_predicates = [ "始まる", "始める", "開始する", "施行する", "実施する", "適用する", "公布する", "公開する", "発効する" ]
+
+[terminal_role]
+followers = [ "」", "』", "”", "’" ]
+followers_includes = [ "grammar_boundary.clause_result_surfaces", "terminal_role.host_skip" ]
+host_skip = [ "～", "〜" ]
+host_skip_includes = [ "grammar_boundary.clause_pause_surfaces", "grammar_boundary.clause_ellipsis_surfaces" ]
+prev_disallowed = " \t\n\r「『（([【〈《｢"
+lengtheners = [ "あ", "ぁ", "ー" ]
+weak_host_endings = "だたいてうくぐすつぬむぶるれけげせてねめべのんゃャ"
+
+[terminal_role.sfp_by_surface]
+"にゃ" = "role_cat_nya"
+"ニャ" = "role_cat_nya"
+
+[text]
+textbook_context_nouns = [ "授業", "講義", "科目", "教科", "受講", "予習", "復習", "問題集", "ワーク", "試験", "テスト", "宿題", "演習", "ゼミ", "シラバス", "参考書" ]
+
+[textile]
+cloth_items = [ "布", "雑巾", "タオル" ]
+
+[todoku]
+reach_subjects = [ "声", "音", "音声", "光", "明かり", "灯", "手", "指", "視線", "電波" ]
+
+[toka_listing]
+resumptive_kind_demonstratives = [ "そういう", "こういう", "ああいう", "そんな", "こんな", "あんな" ]
+alternative_introducers = [ "あるいは", "或いは", "または", "又は", "もしくは", "若しくは" ]
+
+[tokoro]
+report_source_suffixes = [ "によると" ]
+result_evidence_after_forms = [ "ない", "ぬ", "無い", "ある", "有る", "見つかる", "見付かる", "分かる", "わかる", "判る", "判明", "判明する", "明らか", "確認", "確認する" ]
+situation_after_forms = [ "すみません", "申し訳ない", "申し訳ありません", "申し訳ございません", "失礼", "失礼する", "恐縮", "ありがとうございる" ]
+temporal_de_prev_forms = [ "出る", "来る", "入る", "戻る", "帰る", "着く", "到着", "到着する", "到達", "到達する", "曲がる", "止まる", "停まる", "立つ", "座る", "閉める", "開ける", "始める", "終える", "終わる", "切れる", "切る", "抜ける", "離す", "取り出す", "答える", "言いかける", "迫る", "鳴る", "静まり返る", "揃う", "まとまる", "超える", "残す" ]
+concessive_before_surfaces = [ "いくら", "幾ら", "どれだけ", "どんなに", "たとえ", "たとい", "仮に", "どうせ", "今さら", "今更" ]
+concessive_after_forms = [ "ない", "ぬ", "無い", "できる", "出来る", "無理", "無駄", "意味", "仕方" ]
+progress_ni_after_forms = [ "来る", "くる", "入る", "突入", "遭遇", "起こす" ]
+progress_wo_observation_forms = [ "見る", "見える", "目撃", "撮る", "写す" ]
+progress_wo_interruption_forms = [ "起こす" ]
+trait_ga_after_forms = [ "ある", "有る", "いる", "居る", "好き", "嫌い", "魅力", "長所", "短所", "良い", "いい", "面白い", "楽しい", "かわいい", "可愛い", "すごい" ]
+argument_forms = [ "ところ", "所" ]
+almost_before_surfaces = [ "危うく", "あわや", "もう少し", "あっ", "おっと", "おっとっと", "うっかり", "危ない", "危なっ", "危ねえ", "危ねぇ" ]
+about_to_before_surfaces = [ "今から", "これから", "ちょうど", "丁度", "まさに" ]
+teiru_copula_time_cues = [ "今", "現在", "丁度", "ちょうど", "ただいま", "只今", "まだ" ]
+teiru_copula_place_like_forms = [ "生える", "かかる", "掛かる", "積む", "並ぶ", "住む" ]
+teiru_copula_progress_forms = [ "する", "進める", "変える", "立てる", "刻みつける", "弱る" ]
+origin_after_forms = [ "生まれる", "育つ", "始まる", "学ぶ" ]
+limit_after_forms = [ "行く", "来る", "進む", "やれる", "含める", "止める", "変える", "たどり着く" ]
+stage_level_adjective_forms = [ "忙しい", "いそがしい", "眠い", "ねむい", "眠たい", "ねむたい", "苦しい", "くるしい" ]
+
+[tomaru]
+perch_subjects = [ "鳥", "小鳥", "雀", "スズメ", "鳩", "ハト", "烏", "カラス", "鴉", "蝶", "チョウ", "蜻蛉", "トンボ", "蝿", "ハエ", "蛾", "セミ" ]
+
+[toritateru]
+appointment_role_nouns = [ "騎士", "家臣", "家来", "側近", "重臣", "近習", "小姓", "侍", "旗本", "幹部", "役人", "役員", "正社員", "士官", "将校" ]
+appointment_role_nouns_includes = [ "semantic.post_role_objects", "person.human_status_nouns" ]
+collection_objects = [ "借金", "借款", "税", "税金", "家賃", "運賃", "料金", "代金", "会費", "年貢", "債権", "利息", "債務", "罰金", "保険料" ]
+
+[torori]
+texture_verbs = [ "溶ける", "溶かす", "煮る", "煮込む", "とける", "とろける", "した", "スープ", "ソース", "チーズ" ]
+
+[tosuru]
+[totonoeru]
+steady_objects = [ "息", "呼吸", "気持ち", "頭", "理性", "意識" ]
+readiness_objects = [ "準備", "用意", "支度", "旅支度", "体制", "態勢", "戦闘体制", "臨戦態勢", "装備", "軍備", "環境", "条件", "基盤", "手はず", "セッティング", "渡航書類", "書類" ]
+grooming_objects = [ "髪", "髪の毛", "眉", "眉毛", "服", "服装", "身なり", "身だしなみ", "装い", "姿勢", "形", "トップ", "唇", "肌", "キメ", "爪" ]
+
+[transcription]
+speaker_label_marker_surfaces = [ "○", "〇", "◯" ]
+speaker_label_title_suffixes = [ "大臣", "参考人", "公述人", "証人", "補佐人", "当局者", "代理者", "政務官", "長官" ]
+
+[tsukiau]
+romantic_partner_nouns = [ "恋人", "彼氏", "彼女", "交際相手", "婚約者", "夫", "妻", "ボーイフレンド", "ガールフレンド", "相手" ]
+
+[tsuku]
+seat_nouns = [ "席", "座席" ]
+sleep_nouns = [ "眠り" ]
+assignment_nouns = [ "任務", "職務", "任" ]
+ascent_path_nouns = [ "王位", "地位", "位", "帰途", "旅路" ]
+office_nouns = [ "校長", "学校長", "副校長" ]
+office_nouns_includes = [ "semantic.post_role_objects" ]
+work_start_nouns = [ "仕事" ]
+work_engagement_nouns = [ "職", "職業", "業務" ]
+
+[uchi]
+temporal_heads = [ "うち", "内" ]
+unaware_verbs = [ "気づく", "気付く", "知る", "分かる", "わかる" ]
+status_nouns = [ "学生", "生徒", "新人", "新入生", "若手", "子供", "子ども", "独身", "現役", "未成年", "修士課程生" ]
+
+[uchikomi]
+digital_input_nouns = [ "暗証番号", "パスワード", "コマンド", "検索ワード", "メールアドレス", "ユーザーID", "ユーザー名", "IDパスワード" ]
+
+[underwear]
+view_predicates = [ "覗く", "のぞく", "見せる", "見せつける" ]
+exposure_predicates = [ "ずれる", "下がる", "見える", "食い込む", "透ける" ]
+specific_modifiers = [ "ボクサー", "トランクス", "ブリーフ", "レース" ]
+
+[verb]
+te_iru_resultative = [ "来る", "着く", "届く", "到着", "到達", "戻る", "落ちる", "入る", "出る", "離れる", "決まる", "変わる", "終わる", "消える", "死ぬ", "倒れる", "乾く", "汚れる", "濡れる", "曲がる", "沸く", "疲れる", "なる", "成る", "残る", "見つかる", "始まる" ]
+te_iru_resultative_includes = [ "verb.te_iru_negative_resultative" ]
+te_iru_negative_resultative = [ "並ぶ", "止まる", "座る", "立つ", "起きる", "隠れる", "閉まる", "壊れる", "割れる", "折れる", "切れる", "集まる", "付く", "つく", "刺さる", "空く" ]
+te_iru_mada_active_completion_topic_verbs = [ "食べる", "たべる", "読む", "よむ", "送る", "おくる", "調べる", "しらべる" ]
+te_iru_passive_resultative = [ "隠す", "植える", "調べる", "しらべる", "確認する", "認識する", "観測する", "検出する", "記録する", "記載する", "記述する", "登録する", "記す", "しるす", "指定する", "分類する", "採用する", "設置する", "断る", "拒否する", "却下する", "取り消す", "覆う", "おおう", "置く", "おく", "閉める", "しめる", "閉じる", "とじる", "飾る", "かざる", "並べる", "ならべる", "貼る", "はる", "張る", "はる", "沈める", "しずめる", "用意する", "構成する", "設定する", "整備する", "配置する", "整理する", "導入する", "搭載する", "組み込む", "禁止する", "規定する", "制限する", "限定する", "保障する", "定義する", "定める", "さだめる", "設ける", "もうける", "予定する", "計画する", "想定する", "予約する", "掲載する", "明記する", "表示する", "収録する", "説明する", "書く", "かく", "描く", "えがく", "示す", "しめす", "刻む", "きざむ", "保存する", "保管する", "確保する", "計上する", "公開する", "展示する", "知る", "しる", "含む", "ふくむ", "囲む", "かこむ", "残す", "のこす", "満たす", "みたす", "塗る", "ぬる", "積む", "つむ", "結ぶ", "むすぶ", "建てる", "たてる", "閉じ込める", "閉鎖する", "汚染する" ]
+te_iru_progressive_activity = [ "読む", "見る", "聞く", "聴く", "勉強する", "作業する", "練習する", "運動する" ]
+te_iru_progressive_activity_includes = [ "semantic.self_locomotion_verbs" ]
+te_iru_gradual_change_adverbs = [ "だんだん", "段々", "どんどん", "ますます", "益々", "次第に", "徐々に", "少しずつ", "日に日に", "日増しに", "年々", "年年", "刻々", "刻刻", "着々", "着着", "みるみる", "見る見る" ]
+te_iru_result_complement_hosts = [ "なる", "成る" ]
+te_iru_progressive_result_complement_nouns = [ "話題", "問題", "議論", "論争", "争点", "論点", "焦点", "課題", "懸念", "噂", "うわさ", "邪魔", "負担", "重荷", "足かせ", "足枷", "障害", "妨げ", "脅威", "犠牲", "原因", "要因", "根拠", "中心", "主流", "主力", "基盤", "原動力", "元", "もと", "基", "ベース", "土台", "礎", "支え", "励み", "助け", "刺激", "鍵", "手本", "模範", "対象", "標的" ]
+te_iru_following_reaction = [ "笑う", "わらう" ]
+te_aru_subject_resultative_lemmas = [ "開ける|열리다|", "閉める|닫히다|", "かける|걸리다|", "掛ける|걸리다|", "片付ける|정리되다|" ]
+te_aru_object_prepared_lemmas = [ "開ける|열다|", "閉める|닫다|", "かける|걸다|ㄹ", "掛ける|걸다|ㄹ", "片付ける|정리하다|여" ]
+te_hoshii_lexicalized_causative_lemmas = [ "終わる|끝내다|" ]
+te_hoshii_main_lemma_overrides = [ "手伝う|도와주다|" ]
+cognitive_attainment_verbs = [ "覚える", "気づく" ]
+negation_inability_verbs = [ "気づく", "気付く" ]
+te_iru_negative_inability_extra = []
+te_iru_negative_long_negation = [ "来る", "着く", "届く", "到着", "到達", "戻る", "帰る", "出発", "終わる", "達する", "至る", "発生", "起こる", "現れる", "生まれる", "見つかる", "知る", "決まる" ]
+long_negation_preferred_korean_lemmas = [ "알려지다", "불리다", "여겨지다", "생각되다", "인식되다", "판단되다", "인정되다", "이해되다", "표시되다", "발견되다", "정해지다", "용납되다", "가르침을 받다" ]
+dekiru_ability_nouns = [ "日本語", "英語", "中国語", "韓国語", "勉強", "ピアノ", "運転", "仕事", "買い物", "判断", "想像", "計算", "体験", "受容", "返事", "プレイ", "動き", "息", "比較", "証明", "調整", "着こなし", "支援", "注文", "説明", "使い方", "試合", "働き方", "振る舞い", "油断", "投稿", "交渉", "解析", "換気", "縮小", "表示", "強化", "案内", "返信", "理解", "スポーツ", "読み書き", "自己管理", "話", "エッチ", "遊び" ]
+dekiru_possibility_nouns = [ "利用", "使用", "応募", "参加" ]
+dekiru_possibility_nouns_includes = [ "verb.dekiru_possibility_state_bare_completion" ]
+dekiru_possibility_state_bare_completion = [ "予約", "登録", "準備", "支度", "用意" ]
+dekiru_completion_strong_nouns = [ "覚悟", "ご飯", "食事", "資料", "原稿", "作品", "ページ", "書類", "報告書", "企画書", "設計図", "地図", "計画" ]
+dekiru_completion_do_nouns = [ "宿題", "レポート" ]
+dekiru_completion_ambiguous_nouns = [ "料理", "支払い", "整理" ]
+dekiru_emergence_nouns = [ "彼女", "彼氏", "友達", "子供", "ニキビ", "店", "カフェ", "橋", "建物", "道路", "駅", "公園", "ビル", "トンネル", "施設", "恋人", "行列", "列", "傷", "影", "余裕", "口内炎", "距離", "間", "あざ", "青あざ", "染み", "シミ", "ハーレム", "ショッピングモール", "スーパー", "孫", "セフレ", "できもの", "ささくれ", "雰囲気", "クマ" ]
+te_sequential_following = [ "行く", "いく", "ゆく", "来る", "くる", "帰る", "かえる", "通う", "かよう", "戻る", "もどる", "向かう", "むかう" ]
+purpose_motion_verbs = [ "行く", "いく", "行ける", "いける", "来る", "くる", "帰る", "戻る", "出る", "でる", "出かける", "でかける", "寄る", "立ち寄る", "通う", "参る", "連れる", "連れて行く", "向かう", "渡る", "回る", "入る", "押し入る", "集まる", "走る", "飛ぶ", "いらっしゃる", "いらしゃる", "伺う", "上がる" ]
+te_movement_sahen_nouns = [ "登校", "出勤", "下校", "通学", "移動", "通勤", "退勤", "帰宅", "外出", "出社", "退社", "訪問", "入場", "退場", "到着", "出発", "入国", "出国" ]
+te_movement_path_source = [ "出る", "降りる", "飛び立つ", "抜ける", "通る", "染み出す" ]
+te_movement_path_source_particles = [ "を", "から" ]
+te_movement_strong_bare_pairs = [ [ "出る", "行く" ], [ "出る", "いく" ], [ "出る", "ゆく" ], [ "出る", "来る" ], [ "出る", "くる" ] ]
+te_movement_strong_bare_drop_korean_lemmas = [ "나오다", "나타나다", "드러나다", "생기다", "나다" ]
+te_kuru_embedded_directional_lemmas = [ "入る|들어오다", "湧き出る|솟아나다" ]
+te_iku_embedded_directional_lemmas = [ "入る|들어가다" ]
+te_kuru_round_trip_lemmas = [ "行く|가다|다녀오다" ]
+te_kuru_yaru_source_lemmas = [ "やる", "遣る" ]
+te_kuru_yaru_arrival_particles = [ "に", "へ", "から", "まで" ]
+te_kuru_yaru_continuation_cues = [ "今まで", "これまで", "今までも", "これまでも", "ずっと", "長い間", "長年", "今日まで", "現在まで", "従来", "従来から", "以前から", "前から", "昔から", "当初から", "最初から", "精一杯", "一生懸命", "こうやって", "そうやって", "このように", "そのように" ]
+te_kuru_yaru_compositional_attributive_heads = [ "こと", "事", "もの", "物" ]
+te_kuru_yaru_compositional_subject_referents = [ "日本", "我が国", "国", "政府", "自治体", "地方自治体", "行政", "社会", "会社", "企業", "団体", "組織", "*省", "*庁", "*委員会", "*法人" ]
+te_kuru_yaru_compositional_de_referents = [ "国家戦略特区", "国策民営", "制度", "政策", "施策", "事業", "活動", "取組", "取り組み", "仕事", "研究", "研究開発", "調査", "支援", "対応", "改革", "分野", "領域", "現場", "予算", "形", "方法", "やり方", "方式", "枠組み", "仕組み", "委員会", "*委員会", "審査会", "*審査会", "協議会", "*協議会", "国会", "会議", "*会議", "場" ]
+te_kuru_yaru_nonarrival_ni_referents = [ "一緒", "共", "とも" ]
+te_kuru_yaru_nonarrival_kara_referents = [ "今", "いま", "今日", "現在", "これ", "此れ", "従来", "以前", "前", "昔", "当初", "最初" ]
+te_kuru_yaru_nonarrival_made_referents = [ "今", "いま", "今日", "現在", "これ", "此れ", "ここ", "此処", "そこ", "其処", "あそこ", "彼処", "どこ", "何処" ]
+te_movement_acquisition = [ "買う" ]
+te_means_self_locomotion = [ "かける", "掛ける", "駆ける" ]
+te_means_self_locomotion_includes = [ "semantic.self_locomotion_verbs" ]
+te_means_vehicle = [ "乗る" ]
+te_means_carry_state = [ "持つ", "着る", "かぶる", "被る", "抱える", "閉じる", "つかむ", "掴む", "開く", "つなぐ", "繋ぐ", "握る", "組む" ]
+te_attendant_coaction_verbs = [ "踊る", "笑う" ]
+te_adverbial_lexicalized_verbs = [ "急ぐ", "黙る" ]
+te_kuru_carried_state = [ "着る" ]
+te_mawaru_rotation_manner_veto = [ "踊る", "沿う", "逆らう", "描く", "向く", "転がる", "回る", "廻る", "まわる" ]
+te_iku_gradual_change = [ "変わる", "変化する", "進化する", "悪化する", "増える", "ふえる", "減る", "広がる", "進む" ]
+patient_result_agentive_auxiliaries = [ "見せる" ]
+te_sequential_pairs = [ [ "探す", "持つ" ], [ "探す", "持って来る" ], [ "探す", "持って行く" ] ]
+te_causal_pairs = [ [ "疲れる", "休む" ], [ "なくす", "困る" ], [ "座る", "話す" ], [ "なくす", "探す" ], [ "驚く", "逃げる" ], [ "転ぶ", "立ち上がる" ], [ "起きる", "食べる" ], [ "起きる", "行く" ], [ "立つ", "待つ" ], [ "立つ", "話す" ], [ "混む", "遅れる" ], [ "降る", "遅れる" ] ]
+te_preceding_causal = [ "よる", "基づく", "もとづく", "応じる", "おうじる", "従う", "したがう", "対する", "たいする" ]
+te_preceding_benefactive_request = [ "頼む", "たのむ", "願う", "ねがう", "お願いする", "依頼する", "要請する" ]
+te_preceding_involuntary_state = [ "疲れる", "驚く", "転ぶ", "つまずく", "怒る", "降る", "咲く" ]
+te_preceding_emotive_source = [ "焦る", "あせる", "慌てる", "あわてる", "緊張する", "怯える", "おびえる", "びっくりする", "ぎょっとする", "ほっとする" ]
+te_preceding_emotive_source_includes = [ "semantic.involuntary_reaction_verbs" ]
+te_preceding_manner = [ "乗る", "急ぐ" ]
+te_preceding_manner_includes = [ "semantic.self_locomotion_verbs" ]
+te_following_reaction = [ "休む", "困る", "安心", "安心する", "おどろく", "転ぶ", "ころぶ", "嬉しい", "うれしい", "疲れる", "つかれる", "つらい", "辛い", "苦しい", "声を上げる", "けがをする", "なく", "たおれる", "眠る", "ねむる", "立ち止まる", "たちどまる", "立ちすくむ", "たちすくむ", "立ち尽くす", "たちつくす", "座り込む", "すわりこむ", "後ずさる", "あとずさる", "飛びのく", "とびのく", "焦る", "あせる", "ふるえる", "だまる", "あおざめる", "かたまる", "うずくまる", "しゃがみ込む", "しゃがみこむ" ]
+te_following_reaction_includes = [ "semantic.involuntary_reaction_verbs" ]
+te_following_benefactive_result = [ "助ける", "たすける", "救う", "すくう", "手伝う", "てつだう" ]
+te_shimau_following_reparation = [ "謝る", "あやまる", "詫びる", "わびる", "謝罪する", "しゃざいする", "反省する", "はんせいする" ]
+te_evaluation_followers = [ "ありがとう", "ありがとうございる", "有難う", "助かる", "たすかる", "嬉しい", "うれしい", "ありがたい", "有り難い" ]
+degree_intensifier_tail = [ "たまる", "堪る", "なる" ]
+te_aru_evaluation_heads = [ "やすい", "にくい", "良い", "いい", "よい", "高い", "強い", "柔らかい", "酸っぱい", "愛らしい", "控え目", "元気", "大事", "変" ]
+renyou_aux = [ "始める", "はじめる", "終わる", "おわる", "続ける", "つづける", "過ぎる", "すぎる" ]
+rareru_passive_preferred = [ "見る", "みる", "設ける", "もうける", "名付ける", "なづける", "受け入れる", "うけいれる", "認める", "みとめる", "考える", "かんがえる", "求める", "もとめる", "感じる", "かんじる", "与える", "あたえる", "用いる", "もちいる", "定める", "さだめる", "述べる", "のべる", "加える", "くわえる", "含める", "ふくめる", "建てる", "たてる", "進める", "すすめる", "向ける", "むける", "褒める", "ほめる", "調べる", "しらべる", "見捨てる", "みすてる", "傷つける", "きずつける", "教える", "おしえる" ]
+rareru_weak_passive_candidates = [ "入れる", "いれる", "続ける", "つづける" ]
+rareru_meta_te_iru_potential = [ "覚える", "おぼえる", "食べる", "たべる", "開ける", "あける", "着る", "きる", "起きる", "おきる", "出る", "でる", "寝る", "ねる", "落ちる", "おちる", "降りる", "おりる", "離れる", "はなれる" ]
+rareru_meta_ability_cue = [ "食べる", "たべる", "着る", "きる", "開ける", "あける", "覚える", "おぼえる", "起きる", "おきる", "出る", "でる", "寝る", "ねる", "落ちる", "おちる", "降りる", "おりる", "離れる", "はなれる", "来る", "くる", "決める", "きめる", "見つける", "みつける", "答える", "こたえる", "得る", "える", "申し上げる", "もうしあげる", "数える", "かぞえる", "続ける", "つづける", "信じる", "しんじる", "助ける", "たすける", "受ける", "うける", "投げる", "なげる", "集める", "あつめる", "任せる", "まかせる", "預ける", "あずける", "抑える", "おさえる", "どける", "曲げる", "まげる", "掘り下げる", "ほりさげる", "耐える", "たえる" ]
+rareru_meta_transitive = [ "食べる", "たべる", "着る", "きる", "開ける", "あける", "覚える", "おぼえる", "決める", "きめる", "見つける", "みつける", "得る", "える", "申し上げる", "もうしあげる", "数える", "かぞえる", "続ける", "つづける", "信じる", "しんじる", "読む", "よむ", "聞く", "きく", "聴く", "書く", "かく", "作る", "造る", "つくる", "描く", "えがく", "選ぶ", "えらぶ", "撮る", "取る", "とる", "買う", "かう", "売る", "うる", "使う", "つかう", "持つ", "もつ", "呼ぶ", "よぶ", "待つ", "まつ", "洗う", "あらう", "切る", "きる", "送る", "おくる", "直す", "なおす", "探す", "さがす", "押す", "おす", "引く", "ひく", "打つ", "うつ", "飲む", "のむ", "結ぶ", "むすぶ", "言う", "いう", "話す", "はなす", "述べる", "のべる", "語る", "かたる", "伝える", "つたえる", "説明", "説明する", "報告", "報告する", "発表", "発表する", "公表", "公表する", "紹介", "紹介する", "配布", "配布する", "配る", "くばる", "交付", "交付する", "提示", "提示する", "提出", "提出する", "送付", "送付する", "提供", "提供する", "通知", "通知する", "告知", "告知する", "発送", "発送する", "渡す", "わたす", "届ける", "とどける", "否定", "否定する", "大事", "大事にする", "助ける", "たすける", "受ける", "うける", "投げる", "なげる", "集める", "あつめる", "任せる", "まかせる", "預ける", "あずける", "抑える", "おさえる", "どける", "曲げる", "まげる", "掘り下げる", "ほりさげる" ]
+rareru_honorific_subject_intransitive = [ "おる", "居る", "来る", "くる", "帰る", "かえる", "行く", "いく", "戻る", "もどる", "起きる", "おきる", "出る", "でる", "寝る", "ねる", "落ちる", "おちる", "降りる", "おりる", "下りる", "離れる", "はなれる", "入る", "はいる", "立つ", "たつ", "座る", "すわる", "生きる", "いきる", "死ぬ", "しぬ", "亡くなる", "なくなる", "逃げる", "にげる", "集まる", "あつまる", "泊まる", "とまる", "休む", "やすむ", "歩く", "あるく", "働く", "はたらく", "頷く", "うなずく", "触れる", "ふれる", "感謝", "感謝する", "参加", "参加する", "出席", "出席する", "退席", "退席する", "登壇", "登壇する", "着席", "着席する", "起立", "起立する", "滞在", "滞在する", "在席", "在席する", "勤務", "勤務する", "活動", "活動する", "行動", "行動する", "出入り", "出入りする", "お出かけ", "お出かけする", "出かける", "出掛ける", "でかける" ]
+rareru_meta_ability_modal_cues = [ "まだ", "もう", "うまく", "なかなか", "ようやく", "やっと" ]
+rareru_meta_ability_modal_cues_includes = [ "verb.rareru_meta_volitional_manner_modal_cues" ]
+rareru_meta_volitional_manner_modal_cues = [ "しっかり", "ちゃんと", "きちんと", "もっと" ]
+rareru_meta_classification_target_passive = [ "分ける", "わける", "分類する", "区分する", "大別する", "細分する" ]
+rareru_kara_source_verbs = [ "責める", "助ける", "受ける" ]
+rareru_negative_potential_preferred = [ "信じる", "しんじる", "信ずる", "しんずる", "考える", "かんがえる" ]
+potential_negative_prefers_su_eopda = [ "믿다", "생각하다" ]
+adversative_passive_transitive_verbs = [ "踏む", "ふむ", "盗む", "ぬすむ", "奪う", "うばう", "叩く", "たたく", "噛む", "かむ" ]
+adversative_passive_intransitive_verbs = [ "降る", "ふる", "帰る", "かえる", "泣く", "なく", "来る", "くる" ]
+adversative_passive_location_source_nouns = [ "隣", "となり" ]
+departure_passive_verbs = [ "追放する", "追い出す", "おいだす", "追い払う", "おいはらう", "締め出す", "しめだす", "叩き出す", "たたきだす", "放り出す", "ほうりだす", "蹴り出す", "つまみ出す", "破門する", "除名する", "解雇する", "罷免する", "勘当する", "追う", "おう" ]
+adversative_passive_weather_base_lemmas = [ "降る|맞다", "ふる|맞다" ]
+possessor_passive_verbs = [ "盗む", "ぬすむ", "奪う", "うばう", "取る", "とる", "取り上げる", "とりあげる", "踏む", "ふむ", "殴る", "なぐる", "蹴る", "ける", "噛む", "かむ" ]
+causative_passive_lexical_causative = [ "書かす", "習わせる", "着せる" ]
+causative_passive_lexical_causative_includes = [ "verb.causative_passive_neutral_lexical_causative" ]
+causative_passive_coercive = [ "掃除する", "清掃する", "食べる", "たべる", "飲む", "のむ", "書く", "かく", "書かす", "読む", "よむ", "歌う", "うたう", "習わせる", "着せる" ]
+causative_passive_neutral = []
+causative_passive_neutral_includes = [ "verb.causative_passive_neutral_lexical_causative", "verb.causative_passive_neutral_trigger" ]
+causative_passive_neutral_lexical_causative = [ "歩かす", "あるかす", "喜ばす", "よろこばす", "怒らす", "おこらす", "言わす", "いわす", "待たす", "またす", "走らす", "はしらす" ]
+causative_passive_neutral_lexical_causative_includes = [ "verb.causative_passive_neutral_trigger_lexical_causative" ]
+causative_passive_neutral_trigger = [ "気づく", "気付く", "きづく", "思い知る", "おもいしる", "痛感する", "驚く", "おどろく" ]
+causative_passive_neutral_trigger_includes = [ "verb.causative_passive_neutral_trigger_lexical_causative" ]
+causative_passive_neutral_trigger_lexical_causative = [ "気づかす", "気付かす", "きづかす", "思い知らす", "おもいしらす", "驚かす", "おどろかす" ]
+passive_badda_nouns = [ "신뢰", "존경", "평가", "인정", "주목", "칭찬", "사랑", "환영", "지지", "축복", "초대", "비판", "비난", "공격", "책망", "기대", "요청", "요구" ]
+involuntary_result = [ "困る", "こまる", "助かる", "たすかる", "なく", "たおれる", "参る", "まいる", "ふるえる", "おどろく" ]
+involuntary_result_includes = [ "semantic.involuntary_reaction_verbs" ]
+adjective_connective_reaction = [ "笑う", "わらう", "逃げる", "にげる", "落ち着く", "おちつく", "叶う", "かなう", "適う" ]
+nareru_familiarize_nouns = [ "環境", "生活", "暮らし", "仕事", "職場", "社会", "習慣", "作業", "手順", "操作", "声", "音", "味", "光", "暑さ", "寒さ" ]
+te_iru_attributive_contraction_blocked = []
+
+[verb_frame]
+chiru_scatter_subjects = [ "人", "群衆", "人々", "みんな", "皆", "客", "観客", "衆", "兵", "兵士", "部隊", "軍", "一同", "仲間", "メンバー", "鳥", "雲", "霧", "煙", "火花", "火の粉", "破片", "欠片", "光", "星", "紙吹雪", "紙", "水滴", "しぶき", "飛沫" ]
+hiku_pull_objects = [ "手", "腕", "袖", "裾", "足", "脚", "ドア", "引き戸", "紐", "綱", "ロープ", "弦", "弓", "レバー", "取っ手", "ハンドル", "カーテン", "幕", "椅子" ]
+oshitsukeru_abstract_objects = [ "考え", "意見", "価値観", "責任", "仕事", "役割", "負担", "義務", "ルール", "要求", "理想", "正義", "自分", "信念", "主張", "論理", "理屈", "持論" ]
+tadayou_floating_subjects = [ "船", "ボート", "木", "丸太", "板", "氷", "雲", "霧", "煙", "もや", "花びら", "落ち葉", "木の葉", "ゴミ", "残骸", "死体", "遺体", "人", "体", "クラゲ", "藻", "泡", "プランクトン" ]
+tadayou_floating_subjects_includes = [ "semantic.sensory_noun_olfactory" ]
+
+[volitional_concessive]
+licensing_hosts = []
+licensing_hosts_includes = [ "copula_concessive.licensing_hosts" ]
+licensing_host_modifiers = []
+licensing_host_modifiers_includes = [ "copula_concessive.licensing_host_modifiers" ]
+licensing_adverbs = [ "どんなに" ]
+licensing_adverbs_includes = [ "copula_concessive.licensing_adverbs" ]
+indefinite_markers = [ "か", "も", "でも" ]
+
+[watasu]
+transfer_objects = [ "犯人", "容疑者", "身柄", "人質", "彼", "彼女", "相手", "恋人", "権利", "権限", "所有権", "主導権", "役割", "責任", "仕事", "バトン", "データ", "ファイル", "リスト", "結果" ]
+bridge_objects = [ "橋", "橋梁" ]
+
+[whitespace.run_mapping]
+ascii = "0020"
+ideographic = "3000"
+tab = "0009"
+line = "000A,000B,000C,000D,0085,2028,2029"
+unicode_space = "00A0,1680,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,200A,202F,205F"
+
+[whitespace.letter_spacing]
+min_runs = "2"
+segment_scripts = [ "Hiragana", "Katakana", "Han" ]
+
+[whitespace.barrier]
+bound_left_pos0 = [ "接頭辞" ]
+bound_right_suffix_pos0 = [ "接尾辞" ]
+bound_right_inflection_pos0 = [ "助動詞" ]
+inflection_host_forms = [ "未然形", "仮定形", "已然形", "意志推量形", "ク語法" ]
+bond_exempt_left_char_classes = [ "Nd", "Script_Extensions=Latin" ]
+
+[yakusu]
+summary_objects = [ "要点", "概要", "話", "内容", "文章", "文", "発言", "説明", "報告", "演説", "論文", "記事", "記述", "趣旨" ]
+contract_objects = [ "契約", "同盟", "講和", "和約", "協定", "婚約" ]
+
+[yasu_polite.masu_surfaces]
+"やし" = "まし"
+"やしょう" = "ましょう"
+"やす" = "ます"
+
+[yatoi]
+hired_abstract_heads = [ "口", "契約", "条件", "関係", "制度" ]
+
+[zairyou]
+abstract_evidence_heads = [ "証拠", "根拠", "判断", "推理", "考察", "議論", "分析", "研究", "検討", "説明", "話", "記事", "報道" ]
+
+[zero_head_elided_host]
+proposition_head_operators = [ "copula.basic", "adjCopulaBridge", "modal.rashii", "connective.conditional" ]
+predicate_head_operators = [ "tense", "connective.conditional.tara" ]
+event_head_operators = [ "aspect", "desire", "voice" ]
+chain_operators = [ "tense", "polite", "negation", "conjecture", "aspect", "modal.noda", "modal.souda_hearsay", "modal.kamo", "predicateQuoteCarrier", "connective.reason", "connective.adversative", "connective.te_form", "connective.conditional.ba", "connective.conditional.tara" ]
+standalone_sfp_effects = [ "kana", "kai", "ka_ne" ]
+

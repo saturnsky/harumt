@@ -1,0 +1,544 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[[ending]]
+key = "아/어"
+path = "ae"
+foreign = "어"
+
+[[ending]]
+key = "았/었"
+path = "past"
+foreign = "었"
+
+[[ending]]
+key = "고"
+path = "direct"
+arg = "고"
+foreign = "고"
+
+[[ending]]
+key = "지"
+path = "direct"
+arg = "지"
+foreign = "지"
+
+[[ending]]
+key = "죠"
+path = "direct"
+arg = "죠"
+foreign = "죠"
+
+[[ending]]
+key = "게"
+path = "direct"
+arg = "게"
+foreign = "게"
+
+[[ending]]
+key = "다가"
+path = "direct"
+arg = "다가"
+foreign = "다가"
+
+[[ending]]
+key = "도록"
+path = "direct"
+arg = "도록"
+foreign = "도록"
+
+[[ending]]
+key = "기"
+path = "direct"
+arg = "기"
+foreign = "기"
+
+[[ending]]
+key = "고는"
+path = "direct"
+arg = "고는"
+foreign = "고는"
+
+
+[[ending]]
+key = "곤"
+path = "direct"
+arg = "곤"
+foreign = "곤"
+
+[[ending]]
+key = "지만"
+path = "direct"
+arg = "지만"
+foreign = "지만"
+
+[[ending]]
+key = "다고"
+path = "direct"
+arg = "다고"
+foreign = "다고"
+
+[[ending]]
+key = "냐고"
+path = "direct"
+arg = "냐고"
+foreign = "냐고"
+
+[[ending]]
+key = "다니까"
+path = "direct"
+arg = "다니까"
+foreign = "다니까"
+
+
+[[ending]]
+key = "다니"
+path = "direct"
+arg = "다니"
+foreign = "다니"
+
+[[ending]]
+key = "(으)라고"
+path = "eu_medial"
+arg = "라고"
+foreign = "으라고"
+
+
+[[ending]]
+key = "(으)라든가"
+path = "eu_medial"
+arg = "라든가"
+foreign = "으라든가"
+
+[[ending]]
+key = "(으)라니까"
+path = "eu_medial"
+arg = "라니까"
+foreign = "으라니까"
+
+[[ending]]
+key = "(으)라는 말을"
+path = "eu_medial"
+arg = "라는 말을"
+foreign = "으라는 말을"
+
+[[ending]]
+key = "(으)라는"
+path = "eu_medial"
+arg = "라는"
+foreign = "으라는"
+
+[[ending]]
+key = "지 말라고"
+path = "direct"
+arg = "지 말라고"
+foreign = "지 말라고"
+
+[[ending]]
+key = "지 말라는 말을"
+path = "direct"
+arg = "지 말라는 말을"
+foreign = "지 말라는 말을"
+
+[[ending]]
+key = "지 말라는"
+path = "direct"
+arg = "지 말라는"
+foreign = "지 말라는"
+
+[[ending]]
+key = "다는"
+path = "direct"
+arg = "다는"
+
+
+[[ending]]
+key = "거나"
+path = "direct"
+arg = "거나"
+foreign = "거나"
+
+[[ending]]
+key = "든"
+path = "direct"
+arg = "든"
+foreign = "든"
+
+[[ending]]
+key = "겠"
+path = "direct"
+arg = "겠"
+foreign = "겠"
+
+[[ending]]
+key = "지 마"
+path = "direct"
+arg = "지 마"
+foreign = "지 마"
+
+
+[[ending]]
+key = "ㅁ/음"
+path = "nominal_m"
+foreign = "음"
+
+
+
+[[ending]]
+key = "어근"
+path = "stem_root"
+
+
+[[ending]]
+key = "면"
+path = "eu_medial"
+arg = "면"
+foreign = "으면"
+
+[[ending]]
+key = "(으)면서"
+path = "eu_medial"
+arg = "면서"
+foreign = "으면서"
+
+[[ending]]
+key = "(으)면서도"
+path = "eu_medial"
+arg = "면서도"
+foreign = "으면서도"
+
+[[ending]]
+key = "(으)며"
+path = "eu_medial"
+arg = "며"
+foreign = "으며"
+
+[[ending]]
+key = "(으)니까"
+path = "eu_medial"
+arg = "니까"
+foreign = "으니까"
+
+[[ending]]
+key = "(으)니"
+path = "eu_medial"
+arg = "니"
+foreign = "으니"
+
+[[ending]]
+key = "(으)러"
+path = "eu_medial"
+arg = "러"
+foreign = "으러"
+
+[[ending]]
+key = "(으)려고"
+path = "eu_medial"
+arg = "려고"
+foreign = "으려고"
+
+[[ending]]
+key = "(으)려는"
+path = "eu_medial"
+arg = "려는"
+foreign = "으려는"
+
+[[ending]]
+key = "(으)려면"
+path = "eu_medial"
+arg = "려면"
+foreign = "으려면"
+
+
+[[ending]]
+key = "(으)려고 해도"
+path = "eu_medial"
+arg = "려고 해도"
+foreign = "으려고 해도"
+
+
+[[ending]]
+key = "기라도 하면"
+path = "direct"
+arg = "기라도 하면"
+foreign = "기라도 하면"
+
+
+[[ending]]
+key = "ㄴ/는"
+path = "adnominal_present"
+foreign = "는"
+
+[[ending]]
+key = "ㄹ/을"
+path = "adnominal_future"
+foreign = "을"
+
+[[ending]]
+key = "ㄴ/은"
+path = "adnominal_past"
+foreign = "은"
+
+[[ending]]
+key = "는데"
+path = "adnominal_present"
+post = "데"
+foreign = "는데"
+
+[[ending]]
+key = "ㄴ/은데"
+path = "adnominal_past"
+post = "데"
+foreign = "은데"
+
+[[ending]]
+key = "는지"
+path = "adnominal_present"
+post = "지"
+foreign = "는지"
+
+[[ending]]
+key = "ㄴ/은지"
+path = "adnominal_past"
+post = "지"
+foreign = "은지"
+
+[[ending]]
+key = "는가"
+path = "adnominal_present"
+post = "가"
+foreign = "는가"
+
+[[ending]]
+key = "(으)ㄴ가"
+path = "adnominal_past"
+post = "가"
+foreign = "은가"
+
+[[ending]]
+key = "ㄹ/을까"
+path = "adnominal_future"
+post = "까"
+foreign = "을까"
+
+[[ending]]
+key = "ㄹ/을지"
+path = "adnominal_future"
+post = "지"
+foreign = "을지"
+
+
+[[ending]]
+key = "아/어서"
+path = "ae"
+post = "서"
+foreign = "어서"
+
+[[ending]]
+key = "아/어도"
+path = "ae"
+post = "도"
+foreign = "어도"
+
+[[ending]]
+key = "더라도"
+path = "direct"
+arg = "더라도"
+foreign = "더라도"
+
+[[ending]]
+key = "아/어야"
+path = "ae"
+post = "야"
+foreign = "어야"
+
+[[ending]]
+key = "아/어야지"
+path = "ae"
+post = "야지"
+foreign = "어야지"
+
+[[ending]]
+key = "아/어라"
+path = "ae"
+post = "라"
+foreign = "어라"
+
+
+[[ending]]
+key = "ㄴ다/는다"
+path = "verb_quotative"
+foreign = "는다"
+
+[[ending]]
+key = "ㄴ/는다고"
+path = "verb_quotative"
+post = "고"
+foreign = "는다고"
+
+[[ending]]
+key = "ㄴ/는다니까"
+path = "verb_quotative"
+post = "니까"
+foreign = "는다니까"
+
+
+[[ending]]
+key = "ㄴ/는다니"
+path = "verb_quotative"
+post = "니"
+foreign = "는다니"
+
+
+
+[[ending]]
+key = "다면"
+path = "direct"
+arg = "다면"
+foreign = "다면"
+
+
+[[ending]]
+key = "ㄴ/는다면"
+path = "verb_quotative"
+post = "면"
+foreign = "는다면"
+
+
+[[ending]]
+key = "았/었다면"
+path = "past"
+post = "다면"
+foreign = "었다면"
+
+
+[[ending]]
+key = "았/었다"
+path = "past"
+post = "다"
+foreign = "었다"
+
+
+[[ending]]
+key = "다"
+path = "direct"
+arg = "다"
+foreign = "다"
+
+
+[[ending]]
+key = "ㅂ니다/습니다"
+path = "formal_declarative"
+foreign = "습니다"
+
+[[ending]]
+key = "ㅂ니까/습니까"
+path = "formal_declarative_ka"
+foreign = "습니까"
+
+[[ending]]
+key = "(으)ㅂ시다"
+path = "formal_propositive"
+foreign = "읍시다"
+
+[[ending]]
+key = "(으)시"
+path = "eu_medial"
+arg = "시"
+foreign = "으시"
+
+[[ending]]
+key = "(으)세요"
+path = "eu_medial"
+arg = "세요"
+foreign = "으세요"
+
+[[ending]]
+key = "(으)십시오"
+path = "eu_medial"
+arg = "십시오"
+foreign = "으십시오"
+
+
+[[ending]]
+key = "네"
+path = "consonant_suffix"
+arg = "네"
+foreign = "네"
+
+[[ending]]
+key = "구나"
+path = "consonant_suffix"
+arg = "구나"
+foreign = "구나"
+
+[[ending]]
+key = "군"
+path = "consonant_suffix"
+arg = "군"
+foreign = "군"
+
+[[ending]]
+key = "던"
+path = "consonant_suffix"
+arg = "던"
+foreign = "던"
+
+[[ending]]
+key = "던가"
+path = "consonant_suffix"
+arg = "던가"
+foreign = "던가"
+
+
+[[ending]]
+key = "거든"
+path = "consonant_suffix"
+arg = "거든"
+foreign = "거든"
+
+[[ending]]
+key = "자"
+path = "consonant_suffix"
+arg = "자"
+foreign = "자"
+
+[[ending]]
+key = "잖아"
+path = "consonant_suffix"
+arg = "잖아"
+foreign = "잖아"
+
+[[ending]]
+key = "니"
+path = "consonant_suffix"
+arg = "니"
+foreign = "니"
+
+
+[[ending]]
+key = "냐"
+path = "consonant_suffix"
+arg = "냐"
+foreign = "냐"
+
+[[ending]]
+key = "(으)시"
+path = "eu_medial"
+arg = "시"
+foreign = "으시"

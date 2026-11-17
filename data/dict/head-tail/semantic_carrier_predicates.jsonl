@@ -1,0 +1,1 @@
+{"id":"wake_wakaru_reason","carrierReadings":["ワケ"],"carrierForms":["わけ","訳"],"particle":"が","predicateForms":["わかる","分かる","解る","判る"],"affirmative":{"prefix":"이유를 ","lemma":"알다","irregular":"ㄹ","koreanPos":"동사"},"negative":{"prefix":"영문을 ","lemma":"모르다","irregular":"르","koreanPos":"동사","absorbNegativeAux":true}}

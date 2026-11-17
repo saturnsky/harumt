@@ -1,0 +1,167 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[[simple]]
+surface = "かしら"
+type = "kana"
+
+[[simple]]
+surface = "ね"
+aliases = ["ネ"]
+type = "ne"
+
+
+[[simple]]
+surface = "じゃん"
+aliases = ["じゃーん"]
+type = "jan"
+
+consumes_trailing_ka = true
+
+
+
+[[simple]]
+surface = "っけ"
+aliases = ["ッケ"]
+type = "kke"
+consumes_trailing_ka = true
+
+
+
+
+
+[[simple]]
+surface = "っと"
+type = "volitional_resolve"
+
+
+
+
+
+
+
+
+[[simple]]
+surface = "もん"
+type = "explanatory"
+consumes_trailing_yo = true
+yields_to_authored_question = true
+cedes_to_listener_directed = true
+
+[[simple]]
+surface = "もの"
+type = "explanatory"
+consumes_trailing_yo = true
+yields_to_authored_question = true
+cedes_to_listener_directed = true
+
+
+
+
+
+
+
+
+[[simple]]
+surface = "ぞ"
+type = "speaker_assertion"
+cedes_to_trailing_effect = true
+yields_to_authored_question = true
+
+[[simple]]
+surface = "ぜ"
+type = "speaker_assertion"
+cedes_to_trailing_effect = true
+yields_to_authored_question = true
+
+
+
+
+[lexeme]
+surfaces = ["か", "かな", "わ"]
+
+
+
+
+
+[[lexical_variant]]
+surface = "かしらん"
+lexeme = "かしら"
+
+
+
+[effect_class]
+listener_directed = ["ne", "jan", "yone_confirm"]
+
+
+
+
+
+
+
+[skip]
+surfaces = ["よ"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[transparent]
+surfaces = ["や", "さ", "とも"]
+
+
+
+
+
+
+
+
+
+
+[[post_ka]]
+surface = "な"
+type = "kana"
+
+[[post_ka]]
+surface = "のう"
+type = "kana"
+
+[[post_ka]]
+surface = "ね"
+type = "ka_ne"
+
+[[post_ka]]
+surface = "い"
+aliases = ["イ", "いー", "イー"]
+type = "kai"
+
+[[post_ka]]
+surface = "よ"
+type = "kayo"
