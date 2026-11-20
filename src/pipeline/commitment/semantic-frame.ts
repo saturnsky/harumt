@@ -5,9 +5,9 @@ import type { PlanTextSource, RenderPlan, PredicateHeadTailChainRenderPlan } fro
 import { legacySurfaceCompositionPlan, isNominalHeadTailChainRenderPlan, isPredicateHeadTailChainRenderPlan } from "../../types/render-plan.js";
 import type { RuntimeHaruToken } from "../../types/token.js";
 import type { NumericTables } from "../../generator/numeric-lookup.js";
-import { type ClauseLayout } from "../clause-layout/index.js";
+import type { ClauseLayout } from "../clause-layout/final-layout.js";
 import type { LookupTables } from "../lookup-tables.js";
-import { evaluateFrameSourceConditionWithLayout } from "../context.js";
+import { evaluateFrameSourceConditionWithLayout, grammarVoiceForFrame } from "../context.js";
 import { spanGrammar } from "../candidate-runtime.js";
 import { buildFrameArgumentView, evaluateClauseConditions, SLOT_TYPE_NOUN, FrameEvidenceInput, frameEvidenceSelectionTraceDetail, frameMatchTraceDetail, frameSkipTraceDetail, frameSpecFromDict, namedLookupResolver, selectFrameEvidenceCandidate, selectFrameMatch, UnknownLookupSet, type ArgumentFiller, type ConditionEvidenceEvaluator, type FrameJsonMap, type FrameSpec } from "../semantics/frame.js";
 import { projectionTokenMatches } from "../head-tail/candidate/selector.js";
@@ -16,7 +16,7 @@ import { semanticRoleCaseAssignments, type RoleCaseTranslation } from "./role-ca
 import { TraceEvent, type TraceCollector } from "../trace.js";
 import type { AuxLayerNode, TailNode } from "../head-tail/tail/predicate-root/grammar.js";
 import { COMMITMENT_SOURCE_SLOT_REALIZATION, SLOT_REALIZATION_PREFIX_MOVE_AUXILIARIES, type CommitmentCandidate, type CommitmentContentMap, type CommitmentSpan, type CommitmentToken, type CommitmentTranslation, type ParticleCommitmentContext, type SemanticFrameRuntimeMatch, type SlotRealizationSpec } from "./types.js";
-import { candidateFrameConditionEvaluator, candidateFrameSourceGroups, candidateFrameSourceTranslations, candidatePriorityGroup, candidatePriorityInGroup, candidateSenseIndex, candidateSpanGrammar, casePreferenceFromValue, contentEntries, contentSpanAt, evaluateParticipantCondition, frameGroupsUseSourceArgumentViewForVoice, grammarVoiceForFrame, isCasePreferenceRecord, isFrameJsonMapForCommitment, predicateGrammarForClause, runtimeTokens, selectedCommitmentCandidate, semanticFrameIntMetadata, semanticFrameOptionalIntMetadata, traceDetail, roleCaseRolesTraceLike, translationFrameDataAlternatives, withTraceClauseIdx } from "./span-evidence.js";
+import { candidateFrameConditionEvaluator, candidateFrameSourceGroups, candidateFrameSourceTranslations, candidatePriorityGroup, candidatePriorityInGroup, candidateSenseIndex, candidateSpanGrammar, casePreferenceFromValue, contentEntries, contentSpanAt, evaluateParticipantCondition, frameGroupsUseSourceArgumentViewForVoice, isCasePreferenceRecord, isFrameJsonMapForCommitment, predicateGrammarForClause, runtimeTokens, selectedCommitmentCandidate, semanticFrameIntMetadata, semanticFrameOptionalIntMetadata, traceDetail, roleCaseRolesTraceLike, translationFrameDataAlternatives, withTraceClauseIdx } from "./span-evidence.js";
 import { candidateSetMembers, commitmentLaneCandidateSet } from "../source-candidate-set.js";
 
 export function semanticFrameSlotForParticle(ctx: ParticleCommitmentContext): { readonly role: string; readonly filler: ArgumentFiller } | null {

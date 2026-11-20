@@ -3,11 +3,12 @@ import { isPassiveTransitive } from "../../generator/aux-map.js";
 import { asIrregular, type IrregularType } from "../../generator/conjugator.js";
 import type { PredicateHeadTailChainRenderPlan } from "../../types/render-plan.js";
 import { isPredicateHeadTailChainRenderPlan } from "../../types/render-plan.js";
-import { type Clause, type ClauseLayout } from "../clause-layout/index.js";
+import type { Clause, ClauseLayout } from "../clause-layout/final-layout.js";
 import { POS0, POS01, POS4, POS5A, pos0in, 助詞, 助詞_格助詞, 助動詞, 助動詞_レル, 動詞, 未然形_, 接尾辞_名詞的, 대명사, 동사, 명사, NOMINAL_BITS } from "../../types/pos.js";
 import { previousTransparentEvidenceIndex } from "../clause-layout/trivia.js";
 import type { LookupTables } from "../lookup-tables.js";
-import { renderPlanHasKoreanLemma, replaceLemmaRenderPlan, setAdversativePassiveRenderPlan, setPassiveClassRenderPlan } from "../rendering/render-plan.js";
+import { renderPlanHasKoreanLemma } from "../rendering/render-plan-inspect.js";
+import { replaceLemmaRenderPlan, setAdversativePassiveRenderPlan, setPassiveClassRenderPlan } from "../rendering/render-plan-rewrite.js";
 import { getReferentTokenBeforeParticle, isAnimateReferentBeforeNi, isAnimateReferentToken, isPlaceNoun } from "../semantics/helpers.js";
 import { isRespectReferentToken } from "../semantics/honorific.js";
 import { quoteMarkerRelationAt, tokaTteCompositeQuoteCandidateAt } from "../head-tail/boundary/quote-marker.js";
@@ -887,7 +888,6 @@ export function commitNounToSareru(
     if (trace !== null) {
       const predIdx = idx + 1;
       const particleIndices = argumentParticleIndicesForPredicate(predIdx, tokens, layout);
-      const clause = layout.clauseOfPredicate(predIdx) ?? null;
       const predicateDictForms = passiveClassPredicateDictForms(span, tokens[predIdx]);
       const predicateDictForm = predicateDictForms[0] ?? "する";
       const predicateInCausativeCoerciveSet = predicateDictForms.some((form) => lookups.CAUSATIVE_PASSIVE_COERCIVE_VERBS.has(form));

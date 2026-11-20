@@ -2,12 +2,6 @@ import type { MorphemeDerivation, MorphemeSense } from "../types/dictionary.js";
 
 export const LEXICAL_DERIVATION_ID = "lexical";
 
-export type KnownDerivationId =
-  | typeof LEXICAL_DERIVATION_ID
-  | "potential"
-  | "passive"
-  | "honorific";
-
 export interface ResolvedDerivation {
   readonly id: string;
   readonly baseForm?: string;

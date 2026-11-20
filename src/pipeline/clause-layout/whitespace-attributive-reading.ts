@@ -8,13 +8,11 @@ import { isCaseParticleNoToken } from "../semantics/gano-conversion.js";
 import type { LookupTables } from "../lookup-tables.js";
 import type { RuntimeHaruToken } from "../../types/token.js";
 import { hasClauseRole, isPredicateHeadTailChainRenderPlan, type RenderPlan } from "../../types/render-plan.js";
-import {
-  genitiveNominalContinuationHeadIndex,
-  isAttributiveHeadNounishToken,
-  isPoliteMasuChainTerminalEndAt,
-  isPostposedVocativeNounPhraseAt,
-  type ClauseLayout
-} from "./index.js";
+import { genitiveNominalContinuationHeadIndex } from "./attributive-boundaries.js";
+import { isAttributiveHeadNounishToken } from "./nominal-anchor-evidence.js";
+import { isPoliteMasuChainTerminalEndAt } from "./utterance-boundaries.js";
+import { isPostposedVocativeNounPhraseAt } from "./vocative.js";
+import type { ClauseLayout } from "./final-layout.js";
 import type { WhitespaceJunctureEvidence } from "./juncture-verdict.js";
 import { enumerateClausePhrasesAfter, type ClausePhraseItem } from "./phrase-enumeration.js";
 import {

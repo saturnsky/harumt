@@ -1,7 +1,7 @@
 
 import type { ContentCtx } from "../../../content-types.js";
 import { detectSfp, isYouToken } from "../../../semantics/grammar-runtime.js";
-import { collectAuxTokens, runtimeToken, type MatcherToken } from "../../../matchers.js";
+import { collectAuxTokens, runtimeToken, type MatcherToken, runtimeTokens } from "../../../matchers.js";
 import { hasRentaikei } from "../../../attributive.js";
 import { matchFollowingAdversativeConnective } from "../../../rules/connective-helpers.js";
 import type { RuleResult } from "../../../../types/pipeline.js";
@@ -146,6 +146,3 @@ function buildYoudaModalityPlan(
 }
 
 
-function runtimeTokens(tokens: readonly MatcherToken[]) {
-  return tokens.map(runtimeToken);
-}

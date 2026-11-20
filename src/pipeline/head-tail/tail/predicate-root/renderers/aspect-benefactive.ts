@@ -3,7 +3,7 @@ import { type BenefactiveAspectOp } from "../grammar.js";
 import { lemmaPredicateBase, type KoreanLemmaPredicateBase, type RenderOutcome } from "./base-model.js";
 import { predicateBaseInfinitiveForm } from "./base-support.js";
 import { renderBaseVolitionalQuestionQuotative } from "./final-forms.js";
-import { benefactiveBase } from "./predicate-bases.js";
+import { benefactiveBase } from "./voice-benefactive-bases.js";
 
 export function renderBenefactiveVolitional(opts: {
   readonly stemLemma: string;

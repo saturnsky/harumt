@@ -12,7 +12,6 @@ import {
   RETROSPECTIVE_THOUGHT_VERBS
 } from "../../../data/modality-sets.js";
 import { EQUIVALENCE_CARRIER_NOUNS } from "../../../data/semantic-helper-sets.js";
-import { IU_LEXEME_FORMS } from "../../../data/quoted-reporting-sets.js";
 import type { LookupTables } from "../../../../lookup-tables.js";
 import {
   COLLAPSED_ASPECT_AUX_CONTRACTION_BY_LEMMA,
@@ -60,7 +59,6 @@ import {
   助動詞_ナイ,
   助動詞_ヌ,
   助動詞_レル,
-  下一段_マ行,
   命令形_,
   文語助動詞_ズ,
   接頭辞,
@@ -82,7 +80,8 @@ import {
   isVoiceOrCausativeAuxiliaryToken
 } from "../../../../../types/pos.js";
 import type { AffirmativeSupportFocus, NegationFocusParticle, VolitionalAttemptFocusParticle } from "../grammar.js";
-import { affirmativeSupportFocusForMarker, lookupConnectiveBySurface, negationFocusParticleForMarker } from "../grammar.js";
+import { affirmativeSupportFocusForMarker, negationFocusParticleForMarker } from "../grammar.js";
+import { lookupConnectiveBySurface, lookupFusedCopulaSupportConnective } from "../connective-surface-lookup.js";
 import {
   isTeConnectiveToken,
   type TeTailContinuationToken
@@ -94,7 +93,6 @@ import {
 import { TokenCursor } from "../../../../token-cursor.js";
 import { previousNonSpaceIndex } from "../../../../clause-layout/trivia.js";
 import { isClausePunctuationToken } from "../../../../clause-layout/punctuation.js";
-import { lookupFusedCopulaSupportConnective } from "../grammar.js";
 
 const ARU_VERB_FORMS = new Set(["ある", "有る"]);
 
@@ -494,10 +492,6 @@ export function isBungoProhibitiveNakareToken(token: BoundaryToken): boolean {
     token.dictionaryForm === "なし";
 }
 
-export function isSayVerbToken(token: BoundaryToken): boolean {
-  return (token.pos & POS0) === 動詞 && IU_LEXEME_FORMS.has(token.dictionaryForm ?? "");
-}
-
 export function isThoughtVerbToken(token: BoundaryToken): boolean {
   return (token.pos & POS0) === 動詞 && RETROSPECTIVE_THOUGHT_VERBS.has(token.dictionaryForm ?? "");
 }
@@ -843,12 +837,6 @@ export function teConnectiveFusedAspectContraction(
 
 export function collapsedAspectAuxKind(token: BoundaryToken | undefined): CollapsedAspectAuxKind | null {
   return collapsedAspectAuxContraction(token)?.kind ?? null;
-}
-
-export function isShimeruCausativeAuxToken(token: BoundaryToken | undefined): boolean {
-  return token !== undefined &&
-    (token.pos & (POS0 | POS4)) === (助動詞 | 下一段_マ行) &&
-    (token.dictionaryForm === "しめる" || token.surface === "しめ" || token.surface === "しめる");
 }
 
 export interface TteTopicFollowerToken {

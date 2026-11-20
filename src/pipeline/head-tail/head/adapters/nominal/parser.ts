@@ -1,3 +1,4 @@
+import { activeProtoLayout } from "../../../../clause-layout/proto-state.js";
 import type { IrregularType } from "../../../../../generator/conjugator.js";
 import type { RuntimeHaruToken } from "../../../../../types/token.js";
 import type { PredicateProjectionKind, ProjectionEvidenceScope, ProjectionHeadModifierKind } from "../../../grammar.js";
@@ -6,7 +7,7 @@ import { readNumeralToken } from "../../../../../generator/numerals.js";
 import { loadNominalFrameSpecsBySurface } from "./frame-table.js";
 import { TAME_FORMS, type LookupTables } from "../../../../lookup-tables.js";
 import { isPersonToken } from "../../../candidate/semantic-classifiers.js";
-import type { ProjectionEvidenceLayout } from "../../../../clause-layout/index.js";
+import type { ProjectionEvidenceLayout } from "../../../../clause-layout/layout-types.js";
 import {
   SEPARATION_BREAKS_MORPHEME_CHAIN,
   nextNonSpaceIndex,
@@ -45,7 +46,8 @@ import { renyouNominalHeadFrameHostAt } from "./renyou-nominal-head.js";
 import type { NominalHeadTailChainPlan } from "../../../lifecycle/head-tail-render-plan.js";
 import type { TailRoot } from "../../../tail/predicate-root/grammar.js";
 import { projectionCandidateSelectorMatches, projectionTokenMatches, type ProjectionHeadModifierContext } from "../../../candidate/selector.js";
-import { quoteClauseBoundaryFromRelation, quoteStructuralRelationStartingAt } from "../../../../structural-relation/quote.js";
+import { quoteClauseBoundaryFromRelation } from "../../../../structural-relation/quote-clause-boundary.js";
+import { quoteStructuralRelationStartingAt } from "../../../../structural-relation/quote.js";
 import {
   quoteFocusLimitNegationTailStartingAt,
   quoteFocusMarkerStartingAt
@@ -118,11 +120,8 @@ export interface PredicateNominalHostFrameCandidate {
 
 type NominalFrameParseCache = Map<string, NominalFrameParse | null>;
 
-const nominalFrameParseCache = new WeakMap<readonly RuntimeHaruToken[], NominalFrameParseCache>();
-const nominalFrameParseLayoutCache = new WeakMap<
-  readonly RuntimeHaruToken[],
-  WeakMap<ProjectionEvidenceLayout, NominalFrameParseCache>
->();
+const NO_LAYOUT = {};
+const nominalFrameParseCache = new WeakMap<readonly RuntimeHaruToken[], WeakMap<object, WeakMap<object, NominalFrameParseCache>>>();
 
 function buildNominalFrameFromSpec(
   spec: NominalFrameSpec,
@@ -156,7 +155,7 @@ export function tryParseNominalFrame(
   options: { readonly layout?: ProjectionEvidenceLayout; readonly lookups: LookupTables; readonly numeric: NumericTables }
 ): NominalFrameParse | null {
   const cacheKey = `${cursor.pos}:${cursor.end}`;
-  const cache = nominalFrameParseCacheFor(cursor.tokens, options.layout);
+  const cache = nominalFrameParseCacheFor(cursor.tokens, options.layout, options.lookups);
   if (cache.has(cacheKey)) {
     return cache.get(cacheKey) ?? null;
   }
@@ -268,25 +267,25 @@ function consumeFollowingLastIndex(
 
 function nominalFrameParseCacheFor(
   tokens: readonly RuntimeHaruToken[],
-  layout: ProjectionEvidenceLayout | undefined
+  layout: ProjectionEvidenceLayout | undefined,
+  lookups: LookupTables
 ): NominalFrameParseCache {
-  if (layout === undefined) {
-    let cache = nominalFrameParseCache.get(tokens);
-    if (cache === undefined) {
-      cache = new Map();
-      nominalFrameParseCache.set(tokens, cache);
-    }
-    return cache;
+  let byLayout = nominalFrameParseCache.get(tokens);
+  if (byLayout === undefined) {
+    byLayout = new WeakMap();
+    nominalFrameParseCache.set(tokens, byLayout);
   }
-  let layoutCaches = nominalFrameParseLayoutCache.get(tokens);
-  if (layoutCaches === undefined) {
-    layoutCaches = new WeakMap();
-    nominalFrameParseLayoutCache.set(tokens, layoutCaches);
+  const layoutKey = layout ?? NO_LAYOUT;
+  let byContext = byLayout.get(layoutKey);
+  if (byContext === undefined) {
+    byContext = new WeakMap();
+    byLayout.set(layoutKey, byContext);
   }
-  let cache = layoutCaches.get(layout);
+  const contextKey = activeProtoLayout() ?? lookups;
+  let cache = byContext.get(contextKey);
   if (cache === undefined) {
     cache = new Map();
-    layoutCaches.set(layout, cache);
+    byContext.set(contextKey, cache);
   }
   return cache;
 }
@@ -467,14 +466,6 @@ function tryParseCategoryMemberFrame(
     consumed: end - markerStart,
     nextIndex: nextNonSpaceIndex(tokens, end, limit) ?? limit
   };
-}
-
-export function nominalFrameStructuralReferents(
-  parse: NominalFrameParse,
-): readonly RuntimeHaruToken[] {
-  return parse.frame.frameKind === "category_member" && parse.root.kind === "nominalPhrase"
-    ? [parse.root.head.token]
-    : [];
 }
 
 export function buildNominalTailChainPlan(

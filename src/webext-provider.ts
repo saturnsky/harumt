@@ -14,14 +14,22 @@ import { TranslationPipeline } from "./pipeline/core.js";
 import { resolveDataDir } from "./pipeline/data-paths.js";
 import { SudachiAnalyzer, type SudachiDictType } from "./analyzer/index.js";
 import { Dictionary, type UserLexiconEntry } from "./analyzer/dictionary.js";
-import { EagerDataSource, type DictionaryDataSource } from "./analyzer/dictionary-provider.js";
+import { EagerDataSource, readDictionarySection, type DictionaryDataSource } from "./analyzer/dictionary-provider.js";
 import { HaruDictionaryProvider } from "./analyzer/haru-dictionary-provider.js";
+import {
+  DEFAULT_SYSTEM_DICTIONARY_PAGE_BUDGET,
+  PageCacheBudget,
+  pageCountForBytes,
+  SyncAccessHandleDataSource,
+  type SyncAccessHandleLike
+} from "./analyzer/page-cached-source.js";
 import { loadSupplementalLexicon } from "./analyzer-lexicon.js";
 import { translationPipelineCacheKey, withPublicPipelineDefaults } from "./pipeline-cache-key.js";
 import type { WebextFileEntry } from "./webext-manifest.js";
 
 export { decideRegisters, type StreamDecision } from "./stateful/register-stream.js";
 export type { WebextFileEntry } from "./webext-manifest.js";
+export type { SyncAccessHandleLike } from "./analyzer/page-cached-source.js";
 
 interface ExtensionRuntime {
   readonly runtime?: { getURL?(path: string): string };
@@ -30,6 +38,11 @@ interface ExtensionRuntime {
 export interface WebextResourceOptions {
   readonly resolveUrl?: (path: string) => string;
   readonly baseUrl?: string | URL;
+  readonly systemDictionaryHandles?: {
+    readonly dictionary: SyncAccessHandleLike;
+    readonly index: SyncAccessHandleLike;
+  };
+  readonly pageCacheBytes?: number;
 }
 
 const DATA_ROOT = "data";
@@ -173,16 +186,26 @@ class WebextDataLoader implements DataLoader {
   }
 }
 
-let state: { readonly loader: WebextDataLoader; readonly ready: Promise<void> } | null = null;
+let state: {
+  readonly loader: WebextDataLoader;
+  readonly ready: Promise<void>;
+  readonly systemDictionary: HandleSystemDictionary | undefined;
+} | null = null;
+
+interface HandleSystemDictionary {
+  readonly dictionary: DictionaryDataSource;
+  readonly index: DictionaryDataSource;
+}
 const pipelinePromises = new Map<string, Promise<TranslationPipeline>>();
 
 export function initializeWebext(options: WebextResourceOptions = {}): Promise<void> {
   if (state !== null) {
     throw new Error("HaruMT webext layer is already initialized");
   }
+  const systemDictionary = handleSystemDictionary(options);
   const loader = new WebextDataLoader(resourceUrlResolver(options));
   setDataLoader(loader);
-  state = { loader, ready: initAllTables(loader) };
+  state = { loader, ready: initAllTables(loader), systemDictionary };
   return state.ready;
 }
 
@@ -194,11 +217,15 @@ export async function ensureInitialized(): Promise<void> {
   await state.ready;
 }
 
-function initializedLoader(): WebextDataLoader {
+function initializedState(): NonNullable<typeof state> {
   if (state === null) {
     throw new Error("HaruMT webext layer is not initialized");
   }
-  return state.loader;
+  return state;
+}
+
+function initializedLoader(): WebextDataLoader {
+  return initializedState().loader;
 }
 
 export async function createSudachiAnalyzer(
@@ -209,20 +236,19 @@ export async function createSudachiAnalyzer(
   systemDictPath = `${DATA_ROOT}/dict/system.hrdic`
 ): Promise<SudachiAnalyzer> {
   await ensureInitialized();
-  const loader = initializedLoader();
-  const systemIdxPath = systemDictPath.replace(/\.hrdic$/u, "") + ".hridx";
+  const { loader, systemDictionary } = initializedState();
   if (configPath !== undefined && configPath !== null) {
     throw new Error("Sudachi config files are not supported in the web extension build.");
   }
   if (userDictPath !== null) {
     throw new Error("Sudachi user dictionaries are not supported in the web extension build.");
   }
-  const [dictionaryBytes, indexBytes] = await Promise.all([
-    loader.readBinaryResource(systemDictPath),
-    loader.readBinaryResource(systemIdxPath)
-  ]);
   const provider = new HaruDictionaryProvider(systemDictPath, {
-    openBinary: (path) => sourceForDictionaryPath(path, dictionaryBytes, indexBytes),
+    openBinary: systemDictionary !== undefined
+      ? (path) => new BorrowedDataSource(
+        normalizePath(path).endsWith(".hridx") ? systemDictionary.index : systemDictionary.dictionary
+      )
+      : await fetchedSystemDictionary(loader, systemDictPath),
     readText: () => {
       throw new Error("External Sudachi text resources are not available in the web extension build.");
     }
@@ -327,16 +353,59 @@ async function translate(text: string, options: TranslationPipelineOptions = {})
   return pipeline.translate(text);
 }
 
-function sourceForDictionaryPath(
-  path: string,
-  dictionaryBytes: Uint8Array,
-  indexBytes: Uint8Array
-): DictionaryDataSource {
-  const normalized = normalizePath(path);
-  if (normalized.endsWith(".hridx")) {
-    return new EagerDataSource(indexBytes);
+async function fetchedSystemDictionary(
+  loader: WebextDataLoader,
+  systemDictPath: string
+): Promise<(path: string) => DictionaryDataSource> {
+  const systemIdxPath = systemDictPath.replace(/\.hrdic$/u, "") + ".hridx";
+  const [dictionaryBytes, indexBytes] = await Promise.all([
+    loader.readBinaryResource(systemDictPath),
+    loader.readBinaryResource(systemIdxPath)
+  ]);
+  return (path) => new EagerDataSource(normalizePath(path).endsWith(".hridx") ? indexBytes : dictionaryBytes);
+}
+
+function handleSystemDictionary(options: WebextResourceOptions): HandleSystemDictionary | undefined {
+  const { systemDictionaryHandles: handles, pageCacheBytes } = options;
+  if (handles === undefined) {
+    if (pageCacheBytes !== undefined) {
+      throw new TypeError("pageCacheBytes requires systemDictionaryHandles");
+    }
+    return undefined;
   }
-  return new EagerDataSource(dictionaryBytes);
+  const budget = new PageCacheBudget(
+    pageCacheBytes === undefined ? DEFAULT_SYSTEM_DICTIONARY_PAGE_BUDGET : pageCountForBytes(pageCacheBytes)
+  );
+  return {
+    dictionary: new SyncAccessHandleDataSource(handles.dictionary, { budget }),
+    index: new SyncAccessHandleDataSource(handles.index, { budget })
+  };
+}
+
+class BorrowedDataSource implements DictionaryDataSource {
+  readonly byteLength: number;
+  private closed = false;
+
+  constructor(private readonly source: DictionaryDataSource) {
+    this.byteLength = source.byteLength;
+  }
+
+  slice(offset: number, length: number): Uint8Array {
+    return this.live().slice(offset, length);
+  }
+
+  readSection(offset: number, length: number): Uint8Array {
+    return readDictionarySection(this.live(), offset, length);
+  }
+
+  close(): void {
+    this.closed = true;
+  }
+
+  private live(): DictionaryDataSource {
+    if (this.closed) throw new Error("dictionary data source is closed");
+    return this.source;
+  }
 }
 
 function normalizePath(path: string): string {

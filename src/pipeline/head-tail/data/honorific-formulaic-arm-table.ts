@@ -68,10 +68,6 @@ export function honorificFormulaicArmForms(arm: HonorificFormulaicArmId): Readon
   return honorificFormulaicArmRow(arm).forms;
 }
 
-export function honorificFormulaicArmRows(): ReadonlyMap<HonorificFormulaicArmId, HonorificFormulaicArmRow> {
-  return HONORIFIC_FORMULAIC_ARM_ROWS;
-}
-
 function loadHonorificFormulaicArmRows(): ReadonlyMap<HonorificFormulaicArmId, HonorificFormulaicArmRow> {
   if (_cache === undefined) throw new Error("Data not initialized");
   const table = new Map<HonorificFormulaicArmId, HonorificFormulaicArmRow>();

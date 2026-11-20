@@ -1,6 +1,6 @@
 {
   "name": "harumt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Japanese-to-Korean RBMT (Rule-Based Machine Translation) System",
   "author": "saturnsky",
   "license": "Apache-2.0",

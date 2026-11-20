@@ -5,6 +5,7 @@ import type { LookupTables } from "../lookup-tables.js";
 
 
 import { POS0, POS4, POS5A, 意志推量形_, 助動詞, 助動詞_タ, 助動詞_ダ, 助動詞_デス, 助動詞_マス } from "../../types/pos.js";
+import type { FunctionalChainResidualPlan } from "../../types/render-plan.js";
 type FunctionalAuxToken = Pick<RuntimeHaruToken, "pos">;
 
 export type FunctionalChunkKind = "desu" | "deshita" | "deshou" | "masu" | "mashita" | "mashou" | "unknown";
@@ -147,4 +148,19 @@ export function renderRepeatedFunctionalChainText(options: {
     .map((chunk) => renderRepeatedFunctionalAuxSuffix(chunk, { formal: options.formal, question: false, lookups: options.lookups }))
     .join("");
   return first + tail;
+}
+
+export function realizeFunctionalChainResidual(plan: FunctionalChainResidualPlan, formal: boolean, lookups: LookupTables): string {
+  return renderRepeatedFunctionalChainText({
+    koreanLemma: plan.koreanLemma,
+    irregular: plan.irregular,
+    koreanPos: plan.koreanPos,
+    chunks: plan.chunks,
+    formal,
+    question: plan.question,
+    ...(plan.jpDictForm === undefined || plan.jpDictForm === null ? {} : { jpDictForm: plan.jpDictForm }),
+    ...(plan.verbConjType === undefined || plan.verbConjType === null ? {} : { verbConjType: plan.verbConjType }),
+    forcePassive: plan.forcePassive === true,
+    lookups
+  });
 }

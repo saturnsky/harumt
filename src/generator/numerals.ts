@@ -204,10 +204,6 @@ export function getIndefiniteNumeralReading(
   return undefined;
 }
 
-export function getIndefiniteUnit(dictionaryForm: string, numeric: NumericTables): string | undefined {
-  return getIndefiniteNumeralReading(dictionaryForm, numeric)?.korean;
-}
-
 export interface NumeralSurfaceRealization {
   readonly text: string;
   readonly hasUnitWord: boolean;

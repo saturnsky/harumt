@@ -16,10 +16,7 @@ import {
   copulaFocusScopeBodyIdentityAt,
   scopeBridgeBodyClosesAt
 } from "../tail/predicate-root/matchers/scope-bridge.js";
-import {
-  copulaClauseContinuationEvidenceAfter,
-  elidedDewaNegativeBodyAdmissionStandsAt
-} from "../tail/predicate-root/integration.js";
+import { copulaClauseContinuationEvidenceAfter, elidedDewaNegativeBodyAdmissionStandsAt } from "../tail/predicate-root/integration/clause-boundaries.js";
 import {
   copulaFocusAdjunctRealizationFor,
   type CopulaFocusAdjunctRealization

@@ -2,7 +2,7 @@ import { conjugate, type IrregularType } from "../../../../../generator/conjugat
 import { type RenderedTarget, type SourceInternalBoundaryTarget, type TargetSegment } from "../../../../../types/projection.js";
 import { type RuntimeHaruToken } from "../../../../../types/token.js";
 import { type Warning } from "../../../../../types/warning.js";
-import { type ClauseLayout } from "../../../../clause-layout/index.js";
+import type { ClauseLayout } from "../../../../clause-layout/final-layout.js";
 import { type LookupTables } from "../../../../lookup-tables.js";
 import { type PassiveClass } from "../../../../voice-class.js";
 import { type ClauseBoundary } from "../commit.js";
@@ -298,6 +298,7 @@ export function nounCopulaFinalAllomorphHost(final: KoreanFinalForm): string {
   }
   return final.kind === "lemma" ? final.lemma : final.nounSurface;
 }
+
 
 export interface KoreanPredicateBase {
   readonly prefix: string;
@@ -1727,4 +1728,39 @@ function renderedFinalConnectiveSuffixes(
     default:
       return [];
   }
+}
+
+export function withWarnings(result: RenderOutcome, extra: readonly Warning[]): RenderOutcome {
+  if (!result.ok) return result;
+  if (extra.length === 0) return result;
+  return {
+    ...result,
+    warnings: [...(result.warnings ?? []), ...extra]
+  };
+}
+
+export function applyStemAffixToOutcome(outcome: RenderOutcome, stem: StemNode): RenderOutcome {
+  if (!outcome.ok) {
+    return outcome;
+  }
+  if (outcome.rawSourceSurface === true) {
+    return outcome;
+  }
+  const prefix = outcome.stemPrefixApplied === true ? "" : stem.koreanPrefix ?? "";
+  const suffix = stem.koreanSuffix ?? "";
+  if (prefix.length === 0 && suffix.length === 0) {
+    return outcome;
+  }
+  const prefixedText = concatPredicatePrefix(prefix, outcome.text);
+  const text = `${prefixedText}${suffix}`;
+  if (outcome.traced === undefined) {
+    return { ...outcome, text };
+  }
+  const prefixed = prefix.length === 0
+    ? outcome.traced
+    : tracedFuse(tracedStemHostSeg(stem, prefix, stem.source.tokens, "lexeme", "semantic"), outcome.traced, prefixedText);
+  const traced = suffix.length === 0
+    ? prefixed
+    : tracedCat(prefixed, tracedSeg(suffix, stem.source.tokens, "lexeme", "semantic"));
+  return { ...outcome, text, traced };
 }

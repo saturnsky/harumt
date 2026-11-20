@@ -1,5 +1,7 @@
 
 import { lazyValue } from "../../../data-loader.js";
+import { POS0, 動詞 } from "../../../types/pos.js";
+import type { BoundaryToken } from "../boundary/punctuation.js";
 import {
   loadHeadTailStringSetTable,
   requireHeadTailStringArray,
@@ -50,3 +52,7 @@ export const QUOTED_REPORTING_ADVERSATIVE_SURFACES: ReadonlySet<string> = lazyVa
   QUOTED_REPORTING_SETS,
   "adversative_surfaces"
 ));
+
+export function isSayVerbToken(token: BoundaryToken): boolean {
+  return (token.pos & POS0) === 動詞 && IU_LEXEME_FORMS.has(token.dictionaryForm ?? "");
+}

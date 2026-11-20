@@ -39,8 +39,6 @@ export function isReanalysisFlipRequest(value: unknown): value is ReanalysisFlip
     (value as { kind?: unknown }).kind === "reanalysis_flip";
 }
 
-export const CONN_KA_TERMINAL_QUESTION_PIN = "conn_ka_terminal_question";
-
 interface RuleReanalysisProposalCarrier {
   reanalysisProposals?: readonly {
     readonly rowId: string;

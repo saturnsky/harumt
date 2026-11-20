@@ -6,7 +6,7 @@ import { type RuntimeHaruToken } from "../../../../../types/token.js";
 import { type LookupTables } from "../../../../lookup-tables.js";
 import { type PassiveClass } from "../../../../voice-class.js";
 import { assertNever, type AuxOpNode, type ConjectureOp, type CopulaOp, type NegationFocusParticle, type NegationOp, type ObligationIdiomOp, type StemNode } from "../grammar.js";
-import { applyNegationChainToLemmaBase, applyNegationDepthToLemmaBase, lemmaPredicateBase, type BaseResult, type BaseSourceTrace, type KoreanFinalForm, type KoreanLemmaPredicateBase, type KoreanPredicateBase, type NegationLoweringOptions, type NounCopulaPredicateBase, nounCopulaFinalAllomorphHost, type OkBaseResult, predicateBasePolicyAllomorphHost, type PassiveStemOptions, type PredicateBasePolicy, type RenderContext, type ScopeCarrierKind, type ScopeCarrierPolicy, type ScopeCarrierStyle, baseResultWithNegationFocus } from "./base-model.js";
+import { applyNegationChainToLemmaBase, applyNegationDepthToLemmaBase, lemmaPredicateBase, type BaseResult, type BaseSourceTrace, type KoreanFinalForm, type KoreanLemmaPredicateBase, type KoreanPredicateBase, type NegationLoweringOptions, type NounCopulaPredicateBase, nounCopulaFinalAllomorphHost, type OkBaseResult, predicateBasePolicyAllomorphHost, type PassiveStemOptions, type PredicateBasePolicy, type RenderContext, type ScopeCarrierKind, type ScopeCarrierPolicy, type ScopeCarrierStyle, baseResultWithNegationFocus, type RenderFailure } from "./base-model.js";
 import { allomorphReadingForRealizedText, quantityUnitPhraseReading, trailingAllomorphHostText, type AllomorphReadingSourceToken } from "../../../../rendering/allomorph-host.js";
 import { nounToCopulaForm, obligationEmphasis } from "./final-forms.js";
 import { obligationBodyLemmas } from "../obligation-pattern-table.js";
@@ -1138,4 +1138,123 @@ export function lowerBaseKeepingFinal(
   return chainDepth >= 1
     ? applyExternalNegationDepthToPredicateBase(base, chainDepth, formal, options)
     : base;
+}
+
+export function committedTerminalRoleBase(
+  inputBaseResult: BaseResult,
+  finalNeg: NegationOp | null,
+  past: boolean,
+  formal: boolean,
+  lookups: LookupTables
+): { readonly ok: true; readonly base: KoreanPredicateBase; readonly past: boolean } | RenderFailure {
+  const baseResult = baseResultWithNegationFocus(inputBaseResult, finalNeg);
+  if (!baseResult.ok) {
+    return { ok: false, reason: baseResult.reason };
+  }
+  const chainDepth = finalNeg?.chainDepth ?? 0;
+  const effectivePast = past || (finalNeg?.chainPast ?? false);
+  if (chainDepth > 0 && baseResult.chainOnFinalSupported === false) {
+    const lowered = lowerFinalNegationDepthForCommittedBase(baseResult, chainDepth, formal, lookups);
+    if (lowered === null) {
+      return { ok: false, reason: "terminal role frame cannot lower committed final negation" };
+    }
+    return {
+      ok: true,
+      base: applyTerminalPrefixContraction(lowered, baseResult.terminalPrefixContraction, formal),
+      past: effectivePast || finalNegationLoweringForcesPast(baseResult, chainDepth)
+    };
+  }
+  const terminalBase = applyTerminalPrefixContraction(baseResult.base, baseResult.terminalPrefixContraction, formal);
+  if (chainDepth === 0) {
+    return { ok: true, base: terminalBase, past: effectivePast };
+  }
+  if (
+    chainDepth === 1 &&
+    finalNeg?.preferShortNegation === true &&
+    terminalBase.final.kind === "lemma"
+  ) {
+    const [prefix, lemma, irregular] = shortNegationPrefix(terminalBase.final.lemma, terminalBase.final.irregular, lookups);
+    return {
+      ok: true,
+      base: {
+        prefix: `${terminalBase.prefix}${prefix}`,
+        final: {
+          kind: "lemma",
+          lemma,
+          irregular,
+          isVerb: terminalBase.final.isVerb
+        }
+      },
+      past: effectivePast
+    };
+  }
+  const lowered = applyExternalNegationDepthToPredicateBase(
+    terminalBase,
+    chainDepth,
+    formal,
+    baseResult.finalNegationOptions
+  );
+  if (lowered === null) {
+    return { ok: false, reason: "terminal role frame cannot lower external negation depth" };
+  }
+  return { ok: true, base: lowered, past: effectivePast };
+}
+
+export function projectBaseAffirmativeGiFocus(
+  base: KoreanPredicateBase,
+  past: boolean,
+  formal: boolean,
+  particle: "는" | "도" | "까지" | "만"
+): string | null {
+  if (base.final.kind === "negativeNounCopula") {
+    const lowered = negativeNounCopulaChainBase(base.final, formal);
+    return projectBaseAffirmativeGiFocus({ prefix: `${base.prefix}${lowered.prefix}`, final: lowered.final }, past, formal, particle);
+  }
+  if (base.final.kind === "nounCopula" || base.final.kind === "boundNounCopula") {
+    const stem = nounCopulaPlainStem(
+      base.final.nounSurface,
+      past,
+      base.final.kind === "boundNounCopula" || base.final.isBoundNoun,
+      nounCopulaFinalAllomorphHost(base.final)
+    );
+    return `${base.prefix}${stem}기${particle}`;
+  }
+  const final = base.final;
+  if (past) {
+    const stem = final.lemma === "아니다"
+      ? "아니었"
+      : conjugate(final.lemma, final.irregular, "았/었");
+    return `${base.prefix}${stem}기${particle}`;
+  }
+  return `${base.prefix}${conjugate(final.lemma, final.irregular, "기")}${particle}`;
+}
+
+export function stateChangeBase(
+  inputBase: KoreanLemmaPredicateBase,
+  projection: "adjectival" | "adverbial"
+): KoreanLemmaPredicateBase {
+  const final = inputBase.final;
+  if (projection === "adjectival" && final.lemma === "이다" && !final.isVerb && inputBase.prefix.length > 0) {
+    const lastChar = inputBase.prefix.slice(-1);
+    return {
+      prefix: `${inputBase.prefix}${hasBatchim(lastChar) ? "이" : "가"} `,
+      final: { kind: "lemma", lemma: "되다", irregular: null, isVerb: true },
+      capabilities: { ...inputBase.capabilities, prohibitionHost: "action" },
+      ...(inputBase.policy === undefined ? {} : { policy: inputBase.policy })
+    };
+  }
+  if (projection === "adverbial" || final.isVerb) {
+    return {
+      prefix: `${inputBase.prefix}${conjugate(final.lemma, final.irregular, "게")} `,
+      final: { kind: "lemma", lemma: "되다", irregular: null, isVerb: true },
+      capabilities: { ...inputBase.capabilities, prohibitionHost: "action" },
+      ...(inputBase.policy === undefined ? {} : { policy: inputBase.policy })
+    };
+  }
+  return {
+    prefix: `${inputBase.prefix}${conjugate(final.lemma, final.irregular, "아/어")}`,
+    final: { kind: "lemma", lemma: "지다", irregular: null, isVerb: true },
+    capabilities: { ...inputBase.capabilities, prohibitionHost: "action" },
+    ...(inputBase.policy === undefined ? {} : { policy: inputBase.policy })
+  };
 }

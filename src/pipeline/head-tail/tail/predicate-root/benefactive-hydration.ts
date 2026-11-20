@@ -1,6 +1,6 @@
 import type { RuntimeHaruToken } from "../../../../types/token.js";
 import type { LookupTables } from "../../../lookup-tables.js";
-import type { ClauseLayout } from "../../../clause-layout/index.js";
+import type { ClauseLayout } from "../../../clause-layout/final-layout.js";
 import { buildBenefactiveContext, HonorificLevel, hydrateBenefactiveContextFromLayout, resolveBenefactiveTail } from "../../../semantics/honorific.js";
 import { PredicateArgumentView } from "../../candidate/semantic-classifiers.js";
 import type {
@@ -12,6 +12,7 @@ import type {
 } from "./grammar.js";
 import { isBenefactiveAspectOp } from "./inspect.js";
 import { 동사 } from "../../../../types/pos.js";
+import { benefactivePatternIdForAspect } from "./span-metadata.js";
 
 export function hydrateBenefactivePayloads<Root extends TailRootBase>(
   root: Root,
@@ -257,25 +258,6 @@ function hasOwnedObjectParticle(
   return new PredicateArgumentView(tokens, predicateTokenIdx, { lookups, layout })
     .arguments()
     .some((arg) => !arg.borrowed && arg.particle.surface === "を");
-}
-
-function benefactivePatternIdForAspect(aspect: BenefactiveAspectOp["aspect"]): BenefactiveAspectOp["aspect"] {
-  switch (aspect) {
-    case "te_morau":
-      return "te_morau";
-    case "te_ageru":
-      return "te_ageru";
-    case "te_kureru":
-      return "te_kureru";
-    case "te_kudasaru":
-      return "te_kudasaru";
-    case "te_itadaku":
-      return "te_itadaku";
-    case "te_moraeru":
-      return "te_moraeru";
-    case "te_itadakeru":
-      return "te_itadakeru";
-  }
 }
 
 function benefactiveKindForPattern(patternId: ReturnType<typeof benefactivePatternIdForAspect>): BenefactivePayload["kind"] {

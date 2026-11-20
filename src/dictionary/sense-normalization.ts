@@ -189,7 +189,7 @@ export function mintMorphemeEntryId(entry: SenseDictionaryEntry, source?: string
   }
   const namespace = surface === null ? "dict" : "surface";
   const form = surface ?? dictionaryForm!;
-  return `${namespace}:${JSON.stringify([form, reading, entryPosKey, canonicalEntrySource(source)])}`;
+  return [namespace, JSON.stringify([form, reading, entryPosKey, canonicalEntrySource(source)])].join(":");
 }
 
 function stringField(record: Record<string, unknown>, ...keys: readonly string[]): string | null {
@@ -304,7 +304,7 @@ export function normalizeEntrySenses<T extends SenseDictionaryEntry>(
 
   const entryId = mintMorphemeEntryId(entry, options.source);
   const priorityGroups = normalizeSensePriorityGroups(entry.senses, options);
-  const senses: NormalizedSense[] = [];
+  const senses = new Array<NormalizedSense>(priorityGroups.reduce((total, group) => total + group.length, 0));
   const frameIds = new Set<string>();
   let flatIndex = 0;
   for (const [priorityGroup, group] of priorityGroups.entries()) {
@@ -315,7 +315,7 @@ export function normalizeEntrySenses<T extends SenseDictionaryEntry>(
       normalizedSense.priorityGroup = priorityGroup;
       normalizedSense.priorityInGroup = priorityInGroup;
       normalizedSense.sourceFormat = "senses";
-      senses.push(normalizedSense);
+      senses[flatIndex] = normalizedSense;
       flatIndex += 1;
     }
   }

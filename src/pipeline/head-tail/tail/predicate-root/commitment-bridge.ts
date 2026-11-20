@@ -6,7 +6,7 @@ import type {
   CommitmentEntry,
   CommitmentSpan,
   CommitmentTranslation
-} from "../../../deferred-commitment.js";
+} from "../../../commitment/types.js";
 import {
   headEvidenceDecisionAdmitsCommitmentBridgeCandidate,
   resolveTailEvidenceDecision

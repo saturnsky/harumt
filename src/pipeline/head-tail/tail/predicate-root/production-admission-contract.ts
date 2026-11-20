@@ -566,398 +566,467 @@ function validatePredicateEnumArray(
 }
 
 export function validateProductionOpPredicate(predicate: ProductionOpPredicateSpec): void {
-  const enumSet = (values: readonly unknown[]): ReadonlySet<unknown> => new Set(values);
   switch (predicate.key) {
-    case "connective_fields": {
-      const keys = [
-        "connectiveIn", "connectiveNotIn", "surfaceAllomorphIn", "conditionalFlavor",
-        "conditionalQuoteEllipsisNotIn", "quotativeClosureIn", "quotativeClosureNotIn",
-        "quotativeMoodIn", "retrospectiveQuotativeFlavorIn", "quoteAttributiveFlavorIn",
-        "structuralContinuationNotIn"
-      ] as const;
-      const args = validatePredicateArgObject(predicate, keys);
-      const connectiveKinds = enumSet(CONNECTIVE_INVENTORY.map(({ kind }) => kind));
-      validatePredicateEnumArray(predicate, args, "connectiveIn", connectiveKinds);
-      validatePredicateEnumArray(predicate, args, "connectiveNotIn", connectiveKinds);
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "surfaceAllomorphIn",
-        enumSet(CONNECTIVE_SURFACE_ALLOMORPH_VALUES)
-      );
-      if (args.conditionalFlavor !== undefined &&
-        args.conditionalFlavor !== "present" && args.conditionalFlavor !== "absent") {
-        throw new Error("invalid production op predicate arg value: connective_fields.conditionalFlavor");
-      }
-      validatePredicateEnumArray(
-        predicate, args, "conditionalQuoteEllipsisNotIn", enumSet(CONDITIONAL_QUOTE_ELLIPSIS_VALUES)
-      );
-      validatePredicateEnumArray(predicate, args, "quotativeClosureIn", enumSet(QUOTATIVE_CLOSURE_VALUES));
-      validatePredicateEnumArray(
-        predicate, args, "quotativeClosureNotIn", enumSet(QUOTATIVE_CLOSURE_VALUES)
-      );
-      validatePredicateEnumArray(predicate, args, "quotativeMoodIn", enumSet(QUOTATIVE_MOOD_VALUES));
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "retrospectiveQuotativeFlavorIn",
-        enumSet(RETROSPECTIVE_QUOTATIVE_FLAVOR_VALUES)
-      );
-      validatePredicateEnumArray(
-        predicate, args, "quoteAttributiveFlavorIn", enumSet(QUOTE_ATTRIBUTIVE_FLAVOR_VALUES)
-      );
-      validatePredicateEnumArray(
-        predicate, args, "structuralContinuationNotIn", enumSet(STRUCTURAL_CONTINUATION_VALUES)
-      );
+    case "connective_fields":
+      validateConnectiveFieldsPredicate(predicate);
       return;
-    }
-    case "copula_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["variantIn", "polarityIn", "basicForm", "negativeBridgeFormIn", "honorificIn", "politeIn"]
-      );
-      validatePredicateEnumArray(predicate, args, "variantIn", enumSet(COPULA_VARIANT_VALUES));
-      validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "negativeBridgeFormIn",
-        enumSet(["absent", ...COPULA_NEGATIVE_BRIDGE_FORM_VALUES])
-      );
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "honorificIn",
-        enumSet(["absent", ...COPULA_HONORIFIC_VALUES])
-      );
-      validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
-      if (args.basicForm !== undefined && args.basicForm !== "absent") {
-        throw new Error("invalid production op predicate arg value: copula_fields.basicForm");
-      }
+    case "copula_fields":
+      validateCopulaFieldsPredicate(predicate);
       return;
-    }
-    case "tense_fields": {
-      const args = validatePredicateArgObject(predicate, ["tenseIn"]);
-      validatePredicateEnumArray(predicate, args, "tenseIn", enumSet(TENSE_VALUES));
+    case "tense_fields":
+      validateTenseFieldsPredicate(predicate);
       return;
-    }
-    case "modal_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["modalIn", "politeIn", "pastIn", "inner"]
-      );
-      validatePredicateEnumArray(
-        predicate, args, "modalIn", enumSet(MODAL_INVENTORY.map(({ modal }) => modal))
-      );
-      validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
-      validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
-      if (args.inner !== undefined && args.inner !== "absent") {
-        throw new Error("invalid production op predicate arg value: modal_fields.inner");
-      }
+    case "modal_fields":
+      validateModalFieldsPredicate(predicate);
       return;
-    }
-    case "youda_modal_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["formIn", "terminalIn", "readingIn", "politeIn", "pastIn", "inner"]
-      );
-      validatePredicateEnumArray(predicate, args, "formIn", enumSet(YOUDA_FORM_VALUES));
-      validatePredicateEnumArray(predicate, args, "terminalIn", enumSet(YOUDA_TERMINAL_VALUES));
-      validatePredicateEnumArray(predicate, args, "readingIn", enumSet(YOUDA_READING_VALUES));
-      validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
-      validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
-      if (args.inner !== undefined && args.inner !== "absent") {
-        throw new Error("invalid production op predicate arg value: youda_modal_fields.inner");
-      }
+    case "youda_modal_fields":
+      validateYoudaModalFieldsPredicate(predicate);
       return;
-    }
-    case "souda_hearsay_modal_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["readingIn", "politeIn", "pastIn", "inner"]
-      );
-      validatePredicateEnumArray(predicate, args, "readingIn", enumSet(SOUDA_READING_VALUES));
-      validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
-      validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
-      if (args.inner !== undefined && args.inner !== "absent") {
-        throw new Error("invalid production op predicate arg value: souda_hearsay_modal_fields.inner");
-      }
+    case "souda_hearsay_modal_fields":
+      validateSoudaHearsayModalFieldsPredicate(predicate);
       return;
-    }
-    case "adj_copula_bridge_fields": {
-      const args = validatePredicateArgObject(predicate, ["formIn"]);
-      validatePredicateEnumArray(
-        predicate, args, "formIn", enumSet(ADJ_COPULA_BRIDGE_FORM_VALUES)
-      );
+    case "adj_copula_bridge_fields":
+      validateAdjCopulaBridgeFieldsPredicate(predicate);
       return;
-    }
-    case "scope_bridge_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["headIn", "formIn", "particleIn", "polarityIn", "chainDepthIn", "politeIn"]
-      );
-      validatePredicateEnumArray(predicate, args, "headIn", enumSet(SCOPE_BRIDGE_HEAD_VALUES));
-      validatePredicateEnumArray(predicate, args, "formIn", enumSet(SCOPE_BRIDGE_FORM_VALUES));
-      validatePredicateEnumArray(
-        predicate, args, "particleIn", enumSet(SCOPE_BRIDGE_PARTICLE_VALUES)
-      );
-      validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
-      validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
-      const chainDepthIn = args.chainDepthIn;
-      if (chainDepthIn !== undefined && (
-        !Array.isArray(chainDepthIn) || chainDepthIn.length === 0 ||
-        new Set(chainDepthIn).size !== chainDepthIn.length ||
-        chainDepthIn.some((entry) => !Number.isInteger(entry) || Number(entry) < 0)
-      )) {
-        throw new Error(
-          "invalid production op predicate arg value: scope_bridge_fields.chainDepthIn"
-        );
-      }
+    case "scope_bridge_fields":
+      validateScopeBridgeFieldsPredicate(predicate);
       return;
-    }
-    case "aspect_fields": {
-      const args = validatePredicateArgObject(predicate, [
-        "aspectIn",
-        "teFocusParticle",
-        "teFocusTarget",
-        "ellipticTeIruSourceHost",
-        "terminalMood",
-        "semantic",
-        "semanticRenderStrategyIn",
-        "collapsed",
-        "followingRareruReading"
-      ]);
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "aspectIn",
-        enumSet(ASPECT_INVENTORY.map(({ aspect }) => aspect))
-      );
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "semanticRenderStrategyIn",
-        enumSet(ASPECT_RENDER_STRATEGY_VALUES)
-      );
-      for (const key of [
-        "teFocusParticle",
-        "teFocusTarget",
-        "ellipticTeIruSourceHost",
-        "terminalMood",
-        "semantic",
-        "collapsed",
-        "followingRareruReading"
-      ] as const) {
-        if (args[key] !== undefined && args[key] !== "absent") {
-          throw new Error(`invalid production op predicate arg value: aspect_fields.${key}`);
-        }
-      }
+    case "aspect_fields":
+      validateAspectFieldsPredicate(predicate);
       return;
-    }
-    case "benefactive_aspect": {
-      const args = validatePredicateArgObject(predicate, ["aspectIn"]);
-      validatePredicateEnumArray(
-        predicate, args, "aspectIn", enumSet(BENEFACTIVE_ASPECT_VALUES)
-      );
-      if (!Array.isArray(args.aspectIn) || args.aspectIn.length === 0) {
-        throw new Error("invalid production op predicate arg value: benefactive_aspect.aspectIn");
-      }
+    case "benefactive_aspect":
+      validateBenefactiveAspectPredicate(predicate);
       return;
-    }
-    case "voice_fields": {
-      const args = validatePredicateArgObject(predicate, ["voiceIn"]);
-      validatePredicateEnumArray(predicate, args, "voiceIn", enumSet(VOICE_VALUES));
-      if (!Array.isArray(args.voiceIn) || args.voiceIn.length === 0) {
-        throw new Error("invalid production op predicate arg value: voice_fields.voiceIn");
-      }
+    case "voice_fields":
+      validateVoiceFieldsPredicate(predicate);
       return;
-    }
-    case "postverb_auxiliary_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["auxiliaryKindIn", "potentialCompositionIn"]
-      );
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "auxiliaryKindIn",
-        enumSet(POSTVERB_AUXILIARY_INVENTORY.map((entry) => entry.auxiliary))
-      );
-      if (!Array.isArray(args.auxiliaryKindIn) || args.auxiliaryKindIn.length === 0) {
-        throw new Error(
-          "invalid production op predicate arg value: postverb_auxiliary_fields.auxiliaryKindIn"
-        );
-      }
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "potentialCompositionIn",
-        enumSet(POTENTIAL_COMPOSITION_VALUES)
-      );
+    case "postverb_auxiliary_fields":
+      validatePostverbAuxiliaryFieldsPredicate(predicate);
       return;
-    }
-    case "potential_koto_dekiru_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["particleKindIn", "focusParticle", "polarityIn", "politeIn", "pastIn"]
-      );
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "particleKindIn",
-        enumSet(POTENTIAL_KOTO_DEKIRU_PARTICLE_VALUES)
-      );
-      if (args.focusParticle !== undefined && args.focusParticle !== "absent") {
-        throw new Error(
-          "invalid production op predicate arg value: potential_koto_dekiru_fields.focusParticle"
-        );
-      }
-      validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
-      validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
-      validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
+    case "potential_koto_dekiru_fields":
+      validatePotentialKotoDekiruFieldsPredicate(predicate);
       return;
-    }
-    case "negation_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["chainDepthIn", "chainPastIn", "sourceSplit"]
-      );
-      if (
-        args.chainDepthIn !== undefined &&
-        (
-          !Array.isArray(args.chainDepthIn) ||
-          args.chainDepthIn.length === 0 ||
-          args.chainDepthIn.some((value) => !Number.isInteger(value) || value < 1)
-        )
-      ) {
-        throw new Error(
-          "invalid production op predicate arg value: negation_fields.chainDepthIn"
-        );
-      }
-      validatePredicateEnumArray(predicate, args, "chainPastIn", enumSet([true, false]));
-      if (args.sourceSplit !== undefined && args.sourceSplit !== "absent") {
-        throw new Error("invalid production op predicate arg value: negation_fields.sourceSplit");
-      }
+    case "negation_fields":
+      validateNegationFieldsPredicate(predicate);
       return;
-    }
-    case "predicate_quote_carrier_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["styleIn", "allomorphIn", "sourceTerminal"]
-      );
-      validatePredicateEnumArray(
-        predicate, args, "styleIn", enumSet(PREDICATE_QUOTE_CARRIER_STYLE_VALUES)
-      );
-      validatePredicateEnumArray(
-        predicate, args, "allomorphIn", enumSet(PREDICATE_QUOTE_CARRIER_ALLOMORPH_VALUES)
-      );
-      if (args.sourceTerminal !== undefined && typeof args.sourceTerminal !== "boolean") {
-        throw new Error("invalid production op predicate arg value: predicate_quote_carrier_fields.sourceTerminal");
-      }
+    case "predicate_quote_carrier_fields":
+      validatePredicateQuoteCarrierFieldsPredicate(predicate);
       return;
-    }
-    case "predicate_projection_carrier_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["carrierIn", "politeNotTrue", "pastNotTrue"]
-      );
-      validatePredicateEnumArray(
-        predicate, args, "carrierIn", enumSet(PREDICATE_PROJECTION_CARRIER_VALUES)
-      );
-      for (const key of ["politeNotTrue", "pastNotTrue"] as const) {
-        if (args[key] !== undefined && args[key] !== true) {
-          throw new Error(`invalid production op predicate arg value: ${predicate.key}.${key}`);
-        }
-      }
+    case "predicate_projection_carrier_fields":
+      validatePredicateProjectionCarrierFieldsPredicate(predicate);
       return;
-    }
     case "typed_conditional_quote":
     case "plain_te_hoshii":
       validatePredicateArgObject(predicate, []);
       return;
-    case "request_aspect": {
-      const args = validatePredicateArgObject(predicate, ["aspectIn"]);
-      validatePredicateEnumArray(predicate, args, "aspectIn", enumSet(REQUEST_ASPECT_VALUES));
+    case "request_aspect":
+      validateRequestAspectPredicate(predicate);
       return;
-    }
     case "request_command_base_aspect":
     case "chainable_aspect":
     case "chainable_idiom":
       validatePredicateArgObject(predicate, []);
       return;
-    case "idiom_kind_fields": {
-      const args = validatePredicateArgObject(predicate, ["idiomIn"]);
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "idiomIn",
-        enumSet(IDIOM_INVENTORY.map(({ idiom }) => idiom))
-      );
+    case "idiom_kind_fields":
+      validateIdiomKindFieldsPredicate(predicate);
       return;
-    }
-    case "permission_idiom_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["variantIn", "connectiveSurfaceIn"]
-      );
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "variantIn",
-        enumSet(PERMISSION_VARIANT_VALUES)
-      );
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "connectiveSurfaceIn",
-        enumSet(PERMISSION_CONNECTIVE_SURFACE_VALUES)
-      );
+    case "permission_idiom_fields":
+      validatePermissionIdiomFieldsPredicate(predicate);
       return;
-    }
-    case "obligation_idiom_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["variantIn", "polarityIn", "politeIn", "pastIn", "inner"]
-      );
-      validatePredicateEnumArray(predicate, args, "variantIn", enumSet(OBLIGATION_VARIANT_VALUES));
-      validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
-      validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
-      validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
-      if (args.inner !== undefined && args.inner !== "absent") {
-        throw new Error("invalid production op predicate arg value: obligation_idiom_fields.inner");
-      }
+    case "obligation_idiom_fields":
+      validateObligationIdiomFieldsPredicate(predicate);
       return;
-    }
-    case "forbidden_idiom_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["polarityIn", "politeIn", "pastIn", "inner"]
-      );
-      validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
-      validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
-      validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
-      if (args.inner !== undefined && args.inner !== "absent") {
-        throw new Error("invalid production op predicate arg value: forbidden_idiom_fields.inner");
-      }
+    case "forbidden_idiom_fields":
+      validateForbiddenIdiomFieldsPredicate(predicate);
       return;
-    }
-    case "negative_necessity_sumu_idiom_fields": {
-      const args = validatePredicateArgObject(
-        predicate,
-        ["variantIn", "polarityIn", "politeIn", "pastIn"]
-      );
-      validatePredicateEnumArray(
-        predicate,
-        args,
-        "variantIn",
-        enumSet(NEGATIVE_NECESSITY_SUMU_VARIANT_VALUES)
-      );
-      validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
-      validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
-      validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
+    case "negative_necessity_sumu_idiom_fields":
+      validateNegativeNecessitySumuIdiomFieldsPredicate(predicate);
       return;
+  }
+}
+
+function enumSet(values: readonly unknown[]): ReadonlySet<unknown> {
+  return new Set(values);
+}
+
+function validateConnectiveFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const keys = [
+    "connectiveIn", "connectiveNotIn", "surfaceAllomorphIn", "conditionalFlavor",
+    "conditionalQuoteEllipsisNotIn", "quotativeClosureIn", "quotativeClosureNotIn",
+    "quotativeMoodIn", "retrospectiveQuotativeFlavorIn", "quoteAttributiveFlavorIn",
+    "structuralContinuationNotIn"
+  ] as const;
+  const args = validatePredicateArgObject(predicate, keys);
+  const connectiveKinds = enumSet(CONNECTIVE_INVENTORY.map(({ kind }) => kind));
+  validatePredicateEnumArray(predicate, args, "connectiveIn", connectiveKinds);
+  validatePredicateEnumArray(predicate, args, "connectiveNotIn", connectiveKinds);
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "surfaceAllomorphIn",
+    enumSet(CONNECTIVE_SURFACE_ALLOMORPH_VALUES)
+  );
+  if (args.conditionalFlavor !== undefined &&
+    args.conditionalFlavor !== "present" && args.conditionalFlavor !== "absent") {
+    throw new Error("invalid production op predicate arg value: connective_fields.conditionalFlavor");
+  }
+  validatePredicateEnumArray(
+    predicate, args, "conditionalQuoteEllipsisNotIn", enumSet(CONDITIONAL_QUOTE_ELLIPSIS_VALUES)
+  );
+  validatePredicateEnumArray(predicate, args, "quotativeClosureIn", enumSet(QUOTATIVE_CLOSURE_VALUES));
+  validatePredicateEnumArray(
+    predicate, args, "quotativeClosureNotIn", enumSet(QUOTATIVE_CLOSURE_VALUES)
+  );
+  validatePredicateEnumArray(predicate, args, "quotativeMoodIn", enumSet(QUOTATIVE_MOOD_VALUES));
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "retrospectiveQuotativeFlavorIn",
+    enumSet(RETROSPECTIVE_QUOTATIVE_FLAVOR_VALUES)
+  );
+  validatePredicateEnumArray(
+    predicate, args, "quoteAttributiveFlavorIn", enumSet(QUOTE_ATTRIBUTIVE_FLAVOR_VALUES)
+  );
+  validatePredicateEnumArray(
+    predicate, args, "structuralContinuationNotIn", enumSet(STRUCTURAL_CONTINUATION_VALUES)
+  );
+}
+
+function validateCopulaFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["variantIn", "polarityIn", "basicForm", "negativeBridgeFormIn", "honorificIn", "politeIn"]
+  );
+  validatePredicateEnumArray(predicate, args, "variantIn", enumSet(COPULA_VARIANT_VALUES));
+  validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "negativeBridgeFormIn",
+    enumSet(["absent", ...COPULA_NEGATIVE_BRIDGE_FORM_VALUES])
+  );
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "honorificIn",
+    enumSet(["absent", ...COPULA_HONORIFIC_VALUES])
+  );
+  validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
+  if (args.basicForm !== undefined && args.basicForm !== "absent") {
+    throw new Error("invalid production op predicate arg value: copula_fields.basicForm");
+  }
+}
+
+function validateTenseFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(predicate, ["tenseIn"]);
+  validatePredicateEnumArray(predicate, args, "tenseIn", enumSet(TENSE_VALUES));
+}
+
+function validateModalFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["modalIn", "politeIn", "pastIn", "inner"]
+  );
+  validatePredicateEnumArray(
+    predicate, args, "modalIn", enumSet(MODAL_INVENTORY.map(({ modal }) => modal))
+  );
+  validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
+  validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
+  if (args.inner !== undefined && args.inner !== "absent") {
+    throw new Error("invalid production op predicate arg value: modal_fields.inner");
+  }
+}
+
+function validateYoudaModalFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["formIn", "terminalIn", "readingIn", "politeIn", "pastIn", "inner"]
+  );
+  validatePredicateEnumArray(predicate, args, "formIn", enumSet(YOUDA_FORM_VALUES));
+  validatePredicateEnumArray(predicate, args, "terminalIn", enumSet(YOUDA_TERMINAL_VALUES));
+  validatePredicateEnumArray(predicate, args, "readingIn", enumSet(YOUDA_READING_VALUES));
+  validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
+  validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
+  if (args.inner !== undefined && args.inner !== "absent") {
+    throw new Error("invalid production op predicate arg value: youda_modal_fields.inner");
+  }
+}
+
+function validateSoudaHearsayModalFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["readingIn", "politeIn", "pastIn", "inner"]
+  );
+  validatePredicateEnumArray(predicate, args, "readingIn", enumSet(SOUDA_READING_VALUES));
+  validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
+  validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
+  if (args.inner !== undefined && args.inner !== "absent") {
+    throw new Error("invalid production op predicate arg value: souda_hearsay_modal_fields.inner");
+  }
+}
+
+function validateAdjCopulaBridgeFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(predicate, ["formIn"]);
+  validatePredicateEnumArray(
+    predicate, args, "formIn", enumSet(ADJ_COPULA_BRIDGE_FORM_VALUES)
+  );
+}
+
+function validateScopeBridgeFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["headIn", "formIn", "particleIn", "polarityIn", "chainDepthIn", "politeIn"]
+  );
+  validatePredicateEnumArray(predicate, args, "headIn", enumSet(SCOPE_BRIDGE_HEAD_VALUES));
+  validatePredicateEnumArray(predicate, args, "formIn", enumSet(SCOPE_BRIDGE_FORM_VALUES));
+  validatePredicateEnumArray(
+    predicate, args, "particleIn", enumSet(SCOPE_BRIDGE_PARTICLE_VALUES)
+  );
+  validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
+  validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
+  const chainDepthIn = args.chainDepthIn;
+  if (chainDepthIn !== undefined && (
+    !Array.isArray(chainDepthIn) || chainDepthIn.length === 0 ||
+    new Set(chainDepthIn).size !== chainDepthIn.length ||
+    chainDepthIn.some((entry) => !Number.isInteger(entry) || Number(entry) < 0)
+  )) {
+    throw new Error(
+      "invalid production op predicate arg value: scope_bridge_fields.chainDepthIn"
+    );
+  }
+}
+
+function validateAspectFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(predicate, [
+    "aspectIn",
+    "teFocusParticle",
+    "teFocusTarget",
+    "ellipticTeIruSourceHost",
+    "terminalMood",
+    "semantic",
+    "semanticRenderStrategyIn",
+    "collapsed",
+    "followingRareruReading"
+  ]);
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "aspectIn",
+    enumSet(ASPECT_INVENTORY.map(({ aspect }) => aspect))
+  );
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "semanticRenderStrategyIn",
+    enumSet(ASPECT_RENDER_STRATEGY_VALUES)
+  );
+  for (const key of [
+    "teFocusParticle",
+    "teFocusTarget",
+    "ellipticTeIruSourceHost",
+    "terminalMood",
+    "semantic",
+    "collapsed",
+    "followingRareruReading"
+  ] as const) {
+    if (args[key] !== undefined && args[key] !== "absent") {
+      throw new Error(`invalid production op predicate arg value: aspect_fields.${key}`);
     }
   }
+}
+
+function validateBenefactiveAspectPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(predicate, ["aspectIn"]);
+  validatePredicateEnumArray(
+    predicate, args, "aspectIn", enumSet(BENEFACTIVE_ASPECT_VALUES)
+  );
+  if (!Array.isArray(args.aspectIn) || args.aspectIn.length === 0) {
+    throw new Error("invalid production op predicate arg value: benefactive_aspect.aspectIn");
+  }
+}
+
+function validateVoiceFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(predicate, ["voiceIn"]);
+  validatePredicateEnumArray(predicate, args, "voiceIn", enumSet(VOICE_VALUES));
+  if (!Array.isArray(args.voiceIn) || args.voiceIn.length === 0) {
+    throw new Error("invalid production op predicate arg value: voice_fields.voiceIn");
+  }
+}
+
+function validatePostverbAuxiliaryFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["auxiliaryKindIn", "potentialCompositionIn"]
+  );
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "auxiliaryKindIn",
+    enumSet(POSTVERB_AUXILIARY_INVENTORY.map((entry) => entry.auxiliary))
+  );
+  if (!Array.isArray(args.auxiliaryKindIn) || args.auxiliaryKindIn.length === 0) {
+    throw new Error(
+      "invalid production op predicate arg value: postverb_auxiliary_fields.auxiliaryKindIn"
+    );
+  }
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "potentialCompositionIn",
+    enumSet(POTENTIAL_COMPOSITION_VALUES)
+  );
+}
+
+function validatePotentialKotoDekiruFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["particleKindIn", "focusParticle", "polarityIn", "politeIn", "pastIn"]
+  );
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "particleKindIn",
+    enumSet(POTENTIAL_KOTO_DEKIRU_PARTICLE_VALUES)
+  );
+  if (args.focusParticle !== undefined && args.focusParticle !== "absent") {
+    throw new Error(
+      "invalid production op predicate arg value: potential_koto_dekiru_fields.focusParticle"
+    );
+  }
+  validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
+  validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
+  validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
+}
+
+function validateNegationFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["chainDepthIn", "chainPastIn", "sourceSplit"]
+  );
+  if (
+    args.chainDepthIn !== undefined &&
+    (
+      !Array.isArray(args.chainDepthIn) ||
+      args.chainDepthIn.length === 0 ||
+      args.chainDepthIn.some((value) => !Number.isInteger(value) || value < 1)
+    )
+  ) {
+    throw new Error(
+      "invalid production op predicate arg value: negation_fields.chainDepthIn"
+    );
+  }
+  validatePredicateEnumArray(predicate, args, "chainPastIn", enumSet([true, false]));
+  if (args.sourceSplit !== undefined && args.sourceSplit !== "absent") {
+    throw new Error("invalid production op predicate arg value: negation_fields.sourceSplit");
+  }
+}
+
+function validatePredicateQuoteCarrierFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["styleIn", "allomorphIn", "sourceTerminal"]
+  );
+  validatePredicateEnumArray(
+    predicate, args, "styleIn", enumSet(PREDICATE_QUOTE_CARRIER_STYLE_VALUES)
+  );
+  validatePredicateEnumArray(
+    predicate, args, "allomorphIn", enumSet(PREDICATE_QUOTE_CARRIER_ALLOMORPH_VALUES)
+  );
+  if (args.sourceTerminal !== undefined && typeof args.sourceTerminal !== "boolean") {
+    throw new Error("invalid production op predicate arg value: predicate_quote_carrier_fields.sourceTerminal");
+  }
+}
+
+function validatePredicateProjectionCarrierFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["carrierIn", "politeNotTrue", "pastNotTrue"]
+  );
+  validatePredicateEnumArray(
+    predicate, args, "carrierIn", enumSet(PREDICATE_PROJECTION_CARRIER_VALUES)
+  );
+  for (const key of ["politeNotTrue", "pastNotTrue"] as const) {
+    if (args[key] !== undefined && args[key] !== true) {
+      throw new Error(`invalid production op predicate arg value: ${predicate.key}.${key}`);
+    }
+  }
+}
+
+function validateRequestAspectPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(predicate, ["aspectIn"]);
+  validatePredicateEnumArray(predicate, args, "aspectIn", enumSet(REQUEST_ASPECT_VALUES));
+}
+
+function validateIdiomKindFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(predicate, ["idiomIn"]);
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "idiomIn",
+    enumSet(IDIOM_INVENTORY.map(({ idiom }) => idiom))
+  );
+}
+
+function validatePermissionIdiomFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["variantIn", "connectiveSurfaceIn"]
+  );
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "variantIn",
+    enumSet(PERMISSION_VARIANT_VALUES)
+  );
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "connectiveSurfaceIn",
+    enumSet(PERMISSION_CONNECTIVE_SURFACE_VALUES)
+  );
+}
+
+function validateObligationIdiomFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["variantIn", "polarityIn", "politeIn", "pastIn", "inner"]
+  );
+  validatePredicateEnumArray(predicate, args, "variantIn", enumSet(OBLIGATION_VARIANT_VALUES));
+  validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
+  validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
+  validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
+  if (args.inner !== undefined && args.inner !== "absent") {
+    throw new Error("invalid production op predicate arg value: obligation_idiom_fields.inner");
+  }
+}
+
+function validateForbiddenIdiomFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["polarityIn", "politeIn", "pastIn", "inner"]
+  );
+  validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
+  validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
+  validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
+  if (args.inner !== undefined && args.inner !== "absent") {
+    throw new Error("invalid production op predicate arg value: forbidden_idiom_fields.inner");
+  }
+}
+
+function validateNegativeNecessitySumuIdiomFieldsPredicate(predicate: ProductionOpPredicateSpec): void {
+  const args = validatePredicateArgObject(
+    predicate,
+    ["variantIn", "polarityIn", "politeIn", "pastIn"]
+  );
+  validatePredicateEnumArray(
+    predicate,
+    args,
+    "variantIn",
+    enumSet(NEGATIVE_NECESSITY_SUMU_VARIANT_VALUES)
+  );
+  validatePredicateEnumArray(predicate, args, "polarityIn", enumSet(POLARITY_VALUES));
+  validatePredicateEnumArray(predicate, args, "politeIn", enumSet([true, false]));
+  validatePredicateEnumArray(predicate, args, "pastIn", enumSet([true, false]));
 }
 
 export function evaluateProductionOpPredicate(

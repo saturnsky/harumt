@@ -2,7 +2,7 @@ import type { MorphemeDictionary } from "../dictionary/morpheme.js";
 import type { MorphemeSense } from "../types/dictionary.js";
 import type { RuntimeHaruToken } from "../types/token.js";
 import { POS0, 助詞, 補助記号 } from "../types/pos.js";
-import type { LexicalParticleBoundaryClaim } from "./clause-layout/index.js";
+import type { LexicalParticleBoundaryClaim } from "./clause-layout/layout-types.js";
 import {
   activeProtoLayout,
   activeProtoPostposedModifiedPredicateIndexBefore,

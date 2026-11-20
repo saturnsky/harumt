@@ -2,7 +2,6 @@ import type {
   HeadOwnerCandidateCommitmentEvidenceDescriptor,
   HeadOwnerEvidencePolicyDescriptor
 } from "../head/profile.js";
-import type { HeadTailGuardrailDescriptor } from "../audit/types.js";
 
 const SOURCE_BEARING_NOMINAL_FRAME_POLICY: HeadOwnerEvidencePolicyDescriptor = {
   kind: "source_bearing_nominal_frame_owner",
@@ -45,29 +44,6 @@ const PREDICATE_TAIL_WEAK_ATTACHMENT_POLICY: HeadOwnerEvidencePolicyDescriptor =
   kind: "weak_attachment_source_bearing_tail_owner",
   description: ""
 };
-
-export function describeOwnerEvidenceGuardrails(): readonly HeadTailGuardrailDescriptor[] {
-  return [
-    {
-      id: "nominal_source_bearing_owner_evidence",
-      kind: "owner_evidence_contract",
-      required: true,
-      description: ""
-    },
-    {
-      id: "tail_source_bearing_owner_evidence",
-      kind: "owner_evidence_contract",
-      required: true,
-      description: ""
-    },
-    {
-      id: "tail_continuation_owner_evidence",
-      kind: "owner_evidence_contract",
-      required: true,
-      description: ""
-    }
-  ];
-}
 
 export function sourceBearingNominalFrameOwnerEvidencePolicies(): readonly HeadOwnerEvidencePolicyDescriptor[] {
   return [SOURCE_BEARING_NOMINAL_FRAME_POLICY];

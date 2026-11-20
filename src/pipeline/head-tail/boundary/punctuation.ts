@@ -10,8 +10,14 @@ import type {
 
 import {
   isSentenceTerminalPunctuationSubtype,
-  pos0in, POS0, POS01, POS1, PUNCTUATION_BITS,
-  助詞_終助詞, 補助記号, 補助記号_括弧開, 補助記号_括弧閉, 補助記号_読点
+  pos0in,
+  POS01,
+  POS1,
+  PUNCTUATION_BITS,
+  助詞_終助詞,
+  補助記号_括弧開,
+  補助記号_括弧閉,
+  補助記号_読点
 } from "../../../types/pos.js";
 export interface BoundaryToken {
   readonly surface: string;
@@ -127,15 +133,6 @@ export function canonicalHardTerminalPunctuationSurfaceFor(
 
 export function isTrailingPunctuationSurface(surface: string | undefined): boolean {
   return surface !== undefined && TRAILING_PUNCTUATION_SURFACES.has(surface);
-}
-
-export function isSubtitleTerminalTrailingPunctuationToken(
-  token: BoundaryToken | undefined,
-  surfaces: ReadonlySet<string>,
-): boolean {
-  return token !== undefined &&
-    isBoundaryPunctuationCategoryToken(token) &&
-    surfaces.has(token.surface);
 }
 
 export function subtitleTerminalTrailingPunctuationRunRelationAt(

@@ -40,3 +40,8 @@ export function isSecondaryParticle(
 ): boolean {
   return secondaryParticleCanonical(token) === canonical;
 }
+
+export function isDegreeExtentParticle(token: SecondaryParticleToken | undefined): boolean {
+  const canonical = secondaryParticleCanonical(token);
+  return canonical === "ほど" || canonical === "くらい";
+}

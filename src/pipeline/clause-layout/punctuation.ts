@@ -12,6 +12,8 @@ import {
   type HardTerminalPunctuationSurfaceClass
 } from "../head-tail/boundary/punctuation.js";
 import type { UtteranceInitialPauseEdgeVerdict } from "../demo-discourse.js";
+import { POS0, 記号, 補助記号 } from "../../types/pos.js";
+import type { ClauseToken } from "./layout-types.js";
 
 export { BOUNDARY_PUNCTUATION_POS0 as CLAUSE_PUNCT_POS0 } from "../head-tail/boundary/punctuation.js";
 
@@ -232,4 +234,47 @@ export function collectCopulaPauseBridgeEvidence<T extends ClausePunctuationToke
     });
   }
   return bridges;
+}
+
+export function skipClausePunctuationForward<T extends ClausePunctuationToken>(
+  tokens: readonly T[],
+  start: number,
+  endExclusive: number
+): number {
+  let index = start;
+  while (index < endExclusive && isClausePunctuationToken(tokens[index])) {
+    index += 1;
+  }
+  return index;
+}
+
+export const CLAUSE_PUNCT_POS0_NUM: ReadonlySet<number> = new Set([補助記号, 記号]);
+
+export function isOpeningPunct(token: ClauseToken): boolean {
+  return isClauseOpeningPunctuationToken(token);
+}
+
+export function isBoundaryPunct(token: ClauseToken): boolean {
+  return isClauseBoundaryPunctuationToken(token);
+}
+
+export function isAbsorbablePunct(token: ClauseToken): boolean {
+  return CLAUSE_PUNCT_POS0_NUM.has(token.pos & POS0) && (isBoundaryPunct(token) || isTrailingPunct(token));
+}
+
+export function isTrailingPunct(token: ClauseToken): boolean {
+  return isClauseTrailingPunctuationToken(token);
+}
+
+export function nextAfterAbsorbableRun(tokens: readonly ClauseToken[], start: number): number {
+  let lastAbsorbable = start - 1;
+  for (let index = start; index < tokens.length; index += 1) {
+    const token = tokens[index]!;
+    if (isAbsorbablePunct(token)) {
+      lastAbsorbable = index;
+      continue;
+    }
+    break;
+  }
+  return lastAbsorbable + 1;
 }

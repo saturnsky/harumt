@@ -1,7 +1,8 @@
 import type { IrregularType } from "../../../../../generator/conjugator.js";
 import type { RuntimeHaruToken } from "../../../../../types/token.js";
 import type { Warning } from "../../../../../types/warning.js";
-import type { ClauseLayout, ProjectionEvidenceLayout } from "../../../../clause-layout/index.js";
+import type { ClauseLayout } from "../../../../clause-layout/final-layout.js";
+import type { ProjectionEvidenceLayout } from "../../../../clause-layout/layout-types.js";
 import type { ContextGrammar } from "../../../../context.js";
 import type {
   CandidateSetProjection,

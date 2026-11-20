@@ -569,13 +569,8 @@ export type LegacySurfaceCompositionProducer =
   | "content_resolver"
   | "content_resolver_runtime"
   | "deferred_commitment"
-  | "pattern_runtime"
-  | "postaux_pattern"
-  | "rule_pre_entry"
-  | "rule_tail_nominalization"
   | "semantic_frame"
-  | "special_content_phase"
-  | "structural_relation";
+  | "special_content_phase";
 
 type LegacySurfaceCompositionInit =
   | (Omit<LegacySurfaceCompositionPlanFields, "kind"> & { text: string; korean?: string })
@@ -734,10 +729,3 @@ function auxTokensStartWithNegative(auxTokens: readonly RuntimeHaruToken[]): boo
 function isPotentialCapabilityLemma(koreanLemma: string): boolean {
   return koreanLemma.endsWith("수 있다") || koreanLemma.endsWith("수 없다");
 }
-
-export type NamedRenderPlan =
-  | LegacySurfaceCompositionPlan
-  | SemanticCarrierPredicatePlan
-  | DiscourseConnectivePlan
-  | YoudaModalityPlan
-  | WakeExplanationPlan;

@@ -1,6 +1,6 @@
-﻿import type { RuntimeHaruToken } from "../types/token.js";
+import type { RuntimeHaruToken } from "../types/token.js";
 import type { RenderPlan } from "../types/render-plan.js";
-import type { ProjectionEvidenceLayout } from "./clause-layout/index.js";
+import type { ProjectionEvidenceLayout } from "./clause-layout/layout-types.js";
 import type { TraceDetailValue } from "./trace.js";
 import { FunctionalKind, UnitType } from "./translation/unit.js";
 import {
@@ -82,7 +82,6 @@ import {
   名詞,
   名詞_固有名詞_地名,
   接尾辞_名詞的,
-  連体形_,
   連用形_,
   連用形_促音便,
   관형사,
@@ -93,7 +92,10 @@ import {
   isAdverbCapableNominal,
   isNominalLike,
   isNaAdjCapable,
-  NOMINAL_BITS, pos0in, INFLECTABLE_BITS, 助詞_格助詞
+  NOMINAL_BITS,
+  pos0in,
+  INFLECTABLE_BITS,
+  助詞_格助詞
 } from "../types/pos.js";
 import { IU_LEXEME_FORMS } from "./head-tail/data/quoted-reporting-sets.js";
 interface ParticleHeadDispatchContext {
@@ -251,469 +253,511 @@ interface ParticleFunctionalMarkerBuildPayload {
   readonly headRewrite?: ParticleHeadRewriteDescriptor | null;
 }
 
+type ParticleHeadDispatchProfile = HeadProfile<ParticleHeadDispatchContext, ParticleHeadBuildPayload>;
+
 let _particleHeadDispatchProfiles: readonly HeadProfile<ParticleHeadDispatchContext, ParticleHeadBuildPayload>[] | undefined;
 function getParticleHeadDispatchProfiles(): readonly HeadProfile<ParticleHeadDispatchContext, ParticleHeadBuildPayload>[] {
   if (_particleHeadDispatchProfiles !== undefined) return _particleHeadDispatchProfiles;
   _particleHeadDispatchProfiles = [
-    {
-      id: "datte_functional_marker_adapter",
-      owner: "assembler",
-      continuationCapabilities: [
-        {
-          id: "datte_causal_discourse_marker",
-          kind: "connective",
-          surfaces: ["だって"],
-          description: ""
-        },
-        {
-          id: "datte_focus_particle_marker",
-          kind: "focus",
-          surfaces: ["Nだって", "Pだって"],
-          description: ""
-        }
-      ],
-      requiredContinuationCapabilityIds: (result) => {
-        if (result.kind !== "functional_marker_adapter") {
-          return [];
-        }
-        switch (result.markerKind) {
-          case "datte_causal_discourse":
-            return ["datte_causal_discourse_marker"];
-          case "datte_focus_particle":
-            return ["datte_focus_particle_marker"];
-          default:
-            return [];
-        }
-      },
-      tryBuild: (context) => context.datteFunctionalMarker()
-    },
-    {
-      id: "toiu_functional_marker_adapter",
-      owner: "assembler",
-      continuationCapabilities: [
-        {
-          id: "toiu_attributive_marker",
-          kind: "attributive_quote",
-          surfaces: ["というN", "っていうN"],
-          description: ""
-        },
-        {
-          id: "toiu_comparative_marker",
-          kind: "connective",
-          surfaces: ["というより", "っていうより"],
-          description: ""
-        }
-      ],
-      requiredContinuationCapabilityIds: (result) => {
-        if (result.kind !== "functional_marker_adapter") {
-          return [];
-        }
-        return result.markerKind === "toiu_comparative"
-          ? ["toiu_comparative_marker"]
-          : ["toiu_attributive_marker"];
-      },
-      tryBuild: (context) => context.toiuFunctionalMarker()
-    },
-    {
-      id: "tte_functional_marker_adapter",
-      owner: "assembler",
-      continuationCapabilities: [
-        {
-          id: "tte_quote_marker",
-          kind: "quote",
-          surfaces: ["Pって言う", "」って"],
-          description: ""
-        },
-        {
-          id: "tte_attributive_marker",
-          kind: "attributive_quote",
-          surfaces: ["NってN", "PってN"],
-          description: ""
-        },
-        {
-          id: "tte_topic_marker",
-          kind: "topic",
-          surfaces: ["Nって"],
-          description: ""
-        }
-      ],
-      requiredContinuationCapabilityIds: (result) => {
-        if (result.kind !== "functional_marker_adapter") {
-          return [];
-        }
-        switch (result.markerKind) {
-          case "tte_quote":
-            return ["tte_quote_marker"];
-          case "tte_attributive":
-            return ["tte_attributive_marker"];
-          case "tte_topic":
-            return ["tte_topic_marker"];
-          default:
-            return [];
-        }
-      },
-      tryBuild: (context) => context.tteFunctionalMarker()
-    },
-    {
-      id: "to_functional_marker_adapter",
-      owner: "assembler",
-      continuationCapabilities: [
-        {
-          id: "to_adverbial_marker",
-          kind: "adverbial",
-          surfaces: ["副詞と", "形状詞-タリと", "畳語形状詞と"],
-          description: ""
-        },
-        {
-          id: "to_naru_result_marker",
-          kind: "case_frame",
-          surfaces: ["Nとなる"],
-          description: ""
-        },
-        {
-          id: "to_suru_transform_marker",
-          kind: "case_frame",
-          surfaces: ["Nとする"],
-          description: ""
-        }
-      ],
-      requiredContinuationCapabilityIds: (result) => {
-        if (result.kind !== "functional_marker_adapter") {
-          return [];
-        }
-        switch (result.markerKind) {
-          case "to_adverbial":
-            return ["to_adverbial_marker"];
-          case "to_naru_result":
-            return ["to_naru_result_marker"];
-          case "to_suru_transform":
-            return ["to_suru_transform_marker"];
-          default:
-            return [];
-        }
-      },
-      tryBuild: (context) => context.toFunctionalMarker()
-    },
-    {
-      id: "orphan_connective_particle_adapter",
-      owner: "assembler",
-      continuationCapabilities: [
-        {
-          id: "orphan_connective_particle_marker",
-          kind: "connective",
-          surfaces: ["けど"],
-          description: ""
-        },
-        {
-          id: "orphan_connective_tail_particle_skip",
-          kind: "connective",
-          surfaces: ["けども", "けれども"],
-          description: ""
-        }
-      ],
-      requiredContinuationCapabilityIds: (result) => {
-        if (result.kind !== "functional_marker_adapter") {
-          return [];
-        }
-        switch (result.markerKind) {
-          case "orphan_connective_particle":
-            return ["orphan_connective_particle_marker"];
-          case "orphan_connective_tail_particle_skip":
-            return ["orphan_connective_tail_particle_skip"];
-          default:
-            return [];
-        }
-      },
-      tryBuild: (context) => context.orphanConnectiveParticle()
-    },
-    {
-      id: "toka_functional_marker_adapter",
-      owner: "assembler",
-      continuationCapabilities: [
-        {
-          id: "toka_listing_middle_marker",
-          kind: "listing",
-          surfaces: ["NとかNとか"],
-          description: ""
-        },
-        {
-          id: "toka_listing_final_marker",
-          kind: "listing",
-          surfaces: ["Nとか...Nとか"],
-          description: ""
-        },
-        {
-          id: "toka_single_example_marker",
-          kind: "listing",
-          surfaces: ["NとかV"],
-          description: ""
-        },
-        {
-          id: "toka_exemplifier_marker",
-          kind: "listing",
-          surfaces: ["...かとか", "Nとか格助詞"],
-          description: ""
-        }
-      ],
-      requiredContinuationCapabilityIds: (result) => {
-        if (result.kind !== "functional_marker_adapter") {
-          return [];
-        }
-        switch (result.markerKind) {
-          case "toka_listing_middle":
-            return ["toka_listing_middle_marker"];
-          case "toka_listing_final":
-            return ["toka_listing_final_marker"];
-          case "toka_single_example":
-            return ["toka_single_example_marker"];
-          case "toka_exemplifier":
-            return ["toka_exemplifier_marker"];
-          default:
-            return [];
-        }
-      },
-      tryBuild: (context) => context.tokaFunctionalMarker()
-    },
-    {
-      id: "ka_nominal_choice_marker_adapter",
-      owner: "assembler",
-      continuationCapabilities: [
-        {
-          id: "ka_nominal_choice_marker",
-          kind: "listing",
-          surfaces: ["NかN"],
-          description: ""
-        }
-      ],
-      requiredContinuationCapabilityIds: (result) => {
-        if (result.kind !== "functional_marker_adapter") {
-          return [];
-        }
-        return result.markerKind === "ka_nominal_choice" ? ["ka_nominal_choice_marker"] : [];
-      },
-      tryBuild: (context) => context.kaNominalChoiceMarker()
-    },
-    {
-      id: "secondary_particle_marker_adapter",
-      owner: "assembler",
-      continuationCapabilities: [
-        {
-          id: "secondary_kosoado_dake_degree_marker",
-          kind: "degree",
-          surfaces: ["これだけ", "それだけ", "あれだけ", "どれだけ", "これだけの", "それだけの", "あれだけの", "どれだけの"],
-          description: ""
-        },
-        {
-          id: "secondary_bakari_ka_additive_marker",
-          kind: "additive",
-          surfaces: ["Nばかりか", "Nばかりでなく", "Nばかりではなく", "Nばかりじゃなく", "Nのみならず"],
-          description: ""
-        },
-        {
-          id: "secondary_dokoro_ka_reversal_marker",
-          kind: "reversal",
-          surfaces: ["Nどころか"],
-          description: ""
-        },
-        {
-          id: "secondary_kiri_limit_marker",
-          kind: "limit",
-          surfaces: ["Nきり", "Nきりの"],
-          description: ""
-        },
-        {
-          id: "secondary_degree_marker",
-          kind: "degree",
-          surfaces: ["Nくらい", "Nぐらい", "Nほど"],
-          description: ""
-        },
-        {
-          id: "secondary_yara_indefinite_marker",
-          kind: "indefinite",
-          surfaces: ["疑問詞やら"],
-          description: ""
-        },
-        {
-          id: "secondary_yara_listing_marker",
-          kind: "listing",
-          surfaces: ["NやらNやら"],
-          description: ""
-        },
-        {
-          id: "secondary_kashira_indefinite_marker",
-          kind: "indefinite",
-          surfaces: ["疑問詞かしら"],
-          description: ""
-        },
-        {
-          id: "secondary_nado_example_marker",
-          kind: "example",
-          surfaces: ["Nなど"],
-          description: ""
-        },
-        {
-          id: "secondary_nado_soft_topic_marker",
-          kind: "topic",
-          surfaces: ["Nなどは"],
-          description: ""
-        },
-        {
-          id: "secondary_nado_dismissive_marker",
-          kind: "dismissive",
-          surfaces: ["Nなど+neg"],
-          description: ""
-        },
-        {
-          id: "secondary_nante_quote_marker",
-          kind: "quote",
-          surfaces: ["Pなんて言う"],
-          description: ""
-        },
-        {
-          id: "secondary_nante_dismissive_marker",
-          kind: "dismissive",
-          surfaces: ["Nなんて"],
-          description: ""
-        },
-        {
-          id: "secondary_nanka_dismissive_marker",
-          kind: "dismissive",
-          surfaces: ["Nなんか", "Nなんかより", "Nなんかも"],
-          description: ""
-        },
-        {
-          id: "secondary_nanka_indefinite_marker",
-          kind: "indefinite",
-          surfaces: ["何か"],
-          description: ""
-        }
-      ],
-      requiredContinuationCapabilityIds: (result) => {
-        if (result.kind !== "functional_marker_adapter") {
-          return [];
-        }
-        switch (result.markerKind) {
-          case "secondary_bakari_ka_additive":
-            return ["secondary_bakari_ka_additive_marker"];
-          case "secondary_dokoro_ka_reversal":
-            return ["secondary_dokoro_ka_reversal_marker"];
-          case "secondary_kosoado_dake_degree":
-          case "secondary_kosoado_dake_degree_attr":
-            return ["secondary_kosoado_dake_degree_marker"];
-          case "secondary_kiri_limit":
-          case "secondary_kiri_attributive_limit":
-            return ["secondary_kiri_limit_marker"];
-          case "secondary_degree":
-            return ["secondary_degree_marker"];
-          case "secondary_yara_indefinite":
-            return ["secondary_yara_indefinite_marker"];
-          case "secondary_yara_particle_skip":
-          case "secondary_yara_listing":
-            return ["secondary_yara_listing_marker"];
-          case "secondary_kashira_indefinite":
-            return ["secondary_kashira_indefinite_marker"];
-          case "secondary_nado_soft_topic":
-            return ["secondary_nado_soft_topic_marker"];
-          case "secondary_nado_dismissive":
-            return ["secondary_nado_dismissive_marker"];
-          case "secondary_nado_example":
-            return ["secondary_nado_example_marker"];
-          case "secondary_nante_quote_contrast":
-            return ["secondary_nante_quote_marker"];
-          case "secondary_nante_dismissive":
-            return ["secondary_nante_dismissive_marker"];
-          case "secondary_nanka_comparative_dismissive":
-          case "secondary_nanka_additive_dismissive":
-          case "secondary_nanka_soft_topic":
-            return ["secondary_nanka_dismissive_marker"];
-          case "secondary_nanka_split_indefinite":
-            return ["secondary_nanka_indefinite_marker"];
-          default:
-            return [];
-        }
-      },
-      tryBuild: (context) => context.secondaryParticleMarker()
-    },
-    {
-      id: "nominal_frame_marker_adapter_entry",
-      owner: "assembler",
-      continuationCapabilities: collectHeadProfileContinuationCapabilities(describeNominalFrameMarkerAdapterProfiles()),
-      requiredContinuationCapabilityIds: (result) => result.kind === "nominal_frame_marker_adapter"
-        ? result.built.requiredContinuationCapabilityIds
-        : [],
-      tryBuild: async (context) => {
-        const built = await context.nominalFrameMarker();
-        return built === null
-          ? null
-          : { kind: "nominal_frame_marker_adapter", built };
-      }
-    },
-    {
-      id: "case_particle_marker_adapter",
-      owner: "assembler",
-      continuationCapabilities: [
-        {
-          id: "case_no_lexical_preference_marker",
-          kind: "case_frame",
-          surfaces: ["NのN"],
-          description: ""
-        },
-        {
-          id: "case_no_determiner_omit_marker",
-          kind: "attributive",
-          surfaces: ["連体詞のN"],
-          description: ""
-        },
-        {
-          id: "case_no_default_genitive_marker",
-          kind: "case_frame",
-          surfaces: ["XのN"],
-          description: ""
-        },
-        {
-          id: "case_de_orphan_demo_discourse_marker",
-          kind: "connective",
-          surfaces: ["でも"],
-          description: ""
-        },
-        {
-          id: "case_de_default_contextual_marker",
-          kind: "case_frame",
-          surfaces: ["Nで"],
-          description: ""
-        },
-        {
-          id: "case_ni_nari_own_way_marker",
-          kind: "case_frame",
-          surfaces: ["Nなりに"],
-          description: ""
-        }
-      ],
-      requiredContinuationCapabilityIds: (result) => {
-        if (result.kind !== "functional_marker_adapter") {
-          return [];
-        }
-        switch (result.markerKind) {
-          case "case_no_lexical_preference":
-            return ["case_no_lexical_preference_marker"];
-          case "case_no_determiner_omit":
-            return ["case_no_determiner_omit_marker"];
-          case "case_no_default_genitive":
-            return ["case_no_default_genitive_marker"];
-          case "case_de_orphan_demo_discourse":
-            return ["case_de_orphan_demo_discourse_marker"];
-          case "case_de_default_contextual":
-            return ["case_de_default_contextual_marker"];
-          case "case_ni_nari_own_way":
-            return ["case_ni_nari_own_way_marker"];
-          default:
-            return [];
-        }
-      },
-      tryBuild: (context) => context.caseParticleMarker()
-    }
+    datteFunctionalMarkerProfile(),
+    toiuFunctionalMarkerProfile(),
+    tteFunctionalMarkerProfile(),
+    toFunctionalMarkerProfile(),
+    orphanConnectiveParticleProfile(),
+    tokaFunctionalMarkerProfile(),
+    kaNominalChoiceMarkerProfile(),
+    secondaryParticleMarkerProfile(),
+    nominalFrameMarkerProfile(),
+    caseParticleMarkerProfile()
   ] as const;
   return _particleHeadDispatchProfiles;
+}
+
+function datteFunctionalMarkerProfile(): ParticleHeadDispatchProfile {
+  return {
+    id: "datte_functional_marker_adapter",
+    owner: "assembler",
+    continuationCapabilities: [
+      {
+        id: "datte_causal_discourse_marker",
+        kind: "connective",
+        surfaces: ["だって"],
+        description: ""
+      },
+      {
+        id: "datte_focus_particle_marker",
+        kind: "focus",
+        surfaces: ["Nだって", "Pだって"],
+        description: ""
+      }
+    ],
+    requiredContinuationCapabilityIds: (result) => {
+      if (result.kind !== "functional_marker_adapter") {
+        return [];
+      }
+      switch (result.markerKind) {
+        case "datte_causal_discourse":
+          return ["datte_causal_discourse_marker"];
+        case "datte_focus_particle":
+          return ["datte_focus_particle_marker"];
+        default:
+          return [];
+      }
+    },
+    tryBuild: (context) => context.datteFunctionalMarker()
+  };
+}
+
+function toiuFunctionalMarkerProfile(): ParticleHeadDispatchProfile {
+  return {
+    id: "toiu_functional_marker_adapter",
+    owner: "assembler",
+    continuationCapabilities: [
+      {
+        id: "toiu_attributive_marker",
+        kind: "attributive_quote",
+        surfaces: ["というN", "っていうN"],
+        description: ""
+      },
+      {
+        id: "toiu_comparative_marker",
+        kind: "connective",
+        surfaces: ["というより", "っていうより"],
+        description: ""
+      }
+    ],
+    requiredContinuationCapabilityIds: (result) => {
+      if (result.kind !== "functional_marker_adapter") {
+        return [];
+      }
+      return result.markerKind === "toiu_comparative"
+        ? ["toiu_comparative_marker"]
+        : ["toiu_attributive_marker"];
+    },
+    tryBuild: (context) => context.toiuFunctionalMarker()
+  };
+}
+
+function tteFunctionalMarkerProfile(): ParticleHeadDispatchProfile {
+  return {
+    id: "tte_functional_marker_adapter",
+    owner: "assembler",
+    continuationCapabilities: [
+      {
+        id: "tte_quote_marker",
+        kind: "quote",
+        surfaces: ["Pって言う", "」って"],
+        description: ""
+      },
+      {
+        id: "tte_attributive_marker",
+        kind: "attributive_quote",
+        surfaces: ["NってN", "PってN"],
+        description: ""
+      },
+      {
+        id: "tte_topic_marker",
+        kind: "topic",
+        surfaces: ["Nって"],
+        description: ""
+      }
+    ],
+    requiredContinuationCapabilityIds: (result) => {
+      if (result.kind !== "functional_marker_adapter") {
+        return [];
+      }
+      switch (result.markerKind) {
+        case "tte_quote":
+          return ["tte_quote_marker"];
+        case "tte_attributive":
+          return ["tte_attributive_marker"];
+        case "tte_topic":
+          return ["tte_topic_marker"];
+        default:
+          return [];
+      }
+    },
+    tryBuild: (context) => context.tteFunctionalMarker()
+  };
+}
+
+function toFunctionalMarkerProfile(): ParticleHeadDispatchProfile {
+  return {
+    id: "to_functional_marker_adapter",
+    owner: "assembler",
+    continuationCapabilities: [
+      {
+        id: "to_adverbial_marker",
+        kind: "adverbial",
+        surfaces: ["副詞と", "形状詞-タリと", "畳語形状詞と"],
+        description: ""
+      },
+      {
+        id: "to_naru_result_marker",
+        kind: "case_frame",
+        surfaces: ["Nとなる"],
+        description: ""
+      },
+      {
+        id: "to_suru_transform_marker",
+        kind: "case_frame",
+        surfaces: ["Nとする"],
+        description: ""
+      }
+    ],
+    requiredContinuationCapabilityIds: (result) => {
+      if (result.kind !== "functional_marker_adapter") {
+        return [];
+      }
+      switch (result.markerKind) {
+        case "to_adverbial":
+          return ["to_adverbial_marker"];
+        case "to_naru_result":
+          return ["to_naru_result_marker"];
+        case "to_suru_transform":
+          return ["to_suru_transform_marker"];
+        default:
+          return [];
+      }
+    },
+    tryBuild: (context) => context.toFunctionalMarker()
+  };
+}
+
+function orphanConnectiveParticleProfile(): ParticleHeadDispatchProfile {
+  return {
+    id: "orphan_connective_particle_adapter",
+    owner: "assembler",
+    continuationCapabilities: [
+      {
+        id: "orphan_connective_particle_marker",
+        kind: "connective",
+        surfaces: ["けど"],
+        description: ""
+      },
+      {
+        id: "orphan_connective_tail_particle_skip",
+        kind: "connective",
+        surfaces: ["けども", "けれども"],
+        description: ""
+      }
+    ],
+    requiredContinuationCapabilityIds: (result) => {
+      if (result.kind !== "functional_marker_adapter") {
+        return [];
+      }
+      switch (result.markerKind) {
+        case "orphan_connective_particle":
+          return ["orphan_connective_particle_marker"];
+        case "orphan_connective_tail_particle_skip":
+          return ["orphan_connective_tail_particle_skip"];
+        default:
+          return [];
+      }
+    },
+    tryBuild: (context) => context.orphanConnectiveParticle()
+  };
+}
+
+function tokaFunctionalMarkerProfile(): ParticleHeadDispatchProfile {
+  return {
+    id: "toka_functional_marker_adapter",
+    owner: "assembler",
+    continuationCapabilities: [
+      {
+        id: "toka_listing_middle_marker",
+        kind: "listing",
+        surfaces: ["NとかNとか"],
+        description: ""
+      },
+      {
+        id: "toka_listing_final_marker",
+        kind: "listing",
+        surfaces: ["Nとか...Nとか"],
+        description: ""
+      },
+      {
+        id: "toka_single_example_marker",
+        kind: "listing",
+        surfaces: ["NとかV"],
+        description: ""
+      },
+      {
+        id: "toka_exemplifier_marker",
+        kind: "listing",
+        surfaces: ["...かとか", "Nとか格助詞"],
+        description: ""
+      }
+    ],
+    requiredContinuationCapabilityIds: (result) => {
+      if (result.kind !== "functional_marker_adapter") {
+        return [];
+      }
+      switch (result.markerKind) {
+        case "toka_listing_middle":
+          return ["toka_listing_middle_marker"];
+        case "toka_listing_final":
+          return ["toka_listing_final_marker"];
+        case "toka_single_example":
+          return ["toka_single_example_marker"];
+        case "toka_exemplifier":
+          return ["toka_exemplifier_marker"];
+        default:
+          return [];
+      }
+    },
+    tryBuild: (context) => context.tokaFunctionalMarker()
+  };
+}
+
+function kaNominalChoiceMarkerProfile(): ParticleHeadDispatchProfile {
+  return {
+    id: "ka_nominal_choice_marker_adapter",
+    owner: "assembler",
+    continuationCapabilities: [
+      {
+        id: "ka_nominal_choice_marker",
+        kind: "listing",
+        surfaces: ["NかN"],
+        description: ""
+      }
+    ],
+    requiredContinuationCapabilityIds: (result) => {
+      if (result.kind !== "functional_marker_adapter") {
+        return [];
+      }
+      return result.markerKind === "ka_nominal_choice" ? ["ka_nominal_choice_marker"] : [];
+    },
+    tryBuild: (context) => context.kaNominalChoiceMarker()
+  };
+}
+
+function secondaryParticleMarkerProfile(): ParticleHeadDispatchProfile {
+  return {
+    id: "secondary_particle_marker_adapter",
+    owner: "assembler",
+    continuationCapabilities: [
+      {
+        id: "secondary_kosoado_dake_degree_marker",
+        kind: "degree",
+        surfaces: ["これだけ", "それだけ", "あれだけ", "どれだけ", "これだけの", "それだけの", "あれだけの", "どれだけの"],
+        description: ""
+      },
+      {
+        id: "secondary_bakari_ka_additive_marker",
+        kind: "additive",
+        surfaces: ["Nばかりか", "Nばかりでなく", "Nばかりではなく", "Nばかりじゃなく", "Nのみならず"],
+        description: ""
+      },
+      {
+        id: "secondary_dokoro_ka_reversal_marker",
+        kind: "reversal",
+        surfaces: ["Nどころか"],
+        description: ""
+      },
+      {
+        id: "secondary_kiri_limit_marker",
+        kind: "limit",
+        surfaces: ["Nきり", "Nきりの"],
+        description: ""
+      },
+      {
+        id: "secondary_degree_marker",
+        kind: "degree",
+        surfaces: ["Nくらい", "Nぐらい", "Nほど"],
+        description: ""
+      },
+      {
+        id: "secondary_yara_indefinite_marker",
+        kind: "indefinite",
+        surfaces: ["疑問詞やら"],
+        description: ""
+      },
+      {
+        id: "secondary_yara_listing_marker",
+        kind: "listing",
+        surfaces: ["NやらNやら"],
+        description: ""
+      },
+      {
+        id: "secondary_kashira_indefinite_marker",
+        kind: "indefinite",
+        surfaces: ["疑問詞かしら"],
+        description: ""
+      },
+      {
+        id: "secondary_nado_example_marker",
+        kind: "example",
+        surfaces: ["Nなど"],
+        description: ""
+      },
+      {
+        id: "secondary_nado_soft_topic_marker",
+        kind: "topic",
+        surfaces: ["Nなどは"],
+        description: ""
+      },
+      {
+        id: "secondary_nado_dismissive_marker",
+        kind: "dismissive",
+        surfaces: ["Nなど+neg"],
+        description: ""
+      },
+      {
+        id: "secondary_nante_quote_marker",
+        kind: "quote",
+        surfaces: ["Pなんて言う"],
+        description: ""
+      },
+      {
+        id: "secondary_nante_dismissive_marker",
+        kind: "dismissive",
+        surfaces: ["Nなんて"],
+        description: ""
+      },
+      {
+        id: "secondary_nanka_dismissive_marker",
+        kind: "dismissive",
+        surfaces: ["Nなんか", "Nなんかより", "Nなんかも"],
+        description: ""
+      },
+      {
+        id: "secondary_nanka_indefinite_marker",
+        kind: "indefinite",
+        surfaces: ["何か"],
+        description: ""
+      }
+    ],
+    requiredContinuationCapabilityIds: (result) => {
+      if (result.kind !== "functional_marker_adapter") {
+        return [];
+      }
+      switch (result.markerKind) {
+        case "secondary_bakari_ka_additive":
+          return ["secondary_bakari_ka_additive_marker"];
+        case "secondary_dokoro_ka_reversal":
+          return ["secondary_dokoro_ka_reversal_marker"];
+        case "secondary_kosoado_dake_degree":
+        case "secondary_kosoado_dake_degree_attr":
+          return ["secondary_kosoado_dake_degree_marker"];
+        case "secondary_kiri_limit":
+        case "secondary_kiri_attributive_limit":
+          return ["secondary_kiri_limit_marker"];
+        case "secondary_degree":
+          return ["secondary_degree_marker"];
+        case "secondary_yara_indefinite":
+          return ["secondary_yara_indefinite_marker"];
+        case "secondary_yara_particle_skip":
+        case "secondary_yara_listing":
+          return ["secondary_yara_listing_marker"];
+        case "secondary_kashira_indefinite":
+          return ["secondary_kashira_indefinite_marker"];
+        case "secondary_nado_soft_topic":
+          return ["secondary_nado_soft_topic_marker"];
+        case "secondary_nado_dismissive":
+          return ["secondary_nado_dismissive_marker"];
+        case "secondary_nado_example":
+          return ["secondary_nado_example_marker"];
+        case "secondary_nante_quote_contrast":
+          return ["secondary_nante_quote_marker"];
+        case "secondary_nante_dismissive":
+          return ["secondary_nante_dismissive_marker"];
+        case "secondary_nanka_comparative_dismissive":
+        case "secondary_nanka_additive_dismissive":
+        case "secondary_nanka_soft_topic":
+          return ["secondary_nanka_dismissive_marker"];
+        case "secondary_nanka_split_indefinite":
+          return ["secondary_nanka_indefinite_marker"];
+        default:
+          return [];
+      }
+    },
+    tryBuild: (context) => context.secondaryParticleMarker()
+  };
+}
+
+function nominalFrameMarkerProfile(): ParticleHeadDispatchProfile {
+  return {
+    id: "nominal_frame_marker_adapter_entry",
+    owner: "assembler",
+    continuationCapabilities: collectHeadProfileContinuationCapabilities(describeNominalFrameMarkerAdapterProfiles()),
+    requiredContinuationCapabilityIds: (result) => result.kind === "nominal_frame_marker_adapter"
+      ? result.built.requiredContinuationCapabilityIds
+      : [],
+    tryBuild: async (context) => {
+      const built = await context.nominalFrameMarker();
+      return built === null
+        ? null
+        : { kind: "nominal_frame_marker_adapter", built };
+    }
+  };
+}
+
+function caseParticleMarkerProfile(): ParticleHeadDispatchProfile {
+  return {
+    id: "case_particle_marker_adapter",
+    owner: "assembler",
+    continuationCapabilities: [
+      {
+        id: "case_no_lexical_preference_marker",
+        kind: "case_frame",
+        surfaces: ["NのN"],
+        description: ""
+      },
+      {
+        id: "case_no_determiner_omit_marker",
+        kind: "attributive",
+        surfaces: ["連体詞のN"],
+        description: ""
+      },
+      {
+        id: "case_no_default_genitive_marker",
+        kind: "case_frame",
+        surfaces: ["XのN"],
+        description: ""
+      },
+      {
+        id: "case_de_orphan_demo_discourse_marker",
+        kind: "connective",
+        surfaces: ["でも"],
+        description: ""
+      },
+      {
+        id: "case_de_default_contextual_marker",
+        kind: "case_frame",
+        surfaces: ["Nで"],
+        description: ""
+      },
+      {
+        id: "case_ni_nari_own_way_marker",
+        kind: "case_frame",
+        surfaces: ["Nなりに"],
+        description: ""
+      }
+    ],
+    requiredContinuationCapabilityIds: (result) => {
+      if (result.kind !== "functional_marker_adapter") {
+        return [];
+      }
+      switch (result.markerKind) {
+        case "case_no_lexical_preference":
+          return ["case_no_lexical_preference_marker"];
+        case "case_no_determiner_omit":
+          return ["case_no_determiner_omit_marker"];
+        case "case_no_default_genitive":
+          return ["case_no_default_genitive_marker"];
+        case "case_de_orphan_demo_discourse":
+          return ["case_de_orphan_demo_discourse_marker"];
+        case "case_de_default_contextual":
+          return ["case_de_default_contextual_marker"];
+        case "case_ni_nari_own_way":
+          return ["case_ni_nari_own_way_marker"];
+        default:
+          return [];
+      }
+    },
+    tryBuild: (context) => context.caseParticleMarker()
+  };
 }
 
 let _particleHeadDispatchEngine: ReturnType<typeof defineHeadedParserEngine<ParticleHeadDispatchContext, ParticleHeadBuildPayload>> | undefined;

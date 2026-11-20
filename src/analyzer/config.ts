@@ -21,6 +21,7 @@
  */
 import { InfoSubset } from "./subset.js";
 import { SudachiError } from "./error.js";
+import { isRecord } from "../utils/record.js";
 
 export enum SurfaceProjection {
   Surface = "surface",
@@ -123,10 +124,6 @@ export class Config {
     }
     return this.systemDict;
   }
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 export function parseSurfaceProjection(value: string): SurfaceProjection {

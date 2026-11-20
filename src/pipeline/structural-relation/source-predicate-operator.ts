@@ -1,4 +1,6 @@
-import { nextNonSpaceIndex, type ClauseLayout, type ClauseToken } from "../clause-layout/index.js";
+import { nextNonSpaceIndex } from "../clause-layout/index.js";
+import type { ClauseLayout } from "../clause-layout/final-layout.js";
+import type { ClauseToken } from "../clause-layout/layout-types.js";
 import { isClauseHardTerminalPunctuationToken } from "../clause-layout/punctuation.js";
 import type { LookupTables } from "../lookup-tables.js";
 import { isVerbLemma } from "../matchers.js";

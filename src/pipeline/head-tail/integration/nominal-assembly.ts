@@ -6,7 +6,7 @@ import type { AuxToken } from "../../../generator/aux-map.js";
 import type { MorphemeEntry } from "../../../types/dictionary.js";
 import type { RenderPlan } from "../../../types/render-plan.js";
 import type { RuntimeHaruToken } from "../../../types/token.js";
-import type { ProjectionEvidenceLayout } from "../../clause-layout/index.js";
+import type { ProjectionEvidenceLayout } from "../../clause-layout/layout-types.js";
 import { contentResultKoreanCache, contentResultKoreanPos, ResolvedContentResult, StagedContentResult, type ContentResult, type TranslationCandidate as ContentTranslationCandidate } from "../../content-types.js";
 import type { TranslationCandidate } from "../../../types/pipeline.js";
 import type { TokenCursor } from "../../token-cursor.js";
@@ -58,8 +58,8 @@ import {
   transformCandidateSet,
   type SourceCandidateSet
 } from "../../source-candidate-set.js";
-import { 구, 명사 } from "../../../types/pos.js";
-import type { NumericHostReservation } from "../tail/predicate-root/integration.js";
+import { 명사 } from "../../../types/pos.js";
+import type { NumericHostReservation } from "../tail/predicate-root/integration/contracts.js";
 
 export interface NominalTailChainAssemblyBridgeOptions {
   readonly cursor: TokenCursor<RuntimeHaruToken>;

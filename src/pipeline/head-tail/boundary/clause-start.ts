@@ -2,6 +2,7 @@ import {
   isBoundaryPunctuationCategoryToken,
   isHardTerminalPunctuationToken
 } from "./punctuation.js";
+import { skipClausePunctuationForward } from "../../clause-layout/punctuation.js";
 import { nominalLinkMarkerRelationForToken } from "./marker.js";
 import {
   argumentFrameTransparentBoundaryAdvance,
@@ -386,20 +387,4 @@ function clauseStartEvidenceReason(
 
 function preferredConsumer(consumers: readonly BoundaryRelationConsumer[]): BoundaryRelationConsumer {
   return consumers[0] ?? "tail_multi_clause";
-}
-
-function isClausePunctuationToken(token: BoundaryEvidenceToken | undefined): boolean {
-  return isBoundaryPunctuationCategoryToken(token);
-}
-
-function skipClausePunctuationForward(
-  tokens: readonly BoundaryEvidenceToken[],
-  start: number,
-  endExclusive: number
-): number {
-  let index = start;
-  while (index < endExclusive && isClausePunctuationToken(tokens[index])) {
-    index += 1;
-  }
-  return index;
 }

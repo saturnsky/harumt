@@ -5,7 +5,8 @@ import type { SenseFrame } from "../dictionary/sense-normalization.js";
 import { camelizeKeys } from "../dictionary/data-section.js";
 import type { RenderPlan } from "../types/render-plan.js";
 import { temporalIntervalVariantHeadedAt } from "./head-tail/tail/predicate-root/temporal-interval-head.js";
-import { clauseProjectionEvidenceWindowForToken, type Clause, type ClauseLayout } from "./clause-layout/index.js";
+import { clauseProjectionEvidenceWindowForToken } from "./clause-layout/navigation.js";
+import type { Clause, ClauseLayout } from "./clause-layout/final-layout.js";
 import {
   isClauseContentHeadTransparentToken,
   nextNonSpaceIndex,
@@ -74,13 +75,9 @@ import {
   selectFrameMatch,
   UnknownLookupSet
 } from "./semantics/frame.js";
-import {
-  quoteStructuralRelationIndex,
-  quoteStructuralRelationLooksBareNominalContent,
-  quoteStructuralRelationsForHost,
-  quoteHostAllowsBareNominalContent,
-  type QuoteStructuralRelation
-} from "./structural-relation/quote.js";
+import { quoteStructuralRelationIndex, quoteStructuralRelationsForHost } from "./structural-relation/quote.js";
+import { quoteStructuralRelationLooksBareNominalContent, quoteHostAllowsBareNominalContent } from "./structural-relation/quote-nominal-and-passive.js";
+import type { QuoteStructuralRelation } from "./structural-relation/quote-payload.js";
 import { argumentNounLookupForms, argumentNounLookupMatches, getArgumentNounBeforeParticle, isTimeExpressionBeforeParticle, PredicateArgumentView, tokenInSemanticCategories } from "./semantics/helpers.js";
 import { TraceCollector, TraceEvent } from "./trace.js";
 import { DETACHED_SEPARATIONS, separatedAs } from "./clause-layout/trivia.js";
@@ -1417,7 +1414,7 @@ function pythonTruthyFrameDefault(frame: SenseFrameLike | FrameJsonMap): boolean
   return true;
 }
 
-function grammarVoiceForFrame(grammar: ContextGrammar | null): string | null {
+export function grammarVoiceForFrame(grammar: ContextGrammar | null): string | null {
   const voice = grammar?.voice;
   if (voice === undefined || voice === null) {
     return null;

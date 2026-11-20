@@ -13,11 +13,9 @@ import {
   isVerbPredicateToken
 } from "../../../../../types/pos.js";
 import type { LookupTables } from "../../../../lookup-tables.js";
-import {
-  prenominalMarkerHeadReachAfterToken,
-  type ClauseToken,
-  type PrenominalMarkerHeadReachLayout
-} from "../../../../clause-layout/index.js";
+import { prenominalMarkerHeadReachAfterToken } from "../../../../clause-layout/prenominal-head-reach.js";
+import type { ClauseToken } from "../../../../clause-layout/layout-types.js";
+import type { PrenominalMarkerHeadReachLayout } from "../../../../clause-layout/nominal-anchor-evidence.js";
 import { TokenCursor } from "../../../../token-cursor.js";
 import { nominalLinkMarkerRelationAt } from "../../../boundary/marker.js";
 import { matrixPredicateReachAt } from "../../../boundary/modifier-field.js";

@@ -1,9 +1,11 @@
 import type { RuntimeHaruToken } from "../../../../types/token.js";
 import { previousNonSpaceIndex } from "../../../clause-layout/trivia.js";
-import { isExplicitQuoteClosingToken, nextClauseNonPunctuationIndex } from "../../../clause-layout/index.js";
+import { isExplicitQuoteClosingToken } from "../../../clause-layout/index.js";
+import { nextClauseNonPunctuationIndex } from "../../../clause-layout/navigation.js";
 import { externalNominalizerContinuationRelationAt, nominalLinkMarkerRelationAt } from "../../boundary/marker.js";
 import { quoteMarkerRelationAt } from "../../boundary/quote-marker.js";
-import { isAppearanceModalAdnominalTailEnd, isLikenessModalAdnominalTailEnd, isSayVerbToken } from "./classifiers/tokens.js";
+import { isAppearanceModalAdnominalTailEnd, isLikenessModalAdnominalTailEnd } from "./classifiers/tokens.js";
+import { isSayVerbToken } from "../../data/quoted-reporting-sets.js";
 import { quoteFocusLimitNegationTailStartingAt } from "../segments/quote-focus.js";
 import { TokenCursor } from "../../../token-cursor.js";
 import type { LookupTables } from "../../../lookup-tables.js";

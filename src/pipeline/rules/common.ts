@@ -10,7 +10,6 @@ import { matchCopulaNegation } from "./copula.js";
 import type { TokenCursor } from "../token-cursor.js";
 
 import { POS0, 形容詞0, 助詞, 名詞 } from "../../types/pos.js";
-export const OUTER_SCOPE_HEADS = new Set(["ワケ", "コト"]);
 
 function matchSimpleNegativeTail(cursor: TokenCursor<MatcherToken>): readonly [polite: boolean, past: boolean] | null {
   const token = cursor.current();

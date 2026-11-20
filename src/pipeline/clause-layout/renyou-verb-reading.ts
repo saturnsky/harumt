@@ -3,7 +3,7 @@ import type { LookupTables } from "../lookup-tables.js";
 import type { RuntimeHaruToken } from "../../types/token.js";
 import { isPredicateHeadTailChainRenderPlan, type RenderPlan } from "../../types/render-plan.js";
 import { renyouChuushiClosureLeftAt } from "./chuushi-closure.js";
-import type { ClauseLayout } from "./index.js";
+import type { ClauseLayout } from "./final-layout.js";
 
 export type RenyouVerbReadingWitness =
   | { readonly kind: "object"; readonly particleIdx: number }

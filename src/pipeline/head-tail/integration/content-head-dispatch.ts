@@ -9,8 +9,8 @@ import type { ContentHeadHydrationMetadata } from "./content-head-metadata.js";
 import type {
   HeadOwnerCandidateCommitmentPayload,
   HeadOwnerCandidateCommitmentPayloadSlot
-} from "../../deferred-commitment.js";
-import type { ProjectionEvidenceLayout } from "../../clause-layout/index.js";
+} from "../../commitment/types.js";
+import type { ProjectionEvidenceLayout } from "../../clause-layout/layout-types.js";
 import type { TraceDetailValue } from "../../trace.js";
 import { tailChunkCandidateObservationTraceValue } from "../tail/predicate-root/trace.js";
 import type { TailRoot } from "../tail/predicate-root/grammar.js";
@@ -35,8 +35,7 @@ import {
 import type { HeadTailCandidate } from "../tail/chain.js";
 import {
   defineHeadFamilyRunner,
-  type HeadFamilyRegistration,
-  type HeadFamilyRunnerDescriptor
+  type HeadFamilyRegistration
 } from "../head/family-runner.js";
 import {
   attachHeadOwnerCandidateSetToSpan,
@@ -60,23 +59,15 @@ import { collectSharedHeadedContentCandidates } from "../candidate/collect.js";
 import { describeNominalTailChainProfiles } from "../head/adapters/nominal/integration.js";
 import { firstAuxLayer } from "../tail/predicate-root/inspect.js";
 import { opChainCanHostBareNounStemBeforeCommitment } from "../tail/predicate-root/bare-noun-stem-hosting.js";
-import {
-  describePredicateTailHeadProfiles,
-  profileParsedTailHeadChunk,
-  tryParseTailHeadProfileChunk,
-  type TailChunkCandidateObservation,
-  type TailChunkIntakeVerdict,
-  type PredicateTailSyntheticEntryResolver,
-  type TailChunkResult,
-  type TailHeadProfileChunkResult
-} from "../tail/predicate-root/integration.js";
+import { describePredicateTailHeadProfiles, profileParsedTailHeadChunk, tryParseTailHeadProfileChunk, type TailHeadProfileChunkResult } from "../tail/predicate-root/integration/head-profiles.js";
+import type { TailChunkCandidateObservation, TailChunkIntakeVerdict, PredicateTailSyntheticEntryResolver, TailChunkResult } from "../tail/predicate-root/integration/contracts.js";
 import type { BenefactiveContext, DekiruReading, NareruReading, RareruReading } from "../../../types/pipeline.js";
 
 import type { Voice } from "../../../types/render-plan.js";
 import type { TokenCursor } from "../../token-cursor.js";
 
-import { 구, 명사, isAdjectivalDerivationalSuffix } from "../../../types/pos.js";
-import type { NumericHostReservation } from "../tail/predicate-root/integration.js";
+import { 명사, isAdjectivalDerivationalSuffix } from "../../../types/pos.js";
+import type { NumericHostReservation } from "../tail/predicate-root/integration/contracts.js";
 interface ContentHeadDispatchContext {
   readonly build: () => ContentHeadBuildPayload | null | Promise<ContentHeadBuildPayload | null>;
 }
@@ -312,10 +303,6 @@ function getContentHeadDispatchRunner() {
 
 export function describeContentHeadDispatchProfiles(): readonly HeadProfileDescriptor[] {
   return getContentHeadDispatchRunner().describe();
-}
-
-export function describeContentHeadDispatchRunner(): HeadFamilyRunnerDescriptor {
-  return getContentHeadDispatchRunner().describeRunner();
 }
 
 export async function tryBuildContentHeadDispatch(options: ContentHeadDispatchOptions): Promise<ContentHeadDispatchResult> {

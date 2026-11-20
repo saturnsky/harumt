@@ -24,6 +24,7 @@ import {
   POS5A,
   命令形_,
   isClauseClosingInflection,
+  isVerbalDerivationalSuffixToken,
   isVerbPredicateToken,
   isVoicedTeFormHostToken,
   isVolitionalInflection,
@@ -31,8 +32,6 @@ import {
 } from "../../../../types/pos.js";
 import type { RuntimeHaruToken } from "../../../../types/token.js";
 import type { AuxToken } from "../../../../generator/aux-map.js";
-import type { LookupTables } from "../../../lookup-tables.js";
-import { tailOpsPreferTameReason } from "./tame-reason-evidence.js";
 import { isHeadOp, isSimpleAspectOpKind } from "./operator-head.js";
 
 export type RequestAspectOp = Extract<
@@ -97,8 +96,21 @@ export function candidateBearingAuxLayer(layer: AuxLayerNode): AuxLayerNode {
   return hostLayer === null ? layer : { ...hostLayer, ops: [...hostLayer.ops, base.suffix] };
 }
 
+export function tailRootStemIsVerbalSuffixDerivation(root: TailRoot): boolean {
+  const stem = firstAuxLayer(root.tail)?.stem;
+  if (stem === undefined || stem.source.tokens.length < 2 || stem.conjugationAnchor === 0) {
+    return false;
+  }
+  const anchor = stem.source.tokens[stem.conjugationAnchor];
+  return anchor !== undefined && isVerbalDerivationalSuffixToken(anchor);
+}
+
 export function tailRootClosesWithAttributiveTerminal(root: TailRoot): boolean {
   return firstAuxLayer(root.tail)?.terminal === "attributive";
+}
+
+export function tailRootCarriesPropositionModal(root: TailRoot): boolean {
+  return firstAuxLayer(root.tail)?.ops.some((op) => op.kind === "modal") === true;
 }
 
 export function tailRootExplicitAdnominalMarkerIndices(root: TailRoot): readonly number[] {
@@ -623,27 +635,6 @@ export function tailRootHasQuestionSfp(root: TailRoot): boolean {
 
 export function sfpHasSelfDirectedConjectureRole(sfp: NonNullable<TailRoot["sfp"]>): boolean {
   return isKaFamilyQuestionSfpEffect(sfp.effect) || sfp.effect === "kana" || sfp.conjectureQuestionRole === "self_directed";
-}
-
-export function tailPredicateHostPrefersTameReason(options: {
-  readonly root: TailRoot;
-  readonly tokens: readonly RuntimeHaruToken[];
-  readonly tameIndex: number;
-  readonly lookups: LookupTables;
-  readonly adnominal?: boolean;
-}): boolean {
-  const ops = auxOpsInTailNode(options.root.tail);
-  const layer = firstAuxLayer(options.root.tail);
-  const stemLemma = layer?.stem.kind === "candidateSet" ? undefined : layer?.stem.lemma;
-  return tailOpsPreferTameReason({
-    ops,
-    tokens: options.tokens,
-    tameIndex: options.tameIndex,
-    lookups: options.lookups,
-    stemLemma,
-    negationPolicy: "projection_negation",
-    ...(options.adnominal === undefined ? {} : { adnominal: options.adnominal })
-  });
 }
 
 export function chainFinalOpHostCategory(

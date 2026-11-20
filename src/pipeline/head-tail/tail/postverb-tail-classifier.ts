@@ -1,5 +1,4 @@
 import type { RuntimeHaruToken } from "../../../types/token.js";
-import { isAdjSuffixToken } from "../../attributive.js";
 import { nextNonSpaceIndex, previousNonSpaceIndex } from "../../clause-layout/trivia.js";
 import { isPastGoodEvaluationPredicateAt, matchPermissionPredicateAt } from "../../semantics/permission-idiom.js";
 import { nominalizerAdversativeConnectiveRelationAt } from "../boundary/marker.js";
@@ -23,7 +22,7 @@ import { predicateSuffixKindForDictionaryForm } from "./predicate-root/derivatio
 import { isTeAuxActivationAccepted } from "./predicate-root/postverb-auxiliary-parser.js";
 import { matchProhibitionPredicateAt } from "../../semantics/prohibition-idiom.js";
 
-import { POS0, POS01, POS1, POS4, POS5A, 助動詞_マス, 意志推量形_, 形容詞0, 助詞, 助詞_接続助詞, 助動詞, 動詞, 非自立可能, 名詞, 命令形_, 連用形_, 動詞_非自立可能, isAdjectivalRenyouTeFormHostToken, isAuxiliaryToken, isIAdjectivePredicateToken, isNonInflectingHostToken, isVerbPredicateToken } from "../../../types/pos.js";
+import { POS0, POS01, POS1, POS4, POS5A, 助動詞_マス, 意志推量形_, 形容詞0, 助詞, 助詞_接続助詞, 助動詞, 動詞, 非自立可能, 名詞, 命令形_, 連用形_, 動詞_非自立可能, isAdjectivalRenyouTeFormHostToken, isAuxiliaryToken, isIAdjectivePredicateToken, isNonInflectingHostToken, isVerbPredicateToken, isAdjectivalDerivationalSuffix } from "../../../types/pos.js";
 export type TeTailContinuationKind =
   | "simple_aspect"
   | "benefactive"
@@ -277,7 +276,7 @@ export function sourcePredicateEvidenceForHostToken(
   if (
     isIAdjectivePredicateToken(token) ||
     (
-      isAdjSuffixToken(token) &&
+      isAdjectivalDerivationalSuffix(token) &&
       predicateSuffixKindForDictionaryForm(token.dictionaryForm ?? "") !== null
     ) ||
     isAdjectivalRenyouTeFormHostToken(token)
@@ -315,7 +314,7 @@ function teMiruPredicateSuffixAttachmentVetoed(
   }
   const suffix = tokens[continuationIdx + continuation.consumed];
   return suffix !== undefined &&
-    isAdjSuffixToken(suffix) &&
+    isAdjectivalDerivationalSuffix(suffix) &&
     predicateSuffixKindForDictionaryForm(suffix.dictionaryForm ?? "") !== null;
 }
 

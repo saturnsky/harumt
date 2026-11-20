@@ -1,6 +1,7 @@
 
-import { POS0, 副詞, 助詞 } from "../../types/pos.js";
+import { POS0, isTerminalParticleToken, 副詞, 助詞 } from "../../types/pos.js";
 import type { SeparationEvidence, SeparationKind } from "../../types/token.js";
+import type { ClauseToken } from "./layout-types.js";
 
 export interface ClauseTriviaToken {
   readonly pos: number;
@@ -249,4 +250,33 @@ export function previousTransparentEvidenceIndex<T extends ClauseTriviaToken>(
     return { index, skipped };
   }
   return null;
+}
+
+export function skipTerminalParticleRun(
+  tokens: readonly ClauseToken[],
+  startIdx: number,
+  limit?: number
+): number | null {
+  let cursor: number | null = nextNonSpaceIndex(tokens, startIdx, limit);
+  while (cursor !== null && isTerminalParticleToken(tokens[cursor]!)) {
+    cursor = nextNonSpaceIndex(tokens, cursor + 1, limit);
+  }
+  return cursor;
+}
+
+export function lastNonSpaceIndexInRange<T extends ClauseToken>(
+  tokens: readonly T[],
+  start: number,
+  end: number
+): number | undefined {
+  const last = Math.min(end, tokens.length) - 1;
+  return last >= start ? last : undefined;
+}
+
+export function indicesInRange(start: number, end: number): number[] {
+  return Array.from({ length: Math.max(0, end - start) }, (_, offset) => start + offset);
+}
+
+export function lastNonSpaceIndex(tokens: readonly ClauseToken[], start: number, end: number): number | null {
+  return previousNonSpaceIndex(tokens, end, start);
 }

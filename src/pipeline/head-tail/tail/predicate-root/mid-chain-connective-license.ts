@@ -1,9 +1,9 @@
 import type { AuxLayerNode, TailRoot } from "./grammar.js";
 import {
   probeProductionDispatch,
-  tailRootHasMidChainConnective as registryTailRootHasMidChainConnective,
   type ProductionIntakeSite
 } from "./production-registry.js";
+import { tailRootHasMidChainConnective as registryTailRootHasMidChainConnective } from "./production-families/normalization.js";
 
 
 export function tailRootHasMidChainConnective(root: TailRoot): boolean {

@@ -10,7 +10,7 @@ import {
   previousNonSpaceIndex
 } from "../../clause-layout/trivia.js";
 import { TokenCursor } from "../../token-cursor.js";
-import { lookupConnectiveBySurface, lookupConnectiveParticleSubtypesBySurface } from "../tail/predicate-root/grammar.js";
+import { lookupConnectiveBySurface, lookupConnectiveParticleSubtypesBySurface } from "../tail/predicate-root/connective-surface-lookup.js";
 import type { ConnectiveKind } from "../tail/predicate-root/grammar.js";
 import { nominalFrameTailSurfaceSpecs } from "../tail/segments/nominal-frame.js";
 import { loadTailAttachmentRegistry, nominalFrameDataGeneration } from "../head/adapters/nominal/frame-table.js";

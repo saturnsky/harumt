@@ -1506,7 +1506,7 @@ function generateSfpEnding(
   return undefined;
 }
 
-function yoneConfirmSuffix(polite: boolean, formal: boolean): string {
+export function yoneConfirmSuffix(polite: boolean, formal: boolean): string {
   if (!polite) {
     return "지";
   }

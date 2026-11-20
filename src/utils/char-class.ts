@@ -157,3 +157,11 @@ export function isPureKatakanaSurface(text: string): boolean {
   }
   return true;
 }
+
+export function containsKanji(text: string): boolean {
+  return Array.from(text).some(isKanji);
+}
+
+export function isDecimalDigit(ch: string): boolean {
+  return /^\p{Decimal_Number}$/u.test(ch);
+}

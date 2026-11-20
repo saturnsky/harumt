@@ -222,7 +222,7 @@ function projectionKindIsExplicit(value: string): value is HeadProjectionKind {
   return PROJECTION_KINDS.has(value as HeadProjectionKind);
 }
 
-function uniqueProjectionKinds(kinds: readonly HeadProjectionKind[]): HeadProjectionKind[] {
+export function uniqueProjectionKinds(kinds: readonly HeadProjectionKind[]): HeadProjectionKind[] {
   return kinds.filter((kind, index, all) => all.indexOf(kind) === index);
 }
 

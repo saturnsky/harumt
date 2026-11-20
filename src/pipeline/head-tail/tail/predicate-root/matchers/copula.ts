@@ -35,8 +35,6 @@ import {
   isKotoNounToken,
   isMisclassifiedDashiCopulaListingToken,
   isMonoReasonNounToken,
-  isSayVerbToken,
-  isShimeruCausativeAuxToken,
   isUnrealizableCopulaMizenSupportAuxiliary,
   isWakeNounToken,
   volitionalConcessiveMarkerTokenCountAt,
@@ -45,6 +43,8 @@ import {
   isMizenVoiceHonorificCopulaSupportVerbToken,
   isTerminalQuestionSfpParticleStart
 } from "../classifiers/tokens.js";
+import { isShimeruCausativeAuxToken } from "../classifiers/causative-aux.js";
+import { isSayVerbToken } from "../../../data/quoted-reporting-sets.js";
 import type { FusedCopulaSupportHostSlot } from "../classifiers/tokens.js";
 
 const COPULA_CHAIN_FUSED_HOST_SLOTS: ReadonlySet<FusedCopulaSupportHostSlot> =
@@ -324,12 +324,124 @@ export function matchCopula(
       readonly index: number;
     };
   }
-): { readonly op: CopulaOp; readonly ops?: readonly AuxOpNode[]; readonly consumed: number } | null {
+): CopulaMatch | null {
   const t0 = tokens[pos];
   if (t0 === undefined) return null;
   const t0pos4 = t0.pos & POS4;
   const t0pos5A = t0.pos & POS5A;
+  const c: CopulaMatchContext = { tokens, pos, lookups, options, t0, t0pos4, t0pos5A };
+  const copulaNaraConditional = matchCopulaNaraConditional(c);
+  if (copulaNaraConditional !== NO_COPULA_ARM) {
+    return copulaNaraConditional;
+  }
+  const copulaAdnominalNa = matchCopulaAdnominalNa(c);
+  if (copulaAdnominalNa !== NO_COPULA_ARM) {
+    return copulaAdnominalNa;
+  }
+  const copulaPoliteAdnominal = matchCopulaPoliteAdnominal(c);
+  if (copulaPoliteAdnominal !== NO_COPULA_ARM) {
+    return copulaPoliteAdnominal;
+  }
+  const classicalNariIzenConditional = matchClassicalNariIzenConditional(c);
+  if (classicalNariIzenConditional !== NO_COPULA_ARM) {
+    return classicalNariIzenConditional;
+  }
+  const fusedCopulaSupportConnective = matchFusedCopulaSupportConnective(c);
+  if (fusedCopulaSupportConnective !== NO_COPULA_ARM) {
+    return fusedCopulaSupportConnective;
+  }
+  const classicalNariAssertive = matchClassicalNariAssertive(c);
+  if (classicalNariAssertive !== NO_COPULA_ARM) {
+    return classicalNariAssertive;
+  }
+  const copulaConjecture = matchCopulaConjecture(c);
+  if (copulaConjecture !== NO_COPULA_ARM) {
+    return copulaConjecture;
+  }
+  const jaNegativeCopulaBridge = matchJaNegativeCopulaBridge(c);
+  if (jaNegativeCopulaBridge !== NO_COPULA_ARM) {
+    return jaNegativeCopulaBridge;
+  }
+  const dewaNegativeCopulaBridge = matchDewaNegativeCopulaBridge(c);
+  if (dewaNegativeCopulaBridge !== NO_COPULA_ARM) {
+    return dewaNegativeCopulaBridge;
+  }
 
+  const copulaDe = copulaDeMarkerRelationForToken(t0, pos, { consumers: ["tail_multi_clause"] });
+
+  const copulaHonorificSupport = matchCopulaHonorificSupport(c);
+  if (copulaHonorificSupport !== NO_COPULA_ARM) {
+    return copulaHonorificSupport;
+  }
+  const copulaDeNegationOrObligation = matchCopulaDeNegationOrObligation(c, copulaDe);
+  if (copulaDeNegationOrObligation !== NO_COPULA_ARM) {
+    return copulaDeNegationOrObligation;
+  }
+  const copulaDeSupportVerb = matchCopulaDeSupportVerb(c, copulaDe);
+  if (copulaDeSupportVerb !== NO_COPULA_ARM) {
+    return copulaDeSupportVerb;
+  }
+  const misclassifiedDashiCopulaListing = matchMisclassifiedDashiCopulaListing(c);
+  if (misclassifiedDashiCopulaListing !== NO_COPULA_ARM) {
+    return misclassifiedDashiCopulaListing;
+  }
+  const assertiveCopula = matchAssertiveCopula(c);
+  if (assertiveCopula !== NO_COPULA_ARM) {
+    return assertiveCopula;
+  }
+  return null;
+}
+
+export interface CopulaMatch {
+  readonly op: CopulaOp;
+  readonly ops?: readonly AuxOpNode[];
+  readonly consumed: number;
+  readonly imperativeSupportMood?: "unresolved";
+}
+
+export function matchCopulaWithMoodReading(
+  tokens: readonly RuntimeHaruToken[],
+  pos: number,
+  lookups?: LookupTables,
+  options?: Parameters<typeof matchCopula>[3]
+): CopulaMatch | null {
+  const match = matchCopula(tokens, pos, lookups, options);
+  if (match === null || match.imperativeSupportMood !== "unresolved") {
+    return match;
+  }
+  const { imperativeSupportMood: _unresolved, ...resolved } = match;
+  if (
+    copulaConcessiveImperativeEvidenceAt(
+      options?.sourceContext?.tokens ?? tokens,
+      options?.sourceContext?.index ?? pos,
+      lookups
+    ) === null
+  ) {
+    return resolved;
+  }
+  const connective: ConnectiveOp = createConnectiveOp({
+    connective: "even_if",
+    surface: DEARE_CONCESSIVE_CONNECTIVE_SURFACE,
+    source: srcSlice(tokens, pos, 2)
+  });
+  return { ...resolved, ops: [match.op, connective] };
+}
+type CopulaDeRelation = ReturnType<typeof copulaDeMarkerRelationForToken>;
+
+interface CopulaMatchContext {
+  readonly tokens: readonly RuntimeHaruToken[];
+  readonly pos: number;
+  readonly lookups: LookupTables | undefined;
+  readonly options: Parameters<typeof matchCopula>[3];
+  readonly t0: RuntimeHaruToken;
+  readonly t0pos4: number;
+  readonly t0pos5A: number;
+}
+
+const NO_COPULA_ARM: unique symbol = Symbol("copula matcher: arm not applicable");
+
+function matchCopulaNaraConditional(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, t0, t0pos4, t0pos5A } = c;
   if (t0.surface === "なら" && (t0pos4 & POS4) === 助動詞_ダ && t0pos5A === 仮定形_) {
     const t1 = tokens[pos + 1];
     if (isShimeruCausativeAuxToken(t1)) {
@@ -352,7 +464,11 @@ export function matchCopula(
       consumed: formalConditionalConsumed
     };
   }
+  return NO_COPULA_ARM;
+}
 
+function matchCopulaAdnominalNa(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, lookups, options, t0, t0pos4, t0pos5A } = c;
   if (
     t0.surface === "な" &&
     (t0pos4 & POS4) === 助動詞_ダ &&
@@ -368,7 +484,11 @@ export function matchCopula(
       consumed: 1
     };
   }
+  return NO_COPULA_ARM;
+}
 
+function matchCopulaPoliteAdnominal(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, lookups, t0pos4, t0pos5A } = c;
   if (
     (t0pos4 & POS4) === 助動詞_デス &&
     t0pos5A === 連体形_ &&
@@ -379,7 +499,11 @@ export function matchCopula(
       consumed: 1
     };
   }
+  return NO_COPULA_ARM;
+}
 
+function matchClassicalNariIzenConditional(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, t0pos4, t0pos5A } = c;
   if (
     (t0pos4 & POS4) === 文語助動詞_ナリ_断定 &&
     t0pos5A === 已然形_ &&
@@ -391,7 +515,11 @@ export function matchCopula(
       consumed: 2
     };
   }
+  return NO_COPULA_ARM;
+}
 
+function matchFusedCopulaSupportConnective(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, t0 } = c;
   const fusedSupportConnective = COPULA_CHAIN_FUSED_HOST_SLOTS.has(fusedCopulaSupportHostSlotAt(tokens, pos))
     ? fusedCopulaSupportConnectiveKindOf(t0)
     : null;
@@ -410,7 +538,11 @@ export function matchCopula(
     });
     return { op: copula, ops: [copula, connective], consumed: 1 };
   }
+  return NO_COPULA_ARM;
+}
 
+function matchClassicalNariAssertive(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, t0pos4, t0pos5A } = c;
   if (
     (t0pos4 & POS4) === 文語助動詞_ナリ_断定 &&
     (t0pos5A === 終止形_ || t0pos5A === 連用形_ || t0pos5A === 連体形_)
@@ -420,7 +552,11 @@ export function matchCopula(
       consumed: 1
     };
   }
+  return NO_COPULA_ARM;
+}
 
+function matchCopulaConjecture(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, lookups, options, t0, t0pos4, t0pos5A } = c;
   if (
     t0pos5A === 意志推量形_ &&
     (
@@ -458,7 +594,11 @@ export function matchCopula(
       consumed: 1
     };
   }
+  return NO_COPULA_ARM;
+}
 
+function matchJaNegativeCopulaBridge(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, t0 } = c;
   if (isCopulaJaNegativeBridgeToken(t0)) {
     const negEnd = matchNegativeCopulaBridgeBody(tokens, pos + 1);
     if (negEnd !== null) {
@@ -485,7 +625,11 @@ export function matchCopula(
       };
     }
   }
+  return NO_COPULA_ARM;
+}
 
+function matchDewaNegativeCopulaBridge(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, options } = c;
   const copulaDewa = dewaScopeBridgeRelationAt(tokens, pos, {
     anchorIdx: pos,
     consumers: ["tail_multi_clause"]
@@ -551,25 +695,29 @@ export function matchCopula(
       };
     }
   }
+  return NO_COPULA_ARM;
+}
 
-  const copulaDe = copulaDeMarkerRelationForToken(t0, pos, { consumers: ["tail_multi_clause"] });
-
-  {
-    const honorific = copulaHonorificSupportSpanAt(tokens, pos);
-    if (honorific !== null) {
-      return {
-        op: buildCopulaOp(
-          srcSlice(tokens, pos, honorific.consumed),
-          honorific.variant,
-          honorific.polarity,
-          honorific.polite,
-          { honorific: true }
-        ),
-        consumed: honorific.consumed
-      };
-    }
+function matchCopulaHonorificSupport(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos } = c;
+  const honorific = copulaHonorificSupportSpanAt(tokens, pos);
+  if (honorific !== null) {
+    return {
+      op: buildCopulaOp(
+        srcSlice(tokens, pos, honorific.consumed),
+        honorific.variant,
+        honorific.polarity,
+        honorific.polite,
+        { honorific: true }
+      ),
+      consumed: honorific.consumed
+    };
   }
+  return NO_COPULA_ARM;
+}
 
+function matchCopulaDeNegationOrObligation(c: CopulaMatchContext, copulaDe: CopulaDeRelation): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, t0pos5A } = c;
   if (copulaDe !== null && t0pos5A === 連用形_) {
     if (isObligationSpanStartingAtToken(tokens, pos + 1)) {
       return {
@@ -590,7 +738,11 @@ export function matchCopula(
       };
     }
   }
+  return NO_COPULA_ARM;
+}
 
+function matchCopulaDeSupportVerb(c: CopulaMatchContext, copulaDe: CopulaDeRelation): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, lookups, options, t0pos5A } = c;
   if (copulaDe !== null && t0pos5A === 連用形_) {
     const aru = tokens[pos + 1];
     const aruPos5A = (aru?.pos ?? 0) & POS5A;
@@ -626,36 +778,7 @@ export function matchCopula(
         return { op: copula, consumed: 2 };
       }
       if (aruPos5A === 連用形_) {
-        const following = tokens[pos + 2];
-        if (following !== undefined && (following.pos & POS4) === 助動詞_タイ) {
-          return { op: copula, consumed: 2 };
-        }
-        const polite = tokens[pos + 2];
-        if (polite !== undefined && (polite.pos & POS4) === 助動詞_マス) {
-          return { op: copula, consumed: 2 };
-        }
-        if (postverbAuxiliaryPayloadsForForm(tokens[pos + 2]?.dictionaryForm)
-          .some((auxiliary) => auxiliary.kind === "potential")) {
-          return { op: copula, consumed: 2 };
-        }
-        const simultaneousTokens = copulaSupportSimultaneousConnectiveTokenCountAt(tokens, pos + 1);
-        if (simultaneousTokens !== null) {
-          const consumed = 2 + simultaneousTokens;
-          const connective: ConnectiveOp = createConnectiveOp({
-
-            connective: "simultaneous",
-            surface: DEARU_SIMULTANEOUS_CONNECTIVE_SURFACE,
-            source: srcSlice(tokens, pos, consumed)
-          });
-          return { op: copula, ops: [copula, connective], consumed };
-        }
-        const connective: ConnectiveOp = createConnectiveOp({
-
-          connective: "listing",
-          surface: DEARI_LISTING_CONNECTIVE_SURFACE,
-          source: srcSlice(tokens, pos, 2)
-        });
-        return { op: copula, ops: [copula, connective], consumed: 2 };
+        return matchCopulaSupportRenyouContinuation(c, copula);
       }
       if (aruPos5A === 未然形_ && !isUnrealizableCopulaMizenSupportAuxiliary(tokens[pos + 2])) {
         return { op: copula, consumed: 2 };
@@ -667,25 +790,49 @@ export function matchCopula(
         };
       }
       if (isImperativeInflection(aru.pos)) {
-        if (
-          copulaConcessiveImperativeEvidenceAt(
-            options?.sourceContext?.tokens ?? tokens,
-            options?.sourceContext?.index ?? pos,
-            lookups
-          ) !== null
-        ) {
-          const connective: ConnectiveOp = createConnectiveOp({
-            connective: "even_if",
-            surface: DEARE_CONCESSIVE_CONNECTIVE_SURFACE,
-            source: srcSlice(tokens, pos, 2)
-          });
-          return { op: copula, ops: [copula, connective], consumed: 2 };
-        }
-        return { op: copula, consumed: 2 };
+        return { op: copula, consumed: 2, imperativeSupportMood: "unresolved" };
       }
     }
   }
+  return NO_COPULA_ARM;
+}
 
+function matchCopulaSupportRenyouContinuation(c: CopulaMatchContext, copula: CopulaOp): CopulaMatch {
+  const { tokens, pos } = c;
+  const following = tokens[pos + 2];
+  if (following !== undefined && (following.pos & POS4) === 助動詞_タイ) {
+    return { op: copula, consumed: 2 };
+  }
+  const polite = tokens[pos + 2];
+  if (polite !== undefined && (polite.pos & POS4) === 助動詞_マス) {
+    return { op: copula, consumed: 2 };
+  }
+  if (postverbAuxiliaryPayloadsForForm(tokens[pos + 2]?.dictionaryForm)
+    .some((auxiliary) => auxiliary.kind === "potential")) {
+    return { op: copula, consumed: 2 };
+  }
+  const simultaneousTokens = copulaSupportSimultaneousConnectiveTokenCountAt(tokens, pos + 1);
+  if (simultaneousTokens !== null) {
+    const consumed = 2 + simultaneousTokens;
+    const connective: ConnectiveOp = createConnectiveOp({
+
+      connective: "simultaneous",
+      surface: DEARU_SIMULTANEOUS_CONNECTIVE_SURFACE,
+      source: srcSlice(tokens, pos, consumed)
+    });
+    return { op: copula, ops: [copula, connective], consumed };
+  }
+  const connective: ConnectiveOp = createConnectiveOp({
+
+    connective: "listing",
+    surface: DEARI_LISTING_CONNECTIVE_SURFACE,
+    source: srcSlice(tokens, pos, 2)
+  });
+  return { op: copula, ops: [copula, connective], consumed: 2 };
+}
+
+function matchMisclassifiedDashiCopulaListing(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { pos, t0 } = c;
   if (isMisclassifiedDashiCopulaListingToken(t0)) {
     const source = srcSingle(t0, pos);
     const copula = buildCopulaOp(source, "basic", "affirmative", false);
@@ -697,7 +844,11 @@ export function matchCopula(
     });
     return { op: copula, ops: [copula, connective], consumed: 1 };
   }
+  return NO_COPULA_ARM;
+}
 
+function matchAssertiveCopula(c: CopulaMatchContext): CopulaMatch | typeof NO_COPULA_ARM {
+  const { tokens, pos, t0, t0pos4, t0pos5A } = c;
   if (
     (isAssertiveCopulaMarkerToken(t0) && dialectYaCopulaHostSlotAdmits(tokens, pos)) ||
     ((t0pos5A === 終止形_ || t0pos5A === 連用形_) && (t0pos4 & POS4) === 助動詞_デス)
@@ -717,7 +868,7 @@ export function matchCopula(
       consumed: 1
     };
   }
-  return null;
+  return NO_COPULA_ARM;
 }
 
 export interface CopulaHonorificSupportSpan {
@@ -1155,7 +1306,7 @@ function canBareBoundCarrierFeedFollowingTail(
   );
 }
 
-function isQuestionParticleToken(token: RuntimeHaruToken | undefined): boolean {
+export function isQuestionParticleToken(token: RuntimeHaruToken | undefined): boolean {
   return kaMarkerRelationForToken(token, -1, ["tail_multi_clause"]) !== null;
 }
 
@@ -1197,11 +1348,11 @@ export function terminalNodaCarrierFollowsAdnominalCopula(
   return new TokenCursor(tokens, pos, tokens.length).lookahead(1, canBareBoundCarrierFeedFollowingTail);
 }
 
-function isBareNodaCarrierTerminalSfpFollower(token: RuntimeHaruToken): boolean {
+export function isBareNodaCarrierTerminalSfpFollower(token: RuntimeHaruToken): boolean {
   return (token.pos & POS01) === 助詞_終助詞;
 }
 
-function isHazuNounToken(token: RuntimeHaruToken): boolean {
+export function isHazuNounToken(token: RuntimeHaruToken): boolean {
   return (token.pos & POS0) === 名詞 &&
     ((token.dictionaryForm || token.surface) === "はず" || (token.dictionaryForm || token.surface) === "筈");
 }

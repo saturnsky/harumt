@@ -95,7 +95,7 @@ import { resolveTailDefault, ruleKeijoujiBare, ruleSentencefinalNaAttributive } 
 import { sourceVerbalPredicateVerdictForPurposeMotion } from "./rules/tail-nominalization.js";
 import { ruleCauseHeadMoAru } from "./rules/tail-ka.js";
 import type { TailResolver, TailRule, TailTerminalRule } from "./rules/tail-types.js";
-import { replaceLemmaRenderPlan } from "./rendering/render-plan.js";
+import { replaceLemmaRenderPlan } from "./rendering/render-plan-rewrite.js";
 import { metadataIrregular, metadataKoreanPos } from "./translation/metadata.js";
 import { detectNoda, detectSfp, isYouToken } from "./semantics/grammar-runtime.js";
 import { isKanaQuestionNaParticleSurface } from "./semantics/sfp-surface.js";
@@ -155,7 +155,6 @@ function contentCandidateTraceValue(
   fallbackGroup: number | null
 ): TraceDetailValue {
   const priorityGroup = contentCandidatePriorityGroup(candidate);
-  const lexicalParticleAdverbial = candidate.lexicalParticleAdverbial;
   const nominalized = candidate.translation.nominalized;
   return candidateObservabilityTraceValue({
     lemma: candidate.koreanLemma,
@@ -706,66 +705,7 @@ export class PipelineContentResolverMixin {
     this: ContentResolverRuntimeAccess,
     ctx: ContentCtx
   ): Promise<RuleResultLike | null> {
-    const adverbialPrefix = (): RenderPlan | null => {
-      if (ctx.koreanPos !== 형용사) {
-        return null;
-      }
-      if (
-        ctx.auxTokens.length === 0 &&
-        (ctx.token.pos & POS0) === 形容詞0 &&
-        isAdverbial(ctx.token)
-      ) {
-        return {
-          kind: "conjugatedLemma",
-          koreanLemma: ctx.koreanLemma,
-          irregular: ctx.irregular,
-          koreanPos: ctx.koreanPos,
-          ending: "아/어"
-        };
-      }
-      if (
-        ctx.auxTokens.length > 0 &&
-        ctx.auxTokens.length === 1 &&
-        copulaNiMarkerRelationForToken(ctx.auxTokens.at(0), ctx.start + ctx.consumed, {
-          consumers: ["content_resolver"]
-        }) !== null
-      ) {
-        return {
-          kind: "conjugatedLemma",
-          koreanLemma: ctx.koreanLemma,
-          irregular: ctx.irregular,
-          koreanPos: ctx.koreanPos,
-          ending: "아/어"
-        };
-      }
-      return null;
-    };
-
-    const bareRenyouAdverbialResult = (): RuleResult | null => {
-      const cursor = ctx.freshCursor();
-      if ((ctx.token.pos & POS0) !== 形容詞0 || ctx.auxTokens.length > 0) {
-        return null;
-      }
-      const isClauseBreak = cursor.pos >= cursor.end || ((cursor.tokens[cursor.pos]?.pos ?? 0) & POS0) === 補助記号;
-      const ending = isClauseBreak ? "고" : "게";
-      const adverbial = ctx.adverbial ?? undefined;
-      const plan: RenderPlan = {
-        kind: "conjugatedLemma",
-        koreanLemma: ctx.koreanLemma,
-        irregular: ctx.irregular,
-        koreanPos: ctx.koreanPos,
-        ending,
-        ...(adverbial === undefined ? {} : { adverbial })
-      };
-      return new RuleResult(
-        ctx.consumed,
-        "",
-        true,
-        plan
-      );
-    };
-
-    const adverbialPrefixPlan = adverbialPrefix();
+    const adverbialPrefixPlan = adverbialAdjectivePrefixPlan(ctx);
 
     if (ctx.auxTokens.length > 0 || (ctx.token.pos & POS0) !== 形容詞0 || !isAdverbial(ctx.token)) {
       if (adverbialPrefixPlan === null) {
@@ -788,288 +728,25 @@ export class PipelineContentResolverMixin {
 
     if (cursor.currentIs(isAdjNai)) {
       if (ctx.entry.synthetic !== true) {
-        const naiToken = cursor.current()!;
-        const baseEntry = ctx.entry;
-        const baseLemma = ctx.koreanLemma;
-        const baseIrreg = ctx.irregular;
-        cursor.advance();
-        const naiAux = collectAuxTokens(cursor);
-        const bridge = naiAux.length === 0
-          ? detectNaitoBridge(naiToken, cursor)
-          : null;
-        if (bridge !== null) {
-          const [kind, follower] = bridge;
-          const obligationMatch = cursor.lookahead(follower - cursor.pos, c => {
-            const base = c.pos;
-            const obligation = matchObligationTail(c);
-            return obligation === null ? null : { obligation, consumed: c.pos - base };
-          });
-          if (obligationMatch !== null) {
-            const extra = obligationMatch.consumed;
-            const obligation = obligationMatch.obligation;
-            const [polite, past] = obligation;
-            const baseForm = conjugate(baseLemma, baseIrreg, "아/어");
-            const consumedTo = (kind === "naito" ? 1 : 0) + extra;
-            const tailPlan: LemmaRealization = {
-              kind: "lemma",
-              entry: null,
-              koreanLemma: "하다",
-              koreanPos: 동사,
-              irregular: "여",
-              auxTokens: buildSyntheticAux(polite, past)
-            };
-            return new RuleResult(
-              cursor.consumed + consumedTo,
-              "",
-              true,
-              composePrefixWithPredicate(`${baseForm}야 `, tailPlan, { koreanPos: 동사 })
-            );
-          }
-        }
-        const souMatch = matchSouDaHearsay(cursor);
-        if (souMatch !== undefined) {
-          const souAux = souMatch;
-          const neg = conjugate(baseLemma, baseIrreg, "지");
-          return new RuleResult(
-            cursor.consumed,
-            "",
-            true,
-            composePrefixWithPredicate(
-              `${neg} 않다고 `,
-              buildReportingPlan({ polite: auxHasPolite(souAux) }),
-              { koreanPos: 동사 }
-            )
-          );
-        }
-        const nodaStart = cursor.pos;
-        const noda = detectNoda(cursor);
-        if (noda !== null) {
-          const copulaAux = noda;
-          const nodaConsumed = cursor.pos - nodaStart;
-          const hasConjecture = copulaAux.some((token) =>
-            ((token.pos & POS4) === 助動詞_ダ || (token.pos & POS4) === 助動詞_デス) &&
-            (token.pos & POS5A) === 意志推量形_
-          );
-          const polite = auxHasPolite(copulaAux);
-          const cnAfter = cursor.pos + nodaConsumed;
-          const hasQuestion = (
-            cnAfter < cursor.end &&
-            kaMarkerRelationAt(cursor.tokens, cnAfter, ["content_resolver"])?.particleSubtype1 === 終助詞
-          );
-          if (hasConjecture) {
-            cursor.advance(nodaConsumed + (hasQuestion ? 1 : 0));
-            if (hasQuestion) {
-              if (
-                cursor.pos < cursor.end &&
-                contentQuestionOrPeriodAt(cursor.tokens, cursor.pos)
-              ) {
-                cursor.advance();
-              }
-            }
-            const naiPast = auxHasPast(naiAux);
-            const plan: RenderPlan = {
-              kind: "copulaPredicate",
-              koreanLemma: baseLemma,
-              entry: baseEntry,
-              irregular: baseIrreg,
-              past: naiPast,
-              polite,
-              jpPos: ctx.token.pos,
-              conjecture: true,
-              conjectureQuestion: hasQuestion
-            };
-            return new RuleResult(cursor.consumed, "", true, plan);
-          }
-          cursor.advance(nodaConsumed);
-          const sfpType = detectSfp(cursor, ctx.pos0, true);
-          const negStem = conjugate(baseLemma, baseIrreg, "지");
-          const negAttr = rashiiAttributive(`${negStem} 않다`, null, 형용사, auxTokensArray(naiAux), this.lookups);
-          return new RuleResult(
-            cursor.consumed,
-            "",
-            true,
-            {
-              kind: "noda",
-              prefix: `${negAttr} `,
-              copulaAux: auxTokensArray(copulaAux),
-              sfp: sfpType
-            }
-          );
-        }
-        const quoteMarker = quoteMarkerRelationAt(cursor.tokens, cursor.pos, { consumers: ["content_resolver"] });
-        if (
-          cursor.pos < cursor.end &&
-          (quoteMarker?.canonicalSurface === "と" || quoteMarker?.canonicalSurface === "って") &&
-          ((cursor.tokens[cursor.pos]?.pos ?? 0) & POS0) === 助詞 &&
-          isQuotativeToTokens(cursor, this.lookups)
-        ) {
-          cursor.advance();
-          const negStem = conjugate(baseLemma, baseIrreg, "지");
-          const plan: LemmaRealization = {
-            kind: "lemma",
-            entry: baseEntry,
-            koreanLemma: `${negStem} 않다`,
-            koreanPos: 형용사,
-            irregular: null,
-            auxTokens: auxTokensArray(naiAux),
-            connective: "다고"
-          };
-          return new RuleResult(cursor.consumed, "", true, plan);
-        }
-        const rawPostAux = this.patterns.matchPostAux(cursor.tokens, cursor.pos, naiAux) ?? null;
-        const postAux = rawPostAux === null ? null : normalizeContentPostAuxPattern(rawPostAux);
-        if (
-          postAux !== null &&
-          postAux.outputMode === "hybrid" &&
-          typeof postAux.tailLemma === "string" &&
-          typeof postAux.middleText === "string" &&
-          typeof postAux.connectiveEnding === "string"
-        ) {
-          cursor.advance(postAux.triggerLength);
-          const trailingAux = collectAuxTokens(cursor);
-          const negStem = conjugate(baseLemma, baseIrreg, "지");
-          const connectiveEnding = postAux.connectiveEnding;
-          const content: LemmaRealization = {
-            kind: "lemma",
-            entry: baseEntry,
-            koreanLemma: `${negStem} 않다`,
-            koreanPos: 형용사,
-            irregular: null,
-            auxTokens: auxTokensArray(naiAux),
-            connective: connectiveEnding
-          };
-          const plan: RenderPlan = {
-            kind: "hybridPostAux",
-            content,
-            middleText: postAux.middleText,
-            tailLemma: postAux.tailLemma,
-            tailKoreanPos: postAux.tailKoreanPos ?? 동사,
-            tailIrregular: postAux.tailIrregular ?? null,
-            tailAuxTokens: runtimeTokens(trailingAux),
-            ...(postAux.tailLemma === "모르다"
-              ? {
-                modalKind: "kamo_shirenai" as const,
-                modalPolite: auxHasPolite(trailingAux),
-                modalPast: auxHasPast(trailingAux)
-              }
-              : {})
-          };
-          return new RuleResult(cursor.consumed, "", true, plan);
-        }
-        if (postAux !== null && typeof postAux.connectiveEnding === "string") {
-          cursor.advance(postAux.triggerLength);
-          const negStem = conjugate(baseLemma, baseIrreg, "지");
-          const plan: LemmaRealization = {
-            kind: "lemma",
-            entry: baseEntry,
-            koreanLemma: `${negStem} 않다`,
-            koreanPos: 형용사,
-            irregular: null,
-            auxTokens: auxTokensArray(naiAux),
-            connective: postAux.connectiveEnding
-          };
-          return new RuleResult(cursor.consumed, "", true, plan);
-        }
-        const sfpType = detectSfp(cursor, ctx.pos0, naiAux.length > 0);
-        const negStem = conjugate(baseLemma, baseIrreg, "지");
-        const plan: LemmaRealization = {
-          kind: "lemma",
-          entry: baseEntry,
-          koreanLemma: `${negStem} 않다`,
-          koreanPos: 형용사,
-          irregular: null,
-          auxTokens: auxTokensArray(naiAux),
-          ...(sfpType === null ? {} : { sfp: sfpType })
-        };
-        return new RuleResult(cursor.consumed, "", true, plan);
+        return resolveAdjectiveNaiNegation(this, ctx, cursor);
       }
     }
 
     if (cursor.currentIs((tok) => isVerbLemma(tok, "ある"))) {
-      const ariAux = cursor.lookahead(1, collectAuxTokens);
-      const hasNeg = auxHasNegation(ariAux);
-      if (hasNeg) {
-        if (ctx.entry.synthetic !== true) {
-          const baseEntry = ctx.entry;
-          const baseLemma = ctx.koreanLemma;
-          const baseIrreg = ctx.irregular;
-          const clean = ariAux.filter((token) => (token.pos & POS4) !== 助動詞_ナイ && (token.pos & POS4) !== 助動詞_ヌ);
-          cursor.advance(1 + ariAux.length);
-          const sfpType = detectSfp(cursor, ctx.pos0, clean.length > 0);
-          const negStem = conjugate(baseLemma, baseIrreg, "지");
-          const plan: LemmaRealization = {
-            kind: "lemma",
-            entry: baseEntry,
-            koreanLemma: `${negStem} 않다`,
-            koreanPos: 형용사,
-            irregular: null,
-            auxTokens: auxTokensArray(clean),
-            ...(sfpType === null ? {} : { sfp: sfpType })
-          };
-          return new RuleResult(cursor.consumed, "", true, plan);
-        }
+      const ariNegation = resolveAdjectiveAriNegation(ctx, cursor);
+      if (ariNegation !== null) {
+        return ariNegation;
       }
     }
 
     if (adverbialPrefixPlan !== null) {
       if (cursor.currentIs((tok) => isVerbLemma(tok, "なる", "なれる"))) {
-        const next = cursor.current()!;
-        cursor.advance();
-        const naruAux = collectAuxTokens(cursor);
-        if (
-          naruAux.length === 0 &&
-          cursor.pos < cursor.end &&
-
-          cursor.tokens[cursor.pos]?.surface === "まで" &&
-
-          ((cursor.tokens[cursor.pos]?.pos ?? 0) & POS0) === 助詞
-        ) {
-          const nextDict = next.dictionaryForm;
-          const tailLemma = nextDict === "なれる" ? "질 수 있다" : "지다";
-          const plan = composePrefixWithPredicate(
-            adverbialPrefixPlan,
-            {
-              kind: "conjugatedLemma",
-              koreanLemma: tailLemma,
-              irregular: null,
-              koreanPos: 동사,
-              ending: "ㄹ/을",
-              suffix: " 때까지"
-            },
-            { koreanPos: 동사 }
-          );
-          return new RuleResult(
-            cursor.consumed + 1,
-            "",
-            true,
-            plan
-          );
-        }
-        const sfpType = detectSfp(cursor, 動詞, naruAux.length > 0);
-        const nextDict = next.dictionaryForm;
-        return new RuleResult(
-          cursor.consumed,
-          "",
-          true,
-          composePrefixWithPredicate(
-            adverbialPrefixPlan,
-            {
-              kind: "lemma",
-              entry: null,
-              koreanLemma: nextDict === "なれる" ? "질 수 있다" : "지다",
-              koreanPos: 동사,
-              irregular: null,
-              auxTokens: auxTokensArray(naruAux),
-              sfp: sfpType
-            },
-            { koreanPos: 동사 }
-          )
-        );
+        return resolveAdverbialNaruPredicate(cursor, adverbialPrefixPlan);
       }
-      return bareRenyouAdverbialResult();
+      return bareRenyouAdverbialResult(ctx);
     }
     if (ctx.adverbial !== null && ctx.adverbial !== undefined) {
-      return bareRenyouAdverbialResult();
+      return bareRenyouAdverbialResult(ctx);
     }
 
     return null;
@@ -1310,24 +987,7 @@ export class PipelineContentResolverMixin {
     }
     const initialCursor = cursor.fork();
     const auxCursor = cursor;
-    if (
-      (pos0 === 名詞) &&
-      isNaAdjCapableNoun(token) &&
-      start + 1 < n &&
-      auxCursor.lookahead(0, c => matchCopulaNegation(c)) !== undefined
-    ) {
-      return null;
-    }
-    if (
-      (pos0 === 名詞) &&
-      isNaAdjCapableNoun(token) &&
-      start + 1 < n &&
-      ((tokens[start + 1]?.pos ?? 0) & POS0) === 助詞 &&
-      caseParticleMarkerRelationForToken(tokens[start + 1], start + 1, {
-        acceptedSurfaces: ["で"],
-        consumers: ["content_resolver"]
-      }) !== null
-    ) {
+    if (naAdjCapableNounDefersCandidatePath({ auxCursor, token, pos0, tokens, start, n })) {
       return null;
     }
 
@@ -1351,300 +1011,60 @@ export class PipelineContentResolverMixin {
         projectionOrdinal: projectionOrdinals[index]!
       }))
     );
-    let candidates: ContentTranslationCandidate[] = [];
-    const candidateMatches: string[] = [];
-    let consumedValue: number | null = null;
+    const enumerationInput: ContentCandidateEnumerationInput = {
+      tokens,
+      start,
+      n,
+      token,
+      pos0,
+      entry,
+      grammar,
+      auxTokens,
+      auxCursor,
+      initialCursor,
+      forcePassive,
+      trace,
+      options,
+      projectionOrdinals,
+      allocateProjectionOrdinal
+    };
+    const enumeration: ContentCandidateEnumerationState = { candidates: [], candidateMatches: [], consumedValue: null };
     for (const [index, translation] of entrySenses.entries()) {
-      if (!translationEligibleForLocalVoice(translation, grammar)) {
+      const match = senseCandidateFrameMatch(this, enumerationInput, translation);
+      if (match === null) {
         continue;
       }
-      const hasFrameConditions = translationHasSourceFrameConditions(translation);
-      const hasDeferredFrameConditions = translationHasDeferredFrameConditions(translation);
-      const useDirectSourceFrame = hasFrameConditions &&
-        !translationNeedsFinalClauseLayoutForSourceMatch(translation);
-      let match: "match" | "fail" | "unknown";
-      if (useDirectSourceFrame) {
-        match = senseSourceFrameMatch(
-          translation,
-          tokens,
-          start,
-          grammar,
-          this.lookups,
-          this.numeric,
-          options.contentMap ?? null
-        );
-      } else {
-        match = "match";
-        if (hasFrameConditions) {
-          match = translationFrameAlternativeMatchesWithoutLayout(translation, tokens, start, grammar, this.lookups, this.numeric, options.contentMap ?? null)
-            ? "match"
-            : "fail";
-        }
-      }
-      if (match === "fail") {
-        if (hasFrameConditions && hasDeferredFrameConditions && !useDirectSourceFrame) {
-          match = "unknown";
-        } else {
-          continue;
-        }
-      }
-      const candidateTranslation = translation;
-      const candidateEntry: ContentResolverEntry = { ...entry, senses: [candidateTranslation] };
-      const koreanLemma = candidateTranslation.korean;
-      const isPotential = isPotentialDerivation(candidateEntry);
-      const [phaseResult, voice, hasNegative] = await PipelineContentResolverMixin.prototype.resolveContentPhases.call(
-        this,
-        initialCursor.fork(),
-        token,
-        pos0,
-        candidateEntry,
-        koreanLemma,
-        isPotential,
-        { forcePassive, trace, entryAuxMode: options.entryAuxMode ?? "normal" }
-      );
-
-      const renderPlanPolicy = phaseResult.renderPlanPolicy ?? "normal";
-      let renderPlan: RenderPlan | null = phaseResult.renderPlan ?? null;
-      if (candidateTranslation.dropFirstPassiveAux === true) {
-        const rewrittenPlan = renderPlan === null ? undefined : replaceLemmaRenderPlan(renderPlan, {
-          koreanLemma,
-          irregular: candidateTranslation.irregular ?? null,
-          koreanPos: candidateTranslation.koreanPos ?? 명사,
-          dropFirstPassiveAux: true
-        });
-        if (rewrittenPlan !== undefined) {
-          renderPlan = rewrittenPlan;
-        }
-      }
-      if (candidateTranslation.dropFirstCausativeAux === true) {
-        const rewrittenPlan = renderPlan === null ? undefined : replaceLemmaRenderPlan(renderPlan, {
-          koreanLemma,
-          irregular: candidateTranslation.irregular ?? null,
-          koreanPos: candidateTranslation.koreanPos ?? 명사,
-          dropFirstCausativeAux: true
-        });
-        if (rewrittenPlan !== undefined) {
-          renderPlan = rewrittenPlan;
-        }
-      }
-      if (candidateTranslation.dropFirstNegativeAux === true) {
-        const rewrittenPlan = renderPlan === null ? undefined : replaceLemmaRenderPlan(renderPlan, {
-          koreanLemma,
-          irregular: candidateTranslation.irregular ?? null,
-          koreanPos: candidateTranslation.koreanPos ?? 명사,
-          dropFirstNegativeAux: true
-        });
-        if (rewrittenPlan !== undefined) {
-          renderPlan = rewrittenPlan;
-        }
-      }
-      if (
-        renderPlan !== null &&
-        PipelineContentResolverMixin.requiresEarlyContextResolution(renderPlan) &&
-        !["できる", "出来る", "似る", "にる"].includes(token.dictionaryForm)
-      ) {
+      if (await enumerateSenseCandidate(this, enumerationInput, enumeration, index, translation, match) === "abort") {
         return null;
       }
-      const affixed = PipelineContentResolverMixin.prototype.applyTranslationAffixes.call(
-        this,
-        phaseResult,
-        renderPlan,
-        renderPlan === null ? phaseResult.korean : "",
-        candidateTranslation,
-        candidateEntry,
-        token,
-        candidateTranslation.koreanPos ?? 명사
-      );
-      renderPlan = affixed.renderPlan;
-      const korean = affixed.korean;
-      if (consumedValue === null) {
-        consumedValue = phaseResult.consumed;
-      }
-      const candidateVoice = isPotential && voice === "active" ? "potential" : voice;
-      const contentCandidate = new ContentTranslationCandidate(
-        index,
-        normalizeCandidateConditions(null),
-        candidateEntry,
-        candidateTranslation,
-        koreanLemma,
-        candidateTranslation.koreanPos ?? 명사,
-        candidateTranslation.irregular ?? null,
-        renderPlan,
-        korean,
-        candidateVoice,
-        PipelineContentResolverMixin.prototype.initialRareruReadings.call(this, token, auxTokens, candidateVoice ?? "active"),
-        PipelineContentResolverMixin.initialNareruReadings(tokens, start, token, this.lookups),
-        PipelineContentResolverMixin.initialDekiruReadings(tokens, start, n, token, auxTokens, this.lookups),
-        hasNegative,
-        grammar.causative,
-        grammar.causativePassive,
-        grammar.requestTail,
-        grammar.benefactiveTail,
-        grammar.connectiveRole,
-        phaseResult.benefactive,
-        phaseResult.warnings,
-        renderPlanPolicy,
-        null,
-        projectionOrdinals[index]!,
-        phaseResult.sourceVerbalPredicateVerdict ?? null
-      );
-      const particleAdverbialCandidate = auxCursor.lookahead(
-        start - auxCursor.pos,
-        cursor => lexicalParticleAdverbialVariantFromCandidate(
-          contentCandidate,
-          cursor,
-          this.lookups,
-          () => allocateProjectionOrdinal(
-            translationCandidateIdentity(contentCandidate).provenance
-          )
-        )
-      );
-      if (particleAdverbialCandidate !== null) {
-        candidates.push(particleAdverbialCandidate);
-        candidateMatches.push(match);
-      }
-      candidates.push(contentCandidate);
-      candidateMatches.push(match);
     }
 
-    if (candidates.length === 0) {
+    if (enumeration.candidates.length === 0) {
       return null;
     }
 
-    const dedupedCandidates: ContentTranslationCandidate[] = [];
-    const dedupedMatches: string[] = [];
-    const seenConditions = new Set<string>();
-    for (const [index, candidateItem] of candidates.entries()) {
-      const dedupeKey = candidateDedupeKey(candidateItem);
-      if (seenConditions.has(dedupeKey)) {
-        continue;
-      }
-      seenConditions.add(dedupeKey);
-      dedupedCandidates.push(candidateItem);
-      dedupedMatches.push(candidateMatches[index] ?? "unknown");
-    }
-    candidates = dedupedCandidates;
+    const { dedupedCandidates, dedupedMatches } = dedupeContentCandidates(enumeration.candidates, enumeration.candidateMatches);
     const mixedPosSlotValue = auxCursor.lookahead(start - auxCursor.pos, cursor =>
       PipelineContentResolverMixin.mixedPosSlot(cursor, auxTokens, this.lookups)
     );
-    let slotMatches = dedupedMatches;
-    const bareStemNominalHost = auxTokens.length === 0 &&
-      bareStemNominalUseHostClass(token, mixedPosSlotValue) !== null;
-    const stemRootProjectionAllowed = bareStemNominalHost &&
-      stemRootNominalProjectionAllowedForSlot(mixedPosSlotValue, {
-        lexicalMentionSpan: bareStemLexicalMentionSpanAt(runtimeTokens(tokens), start)
-      });
-    const verbalNominalMProjectionAllowed = bareStemNominalHost &&
-      verbalNominalMProjectionAllowedForSlot(mixedPosSlotValue);
-    if (
-      nominalizedNounProjectionAllowedForSlot(mixedPosSlotValue) ||
-      stemRootProjectionAllowed ||
-      verbalNominalMProjectionAllowed
-    ) {
-      const projectedCandidates: ContentTranslationCandidate[] = [];
-      const projectedMatches: string[] = [];
-      const nominalLemmaRenderPlan = (koreanLemma: string, entry: ContentTranslationCandidate["entry"]): Extract<RenderPlan, { readonly kind: "lemma" }> => ({
-        kind: "lemma",
-        entry,
-        koreanLemma,
-        koreanPos: 명사,
-        irregular: null,
-        auxTokens: runtimeAuxTokens(auxTokens),
-        jpDictForm: token.dictionaryForm,
-        verbConjType: null
-      });
-      for (const [candidateIndex, candidateItem] of candidates.entries()) {
-        const match = dedupedMatches[candidateIndex] ?? "unknown";
-        projectedCandidates.push(candidateItem);
-        projectedMatches.push(match);
-        const nextOrdinal = (): number => allocateProjectionOrdinal(
-          translationCandidateIdentity(candidateItem).provenance
-        );
-        const nominalized = candidateItem.translation.nominalized;
-        const nominalizedProjection = nominalizedNounProjectionAllowedForSlot(mixedPosSlotValue) &&
-          typeof nominalized === "string" && nominalized.length > 0
-          ? nominalizedNounProjectionVariantFromCandidate(
-            candidateItem,
-            nominalLemmaRenderPlan(nominalized, candidateItem.entry),
-            nextOrdinal
-          )
-          : null;
-        if (nominalizedProjection !== null) {
-          projectedCandidates.push(nominalizedProjection);
-          projectedMatches.push(match);
-        }
-        const stemRootProjection = stemRootProjectionAllowed
-          ? stemRootNominalProjectionVariantFromCandidate(
-            candidateItem,
-            (root) => nominalLemmaRenderPlan(root, candidateItem.entry),
-            nextOrdinal
-          )
-          : null;
-        if (stemRootProjection !== null) {
-          projectedCandidates.push(stemRootProjection);
-          projectedMatches.push(match);
-        }
-        const verbalNominalMProjection = verbalNominalMProjectionAllowed
-          ? verbalNominalMProjectionVariantFromCandidate(
-            candidateItem,
-            (nominalM) => nominalLemmaRenderPlan(nominalM, candidateItem.entry),
-            nextOrdinal
-          )
-          : null;
-        if (verbalNominalMProjection !== null) {
-          projectedCandidates.push(verbalNominalMProjection);
-          projectedMatches.push(match);
-        }
-      }
-      candidates = projectedCandidates;
-      slotMatches = projectedMatches;
-    }
-    const preSlotPruneCandidates = trace === null ? [] : candidates;
-    const preSlotPruneMatches = trace === null ? [] : slotMatches;
-    const pruned = PipelineContentResolverMixin.pruneMixedPosCandidates(candidates, slotMatches, mixedPosSlotValue);
-    candidates = pruned[0].map(contentTranslationCandidateFrom);
-    const prunedMatches = [...pruned[1]];
-
-    if (trace !== null) {
-      const preSlotFallbackGroup = candidateFallbackGroup(preSlotPruneCandidates);
-      const postSlotCandidates = pruned[0];
-      const postSlotCandidateSet = new Set(postSlotCandidates);
-      const slotDroppedCandidates = preSlotPruneCandidates.filter((candidateItem) => !postSlotCandidateSet.has(candidateItem));
-      const slotReordered =
-        slotDroppedCandidates.length === 0 &&
-        postSlotCandidates.some((candidateItem, index) => candidateItem !== preSlotPruneCandidates[index]);
-      trace.record(new TraceEvent(start, "analysis", "candidate_enumeration", true, {
-        candidate_count: candidates.length,
-        pre_slot_prune_candidate_count: preSlotPruneCandidates.length,
-        slot_pruned_candidate_count: slotDroppedCandidates.length,
-        slot_reordered_candidate_count: slotReordered ? postSlotCandidates.length : 0,
-        lemmas: candidates.map((candidateItem) => candidateItem.koreanLemma),
-        mixed_pos_slot: mixedPosSlotValue ?? null,
-        grammar: candidateGrammarTraceDetail(grammar),
-        candidates: candidates.map((candidateItem, index) =>
-          contentCandidateTraceValue(candidateItem, prunedMatches[index] ?? "fail", preSlotFallbackGroup)
-        ),
-        pre_slot_prune_candidates: preSlotPruneCandidates.map((candidateItem, index) =>
-          contentCandidateTraceValue(candidateItem, preSlotPruneMatches[index] ?? "fail", preSlotFallbackGroup)
-        ),
-        slot_dropped_candidates: slotDroppedCandidates.map((candidateItem) =>
-          contentCandidateTraceValue(candidateItem, preSlotPruneMatches[preSlotPruneCandidates.indexOf(candidateItem)] ?? "fail", preSlotFallbackGroup)
-        ),
-        evidence: mixedPosSlotValue === undefined
-          ? []
-          : [slotEvidenceObservabilityTraceValue({
-            owner: "content_resolver",
-            evidence: "mixed_pos_slot",
-            slot: mixedPosSlotValue,
-            classification: "preference",
-            effect: slotDroppedCandidates.length > 0 ? "prune" : slotReordered ? "reorder" : "observe",
-            final: false,
-            fallbackLoweredToReorder: false,
-            droppedCount: slotDroppedCandidates.length,
-            droppedCandidates: slotDroppedCandidates.map((candidateItem) => candidateItem.koreanLemma)
-          })]
-      }));
-    }
+    const projected = projectBareStemNominalCandidates({
+      candidates: dedupedCandidates,
+      dedupedMatches,
+      mixedPosSlotValue,
+      auxTokens,
+      token,
+      tokens,
+      start,
+      allocateProjectionOrdinal
+    });
+    const { candidates, prunedMatches } = pruneContentCandidatesForSlot({
+      candidates: projected.candidates,
+      slotMatches: projected.slotMatches,
+      mixedPosSlotValue,
+      trace,
+      start,
+      grammar
+    });
 
     const producedSet = createSourceCandidateSet(
       candidates.map((candidateItem, index) => stagedCandidate(
@@ -1652,7 +1072,7 @@ export class PipelineContentResolverMixin {
         frameSourceConditionMatchOf(prunedMatches[index]),
         { consumed: candidateItem.lexicalParticleAdverbial?.consumed ?? null }
       )),
-      { sharedConsumed: consumedValue ?? 1 }
+      { sharedConsumed: enumeration.consumedValue ?? 1 }
     );
 
     const skeleton = laneACandidateChainWinner(producedSet);
@@ -1660,60 +1080,10 @@ export class PipelineContentResolverMixin {
       return null;
     }
     if (isStagedSourceDomain(entrySenses)) {
-      return new StagedContentResult(
-        candidateSetSharedConsumed(producedSet, 1),
-        skeleton.candidate.entry,
-        skeleton.candidate.renderPlan ?? null,
-        skeleton.candidate.voice ?? null,
-        skeleton.candidate.rareruReadings ?? new Set(),
-        skeleton.candidate.nareruReadings ?? new Set(),
-        skeleton.candidate.dekiruReadings ?? new Set(),
-        skeleton.candidate.hasNegative ?? false,
-        skeleton.candidate.hasCausative ?? false,
-        skeleton.candidate.hasCausativePassive ?? false,
-        false,
-        false,
-        null,
-        skeleton.candidate.benefactive,
-        producedSet,
-        skeleton.candidate.warnings ?? [],
-        skeleton.candidate.renderPlanPolicy ?? "normal"
-      );
+      return stagedContentResultFromSkeleton(producedSet, skeleton);
     }
 
-    const sourceCandidates = resolveSourceCandidateSet(producedSet, {
-      kind: "unstaged_domain",
-      entrySenseCount: entrySenses.length,
-      stagedPriorityDomain: false,
-      verdict: skeleton.identity
-    });
-    if (!isResolvedCandidateSet(sourceCandidates)) {
-      return null;
-    }
-    const selected = resolvedWinner(sourceCandidates).candidate;
-
-    const laneAResult = new ResolvedContentResult(
-      resolvedWinnerConsumed(sourceCandidates),
-      selected.korean ?? "",
-      selected.koreanPos,
-      selected.entry,
-      selected.renderPlan ?? null,
-      selected.voice ?? null,
-      selected.rareruReadings ?? new Set(),
-      selected.nareruReadings ?? new Set(),
-      selected.dekiruReadings ?? new Set(),
-      selected.hasNegative ?? false,
-      selected.hasCausative ?? false,
-      selected.hasCausativePassive ?? false,
-      false,
-      false,
-      null,
-      selected.benefactive,
-      sourceCandidates,
-      selected.warnings ?? [],
-      selected.renderPlanPolicy ?? "normal"
-    );
-    return laneAResult;
+    return resolveUnstagedContentResult(producedSet, skeleton, entrySenses);
   }
 
   async _processContent(
@@ -2334,6 +1704,913 @@ export class PipelineContentResolverMixin {
   }
 }
 
+
+function adverbialAdjectivePrefixPlan(ctx: ContentCtx): RenderPlan | null {
+  if (ctx.koreanPos !== 형용사) {
+    return null;
+  }
+  if (
+    ctx.auxTokens.length === 0 &&
+    (ctx.token.pos & POS0) === 形容詞0 &&
+    isAdverbial(ctx.token)
+  ) {
+    return {
+      kind: "conjugatedLemma",
+      koreanLemma: ctx.koreanLemma,
+      irregular: ctx.irregular,
+      koreanPos: ctx.koreanPos,
+      ending: "아/어"
+    };
+  }
+  if (
+    ctx.auxTokens.length > 0 &&
+    ctx.auxTokens.length === 1 &&
+    copulaNiMarkerRelationForToken(ctx.auxTokens.at(0), ctx.start + ctx.consumed, {
+      consumers: ["content_resolver"]
+    }) !== null
+  ) {
+    return {
+      kind: "conjugatedLemma",
+      koreanLemma: ctx.koreanLemma,
+      irregular: ctx.irregular,
+      koreanPos: ctx.koreanPos,
+      ending: "아/어"
+    };
+  }
+  return null;
+}
+
+function bareRenyouAdverbialResult(ctx: ContentCtx): RuleResult | null {
+  const cursor = ctx.freshCursor();
+  if ((ctx.token.pos & POS0) !== 形容詞0 || ctx.auxTokens.length > 0) {
+    return null;
+  }
+  const isClauseBreak = cursor.pos >= cursor.end || ((cursor.tokens[cursor.pos]?.pos ?? 0) & POS0) === 補助記号;
+  const ending = isClauseBreak ? "고" : "게";
+  const adverbial = ctx.adverbial ?? undefined;
+  const plan: RenderPlan = {
+    kind: "conjugatedLemma",
+    koreanLemma: ctx.koreanLemma,
+    irregular: ctx.irregular,
+    koreanPos: ctx.koreanPos,
+    ending,
+    ...(adverbial === undefined ? {} : { adverbial })
+  };
+  return new RuleResult(
+    ctx.consumed,
+    "",
+    true,
+    plan
+  );
+}
+
+interface AdjectiveNaiNegationContext {
+  readonly ctx: ContentCtx;
+  readonly cursor: TokenCursor<RuntimeHaruToken>;
+  readonly naiToken: RuntimeHaruToken;
+  readonly baseEntry: ContentCtx["entry"];
+  readonly baseLemma: ContentCtx["koreanLemma"];
+  readonly baseIrreg: ContentCtx["irregular"];
+  readonly naiAux: AuxTokens;
+}
+
+function resolveAdjectiveNaiNegation(
+  resolver: ContentResolverRuntimeAccess,
+  ctx: ContentCtx,
+  cursor: TokenCursor<RuntimeHaruToken>
+): RuleResult {
+  const naiToken = cursor.current()!;
+  const baseEntry = ctx.entry;
+  const baseLemma = ctx.koreanLemma;
+  const baseIrreg = ctx.irregular;
+  cursor.advance();
+  const naiAux = collectAuxTokens(cursor);
+  const nai: AdjectiveNaiNegationContext = { ctx, cursor, naiToken, baseEntry, baseLemma, baseIrreg, naiAux };
+  const obligation = resolveAdjectiveNaiObligation(nai);
+  if (obligation !== null) {
+    return obligation;
+  }
+  const hearsay = resolveAdjectiveNaiHearsay(nai);
+  if (hearsay !== null) {
+    return hearsay;
+  }
+  const noda = resolveAdjectiveNaiNoda(resolver, nai);
+  if (noda !== null) {
+    return noda;
+  }
+  const quotative = resolveAdjectiveNaiQuotative(resolver, nai);
+  if (quotative !== null) {
+    return quotative;
+  }
+  const rawPostAux = resolver.patterns.matchPostAux(cursor.tokens, cursor.pos, naiAux) ?? null;
+  const postAux = rawPostAux === null ? null : normalizeContentPostAuxPattern(rawPostAux);
+  const hybridPostAux = resolveAdjectiveNaiHybridPostAux(nai, postAux);
+  if (hybridPostAux !== null) {
+    return hybridPostAux;
+  }
+  const postAuxConnective = resolveAdjectiveNaiPostAuxConnective(nai, postAux);
+  if (postAuxConnective !== null) {
+    return postAuxConnective;
+  }
+  return resolveAdjectiveNaiPlainNegation(nai);
+}
+
+function resolveAdjectiveNaiObligation(nai: AdjectiveNaiNegationContext): RuleResult | null {
+  const { cursor, naiToken, baseLemma, baseIrreg, naiAux } = nai;
+  const bridge = naiAux.length === 0
+    ? detectNaitoBridge(naiToken, cursor)
+    : null;
+  if (bridge !== null) {
+    const [kind, follower] = bridge;
+    const obligationMatch = cursor.lookahead(follower - cursor.pos, c => {
+      const base = c.pos;
+      const obligation = matchObligationTail(c);
+      return obligation === null ? null : { obligation, consumed: c.pos - base };
+    });
+    if (obligationMatch !== null) {
+      const extra = obligationMatch.consumed;
+      const obligation = obligationMatch.obligation;
+      const [polite, past] = obligation;
+      const baseForm = conjugate(baseLemma, baseIrreg, "아/어");
+      const consumedTo = (kind === "naito" ? 1 : 0) + extra;
+      const tailPlan: LemmaRealization = {
+        kind: "lemma",
+        entry: null,
+        koreanLemma: "하다",
+        koreanPos: 동사,
+        irregular: "여",
+        auxTokens: buildSyntheticAux(polite, past)
+      };
+      return new RuleResult(
+        cursor.consumed + consumedTo,
+        "",
+        true,
+        composePrefixWithPredicate(`${baseForm}야 `, tailPlan, { koreanPos: 동사 })
+      );
+    }
+  }
+  return null;
+}
+
+function resolveAdjectiveNaiHearsay(nai: AdjectiveNaiNegationContext): RuleResult | null {
+  const { cursor, baseLemma, baseIrreg } = nai;
+  const souMatch = matchSouDaHearsay(cursor);
+  if (souMatch !== undefined) {
+    const souAux = souMatch;
+    const neg = conjugate(baseLemma, baseIrreg, "지");
+    return new RuleResult(
+      cursor.consumed,
+      "",
+      true,
+      composePrefixWithPredicate(
+        `${neg} 않다고 `,
+        buildReportingPlan({ polite: auxHasPolite(souAux) }),
+        { koreanPos: 동사 }
+      )
+    );
+  }
+  return null;
+}
+
+function resolveAdjectiveNaiNoda(resolver: ContentResolverRuntimeAccess, nai: AdjectiveNaiNegationContext): RuleResult | null {
+  const { ctx, cursor, baseEntry, baseLemma, baseIrreg, naiAux } = nai;
+  const nodaStart = cursor.pos;
+  const noda = detectNoda(cursor);
+  if (noda !== null) {
+    const copulaAux = noda;
+    const nodaConsumed = cursor.pos - nodaStart;
+    const hasConjecture = copulaAux.some((token) =>
+      ((token.pos & POS4) === 助動詞_ダ || (token.pos & POS4) === 助動詞_デス) &&
+      (token.pos & POS5A) === 意志推量形_
+    );
+    const polite = auxHasPolite(copulaAux);
+    const cnAfter = cursor.pos + nodaConsumed;
+    const hasQuestion = (
+      cnAfter < cursor.end &&
+      kaMarkerRelationAt(cursor.tokens, cnAfter, ["content_resolver"])?.particleSubtype1 === 終助詞
+    );
+    if (hasConjecture) {
+      cursor.advance(nodaConsumed + (hasQuestion ? 1 : 0));
+      if (hasQuestion) {
+        if (
+          cursor.pos < cursor.end &&
+          contentQuestionOrPeriodAt(cursor.tokens, cursor.pos)
+        ) {
+          cursor.advance();
+        }
+      }
+      const naiPast = auxHasPast(naiAux);
+      const plan: RenderPlan = {
+        kind: "copulaPredicate",
+        koreanLemma: baseLemma,
+        entry: baseEntry,
+        irregular: baseIrreg,
+        past: naiPast,
+        polite,
+        jpPos: ctx.token.pos,
+        conjecture: true,
+        conjectureQuestion: hasQuestion
+      };
+      return new RuleResult(cursor.consumed, "", true, plan);
+    }
+    cursor.advance(nodaConsumed);
+    const sfpType = detectSfp(cursor, ctx.pos0, true);
+    const negStem = conjugate(baseLemma, baseIrreg, "지");
+    const negAttr = rashiiAttributive(`${negStem} 않다`, null, 형용사, auxTokensArray(naiAux), resolver.lookups);
+    return new RuleResult(
+      cursor.consumed,
+      "",
+      true,
+      {
+        kind: "noda",
+        prefix: `${negAttr} `,
+        copulaAux: auxTokensArray(copulaAux),
+        sfp: sfpType
+      }
+    );
+  }
+  return null;
+}
+
+function resolveAdjectiveNaiQuotative(resolver: ContentResolverRuntimeAccess, nai: AdjectiveNaiNegationContext): RuleResult | null {
+  const { cursor, baseEntry, baseLemma, baseIrreg, naiAux } = nai;
+  const quoteMarker = quoteMarkerRelationAt(cursor.tokens, cursor.pos, { consumers: ["content_resolver"] });
+  if (
+    cursor.pos < cursor.end &&
+    (quoteMarker?.canonicalSurface === "と" || quoteMarker?.canonicalSurface === "って") &&
+    ((cursor.tokens[cursor.pos]?.pos ?? 0) & POS0) === 助詞 &&
+    isQuotativeToTokens(cursor, resolver.lookups)
+  ) {
+    cursor.advance();
+    const negStem = conjugate(baseLemma, baseIrreg, "지");
+    const plan: LemmaRealization = {
+      kind: "lemma",
+      entry: baseEntry,
+      koreanLemma: `${negStem} 않다`,
+      koreanPos: 형용사,
+      irregular: null,
+      auxTokens: auxTokensArray(naiAux),
+      connective: "다고"
+    };
+    return new RuleResult(cursor.consumed, "", true, plan);
+  }
+  return null;
+}
+
+function resolveAdjectiveNaiHybridPostAux(
+  nai: AdjectiveNaiNegationContext,
+  postAux: ReturnType<typeof normalizeContentPostAuxPattern> | null
+): RuleResult | null {
+  const { cursor, baseEntry, baseLemma, baseIrreg, naiAux } = nai;
+  if (
+    postAux !== null &&
+    postAux.outputMode === "hybrid" &&
+    typeof postAux.tailLemma === "string" &&
+    typeof postAux.middleText === "string" &&
+    typeof postAux.connectiveEnding === "string"
+  ) {
+    cursor.advance(postAux.triggerLength);
+    const trailingAux = collectAuxTokens(cursor);
+    const negStem = conjugate(baseLemma, baseIrreg, "지");
+    const connectiveEnding = postAux.connectiveEnding;
+    const content: LemmaRealization = {
+      kind: "lemma",
+      entry: baseEntry,
+      koreanLemma: `${negStem} 않다`,
+      koreanPos: 형용사,
+      irregular: null,
+      auxTokens: auxTokensArray(naiAux),
+      connective: connectiveEnding
+    };
+    const plan: RenderPlan = {
+      kind: "hybridPostAux",
+      content,
+      middleText: postAux.middleText,
+      tailLemma: postAux.tailLemma,
+      tailKoreanPos: postAux.tailKoreanPos ?? 동사,
+      tailIrregular: postAux.tailIrregular ?? null,
+      tailAuxTokens: runtimeTokens(trailingAux),
+      ...(postAux.tailLemma === "모르다"
+        ? {
+          modalKind: "kamo_shirenai" as const,
+          modalPolite: auxHasPolite(trailingAux),
+          modalPast: auxHasPast(trailingAux)
+        }
+        : {})
+    };
+    return new RuleResult(cursor.consumed, "", true, plan);
+  }
+  return null;
+}
+
+function resolveAdjectiveNaiPostAuxConnective(
+  nai: AdjectiveNaiNegationContext,
+  postAux: ReturnType<typeof normalizeContentPostAuxPattern> | null
+): RuleResult | null {
+  const { cursor, baseEntry, baseLemma, baseIrreg, naiAux } = nai;
+  if (postAux !== null && typeof postAux.connectiveEnding === "string") {
+    cursor.advance(postAux.triggerLength);
+    const negStem = conjugate(baseLemma, baseIrreg, "지");
+    const plan: LemmaRealization = {
+      kind: "lemma",
+      entry: baseEntry,
+      koreanLemma: `${negStem} 않다`,
+      koreanPos: 형용사,
+      irregular: null,
+      auxTokens: auxTokensArray(naiAux),
+      connective: postAux.connectiveEnding
+    };
+    return new RuleResult(cursor.consumed, "", true, plan);
+  }
+  return null;
+}
+
+function resolveAdjectiveNaiPlainNegation(nai: AdjectiveNaiNegationContext): RuleResult {
+  const { ctx, cursor, baseEntry, baseLemma, baseIrreg, naiAux } = nai;
+  const sfpType = detectSfp(cursor, ctx.pos0, naiAux.length > 0);
+  const negStem = conjugate(baseLemma, baseIrreg, "지");
+  const plan: LemmaRealization = {
+    kind: "lemma",
+    entry: baseEntry,
+    koreanLemma: `${negStem} 않다`,
+    koreanPos: 형용사,
+    irregular: null,
+    auxTokens: auxTokensArray(naiAux),
+    ...(sfpType === null ? {} : { sfp: sfpType })
+  };
+  return new RuleResult(cursor.consumed, "", true, plan);
+}
+
+function resolveAdjectiveAriNegation(ctx: ContentCtx, cursor: TokenCursor<RuntimeHaruToken>): RuleResult | null {
+  const ariAux = cursor.lookahead(1, collectAuxTokens);
+  const hasNeg = auxHasNegation(ariAux);
+  if (hasNeg) {
+    if (ctx.entry.synthetic !== true) {
+      const baseEntry = ctx.entry;
+      const baseLemma = ctx.koreanLemma;
+      const baseIrreg = ctx.irregular;
+      const clean = ariAux.filter((token) => (token.pos & POS4) !== 助動詞_ナイ && (token.pos & POS4) !== 助動詞_ヌ);
+      cursor.advance(1 + ariAux.length);
+      const sfpType = detectSfp(cursor, ctx.pos0, clean.length > 0);
+      const negStem = conjugate(baseLemma, baseIrreg, "지");
+      const plan: LemmaRealization = {
+        kind: "lemma",
+        entry: baseEntry,
+        koreanLemma: `${negStem} 않다`,
+        koreanPos: 형용사,
+        irregular: null,
+        auxTokens: auxTokensArray(clean),
+        ...(sfpType === null ? {} : { sfp: sfpType })
+      };
+      return new RuleResult(cursor.consumed, "", true, plan);
+    }
+  }
+  return null;
+}
+
+function resolveAdverbialNaruPredicate(cursor: TokenCursor<RuntimeHaruToken>, adverbialPrefixPlan: RenderPlan): RuleResult {
+  const next = cursor.current()!;
+  cursor.advance();
+  const naruAux = collectAuxTokens(cursor);
+  if (
+    naruAux.length === 0 &&
+    cursor.pos < cursor.end &&
+
+    cursor.tokens[cursor.pos]?.surface === "まで" &&
+
+    ((cursor.tokens[cursor.pos]?.pos ?? 0) & POS0) === 助詞
+  ) {
+    return realizeAdverbialNaruUntil(cursor, next, adverbialPrefixPlan);
+  }
+  return realizeAdverbialNaruChange(cursor, next, naruAux, adverbialPrefixPlan);
+}
+
+function realizeAdverbialNaruUntil(
+  cursor: TokenCursor<RuntimeHaruToken>,
+  next: RuntimeHaruToken,
+  adverbialPrefixPlan: RenderPlan
+): RuleResult {
+  const nextDict = next.dictionaryForm;
+  const tailLemma = nextDict === "なれる" ? "질 수 있다" : "지다";
+  const plan = composePrefixWithPredicate(
+    adverbialPrefixPlan,
+    {
+      kind: "conjugatedLemma",
+      koreanLemma: tailLemma,
+      irregular: null,
+      koreanPos: 동사,
+      ending: "ㄹ/을",
+      suffix: " 때까지"
+    },
+    { koreanPos: 동사 }
+  );
+  return new RuleResult(
+    cursor.consumed + 1,
+    "",
+    true,
+    plan
+  );
+}
+
+function realizeAdverbialNaruChange(
+  cursor: TokenCursor<RuntimeHaruToken>,
+  next: RuntimeHaruToken,
+  naruAux: AuxTokens,
+  adverbialPrefixPlan: RenderPlan
+): RuleResult {
+  const sfpType = detectSfp(cursor, 動詞, naruAux.length > 0);
+  const nextDict = next.dictionaryForm;
+  return new RuleResult(
+    cursor.consumed,
+    "",
+    true,
+    composePrefixWithPredicate(
+      adverbialPrefixPlan,
+      {
+        kind: "lemma",
+        entry: null,
+        koreanLemma: nextDict === "なれる" ? "질 수 있다" : "지다",
+        koreanPos: 동사,
+        irregular: null,
+        auxTokens: auxTokensArray(naruAux),
+        sfp: sfpType
+      },
+      { koreanPos: 동사 }
+    )
+  );
+}
+
+
+interface ContentCandidateEnumerationInput {
+  readonly tokens: TokenCursor<RuntimeHaruToken>["tokens"];
+  readonly start: number;
+  readonly n: number;
+  readonly token: RuntimeHaruToken;
+  readonly pos0: number;
+  readonly entry: ContentResolverEntry;
+  readonly grammar: CandidateGrammar;
+  readonly auxTokens: AuxTokens;
+  readonly auxCursor: TokenCursor<RuntimeHaruToken>;
+  readonly initialCursor: TokenCursor<RuntimeHaruToken>;
+  readonly forcePassive: boolean;
+  readonly trace: TraceCollector | null;
+  readonly options: {
+    readonly entryAuxMode?: "normal" | "head_metadata";
+    readonly contentMap?: ContextContentMap | null;
+  };
+  readonly projectionOrdinals: ReturnType<typeof translationCandidateProjectionOrdinals>;
+  readonly allocateProjectionOrdinal: ReturnType<typeof createStemCandidateProjectionOrdinalAllocator>;
+}
+
+interface ContentCandidateEnumerationState {
+  readonly candidates: ContentTranslationCandidate[];
+  readonly candidateMatches: string[];
+  consumedValue: number | null;
+}
+
+type ContentResolverSense = NonNullable<ContentResolverEntry["senses"]>[number];
+
+function naAdjCapableNounDefersCandidatePath({ auxCursor, token, pos0, tokens, start, n }: {
+  readonly auxCursor: TokenCursor<RuntimeHaruToken>;
+  readonly token: RuntimeHaruToken;
+  readonly pos0: number;
+  readonly tokens: TokenCursor<RuntimeHaruToken>["tokens"];
+  readonly start: number;
+  readonly n: number;
+}): boolean {
+  if (
+    (pos0 === 名詞) &&
+    isNaAdjCapableNoun(token) &&
+    start + 1 < n &&
+    auxCursor.lookahead(0, c => matchCopulaNegation(c)) !== undefined
+  ) {
+    return true;
+  }
+  if (
+    (pos0 === 名詞) &&
+    isNaAdjCapableNoun(token) &&
+    start + 1 < n &&
+    ((tokens[start + 1]?.pos ?? 0) & POS0) === 助詞 &&
+    caseParticleMarkerRelationForToken(tokens[start + 1], start + 1, {
+      acceptedSurfaces: ["で"],
+      consumers: ["content_resolver"]
+    }) !== null
+  ) {
+    return true;
+  }
+  return false;
+}
+
+async function enumerateSenseCandidate(
+  resolver: ContentResolverRuntimeAccess,
+  input: ContentCandidateEnumerationInput,
+  enumeration: ContentCandidateEnumerationState,
+  index: number,
+  translation: ContentResolverSense,
+  match: "match" | "fail" | "unknown"
+): Promise<"next" | "abort"> {
+  const { tokens, start, n, token, pos0, entry, grammar, auxTokens, auxCursor, initialCursor, forcePassive, trace, options, projectionOrdinals, allocateProjectionOrdinal } = input;
+  const candidateTranslation = translation;
+  const candidateEntry: ContentResolverEntry = { ...entry, senses: [candidateTranslation] };
+  const koreanLemma = candidateTranslation.korean;
+  const isPotential = isPotentialDerivation(candidateEntry);
+  const [phaseResult, voice, hasNegative] = await PipelineContentResolverMixin.prototype.resolveContentPhases.call(
+    resolver,
+    initialCursor.fork(),
+    token,
+    pos0,
+    candidateEntry,
+    koreanLemma,
+    isPotential,
+    { forcePassive, trace, entryAuxMode: options.entryAuxMode ?? "normal" }
+  );
+
+  const renderPlanPolicy = phaseResult.renderPlanPolicy ?? "normal";
+  let renderPlan: RenderPlan | null = phaseResult.renderPlan ?? null;
+  renderPlan = applySenseDropFirstAuxRewrites(renderPlan, candidateTranslation, koreanLemma);
+  if (
+    renderPlan !== null &&
+    PipelineContentResolverMixin.requiresEarlyContextResolution(renderPlan) &&
+    !["できる", "出来る", "似る", "にる"].includes(token.dictionaryForm)
+  ) {
+    return "abort";
+  }
+  const affixed = PipelineContentResolverMixin.prototype.applyTranslationAffixes.call(
+    resolver,
+    phaseResult,
+    renderPlan,
+    renderPlan === null ? phaseResult.korean : "",
+    candidateTranslation,
+    candidateEntry,
+    token,
+    candidateTranslation.koreanPos ?? 명사
+  );
+  renderPlan = affixed.renderPlan;
+  const korean = affixed.korean;
+  if (enumeration.consumedValue === null) {
+    enumeration.consumedValue = phaseResult.consumed;
+  }
+  const candidateVoice = isPotential && voice === "active" ? "potential" : voice;
+  const contentCandidate = new ContentTranslationCandidate(
+    index,
+    normalizeCandidateConditions(null),
+    candidateEntry,
+    candidateTranslation,
+    koreanLemma,
+    candidateTranslation.koreanPos ?? 명사,
+    candidateTranslation.irregular ?? null,
+    renderPlan,
+    korean,
+    candidateVoice,
+    PipelineContentResolverMixin.prototype.initialRareruReadings.call(resolver, token, auxTokens, candidateVoice ?? "active"),
+    PipelineContentResolverMixin.initialNareruReadings(tokens, start, token, resolver.lookups),
+    PipelineContentResolverMixin.initialDekiruReadings(tokens, start, n, token, auxTokens, resolver.lookups),
+    hasNegative,
+    grammar.causative,
+    grammar.causativePassive,
+    grammar.requestTail,
+    grammar.benefactiveTail,
+    grammar.connectiveRole,
+    phaseResult.benefactive,
+    phaseResult.warnings,
+    renderPlanPolicy,
+    null,
+    projectionOrdinals[index]!,
+    phaseResult.sourceVerbalPredicateVerdict ?? null
+  );
+  const particleAdverbialCandidate = auxCursor.lookahead(
+    start - auxCursor.pos,
+    cursor => lexicalParticleAdverbialVariantFromCandidate(
+      contentCandidate,
+      cursor,
+      resolver.lookups,
+      () => allocateProjectionOrdinal(
+        translationCandidateIdentity(contentCandidate).provenance
+      )
+    )
+  );
+  if (particleAdverbialCandidate !== null) {
+    enumeration.candidates.push(particleAdverbialCandidate);
+    enumeration.candidateMatches.push(match);
+  }
+  enumeration.candidates.push(contentCandidate);
+  enumeration.candidateMatches.push(match);
+  return "next";
+}
+
+function senseCandidateFrameMatch(
+  resolver: ContentResolverRuntimeAccess,
+  input: ContentCandidateEnumerationInput,
+  translation: ContentResolverSense
+): "match" | "fail" | "unknown" | null {
+  const { tokens, start, grammar, options } = input;
+  if (!translationEligibleForLocalVoice(translation, grammar)) {
+    return null;
+  }
+  const hasFrameConditions = translationHasSourceFrameConditions(translation);
+  const hasDeferredFrameConditions = translationHasDeferredFrameConditions(translation);
+  const useDirectSourceFrame = hasFrameConditions &&
+    !translationNeedsFinalClauseLayoutForSourceMatch(translation);
+  let match: "match" | "fail" | "unknown";
+  if (useDirectSourceFrame) {
+    match = senseSourceFrameMatch(
+      translation,
+      tokens,
+      start,
+      grammar,
+      resolver.lookups,
+      resolver.numeric,
+      options.contentMap ?? null
+    );
+  } else {
+    match = "match";
+    if (hasFrameConditions) {
+      match = translationFrameAlternativeMatchesWithoutLayout(translation, tokens, start, grammar, resolver.lookups, resolver.numeric, options.contentMap ?? null)
+        ? "match"
+        : "fail";
+    }
+  }
+  if (match === "fail") {
+    if (hasFrameConditions && hasDeferredFrameConditions && !useDirectSourceFrame) {
+      match = "unknown";
+    } else {
+      return null;
+    }
+  }
+  return match;
+}
+
+function applySenseDropFirstAuxRewrites(
+  plan: RenderPlan | null,
+  candidateTranslation: ContentResolverSense,
+  koreanLemma: string
+): RenderPlan | null {
+  let renderPlan = plan;
+  if (candidateTranslation.dropFirstPassiveAux === true) {
+    const rewrittenPlan = renderPlan === null ? undefined : replaceLemmaRenderPlan(renderPlan, {
+      koreanLemma,
+      irregular: candidateTranslation.irregular ?? null,
+      koreanPos: candidateTranslation.koreanPos ?? 명사,
+      dropFirstPassiveAux: true
+    });
+    if (rewrittenPlan !== undefined) {
+      renderPlan = rewrittenPlan;
+    }
+  }
+  if (candidateTranslation.dropFirstCausativeAux === true) {
+    const rewrittenPlan = renderPlan === null ? undefined : replaceLemmaRenderPlan(renderPlan, {
+      koreanLemma,
+      irregular: candidateTranslation.irregular ?? null,
+      koreanPos: candidateTranslation.koreanPos ?? 명사,
+      dropFirstCausativeAux: true
+    });
+    if (rewrittenPlan !== undefined) {
+      renderPlan = rewrittenPlan;
+    }
+  }
+  if (candidateTranslation.dropFirstNegativeAux === true) {
+    const rewrittenPlan = renderPlan === null ? undefined : replaceLemmaRenderPlan(renderPlan, {
+      koreanLemma,
+      irregular: candidateTranslation.irregular ?? null,
+      koreanPos: candidateTranslation.koreanPos ?? 명사,
+      dropFirstNegativeAux: true
+    });
+    if (rewrittenPlan !== undefined) {
+      renderPlan = rewrittenPlan;
+    }
+  }
+  return renderPlan;
+}
+
+function dedupeContentCandidates(
+  candidates: readonly ContentTranslationCandidate[],
+  candidateMatches: readonly string[]
+): { readonly dedupedCandidates: ContentTranslationCandidate[]; readonly dedupedMatches: string[] } {
+  const dedupedCandidates: ContentTranslationCandidate[] = [];
+  const dedupedMatches: string[] = [];
+  const seenConditions = new Set<string>();
+  for (const [index, candidateItem] of candidates.entries()) {
+    const dedupeKey = candidateDedupeKey(candidateItem);
+    if (seenConditions.has(dedupeKey)) {
+      continue;
+    }
+    seenConditions.add(dedupeKey);
+    dedupedCandidates.push(candidateItem);
+    dedupedMatches.push(candidateMatches[index] ?? "unknown");
+  }
+  return { dedupedCandidates, dedupedMatches };
+}
+
+function projectBareStemNominalCandidates(input: {
+  readonly candidates: ContentTranslationCandidate[];
+  readonly dedupedMatches: string[];
+  readonly mixedPosSlotValue: string | null;
+  readonly auxTokens: AuxTokens;
+  readonly token: RuntimeHaruToken;
+  readonly tokens: TokenCursor<RuntimeHaruToken>["tokens"];
+  readonly start: number;
+  readonly allocateProjectionOrdinal: ReturnType<typeof createStemCandidateProjectionOrdinalAllocator>;
+}): { readonly candidates: ContentTranslationCandidate[]; readonly slotMatches: string[] } {
+  const { dedupedMatches, mixedPosSlotValue, auxTokens, token, tokens, start, allocateProjectionOrdinal } = input;
+  let candidates = input.candidates;
+  let slotMatches = dedupedMatches;
+  const bareStemNominalHost = auxTokens.length === 0 &&
+    bareStemNominalUseHostClass(token, mixedPosSlotValue) !== null;
+  const stemRootProjectionAllowed = bareStemNominalHost &&
+    stemRootNominalProjectionAllowedForSlot(mixedPosSlotValue, {
+      lexicalMentionSpan: bareStemLexicalMentionSpanAt(runtimeTokens(tokens), start)
+    });
+  const verbalNominalMProjectionAllowed = bareStemNominalHost &&
+    verbalNominalMProjectionAllowedForSlot(mixedPosSlotValue);
+  if (
+    nominalizedNounProjectionAllowedForSlot(mixedPosSlotValue) ||
+    stemRootProjectionAllowed ||
+    verbalNominalMProjectionAllowed
+  ) {
+    const projectedCandidates: ContentTranslationCandidate[] = [];
+    const projectedMatches: string[] = [];
+    const nominalLemmaRenderPlan = (koreanLemma: string, entry: ContentTranslationCandidate["entry"]): Extract<RenderPlan, { readonly kind: "lemma" }> => ({
+      kind: "lemma",
+      entry,
+      koreanLemma,
+      koreanPos: 명사,
+      irregular: null,
+      auxTokens: runtimeAuxTokens(auxTokens),
+      jpDictForm: token.dictionaryForm,
+      verbConjType: null
+    });
+    for (const [candidateIndex, candidateItem] of candidates.entries()) {
+      const match = dedupedMatches[candidateIndex] ?? "unknown";
+      projectedCandidates.push(candidateItem);
+      projectedMatches.push(match);
+      const nextOrdinal = (): number => allocateProjectionOrdinal(
+        translationCandidateIdentity(candidateItem).provenance
+      );
+      const nominalized = candidateItem.translation.nominalized;
+      const nominalizedProjection = nominalizedNounProjectionAllowedForSlot(mixedPosSlotValue) &&
+        typeof nominalized === "string" && nominalized.length > 0
+        ? nominalizedNounProjectionVariantFromCandidate(
+          candidateItem,
+          nominalLemmaRenderPlan(nominalized, candidateItem.entry),
+          nextOrdinal
+        )
+        : null;
+      if (nominalizedProjection !== null) {
+        projectedCandidates.push(nominalizedProjection);
+        projectedMatches.push(match);
+      }
+      const stemRootProjection = stemRootProjectionAllowed
+        ? stemRootNominalProjectionVariantFromCandidate(
+          candidateItem,
+          (root) => nominalLemmaRenderPlan(root, candidateItem.entry),
+          nextOrdinal
+        )
+        : null;
+      if (stemRootProjection !== null) {
+        projectedCandidates.push(stemRootProjection);
+        projectedMatches.push(match);
+      }
+      const verbalNominalMProjection = verbalNominalMProjectionAllowed
+        ? verbalNominalMProjectionVariantFromCandidate(
+          candidateItem,
+          (nominalM) => nominalLemmaRenderPlan(nominalM, candidateItem.entry),
+          nextOrdinal
+        )
+        : null;
+      if (verbalNominalMProjection !== null) {
+        projectedCandidates.push(verbalNominalMProjection);
+        projectedMatches.push(match);
+      }
+    }
+    candidates = projectedCandidates;
+    slotMatches = projectedMatches;
+  }
+  return { candidates, slotMatches };
+}
+
+function pruneContentCandidatesForSlot(input: {
+  readonly candidates: ContentTranslationCandidate[];
+  readonly slotMatches: string[];
+  readonly mixedPosSlotValue: string | null;
+  readonly trace: TraceCollector | null;
+  readonly start: number;
+  readonly grammar: CandidateGrammar;
+}): { readonly candidates: ContentTranslationCandidate[]; readonly prunedMatches: string[] } {
+  const { slotMatches, mixedPosSlotValue, trace, start, grammar } = input;
+  let candidates = input.candidates;
+  const preSlotPruneCandidates = trace === null ? [] : candidates;
+  const preSlotPruneMatches = trace === null ? [] : slotMatches;
+  const pruned = PipelineContentResolverMixin.pruneMixedPosCandidates(candidates, slotMatches, mixedPosSlotValue);
+  candidates = pruned[0].map(contentTranslationCandidateFrom);
+  const prunedMatches = [...pruned[1]];
+
+  if (trace !== null) {
+    const preSlotFallbackGroup = candidateFallbackGroup(preSlotPruneCandidates);
+    const postSlotCandidates = pruned[0];
+    const postSlotCandidateSet = new Set(postSlotCandidates);
+    const slotDroppedCandidates = preSlotPruneCandidates.filter((candidateItem) => !postSlotCandidateSet.has(candidateItem));
+    const slotReordered =
+      slotDroppedCandidates.length === 0 &&
+      postSlotCandidates.some((candidateItem, index) => candidateItem !== preSlotPruneCandidates[index]);
+    trace.record(new TraceEvent(start, "analysis", "candidate_enumeration", true, {
+      candidate_count: candidates.length,
+      pre_slot_prune_candidate_count: preSlotPruneCandidates.length,
+      slot_pruned_candidate_count: slotDroppedCandidates.length,
+      slot_reordered_candidate_count: slotReordered ? postSlotCandidates.length : 0,
+      lemmas: candidates.map((candidateItem) => candidateItem.koreanLemma),
+      mixed_pos_slot: mixedPosSlotValue ?? null,
+      grammar: candidateGrammarTraceDetail(grammar),
+      candidates: candidates.map((candidateItem, index) =>
+        contentCandidateTraceValue(candidateItem, prunedMatches[index] ?? "fail", preSlotFallbackGroup)
+      ),
+      pre_slot_prune_candidates: preSlotPruneCandidates.map((candidateItem, index) =>
+        contentCandidateTraceValue(candidateItem, preSlotPruneMatches[index] ?? "fail", preSlotFallbackGroup)
+      ),
+      slot_dropped_candidates: slotDroppedCandidates.map((candidateItem) =>
+        contentCandidateTraceValue(candidateItem, preSlotPruneMatches[preSlotPruneCandidates.indexOf(candidateItem)] ?? "fail", preSlotFallbackGroup)
+      ),
+      evidence: mixedPosSlotValue === undefined
+        ? []
+        : [slotEvidenceObservabilityTraceValue({
+          owner: "content_resolver",
+          evidence: "mixed_pos_slot",
+          slot: mixedPosSlotValue,
+          classification: "preference",
+          effect: slotDroppedCandidates.length > 0 ? "prune" : slotReordered ? "reorder" : "observe",
+          final: false,
+          fallbackLoweredToReorder: false,
+          droppedCount: slotDroppedCandidates.length,
+          droppedCandidates: slotDroppedCandidates.map((candidateItem) => candidateItem.koreanLemma)
+        })]
+    }));
+  }
+  return { candidates, prunedMatches };
+}
+
+function stagedContentResultFromSkeleton(
+  producedSet: SourceCandidateSet<ContentTranslationCandidate>,
+  skeleton: NonNullable<ReturnType<typeof laneACandidateChainWinner>>
+): StagedContentResult {
+  return new StagedContentResult(
+    candidateSetSharedConsumed(producedSet, 1),
+    skeleton.candidate.entry,
+    skeleton.candidate.renderPlan ?? null,
+    skeleton.candidate.voice ?? null,
+    skeleton.candidate.rareruReadings ?? new Set(),
+    skeleton.candidate.nareruReadings ?? new Set(),
+    skeleton.candidate.dekiruReadings ?? new Set(),
+    skeleton.candidate.hasNegative ?? false,
+    skeleton.candidate.hasCausative ?? false,
+    skeleton.candidate.hasCausativePassive ?? false,
+    false,
+    false,
+    null,
+    skeleton.candidate.benefactive,
+    producedSet,
+    skeleton.candidate.warnings ?? [],
+    skeleton.candidate.renderPlanPolicy ?? "normal"
+  );
+}
+
+function resolveUnstagedContentResult(
+  producedSet: SourceCandidateSet<ContentTranslationCandidate>,
+  skeleton: NonNullable<ReturnType<typeof laneACandidateChainWinner>>,
+  entrySenses: readonly ContentResolverSense[]
+): ContentResult | null {
+  const sourceCandidates = resolveSourceCandidateSet(producedSet, {
+    kind: "unstaged_domain",
+    entrySenseCount: entrySenses.length,
+    stagedPriorityDomain: false,
+    verdict: skeleton.identity
+  });
+  if (!isResolvedCandidateSet(sourceCandidates)) {
+    return null;
+  }
+  const selected = resolvedWinner(sourceCandidates).candidate;
+
+  const laneAResult = new ResolvedContentResult(
+    resolvedWinnerConsumed(sourceCandidates),
+    selected.korean ?? "",
+    selected.koreanPos,
+    selected.entry,
+    selected.renderPlan ?? null,
+    selected.voice ?? null,
+    selected.rareruReadings ?? new Set(),
+    selected.nareruReadings ?? new Set(),
+    selected.dekiruReadings ?? new Set(),
+    selected.hasNegative ?? false,
+    selected.hasCausative ?? false,
+    selected.hasCausativePassive ?? false,
+    false,
+    false,
+    null,
+    selected.benefactive,
+    sourceCandidates,
+    selected.warnings ?? [],
+    selected.renderPlanPolicy ?? "normal"
+  );
+  return laneAResult;
+}
 const CONTENT_RESOLVER_RULE_ADAPTER_BRIDGE: ContentResolverRuleAdapterBridge = {
   sahenInfoFromRuntime: (resolver, tokens, start) =>
     sahenInfoFromRuntime(resolver, tokens, start),

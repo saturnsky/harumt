@@ -2,6 +2,7 @@ import { lazyValue, type DataLoader } from "../../../data-loader.js";
 import { resolveDataSection } from "../../../dictionary/data-section.js";
 import type { BenefactiveAspectOp } from "./predicate-root/grammar.js";
 import { POS4_OF_NAME, is上一段, is下一段 } from "../../../types/pos.js";
+import { isRecord } from "../../../utils/record.js";
 
 const TE_TAIL_CONTINUATION_TABLE_RELATIVE_PATH = "head-tail/te_tail_continuations.jsonl";
 
@@ -202,10 +203,6 @@ export function parseTeTailContinuationLexemeEntriesText(text: string): readonly
     });
   }
   return entries;
-}
-
-function isRecord(value: unknown): value is { readonly [key: string]: unknown } {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 function requireNonEmptyString(value: unknown, field: string, lineNumber: number): string {

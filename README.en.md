@@ -12,8 +12,12 @@
 import { createTranslationPipeline } from "harumt";
 
 const pipeline = await createTranslationPipeline();
-await pipeline.translate("駅まで歩いて行きました。"); // → 역까지 걸어서 갔어요.
+await pipeline.translate("駅まで歩いて行きました。");
+// → 역까지 걸어서 갔어요.
 ```
+
+**Try it now** — translate in your browser without installing anything: **[harumt.saturnsky.io](https://harumt.saturnsky.io)**
+(downloads about 110 MB of dictionary data once; translation runs entirely in the browser).
 
 This is a short English overview. The [Korean README](README.md) is the full documentation
 (all options, the browser entry point, the diagnostic CLI).
@@ -43,7 +47,7 @@ make RBMT unnecessary. It is a project that can only live in this moment.
 These come from the rule-based approach itself and will not go away in later versions. Improvements from here
 will be gradual: one word and one sentence pattern at a time.
 
-On a set of 167 LLM-written synthetic items graded blind against Google Translate (HaruMT 0.1.0, Google output collected 2026-11-11),
+On a set of 167 LLM-written synthetic items graded blind against Google Translate (HaruMT 0.1.1, Google output collected 2026-11-11),
 HaruMT alone was rated OK on 31 items, Google alone on 18, both on 57 and neither on 61. On this set HaruMT was rated OK more often on
 single sentences with clear grammar, and Google on web-novel style, proper names and multi-sentence text.
 The grading is a single LLM pass, so treat it as a reference. All sentences, both outputs and the criteria are in
@@ -63,15 +67,13 @@ The system dictionary (about 300 MB) is distributed separately from the npm pack
 [HaruMT GitHub repository](https://github.com/saturnsky/harumt) into your user data directory, so it survives
 package updates and reinstalls:
 
-| OS | Location |
-|----|----------|
-| Linux | `$XDG_DATA_HOME/harumt/dict/` (default `~/.local/share/harumt/dict/`) |
-| macOS | `~/Library/Application Support/harumt/dict/` |
-| Windows | `%LOCALAPPDATA%\harumt\dict\` |
+- **Linux** — `$XDG_DATA_HOME/harumt/dict/` (default `~/.local/share/harumt/dict/`)
+- **macOS** — `~/Library/Application Support/harumt/dict/`
+- **Windows** — `%LOCALAPPDATA%\harumt\dict\`
 
 `npm uninstall harumt` does not remove the dictionary; delete the `harumt/` directory above yourself.
 
-> In 0.x versions the API may change between releases. Changes are listed in the [changelog](CHANGELOG.md).
+In 0.x versions the API may change between releases. Changes are listed in the [changelog](CHANGELOG.md).
 
 ## Usage
 
@@ -82,25 +84,28 @@ const pipeline = await createTranslationPipeline();
 console.log(await pipeline.translate("駅まで歩いて行きました。"));
 // 역까지 걸어서 갔어요.
 
-const formal = await createTranslationPipeline({ register: "formal" });
+const formal = await createTranslationPipeline({
+  register: "formal",
+});
 console.log(await formal.translate("駅まで歩いて行きました。"));
 // 역까지 걸어서 갔습니다.
 ```
 
 Creating the first pipeline takes about a second while the dictionary loads. As a reference (Apple M4, Node.js 22,
-one process, single thread): about 190 sentences (5,700 characters) per second, about 0.5 GB of memory right after
-loading and up to about 1.1 GB during continuous translation. The output speech level follows the
-`register` option together with the politeness of the source sentence:
-
-| `register` | Polite source (ます/です) | Plain source (だ/る) | Suited to |
-|------------|--------------------------|----------------------|-----------|
-| `"casual"` (default) | 해요체 — 갔어요 | 해체 — 갔어 | conversation, subtitles |
-| `"formal"` | 합쇼체 — 갔습니다 | 서술체 — 갔다 | written text, news, reports |
+one process, single thread): about 180 sentences (5,500 characters) per second, about 0.5 GB of memory right after
+loading and up to about 0.7 GB during continuous translation.
 
 `translateWithWarnings(text)` also returns warnings raised during translation, which helps pick out sentences
 whose quality may have suffered. A user dictionary for personal names, the browser entry point
 (`harumt/webext`) and the diagnostic CLI (`npx harumt-diagnose`) are described in the
 [Korean README](README.md).
+
+The output speech level follows the `register` option together with the politeness of the source sentence:
+
+| `register` | Polite source (ます/です) | Plain source (だ/る) | Suited to |
+|------------|--------------------------|----------------------|-----------|
+| `"casual"` (default) | 해요체 — 갔어요 | 해체 — 갔어 | conversation, subtitles |
+| `"formal"` | 합쇼체 — 갔습니다 | 서술체 — 갔다 | written text, news, reports |
 
 ## Development and feedback
 
@@ -133,10 +138,8 @@ Kanji readings are handled with [KANJIDIC2](https://www.edrdg.org/wiki/index.php
 HaruMT's code and dictionary data are distributed under the [Apache License 2.0](LICENSE.Apache).
 Two parts keep the license of the work they are derived from:
 
-| Part | Source | License |
-|------|--------|---------|
-| `src/third-party/kanjidic2/` (kanji reading tables) | [KANJIDIC2](https://www.edrdg.org/wiki/index.php/KANJIDIC_Project) (EDRDG) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
-| `src/third-party/unihan/` (Korean readings of kanji) | [Unihan](https://www.unicode.org/charts/unihan.html) (Unicode, Inc.) | [Unicode License v3](https://www.unicode.org/license.txt) |
+- `src/third-party/kanjidic2/` (kanji reading tables) — from [KANJIDIC2](https://www.edrdg.org/wiki/index.php/KANJIDIC_Project) (EDRDG), under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- `src/third-party/unihan/` (Korean readings of kanji) — from [Unihan](https://www.unicode.org/charts/unihan.html) (Unicode, Inc.), under the [Unicode License v3](https://www.unicode.org/license.txt)
 
 The source and license notices for these parts are in `src/third-party/kanjidic2/LICENSE` and `src/third-party/unihan/LICENSE`.
 For notices of the other bundled third-party data and code, see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) and

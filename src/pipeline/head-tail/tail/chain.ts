@@ -22,19 +22,15 @@ import {
 } from "./segments/nominal-frame.js";
 import { quoteFocusLimitNegationTailStartingAt } from "./segments/quote-focus.js";
 import { TokenCursor } from "../../token-cursor.js";
-import type { ProjectionEvidenceLayout } from "../../clause-layout/index.js";
+import type { ProjectionEvidenceLayout } from "../../clause-layout/layout-types.js";
 import { nextNonSpaceIndex } from "../../clause-layout/trivia.js";
 import {
   firstFollowingProjectionContextToken,
   projectionContextBoundsForToken
 } from "../candidate/context.js";
 import { nominalLinkMarkerRelationAt } from "../boundary/marker.js";
-import {
-  tailParserSemanticReadinessBlocker,
-  tryParseTailChunkCandidates,
-  type PredicateTailSyntheticEntryResolver,
-  type TailChunkResult
-} from "./predicate-root/integration.js";
+import { tailParserSemanticReadinessBlocker, tryParseTailChunkCandidates } from "./predicate-root/integration.js";
+import type { PredicateTailSyntheticEntryResolver, TailChunkResult } from "./predicate-root/integration/contracts.js";
 import type { BoundaryReadinessRelation } from "./predicate-root/boundary-semantics.js";
 import type {
   AuxOpNode,
@@ -46,7 +42,7 @@ import type { RuntimeHaruToken } from "../../../types/token.js";
 
 
 import { POS0, POS1, 助詞, 助動詞, 助動詞語幹, 接続詞 } from "../../../types/pos.js";
-import type { NumericHostReservation } from "./predicate-root/integration.js";
+import type { NumericHostReservation } from "./predicate-root/integration/contracts.js";
 export type TailChainSegmentKind =
   | "likeness"
   | "nominal_frame"

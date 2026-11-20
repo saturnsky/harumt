@@ -1,7 +1,7 @@
 import type { BoundaryToken } from "./punctuation.js";
 import type { BoundaryRelationConsumer, QuoteMarkerContinuationRelation, QuoteMarkerRelation } from "./relation.js";
 import { nextNonSpaceIndex } from "../../clause-layout/trivia.js";
-import { isSayVerbToken } from "../tail/predicate-root/classifiers/tokens.js";
+import { isSayVerbToken } from "../data/quoted-reporting-sets.js";
 import { canonicalTerminalSfpSurface } from "../../semantics/sfp-surface.js";
 
 

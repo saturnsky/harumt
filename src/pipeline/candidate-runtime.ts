@@ -4,12 +4,10 @@ import {
   stemCandidateProvenanceForTranslation,
   stemCandidateProvenanceKey
 } from "./head-tail/tail/predicate-root/stem-candidate-identity.js";
-import type { BenefactiveContext, ContentResult, ContentSpan, DekiruReading, RareruReading, RuleResult, RuleTraceEvent, TranslationCandidate } from "../types/pipeline.js";
-import { spanLocalRenderPlanNode, type LemmaRealization, type RenderPlan, type Voice } from "../types/render-plan.js";
+import type { BenefactiveContext, TranslationCandidate } from "../types/pipeline.js";
+import { type LemmaRealization, type RenderPlan, type Voice } from "../types/render-plan.js";
 import type { LookupTables } from "./lookup-tables.js";
 import type { CandidateProjectionSource } from "./candidate-observability.js";
-import type { ResolvedCandidateSet } from "./source-candidate-set.js";
-import type { Warning } from "../types/warning.js";
 import {
   caseParticleMarkerRelationForToken,
   copulaNiMarkerRelationForToken,
@@ -17,7 +15,7 @@ import {
   topicFocusMarkerRelationForToken
 } from "./head-tail/boundary/marker.js";
 import type { CaseParticleMarkerSurface } from "./head-tail/boundary/relation.js";
-import { lookupConnectiveBySurface } from "./head-tail/tail/predicate-root/grammar.js";
+import { lookupConnectiveBySurface } from "./head-tail/tail/predicate-root/connective-surface-lookup.js";
 import { relationConnectiveSpanAt } from "./head-tail/tail/connective-span-scanner.js";
 import { boundNominalReasonCompositeFollowerAdmitted } from "./head-tail/tail/predicate-root/matchers/tame-connective.js";
 import { parentheticalSpanEndingAt } from "./head-tail/boundary/parenthetical.js";
@@ -27,9 +25,9 @@ import {
   quoteBridgePunctuationRelationAt
 } from "./head-tail/boundary/punctuation.js";
 import { quoteMarkerRelationAt } from "./head-tail/boundary/quote-marker.js";
-import { realizeRenderPlan, replaceLemmaRenderPlan, setForcePassiveRenderPlan } from "./rendering/render-plan.js";
 import { META_LINGUISTIC_QUOTATIVE_HEADS } from "./head-tail/data/semantic-helper-sets.js";
-import { findAdverbialModifierPredicate, type TailReachEvidence } from "./clause-layout/index.js";
+import { findAdverbialModifierPredicate } from "./clause-layout/adverbial-predicate.js";
+import type { TailReachEvidence } from "./clause-layout/layout-types.js";
 import { activeProtoLayout } from "./clause-layout/proto-state.js";
 import { AUTHORED_PAUSE_SEPARATIONS, nextNonSpaceIndex, separatedAs } from "./clause-layout/trivia.js";
 import { runtimeTokenSourceSpan, type HaruTokenRuntimeFields } from "../types/token.js";
@@ -37,7 +35,6 @@ import { runtimeTokenSourceSpan, type HaruTokenRuntimeFields } from "../types/to
 import {
   isCaseParticleToken,
   isConjunctionToken,
-  isLexicalBareNaAdjStem,
   isNaAdjCapable,
   isNominalUseBareNaAdjStem,
   isNominalizerParticleToken,
@@ -69,7 +66,7 @@ import {
   명사,
   대명사,
   부사,
-  형용사,
+  형용사
 } from "../types/pos.js";
 import { TokenCursor } from "./token-cursor.js";
 import type { HeadProjectionKind } from "./head-tail/tail/predicate-root/grammar.js";
@@ -138,17 +135,6 @@ export interface CandidateSpanLike {
   connectiveRole?: string | null;
 }
 
-export interface CandidateSyncTarget extends CandidateSpanLike {
-  consumed?: number;
-  particleRole?: string | null;
-  entry?: MorphemeEntry;
-  korean?: string;
-  koreanPos?: number;
-  rareruReadings?: ReadonlySet<string>;
-  benefactive?: BenefactiveContext;
-  warnings?: readonly Warning[];
-}
-
 export function defaultBenefactiveContext(options: BenefactiveContext = {}): BenefactiveContext {
   return {
     patternId: options.patternId ?? null,
@@ -215,41 +201,6 @@ export function translationCandidateFromDict(
     hasBenefactiveTail: false,
     connectiveRole: null,
     benefactive: defaultBenefactiveContext()
-  };
-}
-
-export function withRuleTraceEvents(result: RuleResult, ...events: readonly RuleTraceEvent[]): RuleResult {
-  if (events.length === 0) {
-    return result;
-  }
-  return {
-    ...result,
-    traceEvents: [...result.traceEvents ?? [], ...events]
-  };
-}
-
-export function isPassiveContent(content: Pick<ContentResult, "voice">): boolean {
-  return content.voice === "passive";
-}
-
-export function isPotentialContent(content: Pick<ContentResult, "voice">): boolean {
-  return content.voice === "potential";
-}
-
-export function isVoiceOpenContent(content: Pick<ContentResult, "voice">): boolean {
-  return content.voice === null;
-}
-
-export function defaultContentSpanFields(options: {
-  readonly isKeijoujiVerbPredicate?: boolean;
-  readonly benefactive?: BenefactiveContext;
-} = {}): Pick<ContentSpan, "isKeijoujiVerbPredicate" | "benefactive" | "committedParticleRoles" | "sourceCandidates" | "compoundHeadFrameEntry"> {
-  return {
-    isKeijoujiVerbPredicate: options.isKeijoujiVerbPredicate ?? false,
-    benefactive: defaultBenefactiveContext(options.benefactive),
-    committedParticleRoles: {},
-    sourceCandidates: null,
-    compoundHeadFrameEntry: null
   };
 }
 
@@ -833,89 +784,6 @@ export function candidateProjectionSource(candidate: TranslationCandidate): Cand
     : "lexical_particle_adverbial";
 }
 
-export function realizeResolvedCandidateSet(
-  target: CandidateSyncTarget,
-  set: ResolvedCandidateSet
-): void {
-  const candidate = set.winner.candidate;
-  target.entry = candidate.entry;
-  target.renderPlan = spanLocalRenderPlanNode(candidate.renderPlan ?? null);
-  target.renderPlanPolicy = candidate.renderPlanPolicy ?? "normal";
-  if (candidate.lexicalParticleAdverbial !== undefined && candidate.lexicalParticleAdverbial !== null) {
-    target.consumed = candidate.lexicalParticleAdverbial.consumed;
-    target.particleRole = candidate.lexicalParticleAdverbial.particleRole;
-    target.renderPlan = spanLocalRenderPlanNode(candidate.lexicalParticleAdverbial.renderPlan);
-  }
-  target.korean = candidate.korean ?? "";
-  target.koreanPos = candidate.koreanPos;
-  target.voice = candidate.voice ?? null;
-  target.rareruReadings = candidate.rareruReadings ?? new Set();
-  target.nareruReadings = candidate.nareruReadings ?? new Set();
-  target.dekiruReadings = candidate.dekiruReadings ?? new Set();
-  target.hasNegative = candidate.hasNegative ?? false;
-  target.hasCausative = candidate.hasCausative ?? false;
-  target.hasCausativePassive = candidate.hasCausativePassive ?? false;
-  target.hasRequestTail = candidate.hasRequestTail ?? false;
-  target.hasBenefactiveTail = candidate.hasBenefactiveTail ?? false;
-  target.connectiveRole = candidate.connectiveRole ?? null;
-  target.benefactive = candidate.benefactive;
-  target.warnings = candidate.warnings ?? [];
-}
-
-export function applyResolvedVoice(
-  candidate: TranslationCandidate,
-  resolvedVoice: Voice
-): TranslationCandidate {
-  let renderPlan = candidate.renderPlan ?? null;
-  if (renderPlan !== null && resolvedVoice === "passive") {
-    renderPlan = setForcePassiveRenderPlan(renderPlan, true) ?? renderPlan;
-  }
-
-  const korean = renderPlan !== null ? "" : candidate.korean ?? "";
-  return {
-    ...candidate,
-    renderPlan,
-    voice: resolvedVoice,
-    rareruReadings: resolveRareruReadings(candidate.rareruReadings, resolvedVoice),
-    korean
-  };
-}
-
-export function applyResolvedDekiruReadings(
-  candidate: TranslationCandidate,
-  readings: ReadonlySet<DekiruReading>
-): TranslationCandidate {
-  if (sameSet(candidate.dekiruReadings, readings)) {
-    return candidate;
-  }
-  return {
-    ...candidate,
-    dekiruReadings: new Set(readings)
-  };
-}
-
-export function applyHonorificRareruFallback(candidate: TranslationCandidate): TranslationCandidate {
-  let renderPlan = candidate.renderPlan ?? null;
-  if (renderPlan !== null) {
-    const rewrittenPlan = replaceLemmaRenderPlan(renderPlan, {
-      koreanLemma: candidate.koreanLemma,
-      irregular: candidate.irregular,
-      koreanPos: candidate.koreanPos,
-      dropFirstPassiveAux: true
-    });
-    renderPlan = rewrittenPlan ?? renderPlan;
-  }
-
-  const korean = renderPlan !== null ? "" : candidate.korean ?? "";
-  return {
-    ...candidate,
-    renderPlan,
-    voice: "active",
-    rareruReadings: new Set<RareruReading>(["honorific"]),
-    korean
-  };
-}
-
 export function candidateGrammar(candidate: TranslationCandidate): CandidateGrammar {
   const renderPlan = candidate.renderPlan ?? null;
   const planGrammar = extractPlanCommitmentGrammar(renderPlan);
@@ -954,14 +822,6 @@ export function spanGrammar(span: CandidateSpanLike): CandidateGrammar {
     benefactiveTail: (span.hasBenefactiveTail ?? false) || (planGrammar?.benefactiveTail ?? false),
     connectiveRole: span.connectiveRole ?? planGrammar?.connectiveRole ?? null
   };
-}
-
-export function candidateSurfaceText(candidate: TranslationCandidate, options: { formal?: boolean; lookups: LookupTables }): string {
-  const renderPlan = candidate.renderPlan ?? null;
-  if (renderPlan === null || renderPlan === undefined) {
-    return candidate.korean ?? "";
-  }
-  return realizeRenderPlan(renderPlan, { formal: options.formal ?? false, lookups: options.lookups });
 }
 
 function extractPlanAuxTokens(plan: RenderPlan | null | undefined): readonly CandidateToken[] | undefined {
@@ -1020,29 +880,6 @@ function serializeReadings(readings: ReadonlySet<string> | undefined): string | 
   }
   const values = [...readings].sort();
   return values.length === 1 ? values[0] ?? null : values;
-}
-
-function resolveRareruReadings(
-  readings: ReadonlySet<RareruReading> | undefined,
-  resolvedVoice: Voice
-): ReadonlySet<RareruReading> {
-  if (readings === undefined || readings.size === 0) {
-    return readings ?? new Set();
-  }
-  if (resolvedVoice === "passive") {
-    return new Set<RareruReading>(["passive"]);
-  }
-  if (resolvedVoice === "potential") {
-    return new Set<RareruReading>(["potential"]);
-  }
-  return new Set();
-}
-
-function sameSet<T>(left: ReadonlySet<T> | undefined, right: ReadonlySet<T>): boolean {
-  if (left === undefined) {
-    return right.size === 0;
-  }
-  return left.size === right.size && [...left].every((value) => right.has(value));
 }
 
 function freezeConditionValue(value: unknown): FrozenConditionValue {

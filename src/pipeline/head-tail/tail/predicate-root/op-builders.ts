@@ -1,5 +1,6 @@
 import type {
   AdjCopulaBridgeOp,
+  OpSource,
   AspectOp,
   ClassicalAuxResidueOp,
   ConjectureOp,
@@ -271,4 +272,39 @@ export function markQuotedQuestionContextOp(op: ConnectiveOp): ConnectiveOp {
   return op.connective === "question_content" && op.quotedQuestionContext !== true
     ? { ...op, quotedQuestionContext: true }
     : op;
+}
+
+export function buildVoiceOp(
+  source: OpSource,
+  voice: VoiceOp["voice"],
+  candidates?: VoiceOp["candidates"],
+  options: { readonly honorificFormulaicConstruction?: true } = {}
+): VoiceOp {
+  return createVoiceOp({
+
+    source,
+    voice,
+    ...(candidates === undefined ? {} : { candidates }),
+    ...(options.honorificFormulaicConstruction === undefined
+      ? {}
+      : { honorificFormulaicConstruction: options.honorificFormulaicConstruction }),
+    forcePassive: false,
+    adversativePassive: false,
+    adversativePassiveAgentPromoted: false
+  });
+}
+
+export function buildPredicateSuffixOp(
+  source: OpSource,
+  suffix: PredicateSuffixOp["suffix"],
+  profileId: string,
+  surface: string
+): PredicateSuffixOp {
+  return createPredicateSuffixOp({
+
+    suffix,
+    profileId,
+    surface,
+    source
+  });
 }

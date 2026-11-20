@@ -1,13 +1,11 @@
 import type { Voice } from "../../types/render-plan.js";
 import type { RuntimeHaruToken } from "../../types/token.js";
-import type { ClauseLayout, ProtoClauseLayout } from "../clause-layout/index.js";
+import type { ClauseLayout } from "../clause-layout/final-layout.js";
+import type { ProtoClauseLayout } from "../clause-layout/proto-layout.js";
 import { lookupSetMatches, type LookupTables } from "../lookup-tables.js";
-import {
-  quoteStructuralRelationsForHost,
-  quoteStructuralRelationLooksBareNominalContent,
-  quoteHostAllowsBareNominalContent,
-  type QuoteStructuralRelation
-} from "../structural-relation/quote.js";
+import { quoteStructuralRelationsForHost } from "../structural-relation/quote.js";
+import { quoteStructuralRelationLooksBareNominalContent, quoteHostAllowsBareNominalContent } from "../structural-relation/quote-nominal-and-passive.js";
+import type { QuoteStructuralRelation } from "../structural-relation/quote-payload.js";
 import type { MatcherToken } from "../matchers.js";
 import { isAdjNai } from "../matchers.js";
 import { hardTerminalPunctuationSurfaceClassForToken } from "../head-tail/boundary/punctuation.js";
@@ -24,7 +22,7 @@ import {
 } from "./helpers.js";
 import { enumerateClausePhrasesAfter } from "../clause-layout/phrase-enumeration.js";
 
-import { isCaseParticleToken, isClosingBracketToken, isNominalizerParticleToken, isNominalLike, isNominalScopeParticleToken, isNominalUseBareNaAdjStem, isVerbRenyouPredicateToken, POS0, POS01, POS4, POS5A, 意志推量形_, 記号, 助詞, 助詞_格助詞, 助詞_終助詞, 助動詞_タ, 助動詞_ナイ, 助動詞_ヌ, 補助記号, 命令形_ } from "../../types/pos.js";
+import { isCaseParticleToken, isClosingBracketToken, isNominalizerParticleToken, isNominalLike, isNominalScopeParticleToken, isNominalUseBareNaAdjStem, isVerbRenyouPredicateToken, POS0, POS01, POS4, POS5A, isVolitionalSpeechActInflectionToken, 記号, 助詞, 助詞_終助詞, 助動詞_タ, 助動詞_ナイ, 助動詞_ヌ, 補助記号, 命令形_ } from "../../types/pos.js";
 import { isCaseParticleNoToken, isGaNoConvertedSubjectParticle, type GaNoClauseSpan } from "./gano-conversion.js";
 import { adverbialToCapableKeijoujiHost } from "./tari-adverbial-marker.js";
 export type FrameJsonValue =
@@ -94,7 +92,6 @@ export function isAdnominalBindingSlot(slot: FrameSlotSpec): boolean {
 export const SLOT_TYPE_NOUN = "noun";
 export const SLOT_TYPE_CLAUSE = "clause";
 export const FRAME_SLOT_TYPES = new Set([SLOT_TYPE_NOUN, SLOT_TYPE_CLAUSE]);
-export const FRAME_CLAUSE_SLOT_ROLES = new Set(["wish_content", "quoted_content", "question_content", "request_content"]);
 export const FRAME_CLAUSE_SLOT_MARKERS: { readonly [role: string]: ReadonlySet<string> } = {
   wish_content: new Set(["と", "って"]),
   quoted_content: new Set(["と", "って"]),
@@ -1412,7 +1409,7 @@ function sentenceModalityTags(
       if (pos5a === 命令形_) {
         tags.add("imperative");
       }
-      if (pos5a === 意志推量形_) {
+      if (isVolitionalSpeechActInflectionToken(token)) {
         tags.add("hortative");
       }
     }

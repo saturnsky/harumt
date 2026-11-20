@@ -7,10 +7,8 @@ import {
   tracedSeg,
   type RenderOutcome
 } from "./base-model.js";
-import {
-  CONDITIONAL_QUOTE_ELLIPSIS_PREDICATE,
-  type ConditionalQuoteEllipsisMood
-} from "./connective-compose.js";
+import { conjugate } from "../../../../../generator/conjugator.js";
+import { plainDeclarativeToPointAttributive } from "./predicate-base-projection.js";
 
 export function composeHostlessConditionalQuote(
   renderedConditional: RenderOutcome,
@@ -67,8 +65,6 @@ export function composeConditionalWishComplement(
   };
 }
 
-export type { ConditionalQuoteEllipsisMood };
-
 export function conditionalQuoteEllipsisMood(
   layer: AuxLayerNode,
   conditional: ConnectiveOp
@@ -116,5 +112,30 @@ export function composeConditionalQuoteEllipsisTerminal(
       hostTrace,
       tracedSeg(suffix, carrier.source.tokens, "connective", "semantic")
     )
+  };
+}
+
+export type ConditionalQuoteEllipsisMood = "wish" | "sufficiency";
+
+export const CONDITIONAL_QUOTE_ELLIPSIS_PREDICATE = {
+  wish: { lemma: "좋겠다", declarative: "좋겠다" },
+  sufficiency: { lemma: "되다", declarative: "된다" }
+} as const;
+
+export function composeConditionalQuoteEllipsisAttributive(
+  renderedConditional: RenderOutcome,
+  mood: ConditionalQuoteEllipsisMood,
+  requiresFutureAttributive: boolean
+): RenderOutcome {
+  if (!renderedConditional.ok) {
+    return renderedConditional;
+  }
+  const predicate = CONDITIONAL_QUOTE_ELLIPSIS_PREDICATE[mood];
+  return {
+    ...renderedConditional,
+    text: `${renderedConditional.text} ${requiresFutureAttributive
+      ? conjugate(predicate.lemma, null, "ㄹ/을")
+      : plainDeclarativeToPointAttributive(predicate.declarative)}`,
+    polite: false
   };
 }

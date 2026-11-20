@@ -3,11 +3,11 @@ import type { RuntimeHaruToken } from "../../../types/token.js";
 import type { TokenCursor } from "../../token-cursor.js";
 import type { LookupTables } from "../../lookup-tables.js";
 import type { NumericTables } from "../../../generator/numeric-lookup.js";
-import type { ProjectionEvidenceLayout } from "../../clause-layout/index.js";
-import type { PredicateTailSyntheticEntryResolver } from "../tail/predicate-root/integration.js";
+import type { ProjectionEvidenceLayout } from "../../clause-layout/layout-types.js";
+import type { PredicateTailSyntheticEntryResolver } from "../tail/predicate-root/integration/contracts.js";
 import { collectHeadAnchors } from "../head/anchor.js";
 import type { HeadTailCandidateTraceDescriptor } from "../head/profile.js";
-import type { NumericHostReservation } from "../tail/predicate-root/integration.js";
+import type { NumericHostReservation } from "../tail/predicate-root/integration/contracts.js";
 import {
   buildHeadTailCandidates,
   type HeadTailCandidate

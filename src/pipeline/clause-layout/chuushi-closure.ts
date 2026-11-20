@@ -65,8 +65,7 @@ import { isSahenLightVerbCarrierToken } from "../head-tail/tail/predicate-root/i
 import { isLikenessCarrierStemToken, matchScopeBridgeBeforeBasicCopula } from "../head-tail/tail/predicate-root/matchers/scope-bridge.js";
 import { classifySingleAuxTokenOps } from "../head-tail/tail/predicate-root/parser.js";
 import { TokenCursor } from "../token-cursor.js";
-import { skipClausePunctuationForward } from "./index.js";
-import { isClausePunctuationToken } from "./punctuation.js";
+import { isClausePunctuationToken, skipClausePunctuationForward } from "./punctuation.js";
 import { nextNonSpaceIndex, previousNonSpaceIndex, separatedAs, type ClauseAdjacencyToken } from "./trivia.js";
 import {
   runClosesUtteranceAs,

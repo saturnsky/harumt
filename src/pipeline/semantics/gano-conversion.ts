@@ -1,6 +1,6 @@
 
 import { pairKey, type LookupTables } from "../lookup-tables.js";
-import type { AttributiveStemProjection, ClauseKind } from "../clause-layout/index.js";
+import type { AttributiveStemProjection, ClauseKind } from "../clause-layout/layout-types.js";
 import { isClauseSpaceOrAdverbToken, nextNonSpaceIndex, nextTransparentEvidenceIndex } from "../clause-layout/trivia.js";
 import type { MatcherToken } from "../matchers.js";
 import { secondaryParticleCanonical } from "../particles/secondary-particle.js";
@@ -11,7 +11,7 @@ import {
   isQuantityMeasureToken,
   isTimeExpressionBeforeParticle
 } from "./helpers.js";
-import { POS0, POS1, POS2, POS01, POS5A, isAdjectivalDerivationalSuffix, isBareNaAdjSet, isNominalDerivationalSuffix, isSahenCapableNominal, 形容詞0, 動詞, 助詞, 助詞_格助詞, 助動詞, 数詞, 助数詞, 語幹_, 連体詞, 連用形_ } from "../../types/pos.js";
+import { POS0, POS1, POS2, POS01, POS5A, isAdjectivalDerivationalSuffix, isNominalDerivationalSuffix, isSahenCapableNominal, 形容詞0, 動詞, 助詞, 助詞_格助詞, 助動詞, 数詞, 助数詞, 語幹_, 連体詞, 連用形_ } from "../../types/pos.js";
 
 
 export interface GaNoClauseSpan {
@@ -182,19 +182,6 @@ function effectivePredicate(
   }
   const token = tokens[categoryIdx];
   return token === undefined || category === null ? null : { token, category, tokenIdx: categoryIdx };
-}
-
-
-export function gaNoConversionPredicateIsAdjectival(
-  tokens: readonly MatcherToken[],
-  predicateIdx: number
-): boolean {
-  const effective = effectivePredicate(tokens, predicateIdx);
-  if (effective !== null) {
-    return effective.category === "adjectival";
-  }
-  const token = tokens[predicateIdx];
-  return token !== undefined && isBareNaAdjSet(token);
 }
 
 function gaNoConversionAdjectivePredicateAllowed(

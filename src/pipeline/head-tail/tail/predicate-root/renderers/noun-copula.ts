@@ -11,14 +11,20 @@ import { connectiveForRender, shouldCarryConnectivePoliteness } from "../connect
 import { type AdjStem, type AuxLayerNode, type AuxOpNode, type ConjectureOp, type ConnectiveKind, type ConnectiveOp, type CopulaOp, type IdiomKind, type NegationOp, type NounStem, type OpSource, type PredicateProjectionCarrierOp, type PredicateQuoteCarrierOp, type ScopeBridgeOp, type TailRoot, type TenseOp, type TosuruConstructionMode, type VerbStem, type VoiceOp, type YoudaModalOp, isCommittedKaQuestionSfpEffect, isKaFamilyQuestionSfpEffect } from "../grammar.js";
 import { attributiveProjectionPolicy, committedAttributiveProjectionPolicy } from "../attributive-head-policy.js";
 import { applyNegationDepthToLemmaBase, ensureQuestionPunctuation, opCarriesTerminalRolePoliteness, scopeCarrierCanPreserveSourcePoliteness, tracedSeg, tracedStemHostSeg, type AttributiveProjectionPolicy, type BaseResult, type ChainSourceTrace, type KoreanLemmaPredicateBase, type KoreanPredicateBase, type OkBaseResult, type RenderContext, type RenderFailure, type RenderOutcome } from "./base-model.js";
-import { finalNegationLoweringForcesPast, isCopulaSupportPotentialOp, lowerFinalNegationForCommittedBase, nounCopulaStemAllomorphHost, nounCopulaBase, nounCopulaPolarityBaseForCopula, nounCopulaFocusStem, nounLimitDakeCarrierBase, nounSubjectPart } from "./base-support.js";
-import { attributiveBoundaryRequestsFutureProjection, composeCommittedBaseAttributive, composeCommittedBaseWithConjectureQuestionConnective, composeCommittedTailConnective, composeCommittedTailTerminal, isConjectureQuestionContinuationConnective, isMonoBoundReasonConnective, projectBaseAttributive } from "./connective-compose.js";
+import { finalNegationLoweringForcesPast, isCopulaSupportPotentialOp, lowerFinalNegationForCommittedBase, nounCopulaStemAllomorphHost, nounCopulaBase, nounCopulaPolarityBaseForCopula, nounCopulaFocusStem, nounLimitDakeCarrierBase, nounSubjectPart, copulaCarrierBaseForInterOp } from "./base-support.js";
+import { attributiveBoundaryRequestsFutureProjection, composeCommittedBaseAttributive, projectBaseAttributive } from "./predicate-base-projection.js";
+import { composeCommittedBaseWithConjectureQuestionConnective, isConjectureQuestionContinuationConnective } from "./conjecture-compose.js";
+import { composeCommittedTailConnective, isMonoBoundReasonConnective } from "./connective-compose.js";
+import { composeCommittedTailTerminal } from "./predicate-terminal-compose.js";
 import { chainBases, chainStemTraceFields, collectOperatorChain, isChainableHeadOp, isHeadOp } from "./op-chain.js";
-import { copulaCarrierBaseForInterOp, isStateChangePostverbAuxiliaryKind, modalFinalChainPolicy, predicateProjectionCarrierBase, predicateQuoteCarrierBase, scopeBridgeBase, withNegativeClosureCapability } from "./predicate-bases.js";
+import { modalFinalChainPolicy } from "./modal-bases.js";
+import { predicateProjectionCarrierBase, predicateQuoteCarrierBase } from "./predicate-bases.js";
+import { scopeBridgeBase, withNegativeClosureCapability } from "./scope-bridge-bases.js";
 import { stemIsTosuruResultativeMakeHead, tosuruConstructionModeForNounStem } from "../tosuru-construction-mode.js";
 import { resolveCandidateSetStem } from "../commit.js";
 import { createConjectureOp, createConnectiveOp, createCopulaOp, createNegationOp, createPoliteOp, createTenseOp, createVoiceOp } from "../op-builders.js";
 import { NO_VERBAL_STEM_SAHEN_SHORT_NEGATION_SPLIT } from "../short-negation-policy.js";
+import { isStateChangePostverbAuxiliaryKind } from "../postverb-auxiliary-parser.js";
 
 export function tryRenderInterjectionAbsorbedCopula(
   layer: AuxLayerNode,

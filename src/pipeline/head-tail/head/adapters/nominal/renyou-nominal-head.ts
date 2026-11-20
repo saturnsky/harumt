@@ -15,7 +15,7 @@ import { matchCopula } from "../../../tail/predicate-root/matchers/copula.js";
 import { detectSahenPredicateStart } from "../../../tail/predicate-root/integration/readiness.js";
 import { isStreamVvCompoundPairAt } from "../../../../compounds/compound-verbs.js";
 import { derivedNominalPhraseSpanAt } from "../../../tail/predicate-root/derivational-suffix-table.js";
-import { honorificPrefixRenyouVerbHostAt } from "../../../integration/tail-assembly.js";
+import { honorificPrefixRenyouVerbHostAt } from "../../../integration/honorific-formulaic-host.js";
 import { caseParticleMarkerRelationForToken } from "../../../boundary/marker.js";
 import type { MorphemeEntry } from "../../../../../types/dictionary.js";
 import type { NominalHeadTailChainPlan } from "../../../lifecycle/head-tail-render-plan.js";
@@ -25,7 +25,7 @@ import type { LookupTables } from "../../../../lookup-tables.js";
 import { loadNominalFrameSpecsBySurface } from "./frame-table.js";
 import { derivationalSuffixProfileById } from "../../../tail/predicate-root/derivational-suffix-table.js";
 import { lowerDerivationalSuffixRoot } from "../../../tail/predicate-root/derivational-suffix-lowering.js";
-import { buildPredicateSuffixOp } from "../../../tail/predicate-root/parser.js";
+import { buildPredicateSuffixOp } from "../../../tail/predicate-root/op-builders.js";
 import type { ParsedTailRoot } from "../../../tail/predicate-root/grammar.js";
 
 export type RenyouNominalHeadAdmission =

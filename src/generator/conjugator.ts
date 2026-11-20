@@ -93,10 +93,6 @@ export function withConjugationWarningCollection<T>(fn: () => T): { readonly val
   }
 }
 
-export function emitConjugationWarning(warning: Warning, dedupeKey: string): void {
-  activeConjugationWarningSink?.(warning, dedupeKey);
-}
-
 function tryRieulDrop(stem: string, irregular: IrregularType | null | undefined, suffix: string): string | null {
   if (irregular !== "ㄹ" || suffix.length === 0) return null;
   const last = stem[stem.length - 1] ?? "";

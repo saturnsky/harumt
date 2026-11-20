@@ -1,3 +1,4 @@
+import { activeProtoLayout } from "../../../../clause-layout/proto-state.js";
 import type { MatcherToken } from "../../../../matchers.js";
 import { caseParticleMarkerRelationForToken, copulaDeMarkerRelationForToken, conditionalTailConnectiveRelationForToken, externalNominalizerContinuationRelationAt, caseParticleNiClauseConnectiveRelationAt, nominalLinkMarkerRelationAt, nominalizerAdversativeConnectiveRelationAt, nominalizerQuestionContentConnectiveRelationAt, nominalizerReasonConnectiveRelationAt, predicateNominalizerRelationForToken, questionContentContinuationAfterKaRelationAt, questionReformulationClaimAt, topicFocusMarkerRelationAt } from "../../../boundary/marker.js";
 import { quoteMarkerRelationAt } from "../../../boundary/quote-marker.js";
@@ -15,18 +16,13 @@ import {
   isAruVerbToken,
   isClauseClosingPredicateTailToken,
   isNaiOrNuToken,
-  isSayVerbToken,
   isSuruVerbToken,
   isTeSurfaceConnectiveToken,
   isThoughtVerbToken
 } from "../classifiers/tokens.js";
-import {
-  type ConnectiveKind,
-  type ConnectiveSurfaceAllomorph,
-  lookupConnectiveBySurface,
-  lookupRetrospectiveQuotativeFlavor,
-  type RetrospectiveQuotativeFlavor
-} from "../grammar.js";
+import { isSayVerbToken } from "../../../data/quoted-reporting-sets.js";
+import type { ConnectiveKind, ConnectiveSurfaceAllomorph, RetrospectiveQuotativeFlavor } from "../grammar.js";
+import { lookupConnectiveBySurface, lookupRetrospectiveQuotativeFlavor } from "../connective-surface-lookup.js";
 import { POS0, POS4, POS5A, isAdverbCapable, isConditionalInflection, isImperativeInflection, isRealisInflection, 仮定形_, 助詞, 助動詞 as 助動詞0, 助動詞_タ, 助動詞_レル, 動詞, 未然形_, 名詞, 終止形_, 連体形_, POS01, 助詞_接続助詞, 係助詞 } from "../../../../../types/pos.js";
 
 export interface CompositeConnectiveMatch {
@@ -97,7 +93,8 @@ export function matchCompositeConnectiveAt(
   return lineMemo(
     cursor.tokens as object,
     `cc|${requireEnd ? 1 : 0}|${cursor.pos}|${cursor.end}|${clause === null ? "-" : `${clause.start}:${clause.end}`}`,
-    () => computeMatchCompositeConnectiveAt(cursor, requireEnd, clause)
+    () => computeMatchCompositeConnectiveAt(cursor, requireEnd, clause),
+    activeProtoLayout()
   );
 }
 

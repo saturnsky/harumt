@@ -9,57 +9,13 @@ import { POS0, 動詞, 동사 } from "../../../../types/pos.js";
 import { teIruProgressiveChangeEvidence } from "../../../semantics/te-iru.js";
 import { teAruCaseParticleSurface, teAruStateEvidence } from "../../../content-resolver/runtime-helpers.js";
 import { translationFrameAlternativeMatchesWithoutLayout, type ContextSense } from "../../../context.js";
-import type { AspectKind, AspectSemanticPayload, AuxLayerNode, AuxOpNode, MiseruAspectOp, SimpleAspectOp, StemCandidate, StemNode, TailNode, TailRoot } from "./grammar.js";
+import type { AspectSemanticPayload, AuxLayerNode, AuxOpNode, MiseruAspectOp, SimpleAspectOp, StemCandidate, StemNode, TailNode, TailRoot } from "./grammar.js";
 import { hasFollowingNegationAfter } from "./grammar.js";
 import { rewriteStemCandidatesPreservingIdentity } from "./stem-candidate-identity.js";
 
 export interface AspectSemanticHydrationResult {
   readonly stem: StemNode;
   readonly ops: AuxLayerNode["ops"];
-}
-
-export interface AspectSemanticOwnershipRequirement {
-  readonly aspect: AspectKind;
-  readonly source: "legacy_compound_auxiliary" | "legacy_postverb_operator";
-  readonly reason: string;
-}
-
-const LEGACY_COMPOUND_AUXILIARY_ASPECT_REQUIREMENTS = new Map<string, AspectKind>([
-  ["오다", "te_kuru"],
-  ["가다", "te_iku"]
-]);
-
-const POSTVERB_ASPECT_REQUIRES_READY_SEMANTIC = new Set<AspectKind>([
-  "te_aru",
-  "te_kuru",
-  "te_iku",
-  "te_miseru"
-]);
-
-export function legacyCompoundAuxiliaryAspectRequirement(
-  auxiliaryLemma: string
-): AspectSemanticOwnershipRequirement | null {
-  const aspect = LEGACY_COMPOUND_AUXILIARY_ASPECT_REQUIREMENTS.get(auxiliaryLemma);
-  return aspect === undefined
-    ? null
-    : {
-      aspect,
-      source: "legacy_compound_auxiliary",
-      reason: `full-context compound owner '${auxiliaryLemma}' not yet represented in TailRoot`
-    };
-}
-
-export function legacyPostVerbAspectRequirement(
-  operatorKind: string
-): AspectSemanticOwnershipRequirement | null {
-  if (!isAspectKind(operatorKind) || !POSTVERB_ASPECT_REQUIRES_READY_SEMANTIC.has(operatorKind)) {
-    return null;
-  }
-  return {
-    aspect: operatorKind,
-    source: "legacy_postverb_operator",
-    reason: `post-verb operator '${operatorKind}' requires semantic payload before tail-parser ownership`
-  };
 }
 
 export function tailRootIntrinsicAspectReadinessBlocker(root: TailRoot): string | null {
@@ -242,30 +198,6 @@ export function isSimpleAspectOp(op: AuxLayerNode["ops"][number]): op is SimpleA
     op.aspect === "te_mawaru" ||
     op.aspect === "tsutsu_aru"
   );
-}
-
-function isAspectKind(value: string): value is AspectKind {
-  return value === "te_iru" ||
-    value === "te_aru" ||
-    value === "te_iku" ||
-    value === "te_kuru" ||
-    value === "te_oku" ||
-    value === "te_shimau" ||
-    value === "te_miru" ||
-    value === "te_mawaru" ||
-    value === "tsutsu_aru" ||
-    value === "te_ageru" ||
-    value === "te_kureru" ||
-    value === "te_kudasaru" ||
-    value === "te_morau" ||
-    value === "te_itadaku" ||
-    value === "te_moraeru" ||
-    value === "te_itadakeru" ||
-    value === "te_kudasai" ||
-    value === "te_kure_tanomu" ||
-    value === "te_hoshii" ||
-    value === "naide_kudasai" ||
-    value === "te_miseru";
 }
 
 function visitTailNodeAspectOps(node: TailNode, ops: (SimpleAspectOp | MiseruAspectOp)[]): void {
@@ -675,7 +607,7 @@ function activeStemCandidates(
     : stem.candidates.filter((candidate) => !stemCandidateHasFrame(candidate));
 }
 
-function stemCandidateHasFrame(candidate: { readonly senseFrame?: unknown; readonly senseFrames?: unknown }): boolean {
+export function stemCandidateHasFrame(candidate: { readonly senseFrame?: unknown; readonly senseFrames?: unknown }): boolean {
   return candidate.senseFrame !== undefined || candidate.senseFrames !== undefined;
 }
 
@@ -730,11 +662,14 @@ function stemUsesSahenSemanticAnchor(stem: StemNode): boolean {
   return false;
 }
 
-function rewriteTailStemLemma(
+export function rewriteTailStemLemma(
   stem: StemNode,
   lemma: string,
   irregular: IrregularType | null,
-  options: { readonly structuralCandidate?: StemCandidate | null } = {}
+  options: {
+    readonly candidatePatch?: Partial<StemCandidate>;
+    readonly structuralCandidate?: StemCandidate | null;
+  } = {}
 ): StemNode {
   if (stem.kind === "verb" || stem.kind === "adj") {
     return { ...stem, lemma, irregular };

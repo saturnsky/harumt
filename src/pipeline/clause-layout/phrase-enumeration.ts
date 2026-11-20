@@ -1,10 +1,7 @@
 
-import {
-  clauseProjectionEvidenceWindowForToken,
-  isClausePredicateEvidenceToken,
-  type ClauseToken,
-  type ProjectionEvidenceLayout
-} from "./index.js";
+import { clauseProjectionEvidenceWindowForToken } from "./navigation.js";
+import { isClausePredicateEvidenceToken } from "./token-evidence.js";
+import type { ClauseToken, ProjectionEvidenceLayout } from "./layout-types.js";
 import {
   isClauseEvidenceTransparentPunctuation,
   isClauseHardTerminalPunctuationToken,

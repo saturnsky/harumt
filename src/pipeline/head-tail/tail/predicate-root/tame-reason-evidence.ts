@@ -16,7 +16,8 @@ import type { LookupTables } from "../../../lookup-tables.js";
 import { previousNonSpaceIndex } from "../../../clause-layout/trivia.js";
 import { caseParticleMarkerRelationForToken } from "../../boundary/marker.js";
 import { projectionOpIsNegation } from "../../head/capability.js";
-import type { AuxOpNode } from "./grammar.js";
+import type { AuxOpNode, TailRoot } from "./grammar.js";
+import { auxOpsInTailNode, firstAuxLayer } from "./inspect.js";
 import {
   isAdnominalCopulaToken,
   isNaiOrNuToken
@@ -132,4 +133,25 @@ function previousSahenNounBefore(tokens: readonly RuntimeHaruToken[], pos: numbe
     return token.dictionaryForm || token.surface;
   }
   return null;
+}
+
+export function tailPredicateHostPrefersTameReason(options: {
+  readonly root: TailRoot;
+  readonly tokens: readonly RuntimeHaruToken[];
+  readonly tameIndex: number;
+  readonly lookups: LookupTables;
+  readonly adnominal?: boolean;
+}): boolean {
+  const ops = auxOpsInTailNode(options.root.tail);
+  const layer = firstAuxLayer(options.root.tail);
+  const stemLemma = layer?.stem.kind === "candidateSet" ? undefined : layer?.stem.lemma;
+  return tailOpsPreferTameReason({
+    ops,
+    tokens: options.tokens,
+    tameIndex: options.tameIndex,
+    lookups: options.lookups,
+    stemLemma,
+    negationPolicy: "projection_negation",
+    ...(options.adnominal === undefined ? {} : { adnominal: options.adnominal })
+  });
 }

@@ -298,7 +298,3 @@ export function requestQuoteAttributiveRecipe<S extends object = object, M = unk
     text: `${predicate.text} 달라는`
   };
 }
-
-export function normalizeRequestQuoteAttributive(mainText: string, koreanLemma: string): string {
-  return requestQuoteAttributiveRecipe(mainText, koreanLemma).text;
-}

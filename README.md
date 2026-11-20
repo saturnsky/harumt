@@ -12,8 +12,12 @@
 import { createTranslationPipeline } from "harumt";
 
 const pipeline = await createTranslationPipeline();
-await pipeline.translate("駅まで歩いて行きました。"); // → 역까지 걸어서 갔어요.
+await pipeline.translate("駅まで歩いて行きました。");
+// → 역까지 걸어서 갔어요.
 ```
+
+**바로 써 보기** — 설치하지 않고 브라우저에서 번역해 볼 수 있습니다: **[harumt.saturnsky.io](https://harumt.saturnsky.io)**
+(처음 한 번 사전 데이터 약 110MB를 내려받습니다. 번역은 브라우저 안에서만 이루어집니다.)
 
 - [소개](#소개)
 - [설치](#설치)
@@ -23,8 +27,6 @@ await pipeline.translate("駅まで歩いて行きました。"); // → 역까�
 - [개발 방식과 피드백](#개발-방식과-피드백)
 - [감사의 말 · 라이선스](#감사의-말)
 - [변경 이력](CHANGELOG.md)
-
----
 
 ## 소개
 
@@ -54,7 +56,7 @@ HaruMT는 여러 언어에 두루 쓰이는 범용 RBMT를 지향하지 않습�
 
 ### Google 번역과 견주면
 
-LLM으로 만든 합성 문장 세트 167항목을 양쪽에 넣고, 어느 쪽 출력인지 가린 채 채점한 결과입니다 (HaruMT 0.1.0, Google 번역 2026-11-11 수집).
+LLM으로 만든 합성 문장 세트 167항목을 양쪽에 넣고, 어느 쪽 출력인지 가린 채 채점한 결과입니다 (HaruMT 0.1.1, Google 번역 2026-11-11 수집).
 
 | OK를 받은 쪽 | 문법 단문 (127) | 웹소설·고유명·단락 (40) | 전체 (167) |
 |---|---|---|---|
@@ -63,14 +65,13 @@ LLM으로 만든 합성 문장 세트 167항목을 양쪽에 넣고, 어느 쪽 
 | Google 번역만 | 10 | 8 | 18 |
 | 둘 다 아님 | 35 | 26 | 61 |
 
-이 세트에서는 문법이 분명한 한 문장에서 HaruMT가, 웹소설 문체·고유명·여러 문장이 이어지는 글에서 Google 번역이 OK를 더 많이 받았습니다. 뒤쪽 범주에서는 양쪽 모두 대부분의 항목에서 OK를 받지 못했습니다.
-채점은 LLM이 한 번 판정한 것이고 비교 대상도 하나뿐이니 참고 자료로 보아 주세요. 전체 문장과 양쪽 출력, 채점 기준은 [COMPARISON.md](https://github.com/saturnsky/harumt/blob/main/COMPARISON.md)에 있습니다.
-
----
+- 이 세트에서는 문법이 분명한 한 문장에서 HaruMT가, 웹소설 문체·고유명·여러 문장이 이어지는 글에서 Google 번역이 OK를 더 많이 받았습니다. 뒤쪽 범주에서는 양쪽 모두 대부분의 항목에서 OK를 받지 못했습니다.
+- 채점은 LLM이 한 번 판정한 것이고 비교 대상도 하나뿐이니 참고 자료로 보아 주세요.
+- 전체 문장과 양쪽 출력, 채점 기준은 [COMPARISON.md](https://github.com/saturnsky/harumt/blob/main/COMPARISON.md)에 있습니다.
 
 ## 설치
 
-> **요구 사항**: Node.js 22 이상
+**요구 사항**: Node.js 22 이상
 
 ```bash
 npm install harumt
@@ -82,17 +83,15 @@ npx harumt-fetch-dictionary
 
 사전은 패키지 폴더가 아닌 사용자 데이터 디렉터리에 저장되므로, 패키지를 업데이트하거나 다시 설치해도 유지됩니다.
 
-| OS | 저장 위치 |
-|----|-----------|
-| Linux | `$XDG_DATA_HOME/harumt/dict/` (기본 `~/.local/share/harumt/dict/`) |
-| macOS | `~/Library/Application Support/harumt/dict/` |
-| Windows | `%LOCALAPPDATA%\harumt\dict\` |
+- **Linux** — `$XDG_DATA_HOME/harumt/dict/` (기본 `~/.local/share/harumt/dict/`)
+- **macOS** — `~/Library/Application Support/harumt/dict/`
+- **Windows** — `%LOCALAPPDATA%\harumt\dict\`
 
-| 옵션 | 설명 |
-|------|------|
-| `--out <dir>` | 기본 위치 대신 지정한 디렉터리에 설치 (파이프라인에는 `systemDictPath`로 경로 지정) |
-| `--from <dir>` | 미리 받아 둔 Release 자산(`*.gz`)으로 설치 (오프라인 환경용) |
-| `--force` | 이미 같은 사전이 설치되어 있어도 다시 내려받아 설치 |
+`harumt-fetch-dictionary`의 옵션은 다음과 같습니다.
+
+- `--out <dir>` — 기본 위치 대신 지정한 디렉터리에 설치합니다. 파이프라인에는 `systemDictPath`로 경로를 지정합니다.
+- `--from <dir>` — 미리 받아 둔 Release 자산(`*.gz`)으로 설치합니다. 오프라인 환경용입니다.
+- `--force` — 이미 같은 사전이 설치되어 있어도 다시 내려받아 설치합니다.
 
 ### 사전 삭제
 
@@ -102,13 +101,9 @@ npx harumt-fetch-dictionary
 사전이 갱신되면 새 버전은 `dict/` 아래 별도 디렉터리에 설치되고, 이전 버전은 그대로 남습니다.
 설치할 때 이전 버전이 발견되면 안내 메시지가 출력됩니다. 다른 프로젝트에서 이전 버전의 HaruMT를 사용하고 있지 않다면 해당 디렉터리를 삭제해도 됩니다.
 
----
-
 ## 사용법
 
-> **참고**
->
-> 0.x 버전에서는 API가 버전마다 달라질 수 있습니다. 바뀐 내용은 [변경 이력](CHANGELOG.md)에 적습니다.
+**참고** — 0.x 버전에서는 API가 버전마다 달라질 수 있습니다. 바뀐 내용은 [변경 이력](CHANGELOG.md)에 적습니다.
 
 ### 기본
 
@@ -119,30 +114,31 @@ const pipeline = await createTranslationPipeline();
 console.log(await pipeline.translate("駅まで歩いて行きました。"));
 // 역까지 걸어서 갔어요.
 
-const formal = await createTranslationPipeline({ register: "formal" });
+const formal = await createTranslationPipeline({
+  register: "formal",
+});
 console.log(await formal.translate("駅まで歩いて行きました。"));
 // 역까지 걸어서 갔습니다.
 ```
 
-> **참고**
->
-> 파이프라인을 처음 만들 때는 사전 적재에 1초 남짓 걸립니다(사전 파일이 디스크 캐시에 없으면 더 걸립니다).
-> 같은 옵션으로 다시 호출하면 이미 만들어 둔 파이프라인 객체를 그대로 돌려줍니다.
-> 하나의 파이프라인에서 여러 번역을 동시에 실행해도 번역 결과는 서로 영향을 주지 않습니다.
-> 다만 `translateWithWarnings`의 경고는 동시에 진행 중인 다른 번역의 것이 섞이거나 빠질 수 있으니, 경고를 정확히 받아야 하면 한 번에 하나씩 실행하세요.
+**참고**
 
-**성능 참고치** — Apple M4, Node.js 22, 프로세스 하나(단일 스레드), HaruMT 0.1.0 기준입니다.
+- 파이프라인을 처음 만들 때는 사전 적재에 1초 남짓 걸립니다(사전 파일이 디스크 캐시에 없으면 더 걸립니다).
+- 같은 옵션으로 다시 호출하면 이미 만들어 둔 파이프라인 객체를 그대로 돌려줍니다.
+- 하나의 파이프라인에서 여러 번역을 동시에 실행해도 번역 결과는 서로 영향을 주지 않습니다.
+- 다만 `translateWithWarnings`의 경고는 동시에 진행 중인 다른 번역의 것이 섞이거나 빠질 수 있으니, 경고를 정확히 받아야 하면 한 번에 하나씩 실행하세요.
+
+**성능 참고치** — Apple M4, Node.js 22, 프로세스 하나(단일 스레드), HaruMT 0.1.1 기준입니다.
+소설·회의록·자막·위키 문서 등에서 고르게 뽑은 8,090문장(문장당 평균 30자)을 한 문장씩 번역해 잰 값입니다. 문장이 길수록 문장당 시간은 늘어납니다.
 
 | 항목 | 측정값 |
 |------|--------|
 | 첫 파이프라인 생성 + 첫 문장 | 약 1.1초 |
 | 적재 직후 메모리(RSS) | 약 0.5GB |
-| 번역 속도 | 초당 약 190문장 (약 5,700자) |
-| 연속 번역 중 메모리(RSS) | 1.1GB 안팎까지 증가 |
+| 번역 속도 | 초당 약 180문장 (약 5,500자) |
+| 연속 번역 중 메모리(RSS) | 0.7GB 안팎까지 증가 |
 
-소설·회의록·자막·위키 문서 등에서 고르게 뽑은 8,090문장(문장당 평균 30자)을 한 문장씩 번역해 잰 값입니다. 문장이 길수록 문장당 시간은 늘어납니다.
-
-### 문체 (`register`)
+### 문체
 
 출력 문체는 `register` 옵션과 **원문의 문체**(정중체/보통체)를 함께 보고 결정됩니다.
 
@@ -155,14 +151,12 @@ console.log(await formal.translate("駅まで歩いて行きました。"));
 
 `createTranslationPipeline(options)`에 넘길 수 있는 옵션입니다.
 
-| 옵션 | 기본값 | 설명 |
-|------|--------|------|
-| `register` | `"casual"` | 출력 문체. `"casual"` 또는 `"formal"` |
-| `dataDir` | 패키지의 `data/` | 번역 데이터 디렉터리. 프로세스에서 처음 지정한 값으로 고정됩니다. |
-| `systemDictPath` | 내려받은 사전 | 시스템 사전(`.hrdic`) 경로. 인덱스는 같은 이름의 `.hridx`를 사용합니다. |
-| `readingFallbackRule` | `"common"` | 사전에 없는 인명·고유명사·외래어를 독음으로 음역하는 규칙. `"common"`은 관용 표기(타카나시), `"official"`은 외래어 표기법(다카나시)을 따릅니다. |
-| `userDictPath` | — | `buildUserDict`로 만든 인명 사용자 사전 파일 경로 (Node 전용. 브라우저 진입점에서는 적용되지 않습니다) |
-| `annotateOov`<br>`annotateUserDict` | — | annotation 입력(`AnnotatedText`)을 번역할 때 결과에 미등록어·사용자 사전 표시를 붙입니다. |
+- `register` (기본값 `"casual"`) — 출력 문체. `"casual"` 또는 `"formal"`입니다.
+- `dataDir` (기본값: 패키지의 `data/`) — 번역 데이터 디렉터리. 프로세스에서 처음 지정한 값으로 고정됩니다.
+- `systemDictPath` (기본값: 내려받은 사전) — 시스템 사전(`.hrdic`) 경로. 인덱스는 같은 이름의 `.hridx`를 사용합니다.
+- `readingFallbackRule` (기본값 `"common"`) — 사전에 없는 인명·고유명사·외래어를 독음으로 음역하는 규칙. `"common"`은 관용 표기(타카나시), `"official"`은 외래어 표기법(다카나시)을 따릅니다.
+- `userDictPath` — `buildUserDict`로 만든 인명 사용자 사전 파일 경로. Node 전용이며 브라우저 진입점에서는 적용되지 않습니다.
+- `annotateOov`, `annotateUserDict` — annotation 입력(`AnnotatedText`)을 번역할 때 결과에 미등록어·사용자 사전 표시를 붙입니다.
 
 ### 경고 받기
 
@@ -170,7 +164,8 @@ console.log(await formal.translate("駅まで歩いて行きました。"));
 품질이 떨어졌을 가능성이 있는 문장을 골라내는 데 활용할 수 있습니다.
 
 ```ts
-const { text, warnings } = await pipeline.translateWithWarnings("駅まで歩いて行きました。");
+const { text, warnings } =
+  await pipeline.translateWithWarnings("駅まで歩いて行きました。");
 ```
 
 ### 인명 사용자 사전
@@ -182,7 +177,7 @@ const { text, warnings } = await pipeline.translateWithWarnings("駅まで歩い
 import { UserDictionary } from "harumt";
 
 pipeline.replaceUserDictionary(new UserDictionary([
-  { japanese: "春沙里", reading: "ハルサリ", category: "person" }
+  { japanese: "春沙里", reading: "ハルサリ", category: "person" },
 ]));
 console.log(await pipeline.translate("春沙里さんが来ました。"));
 // 하루사리 씨가 왔어요.
@@ -195,11 +190,14 @@ console.log(await pipeline.translate("春沙里さんが来ました。"));
 ```ts
 import { buildUserDict, createTranslationPipeline } from "harumt";
 
-buildUserDict([{ japanese: "春沙里", reading: "ハルサリ", category: "person" }], "user-dict.json");
-const pipeline = await createTranslationPipeline({ userDictPath: "user-dict.json" });
+buildUserDict(
+  [{ japanese: "春沙里", reading: "ハルサリ", category: "person" }],
+  "user-dict.json",
+);
+const pipeline = await createTranslationPipeline({
+  userDictPath: "user-dict.json",
+});
 ```
-
----
 
 ## 브라우저 · 웹 확장
 
@@ -221,24 +219,27 @@ const pipeline = await createTranslationPipeline({ userDictPath: "user-dict.json
 **사용**
 
 ```ts
-import { initializeWebext, createTranslationPipeline } from "harumt/webext";
+import {
+  initializeWebext,
+  createTranslationPipeline,
+} from "harumt/webext";
 
 // 확장에서는 생략할 수 있습니다(runtime.getURL로 위치를 찾습니다).
 // 일반 웹 페이지에서는 baseUrl을 지정합니다.
-await initializeWebext({ baseUrl: "https://example.com/harumt/" });
+await initializeWebext({
+  baseUrl: "https://example.com/harumt/",
+});
 
-const pipeline = await createTranslationPipeline({ register: "casual" });
+const pipeline = await createTranslationPipeline();
 console.log(await pipeline.translate("本を読んでいる。"));
 // 책을 읽고 있어.
 ```
 
-> **주의**
->
-> - `initializeWebext`는 한 번만 호출할 수 있습니다. 호출하지 않으면 첫 파이프라인을 만들 때 확장 런타임 기준으로 초기화됩니다.
-> - 사전 전체(약 300MB)를 메모리에 올리므로, 메인 스레드보다 **Worker에서 실행하는 것을 권장**합니다.
-> - 브라우저에서는 번역 호출이 내부적으로 한 번에 하나씩 순서대로 처리됩니다.
+**주의**
 
----
+- `initializeWebext`는 한 번만 호출할 수 있습니다. 호출하지 않으면 첫 파이프라인을 만들 때 확장 런타임 기준으로 초기화됩니다.
+- 사전 전체(약 300MB)를 메모리에 올리므로, 메인 스레드보다 **Worker에서 실행하는 것을 권장**합니다.
+- 브라우저에서는 번역 호출이 내부적으로 한 번에 하나씩 순서대로 처리됩니다.
 
 ## 진단 CLI
 
@@ -249,13 +250,9 @@ console.log(await pipeline.translate("本を読んでいる。"));
 npx harumt-diagnose "駅まで歩いて行きました。"
 ```
 
-| 옵션 | 설명 |
-|------|------|
-| `--data-dir <dir>` | 번역 데이터 디렉터리 지정 |
-| `--system-dict <path>` | 시스템 사전 경로 지정 |
-| `--no-color` | 색상 출력 끄기 |
-
----
+- `--data-dir <dir>` — 번역 데이터 디렉터리를 지정합니다.
+- `--system-dict <path>` — 시스템 사전 경로를 지정합니다.
+- `--no-color` — 색상 출력을 끕니다.
 
 ## 개발 방식과 피드백
 
@@ -272,8 +269,6 @@ HaruMT는 별도의 내부 저장소에서 개발하며, 이 공개 저장소는
 
 [GitHub Sponsors](https://github.com/sponsors/saturnsky)를 통해서도 개발을 응원하실 수 있습니다.
 
----
-
 ## 감사의 말
 
 데이터 구조, 사전 데이터, annotation 인터페이스 등에 크게 기여해 주신 [lifthrasiir](https://github.com/lifthrasiir)님께 감사드립니다.
@@ -287,10 +282,8 @@ HaruMT의 형태소 분석은 Works Applications의 [Sudachi](https://github.com
 HaruMT의 코드와 사전 데이터는 [Apache License 2.0](LICENSE.Apache)으로 배포됩니다.
 다만 아래 두 부분은 원 저작물의 라이선스를 그대로 따릅니다.
 
-| 부분 | 출처 | 라이선스 |
-|------|------|----------|
-| `src/third-party/kanjidic2/` (한자 독음 표) | [KANJIDIC2](https://www.edrdg.org/wiki/index.php/KANJIDIC_Project) (EDRDG) | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
-| `src/third-party/unihan/` (한자 한국어 독음 표) | [Unihan](https://www.unicode.org/charts/unihan.html) (Unicode, Inc.) | [Unicode License v3](https://www.unicode.org/license.txt) |
+- `src/third-party/kanjidic2/` (한자 독음 표) — 출처 [KANJIDIC2](https://www.edrdg.org/wiki/index.php/KANJIDIC_Project) (EDRDG), 라이선스 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- `src/third-party/unihan/` (한자 한국어 독음 표) — 출처 [Unihan](https://www.unicode.org/charts/unihan.html) (Unicode, Inc.), 라이선스 [Unicode License v3](https://www.unicode.org/license.txt)
 
 각 부분의 출처와 라이선스 고지는 `src/third-party/kanjidic2/LICENSE`, `src/third-party/unihan/LICENSE`에 있습니다.
 그 밖의 서드파티 데이터와 코드의 고지는 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)와 [`licenses/`](licenses/)를 참고하세요.

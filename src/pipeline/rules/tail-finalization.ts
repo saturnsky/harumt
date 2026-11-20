@@ -10,7 +10,7 @@ import type { LookupTables } from "../lookup-tables.js";
 import { runtimeAuxTokens, runtimeToken, type MatcherToken } from "../matchers.js";
 import { isSahenBoundVerbAfterSahen } from "../predicate-helpers.js";
 import { copulaNiMarkerRelationForToken, kaMarkerRelationAt } from "../head-tail/boundary/marker.js";
-import { voiceFromFlags } from "../rendering/render-plan.js";
+import { voiceFromFlags } from "../rendering/render-plan-rewrite.js";
 import { hasTerminalSentenceMark, isSentenceFinal } from "../semantics/terminal-runtime.js";
 import type { RuleResult } from "../../types/pipeline.js";
 import type { LemmaRealization } from "../../types/render-plan.js";
@@ -23,9 +23,8 @@ import { POS0, POS1, POS4, POS5, 格助詞, 係助詞, 名詞, 助詞, 助動詞
 import { classifyAttributiveHeadKind } from "../head-tail/tail/predicate-root/structural-attributive-head-table.js";
 import { DEFAULT_RENYOU_CHUUSHI_ROLE, DEFAULT_TE_FORM_ROLE, type TeFormConnectiveRole } from "../head-tail/tail/predicate-root/grammar.js";
 import { isTeConnectiveToken } from "../head-tail/tail/postverb-tail-classifier.js";
-import { activeProtoLayout } from "../clause-layout/proto-state.js";
-import { renyouTokenLacksPredicateSense } from "../head-tail/tail/predicate-root/integration.js";
-import { buildProtoLayout } from "../clause-layout/index.js";
+import { renyouTokenLacksPredicateSense } from "../head-tail/tail/predicate-root/integration/head-admission.js";
+import { protoLayoutForTokens } from "../clause-layout/index.js";
 
 async function sahenInfo(resolver: TailResolver, ctx: Pick<ContentCtx, "tokens" | "start">): Promise<readonly [isSahen: boolean, sahenNoun: string | null]> {
   const fromResolver = resolver._sahenInfo;
@@ -320,7 +319,7 @@ async function renyouChuushiEndKeepsConnection(
     return false;
   }
   const splitAt = ctx.start + ctx.consumed;
-  const juncture = (activeProtoLayout() ?? buildProtoLayout(ctx.tokens, lookups)).renyouJunctureAt(splitAt);
+  const juncture = protoLayoutForTokens(ctx.tokens, lookups).renyouJunctureAt(splitAt);
   if (juncture !== undefined && juncture.cohesion.length > 0) {
     return false;
   }

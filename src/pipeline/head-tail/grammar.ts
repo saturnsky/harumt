@@ -152,10 +152,6 @@ export interface CandidateSetProjection<Candidate extends ProjectionCandidate = 
   readonly warnOnDefault?: boolean;
 }
 
-export type ProjectionChoice<Candidate extends ProjectionCandidate = ProjectionCandidate> =
-  | DeterministicProjection
-  | CandidateSetProjection<Candidate>;
-
 export type PredicateProjectionKind =
   | "attributive_nominalizer"
   | "quoted_nominalizer"

@@ -26,8 +26,10 @@ import type {
   SupplementalLexiconMemoryCache,
   UserLexiconEntry
 } from "./analyzer/dictionary.js";
-import { tsvDirFingerprint, type TranslationPipeline } from "./pipeline/core.js";
+import type { TranslationPipeline } from "./pipeline/core.js";
+import { tsvDirFingerprint } from "./pipeline/resource-cache.js";
 import { createSudachiAnalyzer, readUserDictSource } from "./analyzer/node-helpers.js";
+import { clearSystemDictionarySources } from "./analyzer/node-dictionary-provider.js";
 import type { DictionaryDataSource } from "./analyzer/dictionary-provider.js";
 import { LookupTables } from "./pipeline/lookup-tables.js";
 import { NumericTables } from "./generator/numeric-lookup.js";
@@ -123,7 +125,7 @@ export function resolveSupplementalLexiconDir(
 type SupplementalFingerprint = Awaited<ReturnType<typeof tsvDirFingerprint>>;
 interface SupplementalCacheSlot extends SupplementalLexiconMemoryCache {
   readonly fingerprint: string;
-  readonly entriesPromise: Promise<readonly UserLexiconEntry[]>;
+  entriesPromise: Promise<readonly UserLexiconEntry[]> | undefined;
 }
 const supplementalLexiconCache = new Map<string, SupplementalCacheSlot>();
 
@@ -142,14 +144,23 @@ async function loadCachedSupplementalLexicon(
   if (cached !== undefined && cached.fingerprint === fingerprint) {
     return cached;
   }
-  const entriesPromise = loadSupplementalLexicon(loader, dir);
-  const slot = { fingerprint, entriesPromise };
+  const slot: SupplementalCacheSlot = { fingerprint, entriesPromise: undefined };
   supplementalLexiconCache.set(dir, slot);
   return slot;
 }
 
+function supplementalEntries(
+  loader: DataLoader,
+  dir: string,
+  slot: SupplementalCacheSlot
+): Promise<readonly UserLexiconEntry[]> {
+  slot.entriesPromise ??= loadSupplementalLexicon(loader, dir);
+  return slot.entriesPromise;
+}
+
 export function clearProviderCaches(): void {
   supplementalLexiconCache.clear();
+  clearSystemDictionarySources();
   clearFactoryProviderCaches();
 }
 
@@ -170,13 +181,14 @@ export async function createTranslationPipeline(
   const supplementalSlot = supplementalDir === null
     ? undefined
     : await loadCachedSupplementalLexicon(loader, supplementalDir);
-  const supplementalLexicon = supplementalSlot === undefined
-    ? []
-    : await supplementalSlot.entriesPromise;
   const supplementalMemoryCache =
     options.sudachiConfigPath === undefined && openBinaryOverride === undefined && options.systemDictPath === undefined
       ? supplementalSlot
       : undefined;
+  const supplementalLexicon =
+    supplementalDir === null || supplementalSlot === undefined || supplementalMemoryCache?.resolved !== undefined
+      ? []
+      : await supplementalEntries(loader, supplementalDir, supplementalSlot);
 
   const userDictPath = options.userDictPath ?? null;
   const userDictSource = userDictPath === null ? undefined : readUserDictSource(userDictPath);
@@ -190,6 +202,9 @@ export async function createTranslationPipeline(
     supplementalMemoryCache,
     resolveResourceDir(options.systemDictPath ?? resolveDefaultSystemDictPath(resolveResourceDir(resolveDataDir(options))))
   );
+  if (supplementalSlot?.resolved !== undefined) {
+    supplementalSlot.entriesPromise = undefined;
+  }
 
   const pipeline = await loadDictsAndBuildPipeline(loader, dirs, analyzer, options);
   if (userDictSource !== undefined) {

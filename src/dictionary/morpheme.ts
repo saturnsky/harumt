@@ -270,7 +270,12 @@ export class MorphemeDictionary {
       this.materializeDictAliasKey(key, aliases, new Set());
     }
     this.canonicalizeIndexOrder();
+    for (const index of [this.surfaceIndex, this.readingIndex, this.formOnlyIndex, this.readingConjIndex]) {
+      compactMultiValueIndex(index);
+    }
     this.rebuildFuzzyIndexes();
+    compactMultiValueIndex(this.dictFormReadingIndex);
+    compactMultiValueIndex(this.surfaceFormReadingIndex);
   }
 
   private canonicalizeIndexOrder(): void {
@@ -1399,6 +1404,14 @@ function parseIndexKey(key: string): readonly [string, string, PosKey] {
   return [key.slice(0, i1), key.slice(i1 + 1, i2), Number(key.slice(i2 + 1))];
 }
 
+function compactMultiValueIndex<K, V>(map: Map<K, V[]>): void {
+  for (const [key, values] of map) {
+    if (values.length > 1) {
+      map.set(key, values.slice());
+    }
+  }
+}
+
 function pushMap<K, V>(map: Map<K, V[]>, key: K, value: V): void {
   const values = map.get(key);
   if (values === undefined) {
@@ -1805,16 +1818,8 @@ function containsSymbolicNumeric(text: string): boolean {
   return Array.from(text).some((char) => isPythonNumeric(char) && !isDecimalDigit(char));
 }
 
-function containsKanji(text: string): boolean {
-  return Array.from(text).some(isKanji);
-}
-
-import { isKanji, isHiragana } from "../utils/char-class.js";
+import { isKanji, isHiragana, containsKanji, isDecimalDigit } from "../utils/char-class.js";
 export { isKanji, isHiragana };
-
-function isDecimalDigit(ch: string): boolean {
-  return /^\p{Decimal_Number}$/u.test(ch);
-}
 
 function isPythonNumeric(ch: string): boolean {
   return /^\p{Number}$/u.test(ch) || CJK_NUMERIC_CHARS.has(ch);

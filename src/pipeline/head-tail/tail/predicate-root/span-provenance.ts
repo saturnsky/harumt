@@ -84,7 +84,7 @@ import {
 import { candidateProjectionKinds, mixedPosSlot } from "../../../candidate-runtime.js";
 import { collectAuxTokens } from "../../../matchers.js";
 import { isLexicalAdverb, isNominalLike } from "../../../../types/pos.js";
-import type { TailChunkIntakeVerdict } from "./integration.js";
+import type { TailChunkIntakeVerdict } from "./integration/contracts.js";
 import type { SfpNode } from "./grammar.js";
 export function tailFallbackSpanProvenance(
   tokens: readonly RuntimeHaruToken[],

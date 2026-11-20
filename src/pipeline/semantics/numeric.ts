@@ -60,6 +60,7 @@ import {
   連用形_,
   수사,
 } from "../../types/pos.js";
+import { isDecimalDigit } from "../../utils/char-class.js";
 export interface NumericSyntheticToken extends MatcherToken {
   reading: string;
   dictionaryFormReading: string;
@@ -1017,10 +1018,6 @@ function hasSetIntersection<T>(left: ReadonlySet<T>, right: ReadonlySet<T>): boo
     }
   }
   return false;
-}
-
-function isDecimalDigit(ch: string): boolean {
-  return /^\p{Decimal_Number}$/u.test(ch);
 }
 
 function isDecimalSurface(surface: string): boolean {

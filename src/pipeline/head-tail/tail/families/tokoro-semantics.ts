@@ -6,10 +6,8 @@ import type { MatcherToken } from "../../../matchers.js";
 import { nextNonSpaceIndex, previousNonSpaceIndex } from "../../../clause-layout/trivia.js";
 import { getArgumentNounBeforeParticle, PredicateArgumentView } from "../../candidate/semantic-classifiers.js";
 import { activeProtoLayout, activeProtoScopedScanEnd } from "../../../clause-layout/proto-state.js";
-import {
-  clauseProjectionEvidenceWindowForToken,
-  isClauseEvidenceTransparentPunctuation
-} from "../../../clause-layout/index.js";
+import { clauseProjectionEvidenceWindowForToken } from "../../../clause-layout/navigation.js";
+import { isClauseEvidenceTransparentPunctuation } from "../../../clause-layout/index.js";
 import { caseParticleMarkerRelationAt, nominalizerReasonConnectiveRelationAt } from "../../boundary/marker.js";
 
 import { transparentTokenRelationForConsumer } from "../../boundary/punctuation.js";
@@ -994,8 +992,6 @@ export const TOKORO_READING_CLAIMS = {
   trait_ga: ({ tokens, headIdx, lookups }) => isTokoroTraitGaHeadToken(tokens, headIdx, lookups),
   result: ({ tokens, headIdx, lookups }) => isTokoroResultHeadToken(tokens, headIdx, lookups)
 } as const satisfies Readonly<Record<string, TokoroReadingClaim>>;
-
-export type TokoroReadingClaimId = keyof typeof TOKORO_READING_CLAIMS;
 
 export function tokoroSemanticReadingClaimsHead(input: TokoroReadingClaimInput): boolean {
   return Object.values(TOKORO_READING_CLAIMS as Readonly<Record<string, TokoroReadingClaim>>)

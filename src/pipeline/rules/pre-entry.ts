@@ -23,9 +23,6 @@ const PRE_ENTRY_RULE_TABLE = [
   ["ruleTokoroHeadDispatch", ruleTokoroHeadDispatch]
 ] as const satisfies readonly (readonly [PreEntryRuleName, PreEntryRule])[];
 
-export const PRE_ENTRY_RULE_NAMES: readonly PreEntryRuleName[] =
-  PRE_ENTRY_RULE_TABLE.map(([name]) => name);
-
 export const PRE_ENTRY_RULES: readonly PreEntryRule[] =
   PRE_ENTRY_RULE_TABLE.map(([, rule]) => rule);
 

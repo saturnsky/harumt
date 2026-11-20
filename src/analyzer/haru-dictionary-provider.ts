@@ -23,6 +23,7 @@ import { Config, type InlineRuntimeConfig } from "./config.js";
 import { SudachiError } from "./error.js";
 import { ConnectionMatrix } from "./connect.js";
 import {
+  readDictionarySection,
   type DictionaryDataSource,
   type DictionaryProvider
 } from "./dictionary-provider.js";
@@ -91,13 +92,17 @@ export class HaruDictionaryProvider implements DictionaryProvider {
     const metadata = this.metadata();
     const strings = new HaruStringCodec(metadata.strings);
     const source = this.dictionarySource();
-    const posList = readHaruPosList(
-      source.slice(metadata.posList.start, metadata.posList.size),
-      metadata.posList.count,
-      strings
-    );
-    const connection = this.readConnectionMatrix(source, metadata);
-    return Grammar.fromParts(posList, connection, metadata.posList.size + metadata.connections.size);
+    try {
+      const posList = readHaruPosList(
+        source.slice(metadata.posList.start, metadata.posList.size),
+        metadata.posList.count,
+        strings
+      );
+      const connection = this.readConnectionMatrix(source, metadata);
+      return Grammar.fromParts(posList, connection, metadata.posList.size + metadata.connections.size);
+    } finally {
+      source.close();
+    }
   }
 
   async readLexicon(_config: Config): Promise<LexiconLike> {
@@ -112,11 +117,16 @@ export class HaruDictionaryProvider implements DictionaryProvider {
       sectionOffset(metadata.trie.start),
       metadata.trie.count
     );
-    const wordParams = new HaruWordParams(
-      wordParamSource,
-      sectionOffset(metadata.wordParams.start),
-      metadata.wordParams.count
-    );
+    let wordParams: HaruWordParams;
+    try {
+      wordParams = new HaruWordParams(
+        wordParamSource,
+        sectionOffset(metadata.wordParams.start),
+        metadata.wordParams.count
+      );
+    } finally {
+      wordParamSource.close();
+    }
     const wordInfos = new HaruWordInfos(
       wordInfoSource,
       sectionOffset(metadata.wordInfo.start),
@@ -309,7 +319,7 @@ class HaruWordParams {
     offset: number,
     readonly size: number
   ) {
-    const bytes = source.slice(offset, size * 10);
+    const bytes = readDictionarySection(source, offset, size * 10);
     this.view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
   }
 

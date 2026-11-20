@@ -1,7 +1,6 @@
 import type { NumericTables } from "../../generator/numeric-lookup.js";
 import {
   formatCounterPhrase,
-  parseJapaneseNumber,
   resolveNumeralTokenValue,
   type JapaneseNumber
 } from "../../generator/numerals.js";

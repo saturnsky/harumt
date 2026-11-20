@@ -237,16 +237,6 @@ export function phase3InvariantHolds(units: readonly TranslationUnit[]): boolean
   return units.every((unit) => unit.suppressed || unit.korean.length > 0 || unit.renderPlan !== null || unit.allomorphKey !== null);
 }
 
-export function findAdjacentLeft(units: readonly TranslationUnit[], index: number): TranslationUnit | undefined {
-  for (let cursor = index - 1; cursor >= 0; cursor -= 1) {
-    const unit = units[cursor];
-    if (unit !== undefined && emitsOutput(unit)) {
-      return unit;
-    }
-  }
-  return undefined;
-}
-
 export function findBatchimSource(units: readonly TranslationUnit[], index: number): TranslationUnit | undefined {
   for (let cursor = index - 1; cursor >= 0; cursor -= 1) {
     const unit = units[cursor];
@@ -324,4 +314,37 @@ export function allNonWhitespaceTokensCovered(
   units: readonly TranslationUnit[]
 ): boolean {
   return collectUncoveredTokenIndices(tokens, units).length === 0;
+}
+
+export function lastContentUnit(units: readonly TranslationUnit[]): TranslationUnit | undefined {
+  for (let index = units.length - 1; index >= 0; index -= 1) {
+    const unit = units[index];
+    if (unit?.unitType === UnitType.CONTENT) {
+      return unit;
+    }
+  }
+  return undefined;
+}
+
+export function lastOutputUnit(units: readonly TranslationUnit[]): TranslationUnit | undefined {
+  for (let index = units.length - 1; index >= 0; index -= 1) {
+    const unit = units[index];
+    if (unit !== undefined && emitsOutput(unit)) {
+      return unit;
+    }
+  }
+  return undefined;
+}
+
+export function lastUnit(units: readonly TranslationUnit[]): TranslationUnit | undefined {
+  return units.length > 0 ? units[units.length - 1] : undefined;
+}
+
+export function absorbIntoPrecedingUnit(units: readonly TranslationUnit[], tokenIndex: number): boolean {
+  const unit = lastUnit(units);
+  if (unit !== undefined && !unit.jpIndices.includes(tokenIndex)) {
+    unit.jpIndices.push(tokenIndex);
+    return true;
+  }
+  return false;
 }

@@ -5,7 +5,12 @@ import type { LexiconLike } from "./lexicon-set.js";
 export interface DictionaryDataSource {
   readonly byteLength: number;
   slice(offset: number, length: number): Uint8Array;
+  readSection?(offset: number, length: number): Uint8Array;
   close(): void;
+}
+
+export function readDictionarySection(source: DictionaryDataSource, offset: number, length: number): Uint8Array {
+  return source.readSection !== undefined ? source.readSection(offset, length) : source.slice(offset, length);
 }
 
 export interface DictionaryProvider {

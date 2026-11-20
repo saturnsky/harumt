@@ -1,4 +1,5 @@
-import { clauseSentenceOrdinals, type ClauseLayout } from "../../clause-layout/index.js";
+import { clauseSentenceOrdinals } from "../../clause-layout/navigation.js";
+import type { ClauseLayout } from "../../clause-layout/final-layout.js";
 import type { RuntimeHaruToken } from "../../../types/token.js";
 import { warningDedupKey, type Warning } from "../../../types/warning.js";
 import type { ClauseTailIR } from "../tail/predicate-root/commit.js";

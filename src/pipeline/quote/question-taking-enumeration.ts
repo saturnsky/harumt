@@ -2,7 +2,7 @@ import {
   enumerateClausePhrasesAfter,
   type PhraseEnumerationLayout
 } from "../clause-layout/phrase-enumeration.js";
-import type { ClauseToken } from "../clause-layout/index.js";
+import type { ClauseToken } from "../clause-layout/layout-types.js";
 import type { LookupTables } from "../lookup-tables.js";
 import {
   caseParticleMarkerRelationForToken,
@@ -233,11 +233,6 @@ export function looksQuoteQuestionTakingAfterViaLayout(
 
 function nextNonSpaceTokenIndex(tokens: readonly ClauseToken[], from: number): number | null {
   return from < tokens.length && tokens[from] !== undefined ? from : null;
-}
-
-function previousNonSpaceTokenIndex(tokens: readonly ClauseToken[], from: number): number | null {
-  const prev = Math.min(from - 1, tokens.length - 1);
-  return prev >= 0 ? prev : null;
 }
 
 function followedByNiSuru(tokens: readonly ClauseToken[], nounIdx: number): boolean {

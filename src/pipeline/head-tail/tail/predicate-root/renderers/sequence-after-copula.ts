@@ -2,7 +2,7 @@ import type { AuxLayerNode, AuxOpNode, TailRoot } from "../grammar.js";
 import type { BaseResult, RenderContext, RenderOutcome } from "./base-model.js";
 import { negativeNounCopulaBase, nounCopulaBase } from "./base-support.js";
 import { baseResultForNounScopeBridge, committedCarrierPostChainFrame } from "./noun-copula.js";
-import { composeCommittedTailTerminal } from "./connective-compose.js";
+import { composeCommittedTailTerminal } from "./predicate-terminal-compose.js";
 import {
   isTerminalRoleSfpNode,
   loweredTerminalSfpEffect,

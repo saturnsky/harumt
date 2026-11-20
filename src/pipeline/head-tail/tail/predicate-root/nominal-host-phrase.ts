@@ -23,13 +23,6 @@ export function skipHostEnclosingQuoteClose(
   return hostEnclosingQuoteCloseToken(tokens, headStart, idx) === null ? idx : idx + 1;
 }
 
-export function attributiveHeadTokenAt(
-  tokens: readonly RuntimeHaruToken[],
-  idx: number
-): RuntimeHaruToken | undefined {
-  return attributiveHeadAnchorAt(tokens, idx)?.token;
-}
-
 export function attributiveHeadAnchorAt(
   tokens: readonly RuntimeHaruToken[],
   idx: number

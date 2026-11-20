@@ -24,9 +24,8 @@ import {
   文語助動詞_ナリ_伝聞,
   文語助動詞_ナリ_断定,
   未然形_,
-  名詞,
   終止形_一般,
-  連用形_,
+  連用形_
 } from "../types/pos.js";
 import type { RuntimeHaruToken, SeparationEvidence, SourceTokenSpan } from "../types/token.js";
 import { isColloquialNaiNeeSurface } from "./semantics/sfp-surface.js";
@@ -89,8 +88,6 @@ export function runtimeTokensFromMatcher(tokens: readonly MatcherToken[]): reado
 
 export type AuxTokens = readonly MatcherToken[];
 
-export const EMPTY_AUX: AuxTokens = Object.freeze([]);
-
 
 export function isParticleSurface(token: MatcherToken, ...surfaces: readonly string[]): boolean {
   return (token.pos & POS0) === 助詞 && surfaces.includes(token.surface);
@@ -110,10 +107,6 @@ export function isAdjNai(token: { readonly surface: string; readonly dictionaryF
     token.dictionaryForm === "無い" ||
     token.reading === "ナイ"
   )) || isColloquialNaiAdjectiveAuxToken(token);
-}
-
-export function isKotoNoun(token: MatcherToken): boolean {
-  return (token.pos & POS0) === 名詞 && ["こと", "事"].includes(token.surface);
 }
 
 function collectAuxCore(cursor: TokenCursor<MatcherToken>, includeAdjNai: boolean): MatcherToken[] {
@@ -151,10 +144,6 @@ export function collectAuxTokens(cursor: TokenCursor<MatcherToken>): AuxTokens {
   const aux = collectAuxCore(cursor, false);
   cursor.advance(aux.length);
   return aux;
-}
-
-export function collectAuxWithAdjNai(cursor: TokenCursor<MatcherToken>): readonly MatcherToken[] {
-  return collectAuxCore(cursor, true);
 }
 
 

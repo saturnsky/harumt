@@ -896,6 +896,7 @@ export class LookupTables {
   get SEMANTIC_SENSORY_NOUN_PRESENCE_SIGN(): ReadonlySet<string> { return this.cachedSet("SEMANTIC_SENSORY_NOUN_PRESENCE_SIGN", "semantic", "sensory_noun_presence_sign"); }
   get SEMANTIC_SENSORY_NOUN_PREMONITION(): ReadonlySet<string> { return this.cachedSet("SEMANTIC_SENSORY_NOUN_PREMONITION", "semantic", "sensory_noun_premonition"); }
   get SEMANTIC_DESIRE_AUX_SUBJECT_VERBS(): ReadonlySet<string> { return this.cachedSet("SEMANTIC_DESIRE_AUX_SUBJECT_VERBS", "semantic", "desire_aux_subject_verbs"); }
+  get SEMANTIC_ANIMATE_GA_SUBJECT_VERBS(): ReadonlySet<string> { return this.cachedSet("SEMANTIC_ANIMATE_GA_SUBJECT_VERBS", "semantic", "animate_ga_subject_verbs"); }
   get SEMANTIC_DESIRE_HOLDER_NOUNS(): ReadonlySet<string> { return this.cachedSet("SEMANTIC_DESIRE_HOLDER_NOUNS", "semantic", "desire_holder_nouns"); }
   get SEMANTIC_DESIRE_PERSON_TARGET_VERBS(): ReadonlySet<string> { return this.cachedSet("SEMANTIC_DESIRE_PERSON_TARGET_VERBS", "semantic", "desire_person_target_verbs"); }
   get SEMANTIC_MEDICINE_NOUNS(): ReadonlySet<string> { return this.cachedSet("SEMANTIC_MEDICINE_NOUNS", "semantic", "medicine_nouns"); }

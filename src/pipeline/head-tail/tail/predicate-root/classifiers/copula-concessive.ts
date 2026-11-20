@@ -6,7 +6,7 @@ import {
   type CopulaConcessiveConditionEvidence
 } from "../../../../clause-layout/copula-concessive.js";
 import { activeProtoLayout } from "../../../../clause-layout/proto-state.js";
-import type { ProtoClauseLayout } from "../../../../clause-layout/index.js";
+import type { ProtoClauseLayout } from "../../../../clause-layout/proto-layout.js";
 import { copulaDeMarkerRelationForToken } from "../../../boundary/marker.js";
 import { isSupportedClauseStart } from "../integration/readiness.js";
 import { isAffirmativeCopulaSupportVerbToken } from "./tokens.js";
@@ -20,10 +20,14 @@ import {
 
 export type { CopulaConcessiveConditionEvidence };
 
-const evidenceCache = new WeakMap<
-  readonly RuntimeHaruToken[],
-  ReadonlyMap<number, CopulaConcessiveConditionEvidence>
->();
+type CopulaConcessiveEvidenceMap = ReadonlyMap<number, CopulaConcessiveConditionEvidence>;
+
+interface CopulaConcessiveEvidenceCacheBucket {
+  readonly byProto: WeakMap<ProtoClauseLayout, CopulaConcessiveEvidenceMap>;
+  readonly withoutProto: WeakMap<LookupTables, CopulaConcessiveEvidenceMap>;
+}
+
+const evidenceCache = new WeakMap<readonly RuntimeHaruToken[], CopulaConcessiveEvidenceCacheBucket>();
 
 function isCopulaImperativeSupportShapeAt(
   tokens: readonly RuntimeHaruToken[],
@@ -44,13 +48,23 @@ function isCopulaImperativeSupportShapeAt(
 function evidenceFor(
   tokens: readonly RuntimeHaruToken[],
   lookups: LookupTables
-): ReadonlyMap<number, CopulaConcessiveConditionEvidence> {
-  const cached = evidenceCache.get(tokens);
+): CopulaConcessiveEvidenceMap {
+  let bucket = evidenceCache.get(tokens);
+  if (bucket === undefined) {
+    bucket = { byProto: new WeakMap(), withoutProto: new WeakMap() };
+    evidenceCache.set(tokens, bucket);
+  }
+  const proto = activeProtoLayout();
+  const cached = proto === null ? bucket.withoutProto.get(lookups) : bucket.byProto.get(proto);
   if (cached !== undefined) {
     return cached;
   }
-  const collected = copulaConcessiveConditionEvidenceWithLayout(tokens, lookups, activeProtoLayout());
-  evidenceCache.set(tokens, collected);
+  const collected = copulaConcessiveConditionEvidenceWithLayout(tokens, lookups, proto);
+  if (proto === null) {
+    bucket.withoutProto.set(lookups, collected);
+  } else {
+    bucket.byProto.set(proto, collected);
+  }
   return collected;
 }
 

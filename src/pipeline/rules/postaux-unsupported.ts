@@ -1,5 +1,5 @@
 
-import { secondaryParticleCanonical } from "../particles/secondary-particle.js";
+import { isDegreeExtentParticle } from "../particles/secondary-particle.js";
 import type { RuntimeHaruToken } from "../../types/token.js";
 import type { Warning } from "../../types/warning.js";
 import type { LookupTables } from "../lookup-tables.js";
@@ -7,7 +7,7 @@ import { nextNonSpaceIndex } from "../clause-layout/trivia.js";
 import { isClauseEvidenceTransparentPunctuation, isClausePunctuationToken } from "../clause-layout/punctuation.js";
 import { isExplicitQuoteClosingToken } from "../clause-layout/quote-delimiters.js";
 import { activeProtoScopedScanEnd } from "../clause-layout/proto-state.js";
-import type { ClauseToken } from "../clause-layout/index.js";
+import type { ClauseToken } from "../clause-layout/layout-types.js";
 import {
   conditionalDiscoveryEvidenceWindowForToken,
   conditionalSourceAllowsRetrospectiveDiscovery,
@@ -43,7 +43,8 @@ import {
   matchNoNiConcessiveConnectiveStart,
   shouldSuppressConnMonoNo
 } from "../semantics/helpers.js";
-import { quoteStructuralRelationAt, type QuoteStructuralRelation } from "../structural-relation/quote.js";
+import { quoteStructuralRelationAt } from "../structural-relation/quote.js";
+import type { QuoteStructuralRelation } from "../structural-relation/quote-payload.js";
 import { participatesInStructuralKaParallel } from "../structural-relation/ka-parallel-ownership.js";
 import { TokenCursor } from "../token-cursor.js";
 import { isNominalEvidentialRashiiPredicateStart } from "../head-tail/tail/predicate-root/integration/readiness.js";
@@ -575,11 +576,6 @@ function degreeExtentHasPredicateProjectionHost(ctx: PostAuxUnsupportedContext):
   return ctx.pos0 === 動詞 ||
     ctx.pos0 === 形容詞0 ||
     ctx.auxTokens.length > 0;
-}
-
-function isDegreeExtentParticle(token: MatcherToken | undefined): boolean {
-  const canonical = secondaryParticleCanonical(token);
-  return canonical === "ほど" || canonical === "くらい";
 }
 
 function isSupportedDegreeExtentContinuation(

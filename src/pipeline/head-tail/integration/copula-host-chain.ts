@@ -1,7 +1,7 @@
 import type { RuntimeHaruToken } from "../../../types/token.js";
 import type { LookupTables } from "../../lookup-tables.js";
 import { 名詞_普通名詞 } from "../../../types/pos.js";
-import { parseTail } from "../tail/predicate-root/parser.js";
+import { parseTail } from "../tail/predicate-root/parse-tail.js";
 import type { AuxLayerNode, AuxOpNode, OpSource, SourcePredicateShape, TailRoot } from "../tail/predicate-root/grammar.js";
 import { firstAuxLayer } from "../tail/predicate-root/inspect.js";
 import { probeProductionDispatch } from "../tail/predicate-root/production-registry.js";

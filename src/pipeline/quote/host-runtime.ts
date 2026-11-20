@@ -5,20 +5,15 @@ import type {
   RenderPlan
 } from "../../types/render-plan.js";
 import { isPredicateHeadTailChainRenderPlan } from "../../types/render-plan.js";
-import { replaceLemmaRenderPlan } from "../rendering/render-plan.js";
+import { replaceLemmaRenderPlan } from "../rendering/render-plan-rewrite.js";
 import type { RuntimeHaruToken } from "../../types/token.js";
 import type { LookupTables } from "../lookup-tables.js";
 import { TokenCursor } from "../token-cursor.js";
 import { previousNonSpaceIndex } from "../clause-layout/trivia.js";
 import { predicateMorphologyFromAuxTokens, predicateMorphologyFromUnit, type PredicateMorphology } from "../predicate-morphology.js";
-import {
-  quoteRelationContentLooksLabelIsh,
-  quoteRelationLooksBareNominalLabel,
-  quoteReportingPassiveHostRealizesBeTold,
-  quoteStructuralRelationAt,
-  quoteStructuralRelationIndex,
-  type QuoteStructuralRelation
-} from "../structural-relation/quote.js";
+import { quoteRelationContentLooksLabelIsh, quoteRelationLooksBareNominalLabel, quoteReportingPassiveHostRealizesBeTold } from "../structural-relation/quote-nominal-and-passive.js";
+import { quoteStructuralRelationIndex } from "../structural-relation/quote.js";
+import type { QuoteStructuralRelation } from "../structural-relation/quote-payload.js";
 import type { QuoteBoundaryKoreanClauseForm, StemNode, TailNode, TailRoot } from "../head-tail/tail/predicate-root/grammar.js";
 import { FunctionalKind, TranslationUnit, UnitType } from "../translation/unit.js";
 

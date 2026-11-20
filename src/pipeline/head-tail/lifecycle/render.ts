@@ -1,4 +1,4 @@
-import type { AdjStem, AuxLayerNode, AuxOpNode, DerivationalStemBase, ProjectedHostSegments, SourcePredicateShape, StemNode, TailNode } from "../tail/predicate-root/grammar.js";
+import type { AdjStem, AuxLayerNode, AuxOpNode, ProjectedHostSegments, SourcePredicateShape, TailNode } from "../tail/predicate-root/grammar.js";
 import type { TailRoot } from "../tail/predicate-root/grammar.js";
 import type { Warning } from "../../../types/warning.js";
 import {
@@ -19,13 +19,8 @@ import { clauseRoleCommitContext } from "./commit-context.js";
 import { renderNominalTailChain } from "../head/adapters/nominal/render.js";
 import { commitTail, type CommitContext } from "../tail/predicate-root/commit.js";
 import { withProjectedDerivationalStem } from "../tail/predicate-root/derivational-host-base.js";
-import {
-  renderDerivationalSuffixHostProjection,
-  renderNominalHostLikenessContinuation,
-  renderTail,
-  renderTailPredicateGerundProjection
-} from "../tail/predicate-root/render.js";
-import { derivationalSuffixProfileById, HOST_TEMPLATE_PLACEHOLDER } from "../tail/predicate-root/derivational-suffix-table.js";
+import { renderNominalHostLikenessContinuation } from "../tail/predicate-root/renderers/noun-copula-tail-forms.js";
+import { renderTail, renderTailPredicateGerundProjection } from "../tail/predicate-root/render-root.js";
 import type { RenderContext, RenderFailure } from "../tail/predicate-root/renderers/base-model.js";
 import type { HeadTailCandidateTraceDescriptor } from "../head/profile.js";
 import type { HeadTailCandidate } from "../tail/chain.js";

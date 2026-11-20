@@ -1,5 +1,5 @@
 import type { LookupTables } from "../../../lookup-tables.js";
-import type { ProjectionEvidenceLayout } from "../../../clause-layout/index.js";
+import type { ProjectionEvidenceLayout } from "../../../clause-layout/layout-types.js";
 import type { RuntimeHaruToken } from "../../../../types/token.js";
 import type {
   ProjectionCandidateSelector,

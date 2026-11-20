@@ -42,7 +42,7 @@ import { isSourceSeparatedFromPreviousToken, nextNonSpaceIndex, previousNonSpace
 import type { SeparationKind } from "../../types/token.js";
 import { isQuestionParticleKaToken } from "../head-tail/boundary/marker.js";
 import { isKaDouKaMarker } from "../head-tail/boundary/ka-ownership.js";
-import type { Clause, ClauseLayout } from "./index.js";
+import type { Clause, ClauseLayout } from "./final-layout.js";
 import { isPredicateHeadTailChainRenderPlan, type RenderPlan } from "../../types/render-plan.js";
 import { enumerateClausePhrasesAfter, type ClausePhraseItem } from "./phrase-enumeration.js";
 import { utteranceClosureRunAfter, type UtteranceClosureKind } from "./utterance-closure.js";

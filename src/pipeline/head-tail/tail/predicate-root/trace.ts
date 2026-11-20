@@ -3,7 +3,8 @@ import type { RuleTraceDetailValue } from "../../../../types/pipeline.js";
 import type { RuntimeHaruToken } from "../../../../types/token.js";
 import { candidateObservabilityTraceValue } from "../../../candidate-observability.js";
 import { previousNonSpaceIndex } from "../../../clause-layout/trivia.js";
-import { quoteStructuralRelationAt, quoteStructuralRelationTraceDetail, type QuoteStructuralRelation } from "../../../structural-relation/quote.js";
+import { quoteStructuralRelationAt } from "../../../structural-relation/quote.js";
+import { quoteStructuralRelationTraceDetail, type QuoteStructuralRelation } from "../../../structural-relation/quote-payload.js";
 import { TokenCursor } from "../../../token-cursor.js";
 import { TraceEvent, type TraceCollector } from "../../../trace.js";
 import type { ClauseBoundary } from "./commit.js";
@@ -18,7 +19,7 @@ import type {
   TailRoot
 } from "./grammar.js";
 import { firstAuxLayer, isBenefactiveAspectOp } from "./inspect.js";
-import type { TailChunkCandidateObservation } from "./integration.js";
+import type { TailChunkCandidateObservation } from "./integration/contracts.js";
 
 
 import { POS0, POS4, posToString, 助動詞, 助動詞_ダ, 동사, 명사, 부사, 형용사 } from "../../../../types/pos.js";

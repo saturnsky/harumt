@@ -1,4 +1,4 @@
-import { assertNever, type AspectKind, type AuxOpNode, type ConnectiveOp, type IdiomKind } from "./grammar.js";
+import { assertNever, type AspectKind, type AuxOpNode, type IdiomKind } from "./grammar.js";
 
 export const HEAD_AUX_OP_KINDS = [
   "postverbAuxiliary",
@@ -62,10 +62,6 @@ export function isChainableIdiomOpKind(idiom: IdiomKind): boolean {
   return CHAINABLE_IDIOM_KINDS.has(idiom);
 }
 
-export function isHeadAuxOpKind(kind: string): boolean {
-  return (HEAD_AUX_OP_KINDS as readonly string[]).includes(kind);
-}
-
 function isHeadOpCore(op: AuxOpNode, chainableOnly: boolean): boolean {
   if (op.kind === "postverbAuxiliary") return true;
   if (op.kind === "predicateProjectionCarrier") return true;
@@ -98,22 +94,6 @@ export function terminalPolarityScopeStart(ops: readonly AuxOpNode[]): number {
     }
   }
   return lastTeComplementIdx + 1;
-}
-
-export function attributiveOperatorHostInternalConnective(
-  ops: readonly AuxOpNode[],
-  connective: ConnectiveOp,
-): boolean {
-  if (connective.connective !== "te_form") return false;
-  const connectiveIndex = ops.indexOf(connective);
-  if (connectiveIndex < 0 ||
-    ops.some((op, index) => op.kind === "connective" && index !== connectiveIndex)) {
-    return false;
-  }
-  const operatorHeadIndex = ops.findIndex(isHeadOp);
-  return operatorHeadIndex > 0 &&
-    connectiveIndex === operatorHeadIndex - 1 &&
-    isChainableHeadOp(ops[operatorHeadIndex]!);
 }
 
 export function operatorCreatesPotentialPredicate(op: AuxOpNode): boolean {

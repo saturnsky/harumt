@@ -1,5 +1,5 @@
-import type { ClauseLayout } from "../../../clause-layout/index.js";
-import type { CommitmentSpan } from "../../../deferred-commitment.js";
+import type { ClauseLayout } from "../../../clause-layout/final-layout.js";
+import type { CommitmentSpan } from "../../../commitment/types.js";
 import {
   attachTailChainRenderPlanLayout,
   finalizeTailChainRenderPlanWarnings,

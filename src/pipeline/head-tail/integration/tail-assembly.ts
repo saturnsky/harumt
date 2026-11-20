@@ -11,26 +11,20 @@ import type { Warning } from "../../../types/warning.js";
 import type { BenefactiveContext, RenderPlanPolicy, RuleTraceDetailValue } from "../../../types/pipeline.js";
 import { contentResultKoreanPos, type ContentResult } from "../../content-types.js";
 import type { TranslationCandidate } from "../../../types/pipeline.js";
-import type { CommitmentCandidate } from "../../deferred-commitment.js";
+import type { CommitmentCandidate } from "../../commitment/types.js";
 import { translationCandidateProjectionOrdinals } from "../../candidate-runtime.js";
 import type { LookupTables } from "../../lookup-tables.js";
 import { collectAuxTokens } from "../../matchers.js";
 import { TokenCursor } from "../../token-cursor.js";
 import { isSahenBoundVerbAfterSahen } from "../../predicate-helpers.js";
-import {
-  quoteContentEndsWithConditionalBeforeThoughtHost,
-  quoteContentEndsWithReasonCopulaBeforeQuoteMarker,
-  quoteClauseBoundaryFromRelation,
-  quoteConsumedMarkerSpanFromRelation,
-  quoteRelationOwnsMarkerRealization,
-  quoteStructuralRelationAt,
-  quoteStructuralRelationContainingContentToken,
-  quoteStructuralRelationIndex,
-  quoteStructuralRelationHostIsAttributiveIu,
-  type RequestQuoteTailKind
-} from "../../structural-relation/quote.js";
+import { quoteContentEndsWithConditionalBeforeThoughtHost } from "../../structural-relation/quote-content-endings.js";
+import { quoteContentEndsWithReasonCopulaBeforeQuoteMarker } from "../../structural-relation/quote-reason-copula.js";
+import { quoteClauseBoundaryFromRelation, quoteConsumedMarkerSpanFromRelation, quoteStructuralRelationHostIsAttributiveIu } from "../../structural-relation/quote-clause-boundary.js";
+import { quoteRelationOwnsMarkerRealization } from "../../structural-relation/quote-payload.js";
+import { quoteStructuralRelationAt, quoteStructuralRelationContainingContentToken, quoteStructuralRelationIndex } from "../../structural-relation/quote.js";
 import { nextNonSpaceIndex } from "../../clause-layout/trivia.js";
-import { realizeRenderPlan, setForcePassiveRenderPlan } from "../../rendering/render-plan.js";
+import { realizeRenderPlan } from "../../rendering/render-plan.js";
+import { setForcePassiveRenderPlan } from "../../rendering/render-plan-rewrite.js";
 import { UnitType, type TranslationUnitProvenance } from "../../translation/unit.js";
 import { isHardTerminalPunctuationToken, isTrailingPunctuationToken, isWeakPunctuationToken } from "../boundary/punctuation.js";
 import { quoteMarkerRelationAt } from "../boundary/quote-marker.js";
@@ -51,6 +45,7 @@ import type {
   PoliteOp,
   QuoteBoundaryKoreanClauseForm,
   RequestAspectOp,
+  RequestQuoteTailKind,
   SfpNode,
   StemCandidate,
   StemMood,
@@ -81,21 +76,12 @@ import {
   translationCandidateIdentity
 } from "../tail/predicate-root/stem-candidate-identity.js";
 import type { ContentHeadHydrationMetadata, ContentHeadMetadata } from "./content-head-metadata.js";
-import { auxOpsHaveCausativePassiveSequence, firstAuxLayer, tailNodeHasCausativePassiveSequence, tailRootHasRequestTail } from "../tail/predicate-root/inspect.js";
-import {
-  buildTailChainRenderPlan,
-  classifyStructuralAttributiveBoundaryPayload,
-  clauseBoundaryAtSplit,
-  elidedColloquialObligationContextAtBoundary,
-  isZeroNiPurposeProjectionBoundaryEnd,
-  tailParserSemanticReadinessBlocker,
-  volitionalPurposeToBoundaryEndingAt,
-  tryParseEllipticPropositionModalTailChunk,
-  tryParseEllipticPropositionQuoteTailChunk,
-  type IntegrationInput,
-  type TailChunkIntakeVerdict,
-  type TailChunkResult
-} from "../tail/predicate-root/integration.js";
+import { auxOpsHaveCausativePassiveSequence, firstAuxLayer, tailNodeHasCausativePassiveSequence, tailRootHasRequestTail, tailRootStemIsVerbalSuffixDerivation } from "../tail/predicate-root/inspect.js";
+import { buildTailChainRenderPlan, tailParserSemanticReadinessBlocker, tryParseEllipticPropositionModalTailChunk, tryParseEllipticPropositionQuoteTailChunk } from "../tail/predicate-root/integration.js";
+import { elidedColloquialObligationContextAtBoundary } from "../tail/predicate-root/integration/parse-clause.js";
+import type { IntegrationInput, TailChunkIntakeVerdict, TailChunkResult } from "../tail/predicate-root/integration/contracts.js";
+import { classifyStructuralAttributiveBoundaryPayload } from "../tail/predicate-root/integration/attributive-boundary.js";
+import { clauseBoundaryAtSplit, isZeroNiPurposeProjectionBoundaryEnd, volitionalPurposeToBoundaryEndingAt } from "../tail/predicate-root/integration/clause-boundaries.js";
 import { parseOutgoingBoundaryHint } from "../tail/predicate-root/integration/boundary-hint.js";
 import {
   matchPredicateProjectionConnectiveAt,
@@ -125,7 +111,6 @@ import {
   POS1,
   POS4,
   POS5A,
-  isSahenCapableNominal,
   カ行変格,
   サ行変格,
   感動詞,
@@ -155,18 +140,24 @@ import {
   連用形_,
   동사,
   형용사,
-  isAdverbCapableNominal, isImperativeInflection, isRareruAuxiliaryToken, isVerbPredicateToken, isVerbalDerivationalSuffixToken, pos0in, INFLECTABLE_AUX_BITS, 名詞_普通名詞,
+  isAdverbCapableNominal, isImperativeInflection, isRareruAuxiliaryToken, isVerbPredicateToken, isVerbalDerivationalSuffixToken, pos0in, INFLECTABLE_AUX_BITS,
 } from "../../../types/pos.js";
-import { buildRequestAspectOp, createAspectOp, createConnectiveOp, createDesireOp, createPoliteOp, createPredicateQuoteCarrierOp, createTenseOp } from "../tail/predicate-root/op-builders.js";
+import { buildRequestAspectOp, createConnectiveOp, createDesireOp, createPoliteOp, createPredicateQuoteCarrierOp, createTenseOp, buildVoiceOp } from "../tail/predicate-root/op-builders.js";
+import { buildParserBenefactiveAspectOp } from "../tail/predicate-root/matchers/te-aspect.js";
+import { inflectionStemMood } from "../tail/predicate-root/parse-stem.js";
+import { parseTailContinuation, type TailContinuation } from "../tail/predicate-root/parse-tail.js";
+import { predicateQuoteCarrierSpanEnd } from "../tail/predicate-root/matchers/predicate-quote.js";
 import {
-  buildParserBenefactiveAspectOp,
-  buildVoiceOp,
-  inflectionStemMood,
-  isSeruCausativeAuxToken,
-  parseTailContinuation,
-  predicateQuoteCarrierSpanEnd,
-  type TailContinuation
-} from "../tail/predicate-root/parser.js";
+  honorificFormulaicHostAt,
+  isHonorificPrefix,
+  isHonorificRequestRenyouVerb,
+  isPrecollapsedHonorificSahenHost,
+  isSahenRequestNoun,
+  opSourceFromIndices,
+  previousNonSpaceIndex,
+  type HonorificFormulaicHost,
+  type HonorificFormulaicHostKind
+} from "./honorific-formulaic-host.js";
 import { activeProtoLayout } from "../../clause-layout/proto-state.js";
 import { copulaChainOutgoingBoundary } from "./particle-phrase-copula.js";
 import { connectiveCompositeTokenCountAt } from "../../semantics/copula-tail-runtime.js";
@@ -979,6 +970,7 @@ export async function buildTailChainAssemblyDescriptor(options: {
       !isQuoteLikeTailBoundary(options.tailChunk.outgoingBoundary) &&
       koreanPos === 동사 &&
       firstAuxLayer(root.tail)?.stem.kind !== "noun" &&
+      !tailRootStemIsVerbalSuffixDerivation(root) &&
       options.isKeijoujiVerbObjectHost(options.tokens[options.index]),
     benefactive: tailBenefactive ?? options.headResult.benefactive,
     connectiveRole: options.headResult.connectiveRole,
@@ -1480,7 +1472,6 @@ function tailParserFallbackVoiceOpenCandidate(
   return features.potential === true && features.passive !== true;
 }
 
-type HonorificFormulaicHostKind = "sahen_noun" | "renyou_verb" | "nominalized_renyou_verb" | "lexical_respect_verb";
 type HonorificFormulaicStemTransform = "none" | "respect" | "humble_light_verb";
 type FormulaicApologyPredicateKind = "sumimasen_polite" | "sumanai_plain" | "gomen_plain";
 type HonorificFormulaicKind =
@@ -1796,138 +1787,6 @@ function withFormulaicCausativeHostVoice(
     return match;
   }
   return { ...match, ops: [host.causative.op, ...match.ops] };
-}
-
-interface HonorificFormulaicHost {
-  readonly headIdx: number;
-  readonly headEnd: number;
-  readonly head: RuntimeHaruToken;
-  readonly headKind: HonorificFormulaicHostKind;
-  readonly requiresHonorificClosure: boolean;
-  readonly causative: { readonly op: AuxOpNode; readonly endExclusive: number } | null;
-}
-
-function honorificFormulaicHostAt(
-  tokens: readonly RuntimeHaruToken[],
-  index: number
-): HonorificFormulaicHost | null {
-  const n = tokens.length;
-  const first = tokens[index];
-  if (first === undefined) {
-    return null;
-  }
-  if (isHonorificPrefix(first)) {
-    const beforeIdx = previousNonSpaceIndex(tokens, index);
-    const before = beforeIdx === null ? undefined : tokens[beforeIdx];
-    if (before !== undefined && isHonorificPrefix(before)) {
-      return null;
-    }
-    const headIdx = nextNonSpaceIndex(tokens, index + 1, n) ?? n;
-    const head = tokens[headIdx];
-    if (head === undefined) {
-      return null;
-    }
-    const headKind = formulaicHeadKind(head, true);
-    if (headKind !== null) {
-      return { headIdx, headEnd: headIdx + 1, head, headKind, requiresHonorificClosure: true, causative: null };
-    }
-    return formulaicCausativeHostAt(tokens, headIdx, head);
-  }
-  const lexicalKind = lexicalRespectHostKind(first);
-  if (lexicalKind !== null) {
-    return {
-      headIdx: index,
-      headEnd: index + 1,
-      head: first,
-      headKind: lexicalKind,
-      requiresHonorificClosure: true,
-      causative: null
-    };
-  }
-  const bareKind = formulaicHeadKind(first, false);
-  if (bareKind !== null) {
-    return {
-      headIdx: index,
-      headEnd: index + 1,
-      head: first,
-      headKind: bareKind,
-      requiresHonorificClosure: isPrecollapsedHonorificSahenHost(first),
-      causative: null
-    };
-  }
-  return null;
-}
-
-export function honorificPrefixRenyouVerbHostAt(
-  tokens: readonly RuntimeHaruToken[],
-  prefixIdx: number
-): number | null {
-  const prefix = tokens[prefixIdx];
-  if (prefix === undefined || !isHonorificPrefix(prefix)) {
-    return null;
-  }
-  const host = honorificFormulaicHostAt(tokens, prefixIdx);
-  return host !== null && host.headKind === "renyou_verb" && host.causative === null
-    ? host.headIdx
-    : null;
-}
-
-function formulaicCausativeHostAt(
-  tokens: readonly RuntimeHaruToken[],
-  headIdx: number,
-  head: RuntimeHaruToken
-): HonorificFormulaicHost | null {
-  if ((head.pos & (POS0 | POS5A)) !== (動詞 | 未然形_)) {
-    return null;
-  }
-  const causativeIdx = nextNonSpaceIndex(tokens, headIdx + 1, tokens.length) ?? tokens.length;
-  const causative = tokens[causativeIdx];
-  if (
-    causative === undefined ||
-    !isSeruCausativeAuxToken(causative) ||
-    (causative.pos & POS5A) !== 連用形_
-  ) {
-    return null;
-  }
-  return {
-    headIdx,
-    headEnd: headIdx + 1,
-    head,
-    headKind: "renyou_verb",
-    requiresHonorificClosure: true,
-    causative: {
-      op: buildVoiceOp(opSourceFromIndices(tokens, [causativeIdx]), "causative"),
-      endExclusive: causativeIdx + 1
-    }
-  };
-}
-
-function formulaicHeadKind(
-  token: RuntimeHaruToken | undefined,
-  hasPrefix: boolean
-): HonorificFormulaicHostKind | null {
-  if (token === undefined) {
-    return null;
-  }
-  if (isSahenRequestNoun(token)) {
-    return "sahen_noun";
-  }
-  if (isHonorificRequestRenyouVerb(token)) {
-    return "renyou_verb";
-  }
-  if (hasPrefix && isPotentialNominalizedRenyouHost(token)) {
-    return "nominalized_renyou_verb";
-  }
-  return hasPrefix ? lexicalRespectHostKind(token) : null;
-}
-
-function lexicalRespectHostKind(token: RuntimeHaruToken): HonorificFormulaicHostKind | null {
-  const form = token.dictionaryForm || token.surface;
-  return form === "ご覧" ? "lexical_respect_verb" : null;
-}
-
-function isPrecollapsedHonorificSahenHost(token: RuntimeHaruToken): boolean {
-  return isSahenRequestNoun(token) && (token.dictionaryForm || token.surface) === "お願い";
 }
 
 function matchNasaiImperative(
@@ -3163,20 +3022,6 @@ function formulaicApologyHasNonApologyLeftEvidence(
   return false;
 }
 
-function previousNonSpaceIndex(
-  tokens: readonly RuntimeHaruToken[],
-  beforeIdx: number
-): number | null {
-  for (let idx = beforeIdx - 1; idx >= 0; idx -= 1) {
-    const token = tokens[idx];
-    if (token === undefined || token.surface.trim() === "") {
-      continue;
-    }
-    return idx;
-  }
-  return null;
-}
-
 function isSumuApologyStemToken(token: RuntimeHaruToken): boolean {
   if ((token.pos & POS0) !== 動詞) {
     return false;
@@ -3260,23 +3105,6 @@ function teFormConnectiveOp(tokens: readonly RuntimeHaruToken[], teIdx: number):
     surface: tokens[teIdx]?.surface ?? "て",
     source: opSourceFromIndices(tokens, [teIdx])
   });
-}
-
-function isHonorificPrefix(token: RuntimeHaruToken): boolean {
-  const form = token.dictionaryForm || token.surface;
-  return (token.pos & POS0) === 接頭辞 && (form === "ご" || form === "御" || form === "お");
-}
-
-function isSahenRequestNoun(token: RuntimeHaruToken): boolean {
-  return isSahenCapableNominal(token);
-}
-
-function isHonorificRequestRenyouVerb(token: RuntimeHaruToken): boolean {
-  return (token.pos & (POS0 | POS5A)) === (動詞 | 連用形_);
-}
-
-function isPotentialNominalizedRenyouHost(token: RuntimeHaruToken): boolean {
-  return (token.pos & POS01) === 名詞_普通名詞 && token.surface.length > 0 && token.reading.length > 0;
 }
 
 function tokenMatchesArmForms(token: RuntimeHaruToken, forms: ReadonlySet<string>): boolean {
@@ -3653,19 +3481,3 @@ function opSourceFromRange(
   return { tokens: sourceTokens, tokenIndices };
 }
 
-function opSourceFromIndices(
-  tokens: readonly RuntimeHaruToken[],
-  indices: readonly number[]
-): { readonly tokens: readonly RuntimeHaruToken[]; readonly tokenIndices: readonly number[] } {
-  const sourceTokens: RuntimeHaruToken[] = [];
-  const tokenIndices: number[] = [];
-  for (const idx of indices) {
-    const token = tokens[idx];
-    if (token === undefined) {
-      continue;
-    }
-    sourceTokens.push(token);
-    tokenIndices.push(idx);
-  }
-  return { tokens: sourceTokens, tokenIndices };
-}

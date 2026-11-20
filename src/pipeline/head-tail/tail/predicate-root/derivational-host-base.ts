@@ -3,7 +3,7 @@ import type { NumericTables } from "../../../../generator/numeric-lookup.js";
 import { commitTail, type CommitContext } from "./commit.js";
 import { derivationalHostStemRootOf, derivationalSuffixProfileById, HOST_TEMPLATE_PLACEHOLDER } from "./derivational-suffix-table.js";
 import type { StemNode, TailNode, TailRoot } from "./grammar.js";
-import { renderDerivationalSuffixHostProjection } from "./render.js";
+import { renderDerivationalSuffixHostProjection } from "./render-derivational-host-projection.js";
 import type { RenderContext } from "./renderers/base-model.js";
 
 export function withProjectedDerivationalStem(

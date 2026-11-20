@@ -1,4 +1,4 @@
-import { secondaryParticleCanonical } from "../../../../particles/secondary-particle.js";
+import { isDegreeExtentParticle } from "../../../../particles/secondary-particle.js";
 import { activeProtoLayout, activeProtoUtteranceClosureRunAt } from "../../../../clause-layout/proto-state.js";
 import { clauseContainsInterrogativeBefore } from "../../../../quote/embedded-question.js";
 import { isLikenessTransparentFormalNounHead } from "../structural-attributive-head-table.js";
@@ -27,7 +27,7 @@ import { appearancePerceptionReadingForToken } from "../appearance-perception-ca
 import { isTeAuxActivationAccepted } from "../postverb-auxiliary-parser.js";
 import { compositeConnectivePatternRelationAt } from "../../connective-span-scanner.js";
 import { isNiSeriesConcessiveConditionalSurface } from "../connective-surface-table.js";
-import { lookupConnectiveBySurface } from "../grammar.js";
+import { lookupConnectiveBySurface } from "../connective-surface-lookup.js";
 import type { ConnectiveKind, QuoteAttributiveFlavor, QuotativeMood } from "../grammar.js";
 import { collapsedAspectAuxKind, isAdnominalCopulaToken, isTeSurfaceConnectiveToken } from "../classifiers/tokens.js";
 import { isTeConnectiveToken, teBenefactiveContinuationMetadataForToken } from "../../postverb-tail-classifier.js";
@@ -969,6 +969,96 @@ export function matchPredicateProjectionConnectiveAt(
   const t2 = tokens[pos + 2];
   const t1NominalLink = nominalLinkMarkerRelationAt(tokens, pos + 1, { consumers: ["tail_multi_clause"] }) !== null;
 
+  const c: ProjectionConnectiveMatchContext = { tokens, pos, options, previous, endOk, t0, t1, t2, t1NominalLink };
+  const noQuoteReportingProjectionArmMatch = matchNoQuoteReportingProjectionArm(c);
+  if (noQuoteReportingProjectionArmMatch !== NO_PROJECTION_ARM) {
+    return noQuoteReportingProjectionArmMatch;
+  }
+  const niSeriesMergedConcessiveConditionalMatch = matchNiSeriesMergedConcessiveConditional(c);
+  if (niSeriesMergedConcessiveConditionalMatch !== NO_PROJECTION_ARM) {
+    return niSeriesMergedConcessiveConditionalMatch;
+  }
+  const caseParticleNiClauseConnectiveMatch = matchCaseParticleNiClauseConnective(c);
+  if (caseParticleNiClauseConnectiveMatch !== NO_PROJECTION_ARM) {
+    return caseParticleNiClauseConnectiveMatch;
+  }
+  const additiveUeNiMatch = matchAdditiveUeNi(c);
+  if (additiveUeNiMatch !== NO_PROJECTION_ARM) {
+    return additiveUeNiMatch;
+  }
+  const gateraProjectionMatch = matchGateraProjection(c);
+  if (gateraProjectionMatch !== NO_PROJECTION_ARM) {
+    return gateraProjectionMatch;
+  }
+  const quoteMarkerProjectionMatch = matchQuoteMarkerProjection(c);
+  if (quoteMarkerProjectionMatch !== NO_PROJECTION_ARM) {
+    return quoteMarkerProjectionMatch;
+  }
+  const purposeBekuProjectionMatch = matchPurposeBekuProjection(c);
+  if (purposeBekuProjectionMatch !== NO_PROJECTION_ARM) {
+    return purposeBekuProjectionMatch;
+  }
+  const asFarAsKagiriProjectionMatch = matchAsFarAsKagiriProjection(c);
+  if (asFarAsKagiriProjectionMatch !== NO_PROJECTION_ARM) {
+    return asFarAsKagiriProjectionMatch;
+  }
+
+
+  const niwaProjectionMatch = matchNiwaProjection(c);
+  if (niwaProjectionMatch !== NO_PROJECTION_ARM) {
+    return niwaProjectionMatch;
+  }
+  const rowDrivenProjectionPatternMatch = matchRowDrivenProjectionPattern(c);
+  if (rowDrivenProjectionPatternMatch !== NO_PROJECTION_ARM) {
+    return rowDrivenProjectionPatternMatch;
+  }
+  const quantityExtentProjectionMatch = matchQuantityExtentProjection(c);
+  if (quantityExtentProjectionMatch !== NO_PROJECTION_ARM) {
+    return quantityExtentProjectionMatch;
+  }
+  const degreeExtentProjectionMatch = matchDegreeExtentProjection(c);
+  if (degreeExtentProjectionMatch !== NO_PROJECTION_ARM) {
+    return degreeExtentProjectionMatch;
+  }
+  const untilMadeProjectionMatch = matchUntilMadeProjection(c);
+  if (untilMadeProjectionMatch !== NO_PROJECTION_ARM) {
+    return untilMadeProjectionMatch;
+  }
+  const comparisonYoriProjectionMatch = matchComparisonYoriProjection(c);
+  if (comparisonYoriProjectionMatch !== NO_PROJECTION_ARM) {
+    return comparisonYoriProjectionMatch;
+  }
+  const niMatrixAttachmentProjectionMatch = matchNiMatrixAttachmentProjection(c);
+  if (niMatrixAttachmentProjectionMatch !== NO_PROJECTION_ARM) {
+    return niMatrixAttachmentProjectionMatch;
+  }
+  const niComplementProjectionMatch = matchNiComplementProjection(c);
+  if (niComplementProjectionMatch !== NO_PROJECTION_ARM) {
+    return niComplementProjectionMatch;
+  }
+  const purposeMotionProjectionMatch = matchPurposeMotionProjection(c);
+  if (purposeMotionProjectionMatch !== NO_PROJECTION_ARM) {
+    return purposeMotionProjectionMatch;
+  }
+  return null;
+}
+
+interface ProjectionConnectiveMatchContext {
+  readonly tokens: readonly BoundaryToken[];
+  readonly pos: number;
+  readonly options: Parameters<typeof matchPredicateProjectionConnectiveAt>[2];
+  readonly previous: BoundaryToken | undefined;
+  readonly endOk: (consumed: number) => boolean;
+  readonly t0: BoundaryToken;
+  readonly t1: BoundaryToken | undefined;
+  readonly t2: BoundaryToken | undefined;
+  readonly t1NominalLink: boolean;
+}
+
+const NO_PROJECTION_ARM: unique symbol = Symbol("predicate projection connective: arm not applicable");
+
+function matchNoQuoteReportingProjectionArm(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { tokens, pos, options, endOk } = c;
   const noQuoteReporting = matchNoQuoteReportingProjectionConnectiveAt(tokens, pos, {
     allow: options.allowNoQuoteReportingProjection === true,
     lookups: options.lookups
@@ -976,7 +1066,11 @@ export function matchPredicateProjectionConnectiveAt(
   if (noQuoteReporting !== null && endOk(noQuoteReporting.consumed)) {
     return noQuoteReporting;
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchNiSeriesMergedConcessiveConditional(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { options, endOk, t0 } = c;
   if (
     isCaseParticleToken(t0) &&
     isNiSeriesConcessiveConditionalSurface(t0.surface, options.lookups) &&
@@ -987,7 +1081,11 @@ export function matchPredicateProjectionConnectiveAt(
       return { connective: mergedKind, surface: t0.surface, consumed: 1 };
     }
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchCaseParticleNiClauseConnective(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { tokens, pos, endOk } = c;
   const caseParticleNiConnective = caseParticleNiClauseConnectiveRelationAt(tokens, pos, {
     consumers: ["tail_multi_clause"]
   });
@@ -1001,7 +1099,11 @@ export function matchPredicateProjectionConnectiveAt(
       };
     }
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchAdditiveUeNi(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { pos, endOk, t0, t1 } = c;
   if (isPredicateProjectionUeNiHead(t0)) {
     const ni = caseParticleMarkerRelationForToken(t1, pos + 1, {
       acceptedSurfaces: ["に"],
@@ -1015,7 +1117,11 @@ export function matchPredicateProjectionConnectiveAt(
       };
     }
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchGateraProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { previous, endOk, t0 } = c;
   if (
     t0.surface === "がてら" &&
     (t0.pos & POS0) === 接尾辞 &&
@@ -1025,7 +1131,11 @@ export function matchPredicateProjectionConnectiveAt(
   ) {
     return { connective: "predicate_projection_gatera", surface: "がてら", consumed: 1 };
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchQuoteMarkerProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { tokens, pos, options, endOk } = c;
   const quoteMarker = quoteMarkerRelationAt(tokens, pos, {
     consumers: ["tail_multi_clause"]
   });
@@ -1068,13 +1178,21 @@ export function matchPredicateProjectionConnectiveAt(
       }
     }
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchPurposeBekuProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { endOk, t0 } = c;
   if (
     t0.surface === "べく" && (t0.pos & (POS0 | POS4 | POS5A)) === (助動詞0 | 文語助動詞_ベシ | 連用形_) && endOk(1)
   ) {
     return { connective: "predicate_projection_purpose_beku", surface: "べく", consumed: 1 };
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchAsFarAsKagiriProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { tokens, pos, endOk, t0, t1 } = c;
   if (
     t0.surface === "限り" &&
     (t0.pos & POS0) === 名詞 &&
@@ -1095,8 +1213,11 @@ export function matchPredicateProjectionConnectiveAt(
       return { connective: "predicate_projection_as_far_as", surface: "限り", consumed: 1 };
     }
   }
+  return NO_PROJECTION_ARM;
+}
 
-
+function matchNiwaProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { tokens, pos, previous, endOk, t0, t1 } = c;
   if (
     previous !== undefined &&
     (previous.pos & POS0) === 動詞 &&
@@ -1119,7 +1240,11 @@ export function matchPredicateProjectionConnectiveAt(
     }
     return { connective: "predicate_projection_intentional_purpose", surface: "には", consumed: 2 };
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchRowDrivenProjectionPattern(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { tokens, pos, endOk } = c;
   const rowPattern = compositeConnectivePatternRelationAt(new TokenCursor(tokens, pos), {
     consumers: ["tail_multi_clause"],
     lookupConnectiveKind: lookupConnectiveBySurface
@@ -1138,7 +1263,11 @@ export function matchPredicateProjectionConnectiveAt(
       };
     }
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchQuantityExtentProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { tokens, pos, options, endOk } = c;
   const quantity = matchQuantityExtentDakeAt(
     tokens as readonly RuntimeHaruToken[],
     pos,
@@ -1153,18 +1282,26 @@ export function matchPredicateProjectionConnectiveAt(
       quantityBinding: quantity.binding
     };
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchDegreeExtentProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { endOk, t0, t1, t1NominalLink } = c;
   if (
-    isDegreeExtentSecondaryParticle(t0) && t1NominalLink && endOk(2)
+    isDegreeExtentParticle(t0) && t1NominalLink && endOk(2)
   ) {
     return { connective: "predicate_projection_degree_extent", surface: `${t0.surface}${t1?.surface ?? ""}`, consumed: 2 };
   }
   if (
-    isDegreeExtentSecondaryParticle(t0) && endOk(1)
+    isDegreeExtentParticle(t0) && endOk(1)
   ) {
     return { connective: "predicate_projection_degree_extent", surface: t0.surface, consumed: 1 };
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchUntilMadeProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { pos, endOk, t0, t1, t1NominalLink } = c;
   if (t0.surface === "まで" && (t0.pos & POS01) === 助詞_副助詞) {
     const t1Ni = caseParticleMarkerRelationForToken(t1, pos + 1, {
       acceptedSurfaces: ["に"],
@@ -1180,14 +1317,22 @@ export function matchPredicateProjectionConnectiveAt(
       return { connective: "predicate_projection_until", surface: "まで", consumed: 1 };
     }
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchComparisonYoriProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { pos, endOk, t0 } = c;
   if (caseParticleMarkerRelationForToken(t0, pos, {
     acceptedSurfaces: ["より"],
     consumers: ["tail_multi_clause"]
   }) !== null && endOk(1)) {
     return { connective: "predicate_projection_comparison", surface: "より", consumed: 1 };
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchNiMatrixAttachmentProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { pos, endOk, t0, t1, t2 } = c;
   if (caseParticleMarkerRelationForToken(t0, pos, {
     acceptedSurfaces: ["に"],
     consumers: ["tail_multi_clause"]
@@ -1214,7 +1359,11 @@ export function matchPredicateProjectionConnectiveAt(
       }
     }
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchNiComplementProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { pos, previous, endOk, t0, t1, t2 } = c;
   if (
     previous !== undefined &&
     (previous.pos & POS0) === 動詞 &&
@@ -1239,7 +1388,11 @@ export function matchPredicateProjectionConnectiveAt(
       return { connective: niComplementKind, surface: t0.surface, consumed: 1 };
     }
   }
+  return NO_PROJECTION_ARM;
+}
 
+function matchPurposeMotionProjection(c: ProjectionConnectiveMatchContext): PredicateProjectionConnectiveMatch | typeof NO_PROJECTION_ARM {
+  const { tokens, pos, options, previous, endOk, t0 } = c;
   if (
     previous !== undefined &&
     isVerbalEventEndToken(previous) &&
@@ -1262,7 +1415,7 @@ export function matchPredicateProjectionConnectiveAt(
   ) {
     return { connective: "purpose_motion", surface: t0.surface, consumed: 1 };
   }
-  return null;
+  return NO_PROJECTION_ARM;
 }
 
 const PURPOSE_MOTION_ELLIPSIS_CLOSURES: ReadonlySet<UtteranceClosureKind> = new Set<UtteranceClosureKind>([
@@ -1387,7 +1540,3 @@ function isPredicateProjectionUeNiHead(token: BoundaryToken | undefined): boolea
   return form === "うえ" || form === "上";
 }
 
-function isDegreeExtentSecondaryParticle(token: { readonly surface: string; readonly pos: number } | undefined): boolean {
-  const canonical = secondaryParticleCanonical(token);
-  return canonical === "ほど" || canonical === "くらい";
-}

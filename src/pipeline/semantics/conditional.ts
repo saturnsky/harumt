@@ -4,12 +4,9 @@ import {
   type BoundaryToken
 } from "../head-tail/boundary/punctuation.js";
 import { quoteMarkerRelationAt } from "../head-tail/boundary/quote-marker.js";
-import {
-  buildProtoLayout,
-  clauseProjectionEvidenceWindowForToken,
-  type ClauseProjectionEvidenceWindow,
-  type ProjectionEvidenceLayout
-} from "../clause-layout/index.js";
+import { buildProtoLayout } from "../clause-layout/index.js";
+import { clauseProjectionEvidenceWindowForToken, type ClauseProjectionEvidenceWindow } from "../clause-layout/navigation.js";
+import type { ProjectionEvidenceLayout } from "../clause-layout/layout-types.js";
 import type { LookupTables } from "../lookup-tables.js";
 import { TokenCursor } from "../token-cursor.js";
 import { activeProtoLayout } from "../clause-layout/proto-state.js";
@@ -20,7 +17,7 @@ import { auxHasPast } from "../matchers.js";
 import { isTeConnectiveToken } from "../head-tail/tail/postverb-tail-classifier.js";
 
 
-import { NOMINAL_KEIJOU_BITS, POS0, pos0in, POS4, POS5A, isSahenCapableNominal, 記号, 形状詞, 形容詞0, 助詞, 助動詞, 名詞, 代名詞, 助動詞_タ, 助動詞_ダ, 助動詞_ナイ, 助動詞_ヌ, 動詞, 非自立可能, 補助記号, 連用形_, POS01, 助詞_接続助詞 } from "../../types/pos.js";
+import { NOMINAL_KEIJOU_BITS, POS0, pos0in, POS4, POS5A, isSahenCapableNominal, 記号, 形状詞, 形容詞0, 助詞, 助動詞, 名詞, 代名詞, 助動詞_タ, 助動詞_ダ, 助動詞_ナイ, 助動詞_ヌ, 動詞, 非自立可能, 補助記号, 連用形_, POS01 } from "../../types/pos.js";
 export interface ConditionalSemanticToken extends BoundaryToken {
   readonly dictionaryForm: string;
   readonly reading?: string;

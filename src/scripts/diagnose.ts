@@ -31,7 +31,8 @@ import {
   tryNumeralCompound,
   type ChainSegment,
 } from "../pipeline/fallback/index.js";
-import { buildClauseLayoutFromProto, buildProtoLayout, nextNonSpaceIndex, useActiveProtoLayout, type ClauseLayout } from "../pipeline/clause-layout/index.js";
+import { buildClauseLayoutFromProto, type ClauseLayout } from "../pipeline/clause-layout/final-layout.js";
+import { buildProtoLayout, nextNonSpaceIndex, useActiveProtoLayout } from "../pipeline/clause-layout/index.js";
 import { resolveDeferredReanalysisProposals } from "../pipeline/commitment/deferred-reanalysis.js";
 import { attachMoraStutterPrefixes } from "../pipeline/disfluency/stutter-prefix.js";
 import { collectAuxTokens } from "../pipeline/matchers.js";
@@ -39,7 +40,8 @@ import { TokenCursor } from "../pipeline/token-cursor.js";
 import { collectLexicalParticleBoundaryClaims } from "../pipeline/lexical-particle-boundary-claims.js";
 import { collectLexicalRenyouHeadClaims } from "../pipeline/lexical-renyou-head-claims.js";
 import { resolveContext } from "../pipeline/context.js";
-import { commitDecisions, type CommitmentCandidate, type CommitmentSpan } from "../pipeline/deferred-commitment.js";
+import { commitDecisions } from "../pipeline/deferred-commitment.js";
+import type { CommitmentCandidate, CommitmentSpan } from "../pipeline/commitment/types.js";
 import { commitSharedTailParserChain } from "../pipeline/head-tail/lifecycle/render.js";
 import { headEvidenceDecisionTraceValue } from "../pipeline/head-tail/tail/predicate-root/trace.js";
 import type { AuxLayerNode, TailNode, TailRoot } from "../pipeline/head-tail/tail/predicate-root/grammar.js";
@@ -56,7 +58,7 @@ import type { PlanTextSource, RenderPlan, Voice } from "../types/render-plan.js"
 import type { PassiveClass } from "../pipeline/voice-class.js";
 import { TranslationUnit, UnitType } from "../pipeline/translation/unit.js";
 import { TraceCollector, type TraceDetailValue, type TraceEvent } from "../pipeline/trace.js";
-import { retagKeijoujiCopulaRenyou } from "../transform/keijouji-copula-de-retag.js";
+import { retagKeijoujiCopulaRenyou } from "../pipeline/preprocess/keijouji-copula-de-retag.js";
 import type { RuntimeHaruToken } from "../types/token.js";
 
 import type { MorphemeEntry, MorphemeSense } from "../types/dictionary.js";

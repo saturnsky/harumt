@@ -2,13 +2,8 @@ import type { RuntimeHaruToken } from "../../../../../types/token.js";
 import { POS0, POS1, POS4, POS5A, PUNCTUATION_BITS, pos0in, 助詞, 接続助詞, 副助詞, 助動詞_ダ, 助動詞_デス, 助動詞_マス, 助動詞_ヌ, 動詞, 名詞, 終止形_, 補助記号, 連体形_, 連用形_ } from "../../../../../types/pos.js";
 import { detectSfp } from "../../../../semantics/grammar-runtime.js";
 import { OBLIGATION_PATTERNS, type ObligationPattern, type TokenPredicate } from "../obligation-pattern-table.js";
-import {
-  lookupConnectiveBySurface,
-  type ObligationIdiomOp,
-  type ObligationVariant,
-  type OpSource,
-  type Polarity
-} from "../grammar.js";
+import { lookupConnectiveBySurface } from "../connective-surface-lookup.js";
+import type { ObligationIdiomOp, ObligationVariant, OpSource, Polarity } from "../grammar.js";
 import {
   kaMarkerRelationForToken,
   predicateNominalizerRelationForToken,

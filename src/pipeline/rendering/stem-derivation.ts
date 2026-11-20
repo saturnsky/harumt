@@ -2,7 +2,7 @@ import { 동사, 형용사 } from "../../types/pos.js";
 import type { StemDerivation, StemDerivationHost, StemDerivationOp } from "../../types/render-plan.js";
 import { irregularType } from "../../generator/conjugator.js";
 import type { KoreanLemmaPredicateBase } from "../head-tail/tail/predicate-root/renderers/base-model.js";
-import { stateChangeBase } from "../head-tail/tail/predicate-root/renderers/predicate-bases.js";
+import { stateChangeBase } from "../head-tail/tail/predicate-root/renderers/base-support.js";
 import { longNegativeLemma } from "./negative-polish.js";
 
 function applyStemDerivationOp(host: StemDerivationHost, op: StemDerivationOp): StemDerivationHost | null {

@@ -30,8 +30,9 @@ import {
 } from "../../../lifecycle/render.js";
 import { renderAniTerminal } from "../../../tail/korean-terminal.js";
 import { createConnectiveOp } from "../../../tail/predicate-root/op-builders.js";
-import type { ClauseTailIR, CommitContext } from "../../../tail/predicate-root/commit.js";
-import { stemHasAdmittedProjectionCategory, stemSupportsProjectionCategory, tailPredicateHostPrefersTameReason } from "../../../tail/predicate-root/inspect.js";
+import type { CommitContext } from "../../../tail/predicate-root/commit.js";
+import { stemHasAdmittedProjectionCategory, stemSupportsProjectionCategory } from "../../../tail/predicate-root/inspect.js";
+import { tailPredicateHostPrefersTameReason } from "../../../tail/predicate-root/tame-reason-evidence.js";
 import { renderHazuNegativeTail } from "../../../../rendering/wake.js";
 import { clauseRoleCommitContext, syntheticTerminalClauseRole } from "../../../lifecycle/commit-context.js";
 import type { NominalHeadTailChainPlan } from "../../../lifecycle/head-tail-render-plan.js";
@@ -50,7 +51,7 @@ import type {
 import { stemCandidateIdentitiesEqual, stemCandidateIdentity } from "../../../tail/predicate-root/stem-candidate-identity.js";
 import { commitTail } from "../../../tail/predicate-root/commit.js";
 import { withProjectedDerivationalStem } from "../../../tail/predicate-root/derivational-host-base.js";
-import { renderDerivationalSuffixHostProjection } from "../../../tail/predicate-root/render.js";
+import { renderDerivationalSuffixHostProjection } from "../../../tail/predicate-root/render-derivational-host-projection.js";
 import { firstAuxLayer } from "../../../tail/predicate-root/inspect.js";
 import { commitWinner, winnerKorean } from "../../../../translation/access.js";
 import { allomorphReadingForRealizedText } from "../../../../rendering/allomorph-host.js";

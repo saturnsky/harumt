@@ -1,4 +1,4 @@
-﻿import { extractFeatures as auxExtractFeatures, nounCopula, nounCopulaConnective, type AuxToken } from "../generator/aux-map.js";
+import { extractFeatures as auxExtractFeatures, nounCopula, nounCopulaConnective, type AuxToken } from "../generator/aux-map.js";
 import type { RuntimeHaruToken } from "../types/token.js";
 import type { BoundaryToken } from "./head-tail/boundary/punctuation.js";
 import { collectAuxTokens } from "./matchers.js";
@@ -14,7 +14,6 @@ import { terminalQuestionKaRelationAt } from "./head-tail/boundary/ka-ownership.
 import { classifyFollowConnective, detectKamoShirenaiAfterChain } from "./semantics/grammar-runtime.js";
 import {
   caseParticleMarkerRelationForToken,
-  copulaDeMarkerRelationForToken,
   pronominalNoDeScopeBridgeRelationAt,
   pronominalNoMarkerRelationForToken,
   topicFocusMarkerRelationForToken

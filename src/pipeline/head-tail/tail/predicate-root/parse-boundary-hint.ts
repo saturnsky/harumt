@@ -8,7 +8,7 @@ import type {
   RetrospectiveQuotativeFlavor,
   VolitionalAttemptFocusParticle
 } from "./grammar.js";
-import type { PairedVolitionalConcessiveEvidence } from "../../../clause-layout/index.js";
+import type { PairedVolitionalConcessiveEvidence } from "../../../clause-layout/layout-types.js";
 
 export interface ParseOutgoingBoundaryHint {
   readonly connectiveKind: ConnectiveKind;

@@ -266,17 +266,6 @@ export function compileProductionClaimExpression(
   }
 }
 
-export function readProductionClaimOp<
-  K extends AuxOpKind,
-  F extends ClaimOpField<K>
->(
-  op: ProductionClaimOpView | undefined,
-  kind: K,
-  field: F
-): ClaimOpFieldValue<K, F> | undefined {
-  return op?.read(kind, field);
-}
-
 function normalizedKinds(opKinds: readonly AuxOpKind[]): string {
   return [...new Set(opKinds)].sort().join("|");
 }

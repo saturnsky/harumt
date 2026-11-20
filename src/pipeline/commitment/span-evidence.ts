@@ -9,12 +9,12 @@ import type { PredicateHeadTailChainRenderPlan, RenderPlan, Voice } from "../../
 import { isPredicateHeadTailChainRenderPlan } from "../../types/render-plan.js";
 import type { RuntimeHaruToken } from "../../types/token.js";
 import type { NumericTables } from "../../generator/numeric-lookup.js";
-import { type Clause, type ClauseLayout } from "../clause-layout/index.js";
-import { isNominalLike, POS0, POS2, POS4, サ変可能, 助詞, 助動詞_タ, 助動詞_ナイ, 助動詞_ヌ, 명사 } from "../../types/pos.js";
+import type { ClauseLayout } from "../clause-layout/final-layout.js";
+import { isNominalLike, POS2, サ変可能, 명사 } from "../../types/pos.js";
 import { auxHasNegation, auxHasPast } from "../matchers.js";
 import type { LookupTables } from "../lookup-tables.js";
 import { getReferentTokenBeforeParticle, isAnimateReferentBeforeNi, isAnimateReferentToken, type PredicateArgument, PredicateArgumentView, tokenInSemanticCategories } from "../semantics/helpers.js";
-import { evaluateFrameSourceConditionWithLayout, type ContextGrammar } from "../context.js";
+import { evaluateFrameSourceConditionWithLayout, type ContextGrammar, grammarVoiceForFrame } from "../context.js";
 import { caseParticleMarkerRelationForToken } from "../head-tail/boundary/marker.js";
 import type { CaseParticleMarkerSurface } from "../head-tail/boundary/relation.js";
 import { candidateGrammar, spanGrammar } from "../candidate-runtime.js";
@@ -22,6 +22,7 @@ import { buildFrameArgumentView, ConditionEvidenceResult, evaluateClauseConditio
 import { type TraceDetailValue } from "../trace.js";
 import type { AuxLayerNode, TailNode } from "../head-tail/tail/predicate-root/grammar.js";
 import { stemCandidateIdentitiesEqual, stemCandidateIdentity } from "../head-tail/tail/predicate-root/stem-candidate-identity.js";
+import { tailRootStemIsVerbalSuffixDerivation } from "../head-tail/tail/predicate-root/inspect.js";
 import { type SubjectAnimacyEvidence } from "../voice-class.js";
 import { type CasePreference, type CasePreferenceValue, type TraceLikeValue, type CommitmentCandidate, type CommitmentContentMap, type CommitmentSpan, type CommitmentToken, type CommitmentTranslation } from "./types.js";
 import {
@@ -339,14 +340,6 @@ export function predicateGrammarForClause(
   return selected === undefined ? spanGrammar(predicateSpan) : candidateSpanGrammar(selected, predicateSpan);
 }
 
-export function grammarVoiceForFrame(grammar: ContextGrammar | null): string | null {
-  const voice = grammar?.voice;
-  if (voice === undefined || voice === null) {
-    return null;
-  }
-  return typeof voice === "string" ? voice : JSON.stringify(voice);
-}
-
 export function candidatePriorityGroup(candidate: CommitmentCandidate): number {
   return semanticFrameIntMetadata(candidate.translation ?? null, "priorityGroup", candidate.priority ?? 0);
 }
@@ -530,15 +523,6 @@ export function spanTailStemIsSahenVerbalization(span: CommitmentSpan): boolean 
     return stem.candidates.some((candidate) => candidate.conj === "sahen");
   }
   return stem.kind === "verb" && stem.conj === "sahen";
-}
-
-export function spanTailStemIsSuppletiveNegation(span: CommitmentSpan): boolean {
-  const plan = span.renderPlan ?? null;
-  if (!isPredicateHeadTailChainRenderPlan(plan)) {
-    return false;
-  }
-  const layer = firstTailAuxLayerNode(plan.realization.root.tail);
-  return layer !== null && layer.stem.commitment === "suppletive_negation";
 }
 
 function firstTailAuxLayerNode(node: TailNode): Extract<TailNode, { readonly kind: "auxLayer" }> | null {
@@ -785,6 +769,11 @@ export function selectedSpanTranslation(span: CommitmentSpan): MorphemeSense | n
 
 export function hasAnimateNiAgentParticle(tokens: readonly CommitmentToken[], particleIndices: readonly number[], lookups: LookupTables): boolean {
   return particleIndices.some((idx) => isCommitmentCaseParticle(tokens, idx, "に") && isAnimateReferentBeforeNi(tokens, idx, lookups));
+}
+
+export function spanPredicateIsVerbalSuffixDerivation(span: CommitmentSpan): boolean {
+  return isPredicateHeadTailChainRenderPlan(span.renderPlan) &&
+    tailRootStemIsVerbalSuffixDerivation(span.renderPlan.realization.root);
 }
 
 export function hasExplicitWoObject(tokens: readonly CommitmentToken[], particleIndices: readonly number[]): boolean {

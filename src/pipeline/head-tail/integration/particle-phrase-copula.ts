@@ -2,7 +2,7 @@ import type { RuntimeHaruToken, SourceTokenSpan } from "../../../types/token.js"
 import type { RenderPlan } from "../../../types/render-plan.js";
 import { isNominalHeadTailChainRenderPlan } from "../../../types/render-plan.js";
 import type { LookupTables } from "../../lookup-tables.js";
-import type { AuxLayerNode, AuxOpNode, TailRoot } from "../tail/predicate-root/grammar.js";
+import type { AuxOpNode, TailRoot } from "../tail/predicate-root/grammar.js";
 import type { ClauseBoundary } from "../tail/predicate-root/commit.js";
 import { tryBuildCopulaHostChain } from "./copula-host-chain.js";
 import type {
@@ -12,7 +12,7 @@ import type {
 } from "../lifecycle/head-tail-render-plan.js";
 import { withParticleStemProjection } from "./nominal-assembly.js";
 import type { ParticlePhraseCopulaHostBinding } from "../../clause-layout/particle-phrase-copula.js";
-import type { BoundaryKind } from "../../clause-layout/index.js";
+import type { BoundaryKind } from "../../clause-layout/layout-types.js";
 
 export interface ParticlePhraseCopulaChain {
   readonly consumed: number;

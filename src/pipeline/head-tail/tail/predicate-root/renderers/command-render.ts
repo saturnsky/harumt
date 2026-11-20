@@ -2,12 +2,13 @@ import { conjugate, type IrregularType } from "../../../../../generator/conjugat
 import { type RuntimeHaruToken } from "../../../../../types/token.js";
 import { type LookupTables } from "../../../../lookup-tables.js";
 import { normalizeGiveRequest } from "../../../../rendering/request-normalization.js";
-import { assertNever, type ConnectiveOp, type DesiderativeAspectOp, type MiseruAspectOp, type NegationOp, type PredicateQuoteCarrierOp, type ProhibitionAspectOp, type ProhibitionPayload, type RequestAspectOp } from "../grammar.js";
+import { assertNever, type ConnectiveOp, type MiseruAspectOp, type NegationOp, type PredicateQuoteCarrierOp, type ProhibitionAspectOp, type ProhibitionPayload, type RequestAspectOp } from "../grammar.js";
 import { closeChainTraceAgainstText, isFutureAttributiveProjection, concatPredicatePrefix, ensureQuestionPunctuation, lemmaPredicateBase, tracedFuse, tracedSeg, type AttributiveProjectionPolicy, type BaseResult, type KoreanPredicateBase, type RenderOutcome, type RenderSuccess, type TailTraceSegment } from "./base-model.js";
 import { predicateBaseInfinitiveForm, prohibitionPredicateBase, simpleStemBase } from "./base-support.js";
-import { composeBaseWithBareProhibition, composeBaseWithRequestAttributiveQuote, composeBaseWithRequestComplement, composeCommittedTailTerminalDepth, composeRequestProhibitionAttributiveQuote, composeRequestProhibitionComplement, projectBaseAttributive } from "./connective-compose.js";
+import { composeBaseWithBareProhibition } from "./connective-compose.js";
+import { composeBaseWithRequestAttributiveQuote, composeBaseWithRequestComplement, composeRequestProhibitionAttributiveQuote, composeRequestProhibitionComplement } from "./quote-complement-compose.js";
+import { projectBaseAttributive } from "./predicate-base-projection.js";
 import { composeFinalForm } from "./final-forms.js";
-import { desiderativeBaseResultForStem } from "./predicate-bases.js";
 
 export function renderRequest(opts: {
   readonly stemLemma: string;
@@ -570,34 +571,6 @@ export function renderProhibitionOnPredicateBase(
     text: concatPredicatePrefix(base.prefix, `${conjugate(base.final.lemma, base.final.irregular, "지")} ${tail.text}`),
     polite: tail.polite
   };
-}
-
-export function renderDesiderative(opts: {
-  readonly stemLemma: string;
-  readonly stemIrregular: IrregularType | null;
-  readonly isVerb: boolean;
-  readonly desiderative: DesiderativeAspectOp;
-  readonly preModalNeg: NegationOp | null;
-  readonly postModalNeg: NegationOp | null;
-  readonly past: boolean;
-  readonly formal: boolean;
-  readonly isPolite: boolean;
-  readonly lookups: LookupTables;
-}): RenderOutcome {
-  const { stemLemma, stemIrregular, isVerb, desiderative, preModalNeg, postModalNeg, past, formal, isPolite } = opts;
-
-  if (!isVerb) {
-    return { ok: false, reason: "desiderative on adjective stem not supported" };
-  }
-  void desiderative;
-  return composeCommittedTailTerminalDepth(
-    desiderativeBaseResultForStem(stemLemma, stemIrregular, preModalNeg),
-    postModalNeg?.chainDepth ?? 0,
-    past || (postModalNeg?.chainPast ?? false),
-    formal,
-    isPolite,
-    opts.lookups
-  );
 }
 
 export function renderMiseru(opts: {

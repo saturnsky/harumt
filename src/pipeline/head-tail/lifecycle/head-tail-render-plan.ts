@@ -7,7 +7,7 @@ import type { RenderPlan, TeConnectiveBoundaryChoice } from "../../../types/rend
 import type { RuntimeHaruToken } from "../../../types/token.js";
 import type { NumericStemBase } from "../../../types/numeric-base.js";
 import type { Warning } from "../../../types/warning.js";
-import type { ClauseLayout } from "../../clause-layout/index.js";
+import type { ClauseLayout } from "../../clause-layout/final-layout.js";
 import type { ContextGrammar } from "../../context.js";
 import type { ProjectionSpan } from "../grammar.js";
 import type { HeadProfileDescriptor } from "../head/profile.js";

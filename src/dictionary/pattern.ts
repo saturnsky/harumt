@@ -32,12 +32,12 @@ import {
   POS5B_SHIFT,
   意志推量形_,
   助詞,
-  助動詞,
   助動詞_ナイ,
   文語助動詞_ベシ,
   동사,
   KOPOS_OF_NAME,
-  NOMINAL_BITS, pos0in
+  NOMINAL_BITS,
+  pos0in
 } from "../types/pos.js";
 export class TriggerElement {
   constructor(

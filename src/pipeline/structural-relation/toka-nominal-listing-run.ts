@@ -1,10 +1,8 @@
+import { clauseProjectionEvidenceWindowForToken } from "../clause-layout/navigation.js";
+import { nextNonSpaceIndex, previousNonSpaceIndex } from "../clause-layout/index.js";
+import type { ClauseToken } from "../clause-layout/layout-types.js";
 import {
-  clauseProjectionEvidenceWindowForToken,
-  nextNonSpaceIndex,
-  previousNonSpaceIndex,
-  type ClauseToken,
-} from "../clause-layout/index.js";
-import {
+  clausePhraseReachStreamForToken,
   type ClausePhraseItem,
   type PhraseEnumerationLayout,
 } from "../clause-layout/phrase-enumeration.js";
@@ -13,6 +11,8 @@ import { quoteMarkerRelationAt } from "../head-tail/boundary/quote-marker.js";
 import type { LookupTables } from "../lookup-tables.js";
 import { POS0, POS01, 連体詞, 助詞_係助詞, 助詞_副助詞, 助詞_格助詞 } from "../../types/pos.js";
 import type { StructuralRelation, StructuralRelationMarkerSpan } from "./types.js";
+import { activeProtoLayout } from "../clause-layout/proto-state.js";
+import type { RuntimeHaruToken } from "../../types/token.js";
 
 export interface TokaNominalPhraseItem {
   readonly phrases: readonly ClausePhraseItem[];
@@ -358,7 +358,7 @@ function isTokaNominalGenitiveBridgePhrase(
     nextNonSpaceIndex(tokens, particleIdx + 1, phrase.span.endExclusive) === null;
 }
 
-function isTokaNominalTrailingParticle(token: ClauseToken | undefined): boolean {
+export function isTokaNominalTrailingParticle(token: ClauseToken | undefined): boolean {
   return token !== undefined &&
     ((token.pos & POS01) === 助詞_格助詞 || (token.pos & POS01) === 助詞_係助詞);
 }
@@ -385,9 +385,24 @@ function tokaNominalSameQuoteScope(
     : right !== undefined && left[0] === right[0] && left[1] === right[1];
 }
 
-function tokenSpansOverlap(
+export function tokenSpansOverlap(
   left: { readonly start: number; readonly endExclusive: number },
   right: { readonly start: number; readonly endExclusive: number },
 ): boolean {
   return left.start < right.endExclusive && right.start < left.endExclusive;
+}
+
+export function tokaNominalListingRunEvidenceForMarker(
+  tokens: readonly RuntimeHaruToken[],
+  markerIdx: number,
+  lookups: LookupTables,
+) {
+  const proto = activeProtoLayout();
+  return proto === null ? null : tokaNominalListingRunEvidenceAt({
+    tokens,
+    layout: proto,
+    lookups,
+    markerIdx,
+    phrases: clausePhraseReachStreamForToken(proto, tokens, markerIdx),
+  });
 }

@@ -28,7 +28,7 @@ import { matchQuotedConcessiveConnectiveAt } from "../../../tail/predicate-root/
 import { matchBoundNominalReasonConnectiveAt } from "../../../tail/predicate-root/matchers/bound-nominal-connective.js";
 import { matchOutcomeKotoNiNaruSurfaceAt } from "../../../tail/predicate-root/matchers/outcome-koto-ni-naru.js";
 import { matchEpistemicHedgePostverbAuxiliary } from "../../../tail/predicate-root/matchers/epistemic-hedge.js";
-import type { ProjectionEvidenceLayout } from "../../../../clause-layout/index.js";
+import type { ProjectionEvidenceLayout } from "../../../../clause-layout/layout-types.js";
 
 import type { NominalFrame, NominalFrameParse } from "./grammar.js";
 import type { PredicateNominalHostFrameCandidate } from "./parser.js";

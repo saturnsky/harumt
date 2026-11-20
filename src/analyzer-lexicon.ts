@@ -96,7 +96,7 @@ export function parseSupplementalLexiconTsv(
       headerSeen = true;
       continue;
     }
-    const row = parseRow(fileName, lineNo, line);
+    const row = parseRow(fileName, lineNo, detachRowText(line));
     if (row.kind === "lemma") {
       lemmaRows.push(row.lemma);
     } else {
@@ -386,6 +386,13 @@ export function parseConjugationTemplates(content: string, source: string): Conj
     throw new Error(`${source}: missing "classes" object.`);
   }
   return { classes: classes as ConjugationTemplates["classes"] };
+}
+
+const rowEncoder = new TextEncoder();
+const rowDecoder = new TextDecoder("utf-8", { ignoreBOM: true });
+
+function detachRowText(line: string): string {
+  return rowDecoder.decode(rowEncoder.encode(line));
 }
 
 function parseRow(fileName: string, lineNo: number, line: string): ParsedRow {

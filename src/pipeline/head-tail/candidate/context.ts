@@ -1,8 +1,6 @@
 import type { RuntimeHaruToken } from "../../../types/token.js";
-import {
-  clauseProjectionEvidenceWindowForToken,
-  type ProjectionEvidenceLayout
-} from "../../clause-layout/index.js";
+import { clauseProjectionEvidenceWindowForToken } from "../../clause-layout/navigation.js";
+import type { ProjectionEvidenceLayout } from "../../clause-layout/layout-types.js";
 import { DETACHED_SEPARATIONS, separatedAs } from "../../clause-layout/trivia.js";
 import { prenominalModifierChainHeadIndex } from "../../clause-layout/attributive-head.js";
 import { nounCompoundSuffixRunEnd } from "../tail/predicate-root/integration/readiness.js";

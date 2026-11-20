@@ -35,7 +35,6 @@ import {
   助動詞_ダ,
   助動詞_ナイ,
   助詞_係助詞,
-  助詞_格助詞,
   isAdjectivalRenyouTeFormHostToken,
   感動詞,
   接続詞,

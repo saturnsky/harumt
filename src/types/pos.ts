@@ -839,6 +839,15 @@ export function isAdjectivalInflectionRenyouToken(token: { readonly pos: number 
     inflectionClass === "助動詞-ラシイ";
 }
 
+export function isVolitionalSpeechActInflectionToken(token: { readonly pos: number }): boolean {
+  if (!isVolitionalInflection(token.pos)) {
+    return false;
+  }
+  const inflectionClass = inflectionClassName(token.pos);
+  return inflectionClass !== null &&
+    (inflectionClass.includes("段") || inflectionClass.includes("変格") || isPoliteAuxiliaryPos(token.pos));
+}
+
 export function isAdjectivalTeFormFusionHostToken(token: { readonly pos: number }): boolean {
   return isAdjectivalRenyouTeFormHostToken(token);
 }

@@ -1,4 +1,4 @@
-import type { ClauseLayout } from "./clause-layout/index.js";
+import type { ClauseLayout } from "./clause-layout/final-layout.js";
 import type { StemCandidateIdentity } from "./head-tail/tail/predicate-root/stem-candidate-identity.js";
 import {
   stemCandidateIdentitiesEqual,
@@ -272,12 +272,6 @@ export function resolvedWinnerConsumed<C>(set: ResolvedCandidateSet<C>): number 
 
 export function candidateSetSize<C>(set: SourceCandidateSet<C> | null | undefined): number {
   return set?.members.length ?? 0;
-}
-
-export function candidateSetIdentities<C>(
-  set: SourceCandidateSet<C> | null | undefined
-): readonly StemCandidateIdentity[] {
-  return (set?.members ?? []).map((member) => member.identity);
 }
 
 export function candidateSetMembers<C>(

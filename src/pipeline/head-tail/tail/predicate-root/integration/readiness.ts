@@ -6,7 +6,6 @@ import {
   POS0,
   POS4,
   POS5A,
-  サ行変格,
   仮定形_,
   形容詞0,
   形状詞,
@@ -21,20 +20,31 @@ import {
   isNumeralToken,
   isRenyouInflection,
   isLexicalAdverb,
-  NOMINAL_BITS, pos0in, INFLECTABLE_BITS, POS01, 接尾辞_名詞的, isNaAdjectiveDerivationalSuffix, isNominalDerivationalSuffix, 助詞_終助詞, 補助記号, isNaAdjCapableNoun, isLexicalPureNaAdjStem, isSahenCapableNominal,
-  isGeneralRenyouInflectedToken, isNonIndependentVerbToken, isPrefixAffixToken, isVerbPredicateToken, isSahenLightVerbToken,
+  NOMINAL_BITS,
+  pos0in,
+  INFLECTABLE_BITS,
+  POS01,
+  接尾辞_名詞的,
+  isNaAdjectiveDerivationalSuffix,
+  isNominalDerivationalSuffix,
+  助詞_終助詞,
+  補助記号,
+  isNaAdjCapableNoun,
+  isLexicalPureNaAdjStem,
+  isSahenCapableNominal,
+  isGeneralRenyouInflectedToken,
+  isNonIndependentVerbToken,
+  isPrefixAffixToken,
+  isVerbPredicateToken,
+  isSahenLightVerbToken,
   isVolitionalInflection,
   連体詞
 } from "../../../../../types/pos.js";
 import { isStreamVvCompoundPairAt } from "../../../../compounds/compound-verbs.js";
 import { isDetachedFromPreviousToken, previousNonSpaceIndex } from "../../../../clause-layout/trivia.js";
-import {
-  isClausePunctuationToken,
-  isTerminalOnlyInflectionPredicateAt,
-  isTerminalOnlyPredicateUnmarkedOnsetAt,
-  skipClausePunctuationForward,
-  type ClauseToken
-} from "../../../../clause-layout/index.js";
+import { isClausePunctuationToken, skipClausePunctuationForward } from "../../../../clause-layout/index.js";
+import { isTerminalOnlyInflectionPredicateAt, isTerminalOnlyPredicateUnmarkedOnsetAt } from "../../../../clause-layout/boundary-detection.js";
+import type { ClauseToken } from "../../../../clause-layout/layout-types.js";
 import { activeProtoLayout, activeProtoUtteranceRange } from "../../../../clause-layout/proto-state.js";
 import {
   runClosesUtteranceAs,

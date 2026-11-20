@@ -63,7 +63,9 @@ function spellingExplainsLexeme(spelling: readonly string[], lexeme: string): bo
 }
 
 let lexicalVariants: ReadonlyMap<string, CanonicalTerminalSfpSurface> = new Map();
+const SPELLING_LEXEME_MEMO_LIMIT = 65536;
 const spellingLexemeMemo = new Map<string, CanonicalTerminalSfpSurface | null>();
+let spellingLexemeEvictionOrder = spellingLexemeMemo.keys();
 
 export function registerTerminalSfpLexicon(
   lexemes: Iterable<string>,
@@ -81,6 +83,7 @@ export function registerTerminalSfpLexicon(
   terminalSfpLexemes = lexemeList;
   lexicalVariants = next;
   spellingLexemeMemo.clear();
+  spellingLexemeEvictionOrder = spellingLexemeMemo.keys();
 }
 
 export function canonicalTerminalSfpSurface(surface: string | null | undefined): CanonicalTerminalSfpSurface | null {
@@ -95,6 +98,10 @@ export function canonicalTerminalSfpSurface(surface: string | null | undefined):
   if (resolved === null) {
     const spelling = [...surface];
     resolved = terminalSfpLexemes.find((lexeme) => spellingExplainsLexeme(spelling, lexeme)) ?? null;
+  }
+  if (spellingLexemeMemo.size >= SPELLING_LEXEME_MEMO_LIMIT) {
+    const oldest = spellingLexemeEvictionOrder.next();
+    if (oldest.done !== true) spellingLexemeMemo.delete(oldest.value);
   }
   spellingLexemeMemo.set(surface, resolved);
   return resolved;

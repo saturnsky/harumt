@@ -34,7 +34,7 @@ import type { RuntimeHaruToken } from "../../types/token.js";
 
 
 import { toiuIuStandsAsAttributiveCarrier } from "../semantics/marker-roles.js";
-import { POS0, POS1, POS5A, 記号, 係助詞, 形状詞, 形容詞0, 終止形_, 助詞, 助動詞, 代名詞, 動詞, 副詞, 補助記号, 名詞, 連体形_, 連体詞 , isPoliteAuxiliaryPos, isRareruAuxiliaryToken, isSahenLightVerbToken, isTerminalInflection, isTerminalParticleToken, isNominalLike, isBindingParticleToken, isSecondaryParticleToken, pos0in, PREDICATE_BITS, POS01, 接尾辞_名詞的} from "../../types/pos.js";
+import { POS0, POS1, 記号, 係助詞, 形状詞, 形容詞0, 助詞, 助動詞, 代名詞, 動詞, 副詞, 補助記号, 名詞, 連体詞, isPoliteAuxiliaryPos, isRareruAuxiliaryToken, isSahenLightVerbToken, isTerminalInflection, isTerminalParticleToken, isNominalLike, isBindingParticleToken, isSecondaryParticleToken, pos0in, PREDICATE_BITS, POS01, 接尾辞_名詞的 } from "../../types/pos.js";
 export class QuoteHostMatch {
   constructor(
     readonly kind: QuoteHostKind,
@@ -726,7 +726,7 @@ function hostInsideForeignRelativeClause(markerPos: number, hostIdx: number): bo
   return layout.clauseIndexOfToken(markerPos) !== hostClauseIdx;
 }
 
-function isNominalSuffixToken(token: RuntimeHaruToken | undefined): boolean {
+export function isNominalSuffixToken(token: RuntimeHaruToken | undefined): boolean {
   return token !== undefined && (token.pos & POS01) === 接尾辞_名詞的;
 }
 

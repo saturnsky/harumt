@@ -8,7 +8,7 @@ import {
   PredicateArgument,
   PredicateArgumentView
 } from "./helpers.js";
-import type { ClauseLayout } from "../clause-layout/index.js";
+import type { ClauseLayout } from "../clause-layout/final-layout.js";
 import type { LookupTables } from "../lookup-tables.js";
 
 
@@ -167,10 +167,6 @@ export function resolveBenefactiveTail(
   }
 
   return [tailLemma, tailIrregular ?? null, tailKoreanPos];
-}
-
-export function isBenefactivePotentialPattern(patternId: string): boolean {
-  return BEN_MORAERU.has(patternId) || BEN_ITADAKERU.has(patternId);
 }
 
 function findBenefactiveAgentParticleIdx(

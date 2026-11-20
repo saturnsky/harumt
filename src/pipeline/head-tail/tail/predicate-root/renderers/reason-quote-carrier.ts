@@ -5,7 +5,7 @@ import type { IrregularType } from "../../../../../generator/conjugator.js";
 import { headRequiresFutureAttributiveProjection } from "../attributive-head-policy.js";
 import { nounCopulaPolarityBaseForCopula, nounCopulaStemAllomorphHost, simpleStemBase } from "./base-support.js";
 import type { RenderContext, RenderOutcome } from "./base-model.js";
-import { projectBaseReasonGerund } from "./connective-compose.js";
+import { projectBaseReasonGerund } from "./predicate-base-projection.js";
 
 function reasonQuoteAttributiveTail(layer: AuxLayerNode): string {
   return headRequiresFutureAttributiveProjection(layer) ? "때문이라고 할" : "때문이라는";

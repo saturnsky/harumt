@@ -21,20 +21,6 @@ export function partialTailSuffixUnresolvedWarning(
   };
 }
 
-export function tailBoundaryAttachmentWeakWarning(boundary: ClauseBoundary): Warning {
-  const span = boundary.kind === "terminal"
-    ? undefined
-    : { start: boundary.tokenSpan.start, end: boundary.tokenSpan.end };
-  const surface = boundary.kind === "terminal" ? "terminal" : boundary.surface;
-  return {
-    type: "tail_boundary_attachment_weak",
-    severity: "warning",
-    opKind: "tail_boundary_attachment",
-    ...(span === undefined ? {} : { span }),
-    message: `source-bearing tail boundary preserved without following attachment evidence: ${surface}`
-  };
-}
-
 export function tailBoundaryAttachmentWeakPartial(
   _tokens: readonly RuntimeHaruToken[],
   start: number,

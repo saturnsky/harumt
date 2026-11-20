@@ -28,7 +28,7 @@ import { TokenCursor } from "../../../token-cursor.js";
 import { lexicalTailAbsorptionsDropCausative, lexicalTailAbsorptionsFromEntry } from "../postverb-events.js";
 import { isNounToSareruContext, isSahenBoundVerbAfterSahen } from "../../../predicate-helpers.js";
 import { isNoSeiNiSuruContext } from "../../boundary/no-sei.js";
-import { hydrateAspectSemanticOps } from "./aspect-semantics.js";
+import { hydrateAspectSemanticOps, rewriteTailStemLemma, stemCandidateHasFrame } from "./aspect-semantics.js";
 import {
   benefactivePatternIdForAspect
 } from "./span-metadata.js";
@@ -54,7 +54,6 @@ import {
 import { shortNegationPolicyForCommittedStem } from "./short-negation-policy.js";
 import {
   findStemCandidateByTranslationIdentity,
-  rewriteStemCandidatesPreservingIdentity,
   stemCandidateIdentitiesEqual,
   stemCandidateIdentity,
   stemCandidateProvenanceForTranslation,
@@ -634,10 +633,6 @@ function activeTailStemKoreanLemmaCandidates(
   return [];
 }
 
-function stemCandidateHasFrame(candidate: { readonly senseFrame?: unknown; readonly senseFrames?: unknown }): boolean {
-  return candidate.senseFrame !== undefined || candidate.senseFrames !== undefined;
-}
-
 function uniqueDirectionVerbMerges(
   stems: readonly { readonly lemma: string; readonly irregular: IrregularType | null }[],
   tailLemma: string
@@ -1170,32 +1165,6 @@ function hydrateNounToSareruStem(
 function tailStemDictionaryForm(stem: StemNode): string | null {
   const token = stem.source.tokens[stem.conjugationAnchor];
   return token?.dictionaryForm ?? null;
-}
-
-function rewriteTailStemLemma(
-  stem: StemNode,
-  lemma: string,
-  irregular: IrregularType | null,
-  options: {
-    readonly candidatePatch?: Partial<StemCandidate>;
-    readonly structuralCandidate?: StemCandidate | null;
-  } = {}
-): StemNode {
-  if (stem.kind === "verb" || stem.kind === "adj") {
-    return { ...stem, lemma, irregular };
-  }
-  if (stem.kind === "candidateSet") {
-    return {
-      ...stem,
-      candidates: rewriteStemCandidatesPreservingIdentity(
-        stem.candidates,
-        lemma,
-        irregular,
-        options
-      )
-    };
-  }
-  return stem;
 }
 
 function markTailStemResolvedContext(stem: StemNode): StemNode {

@@ -9,7 +9,8 @@ import {
 import { nextNonSpaceIndex } from "./trivia.js";
 import { TokenCursor } from "../token-cursor.js";
 import { matchNegativeTailStart } from "../head-tail/boundary/connective-start.js";
-import { leadingNominalHeadAfterToken, prenominalMarkerHeadReachAfterToken, type PrenominalMarkerHeadReachLayout } from "./index.js";
+import { leadingNominalHeadAfterToken, prenominalMarkerHeadReachAfterToken } from "./prenominal-head-reach.js";
+import type { PrenominalMarkerHeadReachLayout } from "./nominal-anchor-evidence.js";
 import type { LookupTables } from "../lookup-tables.js";
 import type { PhraseEnumerationLayout } from "./phrase-enumeration.js";
 

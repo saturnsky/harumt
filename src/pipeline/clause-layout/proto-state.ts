@@ -1,5 +1,6 @@
 
-import type { ClauseToken, ProtoClauseLayout } from "./index.js";
+import type { ClauseToken } from "./layout-types.js";
+import type { ProtoClauseLayout } from "./proto-layout.js";
 import type { ClausePhraseScope } from "./phrase-enumeration.js";
 import { closedPropositionBeforeMarker, type ClosedPropositionBeforeMarker, type UtteranceClosureRunEvidence } from "./utterance-closure.js";
 import { nextNonSpaceIndex, type ClauseAdjacencyToken, type ClauseTriviaToken } from "./trivia.js";

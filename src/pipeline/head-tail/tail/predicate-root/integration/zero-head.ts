@@ -1,6 +1,7 @@
 import type { RuntimeHaruToken } from "../../../../../types/token.js";
-import { POS0, POS4, POS5A, 助動詞 as 助動詞0, 助動詞_ヤ, 助詞, 動詞, 名詞, 終止形_, 補助記号, 連用形_ } from "../../../../../types/pos.js";
-import { copulaComplementLiesBeyondPauseAt, isClausePunctuationToken } from "../../../../clause-layout/index.js";
+import { POS0, POS4, POS5A, 助動詞 as 助動詞0, 助動詞_ヤ, 助詞, 名詞, 終止形_, 補助記号, 連用形_ } from "../../../../../types/pos.js";
+import { copulaComplementLiesBeyondPauseAt } from "../../../../clause-layout/utterance-boundaries.js";
+import { isClausePunctuationToken } from "../../../../clause-layout/index.js";
 import { activeProtoLayout } from "../../../../clause-layout/proto-state.js";
 import { previousNonSpaceIndex } from "../../../../clause-layout/trivia.js";
 import {

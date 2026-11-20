@@ -1,6 +1,7 @@
 
 import { parseJapaneseNumber } from "../../../generator/numerals.js";
-import type { Clause, ClauseLayout, ProtoClauseLayout } from "../../clause-layout/index.js";
+import type { Clause, ClauseLayout } from "../../clause-layout/final-layout.js";
+import type { ProtoClauseLayout } from "../../clause-layout/proto-layout.js";
 import type { ClausePhraseScope } from "../../clause-layout/phrase-enumeration.js";
 import { activeProtoScopedScanEnd } from "../../clause-layout/proto-state.js";
 import { previousNonSpaceIndex } from "../../clause-layout/trivia.js";

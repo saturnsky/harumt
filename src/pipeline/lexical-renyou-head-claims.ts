@@ -2,9 +2,9 @@ import type { MorphemeDictionary } from "../dictionary/morpheme.js";
 import type { RuntimeHaruToken } from "../types/token.js";
 import { POS0, 動詞, 形容詞0, isGeneralRenyouInflectedToken } from "../types/pos.js";
 import { isStreamVvCompoundPairAt, isStreamVvCompoundShapeAt, streamVvCompoundShapeHasRegisteredOwnerAt } from "./compounds/compound-verbs.js";
-import { renyouTokenLacksPredicateSense } from "./head-tail/tail/predicate-root/integration.js";
+import { renyouTokenLacksPredicateSense } from "./head-tail/tail/predicate-root/integration/head-admission.js";
 import { renyouLexicalNounCompoundCandidateEnds } from "./head-tail/head/adapters/nominal/renyou-nominal-head.js";
-import type { LexicalRenyouHeadClaims } from "./clause-layout/index.js";
+import type { LexicalRenyouHeadClaims } from "./clause-layout/layout-types.js";
 
 export async function collectLexicalRenyouHeadClaims(
   dictionary: MorphemeDictionary,

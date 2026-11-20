@@ -1,5 +1,5 @@
 import { legacySurfaceCompositionPlan } from "../../types/render-plan.js";
-import { attachTeConnectiveBoundaryChoice } from "../rendering/render-plan.js";
+import { attachTeConnectiveBoundaryChoice } from "../rendering/render-plan-rewrite.js";
 import { conjugate, irregularType, type IrregularType } from "../../generator/conjugator.js";
 import { adverbialToCapableKeijoujiHost } from "../semantics/tari-adverbial-marker.js";
 import type { NumericTables } from "../../generator/numeric-lookup.js";
@@ -17,15 +17,14 @@ import {
   matchObligationTail,
   matchTerminalNaitoAfterTo
 } from "../semantics/colloquial-obligation.js";
-import { firstTranslationCandidate, normalizeCandidateConditions, pruneCandidatesBySlotOrder, translationCandidateFromDict, translationCandidateProjectionOrdinals } from "../candidate-runtime.js";
-import { stemCandidateProvenanceKey, translationCandidateIdentity } from "../head-tail/tail/predicate-root/stem-candidate-identity.js";
-import { isFallbackCandidate } from "../deferred-commitment.js";
+import { firstTranslationCandidate } from "../candidate-runtime.js";
+import { isFallbackCandidate } from "../commitment/span-evidence.js";
 import { deriveStem, verifiedStemDerivation } from "../rendering/stem-derivation.js";
 import { nextNonSpaceIndex } from "../clause-layout/trivia.js";
 import { PASSTHROUGH_POS_BITS } from "../fallback/index.js";
 import { resolveContext } from "../context.js";
 import { hasRentaikei, isTameReasonHeadContext, nominalAttributiveEvidenceFrom, resolveAttributive, selectPlainVerbAttributiveEnding } from "../attributive.js";
-import { auxHasNegation, auxHasPast, auxHasPolite, collectAuxTokens, isVerbLemma, runtimeToken, type MatcherToken } from "../matchers.js";
+import { auxHasNegation, auxHasPast, auxHasPolite, collectAuxTokens, isVerbLemma, runtimeToken, type MatcherToken, runtimeTokens } from "../matchers.js";
 import { matchClauseConnector } from "../semantics/te-connective.js";
 import { matchSouDaHearsay } from "../semantics/souda.js";
 import { matchCopulaNegation } from "../rules/copula.js";
@@ -54,12 +53,6 @@ import {
 import { isAdverbial } from "../predicate-helpers.js";
 import { longNegativeLemma } from "../rendering/negative-polish.js";
 import { collapseTeIruAuxTokens, matchSimpleTeIru } from "../semantics/te-iru.js";
-import {
-  colloquialIntensiveTailForms,
-  sahenProductiveFollowingForms,
-  tailOnlyProductiveFollowingForms,
-  uruPotentialTailForms
-} from "./compound-following-forms.js";
 import { derivationalSuffixProfileFor, predicateSuffixKindForDictionaryForm } from "../head-tail/tail/predicate-root/derivational-suffix-table.js";
 import {
   caseParticleMarkerRelationForToken,
@@ -89,7 +82,6 @@ import {
   終助詞,
   助詞,
   助動詞,
-  助動詞_タ,
   助動詞_ダ,
   助動詞_デス,
   助動詞_ナイ,
@@ -114,35 +106,13 @@ import {
   부사,
   접미사,
   형용사,
-  NOMINAL_BITS, 接尾辞_動詞的,
+  NOMINAL_BITS,
+  接尾辞_動詞的
 } from "../../types/pos.js";
+import { type CompoundResult, type CompoundCandidateDerivation, type CompoundHeadCandidate, entryWithOnlyCandidate, compoundSourceCandidates, compoundResultFromCandidates, compoundResultFromHeadCandidates, compoundResultFromStateHeadCandidates, compoundResultFromVerbAdjSuffixPairs, compoundDerivationFromResult, compoundHeadCandidatesFromEntry, compoundStateHeadCandidatesFromEntry, prioritizeHeadCandidates, prioritizeStateHeadCandidates, prioritizeSourceCandidates } from "./compound-translation-candidates.js";
+import { isAuxiliaryVerbToken, isKireruToken, isSugiruAuxiliaryToken, isKiruToken, isOeruAuxiliaryToken, isSahenProductiveFollowingToken, isTailOnlyProductiveFollowingToken, isUruPotentialTailToken, isColloquialIntensiveTailToken, isReciprocalAuTailToken, isSahenSuruRenyou } from "./compound-tail-tokens.js";
 const ATTRIBUTIVE_HEAD_BITS = (1 << 名詞) | (1 << 代名詞) | (1 << 形容詞0) | (1 << 連体詞);
 const NOMINAL_HEAD_BITS = (1 << 名詞) | (1 << 代名詞);
-export type CompoundResult =
-  readonly [
-    consumed: number,
-    korean: string,
-    koreanPos: number,
-    renderPlan?: RenderPlan | null,
-    warnings?: readonly Warning[],
-    candidates?: readonly TranslationCandidate[]
-  ];
-
-interface CompoundCandidateDerivation {
-  readonly result: CompoundResult;
-  readonly koreanLemma?: string;
-  readonly koreanPos?: number;
-  readonly irregular?: IrregularType | null;
-}
-
-interface CompoundHeadCandidate {
-  readonly source: TranslationCandidate;
-  readonly entry: MorphemeEntry;
-  readonly token: MatcherToken;
-  readonly koreanLemma: string;
-  readonly koreanPos: number;
-  readonly irregular: IrregularType | null;
-}
 
 function predicateSuffixKoreanBase(
   dictionaryForm: string
@@ -166,12 +136,7 @@ interface CompoundNominalPrefixCandidate {
   readonly giPrefix: string;
 }
 
-interface CompoundVerbAdjSuffixPair {
-  readonly verb: CompoundHeadCandidate;
-  readonly suffix: TranslationCandidate;
-}
-
-interface CompoundStatePredicateHeadCandidate {
+export interface CompoundStatePredicateHeadCandidate {
   readonly source: TranslationCandidate;
   readonly entry: MorphemeEntry;
   readonly token: MatcherToken;
@@ -184,117 +149,8 @@ interface CompoundStatePredicateHeadCandidate {
   readonly continuationDerivation: StemDerivation | null;
 }
 
-function entryWithOnlyCandidate(candidate: TranslationCandidate): MorphemeEntry {
-  return { ...candidate.entry, senses: [candidate.translation] };
-}
-
 function isDerivedFromHadaPredicateAdverb(korean: string): boolean {
   return korean.endsWith("히") || korean.endsWith("이");
-}
-
-function compoundSourceCandidates(
-  entry: MorphemeEntry,
-  options: {
-    readonly slot?: string | null;
-    readonly filter?: (candidate: TranslationCandidate) => boolean;
-  } = {}
-): readonly TranslationCandidate[] {
-  const senses = entry.senses ?? [];
-  const projectionOrdinals = translationCandidateProjectionOrdinals(entry, senses);
-  const all = senses.map((translation, index) =>
-    translationCandidateFromDict(entry, translation, {
-      priority: index,
-      conditions: normalizeCandidateConditions(null),
-      projectionOrdinal: projectionOrdinals[index]!
-    })
-  );
-  const filtered = options.filter === undefined ? all : all.filter(options.filter);
-  const candidates = options.filter === undefined ? all : filtered;
-  if (candidates.length === 0) {
-    return [];
-  }
-  if (options.slot === undefined || options.slot === null) {
-    return candidates;
-  }
-  const [pruned] = pruneCandidatesBySlotOrder(
-    candidates,
-    candidates.map(() => "match"),
-    options.slot,
-    { final: false }
-  );
-  return pruned.length > 0 ? pruned : candidates;
-}
-
-function compoundResultFromSources<T>(
-  sources: readonly T[],
-  derive: (item: T) => CompoundCandidateDerivation | null,
-  toSourceCandidate: (item: T) => TranslationCandidate
-): CompoundResult | null {
-  const derived = sources
-    .map((item) => ({ item, derivation: derive(item) }))
-    .filter((entry): entry is { readonly item: T; readonly derivation: CompoundCandidateDerivation } =>
-      entry.derivation !== null
-    );
-  const selected = derived[0];
-  if (selected === undefined) {
-    return null;
-  }
-  const selectedConsumed = selected.derivation.result[0];
-  const projectionCounts = new Map<string, number>();
-  const candidates = derived
-    .filter((entry) => entry.derivation.result[0] === selectedConsumed)
-    .map((entry) => {
-      const source = toSourceCandidate(entry.item);
-      const key = compoundProjectionOrdinalBaseKey(source);
-      const projectionOrdinal = projectionCounts.get(key) ?? 0;
-      projectionCounts.set(key, projectionOrdinal + 1);
-      return compoundCandidateFromDerivation(source, entry.derivation, projectionOrdinal);
-    });
-  return compoundResultWithCandidates(selected.derivation.result, candidates);
-}
-
-function compoundResultFromCandidates(
-  sourceCandidates: readonly TranslationCandidate[],
-  derive: (candidate: TranslationCandidate) => CompoundCandidateDerivation | null
-): CompoundResult | null {
-  return compoundResultFromSources(sourceCandidates, derive, (candidate) => candidate);
-}
-
-function compoundResultFromHeadCandidates(
-  headCandidates: readonly CompoundHeadCandidate[],
-  derive: (candidate: CompoundHeadCandidate) => CompoundCandidateDerivation | null
-): CompoundResult | null {
-  return compoundResultFromSources(headCandidates, derive, (candidate) => candidate.source);
-}
-
-function compoundResultFromStateHeadCandidates(
-  headCandidates: readonly CompoundStatePredicateHeadCandidate[],
-  derive: (candidate: CompoundStatePredicateHeadCandidate) => CompoundCandidateDerivation | null
-): CompoundResult | null {
-  return compoundResultFromSources(headCandidates, derive, (candidate) => candidate.source);
-}
-
-function compoundResultFromVerbAdjSuffixPairs(
-  pairs: readonly CompoundVerbAdjSuffixPair[],
-  derive: (pair: CompoundVerbAdjSuffixPair) => CompoundCandidateDerivation | null
-): CompoundResult | null {
-  return compoundResultFromSources(pairs, derive, (pair) =>
-    compoundCommitmentSourceCandidate(pair.verb.source, pair.suffix)
-  );
-}
-
-function compoundCommitmentSourceCandidate(
-  primary: TranslationCandidate,
-  secondary: TranslationCandidate
-): TranslationCandidate {
-  return {
-    ...primary,
-    compoundSamePredicateFrameSources: [primary.translation, secondary.translation]
-  };
-}
-
-function compoundProjectionOrdinalBaseKey(candidate: TranslationCandidate): string {
-  return stemCandidateProvenanceKey(translationCandidateIdentity(candidate).provenance);
 }
 
 function buildMissingAdjectivalSuffixWarning(start: number, suffixTok: MatcherToken): Warning {
@@ -305,47 +161,6 @@ function buildMissingAdjectivalSuffixWarning(start: number, suffixTok: MatcherTo
     span: { start, end: start + 2 },
     message: `productive verb adjectival suffix used surface fallback; suffix=${suffixTok.surface}`
   };
-}
-
-function compoundCandidateFromDerivation(
-  source: TranslationCandidate,
-  derivation: CompoundCandidateDerivation,
-  projectionOrdinal = source.projectionOrdinal
-): TranslationCandidate {
-  const [, korean, koreanPos, renderPlan, warnings] = derivation.result;
-  const plan = renderPlan ?? null;
-  return {
-    ...source,
-    entry: entryWithOnlyCandidate(source),
-    translation: source.translation,
-    koreanLemma: derivation.koreanLemma ?? source.koreanLemma,
-    koreanPos: derivation.koreanPos ?? koreanPos,
-    irregular: derivation.irregular === undefined ? source.irregular : derivation.irregular,
-    projectionOrdinal,
-    renderPlan: plan,
-    korean: plan === null ? korean : "",
-    warnings: warnings ?? [],
-    renderPlanPolicy: "normal"
-  };
-}
-
-function compoundResultWithCandidates(
-  result: CompoundResult,
-  candidates: readonly TranslationCandidate[]
-): CompoundResult {
-  const [consumed, korean, koreanPos, renderPlan, warnings] = result;
-  return [consumed, korean, koreanPos, renderPlan ?? null, warnings ?? [], candidates];
-}
-
-function compoundDerivationFromResult(
-  result: CompoundResult | null,
-  koreanLemma: string,
-  koreanPos: number,
-  irregular: IrregularType | null
-): CompoundCandidateDerivation | null {
-  return result === null
-    ? null
-    : { result, koreanLemma, koreanPos, irregular };
 }
 
 function stateChangeStemDerivation(
@@ -385,99 +200,6 @@ function withStemDerivation(
     warnings ?? [],
     candidates ?? []
   ];
-}
-
-function compoundHeadCandidatesFromEntry(
-  entry: MorphemeEntry,
-  token: MatcherToken,
-  derive: (candidate: TranslationCandidate) => Pick<CompoundHeadCandidate, "koreanLemma" | "koreanPos" | "irregular"> | null
-): readonly CompoundHeadCandidate[] {
-  return compoundSourceCandidates(entry)
-    .map((candidate) => {
-      const terms = derive(candidate);
-      return terms === null
-        ? null
-        : {
-          source: candidate,
-          entry,
-          token,
-          koreanLemma: terms.koreanLemma,
-          koreanPos: terms.koreanPos,
-          irregular: terms.irregular
-        };
-    })
-    .filter((candidate): candidate is CompoundHeadCandidate => candidate !== null);
-}
-
-function compoundStateHeadCandidatesFromEntry(
-  entry: MorphemeEntry,
-  token: MatcherToken,
-  derive: (candidate: TranslationCandidate) => Omit<CompoundStatePredicateHeadCandidate, "source" | "entry" | "token"> | null
-): readonly CompoundStatePredicateHeadCandidate[] {
-  return compoundSourceCandidates(entry)
-    .map((candidate) => {
-      const terms = derive(candidate);
-      return terms === null
-        ? null
-        : {
-          source: candidate,
-          entry,
-          token,
-          ...terms
-        };
-    })
-    .filter((candidate): candidate is CompoundStatePredicateHeadCandidate => candidate !== null);
-}
-
-function prioritizeCandidatesBy<T>(
-  candidates: readonly T[],
-  selected: TranslationCandidate | undefined,
-  toComparable: (candidate: T) => TranslationCandidate
-): readonly T[] {
-  if (selected === undefined || candidates.length <= 1) {
-    return candidates;
-  }
-  const selectedIdx = candidates.findIndex((candidate) => {
-    const source = toComparable(candidate);
-    return (
-      source.translation === selected.translation ||
-      (
-        source.koreanLemma === selected.koreanLemma &&
-        source.koreanPos === selected.koreanPos &&
-        source.irregular === selected.irregular
-      )
-    );
-  });
-  if (selectedIdx <= 0) {
-    return candidates;
-  }
-  const selectedCandidate = candidates[selectedIdx]!;
-  return [
-    selectedCandidate,
-    ...candidates.slice(0, selectedIdx),
-    ...candidates.slice(selectedIdx + 1)
-  ];
-}
-
-function prioritizeHeadCandidates(
-  candidates: readonly CompoundHeadCandidate[],
-  selected: TranslationCandidate | undefined
-): readonly CompoundHeadCandidate[] {
-  return prioritizeCandidatesBy(candidates, selected, (candidate) => candidate.source);
-}
-
-function prioritizeStateHeadCandidates(
-  candidates: readonly CompoundStatePredicateHeadCandidate[],
-  selected: TranslationCandidate | undefined
-): readonly CompoundStatePredicateHeadCandidate[] {
-  return prioritizeCandidatesBy(candidates, selected, (candidate) => candidate.source);
-}
-
-function prioritizeSourceCandidates(
-  candidates: readonly TranslationCandidate[],
-  selected: TranslationCandidate | undefined
-): readonly TranslationCandidate[] {
-  return prioritizeCandidatesBy(candidates, selected, (candidate) => candidate);
 }
 
 async function buildStatePredicateHeadFromEntry(
@@ -671,6 +393,25 @@ export interface BuildAttributivePlanOptions {
   readonly tailLemmaMode?: boolean;
   readonly voice?: "active" | "passive" | "potential";
 }
+
+interface CompoundTailInput {
+  readonly cursor: TokenCursor<MatcherToken>;
+  readonly koreanLemma: string;
+  readonly irregular: IrregularType | null;
+  readonly koreanPos: number;
+  readonly auxTokens: readonly MatcherToken[];
+  readonly contentToken: MatcherToken;
+  readonly options: ResolveCompoundTailOptions;
+  readonly tokens: TokenCursor<MatcherToken>["tokens"];
+  readonly after: number;
+  readonly n: number;
+  readonly consumed: number;
+  readonly voice: NonNullable<ResolveCompoundTailOptions["voice"]>;
+}
+
+type CompoundCopulaNegationMatch = { readonly match: NonNullable<ReturnType<typeof matchCopulaNegation>>; readonly consumed: number };
+
+const NO_COMPOUND_SHAPE: unique symbol = Symbol("compound tail: shape not applicable");
 
 export class PipelineCompoundMixin {
   static fixedLemmaPlan(koreanLemma: string, koreanPos: number, options: { readonly irregular?: IrregularType | null } = {}): RenderPlan {
@@ -2960,6 +2701,66 @@ export class PipelineCompoundMixin {
     const n = cursor.end;
     const consumed = cursor.consumed;
     const voice = options.voice ?? "active";
+    const t: CompoundTailInput = { cursor, koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, tokens, after, n, consumed, voice };
+    const copulaDeContinuation = this.resolveCompoundCopulaDeContinuation(t);
+    if (copulaDeContinuation !== NO_COMPOUND_SHAPE) {
+      return copulaDeContinuation;
+    }
+    const followConnective = this.resolveCompoundFollowConnective(t);
+    if (followConnective !== NO_COMPOUND_SHAPE) {
+      return followConnective;
+    }
+    const noNominalizer = this.resolveCompoundNoNominalizer(t);
+    if (noNominalizer !== NO_COMPOUND_SHAPE) {
+      return noNominalizer;
+    }
+    const postVerbPattern = this.resolveCompoundPostVerbPattern(t);
+    if (postVerbPattern !== NO_COMPOUND_SHAPE) {
+      return postVerbPattern;
+    }
+    const naitoTerminal = this.resolveCompoundNaitoTerminal(t);
+    if (naitoTerminal !== NO_COMPOUND_SHAPE) {
+      return naitoTerminal;
+    }
+    const naitoConditional = this.resolveCompoundNaitoConditional(t);
+    if (naitoConditional !== NO_COMPOUND_SHAPE) {
+      return naitoConditional;
+    }
+    const runtimeCursor = cursor.retarget(runtimeTokens(tokens), cursor.pos, n, cursor.origin);
+    const obligationBridge = this.resolveCompoundObligationBridge(t, runtimeCursor);
+    if (obligationBridge !== NO_COMPOUND_SHAPE) {
+      return obligationBridge;
+    }
+    const souHearsay = this.resolveCompoundSouHearsay(t);
+    if (souHearsay !== NO_COMPOUND_SHAPE) {
+      return souHearsay;
+    }
+    const quotativeTo = this.resolveCompoundQuotativeTo(t);
+    if (quotativeTo !== NO_COMPOUND_SHAPE) {
+      return quotativeTo;
+    }
+    const removedPostAux = this.resolveCompoundRemovedPostAux(t, runtimeCursor);
+    if (removedPostAux !== NO_COMPOUND_SHAPE) {
+      return removedPostAux;
+    }
+
+    const clauseCursor = cursor.fork(after, n, after);
+    const clauseConnector = this.resolveCompoundClauseConnector(t, runtimeCursor, clauseCursor);
+    if (clauseConnector !== NO_COMPOUND_SHAPE) {
+      return clauseConnector;
+    }
+    const attributive = this.resolveCompoundAttributive(t, clauseCursor);
+    if (attributive !== NO_COMPOUND_SHAPE) {
+      return attributive;
+    }
+    return this.realizeCompoundTerminal(t);
+  }
+
+  private resolveCompoundCopulaDeContinuation(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { cursor, koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, consumed, voice } = t;
     const copulaDe = cursor.tx(c =>
       detectCopulaDe(auxTokens, c, {
         contentPosBits: CONTENT_POS_BITS,
@@ -2983,6 +2784,14 @@ export class PipelineCompoundMixin {
         return [consumed, "", koreanPos, plan];
       }
     }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private resolveCompoundFollowConnective(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { cursor, koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, after, consumed, voice } = t;
     if (koreanPos === 동사 || koreanPos === 형용사) {
       const followKind = cursor.lookahead(after - cursor.pos, classifyFollowConnective);
       const followConsumed = followKind === null ? 0 : 1;
@@ -3007,6 +2816,14 @@ export class PipelineCompoundMixin {
         return [consumed + followConsumed, "", koreanPos, plan];
       }
     }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private resolveCompoundNoNominalizer(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { cursor, koreanPos, tokens, after, n } = t;
     if (
       (koreanPos === 동사 || koreanPos === 형용사) &&
       after < n &&
@@ -3044,164 +2861,262 @@ export class PipelineCompoundMixin {
         }) !== null
       );
       if (isNoniCase) {
-        const noniConsumed = cursor.lookahead(0, c => matchNoNiConcessiveConnectiveStart(c, this.lookups));
-        if (noniConsumed !== null) {
-          const plan = this.buildPredicatePlan({
-            koreanLemma,
-            irregular,
-            koreanPos,
-            auxTokens,
-            auxiliaryLemma: contentToken.dictionaryForm,
-            prefix: options.prefix ?? "",
-            prefixSource: options.prefixSource ?? null,
-            connective: "는데",
-            verbConjType: options.verbConjType ?? null,
-            voice
-          });
-          return [consumed + noniConsumed, "", koreanPos, plan];
+        const noniConcessive = this.realizeCompoundNoniConcessive(t);
+        if (noniConcessive !== NO_COMPOUND_SHAPE) {
+          return noniConcessive;
         }
       }
       if (!isConnNodeCase && !isNoniCase) {
-        const hasPast = auxHasPast(auxTokens);
-        const hasNeg = auxHasNegation(auxTokens);
-        let attrMainPlan: AttributiveRealization | ConjugatedLemmaPlan;
-        if (voice === "potential") {
-          attrMainPlan = {
-            kind: "attributive",
-            koreanLemma,
-            irregular,
-            koreanPos,
-            auxTokens: runtimeTokens(auxTokens),
-            contentToken: runtimeToken(contentToken),
-            voice
-          };
-        } else if (hasNeg) {
-          const suffix = hasPast ? " 않은" : " 않는";
-          attrMainPlan = {
-            kind: "conjugatedLemma",
-            koreanLemma,
-            irregular,
-            koreanPos,
-            ending: "지",
-            suffix
-          };
-        } else if (hasPast) {
-          attrMainPlan = {
-            kind: "conjugatedLemma",
-            koreanLemma,
-            irregular,
-            koreanPos,
-            ending: "ㄴ/은"
-          };
-        } else {
-          attrMainPlan = {
-            kind: "conjugatedLemma",
-            koreanLemma,
-            irregular,
-            koreanPos,
-            ending: "ㄴ/는"
-          };
-        }
-
-        const prefix = options.prefix ?? "";
-        const attrPlan = PipelineCompoundMixin.composePrefixWithPredicate(prefix, attrMainPlan, { koreanPos });
-
-        if (negMatch !== undefined) {
-          const negConsumed = negMatch.consumed;
-          const [polite, past, connective, additiveMo, conditionalNara] = negMatch.match;
-          const followKind = conditionalNara ? null : cursor.lookahead(after + 1 + negConsumed - cursor.pos, classifyFollowConnective);
-          const followConsumed = followKind === null ? 0 : 1;
-          const suffixOptions = {
-            polite,
-            past,
-            connective,
-            additiveMo,
-            conditionalNara,
-            followKind
-          };
-          const suffix = compoundNoDewaNaiSuffixPlan(suffixOptions, 형용사);
-          const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
-          return [consumed + 1 + negConsumed + followConsumed, "", 형용사, plan];
-        }
-
-        const copulaMatch = cursor.lookahead(1, copulaCursor => {
-          const match = detectNoCopulaChain(copulaCursor, { consumers: ["compounds"] });
-          return match === null ? null : { match, consumed: copulaCursor.consumed };
-        });
-        if (copulaMatch !== null) {
-          const copConsumed = copulaMatch.consumed;
-          const [kind, past, polite] = copulaMatch.match;
-          const chainAfter = after + 1 + copConsumed;
-          const modalKinds = new Set(["emphasis", "emphasis_limited", "emphasis_additive", "conjecture"]);
-          const modalMatch = modalKinds.has(kind)
-            ? cursor.lookahead(chainAfter - after, modalCursor => {
-              const modal = detectKamoShirenaiAfterChain(modalCursor);
-              return modal === null ? null : { modal, consumed: modalCursor.pos - chainAfter };
-            })
-            : null;
-          const modal = modalMatch?.modal ?? null;
-          if (modal !== null) {
-            const modalConsumed = modalMatch!.consumed;
-            const [modalPolite, modalPast] = modal;
-            const suffix = compoundKamoModalSuffixPlan({
-              modalKind: kind === "conjecture" ? "conjecture" : "emphasis",
-              emphasisKind: kind,
-              emphasisPast: past,
-              modalPolite,
-              modalPast
-            }, 형용사);
-            const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
-            return [consumed + 1 + copConsumed + modalConsumed, "", 형용사, plan];
-          }
-          const question = (
-            chainAfter < n &&
-            kaMarkerRelationAt(tokens, chainAfter, ["compounds"])?.particleSubtype1 === 終助詞
-          );
-          const suffix = compoundNoCopulaChainSuffixPlan({ chainKind: kind, past, polite, question }, 형용사);
-          const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
-          return [consumed + 1 + copConsumed, "", 형용사, plan];
-        }
-
-        if (
-          after + 4 <= n &&
-          kaMarkerRelationAt(tokens, after + 1, ["compounds"])?.particleSubtype1 === 副助詞 &&
-          cursor.peek(2)?.surface === "も" &&
-          ((cursor.peek(2)?.pos ?? 0) & POS0) === 助詞 &&
-          KAMO_SHIRENAI_LEMMAS.has(cursor.peek(3)?.dictionaryForm ?? "") &&
-          ((cursor.peek(3)?.pos ?? 0) & POS0) === 動詞
-        ) {
-          const trailingAux = cursor.lookahead(4, collectAuxTokens);
-          const modalPolite = auxHasPolite(trailingAux);
-          const modalPast = auxHasPast(trailingAux);
-          const suffix = compoundKamoShirenaiSuffixPlan({ modalPolite, modalPast }, 형용사);
-          const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
-          return [consumed + 4 + trailingAux.length, "", 형용사, plan];
-        }
-
-        const sfpMatch = cursor.lookahead(1, sfpCursor => {
-          const type = detectSfp(sfpCursor, 動詞, false);
-          return { type, consumed: sfpCursor.consumed };
-        });
-        if (sfpMatch.consumed !== 0) {
-          const suffix = compoundNodaSfpSuffixPlan({ casualSfp: sfpMatch.type, formalSfp: sfpMatch.type }, 형용사);
-          const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
-          return [consumed + 1 + sfpMatch.consumed, "", 형용사, plan];
-        }
-
-        if (
-          after + 1 < n &&
-          kaMarkerRelationAt(tokens, after + 1, ["compounds"])?.particleSubtype1 === 終助詞
-        ) {
-          const suffix = compoundNodaSfpSuffixPlan({ casualSfp: null, formalSfp: "plain_q" }, 형용사);
-          const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
-          return [consumed + 1, "", 형용사, plan];
-        }
-
-        const suffix = " 것";
-        const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 명사 });
-        return [consumed + 1, "", 명사, plan];
+        return this.realizeCompoundNoNominalization(t, negMatch);
       }
     }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private realizeCompoundNoniConcessive(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): CompoundResult | typeof NO_COMPOUND_SHAPE {
+    const { cursor, koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, consumed, voice } = t;
+    const noniConsumed = cursor.lookahead(0, c => matchNoNiConcessiveConnectiveStart(c, this.lookups));
+    if (noniConsumed !== null) {
+      const plan = this.buildPredicatePlan({
+        koreanLemma,
+        irregular,
+        koreanPos,
+        auxTokens,
+        auxiliaryLemma: contentToken.dictionaryForm,
+        prefix: options.prefix ?? "",
+        prefixSource: options.prefixSource ?? null,
+        connective: "는데",
+        verbConjType: options.verbConjType ?? null,
+        voice
+      });
+      return [consumed + noniConsumed, "", koreanPos, plan];
+    }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private realizeCompoundNoNominalization(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    negMatch: CompoundCopulaNegationMatch | undefined
+  ): CompoundResult {
+    const { consumed } = t;
+    const attrPlan = this.compoundNominalizedAttributivePlan(t);
+    const noDewaNai = this.realizeCompoundNoDewaNai(t, attrPlan, negMatch);
+    if (noDewaNai !== NO_COMPOUND_SHAPE) {
+      return noDewaNai;
+    }
+    const noCopulaChain = this.realizeCompoundNoCopulaChain(t, attrPlan);
+    if (noCopulaChain !== NO_COMPOUND_SHAPE) {
+      return noCopulaChain;
+    }
+    const noKamoShirenai = this.realizeCompoundNoKamoShirenai(t, attrPlan);
+    if (noKamoShirenai !== NO_COMPOUND_SHAPE) {
+      return noKamoShirenai;
+    }
+    const nodaSfp = this.realizeCompoundNodaSfp(t, attrPlan);
+    if (nodaSfp !== NO_COMPOUND_SHAPE) {
+      return nodaSfp;
+    }
+    const noQuestion = this.realizeCompoundNoQuestion(t, attrPlan);
+    if (noQuestion !== NO_COMPOUND_SHAPE) {
+      return noQuestion;
+    }
+    const suffix = " 것";
+    const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 명사 });
+    return [consumed + 1, "", 명사, plan];
+  }
+
+  private compoundNominalizedAttributivePlan(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): RenderPlan {
+    const { koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, voice } = t;
+    const hasPast = auxHasPast(auxTokens);
+    const hasNeg = auxHasNegation(auxTokens);
+    let attrMainPlan: AttributiveRealization | ConjugatedLemmaPlan;
+    if (voice === "potential") {
+      attrMainPlan = {
+        kind: "attributive",
+        koreanLemma,
+        irregular,
+        koreanPos,
+        auxTokens: runtimeTokens(auxTokens),
+        contentToken: runtimeToken(contentToken),
+        voice
+      };
+    } else if (hasNeg) {
+      const suffix = hasPast ? " 않은" : " 않는";
+      attrMainPlan = {
+        kind: "conjugatedLemma",
+        koreanLemma,
+        irregular,
+        koreanPos,
+        ending: "지",
+        suffix
+      };
+    } else if (hasPast) {
+      attrMainPlan = {
+        kind: "conjugatedLemma",
+        koreanLemma,
+        irregular,
+        koreanPos,
+        ending: "ㄴ/은"
+      };
+    } else {
+      attrMainPlan = {
+        kind: "conjugatedLemma",
+        koreanLemma,
+        irregular,
+        koreanPos,
+        ending: "ㄴ/는"
+      };
+    }
+
+    const prefix = options.prefix ?? "";
+    const attrPlan = PipelineCompoundMixin.composePrefixWithPredicate(prefix, attrMainPlan, { koreanPos });
+    return attrPlan;
+  }
+
+  private realizeCompoundNoDewaNai(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    attrPlan: RenderPlan,
+    negMatch: CompoundCopulaNegationMatch | undefined
+  ): CompoundResult | typeof NO_COMPOUND_SHAPE {
+    const { cursor, after, consumed } = t;
+    if (negMatch !== undefined) {
+      const negConsumed = negMatch.consumed;
+      const [polite, past, connective, additiveMo, conditionalNara] = negMatch.match;
+      const followKind = conditionalNara ? null : cursor.lookahead(after + 1 + negConsumed - cursor.pos, classifyFollowConnective);
+      const followConsumed = followKind === null ? 0 : 1;
+      const suffixOptions = {
+        polite,
+        past,
+        connective,
+        additiveMo,
+        conditionalNara,
+        followKind
+      };
+      const suffix = compoundNoDewaNaiSuffixPlan(suffixOptions, 형용사);
+      const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
+      return [consumed + 1 + negConsumed + followConsumed, "", 형용사, plan];
+    }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private realizeCompoundNoCopulaChain(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    attrPlan: RenderPlan
+  ): CompoundResult | typeof NO_COMPOUND_SHAPE {
+    const { cursor, tokens, after, n, consumed } = t;
+    const copulaMatch = cursor.lookahead(1, copulaCursor => {
+      const match = detectNoCopulaChain(copulaCursor, { consumers: ["compounds"] });
+      return match === null ? null : { match, consumed: copulaCursor.consumed };
+    });
+    if (copulaMatch !== null) {
+      const copConsumed = copulaMatch.consumed;
+      const [kind, past, polite] = copulaMatch.match;
+      const chainAfter = after + 1 + copConsumed;
+      const modalKinds = new Set(["emphasis", "emphasis_limited", "emphasis_additive", "conjecture"]);
+      const modalMatch = modalKinds.has(kind)
+        ? cursor.lookahead(chainAfter - after, modalCursor => {
+          const modal = detectKamoShirenaiAfterChain(modalCursor);
+          return modal === null ? null : { modal, consumed: modalCursor.pos - chainAfter };
+        })
+        : null;
+      const modal = modalMatch?.modal ?? null;
+      if (modal !== null) {
+        const modalConsumed = modalMatch!.consumed;
+        const [modalPolite, modalPast] = modal;
+        const suffix = compoundKamoModalSuffixPlan({
+          modalKind: kind === "conjecture" ? "conjecture" : "emphasis",
+          emphasisKind: kind,
+          emphasisPast: past,
+          modalPolite,
+          modalPast
+        }, 형용사);
+        const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
+        return [consumed + 1 + copConsumed + modalConsumed, "", 형용사, plan];
+      }
+      const question = (
+        chainAfter < n &&
+        kaMarkerRelationAt(tokens, chainAfter, ["compounds"])?.particleSubtype1 === 終助詞
+      );
+      const suffix = compoundNoCopulaChainSuffixPlan({ chainKind: kind, past, polite, question }, 형용사);
+      const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
+      return [consumed + 1 + copConsumed, "", 형용사, plan];
+    }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private realizeCompoundNoKamoShirenai(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    attrPlan: RenderPlan
+  ): CompoundResult | typeof NO_COMPOUND_SHAPE {
+    const { cursor, tokens, after, n, consumed } = t;
+    if (
+      after + 4 <= n &&
+      kaMarkerRelationAt(tokens, after + 1, ["compounds"])?.particleSubtype1 === 副助詞 &&
+      cursor.peek(2)?.surface === "も" &&
+      ((cursor.peek(2)?.pos ?? 0) & POS0) === 助詞 &&
+      KAMO_SHIRENAI_LEMMAS.has(cursor.peek(3)?.dictionaryForm ?? "") &&
+      ((cursor.peek(3)?.pos ?? 0) & POS0) === 動詞
+    ) {
+      const trailingAux = cursor.lookahead(4, collectAuxTokens);
+      const modalPolite = auxHasPolite(trailingAux);
+      const modalPast = auxHasPast(trailingAux);
+      const suffix = compoundKamoShirenaiSuffixPlan({ modalPolite, modalPast }, 형용사);
+      const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
+      return [consumed + 4 + trailingAux.length, "", 형용사, plan];
+    }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private realizeCompoundNodaSfp(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    attrPlan: RenderPlan
+  ): CompoundResult | typeof NO_COMPOUND_SHAPE {
+    const { cursor, consumed } = t;
+    const sfpMatch = cursor.lookahead(1, sfpCursor => {
+      const type = detectSfp(sfpCursor, 動詞, false);
+      return { type, consumed: sfpCursor.consumed };
+    });
+    if (sfpMatch.consumed !== 0) {
+      const suffix = compoundNodaSfpSuffixPlan({ casualSfp: sfpMatch.type, formalSfp: sfpMatch.type }, 형용사);
+      const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
+      return [consumed + 1 + sfpMatch.consumed, "", 형용사, plan];
+    }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private realizeCompoundNoQuestion(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    attrPlan: RenderPlan
+  ): CompoundResult | typeof NO_COMPOUND_SHAPE {
+    const { tokens, after, n, consumed } = t;
+    if (
+      after + 1 < n &&
+      kaMarkerRelationAt(tokens, after + 1, ["compounds"])?.particleSubtype1 === 終助詞
+    ) {
+      const suffix = compoundNodaSfpSuffixPlan({ casualSfp: null, formalSfp: "plain_q" }, 형용사);
+      const plan = PipelineCompoundMixin.composePredicateWithSuffix(attrPlan, suffix, { koreanPos: 형용사 });
+      return [consumed + 1, "", 형용사, plan];
+    }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private resolveCompoundPostVerbPattern(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { koreanLemma, irregular, koreanPos, auxTokens, options, tokens, after, consumed } = t;
     let postVerbPattern = this.patterns.matchPostVerb(runtimeTokens(tokens), after);
     if (postVerbPattern !== undefined && postverbPatternRequiresTailRootOwnership(postVerbPattern.id)) {
       const locallyStructuredAspect = postverbAspectOperatorKind(postVerbPattern.id) !== undefined &&
@@ -3237,60 +3152,83 @@ export class PipelineCompoundMixin {
           : PipelineCompoundMixin.composePredicateWithSuffix(mainPlan, postVerbPattern.tailText, { koreanPos });
         return [consumedWithPattern, "", koreanPos, plan];
       }
-      if (postVerbPattern.tailLemma !== null) {
-        const tailStart = after + postVerbPattern.triggerLength;
-        const tailLemma = postVerbPattern.tailLemma;
-        return cursor.lookahead(tailStart - cursor.pos, tailAuxCursor => {
-          const tailAux = collectAuxTokens(tailAuxCursor);
-          const tailPos = postVerbPattern.tailKoreanPos || 동사;
-          const tailVerbIndex = after + postVerbPattern.triggerLength - 1;
-          const tailVerbToken = 0 <= tailVerbIndex && tailVerbIndex < n ? tokens[tailVerbIndex]! : contentToken;
-          const attrPlan = this.buildAttributivePlan({
-            cursor: tailAuxCursor,
-            koreanLemma: tailLemma,
-            irregular: postVerbPattern.tailIrregular ?? null,
-            koreanPos: tailPos,
-            auxTokens: tailAux,
-            contentToken: tailVerbToken,
-            tailLemmaMode: true
-          });
-          if (attrPlan !== null) {
-            const plan = PipelineCompoundMixin.composePrefixWithPredicate(`${mainPart} `, attrPlan, { koreanPos: tailPos });
-            return [consumedWithPattern + tailAux.length, "", tailPos, plan];
-          }
-          const nestedAfter = tailStart + tailAux.length;
-          if (nestedAfter < n) {
-            const nested = this.resolveCompoundTail(
-              tailAuxCursor,
-              tailLemma,
-              postVerbPattern.tailIrregular ?? null,
-              tailPos,
-              tailAux,
-              tailVerbToken,
-              {
-                rentaiCheckToken: tailVerbToken,
-                rentaiPresent: false,
-                entry: null,
-                jpPos0: 動詞,
-                prefix: `${mainPart} `
-              }
-            );
-            if (nested !== null && nested[3] !== undefined && nested[3] !== null && nested[0] > 0) {
-              return [consumedWithPattern + nested[0], nested[1], nested[2], nested[3], nested[4] ?? []];
-            }
-          }
-          const plan = this.buildPredicatePlan({
-            koreanLemma: tailLemma,
-            irregular: postVerbPattern.tailIrregular ?? null,
-            koreanPos: tailPos,
-            auxTokens: tailAux,
-            auxiliaryLemma: tailLemma,
-            prefix: `${mainPart} `
-          });
-          return [consumedWithPattern + tailAux.length, "", tailPos, plan];
-        });
+      const postVerbTailLemma = this.realizeCompoundPostVerbTailLemma(t, postVerbPattern, mainPart, consumedWithPattern);
+      if (postVerbTailLemma !== NO_COMPOUND_SHAPE) {
+        return postVerbTailLemma;
       }
     }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private realizeCompoundPostVerbTailLemma(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    postVerbPattern: PatternEntry,
+    mainPart: string,
+    consumedWithPattern: number
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { cursor, contentToken, tokens, after, n } = t;
+    if (postVerbPattern.tailLemma !== null) {
+      const tailStart = after + postVerbPattern.triggerLength;
+      const tailLemma = postVerbPattern.tailLemma;
+      return cursor.lookahead(tailStart - cursor.pos, tailAuxCursor => {
+        const tailAux = collectAuxTokens(tailAuxCursor);
+        const tailPos = postVerbPattern.tailKoreanPos || 동사;
+        const tailVerbIndex = after + postVerbPattern.triggerLength - 1;
+        const tailVerbToken = 0 <= tailVerbIndex && tailVerbIndex < n ? tokens[tailVerbIndex]! : contentToken;
+        const attrPlan = this.buildAttributivePlan({
+          cursor: tailAuxCursor,
+          koreanLemma: tailLemma,
+          irregular: postVerbPattern.tailIrregular ?? null,
+          koreanPos: tailPos,
+          auxTokens: tailAux,
+          contentToken: tailVerbToken,
+          tailLemmaMode: true
+        });
+        if (attrPlan !== null) {
+          const plan = PipelineCompoundMixin.composePrefixWithPredicate(`${mainPart} `, attrPlan, { koreanPos: tailPos });
+          return [consumedWithPattern + tailAux.length, "", tailPos, plan];
+        }
+        const nestedAfter = tailStart + tailAux.length;
+        if (nestedAfter < n) {
+          const nested = this.resolveCompoundTail(
+            tailAuxCursor,
+            tailLemma,
+            postVerbPattern.tailIrregular ?? null,
+            tailPos,
+            tailAux,
+            tailVerbToken,
+            {
+              rentaiCheckToken: tailVerbToken,
+              rentaiPresent: false,
+              entry: null,
+              jpPos0: 動詞,
+              prefix: `${mainPart} `
+            }
+          );
+          if (nested !== null && nested[3] !== undefined && nested[3] !== null && nested[0] > 0) {
+            return [consumedWithPattern + nested[0], nested[1], nested[2], nested[3], nested[4] ?? []];
+          }
+        }
+        const plan = this.buildPredicatePlan({
+          koreanLemma: tailLemma,
+          irregular: postVerbPattern.tailIrregular ?? null,
+          koreanPos: tailPos,
+          auxTokens: tailAux,
+          auxiliaryLemma: tailLemma,
+          prefix: `${mainPart} `
+        });
+        return [consumedWithPattern + tailAux.length, "", tailPos, plan];
+      });
+    }
+    return NO_COMPOUND_SHAPE;
+  }
+
+  private resolveCompoundNaitoTerminal(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { cursor, koreanLemma, irregular, koreanPos, auxTokens, options, consumed } = t;
     const naitoTerminal = cursor.lookahead(0, c =>
       matchStandaloneNaitoTerminal(c, auxTokens) === null ? null : c.consumed
     );
@@ -3307,7 +3245,14 @@ export class PipelineCompoundMixin {
       });
       return [consumed + naitoTerminal, "", 동사, plan];
     }
+    return NO_COMPOUND_SHAPE;
+  }
 
+  private resolveCompoundNaitoConditional(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { cursor, koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, consumed, voice } = t;
     const naitoConditional = cursor.lookahead(0, c =>
       matchNaitoConditional(c, auxTokens, this.lookups) === null ? null : c.consumed
     );
@@ -3342,8 +3287,15 @@ export class PipelineCompoundMixin {
       });
       return [totalConsumed, "", koreanPos, plan];
     }
+    return NO_COMPOUND_SHAPE;
+  }
 
-    const runtimeCursor = cursor.retarget(runtimeTokens(tokens), cursor.pos, n, cursor.origin);
+  private resolveCompoundObligationBridge(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    runtimeCursor: TokenCursor<RuntimeHaruToken>
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { cursor, koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, after, n, consumed, voice } = t;
     const obligationBridge = cursor.lookahead(after - cursor.pos, c =>
       detectNaitoBridgeFromAux(runtimeTokens(auxTokens), c)
     );
@@ -3383,7 +3335,14 @@ export class PipelineCompoundMixin {
         return [consumed + (follower - after) + tailConsumed, "", 동사, plan];
       }
     }
+    return NO_COMPOUND_SHAPE;
+  }
 
+  private resolveCompoundSouHearsay(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { cursor, koreanLemma, irregular, koreanPos, auxTokens, options, tokens, after, n, consumed } = t;
     const souCursor = cursor.fork(after, n, after);
     const souMatch = matchSouDaHearsay(souCursor);
     if (souMatch !== undefined && (koreanPos === 동사 || koreanPos === 형용사)) {
@@ -3444,7 +3403,14 @@ export class PipelineCompoundMixin {
         }
       );
     }
+    return NO_COMPOUND_SHAPE;
+  }
 
+  private resolveCompoundQuotativeTo(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { cursor, koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, tokens, after, n, consumed, voice } = t;
     const compoundQuoteMarker = quoteMarkerRelationAt(tokens, after, { consumers: ["compounds"] });
     if (
       after < n &&
@@ -3466,7 +3432,15 @@ export class PipelineCompoundMixin {
       });
       return [consumed + 1, "", koreanPos, plan];
     }
+    return NO_COMPOUND_SHAPE;
+  }
 
+  private resolveCompoundRemovedPostAux(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    runtimeCursor: TokenCursor<RuntimeHaruToken>
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, after, n, consumed, voice } = t;
     const postAuxTokens = runtimeCursor.tokens;
     const postAuxContext = {
       cursor: runtimeCursor.fork(after, n, Math.max(0, after - consumed)),
@@ -3507,8 +3481,16 @@ export class PipelineCompoundMixin {
         [buildUnsupportedPostAuxWarning(postAuxContext, removedPostAux)]
       ];
     }
+    return NO_COMPOUND_SHAPE;
+  }
 
-    const clauseCursor = cursor.fork(after, n, after);
+  private resolveCompoundClauseConnector(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    runtimeCursor: TokenCursor<RuntimeHaruToken>,
+    clauseCursor: TokenCursor<MatcherToken>
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, after, n, consumed, voice } = t;
     const clause = matchClauseConnector(clauseCursor);
     if (clause !== undefined) {
       const extra = clauseCursor.consumed;
@@ -3535,7 +3517,15 @@ export class PipelineCompoundMixin {
       }) ?? plan;
       return [consumed + extra, "", koreanPos, planWithChoice];
     }
+    return NO_COMPOUND_SHAPE;
+  }
 
+  private resolveCompoundAttributive(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput,
+    clauseCursor: TokenCursor<MatcherToken>
+  ): CompoundResult | null | typeof NO_COMPOUND_SHAPE {
+    const { cursor, koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, after, n, consumed, voice } = t;
     const checkRentai = (
       (options.rentaiCheckToken !== undefined && options.rentaiCheckToken !== null && auxTokens.length === 0 && hasRentaikei(options.rentaiCheckToken)) ||
       (auxTokens.length > 0 && hasRentaikei(auxTokens[auxTokens.length - 1]!))
@@ -3600,7 +3590,14 @@ export class PipelineCompoundMixin {
         }
       }
     }
+    return NO_COMPOUND_SHAPE;
+  }
 
+  private realizeCompoundTerminal(
+    this: PipelineCompoundResolver & PipelineCompoundMixin,
+    t: CompoundTailInput
+  ): CompoundResult {
+    const { cursor, koreanLemma, irregular, koreanPos, auxTokens, contentToken, options, after, n, consumed, voice } = t;
     const sfpCursor = cursor.fork(after, n, after);
     const sfpType = detectSfp(sfpCursor, options.jpPos0 ?? 動詞, auxTokens.length > 0);
     const plan = this.buildPredicatePlan({
@@ -3810,51 +3807,6 @@ export function startsWithPotentialAux(auxTokens: readonly Pick<MatcherToken, "p
   return auxTokens.length > 0 && (auxTokens[0]!.pos & POS4) === 助動詞_レル;
 }
 
-export function isAuxiliaryVerbToken(token: MatcherToken, renyouAuxVerbs: ReadonlySet<string>): boolean {
-  return (token.pos & POS01) === 動詞_非自立可能 && renyouAuxVerbs.has(token.dictionaryForm);
-}
-
-export function isKireruToken(token: MatcherToken): boolean {
-  return (token.pos & POS01) === 動詞_非自立可能 && (token.dictionaryForm === "きれる" || token.dictionaryForm === "切れる");
-}
-
-export function isSugiruAuxiliaryToken(token: MatcherToken): boolean {
-  return (token.pos & POS01) === 動詞_非自立可能 && (token.dictionaryForm === "すぎる" || token.dictionaryForm === "過ぎる");
-}
-
-export function isKiruToken(token: MatcherToken): boolean {
-  return (token.pos & POS01) === 動詞_非自立可能 && (token.dictionaryForm === "きる" || token.dictionaryForm === "切る");
-}
-
-export function isOeruAuxiliaryToken(token: MatcherToken): boolean {
-  return (token.pos & POS01) === 動詞_非自立可能 && token.dictionaryForm === "終える";
-}
-
-export function isSahenProductiveFollowingToken(token: MatcherToken): boolean {
-  return (token.pos & POS0) === 動詞 && sahenProductiveFollowingForms().has(token.dictionaryForm);
-}
-
-export function isTailOnlyProductiveFollowingToken(token: MatcherToken): boolean {
-  return (token.pos & POS0) === 動詞 && tailOnlyProductiveFollowingForms().has(token.dictionaryForm);
-}
-
-export function isUruPotentialTailToken(token: MatcherToken): boolean {
-  return (token.pos & POS01) === 動詞_非自立可能 && uruPotentialTailForms().has(token.dictionaryForm);
-}
-
-export function isColloquialIntensiveTailToken(token: MatcherToken): boolean {
-  return (token.pos & POS0) === 動詞 && colloquialIntensiveTailForms().has(token.dictionaryForm);
-}
-
-export function isReciprocalAuTailToken(token: MatcherToken): boolean {
-  return isVerbLemma(token, "合う", "あう");
-}
-
-export function isSahenSuruRenyou(tokens: readonly MatcherToken[], pos: number): boolean {
-  const token = tokens[pos];
-  return token !== undefined && (token.pos & (POS01 | POS5A)) === (動詞_非自立可能 | 連用形_) && token.dictionaryForm === "する";
-}
-
 export function matchStandaloneNaitoTerminal(
   cursor: TokenCursor<MatcherToken>,
   auxTokens: readonly MatcherToken[]
@@ -3953,6 +3905,3 @@ function tryAttributiveAt(
   return null;
 }
 
-function runtimeTokens(tokens: readonly MatcherToken[]): RuntimeHaruToken[] {
-  return tokens.map(runtimeToken);
-}

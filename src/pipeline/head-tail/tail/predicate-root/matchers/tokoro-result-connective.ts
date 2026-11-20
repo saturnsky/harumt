@@ -1,7 +1,8 @@
 import type { RuntimeHaruToken } from "../../../../../types/token.js";
 import type { LookupTables } from "../../../../lookup-tables.js";
 import { isClauseSpaceOrAdverbToken, nextNonSpaceIndex, nextTransparentEvidenceIndex } from "../../../../clause-layout/trivia.js";
-import { isClauseEvidenceTransparentPunctuation, type ProtoClauseLayout } from "../../../../clause-layout/index.js";
+import { isClauseEvidenceTransparentPunctuation } from "../../../../clause-layout/index.js";
+import type { ProtoClauseLayout } from "../../../../clause-layout/proto-layout.js";
 import { activeProtoLayout } from "../../../../clause-layout/proto-state.js";
 import { firstMainClausePredicateEvidenceAfter } from "../../../../clause-layout/phrase-enumeration.js";
 import { isCaseParticleNoToken, isGaNoConvertedSubjectParticle } from "../../../../semantics/gano-conversion.js";

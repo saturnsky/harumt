@@ -51,10 +51,8 @@ import { stemCandidateIdentitiesEqual, stemCandidateIdentity } from "./stem-cand
 import type { PassiveClass } from "../../../voice-class.js";
 
 import type { ContextGrammar } from "../../../context.js";
-import type {
-  ClauseLayout,
-  PairedVolitionalConcessiveEvidence
-} from "../../../clause-layout/index.js";
+import type { ClauseLayout } from "../../../clause-layout/final-layout.js";
+import type { PairedVolitionalConcessiveEvidence } from "../../../clause-layout/layout-types.js";
 import { isClauseEvidenceTransparentPunctuation } from "../../../clause-layout/punctuation.js";
 import { hasTokoroAboutToSignal, hasTokoroAlmostSignal, isTokoroDesiredResultHead, isTokoroKininaruHead } from "../families/tokoro-semantics.js";
 import { lookupSetMatches, type LookupTables } from "../../../lookup-tables.js";
@@ -70,7 +68,7 @@ import {
   nominalizerQuestionContentConnectiveRelationAt
 } from "../../boundary/marker.js";
 import { hydrateBenefactivePayloads } from "./benefactive-hydration.js";
-import { isSeruCausativeAuxToken, isShimeruCausativeAuxToken } from "./parser.js";
+import { isShimeruCausativeAuxToken, isSeruCausativeAuxToken } from "./classifiers/causative-aux.js";
 import { senseRequiresSourceEvidence } from "./frame-evidence.js";
 import { quoteStructuralRelationsForHost } from "../../../structural-relation/quote.js";
 import { TokenCursor } from "../../../token-cursor.js";

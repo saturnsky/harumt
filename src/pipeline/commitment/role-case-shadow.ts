@@ -9,9 +9,6 @@ export const BUCKET_DEFAULT_NO_EXPLICIT_PREFERENCE = "default_no_explicit_prefer
 export const BUCKET_MISSING_DEFAULT = "missing_default";
 export const BUCKET_EMPTY_REALIZATION = "empty_realization";
 export const BUCKET_DIRECT_CASE_PREFERENCES_ON_FRAME = "direct_case_preferences_on_frame";
-export const BUCKET_FALLBACK_SURFACE_PREFERENCE = "fallback_surface_preference";
-export const BUCKET_MULTI_PARTICLE_UNSUPPORTED = "multi_particle_unsupported";
-export const BUCKET_NO_FILLED_SLOT = "no_filled_slot";
 
 type CaseValue = string | null;
 type CaseSpec = string | {
@@ -38,13 +35,6 @@ export interface RoleCaseShadowTranslation {
   readonly caseRealization?: CaseRealization;
   readonly casePreferences?: CasePreferences;
 }
-
-export type RoleCaseTraceValue =
-  | string
-  | number
-  | null
-  | readonly string[]
-  | RoleCaseTraceRoles;
 
 export type RoleCaseTraceRoles = Record<string, RoleCaseTraceRole>;
 

@@ -6,7 +6,7 @@ import type {
   CommitmentCandidate,
   HeadOwnerCandidateCommitmentPayload,
   HeadOwnerCandidateCommitmentPayloadSlot
-} from "../../deferred-commitment.js";
+} from "../../commitment/types.js";
 import type { HeadOwnerCandidateDescriptor } from "../head/profile.js";
 import {
   candidateSetMembers,

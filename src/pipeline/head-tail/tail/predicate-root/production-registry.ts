@@ -2,7 +2,7 @@ import {
   STRUCTURAL_RELATION_KIND_VALUES,
   type StructuralRelation
 } from "../../../structural-relation/types.js";
-import type { ClauseLayout } from "../../../clause-layout/index.js";
+import type { ClauseLayout } from "../../../clause-layout/final-layout.js";
 import type { UtteranceClosureKind } from "../../../clause-layout/utterance-closure.js";
 import type { ClauseRoleEnvelope } from "../../grammar.js";
 import type { ClauseBoundary, ClauseTailIR } from "./commit.js";
@@ -47,8 +47,7 @@ import {
   productionOpPredicateRequiredFields,
   validateProductionOpPredicate,
   type ProductionOpPredicatePattern,
-  type ProductionOpPredicateSpec,
-  type ProductionOpPredicateSpecForKind
+  type ProductionOpPredicateSpec
 } from "./production-admission-contract.js";
 import {
   compileProductionClaimExpression,
@@ -61,12 +60,7 @@ export { PRODUCTION_LOWERING_KEYS, type ProductionLoweringKey } from "./producti
 export * from "./production-admission-contract.js";
 export * from "./production-claim-access.js";
 
-export {
-  isConditionalQuoteProductionMatch,
-  normalizeCarrierInternalConnectives,
-  PRODUCTION_REGISTRY,
-  tailRootHasMidChainConnective
-} from "./production-families.js";
+export { PRODUCTION_REGISTRY } from "./production-families.js";
 
 export type ProductionNonAdmissionPolicy = "split" | "preserve" | "reject";
 
@@ -1312,12 +1306,10 @@ function preparedFamilyClaims(
   prepared: PreparedProductionFamilyOpAxis,
   registry: readonly ProductionFamily[]
 ): boolean {
-  if (root.tail.kind !== "auxLayer") return false;
-  return productionFamilyConditionsMatch(root, prepared.family.conditions) &&
-    prepared.matchingDomains.some((domain) =>
-      terminalConditionsMatch(root, root.tail as AuxLayerNode, domain.terminal)
-    ) &&
-    (prepared.invariantClaim ?? evaluateProductionFamilyClaim(root, prepared.family, registry));
+  return familyClaimHolds(root, prepared.family, registry, {
+    opMatchedDomains: prepared.matchingDomains,
+    invariantClaim: prepared.invariantClaim
+  });
 }
 
 function preparedProductionMatchesInFamily(
@@ -1972,17 +1964,6 @@ export function productionFamilyConditionsMatch(
   return terminalConditionsMatch(root, root.tail, conditions.terminal);
 }
 
-export function productionFamilyClaimDomainMatches(
-  root: TailRoot,
-  family: ProductionFamily
-): boolean {
-  if (root.tail.kind !== "auxLayer") {
-    return false;
-  }
-  const layer = root.tail;
-  return familyClaimDomainMatchesLayer(root, layer, family);
-}
-
 function familyClaimDomainMatchesLayer(
   root: TailRoot,
   layer: AuxLayerNode,
@@ -2029,9 +2010,7 @@ export function evaluateProductionFamilyClaim(
       if (referenced === undefined) {
         throw new Error(`unknown production family claim reference: ${familyId}`);
       }
-      const result = productionFamilyConditionsMatch(root, referenced.conditions) &&
-        productionFamilyClaimDomainMatches(root, referenced) &&
-        evaluateProductionFamilyClaim(root, referenced, registry, evaluating);
+      const result = familyClaimHolds(root, referenced, registry, { evaluating });
       referencedClaims.set(familyId, result);
       return result;
     });
@@ -2186,10 +2165,26 @@ export function productionFamilyClaims(
   family: ProductionFamily,
   registry: readonly ProductionFamily[] = installedProductionRegistry()
 ): boolean {
+  return familyClaimHolds(root, family, registry);
+}
+
+function familyClaimHolds(
+  root: TailRoot,
+  family: ProductionFamily,
+  registry: readonly ProductionFamily[],
+  options: {
+    readonly opMatchedDomains?: readonly ProductionFamilyClaimDomain[];
+    readonly invariantClaim?: boolean | undefined;
+    readonly evaluating?: Set<string>;
+  } = {}
+): boolean {
   if (root.tail.kind !== "auxLayer") return false;
-  const admitted = productionFamilyConditionsMatch(root, family.conditions) &&
-    familyClaimDomainMatchesLayer(root, root.tail as AuxLayerNode, family);
-  return admitted && evaluateProductionFamilyClaim(root, family, registry);
+  const layer = root.tail;
+  return productionFamilyConditionsMatch(root, family.conditions) &&
+    (options.opMatchedDomains === undefined
+      ? familyClaimDomainMatchesLayer(root, layer, family)
+      : options.opMatchedDomains.some((domain) => terminalConditionsMatch(root, layer, domain.terminal))) &&
+    (options.invariantClaim ?? evaluateProductionFamilyClaim(root, family, registry, options.evaluating));
 }
 
 function clauseConditionsMatch(

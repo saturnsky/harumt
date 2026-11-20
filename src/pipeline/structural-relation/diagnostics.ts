@@ -8,15 +8,6 @@ import type {
   StructuralRelationTokenSpan,
 } from "./types.js";
 
-export const STRUCTURAL_RELATION_PROVENANCE = "structural_relation_owner" as const;
-
-export const STRUCTURAL_RELATION_DIAGNOSTIC_NAMES = [
-  "structural_relation_degraded",
-  "layout_blocker",
-  "relation_conflict",
-  "projection_unavailable",
-] as const satisfies readonly StructuralRelationDiagnosticName[];
-
 export function buildStructuralRelationDiagnostic(options: {
   readonly name: StructuralRelationDiagnosticName;
   readonly severity: StructuralRelationDiagnosticSeverity;

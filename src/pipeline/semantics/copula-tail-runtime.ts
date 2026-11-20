@@ -8,7 +8,7 @@ import { hasHardTerminalPunctuationClass } from "../head-tail/boundary/punctuati
 import type { LookupTables } from "../lookup-tables.js";
 import { nextNonSpaceIndex, previousNonSpaceIndex } from "../clause-layout/trivia.js";
 import { compositeConnectivePatternRelationAt } from "../head-tail/tail/connective-span-scanner.js";
-import { lookupConnectiveBySurface } from "../head-tail/tail/predicate-root/grammar.js";
+import { lookupConnectiveBySurface } from "../head-tail/tail/predicate-root/connective-surface-lookup.js";
 import { hasTerminalSentenceMark } from "./terminal-runtime.js";
 import { isKanaQuestionNaParticleSurface, isTerminalNeSfpSurface, isTerminalSkipSfpSurface, isTerminalYoSfpSurface } from "./sfp-surface.js";
 import { TokenCursor } from "../token-cursor.js";
@@ -29,8 +29,6 @@ import {
   助詞_副助詞,
   助動詞,
   助動詞_ダ,
-  助動詞_デス,
-  動詞,
   補助記号,
   連用形_,
   대명사,
@@ -38,7 +36,8 @@ import {
   명사,
   수사,
   접미사,
-  형용사, 接尾辞_名詞的,
+  형용사,
+  接尾辞_名詞的
 } from "../../types/pos.js";
 export interface CopulaTailRuntimeToken {
   readonly surface: string;

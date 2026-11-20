@@ -1,10 +1,4 @@
-import type { CollocationDictionary, CollocationRuntimeToken } from "../dictionary/collocation.js";
-import {
-  rawSourceSurfaceText,
-  rawSourceWarningSpan,
-  UNOWNED_TAIL_FALLBACK_RAW_OP_KIND,
-  unsupportedGrammarRawWarning
-} from "./fallback/unsupported-raw.js";
+import type { CollocationDictionary } from "../dictionary/collocation.js";
 import type { ReanalysisDictionary } from "../dictionary/reanalysis.js";
 import { isReanalysisFlipRequest, type ReanalysisFlipRequest } from "../types/reanalysis.js";
 import { resolveDeferredReanalysisProposals, type ReanalysisResolutionRecord } from "./commitment/deferred-reanalysis.js";
@@ -14,28 +8,26 @@ import { extractFeatures as auxExtractFeatures, nounCopula, nounCopulaConnective
 import { asIrregular, conjugate, type IrregularType } from "../generator/conjugator.js";
 import { hasBatchim } from "../generator/hangul.js";
 import { isUnitSymbolSurface } from "../generator/korean-reading.js";
-import { allomorphHostTextFromAnchor, allomorphReadingForRealizedText, segmentIsAllomorphTransparent, segmentIsGeneratedSpacing, trailingNumeralHostKorean } from "./rendering/allomorph-host.js";
+import { allomorphReadingForRealizedText, trailingNumeralHostKorean } from "./rendering/allomorph-host.js";
 import { applyInitialDueum } from "../generator/hanja.js";
-import { ALLOMORPH_MAP, mapParticle, NI_ABSORB_ENDINGS, SKIP_SUBPOS } from "../generator/particle-map.js";
+import { mapParticle, NI_ABSORB_ENDINGS } from "../generator/particle-map.js";
 import { secondaryParticleCanonical } from "./particles/secondary-particle.js";
-import { PARTICLE_PAIRS, selectParticle, type ParticleKey } from "../generator/particles.js";
+import { selectParticle } from "../generator/particles.js";
 import { type ReadingRule } from "../generator/readings.js";
-import type { MorphemeEntry, MorphemeSense } from "../types/dictionary.js";
-import type { RuleTraceDetailValue } from "../types/pipeline.js";
-import type { ProjectionConfidence, RenderedTarget, SourceInternalBoundaryTarget, TargetSegment, TargetSegmentKind } from "../types/projection.js";
-import { legacySurfaceCompositionPlan, isNominalHeadTailChainRenderPlan, isPredicateHeadTailChainRenderPlan, renderPlanStartsWithShortNegation, spanLocalRenderPlanNode, type AttributiveRealization, type ConjugatedLemmaPlan, type RenderPlan } from "../types/render-plan.js";
+import type { MorphemeEntry } from "../types/dictionary.js";
+import type { RuleTraceDetailValue, ParticleAssignment } from "../types/pipeline.js";
+import type { RenderedTarget, TargetSegment } from "../types/projection.js";
+import { legacySurfaceCompositionPlan, isNominalHeadTailChainRenderPlan, isPredicateHeadTailChainRenderPlan, renderPlanStartsWithShortNegation, type AttributiveRealization, type ConjugatedLemmaPlan, type RenderPlan } from "../types/render-plan.js";
 import { ANNOTATION_KEY_OOV, ANNOTATION_KEY_USER_DICT, type AnnotatedSegment } from "../types/annotation.js";
-import type { RuntimeHaruToken, HaruTokenRuntimeFields, SourceTokenSpan } from "../types/token.js";
-import {
-  computeSourceCharSpan,
-  computeSourceSpan,
-  isLongVowelReductionAligned,
-  withRuntimeTokenSourceSpan
-} from "../types/token.js";
-import { applySourceRubyReadingFragments } from "./source-ruby-replay.js";
+import type { RuntimeHaruToken } from "../types/token.js";
 import type { Warning } from "../types/warning.js";
-import { hasRentaikei, isTameReasonHeadContext, resolveNominalAttributiveEvidence } from "./attributive.js";
-import { buildClauseLayoutFromProto, buildProtoLayout, prenominalMarkerHeadReachAfterToken, type ClauseBoundaryDetectionOptions, type ClauseLayout, type PrenominalMarkerHeadReach, type TokenSpaceSourceContext } from "./clause-layout/index.js";
+import { hasRentaikei } from "./attributive.js";
+import { buildClauseLayoutFromProto, type ClauseLayout } from "./clause-layout/final-layout.js";
+import { buildProtoLayout } from "./clause-layout/index.js";
+import { prenominalMarkerHeadReachAfterToken } from "./clause-layout/prenominal-head-reach.js";
+import type { ClauseBoundaryDetectionOptions, TokenSpaceSourceContext } from "./clause-layout/layout-types.js";
+import type { ProtoClauseLayout } from "./clause-layout/proto-layout.js";
+import type { PrenominalMarkerHeadReach } from "./clause-layout/nominal-anchor-evidence.js";
 import {
   collectRenyouVerbReadingProposals,
   reverifiedRenyouVerbReadings,
@@ -50,39 +42,27 @@ import {
 } from "./clause-layout/whitespace-attributive-reading.js";
 import { ownedSelectedFrameSlotFills } from "./commitment/semantic-frame.js";
 import { buildStructuralRelationGraph } from "./structural-relation/collect.js";
-import { collectBareKaQuestionContentRelations, quoteStructuralRelationAt, quoteStructuralRelationIndex } from "./structural-relation/quote.js";
-import { canonicalReformulationMarkerRelationIndex, isKaDouKaMarker, isWhIndefiniteKaMarker, terminalQuestionKaRelationAt } from "./head-tail/boundary/ka-ownership.js";
-import { looksEmbeddedQuestionKaNominalizedBoundary } from "./quote/embedded-question.js";
-import { applyStructuralRelationRender, defaultStructuralRelationRenderConfig, projectPredicateHeadTailAttributivePlan, relationSourceUnitSequenceParts, structuralRelationRenderTokenSpans, type StructuralRelationRenderConfig, type StructuralRelationRenderResult } from "./structural-relation/render.js";
-import {
-  isAdnominalCopulaToken,
-  isUnrealizableCopulaPoliteAuxiliaryMood
-} from "./head-tail/tail/predicate-root/classifiers/tokens.js";
+import { collectBareKaQuestionContentRelations } from "./structural-relation/quote-question-content.js";
+import { quoteStructuralRelationIndex } from "./structural-relation/quote.js";
+import { canonicalReformulationMarkerRelationIndex, isWhIndefiniteKaMarker } from "./head-tail/boundary/ka-ownership.js";
+import { applyStructuralRelationRender, defaultStructuralRelationRenderConfig, structuralRelationRenderTokenSpans, type StructuralRelationRenderConfig, type StructuralRelationRenderResult } from "./structural-relation/render.js";
+import { projectPredicateHeadTailAttributivePlan } from "./structural-relation/render-attributive.js";
+import { relationSourceUnitSequenceParts } from "./structural-relation/render-source-sequence.js";
+import { isAdnominalCopulaToken } from "./head-tail/tail/predicate-root/classifiers/tokens.js";
 import type { StructuralRelationGraph } from "./structural-relation/types.js";
-import { tryResolveKonosonoUchi, tryResolveMamaDewa, tryFixRenyouVerbNoun, tryFixSentenceFinalDore, tryMergeAdverbialShite, tryRescueSentenceInitialNandes, tryRescueSentenceInitialToiuWakeda, tryRescueSentenceInitialToiuWakede, tryResolveDemonstrativeTame, tryResolveDonnaniConcessive, tryResolveDoushita, tryResolveDoushitemo, tryResolveDoushiyou, tryResolveNiOujiResponse, tryResolveSentenceInitialTokoroDiscourse, niOujiResponsePrevToken } from "./fallback/collocation-rescue.js";
-import { PipelineCompoundMixin, type CompoundResult, type PipelineCompoundResolver } from "./compounds/index.js";
+import { tryResolveKonosonoUchi, tryResolveMamaDewa, tryFixRenyouVerbNoun, tryFixSentenceFinalDore, tryMergeAdverbialShite, tryRescueSentenceInitialNandes, tryRescueSentenceInitialToiuWakeda, tryRescueSentenceInitialToiuWakede, tryResolveDemonstrativeTame, tryResolveDonnaniConcessive, tryResolveDoushita, tryResolveDoushitemo, tryResolveDoushiyou, tryResolveNiOujiResponse, tryResolveSentenceInitialTokoroDiscourse } from "./fallback/collocation-rescue.js";
+import { PipelineCompoundMixin, type PipelineCompoundResolver } from "./compounds/index.js";
+import type { CompoundResult } from "./compounds/compound-translation-candidates.js";
 import { contentResultKoreanCache, contentResultKoreanPos, type ContentResult } from "./content-types.js";
 import { PipelineContentResolverMixin } from "./content-resolver.js";
 import type { ContentResolverRuntimeAccess } from "./content-resolver/types.js";
-import { lookupConditionMatches, resolveContext, translationFrameAlternativeMatchesWithoutLayout, type ContextContentMap, type LookupConditionValue } from "./context.js";
+import { resolveContext, translationFrameAlternativeMatchesWithoutLayout, type ContextContentMap } from "./context.js";
 import { honorificClusterLookupsFrom, honorificClusterSuffixDecision } from "./honorific-nominal-cluster.js";
-import { PREDICATE_POS, resolveCasePreference, type CasePreference, type CommitmentCandidate, type CommitmentSpan, type ExtentPostpositionCommitment, type ParticleAssignment } from "./deferred-commitment.js";
-import {
-  candidateSetCandidates,
-  candidateSetMembers,
-  candidateSetSize,
-  commitmentLaneCandidateSet,
-  createSourceCandidateSet,
-  dropCandidate,
-  isResolvedCandidateSet,
-  stagedCandidate,
-  transformCandidateSet,
-  type SourceCandidateSet
-} from "./source-candidate-set.js";
+import { PREDICATE_POS, type CasePreference } from "./commitment/types.js";
+import { resolveCasePreference } from "./commitment/particle-roles.js";
+import { candidateSetSize, createSourceCandidateSet, stagedCandidate } from "./source-candidate-set.js";
 import { resolveHostlessInterjectionAt, tryResolveDemoDiscourseConnective } from "./demo-discourse.js";
-import { readExtentPhraseAt } from "./semantics/extent-phrase.js";
-import { argumentNounLookupForms } from "./semantics/helpers.js";
-import { JP_POS_TO_KR, NONPREDICATE_CONTENT_POS_BITS, PASSTHROUGH_POS_BITS, PLACE_ADMIN_SUFFIX, PipelineFallbackMixin, isLexicalSymbolTokenAt, isNonLexicalSymbolTokenAt, isNonLexicalSymbolToken, splitFallbackKorean, tryNumeralCompound } from "./fallback/index.js";
+import { JP_POS_TO_KR, NONPREDICATE_CONTENT_POS_BITS, PASSTHROUGH_POS_BITS, PLACE_ADMIN_SUFFIX, PipelineFallbackMixin, isNonLexicalSymbolTokenAt, isNonLexicalSymbolToken, splitFallbackKorean, tryNumeralCompound } from "./fallback/index.js";
 import { buildFunctionalMinimalFallbackUnits as buildFunctionalMinimalFallbackUnitsPorted, buildLeadingFunctionalPrefixUnits as buildLeadingFunctionalPrefixUnitsPorted } from "./fallback/functional.js";
 import { applyBenefactiveRecipientOrdering } from "./semantics/benefactive-ordering-runtime.js";
 import {
@@ -91,77 +71,9 @@ import {
   applyKeijoujiKanouDeSemantics
 } from "./semantics/keijouji-de-runtime.js";
 import { isTerminalYoSfpSurface } from "./semantics/sfp-surface.js";
-import {
-  INFLECTABLE_BITS,
-  NOMINAL_BITS,
-  POS0,
-  POS01,
-  POS012,
-  POS0_NAME,
-  POS1,
-  POS4,
-  POS5A,
-  isBareNaAdjSet,
-  isNaAdjectiveDerivationalSuffix,
-  isNaAdjCapableNoun,
-  pos0in,
-  posToString,
-  記号,
-  係助詞,
-  助詞_係助詞,
-  形状詞,
-  形状詞_助動詞語幹,
-  形容詞0,
-  終止形_一般,
-  終助詞,
-  助詞,
-  助詞_格助詞,
-  助詞_終助詞,
-  助動詞,
-  助動詞_タ,
-  助動詞_ダ,
-  助動詞_デス,
-  助動詞_ナイ,
-  助動詞_ヌ,
-  助動詞_マス,
-  接頭辞,
-  接尾辞,
-  接尾辞_形容詞的,
-  代名詞,
-  動詞,
-  非自立可能,
-  副詞,
-  副助詞,
-  補助記号,
-  名詞,
-  名詞_数詞,
-  名詞_普通名詞,
-  名詞_固有名詞,
-  名詞_固有名詞_地名,
-  連体詞,
-  連用形_,
-  連用形_一般,
-  連用形_促音便,
-  감탄사,
-  관형사,
-  대명사,
-  동사,
-  명사,
-  부사,
-  수사,
-  접두사,
-  접미사,
-  접속사,
-  조사,
-  형용사,
-  기호,
-  구,
-  isCounterCapableToken,
-  isSymbolCharacterToken,
-  isNumeralToken,
-} from "../types/pos.js";
+import { NOMINAL_BITS, POS0, POS01, POS012, POS0_NAME, POS1, POS4, POS5A, isNaAdjectiveDerivationalSuffix, isNaAdjCapableNoun, pos0in, posToString, 記号, 係助詞, 助詞_係助詞, 形状詞, 形状詞_助動詞語幹, 形容詞0, 終助詞, 助詞, 助詞_格助詞, 助動詞, 助動詞_ダ, 助動詞_デス, 助動詞_ナイ, 助動詞_ヌ, 接頭辞, 接尾辞, 代名詞, 動詞, 非自立可能, 副詞, 副助詞, 補助記号, 名詞, 名詞_固有名詞_地名, 連体詞, 連用形_, 감탄사, 관형사, 동사, 명사, 부사, 수사, 접두사, 접미사, 접속사, 조사, 형용사, 기호, 구, isCounterCapableToken, isSymbolCharacterToken, isNumeralToken } from "../types/pos.js";
 export { NEG_MARKERS } from "./semantics/keijouji-de-runtime.js";
-import { dearuNounRashiiRenderPlan, isSfpSkipSurface, sfpNodeYieldsToAuthoredQuestion, trailingSfpEffectAfterFirst } from "./semantics/grammar-runtime.js";
+import { dearuNounRashiiRenderPlan } from "./semantics/grammar-runtime.js";
 import { isContentAdmissionToken } from "./lookup-tables.js";
 import type { LookupTables } from "./lookup-tables.js";
 import { collectLexicalParticleBoundaryClaims } from "./lexical-particle-boundary-claims.js";
@@ -171,10 +83,9 @@ import type { NumericTables } from "../generator/numeric-lookup.js";
 import { collectAuxTokens, runtimeTokensFromMatcher, type AuxTokens } from "./matchers.js";
 import { matchCopulaNegation } from "./rules/copula.js";
 import { focusBodyOverNegativeScopeBridgeAt } from "./head-tail/tail/predicate-root/matchers/scope-bridge.js";
-import { quantityApproximationMarker, tryMergeNumericAgeNishite, tryMergeNumericShite, tryNumeral, type NumeralResolutionContext } from "./semantics/numeric.js";
-import { lookupCarrierIdiom, type CarrierIdiomEntry } from "./semantics/carrier-idiom.js";
-import { selectedCommitmentCandidate, selectedSpanTranslation } from "./commitment/span-evidence.js";
-import { ParticleCtx, ParticleDecision, type ContentMap, type ParticleHandler } from "./particles/index.js";
+import { quantityApproximationMarker, tryMergeNumericAgeNishite, tryMergeNumericShite, type NumeralResolutionContext } from "./semantics/numeric.js";
+import { lookupCarrierIdiom } from "./semantics/carrier-idiom.js";
+import { ParticleCtx, ParticleDecision, type ContentMap } from "./particles/index.js";
 import { isUchiTemporalHeadToken } from "./particles/common.js";
 import { temporalIntervalVariantHeadedAt } from "./head-tail/tail/predicate-root/temporal-interval-head.js";
 import type { TemporalIntervalHeadVariant } from "./head-tail/tail/predicate-root/grammar.js";
@@ -186,8 +97,8 @@ import {
   type LexicalAdverbialAffiliation
 } from "./clause-layout/lexical-adverbial-affiliation.js";
 import { activeProtoLayout, useActiveProtoLayout } from "./clause-layout/proto-state.js";
-import type { ClauseTerminalPunctuationRunEvidence, ClauseTerminalPunctuationRunUnit } from "./clause-layout/punctuation.js";
-import { convertPunctuationSegments, punctuationOpensWordBoundaryAfter } from "./rendering/punctuation.js";
+import type { ClauseTerminalPunctuationRunEvidence } from "./clause-layout/punctuation.js";
+import { convertPunctuationSegments } from "./rendering/punctuation.js";
 import { punctuationSegmentsForTargetSegments, renderTargetSegmentsText } from "./rendering/target-segment-text.js";
 import { adverbialToCapableKeijoujiHost, tariKeijoujiAdverbialToEvidence } from "./semantics/tari-adverbial-marker.js";
 import { applyQuoteHostFrameRendering } from "./quote/host-runtime.js";
@@ -199,24 +110,16 @@ import {
   contentHeadDispatchNominalAppendPayload,
   contentHeadDispatchTraceDetail,
   contentHeadSelectedHeadTailCandidate,
-  tryBuildContentHeadDispatch
+  tryBuildContentHeadDispatch,
+  type ContentHeadDispatchResult
 } from "./head-tail/integration/content-head-dispatch.js";
+import type { ContestedBareStemNominalUseSlot } from "./candidate-runtime.js";
 import { contentHeadHydrationMetadataFromResult, contentHeadMetadataFromResult } from "./head-tail/integration/content-head-metadata.js";
 import { copulaFocusAdjunctRelationAt } from "./head-tail/integration/copula-focus-adjunct.js";
-import type { CopulaFocusAdjunctRealization } from "./head-tail/data/copula-focus-adjunct-table.js";
 import { shouldInsertSpaceBetweenSurfaceParts } from "./nominal-phrase-surface.js";
 import { tryBuildSemanticCarrierPredicateDispatchCursor } from "./head-tail/integration/semantic-carrier-predicate.js";
 import { tryBuildParticleHeadConsumption, type ParticleHeadAppendPayload, type ParticleHeadCasePreference } from "./particle-head-dispatch.js";
-import { isNanteQuotativeMarker, resolveTteParticleAllomorphKey } from "./semantics/marker-roles.js";
-import {
-  caseParticleMarkerRelationForToken,
-  dewaScopeBridgeRelationAt,
-  kaMarkerRelationAt,
-  nominalLinkMarkerRelationAt,
-  predicateNominalizerRelationForToken,
-  pronominalNoMarkerRelationForToken,
-  registeredClauseConnectiveRelationForToken
-} from "./head-tail/boundary/marker.js";
+import { caseParticleMarkerRelationForToken, nominalLinkMarkerRelationAt, pronominalNoMarkerRelationForToken } from "./head-tail/boundary/marker.js";
 import { applyHeadedPlanTrailingCopula, tryBuildNominalFrameCopulaChain, withParticleStemProjection, type NominalFrameCopulaChain } from "./head-tail/integration/nominal-assembly.js";
 import { tryBuildParticlePhraseCopulaChain } from "./head-tail/integration/particle-phrase-copula.js";
 import { particlePhraseCopulaHostBinding } from "./clause-layout/particle-phrase-copula.js";
@@ -232,13 +135,13 @@ import {
 import { applyKotoWoWishComplement } from "./head-tail/head/adapters/nominal/wish-complement-runtime.js";
 import { applyQuotedKotoTopicContraction } from "./head-tail/head/adapters/nominal/quoted-nominal-runtime.js";
 import { nominalTailChainAssemblyHint } from "./head-tail/head/adapters/nominal/commit.js";
-import { tryParseNominalFrame } from "./head-tail/head/adapters/nominal/parser.js";
 import {
   tryBuildNominalFrameMarkerAdapterPlan,
   nominalTailChainAttachLeft,
   nominalTailChainKoreanPos
 } from "./head-tail/head/adapters/nominal/integration.js";
-import { realizeRenderPlan, realizeRenderPlanWithTrace, renderPlanContainsAttributiveModifier, replaceLemmaRenderPlan } from "./rendering/render-plan.js";
+import { realizeRenderPlan, realizeRenderPlanWithTrace } from "./rendering/render-plan.js";
+import { renderPlanContainsAttributiveModifier } from "./rendering/render-plan-inspect.js";
 import { realizeNumeral } from "../generator/numeral-realization.js";
 import type { NumericBasePayload } from "../types/numeric-base.js";
 import { attachParticleRenderPlan } from "./rendering/particle-plan.js";
@@ -269,7 +172,6 @@ import {
   type PronominalNoDispatchResult
 } from "./pronominal-no-dispatch.js";
 export { PRONOUN_POSSESSIVE_CONTRACTIONS, PRONOUN_SUBJECT_CONTRACTIONS } from "./pronominal-no-dispatch.js";
-import type { ConnectiveOp, SfpEffect, SfpNode, TailRoot } from "./head-tail/tail/predicate-root/grammar.js";
 import {
   buildTailParserFallbackAssemblyDescriptor,
   buildTailParserFailureFallbackProvenance,
@@ -283,9 +185,10 @@ import {
   type TailChainAssemblyDescriptor
 } from "./head-tail/integration/tail-assembly.js";
 import { hydrateTailChainRootWithHeadMetadata, tailChainPreviousSahenNounAbsorptionStart } from "./head-tail/tail/predicate-root/head-hydration.js";
-import { isBareNominalQuoteStart, isContestedZeroTailClaimCoordinate, nounPhraseCopulaPredicateStartKind, tailChainHeadProfile, type NounPhraseCopulaStartKind, type TailChunkResult } from "./head-tail/tail/predicate-root/integration.js";
+import { isBareNominalQuoteStart, nounPhraseCopulaPredicateStartKind } from "./head-tail/tail/predicate-root/integration/head-admission.js";
+import { isContestedZeroTailClaimCoordinate, tailChainHeadProfile } from "./head-tail/tail/predicate-root/integration.js";
+import type { TailChunkResult } from "./head-tail/tail/predicate-root/integration/contracts.js";
 import { copulaStartsPredicateAt } from "./head-tail/tail/predicate-root/integration/readiness.js";
-import { auxOpCarriesCommandIllocution, auxOpsInTailNode } from "./head-tail/tail/predicate-root/inspect.js";
 import { probeProductionDispatch } from "./head-tail/tail/predicate-root/production-registry.js";
 import {
   attachRegisteredHeadedAssemblyUnitPlanLifecycle,
@@ -299,96 +202,48 @@ import {
   isQuotedJudgmentPassiveQuotationContext,
   nextVerbDictForm
 } from "./semantics/helpers.js";
-import { isCopulaAuxToken, resolveCopulaAdj, terminalQuestionTail } from "./semantics/copula-tail-runtime.js";
-import {
-  SEPARATION_OPENS_BOUNDARY,
-  nextNonSpaceIndex,
-  previousNonSpaceIndex,
-  separatedAs
-} from "./clause-layout/trivia.js";
+import { isCopulaAuxToken, terminalQuestionTail } from "./semantics/copula-tail-runtime.js";
+import { nextNonSpaceIndex, previousNonSpaceIndex } from "./clause-layout/trivia.js";
 import { TokenCursor } from "./token-cursor.js";
 import { hasTerminalSentenceMark } from "./semantics/terminal-runtime.js";
 import { TraceCollector, TraceEvent } from "./trace.js";
-import { commitWinner, hasTranslationAccess, winner, winnerKorean, winnerKoreanPos } from "./translation/access.js";
+import { hasTranslationAccess, winner, winnerKorean, winnerKoreanPos } from "./translation/access.js";
 import { metadataAdverbial } from "./translation/metadata.js";
-import { allNonWhitespaceTokensCovered, clearGeneratedSurfaceCache, collectAnnotationKeys, collectUncoveredTokenIndices, emitsOutput, findBatchimSource, findUnitCoveringIndex, FunctionalKind, TokenUnitIndex, TranslationUnit, UnitType, phase3InvariantHolds, type HonorificLevel, type TranslationUnitProvenance } from "./translation/unit.js";
+import { allNonWhitespaceTokensCovered, clearGeneratedSurfaceCache, collectUncoveredTokenIndices, emitsOutput, findBatchimSource, findUnitCoveringIndex, FunctionalKind, TokenUnitIndex, TranslationUnit, UnitType, phase3InvariantHolds, type HonorificLevel, type TranslationUnitProvenance, lastContentUnit, lastOutputUnit, absorbIntoPrecedingUnit } from "./translation/unit.js";
 import { quoteMarkerRelationAt } from "./head-tail/boundary/quote-marker.js";
 import { isQuestionParticleKaToken, questionContentPunctuationBridgeRelationAt } from "./head-tail/boundary/marker.js";
+import { hasHardTerminalPunctuationClass, isHardTerminalPunctuationToken, isWeakPunctuationToken } from "./head-tail/boundary/punctuation.js";
 import {
-  hasHardTerminalPunctuationClass,
-  hasHardTerminalPunctuationRelation,
-  hasWeakPunctuationRelation,
-  isHardTerminalPunctuationToken,
-  isWeakPunctuationToken,
-  isTrailingPunctuationToken,
-  isTrailingPunctuationSurface,
-  carriesLexicalSurface
-} from "./head-tail/boundary/punctuation.js";
-import { isParentheticalClosingToken, parentheticalSpanEndingAt, OPENING_BRACKET_BY_CLOSING } from "./head-tail/boundary/parenthetical.js";
-import { moraStutterRepeatIndex } from "./disfluency/stutter-prefix.js";
-import { teDeContinuationRelationAt } from "./head-tail/tail/postverb-tail-classifier.js";
-import { createConnectiveOp } from "./head-tail/tail/predicate-root/op-builders.js";
-
-export interface AssemblerToken extends HaruTokenRuntimeFields {
-  readonly surface: string;
-  readonly dictionaryForm: string;
-  readonly reading?: string;
-  readonly dictionaryFormReading?: string;
-  readonly pos: number;
-}
-
-function applyMoraStutterPrefixToGeneratedText(unit: TranslationUnit, text: string): string {
-  const stutter = unit.jpHead.stutterPrefix;
-  if (stutter === undefined || stutter.repeatCount <= 0) {
-    return text;
-  }
-  const index = moraStutterRepeatIndex(text);
-  if (index === null) {
-    return text;
-  }
-  const char = String.fromCodePoint(text.codePointAt(index)!);
-  const prefix = Array.from({ length: stutter.repeatCount }, () => `${char}, `).join("");
-  return `${text.slice(0, index)}${prefix}${text.slice(index)}`;
-}
-
-function isKeijoujiVerbObjectHost(token: RuntimeHaruToken | undefined): boolean {
-  return token !== undefined && isBareNaAdjSet(token);
-}
-
-function isClauseConnectiveEmphasisParticle(
-  cursor: TokenCursor<RuntimeHaruToken>
-): boolean {
-  const token = cursor.current();
-  if (token?.surface !== "こそ" || (token.pos & POS0) !== 助詞) {
-    return false;
-  }
-  return registeredClauseConnectiveRelationForToken(cursor.tokens[cursor.pos - 1], cursor.pos - 1, {
-    acceptedSurfaces: ["から"],
-    acceptedParticleSubtypes: ["接続助詞", "格助詞"],
-    consumers: ["assembler"]
-  }) !== null;
-}
-
-export const SUFFIX_NOUN_CHARS = new Set(Array.from("図集論伝記書誌表巻編"));
-
-export function isSuffixNounUnit(unit: Pick<TranslationUnit, "jpHead">): boolean {
-  const surface = unit.jpHead.surface;
-  const pos = unit.jpHead.pos;
-  return surface.length === 1 && SUFFIX_NOUN_CHARS.has(surface) && (pos & POS012) === 名詞_普通名詞                             ;
-}
-
-export function prevIsNominalUnit(unit: Pick<TranslationUnit, "jpHead"> | null | undefined): boolean {
-  const pos = unit?.jpHead.pos ?? 0;
-  return (pos & POS01) === 名詞_普通名詞 || (pos & POS01) === 名詞_固有名詞;
-}
-
-export function resolveTteParticle(cursor: TokenCursor<AssemblerToken>, lookups: LookupTables): string {
-  return resolveTteParticleAllomorphKey(cursor, lookups);
-}
-
-export function resolveNante(cursor: TokenCursor<AssemblerToken>, lookups: LookupTables): boolean {
-  return isNanteQuotativeMarker(cursor, lookups);
-}
+  type AllomorphIslandHost,
+  allomorphSourceFromTargetSegments,
+  isParticleKey,
+  tracedAllomorphSurface
+} from "./rendering/segment-allomorph.js";
+import {
+  annotatedSegmentsWithSpacerKeys,
+  applyTransparentPauseBoundaryAnnotationKeys,
+  collectAnnotationKeysForTargetSegment
+} from "./rendering/segment-annotation-keys.js";
+import { attachSourceInternalBoundaryTargetsToTargetSegments, interUnitSpaceSegment, lastOutputSegmentText, markConsumedWordBoundaryOnLastSegment, preserveOutputTextInTargetSegments, removeTrailingQuestionFromLastSegment, replaceLastUnitSegmentText, targetSegmentForUnit } from "./rendering/target-segment-build.js";
+import { type AssemblerToken, sourceSpanForTokenIndexes } from "./source-coordinate.js";
+import { applyMoraStutterPrefixToGeneratedText, isSuffixNounUnit, prevIsNominalUnit, type GeneratedSurfacePair, continuesReduplication, hasUserDictOverride } from "./rendering/unit-surface.js";
+import { isKeijoujiVerbObjectHost, applyTailParserFallbackDescriptorToSpan, closeUnownedTailFallbackSpanToRaw, type AssemblyContentSpan, contentSpanCoversIndex, applySourceCompoundContinuationToContentMap, makeAssemblyContentSpan, contentMapRepairSeed, selectedIntrinsicHonorificMetadata, contentHeadDispatchLimit, committedLookupEntry } from "./assembly-content-span.js";
+import { isClauseConnectiveEmphasisParticle, committedParticleAssignmentAt, isVocativeYo, particleAllomorphKey } from "./assembler/particle-helpers.js";
+import { prefixAttachRightForToken, modifiedHeadNounMatchingSelectedSense, kataVerbHostAttributivePlan, suffixNominalizerAlreadyLexicalizedInPreviousUnit, rewriteFunctionalAdjectivalSuffixHostToNominalized, suffixRenderPlanFromCommittedEntry } from "./assembler/affix-helpers.js";
+import { numeralAttachedSymbolHead, type PendingExtentPostposition, finalizeExtentPostpositionSpan, tryContentNumeral, type NumericHostYield } from "./assembler/quantity-spans.js";
+import { koreanOverrideRenderPlan } from "./assembler/content-override.js";
+import { canCarryCopulaHostPlan, decorationSurfaceParts, isQuoteClosingCopulaHostAt, isNominalizedQuestionCopulaComplementAt, politeCopulaSupportTailIsRealizable, nominalDakeCopulaHostUnit, punctuatedCopulaTailHostUnit, isEllipticConfirmationParticle, isNaniDeConfirmationVeto, matchEllipticConfirmationTerminal, trailingCopulaConnectiveSuffix, nominalDakeTameReasonTail } from "./assembler/copula-helpers.js";
+import { type RuntimePreprocessToken, runtimeTokenFromPreprocess } from "./preprocess/runtime-token-from-preprocess.js";
+import { withMergedSourcePosition, withSourcePositionFromConsumed, collocationEmissionPreservesSourceRuby, shouldSkipCollocation } from "./preprocess/collocation-emission.js";
+import { type NominalLightVerbCarrierProjection, nominalLightVerbObjectLinkAt, rewriteCarrierIdiomRenderPlan } from "./assembler/light-verb-projection.js";
+import { isAssemblerTerminalQuestionKa, applyBareQuestionRenderPlan, applyBareQuestionToRenderPlan } from "./assembler/question-plan.js";
+import { trySplitNandeReasonSpan } from "./assembler/nande-reason.js";
+import { applyCopulaFocusAdjunctRenderPlan } from "./assembler/copula-focus-plan.js";
+import { isSentencePunctuationUnit, type MoodPunctuationAnchor, moodPunctuationAnchorAt, reconcileTerminalPunctuationUnit, authoredRunClosesWithQuestion, terminalPeriodIsRedundant, isClauseCommaPunctuationUnit } from "./rendering/terminal-unit-punctuation.js";
+import { type LexicalParticleLayoutHypothesis, type LexicalLayoutHypothesisRun, type LexicalAdverbialAffiliationFacts, adoptLexicalLayoutHypothesis, sameLexicalAdverbialAffiliationFacts, type LexicalParticleOwnershipMode, type LexicalParticleOwnershipChoice, lexicalParticleOwnershipHypothesisSlots, lexicalParticleInitialOwnershipChoices, cloneAssemblyContentMap, applyLexicalParticleOwnershipChoice, lexicalParticleConsumedIndicesForChoices, lexicalParticleLayoutSemanticSignature, lexicalParticleChoiceRank, compareLexicalParticleSlotRanks, lexicalParticleChoiceIsRealized } from "./assembler/lexical-layout-hypothesis.js";
+import { harvestFailClosedSpanWarnings } from "./translation/warnings.js";
+import { isQuoteUtteranceClauseEndToken, quoteMarkerFocusRealizationAt, quotedDesireRenderPlan } from "./assembler/quote-helpers.js";
+import { absorbOrphanShuujoshi, absorbOrphanHojokigou } from "./fallback/orphan-unit-absorption.js";
 
 const PREFIX_RUN_HOST_POS_BITS = (1 << 名詞) | (1 << 代名詞) | (1 << 動詞) | (1 << 形容詞0) | (1 << 形状詞) | (1 << 連体詞);
 const PREFIX_RUN_BLOCKED_HOST_POS_BITS = (1 << 補助記号) | (1 << 記号) | (1 << 助詞) | (1 << 助動詞);
@@ -397,567 +252,6 @@ const REGISTER_NEUTRAL_BUILD_FORMAL = false;
 const HOSTLESS_INTERJECTION_LEXEME_POS: readonly string[] = ["感動詞", "一般", "*", "*"];
 
 export type TokenSpaceContext = TokenSpaceSourceContext;
-
-type GeneratedSurfacePair = readonly [TranslationUnit, string];
-
-function continuesReduplication(
-  unit: TranslationUnit,
-  previous: GeneratedSurfacePair | undefined,
-  text: string,
-  tokens: readonly RuntimeHaruToken[] | undefined
-): boolean {
-  if (previous === undefined || tokens === undefined || unit.jpIndices.length === 0 || previous[1] !== text) {
-    return false;
-  }
-  const head = tokens[Math.min(...unit.jpIndices)];
-  return head?.sourceReduplication === true && previous[0].jpIndices.includes(Math.min(...unit.jpIndices) - 1);
-}
-
-function prefixAttachRightForToken(
-  token: RuntimeHaruToken,
-  tokens: readonly RuntimeHaruToken[],
-  index: number,
-  defaultAttachRight: boolean
-): boolean {
-  if (token.dictionaryForm === "約" || token.surface === "約") {
-    const next = nextNonSpaceIndex(tokens, index + 1, tokens.length);
-    if (next !== null && ((tokens[next]?.pos ?? 0) & POS01) === 名詞_数詞) {
-      return false;
-    }
-  }
-  return defaultAttachRight;
-}
-
-function targetSegmentKindForUnit(unit: TranslationUnit): TargetSegmentKind {
-  if (unit.unitType === UnitType.SYMBOL) {
-    return "punctuation";
-  }
-  if (unit.unitType === UnitType.FUNCTIONAL) {
-    return unit.functionalKind === FunctionalKind.PARTICLE || unit.allomorphKey !== null || unit.particleRole !== null
-      ? "particle"
-      : "connective";
-  }
-  if (unit.unitType === UnitType.NUMERAL) {
-    return "lexeme";
-  }
-  if (unit.renderPlan?.kind === "legacySurfaceComposition" || unit.provenance === "fallback" || unit.provenance === "legacy_tail") {
-    return "fallback";
-  }
-  if (unit.renderPlan?.kind === "headTailChain") {
-    return "modal";
-  }
-  return "lexeme";
-}
-
-function projectionConfidenceForUnit(unit: TranslationUnit): ProjectionConfidence {
-  if (unit.provenance === "legacy_tail" || unit.provenance === "fallback") {
-    return "fallback";
-  }
-  if (unit.renderPlan === null) {
-    return "semantic";
-  }
-  return "owner";
-}
-
-function targetSegmentForUnit(
-  unit: TranslationUnit,
-  text: string,
-  options: { readonly allomorphSourceSpan?: TargetSegment["allomorphSourceSpan"] } = {}
-): TargetSegment {
-  const sourceSpan = unit.sourceSpan;
-  const sourceInternalBoundaryTargets = sourceInternalBoundaryTargetsForUnit(unit);
-  const symbolIsTransparent = unit.unitType === UnitType.SYMBOL && !isUnitSymbolSurface(text);
-  const anchorsAllomorph = !symbolIsTransparent && sourceSpan !== null && unit.allomorphKey === null;
-  return {
-    text,
-    sourceSpan,
-    boundaryBefore: sourceSpan === null ? null : {
-      beforeOrdinal: sourceSpan.startOrdinal - 1 >= 0 ? sourceSpan.startOrdinal - 1 : null,
-      afterOrdinal: sourceSpan.startOrdinal
-    },
-    boundaryAfter: sourceSpan === null ? null : {
-      beforeOrdinal: sourceSpan.endOrdinal - 1,
-      afterOrdinal: sourceSpan.endOrdinal
-    },
-    unit,
-    renderPlanKind: unit.renderPlan?.kind ?? null,
-    kind: targetSegmentKindForUnit(unit),
-    attachLeft: unit.attachLeft,
-    attachRight: unit.attachRight,
-    transparentForAllomorph: symbolIsTransparent,
-    ...(symbolIsTransparent
-      ? { allomorphRole: "transparent" as const }
-      : anchorsAllomorph
-        ? { allomorphRole: "source_anchor" as const }
-        : {}),
-    ...(options.allomorphSourceSpan === undefined ? {} : {
-      allomorphSourceSpan: options.allomorphSourceSpan
-    }),
-    ...(sourceInternalBoundaryTargets.length === 0 ? {} : { sourceInternalBoundaryTargets }),
-    projectionConfidence: projectionConfidenceForUnit(unit)
-  };
-}
-
-function sourceInternalBoundaryTargetsForUnit(unit: TranslationUnit): readonly SourceInternalBoundaryTarget[] {
-  const boundaries = unit.jpHead.sourceCompoundProjectionBoundaries ?? [];
-  if (boundaries.length === 0) {
-    return [];
-  }
-  return boundaries.map((boundary) => ({
-    sourceBoundary: boundary.sourceBoundary,
-    ...(boundary.leftTargetText === undefined ? {} : { leftTargetText: boundary.leftTargetText }),
-    ...(boundary.rightTargetText === undefined ? {} : { rightTargetText: boundary.rightTargetText }),
-    ...(boundary.leftSplitTargetText === undefined ? {} : { leftSplitTargetText: boundary.leftSplitTargetText }),
-    ...(boundary.rightSplitTargetText === undefined ? {} : { rightSplitTargetText: boundary.rightSplitTargetText })
-  }));
-}
-
-function attachSourceInternalBoundaryTargetsToTargetSegments(
-  segments: readonly TargetSegment[],
-  unit: TranslationUnit
-): TargetSegment[] {
-  const sourceInternalBoundaryTargets = sourceInternalBoundaryTargetsForUnit(unit);
-  if (sourceInternalBoundaryTargets.length === 0) {
-    return [...segments];
-  }
-  return segments.map((segment) => {
-    if (segment.unit !== unit) {
-      return segment;
-    }
-    return {
-      ...segment,
-      sourceInternalBoundaryTargets
-    };
-  });
-}
-
-function interUnitSpaceSegment(): TargetSegment {
-  return {
-    text: " ",
-    sourceSpan: null,
-    boundaryBefore: null,
-    boundaryAfter: null,
-    unit: null,
-    renderPlanKind: null,
-    kind: "punctuation",
-    attachLeft: false,
-    attachRight: false,
-    transparentForAllomorph: true,
-    allomorphRole: "transparent",
-    projectionConfidence: "exact"
-  };
-}
-
-function sourceAlignedAllomorphSourceIndexFromTargetSegments(
-  segments: readonly TargetSegment[],
-  unit: TranslationUnit
-): number {
-  const particleSpan = unit.sourceSpan;
-  if (particleSpan === null) {
-    return -1;
-  }
-  let bestIndex = -1;
-  let bestEndOrdinal = -1;
-  for (const [index, segment] of segments.entries()) {
-    if (segmentIsAllomorphTransparent(segment) || segment.sourceSpan === null) {
-      continue;
-    }
-    if (segment.allomorphRole !== "source_anchor") {
-      continue;
-    }
-    const overlapsParticleStart = segment.sourceSpan.startOrdinal <= particleSpan.startOrdinal &&
-      segment.sourceSpan.endOrdinal > particleSpan.startOrdinal;
-    const strictlyBeforeParticle = segment.sourceSpan.endOrdinal <= particleSpan.startOrdinal;
-    if (!overlapsParticleStart && !strictlyBeforeParticle) {
-      continue;
-    }
-    const rank = overlapsParticleStart
-      ? 1_000_000_000 + segment.sourceSpan.startOrdinal
-      : segment.sourceSpan.endOrdinal;
-    if (rank < bestEndOrdinal) {
-      continue;
-    }
-    bestIndex = index;
-    bestEndOrdinal = rank;
-  }
-  return bestIndex;
-}
-
-export interface AllomorphIslandHost {
-  readonly startOrdinal: number;
-  readonly endOrdinal: number;
-  readonly text: string;
-}
-
-function restoredIslandAllomorphHost(
-  islandHosts: readonly AllomorphIslandHost[],
-  segments: readonly TargetSegment[],
-  unit: TranslationUnit
-): AllomorphIslandHost | null {
-  const particleStartOrdinal = unit.sourceSpan?.startOrdinal ?? null;
-  if (islandHosts.length === 0 || particleStartOrdinal === null) {
-    return null;
-  }
-  const overlapsParticleStart = segments.some((segment) =>
-    !segmentIsAllomorphTransparent(segment) &&
-    segment.sourceSpan !== null &&
-    segment.sourceSpan.startOrdinal <= particleStartOrdinal &&
-    segment.sourceSpan.endOrdinal > particleStartOrdinal);
-  if (overlapsParticleStart) {
-    return null;
-  }
-  let nearest: AllomorphIslandHost | null = null;
-  for (const island of islandHosts) {
-    if (island.text.length === 0 || island.endOrdinal > particleStartOrdinal) {
-      continue;
-    }
-    if (nearest === null || island.startOrdinal > nearest.startOrdinal) {
-      nearest = island;
-    }
-  }
-  if (nearest === null) {
-    return null;
-  }
-  const realizedAfterIsland = segments.some((segment) =>
-    !segmentIsAllomorphTransparent(segment) &&
-    segment.sourceSpan !== null &&
-    segment.sourceSpan.startOrdinal >= nearest.endOrdinal &&
-    segment.sourceSpan.endOrdinal <= particleStartOrdinal);
-  if (realizedAfterIsland) {
-    return null;
-  }
-  return islandIsAppendedNotation(segments, lastRealizedFragment(segments)) ? null : nearest;
-}
-
-function lastRealizedFragment(segments: readonly TargetSegment[]): TargetSegment | undefined {
-  for (let index = segments.length - 1; index >= 0; index -= 1) {
-    const segment = segments[index];
-    if (segment !== undefined && !segmentIsGeneratedSpacing(segment)) {
-      return segment;
-    }
-  }
-  return undefined;
-}
-
-function islandIsAppendedNotation(
-  segments: readonly TargetSegment[],
-  previous: TargetSegment | undefined
-): boolean {
-  if (previous === undefined) {
-    return false;
-  }
-  if (carriesLexicalSurface(previous.text) || isUnitSymbolSurface(previous.text)) {
-    return true;
-  }
-  const closingChar = previous.text.trimEnd().at(-1);
-  if (closingChar === undefined ||
-    !isTrailingPunctuationSurface(closingChar) ||
-    punctuationOpensWordBoundaryAfter(closingChar)) {
-    return false;
-  }
-  const word = trailingRealizedWord(segments);
-  const openingChar = OPENING_BRACKET_BY_CLOSING.get(closingChar) ?? closingChar;
-  if (openingChar !== closingChar) {
-    return word.includes(openingChar);
-  }
-  return [...word].filter((char) => char === closingChar).length % 2 === 0;
-}
-
-function trailingRealizedWord(segments: readonly TargetSegment[]): string {
-  let word = "";
-  for (let index = segments.length - 1; index >= 0; index -= 1) {
-    const text = segments[index]?.text ?? "";
-    const spaceAt = text.search(/\s(?![\s\S]*\s)/u);
-    if (/\s/u.test(text)) {
-      return text.slice(spaceAt + 1) + word;
-    }
-    word = text + word;
-  }
-  return word;
-}
-
-function allomorphSourceFromTargetSegments(
-  segments: readonly TargetSegment[],
-  unit: TranslationUnit,
-  islandHosts: readonly AllomorphIslandHost[] = []
-): { readonly text: string; readonly sourceSpan: TargetSegment["sourceSpan"] } {
-  const island = restoredIslandAllomorphHost(islandHosts, segments, unit);
-  if (island !== null) {
-    return {
-      text: island.text,
-      sourceSpan: { startOrdinal: island.startOrdinal, endOrdinal: island.endOrdinal }
-    };
-  }
-  const sourceAlignedIndex = sourceAlignedAllomorphSourceIndexFromTargetSegments(segments, unit);
-  if (sourceAlignedIndex >= 0) {
-    const sourceAlignedText = allomorphHostTextFromAnchor(segments, sourceAlignedIndex);
-    if (sourceAlignedText.length > 0) {
-      return {
-        text: sourceAlignedText,
-        sourceSpan: segments[sourceAlignedIndex]?.sourceSpan ?? null
-      };
-    }
-  }
-  for (let index = segments.length - 1; index >= 0; index -= 1) {
-    const segment = segments[index];
-    if (
-      segment === undefined ||
-      segmentIsAllomorphTransparent(segment)
-    ) {
-      continue;
-    }
-    return { text: segment.text, sourceSpan: null };
-  }
-  return { text: "", sourceSpan: null };
-}
-
-function tracedAllomorphSurface(
-  unit: TranslationUnit,
-  allomorphSource: { readonly text: string; readonly sourceSpan: TargetSegment["sourceSpan"] }
-): string {
-  const key = unit.allomorphKey;
-  if (key === null) {
-    return unit.korean;
-  }
-  if (!isParticleKey(key)) {
-    throw new Error(`unknown particle key: ${key}`);
-  }
-  return selectParticle(allomorphSource.text, key, { register: unit.register });
-}
-
-function lastOutputSegmentIndex(segments: readonly TargetSegment[]): number {
-  for (let index = segments.length - 1; index >= 0; index -= 1) {
-    const segment = segments[index];
-    if (segment !== undefined && segment.text.length > 0 && !/^\s+$/u.test(segment.text)) {
-      return index;
-    }
-  }
-  return -1;
-}
-
-function lastOutputSegmentText(segments: readonly TargetSegment[]): string {
-  const index = lastOutputSegmentIndex(segments);
-  return index < 0 ? "" : segments[index]?.text ?? "";
-}
-
-function replaceLastUnitSegmentText(
-  segments: TargetSegment[],
-  unit: TranslationUnit,
-  text: string
-): void {
-  for (let index = segments.length - 1; index >= 0; index -= 1) {
-    const segment = segments[index];
-    if (segment?.unit !== unit) {
-      continue;
-    }
-    segments[index] = { ...segment, text };
-    return;
-  }
-}
-
-function markConsumedWordBoundaryOnLastSegment(segments: TargetSegment[]): void {
-  const index = lastOutputSegmentIndex(segments);
-  const segment = index < 0 ? undefined : segments[index];
-  if (segment === undefined) {
-    return;
-  }
-  segments[index] = { ...segment, consumedWordBoundaryAfter: true };
-}
-
-function removeTrailingQuestionFromLastSegment(segments: TargetSegment[]): void {
-  const index = lastOutputSegmentIndex(segments);
-  const segment = index < 0 ? undefined : segments[index];
-  if (segment === undefined || !segment.text.endsWith("?")) {
-    return;
-  }
-  segments[index] = { ...segment, text: segment.text.slice(0, -1) };
-}
-
-function preserveOutputTextInTargetSegments(
-  segments: readonly TargetSegment[],
-  expectedText: string
-): TargetSegment[] {
-  const actualText = segments.map(segment => segment.text).join("");
-  if (actualText === expectedText) {
-    return [...segments];
-  }
-  if (segments.length === 1) {
-    const segment = segments[0];
-    return segment === undefined ? [] : [{ ...segment, text: expectedText }];
-  }
-  const first = segments[0];
-  if (first === undefined) {
-    return [];
-  }
-  return [{
-    ...first,
-    text: expectedText,
-    projectionConfidence: "fallback"
-  }];
-}
-
-function collectAnnotationKeysForTargetSegment(
-  segment: TargetSegment,
-  tokens: readonly RuntimeHaruToken[]
-): number[] {
-  const keys = new Set<number>();
-  for (const key of segment.annotationKeys ?? []) {
-    keys.add(key);
-  }
-  if (segment.sourceSpan !== null) {
-    for (const token of tokens) {
-      const tokenSpan = token.sourceSpan ?? (token.sourceOrdinal === undefined ? null : {
-        startOrdinal: token.sourceOrdinal,
-        endOrdinal: token.sourceOrdinal + 1,
-      });
-      if (
-        tokenSpan === null ||
-        tokenSpan.endOrdinal <= segment.sourceSpan.startOrdinal ||
-        segment.sourceSpan.endOrdinal <= tokenSpan.startOrdinal ||
-        token.annotationKeys === undefined
-      ) {
-        continue;
-      }
-      for (const key of token.annotationKeys) {
-        keys.add(key);
-      }
-    }
-  }
-  if (keys.size === 0 && segment.sourceSpan === null && segment.unit !== null) {
-    for (const key of collectAnnotationKeys(segment.unit, tokens)) {
-      keys.add(key);
-    }
-  }
-  return Array.from(keys);
-}
-
-function applyTransparentPauseBoundaryAnnotationKeys(
-  annotated: AnnotatedSegment[],
-  segments: readonly TargetSegment[],
-  tokens: readonly RuntimeHaruToken[]
-): void {
-  for (const token of tokens) {
-    const keys = token.annotationKeys;
-    if (keys === undefined || keys.length === 0) continue;
-    const span = token.sourceSpan ?? (token.sourceOrdinal === undefined ? null : {
-      startOrdinal: token.sourceOrdinal,
-      endOrdinal: token.sourceOrdinal + 1,
-    });
-    if (span === null) continue;
-    if (targetSegmentAlreadyCarriesTokenPauseKey(annotated, segments, span, keys)) {
-      continue;
-    }
-    if (token.transparentPauseAfter === true) {
-      const index = targetSegmentIndexBeforeSourceBoundary(segments, span.endOrdinal);
-      if (index !== null) addAnnotationKeysToSegment(annotated[index], keys);
-    }
-    if (token.transparentPauseBefore === true) {
-      const index = targetSegmentIndexAfterSourceBoundary(segments, span.startOrdinal);
-      if (index !== null) addAnnotationKeysToSegment(annotated[index], keys);
-    }
-  }
-}
-
-function targetSegmentAlreadyCarriesTokenPauseKey(
-  annotated: readonly AnnotatedSegment[],
-  segments: readonly TargetSegment[],
-  tokenSpan: SourceTokenSpan,
-  keys: readonly number[]
-): boolean {
-  for (let index = 0; index < segments.length; index += 1) {
-    const segment = segments[index];
-    const span = segment?.sourceSpan ?? null;
-    if (
-      span === null ||
-      span.endOrdinal <= tokenSpan.startOrdinal ||
-      tokenSpan.endOrdinal <= span.startOrdinal
-    ) {
-      continue;
-    }
-    const segmentKeys = annotated[index]?.keys;
-    if (segmentKeys?.some((key) => keys.includes(key)) === true) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function targetSegmentIndexBeforeSourceBoundary(
-  segments: readonly TargetSegment[],
-  boundaryOrdinal: number
-): number | null {
-  let bestIndex: number | null = null;
-  let bestEnd = Number.NEGATIVE_INFINITY;
-  for (let index = 0; index < segments.length; index += 1) {
-    const segment = segments[index];
-    if (segment === undefined) continue;
-    const span = segment.sourceSpan;
-    if (span === null || /^\s*$/u.test(segment.text)) continue;
-    if (span.endOrdinal > boundaryOrdinal) continue;
-    if (span.endOrdinal > bestEnd) {
-      bestEnd = span.endOrdinal;
-      bestIndex = index;
-    }
-  }
-  return bestIndex;
-}
-
-function targetSegmentIndexAfterSourceBoundary(
-  segments: readonly TargetSegment[],
-  boundaryOrdinal: number
-): number | null {
-  let bestIndex: number | null = null;
-  let bestStart = Number.POSITIVE_INFINITY;
-  for (let index = 0; index < segments.length; index += 1) {
-    const segment = segments[index];
-    if (segment === undefined) continue;
-    const span = segment.sourceSpan;
-    if (span === null || /^\s*$/u.test(segment.text)) continue;
-    if (span.startOrdinal < boundaryOrdinal) continue;
-    if (span.startOrdinal < bestStart) {
-      bestStart = span.startOrdinal;
-      bestIndex = index;
-    }
-  }
-  return bestIndex;
-}
-
-function addAnnotationKeysToSegment(
-  segment: AnnotatedSegment | undefined,
-  keys: readonly number[]
-): void {
-  if (segment === undefined || keys.length === 0) return;
-  const merged = new Set(segment.keys ?? []);
-  for (const key of keys) merged.add(key);
-  const next = Array.from(merged);
-  if (next.length > 0) {
-    (segment as { keys?: readonly number[] }).keys = next;
-  }
-}
-
-function annotatedSegmentsWithSpacerKeys(segments: readonly AnnotatedSegment[]): AnnotatedSegment[] {
-  return segments.map((segment, index) => {
-    if (segment.keys !== undefined || !/^\s+$/u.test(segment.text)) {
-      return segment;
-    }
-    const previousKeys = segments[index - 1]?.keys;
-    const nextKeys = segments[index + 1]?.keys;
-    if (previousKeys === undefined || nextKeys === undefined) {
-      return segment;
-    }
-    const shared = previousKeys.filter((key) => nextKeys.includes(key));
-    return shared.length === 0
-      ? segment
-      : { ...segment, keys: [...new Set(shared)] };
-  });
-}
-
-function numeralAttachedSymbolHead(tokens: readonly AssemblerToken[], start: number): boolean {
-  const head = tokens[start];
-  return head !== undefined &&
-    isLexicalSymbolTokenAt(tokens, start) &&
-    isUnitSymbolSurface(head.surface);
-}
 
 export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
   _formal = false;
@@ -1074,18 +368,6 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
       }
     }
     return undefined;
-  }
-
-  static keijoujiKanouNominalText(unit: TranslationUnit): string {
-    let source = unit.korean;
-    const entry = unit.entry;
-    if (entry !== null && hasTranslationAccess(entry)) {
-      source = winnerKorean(entry) ?? source;
-    }
-    if (source.endsWith("하다")) {
-      return source.slice(0, -2);
-    }
-    return unit.korean;
   }
 
   static shouldCacheSurface(renderPlan: RenderPlan | null | undefined): boolean {
@@ -1250,28 +532,8 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
     );
   }
 
-  static async runParticleRules(ctx: ParticleCtx, rules: readonly ParticleHandler[]): Promise<number | null> {
-    for (const rule of rules) {
-      const decision = await rule(ctx);
-      if (decision === null) {
-        continue;
-      }
-      if (decision.kind === "emit") {
-        return decision.consumed;
-      }
-      if (decision.kind === "map_fallback") {
-        return null;
-      }
-    }
-    return null;
-  }
-
   static particleEmit(consumed: number): ParticleDecision {
     return new ParticleDecision("emit", consumed);
-  }
-
-  static particleMapFallback(): ParticleDecision {
-    return new ParticleDecision("map_fallback");
   }
 
   static appendCommittedParticle(
@@ -1816,20 +1078,16 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
 
   private async contentPass(
     tokens: readonly RuntimeHaruToken[],
-    options: {
-      readonly trace?: TraceCollector | null;
-      readonly startIndex?: number;
-      readonly seedContentMap?: ReadonlyMap<number, AssemblyContentSpan>;
-      readonly resolveDeferredCopulaSupportAt?: number;
-    } = {}
+    options: ContentPassOptions = {}
   ): Promise<Map<number, AssemblyContentSpan>> {
     const contentMap = new Map<number, AssemblyContentSpan>(options.seedContentMap ?? []);
     const pendingExtentPostpositions = new Map<number, PendingExtentPostposition>();
-    let lastNumeralQuantity: { readonly endExclusive: number; readonly plan: NumericBasePayload } | null = null;
+    const state: ContentPassState = { lastNumeralQuantity: null };
     const numeralContext: NumeralResolutionContext = {
       copulaPredicateStartsAt: (idx) => copulaStartsPredicateAt(tokens, idx, this.lookups)
     };
     const cursor = new TokenCursor(tokens, Math.max(0, Math.min(options.startIndex ?? 0, tokens.length)), tokens.length);
+    const ctx: ContentPassContext = { tokens, cursor, contentMap, pendingExtentPostpositions, numeralContext, options };
     while (cursor.pos < cursor.end) {
       const index = cursor.pos;
       const token = cursor.current();
@@ -1841,711 +1099,967 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
         cursor.advance();
         continue;
       }
-      const renderPlan = koreanOverrideRenderPlan(token, 부사);
-      if (renderPlan !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "korean_override",
-            true,
-            { surface: token.surface }
-          ));
-        }
-        const span = makeAssemblyContentSpan(index, 1, token.koreanOverride ?? "", 부사, null, UnitType.CONTENT, { renderPlan });
-        finalizeExtentPostpositionSpan(cursor, index, span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, span);
-        cursor.advance();
+      const step: ContentPassStep = { index, token, yieldedNumeral: undefined };
+      if (this.emitKoreanOverrideSpan(ctx, step) === "continue") {
         continue;
       }
-      const splitNandeReason = trySplitNandeReasonSpan(cursor);
-      if (splitNandeReason !== undefined) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "split_nande_reason",
-            true,
-            { consumed: splitNandeReason.consumed }
-          ));
-        }
-        contentMap.set(index, splitNandeReason);
+      if (this.emitNandeReasonSplitSpan(ctx, step) === "continue") {
         continue;
       }
-      let yieldedNumeral: NumericHostYield | undefined;
-      const numeral = cursor.tryParse(c => {
-        const result = tryContentNumeral(c, this.numeric, numeralContext);
-        if (result === undefined) {
-          return undefined;
-        }
-        const copulaStartKind = nounPhraseCopulaPredicateStartKind(
-          cursor,
-          index,
-          this.numeric,
-          this.lookups,
-          { consumed: result.consumed, plan: result.renderPlan }
-        );
-        if (
-          copulaStartKind !== "none" &&
-          !pendingExtentPostpositions.has(index)
-        ) {
-          yieldedNumeral = { reason: "copula_host", result, startKind: copulaStartKind };
-          return undefined;
-        }
-        if (isBareNominalQuoteStart(cursor, index, this.numeric, this.lookups)) {
-          yieldedNumeral = { reason: "bare_quote", result, startKind: "none" };
-          return undefined;
-        }
-        return result;
-      });
-      if (numeral !== undefined) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "numeral",
-            true,
-            { consumed: numeral.consumed }
-          ));
-        }
-        const numeralSpan = makeAssemblyContentSpan(index, numeral.consumed, numeral.korean, 수사, null, UnitType.NUMERAL);
-        if (numeral.renderPlan !== null) {
-          numeralSpan.renderPlan = numeral.renderPlan;
-        }
-        finalizeExtentPostpositionSpan(cursor, index, numeralSpan, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, numeralSpan);
-        lastNumeralQuantity = { endExclusive: index + numeral.consumed, plan: numeral.renderPlan };
+      if (this.emitNumeralSpan(ctx, state, step) === "continue") {
         continue;
       }
-      const approximationMarker = this.quantityApproximationSpanAt(cursor, index, lastNumeralQuantity);
-      if (approximationMarker !== undefined) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "quantity_approximation_marker",
-            true,
-            { surface: token.surface }
-          ));
-        }
-        contentMap.set(index, approximationMarker);
-        cursor.advance();
+      if (this.emitQuantityApproximationMarkerSpan(ctx, state, step) === "continue") {
         continue;
       }
-      const ellipticPropositionQuote = await this.tryBuildEllipticPropositionQuoteTailSpan(cursor);
-      if (ellipticPropositionQuote !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "elliptic_proposition_quote_tail",
-            true,
-            ellipticPropositionQuote.traceDetail
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, index, ellipticPropositionQuote.span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, ellipticPropositionQuote.span);
+      if (await this.emitHeadTailAdapterSpans(ctx, step) === "continue") {
         continue;
       }
-      const ellipticPropositionModal = await this.tryBuildEllipticPropositionModalTailSpan(cursor);
-      if (ellipticPropositionModal !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "elliptic_proposition_modal_tail",
-            true,
-            ellipticPropositionModal.traceDetail
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, index, ellipticPropositionModal.span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, ellipticPropositionModal.span);
+      if (this.emitDemonstrativeDiscourseConnectiveSpan(ctx, step) === "continue") {
         continue;
       }
-      const honorificRequestQuote = await this.tryBuildHonorificRequestQuoteSpan(cursor);
-      if (honorificRequestQuote !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "honorific_request_quote",
-            true,
-            honorificRequestQuote.traceDetail
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, index, honorificRequestQuote.span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, honorificRequestQuote.span);
+      if (await this.emitHonorificFormulaicTailSpan(ctx, step) === "continue") {
         continue;
       }
-      const formulaicApologyPredicate = await this.tryBuildFormulaicApologyPredicateSpan(cursor);
-      if (formulaicApologyPredicate !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "formulaic_apology_predicate",
-            true,
-            formulaicApologyPredicate.traceDetail
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, index, formulaicApologyPredicate.span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, formulaicApologyPredicate.span);
+      if (this.screenContentPassAdmission(ctx, step) === "continue") {
         continue;
       }
-      const hostlessInterjection = await this.tryBuildHostlessInterjectionSpan(cursor);
-      if (hostlessInterjection !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "hostless_interjection",
-            true,
-            hostlessInterjection.traceDetail
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, index, hostlessInterjection.span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, hostlessInterjection.span);
+      if (this.emitSemanticCarrierPredicateSpan(ctx, step) === "continue") {
         continue;
       }
-      const demoDiscourse = tryResolveDemoDiscourseConnective(cursor, this.lookups);
-      if (demoDiscourse !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "demo_discourse_connective",
-            true,
-            { key: demoDiscourse.key, reading: demoDiscourse.reading, consumed: demoDiscourse.consumed }
-          ));
-        }
-        const demoDiscourseSpan = makeAssemblyContentSpan(index, demoDiscourse.consumed, demoDiscourse.korean, demoDiscourse.koreanPos, null, UnitType.CONTENT, {
-          discourseConnective: demoDiscourse.reading === "connective",
-          renderPlan: {
-            kind: "lemma",
-            entry: null,
-            koreanLemma: demoDiscourse.korean,
-            koreanPos: demoDiscourse.koreanPos,
-            irregular: null,
-            auxTokens: []
-          }
-        });
-        finalizeExtentPostpositionSpan(cursor, index, demoDiscourseSpan, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, demoDiscourseSpan);
+      const protoLayout = activeProtoLayout();
+      if (this.emitQuoteClauseLikenessMarkerSpan(ctx, step, protoLayout) === "continue") {
         continue;
       }
-      const honorificFormulaicTail = await this.tryBuildHonorificFormulaicTailSpan(cursor);
-      if (honorificFormulaicTail !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "honorific_formulaic_tail",
-            true,
-            honorificFormulaicTail.traceDetail
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, index, honorificFormulaicTail.span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, honorificFormulaicTail.span);
+      if (await this.emitNominalHostLikenessAdverbialMarkerSpan(ctx, step, protoLayout) === "continue") {
         continue;
       }
-      const pos0 = token.pos & POS0;
-      if (isNonLexicalSymbolTokenAt(cursor.tokens, index)) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "non_lexical_symbol",
-            true,
-            { surface: token.surface }
-          ));
-        }
-        cursor.advance();
+      if (await this.emitCopulaFocusAdjunctSpan(ctx, step) === "continue") {
         continue;
       }
-      if (!isContentAdmissionToken(token)) {
-        cursor.advance();
+      const dispatch = await this.dispatchContentPassContentHead(ctx, step, protoLayout);
+      const { contentHead, buildHeadTailCandidatePayloadSource } = dispatch;
+      if (contentHead?.kind === "nominal") {
+        await this.emitContentHeadNominalSpan(ctx, step, contentHead, buildHeadTailCandidatePayloadSource);
         continue;
       }
-      if (
-        index !== options.resolveDeferredCopulaSupportAt &&
-        isCopulaSupportChainStartAt(tokens, index - 1) &&
-        !contentSpanCoversIndex(contentMap, index - 1)
-      ) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "detached_copula_support_deferred",
-            true,
-            { surface: token.surface }
-          ));
-        }
-        cursor.advance();
+      const verdict = this.contentHeadTailOwnershipVerdict(ctx, step, contentHead);
+      if (contentHead?.kind === "tail" && !verdict.numericYieldClaimMissed && verdict.contestedNominalUseSlot === null) {
+        await this.emitContentHeadTailChainSpan(ctx, step, contentHead, buildHeadTailCandidatePayloadSource);
         continue;
       }
+      const tailParserFailureReason = this.recordContentHeadDispatchFailure(ctx, step, contentHead, verdict);
+      if (this.reclaimYieldedNumeralSpan(ctx, step, tailParserFailureReason) === "continue") {
+        continue;
+      }
+      if (await this.emitCompoundDispatchSpan(ctx, step, tailParserFailureReason) === "continue") {
+        continue;
+      }
+      await this.emitGeneralContentSpan(ctx, step, dispatch, verdict, tailParserFailureReason);
+    }
+    applySourceCompoundContinuationToContentMap(tokens, contentMap);
+    return contentMap;
+  }
+
+  private emitKoreanOverrideSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep
+  ): AssemblyLoopSignal {
+    const { cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index, token } = step;
+    const renderPlan = koreanOverrideRenderPlan(token, 부사);
+    if (renderPlan !== null) {
       if (options.trace !== undefined && options.trace !== null) {
         options.trace.record(new TraceEvent(
           index,
           "content_pass",
-          "content_pos",
+          "korean_override",
           true,
-          { pos0: POS0_NAME[pos0] ?? "*" }
+          { surface: token.surface }
         ));
       }
-      const semanticCarrierStart = cursor.pos;
-      const semanticCarrierPredicate = tryBuildSemanticCarrierPredicateDispatchCursor(cursor, this.lookups);
-      if (semanticCarrierPredicate !== null) {
-        const semanticCarrierConsumed = cursor.pos - semanticCarrierStart;
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            semanticCarrierPredicate.rule,
-            true,
-            {
-              consumed: semanticCarrierConsumed,
-              ...semanticCarrierPredicate.traceDetail
-            }
-          ));
-        }
-        const span = makeAssemblyContentSpan(
-          index,
-          semanticCarrierConsumed,
-          "",
-          semanticCarrierPredicate.koreanPos,
-          null,
-          UnitType.CONTENT,
-          {
-            provenance: "predicate_tail"
-          }
-        );
-        span.renderPlan = semanticCarrierPredicate.renderPlan;
-        finalizeExtentPostpositionSpan(cursor, index, span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, span);
-        continue;
-      }
-      const protoLayout = activeProtoLayout();
-      const quoteClauseLikenessMarker = this.tryBuildQuoteClauseLikenessMarkerSpan(cursor, protoLayout);
-      if (quoteClauseLikenessMarker !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "quote_clause_likeness_marker",
-            true,
-            { consumed: quoteClauseLikenessMarker.consumed }
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, index, quoteClauseLikenessMarker, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, quoteClauseLikenessMarker);
-        cursor.advance(quoteClauseLikenessMarker.consumed);
-        continue;
-      }
-      const nominalHostLikenessAdverbialMarker = await this.tryBuildNominalHostLikenessAdverbialMarkerSpan(cursor, protoLayout);
-      if (nominalHostLikenessAdverbialMarker !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "nominal_host_likeness_adverbial_marker",
-            true,
-            { consumed: nominalHostLikenessAdverbialMarker.consumed }
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, index, nominalHostLikenessAdverbialMarker, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, nominalHostLikenessAdverbialMarker);
-        cursor.advance(nominalHostLikenessAdverbialMarker.consumed);
-        continue;
-      }
-      const copulaFocusAdjunct = await this.tryBuildCopulaFocusAdjunctSpan(cursor);
-      if (copulaFocusAdjunct !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "copula_focus_adjunct",
-            true,
-            { consumed: copulaFocusAdjunct.consumed }
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, index, copulaFocusAdjunct, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, copulaFocusAdjunct);
-        cursor.advance(copulaFocusAdjunct.consumed);
-        continue;
-      }
-      const contentHeadLimit = contentHeadDispatchLimit(tokens, index, protoLayout);
-      const buildHeadTailCandidatePayloadSource = (tailCandidateChunk: Extract<TailChunkResult, { readonly ok: true }>) =>
-        buildTailOwnerCandidatePayloadSource({
-          tokens,
-          cursor,
-          index,
-          tailChunk: tailCandidateChunk,
-          dictionary: this.dictionary,
-          lookups: this.lookups,
-          numeric: this.numeric,
-          resolveHeadMetadata: async (start, end) => contentHeadMetadataFromResult(await this._processContent(cursor.fork(start, end, start), {
-            trace: null,
-            entryAuxMode: "head_metadata"
-          })),
-          isKeijoujiVerbObjectHost
-        });
-      const skipContentHeadForAdverbialNi = await this.shouldUseCandidatePathForLexicalizedAdverbialNi(tokens, index);
-      const currentToken = tokens[index];
-      const skipContentHeadForLayeredNegativeBridge = currentToken !== undefined &&
-        (pos0in(currentToken.pos, NOMINAL_BITS) || isNaAdjCapableNoun(currentToken)) &&
-        focusBodyOverNegativeScopeBridgeAt(tokens, index);
-      const contentHead = skipContentHeadForAdverbialNi || skipContentHeadForLayeredNegativeBridge
-        ? null
-        : await tryBuildContentHeadDispatch({
-          cursor,
-          limit: contentHeadLimit,
-          dictionary: this.dictionary,
-          previewFormal: REGISTER_NEUTRAL_BUILD_FORMAL,
-          lookups: this.lookups,
-          numeric: this.numeric,
-          ...(yieldedNumeral === undefined
-            ? {}
-            : {
-              numericHostReservation: {
-                tokenIdx: index,
-                consumed: yieldedNumeral.result.consumed,
-                plan: yieldedNumeral.result.renderPlan,
-                claimRequired: yieldedNumeral.reason === "copula_host" &&
-                  yieldedNumeral.startKind === "numeral_span"
-              }
-            }),
-          ...(protoLayout === null ? {} : { layout: protoLayout }),
-          synthesizeEntry: async (headToken, synthOptions) => {
-            const headPos0 = headToken.pos & POS0;
-            const splitFallback = pos0in(headPos0, NONPREDICATE_CONTENT_POS_BITS)
-              ? await this._renderSplitFallback(headToken)
-              : undefined;
-            if (splitFallback !== undefined) {
-              const synthEntry: MorphemeEntry = {
-                dictionaryForm: headToken.dictionaryForm,
-                senses: [{
-                  korean: splitFallback,
-                  koreanPos: JP_POS_TO_KR[headPos0] ?? 명사
-                }],
-                synthetic: true,
-                syntheticReason: "split_fallback"
-              };
-              return synthEntry;
-            }
-            return this._synthesizeEntry(headToken, { nextToken: synthOptions?.nextToken ?? null });
-          },
-          resolveNominalHeadMetadata: (start, end) => this._processContent(cursor.fork(start, end, start), {
-            trace: null,
-            entryAuxMode: "head_metadata"
-          }),
-          hydrateTailRoot: (root, headResult, predicateTokenIdx) =>
-            hydrateTailChainRootWithHeadMetadata(
-              root,
-              headResult,
-              tokens,
-              cursor,
-              predicateTokenIdx,
-              this.dictionary,
-              this.lookups,
-              this.numeric
-            )
-        });
-      if (contentHead?.kind === "nominal") {
-        const payload = contentHeadDispatchNominalAppendPayload(contentHead);
-        attachContentHeadSharedHeadTailCandidateToPlan(contentHead, payload.renderPlan);
-        const nominalRoot = isNominalHeadTailChainRenderPlan(payload.renderPlan)
-          ? payload.renderPlan.realization.root
-          : null;
-        const absorptionStart = nominalRoot?.kind === "predicateNominalHost"
-          ? tailChainPreviousSahenNounAbsorptionStart(
-              nominalRoot.host.root,
-              nominalRoot.host.predicateTokenIdx
-            )
-          : null;
-        const spanStart = absorptionStart ?? index;
-        const span = makeAssemblyContentSpan(
-          spanStart,
-          payload.consumed + index - spanStart,
-          payload.korean,
-          payload.koreanPos,
-          payload.entry,
-          payload.unitType,
-          {
-            attachLeft: payload.attachLeft,
-            provenance: payload.provenance,
-            koreanBase: payload.koreanBase ?? null
-          }
-        );
-        await attachContentHeadOwnerCandidateLifecycle({
-          tokens,
-          dispatchIndex: index,
-          selectedSpanStart: spanStart,
-          contentHead,
-          span,
-          selectedNominalPayload: payload,
-          buildTailPayloadSource: buildHeadTailCandidatePayloadSource
-        });
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            contentHead.built.profile.traceKind ?? contentHead.built.profile.id,
-            true,
-            {
-              consumed: payload.consumed,
-              head_profile: contentHead.built.profile.id,
-              ...contentHeadDispatchTraceDetail(contentHead)
-            }
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, spanStart, span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(spanStart, span);
-        cursor.advance(payload.consumed);
-        continue;
-      }
-      const numericYieldClaimMissed = contentHead?.kind === "tail" &&
-        yieldedNumeral?.reason === "copula_host" &&
-        yieldedNumeral.startKind === "numeral_span" &&
-        probeProductionDispatch(contentHead.tailChunk.root, {
-          intake: { site: "committed_render", partial: false }
-        }).kind !== "registry";
-      const contestedNominalUseSlot = contentHead?.kind === "tail"
-        ? contentHead.tailChunk.contestedNominalUseSlot ?? null
-        : null;
-      const contestedClaimCoordinate = contestedNominalUseSlot !== null ||
-        isContestedZeroTailClaimCoordinate(tokens, index, this.numeric, this.lookups);
-      if (contentHead?.kind === "tail" && !numericYieldClaimMissed && contestedNominalUseSlot === null) {
-        const selectedHeadTailCandidate = contentHeadSelectedHeadTailCandidate(contentHead);
-        const selectedTailRealization = selectedHeadTailCandidate?.tail.realization;
-        const selectedTailPlan = selectedHeadTailCandidate != null && selectedTailRealization?.kind === "predicate_root"
-          ? { root: selectedTailRealization.root, sourceSpan: selectedHeadTailCandidate.tail.sourceSpan }
-          : null;
-        const tailChunk = contentHead.tailChunk;
-        const headResult = await this._processContent(cursor.fork(index, tokens.length, index), {
-          trace: null,
-          entryAuxMode: "head_metadata"
-        });
-        const headMetadata = contentHeadMetadataFromResult(headResult);
-        const tailBridge = await buildContentHeadTailAssemblyBridge({
-          tokens,
-          cursor,
-          index,
-          tailChunk,
-          selectedTailPlan,
-          headResult: headMetadata,
-          dictionary: this.dictionary,
-          lookups: this.lookups,
-          numeric: this.numeric,
-          isKeijoujiVerbObjectHost
-        });
-        if (options.trace !== undefined && options.trace !== null) {
-          recordTailChainContentPassTrace({
-            trace: options.trace,
-            tokens,
-            cursor,
-            root: tailBridge.root,
-            start: index,
-            consumed: tailChunk.consumed,
-            predicateTokenIdx: tailChunk.predicateTokenIdx,
-            blocker: tailBridge.kind === "blocked" ? tailBridge.readinessBlocker : null,
-            outgoingBoundary: tailChunk.outgoingBoundary,
-            headProfileId: tailChainHeadProfile(tailChunk)?.id ?? null,
-            dispatchTraceDetail: contentHeadDispatchTraceDetail(contentHead),
-            commitmentCandidateCount: tailBridge.kind === "ready" ? candidateSetSize(tailBridge.descriptor.sourceCandidates) : null,
-            ...(tailChunk.candidateObservation === undefined ? {} : { candidateObservation: tailChunk.candidateObservation }),
-            lookups: this.lookups
-          });
-        }
-        if (tailBridge.kind === "blocked") {
-          const result = await this._processContent(cursor.fork(index, tokens.length, index), {
-            trace: options.trace ?? null
-          });
-          const cacheKorean = PipelineAssemblerMixin.shouldCacheSurface(result.renderPlan);
-          const realizedKorean = cacheKorean ? this.surfaceFromRenderPlan(contentResultKoreanCache(result), result.renderPlan) : "";
-          const descriptor = buildTailParserFallbackAssemblyDescriptor({
-            cursor: cursor.fork(index, cursor.end, index),
-            result,
-            reason: tailBridge.readinessBlocker,
-            mode: "readiness_blocker",
-            realizedKorean,
-            cacheKorean,
-            isKeijoujiVerbObjectHost,
-            lookups: this.lookups
-          });
-          const span = applyTailParserFallbackDescriptorToSpan(descriptor, index, tokens, this.lookups);
-          finalizeExtentPostpositionSpan(cursor, index, span, pendingExtentPostpositions, this.numeric);
-          contentMap.set(index, span);
-          cursor.advance(descriptor.consumed);
-          continue;
-        }
-        const spanStart = tailBridge.spanStart;
-        const tailDescriptor = tailBridge.descriptor;
-        attachContentHeadSharedHeadTailCandidateToPlan(contentHead, tailDescriptor.renderPlan);
-        const span = this.makeTailChainSpanFromDescriptor(tokens, spanStart, tailDescriptor);
-        await attachContentHeadOwnerCandidateLifecycle({
-          tokens,
-          dispatchIndex: index,
-          selectedSpanStart: spanStart,
-          contentHead,
-          span,
-          selectedTailDescriptor: tailDescriptor,
-          buildTailPayloadSource: buildHeadTailCandidatePayloadSource
-        });
-        finalizeExtentPostpositionSpan(cursor, spanStart, span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(spanStart, span);
-        cursor.advance(tailChunk.consumed);
-        continue;
-      }
-      const tailParserFailureReason = numericYieldClaimMissed
-        ? "numeric host yield reclaimed: tail chain did not claim a production family"
-        : contestedNominalUseSlot !== null
-          ? `contested bare-stem nominal-use claim (${contestedNominalUseSlot}): content lane owns the span until the slot verdict decides`
-          : contentHead?.kind === "none"
-            ? contentHead.reason
-            : "content head dispatch skipped for copula negation owner";
-      if (options.trace !== undefined && options.trace !== null) {
-        recordTailParserFailureTrace({
-          trace: options.trace,
-          tokens,
-          index,
-          reason: tailParserFailureReason,
-          ...(contentHead?.kind === "none"
-            ? { dispatchTraceDetail: contentHeadDispatchFailureTraceDetail(contentHead) }
-            : {})
-        });
-      }
-      if (
-        yieldedNumeral !== undefined &&
-        (yieldedNumeral.reason === "bare_quote" || yieldedNumeral.startKind === "numeral_span")
-      ) {
-        const reclaimed = yieldedNumeral.result;
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "numeral",
-            true,
-            {
-              consumed: reclaimed.consumed,
-              yield_reason: yieldedNumeral.reason,
-              tail_parser_reason: tailParserFailureReason
-            }
-          ));
-        }
-        const reclaimedSpan = makeAssemblyContentSpan(index, reclaimed.consumed, reclaimed.korean, 수사, null, UnitType.NUMERAL);
-        if (reclaimed.renderPlan !== null) {
-          reclaimedSpan.renderPlan = reclaimed.renderPlan;
-        }
-        finalizeExtentPostpositionSpan(cursor, index, reclaimedSpan, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, reclaimedSpan);
-        cursor.advance(reclaimed.consumed);
-        continue;
-      }
-      const compound = await this.tryCompoundDispatch(cursor);
-      if (compound !== undefined) {
-        const [consumed, korean, koreanPos, renderPlan, warnings, candidates] = compound;
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "compound",
-            true,
-            { consumed, korean_pos: koreanPos, tail_parser_reason: tailParserFailureReason }
-          ));
-        }
-        const shouldCacheKorean = PipelineAssemblerMixin.shouldCacheSurface(renderPlan);
-        const cachedKorean = shouldCacheKorean ? this.surfaceFromRenderPlan(korean, renderPlan) : "";
-        const provenanceBridge = buildTailParserFailureFallbackProvenance({
-          tokens,
-          cursor,
-          index,
-          consumed,
-          renderPlan,
-          reason: tailParserFailureReason,
-          lookups: this.lookups
-        });
-        const span = makeAssemblyContentSpan(
-          index,
-          consumed,
-          cachedKorean,
-          koreanPos,
-          null,
-          UnitType.CONTENT,
-          {
-            attachLeft: isSahenBoundVerbAfterSahen(tokens, index) && !renderPlanStartsWithShortNegation(renderPlan),
-            provenance: provenanceBridge.provenance,
-            provenanceReason: provenanceBridge.provenanceReason,
-            warnings: warnings ?? []
-          }
-        );
-        span.renderPlan = renderPlan ?? null;
-        if (candidates !== undefined && candidates.length > 0) {
-          span.sourceCandidates = createSourceCandidateSet(
-            candidates.map((candidate) => stagedCandidate(candidate, "unknown")),
-            { sharedConsumed: consumed }
-          );
-        }
-        span.compoundHeadFrameEntry = await this.compoundSemanticHeadEntry(tokens, index, renderPlan ?? null);
-        closeUnownedTailFallbackSpanToRaw(span, tokens);
-        finalizeExtentPostpositionSpan(cursor, index, span, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, span);
-        continue;
-      }
-      const result = await this._processContent(cursor.fork(index, tokens.length, index), {
-        trace: options.trace ?? null,
-        contentMap
-      });
-      const prenominalModifierSpan = this.tryBuildModifiedHeadPrenominalModifierSpan(tokens, index, result);
-      if (prenominalModifierSpan !== null) {
-        if (options.trace !== undefined && options.trace !== null) {
-          options.trace.record(new TraceEvent(
-            index,
-            "content_pass",
-            "modified_head_prenominal_modifier",
-            true,
-            { consumed: result.consumed, korean_pos: contentResultKoreanPos(result) }
-          ));
-        }
-        finalizeExtentPostpositionSpan(cursor, index, prenominalModifierSpan, pendingExtentPostpositions, this.numeric);
-        contentMap.set(index, prenominalModifierSpan);
-        cursor.advance(result.consumed);
-        continue;
-      }
-      const cacheKorean = PipelineAssemblerMixin.shouldCacheSurface(result.renderPlan);
-      const realizedKorean = cacheKorean ? this.surfaceFromRenderPlan(contentResultKoreanCache(result), result.renderPlan) : "";
-      const predicateIntake = !numericYieldClaimMissed && contestedNominalUseSlot === null && contentHead?.kind === "none"
-        ? contentHead.predicateIntake
-        : undefined;
-      const descriptor = buildTailParserFallbackAssemblyDescriptor({
-        cursor: cursor.fork(index, cursor.end, index),
-        result,
-        reason: tailParserFailureReason,
-        mode: contestedClaimCoordinate ? "contested_claim_yield" : "parse_failure",
-        ...(predicateIntake === undefined ? {} : { predicateIntake }),
-        realizedKorean,
-        cacheKorean,
-        isKeijoujiVerbObjectHost,
-        lookups: this.lookups
-      });
-      const span = applyTailParserFallbackDescriptorToSpan(descriptor, index, tokens, this.lookups);
-      const intrinsicHonorific = selectedIntrinsicHonorificMetadata(result.sourceCandidates, result.entry);
-      if (intrinsicHonorific !== undefined) span.intrinsicHonorific = intrinsicHonorific;
-      if (contestedNominalUseSlot !== null && contentHead?.kind === "tail") {
-        await attachContestedNominalUseOwnerCandidateLifecycle({
-          tokens,
-          dispatchIndex: index,
-          contentHead,
-          contestedNominalUseSlot,
-          span,
-          buildTailPayloadSource: buildHeadTailCandidatePayloadSource
-        });
-      }
+      const span = makeAssemblyContentSpan(index, 1, token.koreanOverride ?? "", 부사, null, UnitType.CONTENT, { renderPlan });
       finalizeExtentPostpositionSpan(cursor, index, span, pendingExtentPostpositions, this.numeric);
       contentMap.set(index, span);
-      cursor.advance(descriptor.consumed);
+      cursor.advance();
+      return "continue";
     }
-    applySourceCompoundContinuationToContentMap(tokens, contentMap);
-    return contentMap;
+    return "next";
+  }
+
+  private emitNandeReasonSplitSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep
+  ): AssemblyLoopSignal {
+    const { cursor, contentMap, options } = ctx;
+    const { index } = step;
+    const splitNandeReason = trySplitNandeReasonSpan(cursor);
+    if (splitNandeReason !== undefined) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "split_nande_reason",
+          true,
+          { consumed: splitNandeReason.consumed }
+        ));
+      }
+      contentMap.set(index, splitNandeReason);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private emitNumeralSpan(
+    ctx: ContentPassContext,
+    state: ContentPassState,
+    step: ContentPassStep
+  ): AssemblyLoopSignal {
+    const { cursor, contentMap, pendingExtentPostpositions, numeralContext, options } = ctx;
+    const { index } = step;
+    const numeral = cursor.tryParse(c => {
+      const result = tryContentNumeral(c, this.numeric, numeralContext);
+      if (result === undefined) {
+        return undefined;
+      }
+      const copulaStartKind = nounPhraseCopulaPredicateStartKind(
+        cursor,
+        index,
+        this.numeric,
+        this.lookups,
+        { consumed: result.consumed, plan: result.renderPlan }
+      );
+      if (
+        copulaStartKind !== "none" &&
+        !pendingExtentPostpositions.has(index)
+      ) {
+        step.yieldedNumeral = { reason: "copula_host", result, startKind: copulaStartKind };
+        return undefined;
+      }
+      if (isBareNominalQuoteStart(cursor, index, this.numeric, this.lookups)) {
+        step.yieldedNumeral = { reason: "bare_quote", result, startKind: "none" };
+        return undefined;
+      }
+      return result;
+    });
+    if (numeral !== undefined) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "numeral",
+          true,
+          { consumed: numeral.consumed }
+        ));
+      }
+      const numeralSpan = makeAssemblyContentSpan(index, numeral.consumed, numeral.korean, 수사, null, UnitType.NUMERAL);
+      if (numeral.renderPlan !== null) {
+        numeralSpan.renderPlan = numeral.renderPlan;
+      }
+      finalizeExtentPostpositionSpan(cursor, index, numeralSpan, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, numeralSpan);
+      state.lastNumeralQuantity = { endExclusive: index + numeral.consumed, plan: numeral.renderPlan };
+      return "continue";
+    }
+    return "next";
+  }
+
+  private emitQuantityApproximationMarkerSpan(
+    ctx: ContentPassContext,
+    state: ContentPassState,
+    step: ContentPassStep
+  ): AssemblyLoopSignal {
+    const { cursor, contentMap, options } = ctx;
+    const { index, token } = step;
+    const approximationMarker = this.quantityApproximationSpanAt(cursor, index, state.lastNumeralQuantity);
+    if (approximationMarker !== undefined) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "quantity_approximation_marker",
+          true,
+          { surface: token.surface }
+        ));
+      }
+      contentMap.set(index, approximationMarker);
+      cursor.advance();
+      return "continue";
+    }
+    return "next";
+  }
+
+  private async emitHeadTailAdapterSpans(
+    ctx: ContentPassContext,
+    step: ContentPassStep
+  ): Promise<AssemblyLoopSignal> {
+    const { cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const ellipticPropositionQuote = await this.tryBuildEllipticPropositionQuoteTailSpan(cursor);
+    if (ellipticPropositionQuote !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "elliptic_proposition_quote_tail",
+          true,
+          ellipticPropositionQuote.traceDetail
+        ));
+      }
+      finalizeExtentPostpositionSpan(cursor, index, ellipticPropositionQuote.span, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, ellipticPropositionQuote.span);
+      return "continue";
+    }
+    const ellipticPropositionModal = await this.tryBuildEllipticPropositionModalTailSpan(cursor);
+    if (ellipticPropositionModal !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "elliptic_proposition_modal_tail",
+          true,
+          ellipticPropositionModal.traceDetail
+        ));
+      }
+      finalizeExtentPostpositionSpan(cursor, index, ellipticPropositionModal.span, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, ellipticPropositionModal.span);
+      return "continue";
+    }
+    const honorificRequestQuote = await this.tryBuildHonorificRequestQuoteSpan(cursor);
+    if (honorificRequestQuote !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "honorific_request_quote",
+          true,
+          honorificRequestQuote.traceDetail
+        ));
+      }
+      finalizeExtentPostpositionSpan(cursor, index, honorificRequestQuote.span, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, honorificRequestQuote.span);
+      return "continue";
+    }
+    const formulaicApologyPredicate = await this.tryBuildFormulaicApologyPredicateSpan(cursor);
+    if (formulaicApologyPredicate !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "formulaic_apology_predicate",
+          true,
+          formulaicApologyPredicate.traceDetail
+        ));
+      }
+      finalizeExtentPostpositionSpan(cursor, index, formulaicApologyPredicate.span, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, formulaicApologyPredicate.span);
+      return "continue";
+    }
+    const hostlessInterjection = await this.tryBuildHostlessInterjectionSpan(cursor);
+    if (hostlessInterjection !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "hostless_interjection",
+          true,
+          hostlessInterjection.traceDetail
+        ));
+      }
+      finalizeExtentPostpositionSpan(cursor, index, hostlessInterjection.span, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, hostlessInterjection.span);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private emitDemonstrativeDiscourseConnectiveSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep
+  ): AssemblyLoopSignal {
+    const { cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const demoDiscourse = tryResolveDemoDiscourseConnective(cursor, this.lookups);
+    if (demoDiscourse !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "demo_discourse_connective",
+          true,
+          { key: demoDiscourse.key, reading: demoDiscourse.reading, consumed: demoDiscourse.consumed }
+        ));
+      }
+      const demoDiscourseSpan = makeAssemblyContentSpan(index, demoDiscourse.consumed, demoDiscourse.korean, demoDiscourse.koreanPos, null, UnitType.CONTENT, {
+        discourseConnective: demoDiscourse.reading === "connective",
+        renderPlan: {
+          kind: "lemma",
+          entry: null,
+          koreanLemma: demoDiscourse.korean,
+          koreanPos: demoDiscourse.koreanPos,
+          irregular: null,
+          auxTokens: []
+        }
+      });
+      finalizeExtentPostpositionSpan(cursor, index, demoDiscourseSpan, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, demoDiscourseSpan);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private async emitHonorificFormulaicTailSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep
+  ): Promise<AssemblyLoopSignal> {
+    const { cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const honorificFormulaicTail = await this.tryBuildHonorificFormulaicTailSpan(cursor);
+    if (honorificFormulaicTail !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "honorific_formulaic_tail",
+          true,
+          honorificFormulaicTail.traceDetail
+        ));
+      }
+      finalizeExtentPostpositionSpan(cursor, index, honorificFormulaicTail.span, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, honorificFormulaicTail.span);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private screenContentPassAdmission(
+    ctx: ContentPassContext,
+    step: ContentPassStep
+  ): AssemblyLoopSignal {
+    const { tokens, cursor, contentMap, options } = ctx;
+    const { index, token } = step;
+    const pos0 = token.pos & POS0;
+    if (isNonLexicalSymbolTokenAt(cursor.tokens, index)) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "non_lexical_symbol",
+          true,
+          { surface: token.surface }
+        ));
+      }
+      cursor.advance();
+      return "continue";
+    }
+    if (!isContentAdmissionToken(token)) {
+      cursor.advance();
+      return "continue";
+    }
+    if (
+      index !== options.resolveDeferredCopulaSupportAt &&
+      isCopulaSupportChainStartAt(tokens, index - 1) &&
+      !contentSpanCoversIndex(contentMap, index - 1)
+    ) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "detached_copula_support_deferred",
+          true,
+          { surface: token.surface }
+        ));
+      }
+      cursor.advance();
+      return "continue";
+    }
+    if (options.trace !== undefined && options.trace !== null) {
+      options.trace.record(new TraceEvent(
+        index,
+        "content_pass",
+        "content_pos",
+        true,
+        { pos0: POS0_NAME[pos0] ?? "*" }
+      ));
+    }
+    return "next";
+  }
+
+  private emitSemanticCarrierPredicateSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep
+  ): AssemblyLoopSignal {
+    const { cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const semanticCarrierStart = cursor.pos;
+    const semanticCarrierPredicate = tryBuildSemanticCarrierPredicateDispatchCursor(cursor, this.lookups);
+    if (semanticCarrierPredicate !== null) {
+      const semanticCarrierConsumed = cursor.pos - semanticCarrierStart;
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          semanticCarrierPredicate.rule,
+          true,
+          {
+            consumed: semanticCarrierConsumed,
+            ...semanticCarrierPredicate.traceDetail
+          }
+        ));
+      }
+      const span = makeAssemblyContentSpan(
+        index,
+        semanticCarrierConsumed,
+        "",
+        semanticCarrierPredicate.koreanPos,
+        null,
+        UnitType.CONTENT,
+        {
+          provenance: "predicate_tail"
+        }
+      );
+      span.renderPlan = semanticCarrierPredicate.renderPlan;
+      finalizeExtentPostpositionSpan(cursor, index, span, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, span);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private emitQuoteClauseLikenessMarkerSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    protoLayout: ProtoClauseLayout | null
+  ): AssemblyLoopSignal {
+    const { cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const quoteClauseLikenessMarker = this.tryBuildQuoteClauseLikenessMarkerSpan(cursor, protoLayout);
+    if (quoteClauseLikenessMarker !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "quote_clause_likeness_marker",
+          true,
+          { consumed: quoteClauseLikenessMarker.consumed }
+        ));
+      }
+      finalizeExtentPostpositionSpan(cursor, index, quoteClauseLikenessMarker, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, quoteClauseLikenessMarker);
+      cursor.advance(quoteClauseLikenessMarker.consumed);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private async emitNominalHostLikenessAdverbialMarkerSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    protoLayout: ProtoClauseLayout | null
+  ): Promise<AssemblyLoopSignal> {
+    const { cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const nominalHostLikenessAdverbialMarker = await this.tryBuildNominalHostLikenessAdverbialMarkerSpan(cursor, protoLayout);
+    if (nominalHostLikenessAdverbialMarker !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "nominal_host_likeness_adverbial_marker",
+          true,
+          { consumed: nominalHostLikenessAdverbialMarker.consumed }
+        ));
+      }
+      finalizeExtentPostpositionSpan(cursor, index, nominalHostLikenessAdverbialMarker, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, nominalHostLikenessAdverbialMarker);
+      cursor.advance(nominalHostLikenessAdverbialMarker.consumed);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private async emitCopulaFocusAdjunctSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep
+  ): Promise<AssemblyLoopSignal> {
+    const { cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const copulaFocusAdjunct = await this.tryBuildCopulaFocusAdjunctSpan(cursor);
+    if (copulaFocusAdjunct !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "copula_focus_adjunct",
+          true,
+          { consumed: copulaFocusAdjunct.consumed }
+        ));
+      }
+      finalizeExtentPostpositionSpan(cursor, index, copulaFocusAdjunct, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, copulaFocusAdjunct);
+      cursor.advance(copulaFocusAdjunct.consumed);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private async dispatchContentPassContentHead(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    protoLayout: ProtoClauseLayout | null
+  ): Promise<ContentHeadDispatchOutcome> {
+    const { tokens, cursor } = ctx;
+    const { index } = step;
+    const contentHeadLimit = contentHeadDispatchLimit(tokens, index, protoLayout);
+    const buildHeadTailCandidatePayloadSource = (tailCandidateChunk: Extract<TailChunkResult, { readonly ok: true }>) =>
+      buildTailOwnerCandidatePayloadSource({
+        tokens,
+        cursor,
+        index,
+        tailChunk: tailCandidateChunk,
+        dictionary: this.dictionary,
+        lookups: this.lookups,
+        numeric: this.numeric,
+        resolveHeadMetadata: async (start, end) => contentHeadMetadataFromResult(await this._processContent(cursor.fork(start, end, start), {
+          trace: null,
+          entryAuxMode: "head_metadata"
+        })),
+        isKeijoujiVerbObjectHost
+      });
+    const skipContentHeadForAdverbialNi = await this.shouldUseCandidatePathForLexicalizedAdverbialNi(tokens, index);
+    const currentToken = tokens[index];
+    const skipContentHeadForLayeredNegativeBridge = currentToken !== undefined &&
+      (pos0in(currentToken.pos, NOMINAL_BITS) || isNaAdjCapableNoun(currentToken)) &&
+      focusBodyOverNegativeScopeBridgeAt(tokens, index);
+    const contentHead = skipContentHeadForAdverbialNi || skipContentHeadForLayeredNegativeBridge
+      ? null
+      : await tryBuildContentHeadDispatch({
+        cursor,
+        limit: contentHeadLimit,
+        dictionary: this.dictionary,
+        previewFormal: REGISTER_NEUTRAL_BUILD_FORMAL,
+        lookups: this.lookups,
+        numeric: this.numeric,
+        ...(step.yieldedNumeral === undefined
+          ? {}
+          : {
+            numericHostReservation: {
+              tokenIdx: index,
+              consumed: step.yieldedNumeral.result.consumed,
+              plan: step.yieldedNumeral.result.renderPlan,
+              claimRequired: step.yieldedNumeral.reason === "copula_host" &&
+                step.yieldedNumeral.startKind === "numeral_span"
+            }
+          }),
+        ...(protoLayout === null ? {} : { layout: protoLayout }),
+        synthesizeEntry: async (headToken, synthOptions) => {
+          const headPos0 = headToken.pos & POS0;
+          const splitFallback = pos0in(headPos0, NONPREDICATE_CONTENT_POS_BITS)
+            ? await this._renderSplitFallback(headToken)
+            : undefined;
+          if (splitFallback !== undefined) {
+            const synthEntry: MorphemeEntry = {
+              dictionaryForm: headToken.dictionaryForm,
+              senses: [{
+                korean: splitFallback,
+                koreanPos: JP_POS_TO_KR[headPos0] ?? 명사
+              }],
+              synthetic: true,
+              syntheticReason: "split_fallback"
+            };
+            return synthEntry;
+          }
+          return this._synthesizeEntry(headToken, { nextToken: synthOptions?.nextToken ?? null });
+        },
+        resolveNominalHeadMetadata: (start, end) => this._processContent(cursor.fork(start, end, start), {
+          trace: null,
+          entryAuxMode: "head_metadata"
+        }),
+        hydrateTailRoot: (root, headResult, predicateTokenIdx) =>
+          hydrateTailChainRootWithHeadMetadata(
+            root,
+            headResult,
+            tokens,
+            cursor,
+            predicateTokenIdx,
+            this.dictionary,
+            this.lookups,
+            this.numeric
+          )
+      });
+    return { contentHead, buildHeadTailCandidatePayloadSource };
+  }
+
+  private async emitContentHeadNominalSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    contentHead: Extract<ContentHeadDispatchResult, { readonly kind: "nominal" }>,
+    buildHeadTailCandidatePayloadSource: ContentHeadTailPayloadSourceBuilder
+  ): Promise<void> {
+    const { tokens, cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const payload = contentHeadDispatchNominalAppendPayload(contentHead);
+    attachContentHeadSharedHeadTailCandidateToPlan(contentHead, payload.renderPlan);
+    const nominalRoot = isNominalHeadTailChainRenderPlan(payload.renderPlan)
+      ? payload.renderPlan.realization.root
+      : null;
+    const absorptionStart = nominalRoot?.kind === "predicateNominalHost"
+      ? tailChainPreviousSahenNounAbsorptionStart(
+          nominalRoot.host.root,
+          nominalRoot.host.predicateTokenIdx
+        )
+      : null;
+    const spanStart = absorptionStart ?? index;
+    const span = makeAssemblyContentSpan(
+      spanStart,
+      payload.consumed + index - spanStart,
+      payload.korean,
+      payload.koreanPos,
+      payload.entry,
+      payload.unitType,
+      {
+        attachLeft: payload.attachLeft,
+        provenance: payload.provenance,
+        koreanBase: payload.koreanBase ?? null
+      }
+    );
+    await attachContentHeadOwnerCandidateLifecycle({
+      tokens,
+      dispatchIndex: index,
+      selectedSpanStart: spanStart,
+      contentHead,
+      span,
+      selectedNominalPayload: payload,
+      buildTailPayloadSource: buildHeadTailCandidatePayloadSource
+    });
+    if (options.trace !== undefined && options.trace !== null) {
+      options.trace.record(new TraceEvent(
+        index,
+        "content_pass",
+        contentHead.built.profile.traceKind ?? contentHead.built.profile.id,
+        true,
+        {
+          consumed: payload.consumed,
+          head_profile: contentHead.built.profile.id,
+          ...contentHeadDispatchTraceDetail(contentHead)
+        }
+      ));
+    }
+    finalizeExtentPostpositionSpan(cursor, spanStart, span, pendingExtentPostpositions, this.numeric);
+    contentMap.set(spanStart, span);
+    cursor.advance(payload.consumed);
+  }
+
+  private contentHeadTailOwnershipVerdict(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    contentHead: ContentHeadDispatchResult | null
+  ): ContentHeadTailOwnershipVerdict {
+    const { tokens } = ctx;
+    const { index } = step;
+    const numericYieldClaimMissed = contentHead?.kind === "tail" &&
+      step.yieldedNumeral?.reason === "copula_host" &&
+      step.yieldedNumeral.startKind === "numeral_span" &&
+      probeProductionDispatch(contentHead.tailChunk.root, {
+        intake: { site: "committed_render", partial: false }
+      }).kind !== "registry";
+    const contestedNominalUseSlot = contentHead?.kind === "tail"
+      ? contentHead.tailChunk.contestedNominalUseSlot ?? null
+      : null;
+    const contestedClaimCoordinate = contestedNominalUseSlot !== null ||
+      isContestedZeroTailClaimCoordinate(tokens, index, this.numeric, this.lookups);
+    return { numericYieldClaimMissed, contestedNominalUseSlot, contestedClaimCoordinate };
+  }
+
+  private async emitContentHeadTailChainSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    contentHead: Extract<ContentHeadDispatchResult, { readonly kind: "tail" }>,
+    buildHeadTailCandidatePayloadSource: ContentHeadTailPayloadSourceBuilder
+  ): Promise<void> {
+    const { tokens, cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const selectedHeadTailCandidate = contentHeadSelectedHeadTailCandidate(contentHead);
+    const selectedTailRealization = selectedHeadTailCandidate?.tail.realization;
+    const selectedTailPlan = selectedHeadTailCandidate != null && selectedTailRealization?.kind === "predicate_root"
+      ? { root: selectedTailRealization.root, sourceSpan: selectedHeadTailCandidate.tail.sourceSpan }
+      : null;
+    const tailChunk = contentHead.tailChunk;
+    const headResult = await this._processContent(cursor.fork(index, tokens.length, index), {
+      trace: null,
+      entryAuxMode: "head_metadata"
+    });
+    const headMetadata = contentHeadMetadataFromResult(headResult);
+    const tailBridge = await buildContentHeadTailAssemblyBridge({
+      tokens,
+      cursor,
+      index,
+      tailChunk,
+      selectedTailPlan,
+      headResult: headMetadata,
+      dictionary: this.dictionary,
+      lookups: this.lookups,
+      numeric: this.numeric,
+      isKeijoujiVerbObjectHost
+    });
+    if (options.trace !== undefined && options.trace !== null) {
+      recordTailChainContentPassTrace({
+        trace: options.trace,
+        tokens,
+        cursor,
+        root: tailBridge.root,
+        start: index,
+        consumed: tailChunk.consumed,
+        predicateTokenIdx: tailChunk.predicateTokenIdx,
+        blocker: tailBridge.kind === "blocked" ? tailBridge.readinessBlocker : null,
+        outgoingBoundary: tailChunk.outgoingBoundary,
+        headProfileId: tailChainHeadProfile(tailChunk)?.id ?? null,
+        dispatchTraceDetail: contentHeadDispatchTraceDetail(contentHead),
+        commitmentCandidateCount: tailBridge.kind === "ready" ? candidateSetSize(tailBridge.descriptor.sourceCandidates) : null,
+        ...(tailChunk.candidateObservation === undefined ? {} : { candidateObservation: tailChunk.candidateObservation }),
+        lookups: this.lookups
+      });
+    }
+    if (tailBridge.kind === "blocked") {
+      await this.emitTailReadinessBlockedFallbackSpan(ctx, step, tailBridge);
+      return;
+    }
+    const spanStart = tailBridge.spanStart;
+    const tailDescriptor = tailBridge.descriptor;
+    attachContentHeadSharedHeadTailCandidateToPlan(contentHead, tailDescriptor.renderPlan);
+    const span = this.makeTailChainSpanFromDescriptor(tokens, spanStart, tailDescriptor);
+    await attachContentHeadOwnerCandidateLifecycle({
+      tokens,
+      dispatchIndex: index,
+      selectedSpanStart: spanStart,
+      contentHead,
+      span,
+      selectedTailDescriptor: tailDescriptor,
+      buildTailPayloadSource: buildHeadTailCandidatePayloadSource
+    });
+    finalizeExtentPostpositionSpan(cursor, spanStart, span, pendingExtentPostpositions, this.numeric);
+    contentMap.set(spanStart, span);
+    cursor.advance(tailChunk.consumed);
+  }
+
+  private async emitTailReadinessBlockedFallbackSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    tailBridge: Extract<Awaited<ReturnType<typeof buildContentHeadTailAssemblyBridge>>, { readonly kind: "blocked" }>
+  ): Promise<void> {
+    const { tokens, cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const result = await this._processContent(cursor.fork(index, tokens.length, index), {
+      trace: options.trace ?? null
+    });
+    const cacheKorean = PipelineAssemblerMixin.shouldCacheSurface(result.renderPlan);
+    const realizedKorean = cacheKorean ? this.surfaceFromRenderPlan(contentResultKoreanCache(result), result.renderPlan) : "";
+    const descriptor = buildTailParserFallbackAssemblyDescriptor({
+      cursor: cursor.fork(index, cursor.end, index),
+      result,
+      reason: tailBridge.readinessBlocker,
+      mode: "readiness_blocker",
+      realizedKorean,
+      cacheKorean,
+      isKeijoujiVerbObjectHost,
+      lookups: this.lookups
+    });
+    const span = applyTailParserFallbackDescriptorToSpan(descriptor, index, tokens, this.lookups);
+    finalizeExtentPostpositionSpan(cursor, index, span, pendingExtentPostpositions, this.numeric);
+    contentMap.set(index, span);
+    cursor.advance(descriptor.consumed);
+  }
+
+  private recordContentHeadDispatchFailure(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    contentHead: ContentHeadDispatchResult | null,
+    verdict: ContentHeadTailOwnershipVerdict
+  ): string {
+    const { tokens, options } = ctx;
+    const { index } = step;
+    const { numericYieldClaimMissed, contestedNominalUseSlot } = verdict;
+    const tailParserFailureReason = numericYieldClaimMissed
+      ? "numeric host yield reclaimed: tail chain did not claim a production family"
+      : contestedNominalUseSlot !== null
+        ? `contested bare-stem nominal-use claim (${contestedNominalUseSlot}): content lane owns the span until the slot verdict decides`
+        : contentHead?.kind === "none"
+          ? contentHead.reason
+          : "content head dispatch skipped for copula negation owner";
+    if (options.trace !== undefined && options.trace !== null) {
+      recordTailParserFailureTrace({
+        trace: options.trace,
+        tokens,
+        index,
+        reason: tailParserFailureReason,
+        ...(contentHead?.kind === "none"
+          ? { dispatchTraceDetail: contentHeadDispatchFailureTraceDetail(contentHead) }
+          : {})
+      });
+    }
+    return tailParserFailureReason;
+  }
+
+  private reclaimYieldedNumeralSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    tailParserFailureReason: string
+  ): AssemblyLoopSignal {
+    const { cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    if (
+      step.yieldedNumeral !== undefined &&
+      (step.yieldedNumeral.reason === "bare_quote" || step.yieldedNumeral.startKind === "numeral_span")
+    ) {
+      const reclaimed = step.yieldedNumeral.result;
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "numeral",
+          true,
+          {
+            consumed: reclaimed.consumed,
+            yield_reason: step.yieldedNumeral.reason,
+            tail_parser_reason: tailParserFailureReason
+          }
+        ));
+      }
+      const reclaimedSpan = makeAssemblyContentSpan(index, reclaimed.consumed, reclaimed.korean, 수사, null, UnitType.NUMERAL);
+      if (reclaimed.renderPlan !== null) {
+        reclaimedSpan.renderPlan = reclaimed.renderPlan;
+      }
+      finalizeExtentPostpositionSpan(cursor, index, reclaimedSpan, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, reclaimedSpan);
+      cursor.advance(reclaimed.consumed);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private async emitCompoundDispatchSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    tailParserFailureReason: string
+  ): Promise<AssemblyLoopSignal> {
+    const { tokens, cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const compound = await this.tryCompoundDispatch(cursor);
+    if (compound !== undefined) {
+      const [consumed, korean, koreanPos, renderPlan, warnings, candidates] = compound;
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "compound",
+          true,
+          { consumed, korean_pos: koreanPos, tail_parser_reason: tailParserFailureReason }
+        ));
+      }
+      const shouldCacheKorean = PipelineAssemblerMixin.shouldCacheSurface(renderPlan);
+      const cachedKorean = shouldCacheKorean ? this.surfaceFromRenderPlan(korean, renderPlan) : "";
+      const provenanceBridge = buildTailParserFailureFallbackProvenance({
+        tokens,
+        cursor,
+        index,
+        consumed,
+        renderPlan,
+        reason: tailParserFailureReason,
+        lookups: this.lookups
+      });
+      const span = makeAssemblyContentSpan(
+        index,
+        consumed,
+        cachedKorean,
+        koreanPos,
+        null,
+        UnitType.CONTENT,
+        {
+          attachLeft: isSahenBoundVerbAfterSahen(tokens, index) && !renderPlanStartsWithShortNegation(renderPlan),
+          provenance: provenanceBridge.provenance,
+          provenanceReason: provenanceBridge.provenanceReason,
+          warnings: warnings ?? []
+        }
+      );
+      span.renderPlan = renderPlan ?? null;
+      if (candidates !== undefined && candidates.length > 0) {
+        span.sourceCandidates = createSourceCandidateSet(
+          candidates.map((candidate) => stagedCandidate(candidate, "unknown")),
+          { sharedConsumed: consumed }
+        );
+      }
+      span.compoundHeadFrameEntry = await this.compoundSemanticHeadEntry(tokens, index, renderPlan ?? null);
+      closeUnownedTailFallbackSpanToRaw(span, tokens);
+      finalizeExtentPostpositionSpan(cursor, index, span, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, span);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private async emitGeneralContentSpan(
+    ctx: ContentPassContext,
+    step: ContentPassStep,
+    dispatch: ContentHeadDispatchOutcome,
+    verdict: ContentHeadTailOwnershipVerdict,
+    tailParserFailureReason: string
+  ): Promise<void> {
+    const { tokens, cursor, contentMap, pendingExtentPostpositions, options } = ctx;
+    const { index } = step;
+    const { contentHead, buildHeadTailCandidatePayloadSource } = dispatch;
+    const { numericYieldClaimMissed, contestedNominalUseSlot, contestedClaimCoordinate } = verdict;
+    const result = await this._processContent(cursor.fork(index, tokens.length, index), {
+      trace: options.trace ?? null,
+      contentMap
+    });
+    const prenominalModifierSpan = this.tryBuildModifiedHeadPrenominalModifierSpan(tokens, index, result);
+    if (prenominalModifierSpan !== null) {
+      if (options.trace !== undefined && options.trace !== null) {
+        options.trace.record(new TraceEvent(
+          index,
+          "content_pass",
+          "modified_head_prenominal_modifier",
+          true,
+          { consumed: result.consumed, korean_pos: contentResultKoreanPos(result) }
+        ));
+      }
+      finalizeExtentPostpositionSpan(cursor, index, prenominalModifierSpan, pendingExtentPostpositions, this.numeric);
+      contentMap.set(index, prenominalModifierSpan);
+      cursor.advance(result.consumed);
+      return;
+    }
+    const cacheKorean = PipelineAssemblerMixin.shouldCacheSurface(result.renderPlan);
+    const realizedKorean = cacheKorean ? this.surfaceFromRenderPlan(contentResultKoreanCache(result), result.renderPlan) : "";
+    const predicateIntake = !numericYieldClaimMissed && contestedNominalUseSlot === null && contentHead?.kind === "none"
+      ? contentHead.predicateIntake
+      : undefined;
+    const descriptor = buildTailParserFallbackAssemblyDescriptor({
+      cursor: cursor.fork(index, cursor.end, index),
+      result,
+      reason: tailParserFailureReason,
+      mode: contestedClaimCoordinate ? "contested_claim_yield" : "parse_failure",
+      ...(predicateIntake === undefined ? {} : { predicateIntake }),
+      realizedKorean,
+      cacheKorean,
+      isKeijoujiVerbObjectHost,
+      lookups: this.lookups
+    });
+    const span = applyTailParserFallbackDescriptorToSpan(descriptor, index, tokens, this.lookups);
+    const intrinsicHonorific = selectedIntrinsicHonorificMetadata(result.sourceCandidates, result.entry);
+    if (intrinsicHonorific !== undefined) span.intrinsicHonorific = intrinsicHonorific;
+    if (contestedNominalUseSlot !== null && contentHead?.kind === "tail") {
+      await attachContestedNominalUseOwnerCandidateLifecycle({
+        tokens,
+        dispatchIndex: index,
+        contentHead,
+        contestedNominalUseSlot,
+        span,
+        buildTailPayloadSource: buildHeadTailCandidatePayloadSource
+      });
+    }
+    finalizeExtentPostpositionSpan(cursor, index, span, pendingExtentPostpositions, this.numeric);
+    contentMap.set(index, span);
+    cursor.advance(descriptor.consumed);
   }
 
   private descriptorToSpan(
@@ -2770,19 +2284,6 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
     return resolveContext(entry, tokens, index, { lookups: this.lookups, numeric: this.numeric });
   }
 
-  private async sahenInfo(tokens: readonly RuntimeHaruToken[], start: number): Promise<readonly [boolean, string | null]> {
-    const isSahen = isSahenBoundVerbAfterSahen(tokens, start);
-    if (!isSahen) {
-      return [false, null];
-    }
-    const noun = tokens[start - 1];
-    if (noun === undefined) {
-      return [true, null];
-    }
-    const entry = committedLookupEntry(await this.dictionary.lookupTokenRelaxed(noun));
-    return [true, entry === null ? null : winnerKorean(entry) ?? null];
-  }
-
   private async nominalLightVerbProjectionAt(
     cursor: TokenCursor<RuntimeHaruToken>,
     nounSpan: AssemblyContentSpan,
@@ -2824,57 +2325,21 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
     const repairedContentMap = new Map<number, AssemblyContentSpan>();
     const carrierOverrides = new Map<number, NominalLightVerbCarrierProjection>();
     const cursor = new TokenCursor(tokens, 0, tokens.length);
+    const ctx: AssemblyPassContext = {
+      cursor,
+      units,
+      contentMap,
+      repairedContentMap,
+      carrierOverrides,
+      layout,
+      relationRenderSpans,
+      options
+    };
     while (cursor.current() !== undefined) {
       const index = cursor.pos;
       const span = repairedContentMap.get(index) ?? contentMap.get(index);
       if (span !== undefined) {
-        const nominalLightVerb = await this.nominalLightVerbProjectionAt(cursor, span, contentMap, layout);
-        if (nominalLightVerb !== null) {
-          carrierOverrides.set(nominalLightVerb.predicateIndex, nominalLightVerb);
-        }
-        const surface = cursor.current()?.surface;
-        const pos1 = (cursor.current()?.pos ?? 0) & POS1;
-        if (surface === "だけでなく" || (surface === "だけ" && (pos1 === 副助詞))) {
-          if (await this.matchFocusDakeCopulaTail(cursor, units, options.trace)) {
-            continue;
-          }
-        }
-        if ((cursor.current()!.pos & POS0) === 助動詞 && span.discourseConnective !== true) {
-          if (this.tryApplyParticlePhraseCopulaChain(cursor, units, layout, relationRenderSpans)) {
-            continue;
-          }
-          if (this.tryApplyPunctuatedCopulaChain(cursor, units, layout, relationRenderSpans)) {
-            continue;
-          }
-        }
-        const carrierOverride = carrierOverrides.get(index);
-        const baseRenderPlan = applyCopulaFocusAdjunctRenderPlan(
-          carrierOverride === undefined ? span.renderPlan : carrierOverride.renderPlan,
-          span
-        );
-        const renderPlan = applyBareQuestionRenderPlan(baseRenderPlan, cursor.tokens, index + span.consumed, cursor.end);
-        const shouldCacheKorean = PipelineAssemblerMixin.shouldCacheSurface(renderPlan);
-        const shouldCacheBaseKorean = PipelineAssemblerMixin.shouldCacheBaseSurface(renderPlan);
-        const realizedKorean = shouldCacheKorean || shouldCacheBaseKorean
-          ? this.surfaceFromRenderPlan(span.korean, renderPlan)
-          : "";
-        const cachedKorean = shouldCacheKorean ? realizedKorean : "";
-        const cachedBaseKorean = shouldCacheBaseKorean ? realizedKorean : span.koreanBase ?? "";
-        PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, span.consumed, cachedKorean, {
-          unitType: span.unitType,
-          koreanPos: span.koreanPos,
-          entry: span.entry,
-          renderPlan,
-          koreanBase: cachedBaseKorean,
-          attachLeft: span.attachLeft,
-          particleRole: span.particleRole,
-          provenance: span.provenance,
-          discourseConnective: span.discourseConnective,
-          provenanceReason: carrierOverride === undefined ? span.provenanceReason : "carrier_idiom",
-          warnings: span.warnings,
-          renderPlanPolicy: span.renderPlanPolicy
-        });
-        cursor.advance(span.consumed);
+        await this.appendAssemblyContentSpanUnit(ctx, index, span);
         continue;
       }
       const token = cursor.current()!;
@@ -2888,80 +2353,15 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
       }
       const pos0 = token.pos & POS0;
       if (isNonLexicalSymbolTokenAt(cursor.tokens, index)) {
-        if (
-          isHardTerminalPunctuationToken(token) &&
-          questionContentPunctuationBridgeRelationAt(cursor.tokens, index, { consumers: ["assembler"] }) !== null
-        ) {
-          cursor.advance();
-          continue;
-        }
-        PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, token.surface, {
-          unitType: UnitType.SYMBOL,
-          koreanPos: 기호,
-          attachLeft: true,
-          attachRight: true,
-          terminalPunctuationRun: layout.terminalPunctuationRunContaining(index) ?? null
-        });
-        cursor.advance();
+        this.appendNonLexicalSymbolUnit(ctx, index, token);
         continue;
       }
       if (pos0in(pos0, PASSTHROUGH_POS_BITS) && !isSymbolCharacterToken(token)) {
-        if (token.surface.length > 0) {
-          PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, token.surface, {
-            unitType: UnitType.SYMBOL,
-            koreanPos: 기호,
-            attachLeft: true,
-            attachRight: true
-          });
-        } else {
-          absorbIntoPrecedingUnit(units, index);
-        }
-        cursor.advance();
+        this.appendPassthroughSymbolUnit(ctx, index, token);
         continue;
       }
       if ((token.pos & POS0) === 助詞) {
-        if (await this.matchPronominalNoDispatch(cursor, units, options.trace)) {
-          continue;
-        }
-        if (this.tryApplyTrailingCopulaNegation(cursor, units)) {
-          continue;
-        }
-        if (isAssemblerTerminalQuestionKa(cursor.tokens, index)) {
-          const nextIndex = nextNonSpaceIndex(cursor.tokens, index + 1) ?? cursor.end;
-          if (nextIndex >= cursor.end) {
-            PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, "?", {
-              unitType: UnitType.SYMBOL,
-              koreanPos: 기호,
-              attachLeft: true,
-              attachRight: true
-            });
-            cursor.advance();
-            continue;
-          }
-          if (hasHardTerminalPunctuationClass(cursor.tokens[nextIndex], nextIndex, ["japanese_period"], ["assembler"])) {
-            PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, nextIndex - index + 1, "?", {
-              unitType: UnitType.SYMBOL,
-              koreanPos: 기호,
-              attachLeft: true,
-              attachRight: true
-            });
-            cursor.advance(nextIndex + 1 - cursor.pos);
-            continue;
-          }
-        }
-        if (isTerminalYoSfpSurface(token)) {
-          if (isVocativeYo(cursor.tokens, index)) {
-            PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, "", {
-              unitType: UnitType.FUNCTIONAL,
-              koreanPos: 조사,
-              attachLeft: true,
-              functionalKind: FunctionalKind.CONTEXTUAL,
-              allomorphKey: "이여/여"
-            });
-          } else {
-            absorbIntoPrecedingUnit(units, index);
-          }
-          cursor.advance();
+        if (await this.applyAssemblyParticlePrelude(ctx, index, token) === "continue") {
           continue;
         }
       }
@@ -2989,294 +2389,24 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
         }
       }
       if ((token.pos & POS0) === 助動詞) {
-        const pronominalNoIndex = nextNonSpaceIndex(cursor.tokens, index + 1, cursor.end);
-        const previousToken = cursor.tokens[index - 1];
-        if (
-          isAdnominalCopulaToken(token) &&
-          previousToken !== undefined &&
-          isNaAdjectiveDerivationalSuffix(previousToken) &&
-          pronominalNoIndex !== null &&
-          pronominalNoMarkerRelationForToken(cursor.tokens[pronominalNoIndex], pronominalNoIndex, {
-            requirement: "copula_tail",
-            consumers: ["pronominal_no_dispatch"],
-          }) !== null
-        ) {
-          absorbIntoPrecedingUnit(units, index);
-          cursor.advance();
-          continue;
-        }
-        if (this.tryApplyEllipticPoliteConfirmation(cursor, units, layout)) {
-          continue;
-        }
-        if (this.tryApplyParticlePhraseCopulaChain(cursor, units, layout, relationRenderSpans)) {
-          continue;
-        }
-        if (this.tryApplyPunctuatedCopulaChain(cursor, units, layout, relationRenderSpans)) {
-          continue;
-        }
-        if (this.tryApplyTrailingCopulaNegation(cursor, units)) {
+        if (this.applyResidualAuxiliaryCopulaOwners(ctx, index, token) === "continue") {
           continue;
         }
         if (await this.matchPronominalNoAuxDeDispatch(cursor, units, options.trace)) {
           continue;
         }
-        const previousUnit = lastOutputUnit(units);
-        const preceding = this.precedingForAllomorph(units);
-        const hasPunctuatedCopulaConnectiveHost = this.hasPunctuatedCopulaConnectiveHost(units);
-        let orphanConn: readonly [korean: string, consumed: number] | undefined;
-        if (!(isCopulaAuxToken(token) && (canHostTrailingCopulaConnective(previousUnit, preceding) || hasPunctuatedCopulaConnectiveHost))) {
-          orphanConn = matchOrphanCopulaConn(cursor);
-        }
-        orphanConn ??= matchOrphanNanoconn(cursor);
-        if (orphanConn !== undefined) {
-          const [korean, orphanConsumed] = orphanConn;
-          PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, orphanConsumed, korean, {
-            unitType: UnitType.CONTENT,
-            koreanPos: 접속사
-          });
-          cursor.advance(orphanConsumed);
-          continue;
-        }
-        if (this.matchDearuAux(cursor, units)) {
-          continue;
-        }
-        if (isCopulaAuxToken(token)) {
-          const auxProbe1 = cursor.lookahead(index - cursor.pos, c => {
-            const auxTokens = collectAuxTokens(c);
-            return { auxTokens, afterAux: c.pos };
-          });
-          const auxTokens = auxProbe1.auxTokens;
-          if (auxTokens.length > 0) {
-            const connectiveMatch1 = cursor.lookahead(auxProbe1.afterAux - cursor.pos, c => {
-              const connective = trailingCopulaConnectiveTail(c, this.lookups);
-              return connective === null ? null : { connective, consumed: c.pos - index };
-            });
-            if (connectiveMatch1 !== null) {
-              const puncConsumed = this.tryAppendTrailingPunctuationCopulaConnective(
-                cursor.tokens,
-                index,
-                connectiveMatch1.consumed,
-                units,
-                auxTokens,
-                connectiveMatch1.connective
-              );
-              if (puncConsumed !== null) {
-                cursor.advance(puncConsumed);
-                continue;
-              }
-            }
-            const punctuatedTerminalConsumed = this.tryAppendPunctuatedCopulaTerminalTail(
-              cursor,
-              index,
-              auxProbe1.afterAux,
-              units,
-              auxTokens
-            );
-            if (punctuatedTerminalConsumed !== null) {
-              cursor.advance(punctuatedTerminalConsumed);
-              continue;
-            }
-          }
-        }
-        if (isCopulaAuxToken(token) && canHostTrailingCopula(previousUnit, preceding)) {
-          const auxProbe2 = cursor.lookahead(index - cursor.pos, c => {
-            const auxTokens = collectAuxTokens(c);
-            return { auxTokens, afterAux: c.pos };
-          });
-          const auxTokens = auxProbe2.auxTokens;
-          if (auxTokens.length > 0 && canHostTrailingCopulaConnective(previousUnit, preceding)) {
-            const connectiveMatch2 = cursor.lookahead(auxProbe2.afterAux - cursor.pos, c => {
-              const connective = trailingCopulaConnectiveTail(c, this.lookups);
-              return connective === null ? null : { connective, consumed: c.pos - index };
-            });
-            if (connectiveMatch2 !== null) {
-              if (previousUnit !== undefined) {
-                applyHeadedPlanTrailingCopula(previousUnit, "", {
-                  auxTokens,
-                  baseText: preceding,
-                  connective: connectiveMatch2.connective
-                });
-                for (let offset = 0; offset < connectiveMatch2.consumed; offset++) {
-                  if (!previousUnit.jpIndices.includes(index + offset)) {
-                    previousUnit.jpIndices.push(index + offset);
-                  }
-                }
-              } else {
-                const features = auxExtractFeatures(auxTokens, { lookups: this.lookups });
-                const copula = nounCopulaConnective(preceding, connectiveMatch2.connective, features.past);
-                PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, connectiveMatch2.consumed, copula, {
-                  unitType: UnitType.CONTENT
-                });
-              }
-              cursor.advance(connectiveMatch2.consumed);
-              continue;
-            }
-          }
-          if (auxTokens.length > 0 && cursor.lookahead(auxProbe2.afterAux - cursor.pos, hasTerminalSentenceMark)) {
-            const terminalConsumed = auxProbe2.afterAux - index;
-            if (previousUnit !== undefined) {
-              applyHeadedPlanTrailingCopula(previousUnit, "", { auxTokens, baseText: preceding });
-              for (let offset = 0; offset < terminalConsumed; offset++) {
-                if (!previousUnit.jpIndices.includes(index + offset)) {
-                  previousUnit.jpIndices.push(index + offset);
-                }
-              }
-            } else {
-              const features = auxExtractFeatures(auxTokens, { lookups: this.lookups });
-              features.copula = true;
-              const copula = nounCopula(preceding, features, this._formal, this.lookups).text;
-              PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, terminalConsumed, copula, {
-                unitType: UnitType.CONTENT
-              });
-            }
-            cursor.advance(terminalConsumed);
-            continue;
-          }
-          if (auxTokens.length > 0) {
-            const questionMatch = cursor.lookahead(auxProbe2.afterAux - cursor.pos, c => {
-              const question = terminalQuestionTail(c);
-              return question === null ? null : { question, consumed: c.pos - index };
-            });
-            if (questionMatch !== null) {
-              const question = questionMatch.question;
-              if (previousUnit !== undefined) {
-                applyHeadedPlanTrailingCopula(previousUnit, "", { auxTokens, baseText: preceding, sfp: "polite_q" });
-                for (let offset = 0; offset < questionMatch.consumed; offset++) {
-                  if (!previousUnit.jpIndices.includes(index + offset)) {
-                    previousUnit.jpIndices.push(index + offset);
-                  }
-                }
-              } else {
-                const features = auxExtractFeatures(auxTokens, { lookups: this.lookups });
-                features.copula = true;
-                const copula = nounCopula(preceding, features, this._formal, this.lookups, "polite_q").text;
-                PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, questionMatch.consumed, copula, {
-                  unitType: UnitType.CONTENT
-                });
-              }
-              if (question.absorbPeriod) {
-                PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index + auxTokens.length, questionMatch.consumed - auxTokens.length, "?", {
-                  unitType: UnitType.SYMBOL,
-                  koreanPos: 기호,
-                  attachLeft: true,
-                  attachRight: true
-                });
-              }
-              cursor.advance(questionMatch.consumed);
-              continue;
-            }
-            const sfpMatch = cursor.lookahead(auxProbe2.afterAux - cursor.pos, c => {
-              const sfp = trailingCopulaSfpTail(c);
-              return sfp === null ? null : { sfp, consumed: c.pos - index };
-            });
-            if (sfpMatch !== null) {
-              if (previousUnit !== undefined) {
-                applyHeadedPlanTrailingCopula(previousUnit, "", { auxTokens, baseText: preceding, sfp: sfpMatch.sfp });
-                for (let offset = 0; offset < sfpMatch.consumed; offset++) {
-                  if (!previousUnit.jpIndices.includes(index + offset)) {
-                    previousUnit.jpIndices.push(index + offset);
-                  }
-                }
-              } else {
-                const features = auxExtractFeatures(auxTokens, { lookups: this.lookups });
-                features.copula = true;
-                const copula = nounCopula(preceding, features, this._formal, this.lookups, sfpMatch.sfp).text;
-                PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, sfpMatch.consumed, copula, {
-                  unitType: UnitType.CONTENT
-                });
-              }
-              cursor.advance(sfpMatch.consumed);
-              continue;
-            }
-          }
-        }
-        absorbIntoPrecedingUnit(units, index);
-        cursor.advance();
+        this.assembleResidualCopulaTail(ctx, index, token);
         continue;
       }
       if ((token.pos & POS0) === 接頭辞) {
-        const entry = committedLookupEntry(await this.dictionary.lookupTokenRelaxed(token));
-        const korean = entry === null ? token.surface : winnerKorean(entry) ?? "";
-        if (korean.length > 0) {
-          const defaultAttachRight = entry !== null ? (winner(entry).attachRight ?? true) : true;
-          const attachRight = prefixAttachRightForToken(token, cursor.tokens, index, defaultAttachRight);
-          PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, korean, {
-            unitType: UnitType.PREFIX,
-            koreanPos: 접두사,
-            entry,
-            renderPlan: { kind: "fixedText", text: korean, koreanPos: 접두사 },
-            attachRight
-          });
-        }
-        cursor.advance();
+        await this.appendAssemblyPrefixUnit(ctx, index, token);
         continue;
       }
       if ((token.pos & POS0) === 接尾辞) {
-        const clusterDecision = honorificClusterSuffixDecision(
-          cursor.tokens,
-          index,
-          honorificClusterLookupsFrom(this.lookups)
-        );
-        if (clusterDecision?.kind === "absorbed") {
-          absorbIntoPrecedingUnit(units, index);
-          cursor.advance();
+        if (this.applyHonorificClusterSuffix(ctx, index) === "continue") {
           continue;
         }
-        if (clusterDecision?.kind === "override") {
-          const clusterOverride = clusterDecision.realization;
-          PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, clusterOverride.korean, {
-            unitType: UnitType.SUFFIX,
-            koreanPos: 접미사,
-            attachLeft: clusterOverride.attachLeft,
-            renderPlan: {
-              kind: "fixedText",
-              text: clusterOverride.korean,
-              koreanPos: 접미사
-            }
-          });
-          cursor.advance();
-          continue;
-        }
-        let entry = await this.dictionary.lookupTokenRelaxed(token);
-        if (entry !== undefined) {
-          entry = resolveContext(entry, cursor.tokens, index, { layout, lookups: this.lookups, numeric: this.numeric });
-        }
-        const committed = committedLookupEntry(entry);
-        let korean = committed === null ? token.surface : winnerKorean(committed) ?? "";
-        const previousUnit = lastOutputUnit(units);
-        let suffixAttachLeft = committed !== null ? (winner(committed).attachLeft ?? true) : true;
-        if (
-          token.dictionaryForm === "方"
-          && token.reading === "カタ"
-          && index > 0
-          && previousUnit !== undefined
-        ) {
-          const hostPlan = kataVerbHostAttributivePlan(previousUnit);
-          if (hostPlan !== null) {
-            previousUnit.setRenderPlan(hostPlan, { rule: "SUFFIX-KATA-VERB", cacheValue: "" });
-            korean = "법";
-            suffixAttachLeft = false;
-          }
-        }
-        if (suffixNominalizerAlreadyLexicalizedInPreviousUnit(token, korean, previousUnit)) {
-          absorbIntoPrecedingUnit(units, index);
-          cursor.advance();
-          continue;
-        }
-        rewriteFunctionalAdjectivalSuffixHostToNominalized(token, previousUnit);
-        if (korean.length > 0) {
-          const renderPlan = suffixRenderPlanFromCommittedEntry(committed, korean);
-          PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, korean, {
-            unitType: UnitType.SUFFIX,
-            koreanPos: 접미사,
-            entry: committed,
-            attachLeft: suffixAttachLeft,
-            ...(renderPlan === null ? {} : { renderPlan })
-          });
-        } else {
-          absorbIntoPrecedingUnit(units, index);
-        }
-        cursor.advance();
+        await this.appendLexicalSuffixUnit(ctx, index, token);
         continue;
       }
       const repairedConsumed = await this.tryAppendRepairedContentSpan(
@@ -3298,6 +2428,546 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
     }
     this.absorbUncoveredAssemblyTokens(cursor.tokens, units, contentMap, layout);
     return units;
+  }
+
+  private async appendAssemblyContentSpanUnit(
+    ctx: AssemblyPassContext,
+    index: number,
+    span: AssemblyContentSpan
+  ): Promise<void> {
+    const { cursor, units, contentMap, layout, carrierOverrides, relationRenderSpans, options } = ctx;
+    const nominalLightVerb = await this.nominalLightVerbProjectionAt(cursor, span, contentMap, layout);
+    if (nominalLightVerb !== null) {
+      carrierOverrides.set(nominalLightVerb.predicateIndex, nominalLightVerb);
+    }
+    const surface = cursor.current()?.surface;
+    const pos1 = (cursor.current()?.pos ?? 0) & POS1;
+    if (surface === "だけでなく" || (surface === "だけ" && (pos1 === 副助詞))) {
+      if (await this.matchFocusDakeCopulaTail(cursor, units, options.trace)) {
+        return;
+      }
+    }
+    if ((cursor.current()!.pos & POS0) === 助動詞 && span.discourseConnective !== true) {
+      if (this.tryApplyParticlePhraseCopulaChain(cursor, units, layout, relationRenderSpans)) {
+        return;
+      }
+      if (this.tryApplyPunctuatedCopulaChain(cursor, units, layout, relationRenderSpans)) {
+        return;
+      }
+    }
+    const carrierOverride = carrierOverrides.get(index);
+    const baseRenderPlan = applyCopulaFocusAdjunctRenderPlan(
+      carrierOverride === undefined ? span.renderPlan : carrierOverride.renderPlan,
+      span
+    );
+    const renderPlan = applyBareQuestionRenderPlan(baseRenderPlan, cursor.tokens, index + span.consumed, cursor.end);
+    const shouldCacheKorean = PipelineAssemblerMixin.shouldCacheSurface(renderPlan);
+    const shouldCacheBaseKorean = PipelineAssemblerMixin.shouldCacheBaseSurface(renderPlan);
+    const realizedKorean = shouldCacheKorean || shouldCacheBaseKorean
+      ? this.surfaceFromRenderPlan(span.korean, renderPlan)
+      : "";
+    const cachedKorean = shouldCacheKorean ? realizedKorean : "";
+    const cachedBaseKorean = shouldCacheBaseKorean ? realizedKorean : span.koreanBase ?? "";
+    PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, span.consumed, cachedKorean, {
+      unitType: span.unitType,
+      koreanPos: span.koreanPos,
+      entry: span.entry,
+      renderPlan,
+      koreanBase: cachedBaseKorean,
+      attachLeft: span.attachLeft,
+      particleRole: span.particleRole,
+      provenance: span.provenance,
+      discourseConnective: span.discourseConnective,
+      provenanceReason: carrierOverride === undefined ? span.provenanceReason : "carrier_idiom",
+      warnings: span.warnings,
+      renderPlanPolicy: span.renderPlanPolicy
+    });
+    cursor.advance(span.consumed);
+  }
+
+  private appendNonLexicalSymbolUnit(ctx: AssemblyPassContext, index: number, token: RuntimeHaruToken): void {
+    const { cursor, units, layout } = ctx;
+    if (
+      isHardTerminalPunctuationToken(token) &&
+      questionContentPunctuationBridgeRelationAt(cursor.tokens, index, { consumers: ["assembler"] }) !== null
+    ) {
+      cursor.advance();
+      return;
+    }
+    PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, token.surface, {
+      unitType: UnitType.SYMBOL,
+      koreanPos: 기호,
+      attachLeft: true,
+      attachRight: true,
+      terminalPunctuationRun: layout.terminalPunctuationRunContaining(index) ?? null
+    });
+    cursor.advance();
+  }
+
+  private appendPassthroughSymbolUnit(ctx: AssemblyPassContext, index: number, token: RuntimeHaruToken): void {
+    const { cursor, units } = ctx;
+    if (token.surface.length > 0) {
+      PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, token.surface, {
+        unitType: UnitType.SYMBOL,
+        koreanPos: 기호,
+        attachLeft: true,
+        attachRight: true
+      });
+    } else {
+      absorbIntoPrecedingUnit(units, index);
+    }
+    cursor.advance();
+  }
+
+  private async applyAssemblyParticlePrelude(
+    ctx: AssemblyPassContext,
+    index: number,
+    token: RuntimeHaruToken
+  ): Promise<AssemblyLoopSignal> {
+    const { cursor, units, options } = ctx;
+    if (await this.matchPronominalNoDispatch(cursor, units, options.trace)) {
+      return "continue";
+    }
+    if (this.tryApplyTrailingCopulaNegation(cursor, units)) {
+      return "continue";
+    }
+    if (isAssemblerTerminalQuestionKa(cursor.tokens, index)) {
+      const nextIndex = nextNonSpaceIndex(cursor.tokens, index + 1) ?? cursor.end;
+      if (nextIndex >= cursor.end) {
+        PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, "?", {
+          unitType: UnitType.SYMBOL,
+          koreanPos: 기호,
+          attachLeft: true,
+          attachRight: true
+        });
+        cursor.advance();
+        return "continue";
+      }
+      if (hasHardTerminalPunctuationClass(cursor.tokens[nextIndex], nextIndex, ["japanese_period"], ["assembler"])) {
+        PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, nextIndex - index + 1, "?", {
+          unitType: UnitType.SYMBOL,
+          koreanPos: 기호,
+          attachLeft: true,
+          attachRight: true
+        });
+        cursor.advance(nextIndex + 1 - cursor.pos);
+        return "continue";
+      }
+    }
+    if (isTerminalYoSfpSurface(token)) {
+      if (isVocativeYo(cursor.tokens, index)) {
+        PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, "", {
+          unitType: UnitType.FUNCTIONAL,
+          koreanPos: 조사,
+          attachLeft: true,
+          functionalKind: FunctionalKind.CONTEXTUAL,
+          allomorphKey: "이여/여"
+        });
+      } else {
+        absorbIntoPrecedingUnit(units, index);
+      }
+      cursor.advance();
+      return "continue";
+    }
+    return "next";
+  }
+
+  private applyResidualAuxiliaryCopulaOwners(
+    ctx: AssemblyPassContext,
+    index: number,
+    token: RuntimeHaruToken
+  ): AssemblyLoopSignal {
+    const { cursor, units, layout, relationRenderSpans } = ctx;
+    if (this.absorbNaAdjectiveSuffixAdnominalCopula(ctx, index, token) === "continue") {
+      return "continue";
+    }
+    if (this.tryApplyEllipticPoliteConfirmation(cursor, units, layout)) {
+      return "continue";
+    }
+    if (this.tryApplyParticlePhraseCopulaChain(cursor, units, layout, relationRenderSpans)) {
+      return "continue";
+    }
+    if (this.tryApplyPunctuatedCopulaChain(cursor, units, layout, relationRenderSpans)) {
+      return "continue";
+    }
+    if (this.tryApplyTrailingCopulaNegation(cursor, units)) {
+      return "continue";
+    }
+    return "next";
+  }
+
+  private assembleResidualCopulaTail(
+    ctx: AssemblyPassContext,
+    index: number,
+    token: RuntimeHaruToken
+  ): void {
+    const { cursor, units } = ctx;
+    const previousUnit = lastOutputUnit(units);
+    const preceding = this.precedingForAllomorph(units);
+    const hasPunctuatedCopulaConnectiveHost = this.hasPunctuatedCopulaConnectiveHost(units);
+    if (this.appendOrphanCopulaConnective(ctx, index, token, previousUnit, preceding, hasPunctuatedCopulaConnectiveHost) === "continue") {
+      return;
+    }
+    if (this.matchDearuAux(cursor, units)) {
+      return;
+    }
+    if (this.appendPunctuatedTrailingCopulaTail(ctx, index, token) === "continue") {
+      return;
+    }
+    if (isCopulaAuxToken(token) && canHostTrailingCopula(previousUnit, preceding)) {
+      if (this.foldTrailingCopulaTail(ctx, index, previousUnit, preceding) === "continue") {
+        return;
+      }
+    }
+    absorbIntoPrecedingUnit(units, index);
+    cursor.advance();
+  }
+
+  private absorbNaAdjectiveSuffixAdnominalCopula(
+    ctx: AssemblyPassContext,
+    index: number,
+    token: RuntimeHaruToken
+  ): AssemblyLoopSignal {
+    const { cursor, units } = ctx;
+    const pronominalNoIndex = nextNonSpaceIndex(cursor.tokens, index + 1, cursor.end);
+    const previousToken = cursor.tokens[index - 1];
+    if (
+      isAdnominalCopulaToken(token) &&
+      previousToken !== undefined &&
+      isNaAdjectiveDerivationalSuffix(previousToken) &&
+      pronominalNoIndex !== null &&
+      pronominalNoMarkerRelationForToken(cursor.tokens[pronominalNoIndex], pronominalNoIndex, {
+        requirement: "copula_tail",
+        consumers: ["pronominal_no_dispatch"],
+      }) !== null
+    ) {
+      absorbIntoPrecedingUnit(units, index);
+      cursor.advance();
+      return "continue";
+    }
+    return "next";
+  }
+
+  private appendOrphanCopulaConnective(
+    ctx: AssemblyPassContext,
+    index: number,
+    token: RuntimeHaruToken,
+    previousUnit: TranslationUnit | undefined,
+    preceding: string,
+    hasPunctuatedCopulaConnectiveHost: boolean
+  ): AssemblyLoopSignal {
+    const { cursor, units } = ctx;
+    let orphanConn: readonly [korean: string, consumed: number] | undefined;
+    if (!(isCopulaAuxToken(token) && (canHostTrailingCopulaConnective(previousUnit, preceding) || hasPunctuatedCopulaConnectiveHost))) {
+      orphanConn = matchOrphanCopulaConn(cursor);
+    }
+    orphanConn ??= matchOrphanNanoconn(cursor);
+    if (orphanConn !== undefined) {
+      const [korean, orphanConsumed] = orphanConn;
+      PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, orphanConsumed, korean, {
+        unitType: UnitType.CONTENT,
+        koreanPos: 접속사
+      });
+      cursor.advance(orphanConsumed);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private appendPunctuatedTrailingCopulaTail(
+    ctx: AssemblyPassContext,
+    index: number,
+    token: RuntimeHaruToken
+  ): AssemblyLoopSignal {
+    const { cursor, units } = ctx;
+    if (isCopulaAuxToken(token)) {
+      const auxProbe1 = cursor.lookahead(index - cursor.pos, c => {
+        const auxTokens = collectAuxTokens(c);
+        return { auxTokens, afterAux: c.pos };
+      });
+      const auxTokens = auxProbe1.auxTokens;
+      if (auxTokens.length > 0) {
+        const connectiveMatch1 = cursor.lookahead(auxProbe1.afterAux - cursor.pos, c => {
+          const connective = trailingCopulaConnectiveTail(c, this.lookups);
+          return connective === null ? null : { connective, consumed: c.pos - index };
+        });
+        if (connectiveMatch1 !== null) {
+          const puncConsumed = this.tryAppendTrailingPunctuationCopulaConnective(
+            cursor.tokens,
+            index,
+            connectiveMatch1.consumed,
+            units,
+            auxTokens,
+            connectiveMatch1.connective
+          );
+          if (puncConsumed !== null) {
+            cursor.advance(puncConsumed);
+            return "continue";
+          }
+        }
+        const punctuatedTerminalConsumed = this.tryAppendPunctuatedCopulaTerminalTail(
+          cursor,
+          index,
+          auxProbe1.afterAux,
+          units,
+          auxTokens
+        );
+        if (punctuatedTerminalConsumed !== null) {
+          cursor.advance(punctuatedTerminalConsumed);
+          return "continue";
+        }
+      }
+    }
+    return "next";
+  }
+
+  private foldTrailingCopulaTail(
+    ctx: AssemblyPassContext,
+    index: number,
+    previousUnit: TranslationUnit | undefined,
+    preceding: string
+  ): AssemblyLoopSignal {
+    const { cursor } = ctx;
+    const auxProbe2 = cursor.lookahead(index - cursor.pos, c => {
+      const auxTokens = collectAuxTokens(c);
+      return { auxTokens, afterAux: c.pos };
+    });
+    const auxTokens = auxProbe2.auxTokens;
+    const fold: TrailingCopulaFoldInput = { index, previousUnit, preceding, auxProbe2, auxTokens };
+    if (this.foldTrailingCopulaConnective(ctx, fold) === "continue") {
+      return "continue";
+    }
+    if (this.foldTrailingCopulaTerminal(ctx, fold) === "continue") {
+      return "continue";
+    }
+    if (auxTokens.length > 0) {
+      if (this.foldTrailingCopulaQuestion(ctx, fold) === "continue") {
+        return "continue";
+      }
+      if (this.foldTrailingCopulaSfp(ctx, fold) === "continue") {
+        return "continue";
+      }
+    }
+    return "next";
+  }
+
+  private foldTrailingCopulaConnective(ctx: AssemblyPassContext, fold: TrailingCopulaFoldInput): AssemblyLoopSignal {
+    const { cursor, units } = ctx;
+    const { index, previousUnit, preceding, auxProbe2, auxTokens } = fold;
+    if (auxTokens.length > 0 && canHostTrailingCopulaConnective(previousUnit, preceding)) {
+      const connectiveMatch2 = cursor.lookahead(auxProbe2.afterAux - cursor.pos, c => {
+        const connective = trailingCopulaConnectiveTail(c, this.lookups);
+        return connective === null ? null : { connective, consumed: c.pos - index };
+      });
+      if (connectiveMatch2 !== null) {
+        if (previousUnit !== undefined) {
+          applyHeadedPlanTrailingCopula(previousUnit, "", {
+            auxTokens,
+            baseText: preceding,
+            connective: connectiveMatch2.connective
+          });
+          for (let offset = 0; offset < connectiveMatch2.consumed; offset++) {
+            if (!previousUnit.jpIndices.includes(index + offset)) {
+              previousUnit.jpIndices.push(index + offset);
+            }
+          }
+        } else {
+          const features = auxExtractFeatures(auxTokens, { lookups: this.lookups });
+          const copula = nounCopulaConnective(preceding, connectiveMatch2.connective, features.past);
+          PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, connectiveMatch2.consumed, copula, {
+            unitType: UnitType.CONTENT
+          });
+        }
+        cursor.advance(connectiveMatch2.consumed);
+        return "continue";
+      }
+    }
+    return "next";
+  }
+
+  private foldTrailingCopulaTerminal(ctx: AssemblyPassContext, fold: TrailingCopulaFoldInput): AssemblyLoopSignal {
+    const { cursor, units } = ctx;
+    const { index, previousUnit, preceding, auxProbe2, auxTokens } = fold;
+    if (auxTokens.length > 0 && cursor.lookahead(auxProbe2.afterAux - cursor.pos, hasTerminalSentenceMark)) {
+      const terminalConsumed = auxProbe2.afterAux - index;
+      if (previousUnit !== undefined) {
+        applyHeadedPlanTrailingCopula(previousUnit, "", { auxTokens, baseText: preceding });
+        for (let offset = 0; offset < terminalConsumed; offset++) {
+          if (!previousUnit.jpIndices.includes(index + offset)) {
+            previousUnit.jpIndices.push(index + offset);
+          }
+        }
+      } else {
+        const features = auxExtractFeatures(auxTokens, { lookups: this.lookups });
+        features.copula = true;
+        const copula = nounCopula(preceding, features, this._formal, this.lookups).text;
+        PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, terminalConsumed, copula, {
+          unitType: UnitType.CONTENT
+        });
+      }
+      cursor.advance(terminalConsumed);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private foldTrailingCopulaQuestion(ctx: AssemblyPassContext, fold: TrailingCopulaFoldInput): AssemblyLoopSignal {
+    const { cursor, units } = ctx;
+    const { index, previousUnit, preceding, auxProbe2, auxTokens } = fold;
+    const questionMatch = cursor.lookahead(auxProbe2.afterAux - cursor.pos, c => {
+      const question = terminalQuestionTail(c);
+      return question === null ? null : { question, consumed: c.pos - index };
+    });
+    if (questionMatch !== null) {
+      const question = questionMatch.question;
+      if (previousUnit !== undefined) {
+        applyHeadedPlanTrailingCopula(previousUnit, "", { auxTokens, baseText: preceding, sfp: "polite_q" });
+        for (let offset = 0; offset < questionMatch.consumed; offset++) {
+          if (!previousUnit.jpIndices.includes(index + offset)) {
+            previousUnit.jpIndices.push(index + offset);
+          }
+        }
+      } else {
+        const features = auxExtractFeatures(auxTokens, { lookups: this.lookups });
+        features.copula = true;
+        const copula = nounCopula(preceding, features, this._formal, this.lookups, "polite_q").text;
+        PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, questionMatch.consumed, copula, {
+          unitType: UnitType.CONTENT
+        });
+      }
+      if (question.absorbPeriod) {
+        PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index + auxTokens.length, questionMatch.consumed - auxTokens.length, "?", {
+          unitType: UnitType.SYMBOL,
+          koreanPos: 기호,
+          attachLeft: true,
+          attachRight: true
+        });
+      }
+      cursor.advance(questionMatch.consumed);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private foldTrailingCopulaSfp(ctx: AssemblyPassContext, fold: TrailingCopulaFoldInput): AssemblyLoopSignal {
+    const { cursor, units } = ctx;
+    const { index, previousUnit, preceding, auxProbe2, auxTokens } = fold;
+    const sfpMatch = cursor.lookahead(auxProbe2.afterAux - cursor.pos, c => {
+      const sfp = trailingCopulaSfpTail(c);
+      return sfp === null ? null : { sfp, consumed: c.pos - index };
+    });
+    if (sfpMatch !== null) {
+      if (previousUnit !== undefined) {
+        applyHeadedPlanTrailingCopula(previousUnit, "", { auxTokens, baseText: preceding, sfp: sfpMatch.sfp });
+        for (let offset = 0; offset < sfpMatch.consumed; offset++) {
+          if (!previousUnit.jpIndices.includes(index + offset)) {
+            previousUnit.jpIndices.push(index + offset);
+          }
+        }
+      } else {
+        const features = auxExtractFeatures(auxTokens, { lookups: this.lookups });
+        features.copula = true;
+        const copula = nounCopula(preceding, features, this._formal, this.lookups, sfpMatch.sfp).text;
+        PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, sfpMatch.consumed, copula, {
+          unitType: UnitType.CONTENT
+        });
+      }
+      cursor.advance(sfpMatch.consumed);
+      return "continue";
+    }
+    return "next";
+  }
+
+  private async appendAssemblyPrefixUnit(ctx: AssemblyPassContext, index: number, token: RuntimeHaruToken): Promise<void> {
+    const { cursor, units } = ctx;
+    const entry = committedLookupEntry(await this.dictionary.lookupTokenRelaxed(token));
+    const korean = entry === null ? token.surface : winnerKorean(entry) ?? "";
+    if (korean.length > 0) {
+      const defaultAttachRight = entry !== null ? (winner(entry).attachRight ?? true) : true;
+      const attachRight = prefixAttachRightForToken(token, cursor.tokens, index, defaultAttachRight);
+      PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, korean, {
+        unitType: UnitType.PREFIX,
+        koreanPos: 접두사,
+        entry,
+        renderPlan: { kind: "fixedText", text: korean, koreanPos: 접두사 },
+        attachRight
+      });
+    }
+    cursor.advance();
+  }
+
+  private applyHonorificClusterSuffix(ctx: AssemblyPassContext, index: number): AssemblyLoopSignal {
+    const { cursor, units } = ctx;
+    const clusterDecision = honorificClusterSuffixDecision(
+      cursor.tokens,
+      index,
+      honorificClusterLookupsFrom(this.lookups)
+    );
+    if (clusterDecision?.kind === "absorbed") {
+      absorbIntoPrecedingUnit(units, index);
+      cursor.advance();
+      return "continue";
+    }
+    if (clusterDecision?.kind === "override") {
+      const clusterOverride = clusterDecision.realization;
+      PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, clusterOverride.korean, {
+        unitType: UnitType.SUFFIX,
+        koreanPos: 접미사,
+        attachLeft: clusterOverride.attachLeft,
+        renderPlan: {
+          kind: "fixedText",
+          text: clusterOverride.korean,
+          koreanPos: 접미사
+        }
+      });
+      cursor.advance();
+      return "continue";
+    }
+    return "next";
+  }
+
+  private async appendLexicalSuffixUnit(ctx: AssemblyPassContext, index: number, token: RuntimeHaruToken): Promise<void> {
+    const { cursor, units, layout } = ctx;
+    let entry = await this.dictionary.lookupTokenRelaxed(token);
+    if (entry !== undefined) {
+      entry = resolveContext(entry, cursor.tokens, index, { layout, lookups: this.lookups, numeric: this.numeric });
+    }
+    const committed = committedLookupEntry(entry);
+    let korean = committed === null ? token.surface : winnerKorean(committed) ?? "";
+    const previousUnit = lastOutputUnit(units);
+    let suffixAttachLeft = committed !== null ? (winner(committed).attachLeft ?? true) : true;
+    if (
+      token.dictionaryForm === "方"
+      && token.reading === "カタ"
+      && index > 0
+      && previousUnit !== undefined
+    ) {
+      const hostPlan = kataVerbHostAttributivePlan(previousUnit);
+      if (hostPlan !== null) {
+        previousUnit.setRenderPlan(hostPlan, { rule: "SUFFIX-KATA-VERB", cacheValue: "" });
+        korean = "법";
+        suffixAttachLeft = false;
+      }
+    }
+    if (suffixNominalizerAlreadyLexicalizedInPreviousUnit(token, korean, previousUnit)) {
+      absorbIntoPrecedingUnit(units, index);
+      cursor.advance();
+      return;
+    }
+    rewriteFunctionalAdjectivalSuffixHostToNominalized(token, previousUnit);
+    if (korean.length > 0) {
+      const renderPlan = suffixRenderPlanFromCommittedEntry(committed, korean);
+      PipelineAssemblerMixin.appendUnit(units, cursor.tokens, index, 1, korean, {
+        unitType: UnitType.SUFFIX,
+        koreanPos: 접미사,
+        entry: committed,
+        attachLeft: suffixAttachLeft,
+        ...(renderPlan === null ? {} : { renderPlan })
+      });
+    } else {
+      absorbIntoPrecedingUnit(units, index);
+    }
+    cursor.advance();
   }
 
   private async tryAppendRepairedContentSpan(
@@ -5567,11 +5237,6 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
     return this._generate(units);
   }
 
-  protected async assembleWithUnits(tokens: readonly RuntimeHaruToken[]): Promise<readonly [string, TranslationUnit[], readonly Warning[]]> {
-    const { units, warnings } = await this.buildUnitsForAssembly(tokens, { reanalysis: "record_only" });
-    return [this._generate(units, { materializeCaches: true, tokens }), units, warnings];
-  }
-
   protected async buildUnitIrForAssembly(
     tokens: readonly RuntimeHaruToken[],
     mode: { readonly reanalysis: "record_only" },
@@ -6460,16 +6125,8 @@ export abstract class PipelineAssemblerMixin extends PipelineCompoundMixin {
     return await this.renderSplitFallback(token);
   }
 
-  async _render_split_fallback(token: RuntimeHaruToken): Promise<string | undefined> {
-    return await this.renderSplitFallback(token);
-  }
-
   async _synthesizeEntry(token: RuntimeHaruToken, options: { readonly nextToken?: RuntimeHaruToken | null } = {}): Promise<MorphemeEntry> {
     return this.fallbackMixin().synthesizeEntry(token, { nextToken: options.nextToken ?? null });
-  }
-
-  async _synthesize_entry(token: RuntimeHaruToken, options: { readonly next_token?: RuntimeHaruToken | null } = {}): Promise<MorphemeEntry> {
-    return this.fallbackMixin().synthesizeEntry(token, { nextToken: options.next_token ?? null });
   }
 
   async diagnoseRenderPlaceNameFallback(token: RuntimeHaruToken): Promise<string | undefined> {
@@ -6558,143 +6215,6 @@ function toHaruPos(pos: number): number {
   return pos;
 }
 
-function isParticleKey(value: string): value is ParticleKey {
-  return value in PARTICLE_PAIRS;
-}
-
-function koreanOverrideRenderPlan(token: RuntimeHaruToken, koreanPos: number): RenderPlan | null {
-  if (token.syntheticReason === "demonstrative_tame_discourse") {
-    return {
-      kind: "discourseConnective",
-      payload: {
-        id: "demonstrative_tame_discourse",
-        demonstrative: demonstrativeTameKind(token),
-        koreanPos
-      }
-    };
-  }
-  if (token.syntheticReason === "sentence_initial_toiu_wakeda") {
-    return {
-      kind: "wakeExplanation",
-      payload: {
-        prefix: { kind: "fixedText", text: "그런", koreanPos: 관형사 },
-        headKind: "register_noun",
-        tailKind: "wakeda",
-        auxTokens: sentenceInitialToiuWakedaAuxTokens(token),
-        connectiveEnding: null
-      }
-    };
-  }
-  if (token.koreanOverrideByRegister !== undefined) {
-    return {
-      kind: "registerText",
-      casual: token.koreanOverrideByRegister.casual,
-      formal: token.koreanOverrideByRegister.formal,
-      koreanPos
-    };
-  }
-  if (token.koreanOverride !== undefined) {
-    return {
-      kind: "fixedText",
-      text: token.koreanOverride,
-      koreanPos
-    };
-  }
-  return null;
-}
-
-function sentenceInitialToiuWakedaAuxTokens(token: RuntimeHaruToken): readonly RuntimeHaruToken[] {
-  if (token.surface.endsWith("でした")) {
-    return [
-      syntheticCopulaAuxToken("でし", "です", "デシ", 助動詞_デス, 連用形_一般),
-      syntheticCopulaAuxToken("た", "た", "タ", 助動詞_タ, 終止形_一般)
-    ];
-  }
-  if (token.surface.endsWith("だった")) {
-    return [
-      syntheticCopulaAuxToken("だっ", "だ", "ダッ", 助動詞_ダ, 連用形_促音便),
-      syntheticCopulaAuxToken("た", "た", "タ", 助動詞_タ, 終止形_一般)
-    ];
-  }
-  if (token.surface.endsWith("です")) {
-    return [syntheticCopulaAuxToken("です", "です", "デス", 助動詞_デス, 終止形_一般)];
-  }
-  return [];
-}
-
-function syntheticCopulaAuxToken(
-  surface: string,
-  dictionaryForm: string,
-  reading: string,
-  pos4: number,
-  pos5A: number
-): RuntimeHaruToken {
-  return {
-    surface,
-    dictionaryForm,
-    reading,
-    dictionaryFormReading: reading,
-    pos: 助動詞 | pos4 | pos5A,
-    dictionaryId: 0
-  };
-}
-
-function applyTailParserFallbackDescriptorToSpan(
-  descriptor: ReturnType<typeof buildTailParserFallbackAssemblyDescriptor>,
-  index: number,
-  tokens: readonly RuntimeHaruToken[],
-  lookups: LookupTables
-): AssemblyContentSpan {
-  const span = makeAssemblyContentSpan(
-    index,
-    descriptor.consumed,
-    descriptor.korean,
-    descriptor.koreanPos ?? 명사,
-    descriptor.entry,
-    descriptor.unitType,
-    {
-      attachLeft: descriptor.attachLeft,
-      provenance: descriptor.provenance,
-      provenanceReason: descriptor.provenanceReason,
-      warnings: descriptor.warnings,
-      renderPlanPolicy: descriptor.renderPlanPolicy
-    }
-  );
-  span.renderPlan = descriptor.renderPlan;
-  span.voice = descriptor.voice;
-  span.rareruReadings = descriptor.rareruReadings;
-  span.nareruReadings = descriptor.nareruReadings;
-  span.dekiruReadings = descriptor.dekiruReadings;
-  span.hasNegative = descriptor.hasNegative;
-  span.hasCausative = descriptor.hasCausative;
-  span.hasCausativePassive = descriptor.hasCausativePassive;
-  span.hasRequestTail = descriptor.hasRequestTail;
-  span.hasBenefactiveTail = descriptor.hasBenefactiveTail;
-  span.isKeijoujiVerbPredicate = descriptor.isKeijoujiVerbPredicate;
-  span.benefactive = descriptor.benefactive;
-  span.sourceCandidates = descriptor.sourceCandidates;
-  closeUnownedTailFallbackSpanToRaw(span, tokens);
-  return span;
-}
-
-function closeUnownedTailFallbackSpanToRaw(span: AssemblyContentSpan, tokens: readonly RuntimeHaruToken[]): void {
-  if (span.provenance !== "legacy_tail" && span.provenance !== "fallback") return;
-  const raw = rawSourceSurfaceText(tokens, span.start, span.consumed);
-  span.korean = raw;
-  span.koreanBase = null;
-  span.renderPlan = null;
-  span.sourceCandidates = null;
-  span.warnings = [
-    ...span.warnings,
-    unsupportedGrammarRawWarning(
-      UNOWNED_TAIL_FALLBACK_RAW_OP_KIND,
-      rawSourceWarningSpan(span.start, span.consumed),
-      `unsupported grammar: head-tail did not own this span (provenance=${span.provenance}); ` +
-      `the consumed source span was kept raw. surface=${raw}`
-    )
-  ];
-}
-
 interface CopulaHostUnitPlacement {
   readonly anchor: TranslationUnit;
   readonly hostUnits: readonly TranslationUnit[];
@@ -6711,1708 +6231,74 @@ function overlapsStructuralRelationRender(
   return spans.some((span) => span.start < range.endExclusive && range.start < span.endExclusive);
 }
 
-function canCarryCopulaHostPlan(unit: TranslationUnit): boolean {
-  return unit.unitType !== UnitType.SYMBOL && unit.allomorphKey === null;
-}
-
-function decorationSurfaceParts(
-  tokens: readonly RuntimeHaruToken[],
-  span: { readonly start: number; readonly endExclusive: number },
-  decorationUnits: readonly TranslationUnit[]
-): readonly PredicateHeadTailChainHostTextPart[] {
-  const parts: PredicateHeadTailChainHostTextPart[] = [];
-  for (let idx = span.start; idx < span.endExclusive; idx += 1) {
-    const token = tokens[idx];
-    if (token === undefined) {
-      continue;
-    }
-    const owner = decorationUnits.find((unit) => unit.jpIndices.includes(idx)) ?? null;
-    parts.push({
-      kind: "hostText",
-      text: token.surface,
-      sourceSpan: sourceSpanForTokenIndexes(tokens, [idx]),
-      unit: owner,
-      decoration: true
-    });
-  }
-  return parts;
-}
-
-export function sourceSpanForTokenIndexes(
-  tokens: readonly Pick<AssemblerToken, "sourceOrdinal" | "sourceSpan">[],
-  indexes: Iterable<number>
-): SourceTokenSpan | null {
-  function* iterTokens() {
-    for (const index of indexes) {
-      const token = tokens[index];
-      if (token !== undefined) {
-        yield token;
-      }
-    }
-  }
-  return computeSourceSpan(iterTokens()) ?? null;
-}
-
-function demonstrativeTameKind(token: RuntimeHaruToken): "sono" | "kono" | null {
-  const source = token.dictionaryForm || token.surface;
-  if (source.startsWith("その")) {
-    return "sono";
-  }
-  if (source.startsWith("この")) {
-    return "kono";
-  }
-  return null;
-}
-
-interface RuntimePreprocessToken extends HaruTokenRuntimeFields {
-  readonly surface: string;
-  readonly normalizedForm?: string;
-  readonly dictionaryForm: string;
-  readonly reading: string;
-  readonly dictionaryFormReading: string;
-  readonly pos: number;
-  readonly dictionaryId?: number;
-  readonly splitA?: readonly RuntimePreprocessToken[];
-  readonly splitB?: readonly RuntimePreprocessToken[];
-}
-
-function runtimeTokenFromPreprocess(token: RuntimePreprocessToken): RuntimeHaruToken {
-  const { splitA, splitB, longVowelReduction, ...flatToken } = token;
-  const alignedMetadata = longVowelReduction !== undefined &&
-    isLongVowelReductionAligned({ surface: token.surface, longVowelReduction })
-    ? longVowelReduction
-    : undefined;
-  return {
-    ...flatToken,
-    ...(alignedMetadata === undefined ? {} : { longVowelReduction: alignedMetadata }),
-    dictionaryId: token.dictionaryId ?? -1,
-    ...(splitA === undefined ? {} : { splitA: splitA.map((item) => runtimeTokenFromPreprocess(item)) }),
-    ...(splitB === undefined ? {} : { splitB: splitB.map((item) => runtimeTokenFromPreprocess(item)) })
-  };
-}
-
-interface MergedSourcePositionRole {
-  readonly leading: boolean;
-  readonly trailing: boolean;
-}
-
-type MergedSourcePositionToken = Pick<
-  RuntimeHaruToken,
-  "whitespaceBefore" | "whitespaceAfter" | "transparentPauseBefore" | "transparentPauseAfter" | "transparentPauseRunAfter"
-  | "sourceLineBreakBefore"
->;
-
-function withMergedSourcePosition<T extends RuntimePreprocessToken>(
-  tokens: readonly MergedSourcePositionToken[],
-  start: number,
-  consumed: number,
-  token: T,
-  role: MergedSourcePositionRole
-): T {
-  const first = role.leading ? tokens[start] : undefined;
-  const last = role.trailing ? tokens[start + consumed - 1] : undefined;
-  return {
-    ...token,
-    ...(token.whitespaceBefore === undefined && first?.whitespaceBefore !== undefined
-      ? { whitespaceBefore: first.whitespaceBefore }
-      : {}),
-    ...(token.whitespaceAfter === undefined && last?.whitespaceAfter !== undefined
-      ? { whitespaceAfter: last.whitespaceAfter }
-      : {}),
-    ...(token.transparentPauseBefore === undefined && first?.transparentPauseBefore === true
-      ? { transparentPauseBefore: true }
-      : {}),
-    ...(token.transparentPauseAfter === undefined && last?.transparentPauseAfter === true
-      ? { transparentPauseAfter: true }
-      : {}),
-    ...(token.transparentPauseRunAfter === undefined && last?.transparentPauseRunAfter !== undefined
-      ? { transparentPauseRunAfter: last.transparentPauseRunAfter }
-      : {}),
-    ...(token.sourceLineBreakBefore === undefined && first?.sourceLineBreakBefore === true
-      ? { sourceLineBreakBefore: true as const }
-      : {})
-  };
-}
-
-function withSourcePositionFromConsumed<T extends RuntimePreprocessToken>(
-  tokens: readonly (
-    Pick<RuntimeHaruToken, "sourceOrdinal" | "sourceSpan" | "sourceCharSpan"> & MergedSourcePositionToken
-  )[],
-  start: number,
-  consumed: number,
-  token: T,
-  role: MergedSourcePositionRole
-): T {
-  const positioned = withMergedSourcePosition(tokens, start, consumed, token, role);
-  const sourceSpan = sourceSpanForTokenIndexes(tokens, rangeIndexes(start, consumed));
-  if (sourceSpan === null) {
-    return positioned;
-  }
-  const sourceCharSpan = computeSourceCharSpan(tokens.slice(start, start + consumed));
-  const identified = sourceCharSpan === undefined
-    ? positioned
-    : { ...positioned, sourceCharSpan };
-  return withRuntimeTokenSourceSpan(identified, sourceSpan);
-}
-
-function collocationEmissionPreservesSourceRuby(
-  source: readonly RuntimeHaruToken[],
-  start: number,
-  consumed: number,
-  emitted: readonly RuntimeHaruToken[]
-): boolean {
-  const fragments = source
-    .slice(start, start + consumed)
-    .flatMap((token) => token.sourceRubyReadingFragments ?? []);
-  if (fragments.length === 0) {
-    return true;
-  }
-  const probe = emitted.map((token) => ({ ...token }));
-  return applySourceRubyReadingFragments(probe, fragments);
-}
-
-function rangeIndexes(start: number, count: number): number[] {
-  return Array.from({ length: Math.max(0, count) }, (_value, offset) => start + offset);
-}
-
-interface AssemblyContentSpan extends CommitmentSpan {
-  renderPlan: RenderPlan | null;
-  copulaFocusAdjunct?: CopulaFocusAdjunctRequest | null;
-  koreanBase?: string | null;
-  unitType: UnitType;
-  attachLeft: boolean;
-  particleRole: string | null;
-  provenance: TranslationUnitProvenance;
-  provenanceReason: string | null;
-  discourseConnective: boolean;
-  warnings: readonly Warning[];
-  renderPlanPolicy: import("../types/pipeline.js").RenderPlanPolicy;
-  traceEvents: readonly TraceableRuleEvent[];
-}
-
-interface NominalLightVerbObjectLink {
-  readonly particleIndex: number;
-  readonly predicateIndex: number;
-  readonly predicateDictForm: string;
-  readonly predicateSpan: AssemblyContentSpan;
-}
-
-interface NominalLightVerbCarrierProjection {
-  readonly kind: "carrier";
-  readonly predicateIndex: number;
-  readonly particleIndex: number;
-  readonly entry: CarrierIdiomEntry;
-  readonly renderPlan: RenderPlan;
-}
-
 type NominalLightVerbProjection = NominalLightVerbCarrierProjection;
 
-interface TraceableRuleEvent {
-  readonly ruleName: string;
-  readonly detail: { readonly [key: string]: RuleTraceDetailValue };
-  readonly phase?: string;
-  readonly matched?: boolean;
-  readonly tokenIdx?: number | null;
-}
+type AssemblyLoopSignal = "continue" | "next";
 
-function assemblerKaMarkerRelationAt(tokens: readonly RuntimeHaruToken[], index: number) {
-  return kaMarkerRelationAt(tokens, index, ["assembler"]);
-}
-
-function isAssemblerTerminalQuestionKa(tokens: readonly RuntimeHaruToken[], index: number): boolean {
-  return assemblerKaMarkerRelationAt(tokens, index)?.particleSubtype1 === 終助詞;
-}
-
-
-const WO_TOOSU_PASS_OBJECTS = new Set(["申請", "法案", "予算案", "議案", "提案", "企画", "計画", "書類", "案"]);
-const WO_TOOSU_PASS_OBJECT_PREFIXES = new Set(["法", "予算", "議"]);
-const WO_TOOSU_BENEFACTIVE_TAILS = new Set(["いただける", "いただく", "頂ける", "頂く", "くれる", "くださる", "下さる", "もらう", "もらえる"]);
-
-function shouldSkipCollocation(
-  tokens: readonly RuntimeHaruToken[],
-  start: number,
-  collocation: readonly [consumed: number, emitted: readonly CollocationRuntimeToken[]],
-  lookups: LookupTables
-): boolean {
-  const [consumed, emitted] = collocation;
-  const emittedHead = emitted[0];
-  if (emittedHead === undefined) {
-    return false;
-  }
-  const dictionaryForm = emittedHead.dictionaryForm;
-  if (dictionaryForm === "いただきます") {
-    if (start <= 0) {
-      return false;
-    }
-    const relation = teDeContinuationRelationAt(tokens, start - 1, { consumers: ["assembler"], lookups });
-    return relation?.continuationKind === "benefactive" && relation.continuationIdx === start;
-  }
-  if (dictionaryForm === "を通して" || dictionaryForm === "を通し") {
-    return shouldSkipWoTooshiteCollocation(tokens, start, consumed);
-  }
-  if (dictionaryForm === "に応じ") {
-    return shouldSkipNiOujiCollocation(tokens, start, consumed);
-  }
-  if (dictionaryForm === "に比べて" || dictionaryForm === "に比べ") {
-    return shouldSkipNiKurabeteCollocation(tokens, start, consumed);
-  }
-  return false;
-}
-
-function shouldSkipNiKurabeteCollocation(tokens: readonly RuntimeHaruToken[], start: number, consumed: number): boolean {
-  if (start <= 0) {
-    return false;
-  }
-  const previousIndex = previousNonSpaceIndex(tokens, start);
-  if (previousIndex === null) {
-    return false;
-  }
-  const previous = tokens[previousIndex];
-  if (
-    previous === undefined ||
-    predicateNominalizerRelationForToken(previous, previousIndex, {
-      requirement: "tail_connective_marker",
-      consumers: ["assembler"]
-    })?.nominalizerKind !== "no"
-  ) {
-    return false;
-  }
-  const after = nextNonSpaceIndex(tokens, start + consumed, tokens.length) ?? tokens.length;
-  const tail = tokens[after];
-  if (tail === undefined) {
-    return false;
-  }
-  const tailForm = tail.dictionaryForm || tail.surface;
-  return (tail.pos & POS0) === 動詞
-    && ((tail.pos & POS1) === 非自立可能 || ["しまう", "みる", "くる", "いく", "おく", "いる", "ある"].includes(tailForm));
-}
-
-function shouldSkipWoTooshiteCollocation(tokens: readonly RuntimeHaruToken[], start: number, consumed: number): boolean {
-  if (start <= 0) {
-    return false;
-  }
-  const objectIndex = previousNonSpaceIndex(tokens, start);
-  if (objectIndex === null) {
-    return false;
-  }
-  const object = tokens[objectIndex];
-  if (object === undefined) {
-    return false;
-  }
-  const objectSurface = object.dictionaryForm || object.surface;
-  if (!WO_TOOSU_PASS_OBJECTS.has(objectSurface)) {
-    const previousIndex = previousNonSpaceIndex(tokens, objectIndex);
-    const previous = previousIndex === null ? undefined : tokens[previousIndex];
-    const previousSurface = previous === undefined ? undefined : previous.dictionaryForm || previous.surface;
-    if (!(objectSurface === "案" && previousSurface !== undefined && WO_TOOSU_PASS_OBJECT_PREFIXES.has(previousSurface))) {
-      return false;
-    }
-  }
-  const after = nextNonSpaceIndex(tokens, start + consumed, tokens.length) ?? tokens.length;
-  const tail = tokens[after];
-  if (tail === undefined) {
-    return false;
-  }
-  const tailForm = tail.dictionaryForm || tail.surface;
-  return WO_TOOSU_BENEFACTIVE_TAILS.has(tailForm);
-}
-
-function shouldSkipNiOujiCollocation(tokens: readonly RuntimeHaruToken[], start: number, consumed: number): boolean {
-  if (niOujiResponsePrevToken(tokens, start) === undefined) {
-    return false;
-  }
-  const after = nextNonSpaceIndex(tokens, start + consumed, tokens.length) ?? tokens.length;
-  const afterPos = tokens[after]?.pos ?? 0;
-  return (afterPos & POS0) === 助動詞;
-}
-
-function committedParticleAssignmentAt(
-  contentMap: ReadonlyMap<number, { readonly committedParticleRoles?: Record<number, ParticleAssignment> | ReadonlyMap<number, ParticleAssignment> }>,
-  particleIdx: number,
-  ownerIndex?: number
-): ParticleAssignment | undefined {
-  const owned = ownerIndex === undefined
-    ? undefined
-    : committedParticleAssignmentFromSpan(contentMap.get(ownerIndex), particleIdx);
-  if (owned !== undefined) {
-    return owned;
-  }
-  for (const span of contentMap.values()) {
-    const committed = committedParticleAssignmentFromSpan(span, particleIdx);
-    if (committed?.commitmentSource === "slot_realization") {
-      return committed;
-    }
-  }
-  return undefined;
-}
-
-function committedParticleAssignmentFromSpan(
-  span: { readonly committedParticleRoles?: Record<number, ParticleAssignment> | ReadonlyMap<number, ParticleAssignment> } | undefined,
-  particleIdx: number
-): ParticleAssignment | undefined {
-  const roles = span?.committedParticleRoles;
-  if (roles === undefined) {
-    return undefined;
-  }
-  if (roles instanceof Map) {
-    return roles.get(particleIdx);
-  }
-  return (roles as Record<number, ParticleAssignment>)[particleIdx];
-}
-
-const NANDE_INSTRUMENT_PREDICATE_FOR_OBJECT = new Set([
-  "書く",
-  "描く",
-  "切る",
-  "撮る",
-  "録る",
-  "写す",
-  "拭く",
-  "洗う",
-  "磨く",
-  "掃除",
-  "清掃",
-  "洗濯",
-  "撮影",
-  "録音",
-  "録画"
-]);
-
-const NANDE_INSTRUMENT_SAHEN_NOUNS = new Set(["掃除", "清掃", "洗濯", "撮影", "録音", "録画"]);
-
-function nextNonSymbolTokenIndex(tokens: readonly RuntimeHaruToken[], start: number, end: number): number | undefined {
-  for (let index = start; index < end; index += 1) {
-    if (((tokens[index]?.pos ?? 0) & POS0) !== 補助記号) {
-      return index;
-    }
-  }
-  return undefined;
-}
-
-function bareQuestionPunctuationIndex(tokens: readonly RuntimeHaruToken[], start: number, end: number): number | null {
-  const index = nextNonSpaceIndex(tokens, start, end) ?? end;
-  const token = tokens[index];
-  if (token === undefined || (token.pos & POS0) !== 補助記号) {
-    return null;
-  }
-  return hasHardTerminalPunctuationClass(token, index, ["question"], ["assembler"]) ? index : null;
-}
-
-function plainQuestionSfpNode(token: RuntimeHaruToken, tokenIdx: number): SfpNode {
-  return {
-    effect: "plain_q",
-    surface: token.surface,
-    consumed: 1,
-    repeatCount: 1,
-    source: {
-      tokens: [token],
-      tokenIndices: [tokenIdx]
-    }
+interface AssemblyPassContext {
+  readonly cursor: TokenCursor<RuntimeHaruToken>;
+  readonly units: TranslationUnit[];
+  readonly contentMap: ReadonlyMap<number, AssemblyContentSpan>;
+  readonly repairedContentMap: Map<number, AssemblyContentSpan>;
+  readonly carrierOverrides: Map<number, NominalLightVerbCarrierProjection>;
+  readonly layout: ClauseLayout;
+  readonly relationRenderSpans: readonly { readonly start: number; readonly endExclusive: number }[];
+  readonly options: {
+    readonly trace?: TraceCollector | null;
+    readonly relationRenderSpans?: readonly { readonly start: number; readonly endExclusive: number }[];
   };
 }
 
-interface CopulaFocusAdjunctRequest {
-  readonly realization: CopulaFocusAdjunctRealization;
-  readonly hostEntry: MorphemeEntry | null;
-  readonly hostPos: number;
+interface ContentPassOptions {
+  readonly trace?: TraceCollector | null;
+  readonly startIndex?: number;
+  readonly seedContentMap?: ReadonlyMap<number, AssemblyContentSpan>;
+  readonly resolveDeferredCopulaSupportAt?: number;
 }
 
-function applyCopulaFocusAdjunctRenderPlan(
-  plan: RenderPlan | null,
-  span: AssemblyContentSpan
-): RenderPlan | null {
-  const request = span.copulaFocusAdjunct;
-  if (plan === null || request === null || request === undefined) {
-    return plan;
-  }
-  const { nominalParticle, predicateEnding } = request.realization;
-  const lemmaPlan = plan.kind === "lemma" ? plan : null;
-  const winner = selectedCommitmentCandidate(span);
-  const baseLemma = lemmaPlan?.koreanLemma ?? winner?.koreanLemma ?? winner?.korean ?? null;
-  const basePos = lemmaPlan?.koreanPos ?? winner?.koreanPos ?? null;
-  if (baseLemma === null || baseLemma.length === 0 || basePos === null || basePos === 부사) {
-    return plan;
-  }
-  const [hostLemma, hostLemmaPos, hostIrregular] = resolveCopulaAdj(
-    request.hostEntry ?? lemmaPlan?.entry ?? null,
-    baseLemma,
-    basePos,
-    lemmaPlan?.irregular ?? winner?.irregular ?? null,
-    request.hostPos
-  );
-  if (hostLemmaPos === 형용사 || hostLemmaPos === 동사) {
-    return predicateEnding === null
-      ? plan
-      : {
-        kind: "conjugatedLemma",
-        koreanLemma: hostLemma,
-        irregular: hostIrregular ?? null,
-        koreanPos: hostLemmaPos,
-        ending: predicateEnding
-      };
-  }
-  return nominalParticle === null
-    ? plan
-    : { kind: "particleizedContent", content: plan, particle: nominalParticle, koreanPos: hostLemmaPos };
+interface ContentPassContext {
+  readonly tokens: readonly RuntimeHaruToken[];
+  readonly cursor: TokenCursor<RuntimeHaruToken>;
+  readonly contentMap: Map<number, AssemblyContentSpan>;
+  readonly pendingExtentPostpositions: Map<number, PendingExtentPostposition>;
+  readonly numeralContext: NumeralResolutionContext;
+  readonly options: ContentPassOptions;
 }
 
-function applyBareQuestionRenderPlan(
-  plan: RenderPlan | null,
-  tokens: readonly RuntimeHaruToken[],
-  afterContent: number,
-  end: number
-): RenderPlan | null {
-  return plan === null ? null : applyBareQuestionToRenderPlan(plan, tokens, afterContent, end);
+interface ContentPassState {
+  lastNumeralQuantity: { readonly endExclusive: number; readonly plan: NumericBasePayload } | null;
 }
 
-function applyBareQuestionToRenderPlan(
-  plan: RenderPlan,
-  tokens: readonly RuntimeHaruToken[],
-  afterContent: number,
-  end: number
-): RenderPlan {
-  const questionIdx = bareQuestionPunctuationIndex(tokens, afterContent, end);
-  if (questionIdx === null) {
-    return plan;
-  }
-  const questionToken = tokens[questionIdx];
-  if (questionToken === undefined) {
-    return plan;
-  }
-  if (plan.kind === "lemma" || plan.kind === "copulaPredicate") {
-    if (plan.sfp === undefined || plan.sfp === null) {
-      return { ...plan, sfp: "plain_q" };
-    }
-    const node = plan.terminalSfp ?? null;
-    const yielded = node === null ? null : authoredQuestionYieldEffect(node, tokens, (plan.auxTokens?.length ?? 0) > 0);
-    return yielded === null ? plan : { ...plan, sfp: yielded, terminalSfp: { ...node!, effect: yielded } };
-  }
-  if (plan.kind === "noda") {
-    return plan.sfp === undefined || plan.sfp === null ? { ...plan, sfp: "plain_q" } : plan;
-  }
-  if (plan.kind === "headTailChain" && plan.realization.kind === "predicate") {
-    const root = plan.realization.root;
-    const existing = root.sfp;
-    if (existing !== null && !terminalSkipSfpYieldsToAuthoredQuestion(existing, root)) {
-      return plan;
-    }
-    const trailingEffect = existing === null || existing.effect === null
-      ? null
-      : authoredQuestionYieldEffect(existing, tokens, auxOpsInTailNode(root.tail).length > 0);
-    if (existing !== null && trailingEffect !== null && trailingEffect !== "plain_q") {
-      return {
-        ...plan,
-        realization: { ...plan.realization, root: { ...root, sfp: { ...existing, effect: trailingEffect } } }
-      };
-    }
-    if (!canInjectPlainQuestionIntoTailRoot(root)) {
-      return plan;
-    }
-    return {
-      ...plan,
-      realization: {
-        ...plan.realization,
-        root: {
-          ...root,
-          sfp: existing === null
-            ? plainQuestionSfpNode(questionToken, questionIdx)
-            : { ...existing, effect: "plain_q" }
-        }
-      }
-    };
-  }
-  return plan;
+interface ContentPassStep {
+  readonly index: number;
+  readonly token: RuntimeHaruToken;
+  yieldedNumeral: NumericHostYield | undefined;
 }
 
-function authoredQuestionYieldEffect(
-  node: NonNullable<TailRoot["sfp"]>,
-  tokens: readonly RuntimeHaruToken[],
-  hasAux: boolean
-): SfpEffect | null {
-  if (!sfpNodeYieldsToAuthoredQuestion(node)) {
-    return null;
-  }
-  const hostToken = tokens[(node.source.tokenIndices[0] ?? 0) - 1];
-  return trailingSfpEffectAfterFirst(node, (hostToken?.pos ?? 0) & POS0, hasAux) ?? "plain_q";
+type ContentHeadTailPayloadSourceBuilder = (
+  tailCandidateChunk: Extract<TailChunkResult, { readonly ok: true }>
+) => ReturnType<typeof buildTailOwnerCandidatePayloadSource>;
+
+interface ContentHeadDispatchOutcome {
+  readonly contentHead: ContentHeadDispatchResult | null;
+  readonly buildHeadTailCandidatePayloadSource: ContentHeadTailPayloadSourceBuilder;
 }
 
-function terminalSkipSfpYieldsToAuthoredQuestion(
-  sfp: NonNullable<TailRoot["sfp"]>,
-  root: TailRoot
-): boolean {
-  const yieldingEffect = sfp.effect === null
-    ? isSfpSkipSurface(sfp.surface) || sfpNodeYieldsToAuthoredQuestion(sfp)
-    : sfpNodeYieldsToAuthoredQuestion(sfp);
-  return yieldingEffect &&
-    sfp.quoteProjection === undefined &&
-    sfp.questionRole === undefined &&
-    sfp.questionRealizationEffect === undefined &&
-    !auxOpsInTailNode(root.tail).some(auxOpCarriesCommandIllocution);
+interface ContentHeadTailOwnershipVerdict {
+  readonly numericYieldClaimMissed: boolean;
+  readonly contestedNominalUseSlot: ContestedBareStemNominalUseSlot | null;
+  readonly contestedClaimCoordinate: boolean;
 }
 
-function canInjectPlainQuestionIntoTailRoot(root: TailRoot): boolean {
-  const tail = root.tail;
-  if (tail.kind !== "auxLayer" || tail.terminal !== null) {
-    return false;
-  }
-  if (tail.ops.some((op) => op.kind === "copula" && op.variant === "conjecture")) {
-    return false;
-  }
-  if (tail.ops.some((op) => op.kind === "connective")) {
-    return false;
-  }
-  if (tail.stem.kind === "noun" && tail.ops.some((op) => op.kind === "conjecture")) {
-    return false;
-  }
-  return true;
-}
-
-function isSentencePunctuationUnit(unit: TranslationUnit): boolean {
-  if (unit.jpPos !== 補助記号) {
-    return false;
-  }
-  return hasHardTerminalPunctuationRelation(translationUnitBoundaryToken(unit), 0, ["assembler"]);
-}
-
-interface MoodPunctuationAnchor {
-  readonly marks: string;
-  readonly unidentified?: true;
-}
-
-function moodPunctuationAnchorAt(segments: readonly TargetSegment[]): MoodPunctuationAnchor | null {
-  const segmentIndex = lastOutputSegmentIndex(segments);
-  const segment = segmentIndex < 0 ? undefined : segments[segmentIndex];
-  if (segment === undefined || (segment.unit !== null && isSentencePunctuationUnit(segment.unit))) {
-    return null;
-  }
-  const marks = /[?!]+$/u.exec(segment.text)?.[0];
-  if (marks === undefined) {
-    return null;
-  }
-  return marks.includes("?") ? { marks } : { marks, unidentified: true };
-}
-
-function reconcileTerminalPunctuationUnit(
-  unit: TranslationUnit,
-  anchor: MoodPunctuationAnchor | null
-): { readonly emit: boolean; readonly moodPunctuation: MoodPunctuationAnchor | null } {
-  if (anchor === null) {
-    return { emit: true, moodPunctuation: null };
-  }
-  if (anchor.unidentified === true) {
-    return { emit: false, moodPunctuation: anchor };
-  }
-  const run = unit.terminalPunctuationRun;
-  if (run === null || !run.units.includes("question")) {
-    return { emit: false, moodPunctuation: anchor };
-  }
-  const mark = moodPunctuationMarkForRunUnit(terminalPunctuationRunUnitOf(unit, run));
-  if (mark === null) {
-    return { emit: true, moodPunctuation: anchor };
-  }
-  const markIndex = anchor.marks.indexOf(mark);
-  return markIndex < 0
-    ? { emit: true, moodPunctuation: anchor }
-    : {
-      emit: false,
-      moodPunctuation: {
-        marks: `${anchor.marks.slice(0, markIndex)}${anchor.marks.slice(markIndex + 1)}`
-      }
-    };
-}
-
-function terminalPunctuationRunPositionOf(
-  unit: TranslationUnit,
-  run: ClauseTerminalPunctuationRunEvidence
-): number {
-  const tokenIdx = unit.jpIndices[0];
-  return tokenIdx === undefined ? -1 : run.tokenIndices.indexOf(tokenIdx);
-}
-
-function terminalPunctuationRunUnitOf(
-  unit: TranslationUnit,
-  run: ClauseTerminalPunctuationRunEvidence
-): ClauseTerminalPunctuationRunUnit | null {
-  const position = terminalPunctuationRunPositionOf(unit, run);
-  return position < 0 ? null : run.units[position] ?? null;
-}
-
-function authoredRunClosesWithQuestion(
-  run: ClauseTerminalPunctuationRunEvidence | null
-): boolean {
-  return run !== null &&
-    run.units.includes("question") &&
-    !run.units.includes("exclamation");
-}
-
-function moodPunctuationMarkForRunUnit(runUnit: ClauseTerminalPunctuationRunUnit | null): string | null {
-  return runUnit === "question" ? "?" : runUnit === "exclamation" ? "!" : null;
-}
-
-function terminalPeriodIsRedundant(
-  segments: readonly TargetSegment[],
-  unit: TranslationUnit,
-  anchor: MoodPunctuationAnchor | null
-): boolean {
-  const run = unit.terminalPunctuationRun;
-  if (run === null || !terminalRunUnitIsLonePeriod(run, terminalPunctuationRunPositionOf(unit, run))) {
-    return false;
-  }
-  if (anchor !== null) {
-    return true;
-  }
-  const previousSegment = segments[lastOutputSegmentIndex(segments)];
-  const previousUnit = previousSegment?.unit ?? null;
-  if (previousUnit === null || !isSentencePunctuationUnit(previousUnit)) {
-    return false;
-  }
-  const previousRun = previousUnit.terminalPunctuationRun;
-  const previousRunUnit = previousRun === null
-    ? null
-    : terminalPunctuationRunUnitOf(previousUnit, previousRun);
-  return previousRunUnit === "question" || previousRunUnit === "exclamation";
-}
-
-function terminalRunUnitIsLonePeriod(
-  run: ClauseTerminalPunctuationRunEvidence,
-  position: number
-): boolean {
-  return position >= 0 &&
-    run.units[position] === "period" &&
-    run.units[position - 1] !== "period" &&
-    run.units[position + 1] !== "period";
-}
-
-function nominalLightVerbObjectLinkAt(
-  tokens: readonly RuntimeHaruToken[],
-  nounIndex: number,
-  nounConsumed: number,
-  contentMap: ReadonlyMap<number, AssemblyContentSpan>,
-  layout: ClauseLayout
-): NominalLightVerbObjectLink | null {
-  const particleIndex = nextNonSpaceIndex(tokens, nounIndex + nounConsumed, tokens.length) ?? tokens.length;
-  const particle = tokens[particleIndex];
-  if (caseParticleMarkerRelationForToken(particle, particleIndex, {
-    acceptedSurfaces: ["を"],
-    consumers: ["assembler"]
-  }) === null) {
-    return null;
-  }
-  const predicateIndex = nextNonSpaceIndex(tokens, particleIndex + 1, tokens.length) ?? tokens.length;
-  if (layout.ownerPredicateOfParticle(particleIndex) !== predicateIndex) {
-    return null;
-  }
-  const predicate = tokens[predicateIndex];
-  const predicateSpan = contentMap.get(predicateIndex);
-  if (predicate === undefined || predicateSpan === undefined) {
-    return null;
-  }
-  const predicateDictForm = predicate.dictionaryForm || predicate.surface;
-  if (predicateDictForm.length === 0) {
-    return null;
-  }
-  return {
-    particleIndex,
-    predicateIndex,
-    predicateDictForm,
-    predicateSpan
-  };
-}
-
-function rewriteCarrierIdiomRenderPlan(
-  renderPlan: RenderPlan | null,
-  entry: CarrierIdiomEntry
-): RenderPlan | undefined {
-  if (renderPlan === null) {
-    return undefined;
-  }
-  return replaceLemmaRenderPlan(renderPlan, {
-    koreanLemma: entry.koreanCarrier,
-    koreanPos: 동사,
-    irregular: entry.irregular ?? null
-  });
-}
-
-function isClauseCommaPunctuationUnit(unit: TranslationUnit): boolean {
-  if (unit.jpPos !== 補助記号) {
-    return false;
-  }
-  return hasWeakPunctuationRelation(translationUnitBoundaryToken(unit), 0, ["assembler"]);
-}
-
-function translationUnitBoundaryToken(unit: TranslationUnit): { readonly surface: string; readonly pos: number } {
-  return { surface: unit.jpHead.surface, pos: unit.jpHead.pos };
-}
-
-function hasNegativePoliteBenefactiveQuestionAfter(cursor: TokenCursor<RuntimeHaruToken>): boolean {
-  const c = cursor.fork();
-  while (true) {
-    const token = c.current();
-    if (token === undefined) {
-      return false;
-    }
-    if (hasHardTerminalPunctuationRelation(token, c.pos, ["assembler"])) {
-      return false;
-    }
-    if (token.dictionaryForm !== "くれる" && token.dictionaryForm !== "いただける") {
-      c.advance();
-      continue;
-    }
-    let hasPolite = false;
-    let hasNegative = false;
-    const inner = c.fork(c.pos + 1);
-    while (true) {
-      const tail = inner.current();
-      if (tail === undefined) {
-        return false;
-      }
-      if (hasHardTerminalPunctuationRelation(tail, inner.pos, ["assembler"])) {
-        return false;
-      }
-      if (isAssemblerTerminalQuestionKa(cursor.tokens, inner.pos)) {
-        return hasPolite && hasNegative;
-      }
-      const pos4 = (tail.pos & POS4);
-      if ((pos4 === 助動詞_マス) || (pos4 === 助動詞_デス)) {
-        hasPolite = true;
-      }
-      if ((pos4 === 助動詞_ナイ) || (pos4 === 助動詞_ヌ)) {
-        hasNegative = true;
-      }
-      inner.advance();
-    }
-    return false;
-  }
-  return false;
-}
-
-function hasReasonQuestionContextAfter(cursor: TokenCursor<RuntimeHaruToken>): boolean {
-  let sawArgumentContent = false;
-  let sawInstrumentArgument = false;
-  let firstPredicateDictionaryForm: string | undefined;
-  let previousContentDictionaryForm: string | undefined;
-  const c = cursor.fork();
-  while (true) {
-    const token = c.current();
-    if (token === undefined) {
-      return false;
-    }
-    const surface = token.surface;
-    const pos0 = token.pos & POS0;
-    if ((pos0 === 補助記号)) {
-      if (!hasHardTerminalPunctuationClass(token, c.pos, ["question"], ["assembler"])) {
-        return false;
-      }
-      if (!sawArgumentContent) {
-        return false;
-      }
-      return !(sawInstrumentArgument && firstPredicateDictionaryForm !== undefined && NANDE_INSTRUMENT_PREDICATE_FOR_OBJECT.has(firstPredicateDictionaryForm));
-    }
-    if (isAssemblerTerminalQuestionKa(cursor.tokens, c.pos)) {
-      if (!sawArgumentContent) {
-        return false;
-      }
-      return !(sawInstrumentArgument && firstPredicateDictionaryForm !== undefined && NANDE_INSTRUMENT_PREDICATE_FOR_OBJECT.has(firstPredicateDictionaryForm));
-    }
-    if (
-      sawArgumentContent &&
-      caseParticleMarkerRelationForToken(token, c.pos, {
-        acceptedSurfaces: ["を", "に", "で"],
-        consumers: ["assembler"]
-      }) !== null
-    ) {
-      sawInstrumentArgument = true;
-      c.advance();
-      continue;
-    }
-    if ((pos0 === 動詞) || (pos0 === 形容詞0) || (pos0 === 形状詞)) {
-      if (firstPredicateDictionaryForm === undefined) {
-        const dictionaryForm = token.dictionaryForm || surface;
-        firstPredicateDictionaryForm = dictionaryForm === "する" && previousContentDictionaryForm !== undefined && NANDE_INSTRUMENT_SAHEN_NOUNS.has(previousContentDictionaryForm)
-          ? previousContentDictionaryForm
-          : dictionaryForm;
-      }
-      c.advance();
-      continue;
-    }
-    if (isContentAdmissionToken(token)) {
-      sawArgumentContent = true;
-      previousContentDictionaryForm = token.dictionaryForm || surface;
-    }
-    c.advance();
-  }
-  return false;
-}
-
-function trySplitNandeReasonSpan(cursor: TokenCursor<RuntimeHaruToken>): AssemblyContentSpan | undefined {
-  const tokens = cursor.tokens;
-  const index = cursor.pos;
-  const n = cursor.end;
-  const token = cursor.current();
-  if (token === undefined) {
-    return undefined;
-  }
-  if (!["何", "なん"].includes(token.surface) && !["何", "なん"].includes(token.dictionaryForm)) {
-    return undefined;
-  }
-  const deIndex = nextNonSymbolTokenIndex(tokens, index + 1, n);
-  if (deIndex === undefined) {
-    return undefined;
-  }
-  const deToken = tokens[deIndex];
-  if (caseParticleMarkerRelationForToken(deToken, deIndex, {
-    acceptedSurfaces: ["で"],
-    acceptedParticleSubtypes: ["格助詞", "接続助詞", "副助詞"],
-    consumers: ["assembler"]
-  }) === null) {
-    return undefined;
-  }
-  const reasonProbeOffset = deIndex + 1 - index;
-  if (
-    !cursor.lookahead(reasonProbeOffset, hasNegativePoliteBenefactiveQuestionAfter) &&
-    !cursor.lookahead(reasonProbeOffset, hasReasonQuestionContextAfter)
-  ) {
-    return undefined;
-  }
-  const consumed = deIndex - index + 1;
-  const span = makeAssemblyContentSpan(index, consumed, "왜", 부사, null, UnitType.CONTENT);
-  cursor.advance(consumed);
-  return span;
+interface TrailingCopulaFoldInput {
+  readonly index: number;
+  readonly previousUnit: TranslationUnit | undefined;
+  readonly preceding: string;
+  readonly auxProbe2: { readonly auxTokens: AuxTokens; readonly afterAux: number };
+  readonly auxTokens: AuxTokens;
 }
 
 const MAX_LEXICAL_PARTICLE_LAYOUT_HYPOTHESIS_SLOTS = 8;
-
-interface LexicalParticleLayoutHypothesis {
-  readonly contentMap: Map<number, AssemblyContentSpan>;
-  readonly layout: ClauseLayout;
-  readonly commitmentTrace: TraceCollector | null;
-}
-
-interface LexicalLayoutHypothesisRun {
-  readonly contentMap: Map<number, AssemblyContentSpan>;
-  readonly layout: ClauseLayout;
-  readonly protoLayout: ReturnType<typeof buildProtoLayout>;
-  readonly contentPassMap: Map<number, AssemblyContentSpan>;
-  readonly trace: TraceCollector | null;
-}
-
-type LexicalAdverbialAffiliationFacts = ReadonlyMap<number, LexicalAdverbialAffiliation>;
-
-function adoptLexicalLayoutHypothesis(variant: LexicalLayoutHypothesisRun, trace: TraceCollector | null) {
-  for (const event of variant.trace?.events ?? []) {
-    trace?.record(event);
-  }
-  return {
-    contentMap: variant.contentMap,
-    layout: variant.layout,
-    protoLayout: variant.protoLayout,
-    contentPassMap: variant.contentPassMap
-  };
-}
-
-function sameLexicalAdverbialAffiliationFacts(
-  left: LexicalAdverbialAffiliationFacts,
-  right: LexicalAdverbialAffiliationFacts
-): boolean {
-  if (left.size !== right.size) {
-    return false;
-  }
-  for (const [particleIdx, affiliation] of left) {
-    const other = right.get(particleIdx);
-    if (other === undefined || !sameLexicalAdverbialAffiliation(affiliation, other, { includeClauseOrdinals: true })) {
-      return false;
-    }
-  }
-  return true;
-}
-
-type LexicalParticleOwnershipMode = "particle" | "content_owner" | "marker_owner";
-
-interface LexicalParticleOwnershipSlot {
-  readonly start: number;
-  readonly particleIdx: number;
-  readonly markerEndExclusive: number;
-  readonly initialMode: LexicalParticleOwnershipMode;
-  readonly modes: readonly LexicalParticleOwnershipMode[];
-}
-
-interface LexicalParticleOwnershipChoice {
-  readonly start: number;
-  readonly particleIdx: number;
-  readonly markerEndExclusive: number;
-  readonly mode: LexicalParticleOwnershipMode;
-}
-
-interface LexicalParticleSlotRank {
-  readonly priorityGroup: number;
-  readonly priorityInGroup: number;
-  readonly selectedIdx: number;
-  readonly ownerModeRank: number;
-  readonly initialMismatch: boolean;
-}
-
-function lexicalParticleOwnershipHypothesisSlots(
-  contentMap: ReadonlyMap<number, AssemblyContentSpan>,
-  tokens: readonly RuntimeHaruToken[],
-  lookups: LookupTables,
-  numeric: NumericTables
-): readonly LexicalParticleOwnershipSlot[] {
-  const result: LexicalParticleOwnershipSlot[] = [];
-  const occupiedParticles = new Set<number>();
-  for (const [start, span] of contentMap) {
-    const candidates = candidateSetCandidates(commitmentLaneCandidateSet(span.sourceCandidates));
-    if (candidates.length === 0) {
-      continue;
-    }
-    const hasContentOwner = candidates.some((candidate) => lexicalParticleOwnershipModeForCandidate(candidate) === "content_owner");
-    const hasParticle = candidates.some((candidate) => lexicalParticleOwnershipModeForCandidate(candidate) === "particle");
-    if (!hasContentOwner || !hasParticle) {
-      continue;
-    }
-    const particleIdx = candidates.find((candidate) => adverbialNiCandidateCommitment(candidate) !== null)
-      ?.lexicalParticleAdverbial?.particleIdx ?? start + 1;
-    occupiedParticles.add(particleIdx);
-    const selected = selectedLexicalParticleCandidate(span);
-    const selectedMode = selected === undefined
-      ? (span.particleRole === "adverbializer" ? "content_owner" : "particle")
-      : lexicalParticleOwnershipModeForCandidate(selected);
-    result.push({
-      start,
-      particleIdx,
-      markerEndExclusive: particleIdx + 1,
-      initialMode: selectedMode,
-      modes: ["content_owner", "particle"]
-    });
-  }
-  for (let markerIdx = 0; markerIdx < tokens.length; markerIdx += 1) {
-    if (occupiedParticles.has(markerIdx)) {
-      continue;
-    }
-    const markerSlot = lexicalParticleMarkerOwnerSlotAt(tokens, markerIdx, contentMap, lookups, numeric);
-    if (markerSlot !== null) {
-      result.push(markerSlot);
-    }
-  }
-  return result;
-}
-
-function lexicalParticleMarkerOwnerSlotAt(
-  tokens: readonly RuntimeHaruToken[],
-  markerIdx: number,
-  contentMap: ReadonlyMap<number, AssemblyContentSpan>,
-  lookups: LookupTables,
-  numeric: NumericTables
-): LexicalParticleOwnershipSlot | null {
-  const bridge = dewaScopeBridgeRelationAt(tokens, markerIdx, {
-    consumers: ["assembler"]
-  });
-  if (bridge === null) {
-    return null;
-  }
-  const parse = tryParseNominalFrame(new TokenCursor(tokens, markerIdx, tokens.length), { lookups, numeric });
-  if (
-    parse === null ||
-    parse.frame.frameKind !== "lexical_particle" ||
-    parse.frame.source.start !== bridge.span.start ||
-    parse.frame.source.end !== bridge.span.endExclusive ||
-    parse.frame.markerSurface !== bridge.surface
-  ) {
-    return null;
-  }
-  const start = parse.root.source.start;
-  if (!contentMap.has(start)) {
-    return null;
-  }
-  return {
-    start,
-    particleIdx: markerIdx,
-    markerEndExclusive: bridge.span.endExclusive,
-    initialMode: "marker_owner",
-    modes: ["marker_owner", "particle"]
-  };
-}
-
-function lexicalParticleOwnershipModeForCandidate(candidate: CommitmentCandidate): LexicalParticleOwnershipMode {
-  return adverbialNiCandidateCommitment(candidate) !== null ? "content_owner" : "particle";
-}
-
-function lexicalParticleInitialOwnershipChoices(
-  slots: readonly LexicalParticleOwnershipSlot[]
-): readonly LexicalParticleOwnershipChoice[] {
-  return slots.map((slot) => ({
-    start: slot.start,
-    particleIdx: slot.particleIdx,
-    markerEndExclusive: slot.markerEndExclusive,
-    mode: slot.initialMode
-  }));
-}
-
-function cloneAssemblyContentMap(
-  source: ReadonlyMap<number, AssemblyContentSpan>
-): Map<number, AssemblyContentSpan> {
-  const result = new Map<number, AssemblyContentSpan>();
-  for (const [start, span] of source) {
-    result.set(start, cloneAssemblyContentSpan(span));
-  }
-  return result;
-}
-
-const HARVESTED_FAIL_CLOSED_OP_KINDS: ReadonlySet<string> = new Set([
-  "candidate_set_no_fallback_member"
-]);
-
-function harvestFailClosedSpanWarnings(
-  contentMap: ReadonlyMap<number, AssemblyContentSpan>
-): Warning[] {
-  const harvested: Warning[] = [];
-  const seenSpans = new Set<AssemblyContentSpan>();
-  for (const span of contentMap.values()) {
-    if (seenSpans.has(span)) {
-      continue;
-    }
-    seenSpans.add(span);
-    if (span.korean.length > 0 || span.renderPlan !== null) {
-      continue;
-    }
-    for (const warning of span.warnings ?? []) {
-      if (HARVESTED_FAIL_CLOSED_OP_KINDS.has(warning.opKind ?? "")) {
-        harvested.push(warning);
-      }
-    }
-  }
-  return harvested;
-}
-
-function cloneAssemblyContentSpan(span: AssemblyContentSpan): AssemblyContentSpan {
-  const clone = {
-    ...span,
-    renderPlan: spanLocalRenderPlanNode(span.renderPlan),
-    ownerCandidates: span.ownerCandidates === undefined ? undefined : [...span.ownerCandidates],
-    ownerCandidatePayloads: span.ownerCandidatePayloads === undefined ? undefined : [...span.ownerCandidatePayloads],
-    warnings: [...(span.warnings ?? [])],
-    traceEvents: [...(span.traceEvents ?? [])]
-  } as AssemblyContentSpan;
-  delete (clone as { voiceOpen?: unknown }).voiceOpen;
-  Object.defineProperty(clone, "voiceOpen", {
-    enumerable: true,
-    get() {
-      return clone.voice === null;
-    }
-  });
-  return clone;
-}
-
-function isQuoteClosingCopulaHostAt(
-  tokens: readonly RuntimeHaruToken[],
-  deIdx: number
-): boolean {
-  const closeIdx = previousNonSpaceIndex(tokens, deIdx);
-  return closeIdx !== null &&
-    isParentheticalClosingToken(tokens[closeIdx]) &&
-    parentheticalSpanEndingAt(tokens, closeIdx, { consumers: ["assembler"] }) !== null;
-}
-
-function isNominalizedQuestionCopulaComplementAt(
-  cursor: TokenCursor<RuntimeHaruToken>,
-  kaIdx: number
-): boolean {
-  return looksEmbeddedQuestionKaNominalizedBoundary(cursor.fork(kaIdx, cursor.end, kaIdx)) ||
-    isKaDouKaMarker(cursor.tokens, kaIdx);
-}
-
-function politeCopulaSupportTailIsRealizable(
-  tokens: readonly RuntimeHaruToken[],
-  aruAux: AuxTokens,
-  afterAux: number,
-  end: number,
-  lookups: LookupTables
-): boolean {
-  if (aruAux.length === 0) {
-    return true;
-  }
-  if (aruAux.some(aux => isUnrealizableCopulaPoliteAuxiliaryMood(aux))) {
-    return false;
-  }
-  const lastAux = aruAux[aruAux.length - 1];
-  if (lastAux !== undefined && (lastAux.pos & POS4) === 助動詞_マス && hasRentaikei(lastAux)) {
-    return false;
-  }
-  const kaIdx = nextNonSpaceIndex(tokens, afterAux, end);
-  if (
-    kaIdx !== null &&
-    terminalQuestionKaRelationAt(tokens, kaIdx, { lookups }) !== null
-  ) {
-    return false;
-  }
-  if (trailingCopulaSfpTail(new TokenCursor(tokens, afterAux, end)) !== null) {
-    return false;
-  }
-  return true;
-}
-
-function contentSpanCoversIndex(
-  contentMap: ReadonlyMap<number, AssemblyContentSpan>,
-  index: number
-): boolean {
-  for (const [start, span] of contentMap) {
-    if (start <= index && index < start + span.consumed) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function applySourceCompoundContinuationToContentMap(
-  tokens: readonly RuntimeHaruToken[],
-  contentMap: Map<number, AssemblyContentSpan>
-): void {
-  for (const [start, span] of contentMap) {
-    if (tokens[start]?.sourceCompoundContinuation !== true || span.attachLeft) {
-      continue;
-    }
-    (span as { attachLeft: boolean }).attachLeft = true;
-  }
-}
-
-function applyLexicalParticleOwnershipChoice(
-  contentMap: Map<number, AssemblyContentSpan>,
-  choice: LexicalParticleOwnershipChoice
-): void {
-  if (choice.mode === "marker_owner") {
-    return;
-  }
-  const span = contentMap.get(choice.start);
-  const sourceCandidates = commitmentLaneCandidateSet(span?.sourceCandidates);
-  if (span === undefined || sourceCandidates === null || sourceCandidates.members.length === 0) {
-    return;
-  }
-  const ordered = candidateSetMembers(sourceCandidates)
-    .filter((member) => lexicalParticleOwnershipModeForCandidate(member.candidate) === choice.mode)
-    .sort((left, right) => compareAdverbialNiCandidateStaticOrder(left.candidate, right.candidate));
-  if (ordered.length === 0) {
-    return;
-  }
-  span.sourceCandidates = transformCandidateSet(sourceCandidates, {
-    map: () => dropCandidate("lexical_particle_ownership"),
-    introduce: ordered,
-    failClosedReason: "all_members_dropped"
-  });
-  hydrateAssemblyContentSpanFromCandidate(span, ordered[0]!.candidate, choice.mode);
-}
-
-function hydrateAssemblyContentSpanFromCandidate(
-  span: AssemblyContentSpan,
-  candidate: CommitmentCandidate,
-  mode: LexicalParticleOwnershipMode
-): void {
-  span.entry = candidate.entry ?? span.entry;
-  span.renderPlanPolicy = candidate.renderPlanPolicy ?? span.renderPlanPolicy;
-  const adverbialNi = adverbialNiCandidateCommitment(candidate);
-  if (mode === "content_owner" && adverbialNi !== null) {
-    span.consumed = adverbialNi.consumed;
-    span.particleRole = adverbialNi.particleRole;
-    span.renderPlan = spanLocalRenderPlanNode(adverbialNi.renderPlan);
-    span.korean = "";
-    span.koreanPos = candidate.koreanPos ?? 부사;
-  } else {
-    span.consumed = 1;
-    span.particleRole = null;
-    span.renderPlan = spanLocalRenderPlanNode(candidate.renderPlan ?? null);
-    span.korean = candidate.korean ?? "";
-    span.koreanPos = candidate.koreanPos ?? span.koreanPos;
-  }
-  if (candidate.voice !== undefined) span.voice = candidate.voice;
-  if (candidate.nareruReadings !== undefined) span.nareruReadings = candidate.nareruReadings;
-  if (candidate.rareruReadings !== undefined) span.rareruReadings = candidate.rareruReadings;
-  if (candidate.dekiruReadings !== undefined) span.dekiruReadings = candidate.dekiruReadings;
-  if (candidate.hasNegative !== undefined) span.hasNegative = candidate.hasNegative;
-  if (candidate.hasCausative !== undefined) span.hasCausative = candidate.hasCausative;
-  if (candidate.hasCausativePassive !== undefined) span.hasCausativePassive = candidate.hasCausativePassive;
-  if (candidate.hasRequestTail !== undefined) span.hasRequestTail = candidate.hasRequestTail;
-  if (candidate.hasBenefactiveTail !== undefined) span.hasBenefactiveTail = candidate.hasBenefactiveTail;
-  if (candidate.connectiveRole !== undefined) span.connectiveRole = candidate.connectiveRole;
-  span.benefactive = candidate.benefactive ?? span.benefactive ?? null;
-  span.warnings = candidate.warnings ?? span.warnings ?? [];
-}
-
-function lexicalParticleConsumedIndicesForChoices(
-  choices: readonly LexicalParticleOwnershipChoice[]
-): readonly number[] {
-  const consumed = new Set<number>();
-  for (const choice of choices) {
-    if (choice.mode === "particle") {
-      continue;
-    }
-    for (let index = choice.particleIdx; index < choice.markerEndExclusive; index += 1) {
-      consumed.add(index);
-    }
-  }
-  return [...consumed].sort((left, right) => left - right);
-}
-
-function lexicalParticleLayoutSemanticSignature(
-  contentMap: ReadonlyMap<number, AssemblyContentSpan>,
-  layout: ClauseLayout,
-  choices: readonly LexicalParticleOwnershipChoice[]
-): string {
-  return JSON.stringify(choices.map((choice) => {
-    const span = contentMap.get(choice.start);
-    const candidate = span === undefined ? undefined : selectedLexicalParticleCandidate(span);
-    return {
-      start: choice.start,
-      mode: lexicalParticleResolvedMode(span, layout, choice),
-      markerEndExclusive: choice.markerEndExclusive,
-      consumed: span?.consumed ?? null,
-      particleOwner: layout.predicateOfParticle.get(choice.particleIdx) ?? null,
-      particleClause: layout.clauseIndexOfToken(choice.particleIdx),
-      renderPlanKind: span?.renderPlan?.kind ?? null,
-      selected: adverbialNiCandidateSemanticKey(candidate)
-    };
-  }));
-}
-
-function lexicalParticleResolvedMode(
-  span: AssemblyContentSpan | undefined,
-  layout: ClauseLayout,
-  choice: LexicalParticleOwnershipChoice
-): LexicalParticleOwnershipMode {
-  if (span?.particleRole === "adverbializer") {
-    return "content_owner";
-  }
-  if (!layout.predicateOfParticle.has(choice.particleIdx) && choice.markerEndExclusive > choice.particleIdx + 1) {
-    return "marker_owner";
-  }
-  return "particle";
-}
-
-function adverbialNiCandidateSemanticKey(candidate: CommitmentCandidate | undefined): readonly unknown[] {
-  if (candidate === undefined) {
-    return [];
-  }
-  const translation = candidate.translation as (CommitmentCandidate["translation"] & {
-    readonly priorityGroup?: number;
-    readonly priorityInGroup?: number;
-    readonly senseIndex?: number;
-  }) | undefined;
-  return [
-    candidate.koreanLemma ?? candidate.korean ?? null,
-    candidate.koreanPos ?? null,
-    candidate.derivation?.id ?? null,
-    translation?.priorityGroup ?? candidate.priority ?? null,
-    translation?.priorityInGroup ?? null,
-    translation?.senseIndex ?? null,
-    candidate.renderPlan?.kind ?? null
-  ];
-}
-
-function compareAdverbialNiCandidateStaticOrder(
-  left: CommitmentCandidate,
-  right: CommitmentCandidate
-): number {
-  const [leftPriorityGroup, leftPriorityInGroup, leftSenseIndex] = adverbialNiCandidatePriorityTuple(left);
-  const [rightPriorityGroup, rightPriorityInGroup, rightSenseIndex] = adverbialNiCandidatePriorityTuple(right);
-  const priorityGroupDiff = leftPriorityGroup - rightPriorityGroup;
-  if (priorityGroupDiff !== 0) return priorityGroupDiff;
-  const priorityInGroupDiff = leftPriorityInGroup - rightPriorityInGroup;
-  if (priorityInGroupDiff !== 0) return priorityInGroupDiff;
-  return leftSenseIndex - rightSenseIndex;
-}
-
-function adverbialNiCandidatePriorityTuple(
-  candidate: CommitmentCandidate | undefined
-): readonly [number, number, number] {
-  if (candidate === undefined) {
-    return [Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER, Number.MAX_SAFE_INTEGER];
-  }
-  const translation = candidate.translation as (CommitmentCandidate["translation"] & {
-    readonly priorityGroup?: number;
-    readonly priorityInGroup?: number;
-    readonly senseIndex?: number;
-  }) | undefined;
-  return [
-    translation?.priorityGroup ?? candidate.priority ?? 0,
-    translation?.priorityInGroup ?? 0,
-    translation?.senseIndex ?? Number.MAX_SAFE_INTEGER
-  ];
-}
-
-function lexicalParticleChoiceRank(
-  contentMap: ReadonlyMap<number, AssemblyContentSpan>,
-  choice: LexicalParticleOwnershipChoice,
-  initialContentMap: ReadonlyMap<number, AssemblyContentSpan>
-): LexicalParticleSlotRank {
-  const span = contentMap.get(choice.start);
-  const selectedSet = commitmentLaneCandidateSet(span?.sourceCandidates);
-  const selectedIdx = isResolvedCandidateSet(selectedSet)
-    ? Math.max(0, selectedSet.members.indexOf(selectedSet.winner))
-    : 0;
-  const candidate = span === undefined ? undefined : selectedLexicalParticleCandidate(span);
-  const [priorityGroup, priorityInGroup] = adverbialNiCandidatePriorityTuple(candidate);
-  return {
-    priorityGroup,
-    priorityInGroup,
-    selectedIdx,
-    ownerModeRank: lexicalParticleOwnershipModeRank(choice.mode),
-    initialMismatch: lexicalParticleInitialOwnershipMode(initialContentMap.get(choice.start), choice) !== choice.mode
-  };
-}
-
-function compareLexicalParticleSlotRanks(
-  left: LexicalParticleSlotRank,
-  right: LexicalParticleSlotRank
-): number {
-  const priorityGroupDiff = left.priorityGroup - right.priorityGroup;
-  if (priorityGroupDiff !== 0) return priorityGroupDiff;
-  const priorityInGroupDiff = left.priorityInGroup - right.priorityInGroup;
-  if (priorityInGroupDiff !== 0) return priorityInGroupDiff;
-  const ownerModeDiff = left.ownerModeRank - right.ownerModeRank;
-  if (ownerModeDiff !== 0) return ownerModeDiff;
-  const selectedIdxDiff = left.selectedIdx - right.selectedIdx;
-  if (selectedIdxDiff !== 0) return selectedIdxDiff;
-  if (left.initialMismatch !== right.initialMismatch) {
-    return left.initialMismatch ? 1 : -1;
-  }
-  return 0;
-}
-
-function lexicalParticleOwnershipModeRank(mode: LexicalParticleOwnershipMode): number {
-  switch (mode) {
-    case "content_owner":
-      return 0;
-    case "marker_owner":
-      return 1;
-    case "particle":
-      return 2;
-  }
-}
-
-function lexicalParticleChoiceIsRealized(
-  contentMap: ReadonlyMap<number, AssemblyContentSpan>,
-  layout: ClauseLayout,
-  choice: LexicalParticleOwnershipChoice
-): boolean {
-  const span = contentMap.get(choice.start);
-  if (choice.mode === "content_owner") {
-    return span?.particleRole === "adverbializer" &&
-      span.consumed >= 2 &&
-      span.renderPlan?.kind === "lexicalParticleAdverbial" &&
-      span.renderPlan.particle === "に";
-  }
-  if (choice.mode === "marker_owner") {
-    if (span === undefined || layout.predicateOfParticle.has(choice.particleIdx)) {
-      return false;
-    }
-    for (let index = choice.particleIdx + 1; index < choice.markerEndExclusive; index += 1) {
-      if (layout.predicateOfParticle.has(index)) {
-        return false;
-      }
-    }
-    return true;
-  }
-  return span !== undefined &&
-    span.particleRole !== "adverbializer" &&
-    layout.predicateOfParticle.has(choice.particleIdx);
-}
-
-function lexicalParticleInitialOwnershipMode(
-  span: AssemblyContentSpan | undefined,
-  choice: LexicalParticleOwnershipChoice
-): LexicalParticleOwnershipMode {
-  if (choice.markerEndExclusive > choice.particleIdx + 1) {
-    return "marker_owner";
-  }
-  const selected = span === undefined ? undefined : selectedLexicalParticleCandidate(span);
-  if (selected !== undefined) {
-    return lexicalParticleOwnershipModeForCandidate(selected);
-  }
-  return span?.particleRole === "adverbializer" ? "content_owner" : "particle";
-}
-
-function adverbialNiCandidateCommitment(
-  candidate: CommitmentCandidate | undefined
-): NonNullable<CommitmentCandidate["lexicalParticleAdverbial"]> | null {
-  const commitment = candidate?.lexicalParticleAdverbial;
-  if (commitment === undefined || commitment === null || commitment.renderPlan.particle !== "に") {
-    return null;
-  }
-  return commitment;
-}
-
-function isQuoteUtteranceClauseEndToken(token: RuntimeHaruToken | undefined): boolean {
-  if (token === undefined) {
-    return false;
-  }
-  if (pos0in(token.pos, INFLECTABLE_BITS)) {
-    return true;
-  }
-  if ((token.pos & POS0) === 助動詞) {
-    return true;
-  }
-  return (token.pos & POS01) === 助詞_終助詞;
-}
-
-function makeAssemblyContentSpan(
-  start: number,
-  consumed: number,
-  korean: string,
-  koreanPos: number,
-  entry: MorphemeEntry | null,
-  unitType: UnitType,
-  options: {
-    readonly attachLeft?: boolean;
-    readonly provenance?: TranslationUnitProvenance;
-    readonly provenanceReason?: string | null;
-    readonly warnings?: readonly Warning[];
-    readonly renderPlanPolicy?: import("../types/pipeline.js").RenderPlanPolicy;
-    readonly renderPlan?: RenderPlan | null;
-    readonly koreanBase?: string | null;
-    readonly particleRole?: string | null;
-    readonly discourseConnective?: boolean;
-  } = {}
-): AssemblyContentSpan {
-  const span: AssemblyContentSpan = {
-    start,
-    consumed,
-    korean,
-    koreanPos,
-    entry,
-    renderPlan: options.renderPlan ?? null,
-    koreanBase: options.koreanBase ?? null,
-    unitType,
-    attachLeft: options.attachLeft ?? false,
-    particleRole: options.particleRole ?? null,
-    provenance: options.provenance ?? "assembler",
-    provenanceReason: options.provenanceReason ?? null,
-    discourseConnective: options.discourseConnective ?? false,
-    warnings: options.warnings ?? [],
-    renderPlanPolicy: options.renderPlanPolicy ?? "normal",
-    traceEvents: []
-  };
-  Object.defineProperty(span, "voiceOpen", {
-    enumerable: true,
-    get() {
-      return span.voice === null;
-    }
-  });
-  return span;
-}
-
-function contentMapRepairSeed(
-  contentMap: ReadonlyMap<number, AssemblyContentSpan>,
-  units: readonly TranslationUnit[],
-  repairStart: number
-): Map<number, AssemblyContentSpan> {
-  const covered = new Set(units.flatMap((unit) => unit.jpIndices));
-  const seed = new Map<number, AssemblyContentSpan>();
-  for (const [start, span] of contentMap) {
-    const endExclusive = start + Math.max(1, span.consumed);
-    if (start < repairStart && repairStart < endExclusive) {
-      continue;
-    }
-    if (start >= repairStart && rangeContainsCoveredIndex(start, endExclusive, covered)) {
-      continue;
-    }
-    seed.set(start, span);
-  }
-  return seed;
-}
-
-function rangeContainsCoveredIndex(
-  start: number,
-  endExclusive: number,
-  covered: ReadonlySet<number>
-): boolean {
-  for (let index = start; index < endExclusive; index += 1) {
-    if (covered.has(index)) {
-      return true;
-    }
-  }
-  return false;
-}
-
-type PendingExtentPostposition = ExtentPostpositionCommitment;
-
-function finalizeExtentPostpositionSpan(
-  cursor: TokenCursor<RuntimeHaruToken>,
-  index: number,
-  span: AssemblyContentSpan,
-  pending: Map<number, PendingExtentPostposition>,
-  numeric: NumericTables
-): void {
-  applyPendingExtentPostposition(index, span, pending);
-  registerExtentPostpositionSource(cursor, index, span, pending, numeric);
-}
-
-function applyPendingExtentPostposition(
-  index: number,
-  span: AssemblyContentSpan,
-  pending: Map<number, PendingExtentPostposition>
-): void {
-  const postposition = pending.get(index);
-  if (postposition === undefined) {
-    return;
-  }
-  pending.delete(index);
-  span.extentPostposition = postposition;
-}
-
-function registerExtentPostpositionSource(
-  cursor: TokenCursor<RuntimeHaruToken>,
-  index: number,
-  span: AssemblyContentSpan,
-  pending: Map<number, PendingExtentPostposition>,
-  numeric: NumericTables
-): void {
-  const translation = selectedSpanTranslation(span);
-  if (translation?.placement?.type !== "after_next_extent_phrase") {
-    return;
-  }
-  const reading = cursor.lookahead(index + span.consumed - cursor.pos, c => readExtentPhraseAt(c, numeric));
-  if (reading === null) {
-    return;
-  }
-  const modifier = translation.korean.trim();
-  if (modifier.length === 0) {
-    return;
-  }
-  pending.set(reading.start, {
-    modifier,
-    targetOverride: reading.immediateKorean
-  });
-  span.korean = "";
-  span.renderPlan = null;
-  span.extentPostpositionRelocated = true;
-}
-
-function selectedIntrinsicHonorificMetadata(
-  set: SourceCandidateSet<CommitmentCandidate> | null | undefined,
-  entry: MorphemeEntry | null
-): boolean | undefined {
-  const laneSet = commitmentLaneCandidateSet(set);
-  const selected = isResolvedCandidateSet(laneSet)
-    ? laneSet.winner
-    : candidateSetSize(laneSet) === 1 ? candidateSetMembers(laneSet)[0] : undefined;
-  if (selected !== undefined) {
-    return selected.candidate.intrinsicHonorific ?? selected.candidate.translation?.intrinsicHonorific;
-  }
-  const senses = entry?.senses ?? [];
-  return senses.length === 1 ? senses[0]?.intrinsicHonorific : undefined;
-}
-
-function selectedLexicalParticleCandidate(span: AssemblyContentSpan): CommitmentCandidate | undefined {
-  const set = commitmentLaneCandidateSet(span.sourceCandidates);
-  return isResolvedCandidateSet(set) ? set.winner.candidate : undefined;
-}
-
-function tryContentNumeral(
-  cursor: TokenCursor<RuntimeHaruToken>,
-  numeric: NumericTables,
-  context: NumeralResolutionContext
-): ContentNumeralResult | undefined {
-  const before = cursor.pos;
-  const numeral = tryNumeral(cursor, numeric, context);
-  if (numeral === undefined) {
-    return undefined;
-  }
-  const consumed = cursor.pos - before;
-  const output = numeral;
-  if (typeof output === "string") {
-    return { consumed, korean: "", renderPlan: { kind: "fixedText", text: output, koreanPos: 수사 } };
-  }
-  return { consumed, korean: "", renderPlan: output };
-}
-
-interface ContentNumeralResult {
-  readonly consumed: number;
-  readonly korean: string;
-  readonly renderPlan: NumericBasePayload;
-}
-
-interface NumericHostYield {
-  readonly reason: "copula_host" | "bare_quote";
-  readonly result: ContentNumeralResult;
-  readonly startKind: NounPhraseCopulaStartKind;
-}
-
-function isVocativeYo(tokens: readonly RuntimeHaruToken[], index: number): boolean {
-  if (index < 1 || !pos0in((tokens[index - 1]?.pos ?? 0), NOMINAL_BITS)) {
-    return false;
-  }
-  const previousPrevious = index >= 2 ? tokens[index - 2] : undefined;
-  if (previousPrevious !== undefined && (previousPrevious.pos & POS0) === 助詞 && (previousPrevious.surface === "は" || previousPrevious.surface === "が" || previousPrevious.surface === "も")) {
-    return false;
-  }
-  return true;
-}
-
-function lastContentUnit(units: readonly TranslationUnit[]): TranslationUnit | undefined {
-  for (let index = units.length - 1; index >= 0; index -= 1) {
-    const unit = units[index];
-    if (unit?.unitType === UnitType.CONTENT) {
-      return unit;
-    }
-  }
-  return undefined;
-}
-
-function modifiedHeadNounMatchingSelectedSense(
-  sense: MorphemeSense,
-  tokens: readonly RuntimeHaruToken[],
-  index: number,
-  lookups: LookupTables
-): RuntimeHaruToken | null {
-  const head = directModifiedHeadNoun(tokens, index);
-  if (head === null) {
-    return null;
-  }
-  for (const condition of modifiedHeadNounLookupConditions(sense)) {
-    if (lookupConditionMatches(condition, argumentNounLookupForms(head), lookups)) {
-      return head;
-    }
-  }
-  return null;
-}
-
-function directModifiedHeadNoun(tokens: readonly RuntimeHaruToken[], index: number): RuntimeHaruToken | null {
-  const nextIndex = nextNonSpaceIndex(tokens, index + 1, tokens.length);
-  if (nextIndex === null) {
-    return null;
-  }
-  const next = tokens[nextIndex];
-  return next !== undefined && pos0in(next.pos, NOMINAL_BITS) ? next : null;
-}
-
-function modifiedHeadNounLookupConditions(sense: MorphemeSense): readonly LookupConditionValue[] {
-  const frames = [
-    ...(sense.senseFrame === undefined ? [] : [sense.senseFrame]),
-    ...(sense.senseFrames ?? [])
-  ];
-  const conditions: LookupConditionValue[] = [];
-  for (const frame of frames) {
-    const lexical = mappingValue(frame, "lexicalConditions") ?? mappingValue(frame, "lexical_conditions");
-    if (lexical === null) {
-      continue;
-    }
-    const value = valueFromMapping(lexical, "modifiedHeadNounLookup") ?? valueFromMapping(lexical, "modified_head_noun_lookup");
-    if (value !== undefined) {
-      conditions.push(value);
-    }
-  }
-  return conditions;
-}
-
-function mappingValue(value: unknown, key: string): Record<string, unknown> | null {
-  const item = valueFromMapping(value, key);
-  return item !== null && typeof item === "object" && !Array.isArray(item)
-    ? item as Record<string, unknown>
-    : null;
-}
-
-function valueFromMapping(value: unknown, key: string): unknown {
-  return value !== null && typeof value === "object" && !Array.isArray(value)
-    ? (value as Record<string, unknown>)[key]
-    : undefined;
-}
 
 function predicatePrenominalPlan(
   translation: { readonly korean: string; readonly koreanPos: number; readonly irregular: IrregularType | null | undefined },
@@ -8450,462 +6336,4 @@ function predicatePrenominalEnding(
     return koreanVerbEndingOverrides.get(translation.korean) ?? "ㄴ/는";
   }
   return "ㄴ/은";
-}
-
-function particleAllomorphKey(token: RuntimeHaruToken): ParticleKey | undefined {
-  const pos1 = token.pos & POS1;
-  if (pos1 !== undefined && SKIP_SUBPOS.has(pos1)) {
-    return undefined;
-  }
-  return ALLOMORPH_MAP[secondaryParticleCanonical(token) ?? token.surface];
-}
-
-function quoteMarkerFocusRealizationAt(
-  cursor: TokenCursor<RuntimeHaruToken>,
-  lookups: LookupTables
-): { readonly consumed: number; readonly allomorphKey: ParticleKey } | null {
-  const quote = quoteStructuralRelationAt(cursor, lookups)?.quote;
-  if (quote === undefined || quote.focusParticle === undefined || quote.markerIdx !== cursor.pos) {
-    return null;
-  }
-  const consumed = quote.markerSpan.endExclusive - (quote.markerIdx + 1);
-  if (consumed <= 0) {
-    return null;
-  }
-  const allomorphKey = quote.focusParticle === "でも"
-    ? "이라도/라도"
-    : quote.focusParticle === "も" ? "도" : "은/는";
-  return { consumed, allomorphKey };
-}
-
-function lastOutputUnit(units: readonly TranslationUnit[]): TranslationUnit | undefined {
-  for (let index = units.length - 1; index >= 0; index -= 1) {
-    const unit = units[index];
-    if (unit !== undefined && emitsOutput(unit)) {
-      return unit;
-    }
-  }
-  return undefined;
-}
-
-interface NominalDakeCopulaHost {
-  readonly mode: "inline" | "suffix";
-  readonly unit: TranslationUnit;
-  readonly renderPlan: RenderPlan;
-}
-
-function nominalDakeCopulaHostUnit(units: readonly TranslationUnit[]): NominalDakeCopulaHost | null {
-  const last = lastOutputUnit(units);
-  if (last === undefined) {
-    return null;
-  }
-  const direct = nominalDakeCopulaHostFromUnit(last);
-  if (direct !== null) {
-    return {
-      mode: "inline",
-      ...direct,
-    };
-  }
-  if (last.unitType !== UnitType.SYMBOL || !isTrailingPunctuationToken(last.jpHead)) {
-    return null;
-  }
-  for (let index = units.length - 2; index >= 0; index -= 1) {
-    const unit = units[index];
-    if (unit === undefined || !emitsOutput(unit)) {
-      continue;
-    }
-    if (unit.unitType === UnitType.SYMBOL) {
-      if (isTrailingPunctuationToken(unit.jpHead)) {
-        continue;
-      }
-      return null;
-    }
-    const host = nominalDakeCopulaHostFromUnit(unit);
-    return host === null
-      ? null
-      : {
-        mode: "suffix",
-        ...host,
-      };
-  }
-  return null;
-}
-
-function nominalDakeCopulaHostFromUnit(unit: TranslationUnit): Omit<NominalDakeCopulaHost, "mode"> | null {
-  const renderPlan = unit.renderPlan;
-  if (
-    renderPlan === null ||
-    PREDICATE_POS.has(unit.koreanPos) ||
-    (unit.koreanPos !== 명사 && unit.koreanPos !== 대명사 && unit.koreanPos !== 수사 && unit.koreanPos !== 구)
-  ) {
-    return null;
-  }
-  return { unit, renderPlan };
-}
-
-function punctuatedCopulaTailHostUnit(units: readonly TranslationUnit[]): TranslationUnit | undefined {
-  const last = lastUnit(units);
-  if (last === undefined || last.unitType !== UnitType.SYMBOL || !isCopulaTailContinuationPunctuationUnit(last)) {
-    return undefined;
-  }
-  for (let index = units.length - 2; index >= 0; index -= 1) {
-    const unit = units[index];
-    if (unit === undefined || !emitsOutput(unit)) {
-      continue;
-    }
-    if (unit.unitType === UnitType.SYMBOL) {
-      if (isCopulaTailContinuationPunctuationUnit(unit)) {
-        continue;
-      }
-      return undefined;
-    }
-    return unit;
-  }
-  return undefined;
-}
-
-function isCopulaTailContinuationPunctuationUnit(unit: TranslationUnit): boolean {
-  return isTrailingPunctuationToken(unit.jpHead) || isClauseCommaPunctuationUnit(unit);
-}
-
-function isEllipticConfirmationParticle(
-  token: RuntimeHaruToken,
-  particles: ReadonlySet<string>
-): boolean {
-  return (token.pos & POS0) === 助詞 && particles.has(token.surface);
-}
-
-function isNaniDeConfirmationVeto(
-  tokens: readonly RuntimeHaruToken[],
-  particleIdx: number
-): boolean {
-  const particle = tokens[particleIdx];
-  if (particle === undefined || particle.surface !== "で" || (particle.pos & POS01) !== 助詞_格助詞) {
-    return false;
-  }
-  const nounIdx = previousNonSpaceIndex(tokens, particleIdx, 0);
-  const noun = nounIdx === null ? undefined : tokens[nounIdx];
-  if (noun === undefined) {
-    return false;
-  }
-  return noun.surface === "何" ||
-    noun.surface === "なに" ||
-    noun.dictionaryForm === "何" ||
-    noun.reading === "ナニ" ||
-    noun.reading === "ナン";
-}
-
-function matchEllipticConfirmationTerminal(
-  tokens: readonly RuntimeHaruToken[],
-  desuIdx: number,
-  end: number
-): { readonly kaIdx: number; readonly endExclusive: number } | null {
-  const kaIdx = nextNonSpaceIndex(tokens, desuIdx + 1, end);
-  if (kaIdx === null) {
-    return null;
-  }
-  const ka = tokens[kaIdx];
-  if (ka === undefined || ka.surface !== "か" || (ka.pos & POS0) !== 助詞) {
-    return null;
-  }
-  const afterIdx = nextNonSpaceIndex(tokens, kaIdx + 1, end);
-  if (afterIdx === null) {
-    return { kaIdx, endExclusive: kaIdx + 1 };
-  }
-  const after = tokens[afterIdx];
-  if (
-    after !== undefined &&
-    (after.pos & POS0) === 補助記号 &&
-    hasHardTerminalPunctuationClass(after, afterIdx, ["japanese_period", "question"], ["assembler"])
-  ) {
-    return { kaIdx, endExclusive: afterIdx + 1 };
-  }
-  return null;
-}
-
-function trailingCopulaConnectiveSuffix(
-  preceding: string,
-  connective: string,
-  auxTokens: AuxTokens,
-  lookups: LookupTables
-): string {
-  if (preceding.length === 0) {
-    return "";
-  }
-  const features = auxExtractFeatures(auxTokens, { lookups });
-  const full = nounCopulaConnective(preceding, connective, features.past);
-  return full.startsWith(preceding) ? full.slice(preceding.length) : "";
-}
-
-function nominalDakeTameReasonTail(
-  cursor: TokenCursor<RuntimeHaruToken>,
-  contentIdx: number,
-  lookups: LookupTables
-): boolean {
-  const { tokens, pos: start } = cursor;
-  const headToken = tokens[start] ?? null;
-  if (!isTameReasonHeadContext(headToken, tokens, contentIdx, lookups)) {
-    return false;
-  }
-  cursor.advance(1);
-  return true;
-}
-
-function lastUnit(units: readonly TranslationUnit[]): TranslationUnit | undefined {
-  return units.length > 0 ? units[units.length - 1] : undefined;
-}
-
-function quotedDesireRenderPlan(plan: RenderPlan | null, marker: RuntimeHaruToken, markerIndex: number): RenderPlan | null {
-  if (!isPredicateHeadTailChainRenderPlan(plan) || plan.realization.root.tail.kind !== "auxLayer") {
-    return null;
-  }
-  const layer = plan.realization.root.tail;
-  if (!layer.ops.some((op) => op.kind === "desire") || layer.ops.some((op) => op.kind === "connective")) {
-    return null;
-  }
-  const connective: ConnectiveOp = createConnectiveOp({
-
-    connective: "quotative",
-    surface: marker.surface,
-    source: { tokens: [marker], tokenIndices: [markerIndex] }
-  });
-  return {
-    ...plan,
-    realization: {
-      ...plan.realization,
-      root: {
-        ...plan.realization.root,
-        tail: {
-          ...layer,
-          ops: [...layer.ops, connective]
-        }
-      }
-    },
-    clauseRole: {
-      ...plan.clauseRole,
-      outgoingBoundary: {
-        kind: "接続助詞",
-        connectiveKind: "quotative",
-        surface: marker.surface,
-        tokenIdx: markerIndex,
-        tokenSpan: { start: markerIndex, end: markerIndex }
-      }
-    }
-  };
-}
-
-function kataVerbHostAttributivePlan(unit: TranslationUnit): ConjugatedLemmaPlan | null {
-  const plan = unit.renderPlan;
-  if (plan?.kind !== "lemma" || plan.connective !== "고" || plan.koreanPos !== 동사) {
-    return null;
-  }
-  return {
-    kind: "conjugatedLemma",
-    koreanLemma: plan.koreanLemma,
-    irregular: plan.irregular,
-    koreanPos: plan.koreanPos,
-    ending: "ㄴ/는",
-    auxTokens: plan.auxTokens,
-    ...(plan.jpDictForm === undefined || plan.jpDictForm === null ? {} : { jpDictForm: plan.jpDictForm }),
-    ...(plan.verbConjType === undefined || plan.verbConjType === null ? {} : { verbConjType: plan.verbConjType }),
-    ...(plan.voice === undefined && plan.forcePassive !== true ? {} : { voice: plan.forcePassive === true ? "passive" as const : plan.voice }),
-  };
-}
-
-function suffixNominalizerAlreadyLexicalizedInPreviousUnit(
-  token: RuntimeHaruToken,
-  korean: string,
-  previousUnit: TranslationUnit | undefined
-): boolean {
-  if (
-    previousUnit === undefined ||
-    previousUnit.unitType !== UnitType.CONTENT ||
-    !unitHasNominalizedNounRenderPlan(previousUnit)
-  ) {
-    return false;
-  }
-  return korean === "함" &&
-    (token.dictionaryForm === "さ" || token.dictionaryForm === "ざ" || token.dictionaryForm === "がたみ");
-}
-
-function unitHasNominalizedNounRenderPlan(unit: TranslationUnit): boolean {
-  const plan = unit.renderPlan;
-  if (plan?.kind !== "lemma" || plan.koreanPos !== 명사) {
-    return false;
-  }
-  const typed = unit.entry?.senses?.some((sense) =>
-    sense.nominalized === plan.koreanLemma &&
-    (sense.koreanPos === 형용사 || sense.koreanPos === 동사)
-  ) === true
-    ? "predicate_nominalized"
-    : "unknown";
-  return resolveNominalAttributiveEvidence(
-    plan.koreanLemma,
-    typed
-  ) === "predicate_nominalized";
-}
-
-function rewriteFunctionalAdjectivalSuffixHostToNominalized(
-  suffixToken: RuntimeHaruToken,
-  previousUnit: TranslationUnit | undefined
-): void {
-  if (
-    previousUnit === undefined ||
-    previousUnit.unitType !== UnitType.CONTENT ||
-    (suffixToken.pos & POS01) !== 接尾辞_形容詞的
-  ) {
-    return;
-  }
-  const nominalized = selectedPredicateNominalizedLemma(previousUnit);
-  if (nominalized === null || nominalized === previousUnit.korean) {
-    return;
-  }
-  previousUnit.setRenderPlan(
-    { kind: "fixedText", text: nominalized, koreanPos: 명사 },
-    { rule: "SUFFIX-ADJECTIVAL-NOMINALIZED-HOST", cacheValue: nominalized }
-  );
-}
-
-function selectedPredicateNominalizedLemma(unit: TranslationUnit): string | null {
-  const selectedLemma = selectedPredicateLemmaForUnit(unit);
-  if (selectedLemma === null) {
-    return null;
-  }
-  const sense = unit.entry?.senses?.find((candidate) =>
-    candidate.korean === selectedLemma &&
-    (candidate.koreanPos === 형용사 || candidate.koreanPos === 동사) &&
-    typeof candidate.nominalized === "string" &&
-    candidate.nominalized.length > 0
-  );
-  return sense?.nominalized ?? null;
-}
-
-function selectedPredicateLemmaForUnit(unit: TranslationUnit): string | null {
-  const plan = unit.renderPlan;
-  if (plan?.kind === "lemma" && (plan.koreanPos === 형용사 || plan.koreanPos === 동사)) {
-    return plan.koreanLemma;
-  }
-  if ((unit.koreanPos === 형용사 || unit.koreanPos === 동사) && unit.korean.length > 0) {
-    return unit.korean;
-  }
-  return null;
-}
-
-function absorbOrphanShuujoshi(tokens: readonly RuntimeHaruToken[], units: TranslationUnit[]): void {
-  const covered = new Set(units.flatMap(u => u.jpIndices));
-  const unitIndex = TokenUnitIndex.build(units);
-  for (let i = tokens.length - 1; i >= 0; i--) {
-    const t = tokens[i];
-    if (t === undefined || covered.has(i)) continue;
-    if ((t.pos & POS01) !== 助詞_終助詞) continue;
-    const prev = unitIndex.get(i - 1);
-    if (prev !== undefined) {
-      prev.jpIndices.push(i);
-      unitIndex.set(i, prev);
-      covered.add(i);
-      continue;
-    }
-    for (let j = i + 1; j < tokens.length; j++) {
-      if (covered.has(j)) {
-        const next = unitIndex.get(j);
-        if (next !== undefined) {
-          next.jpIndices.push(i);
-          unitIndex.set(i, next);
-          covered.add(i);
-        }
-        break;
-      }
-      if (!pos0in((tokens[j]?.pos ?? 0), (1 << 助詞))) break;
-    }
-  }
-}
-
-function absorbOrphanHojokigou(tokens: readonly RuntimeHaruToken[], units: TranslationUnit[]): void {
-  const covered = new Set(units.flatMap(u => u.jpIndices));
-  const unitIndex = TokenUnitIndex.build(units);
-  for (let i = 0; i < tokens.length; i++) {
-    const t = tokens[i];
-    if (t === undefined || covered.has(i)) continue;
-    if ((t.pos & POS0) !== 補助記号) continue;
-    const prev = unitIndex.get(i - 1);
-    if (prev !== undefined) {
-      prev.jpIndices.push(i);
-      unitIndex.set(i, prev);
-      covered.add(i);
-      continue;
-    }
-    const next = unitIndex.get(i + 1);
-    if (next !== undefined) {
-      next.jpIndices.push(i);
-      unitIndex.set(i, next);
-      covered.add(i);
-    }
-  }
-}
-
-function contentHeadDispatchLimit(
-  tokens: readonly RuntimeHaruToken[],
-  index: number,
-  protoLayout: ReturnType<typeof buildProtoLayout> | null
-): number {
-  const clause = protoLayout?.clauseOfToken(index);
-  if (clause === undefined) {
-    return tokens.length;
-  }
-  if (separatedAs(tokens, clause.end, SEPARATION_OPENS_BOUNDARY)) {
-    return clause.end;
-  }
-  if (protoLayout?.unmarkedMainClauseBoundaryAt(clause.end) === true) {
-    return clause.end;
-  }
-  let boundary = previousNonSpaceIndex(tokens, clause.end, clause.start);
-  while (boundary !== null && isTrailingPunctuationToken(tokens[boundary])) {
-    boundary = previousNonSpaceIndex(tokens, boundary, clause.start);
-  }
-  return boundary !== null && isHardTerminalPunctuationToken(tokens[boundary])
-    ? clause.end
-    : tokens.length;
-}
-
-function absorbIntoPrecedingUnit(units: readonly TranslationUnit[], tokenIndex: number): boolean {
-  const unit = lastUnit(units);
-  if (unit !== undefined && !unit.jpIndices.includes(tokenIndex)) {
-    unit.jpIndices.push(tokenIndex);
-    return true;
-  }
-  return false;
-}
-
-function committedLookupEntry(entry: MorphemeEntry | undefined): (MorphemeEntry & { readonly senses: readonly MorphemeSense[]; readonly committed: true }) | null {
-  if (entry === undefined || !hasTranslationAccess(entry)) {
-    return null;
-  }
-  return commitWinner(entry);
-}
-
-function suffixRenderPlanFromCommittedEntry(
-  entry: (MorphemeEntry & { readonly senses: readonly MorphemeSense[]; readonly committed: true }) | null,
-  korean: string,
-): RenderPlan | null {
-  if (entry === null) {
-    return null;
-  }
-  const selected = winner(entry);
-  if (korean.length === 0) {
-    return null;
-  }
-  return {
-    kind: "lemma",
-    entry,
-    koreanLemma: korean,
-    koreanPos: selected.koreanPos ?? 접미사,
-    irregular: selected.irregular ?? null,
-    auxTokens: [],
-    jpDictForm: entry.dictionaryForm ?? null,
-    verbConjType: null,
-  };
-}
-
-function hasUserDictOverride(unit: TranslationUnit, tokens: readonly RuntimeHaruToken[]): boolean {
-  return unit.jpIndices.some(i => tokens[i]?.koreanOverride !== undefined);
 }

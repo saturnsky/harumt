@@ -23,7 +23,7 @@ import { runClosesUtteranceAs, utteranceClosureRunAfter } from "./clause-layout/
 import type { UtteranceClosureKind, UtteranceClosureToken } from "./clause-layout/utterance-closure.js";
 import type { ClauseAdjacencyToken } from "./clause-layout/trivia.js";
 import { kaChoiceAlternativeCounterpartAfter } from "./structural-relation/ka-parallel-ownership.js";
-import type { DemoDiscourseLeftBoundaryEvidenceKind } from "./clause-layout/index.js";
+import type { DemoDiscourseLeftBoundaryEvidenceKind } from "./clause-layout/layout-types.js";
 import { type LookupTables } from "./lookup-tables.js";
 import type { RuntimeHaruToken, HaruTokenRuntimeFields } from "../types/token.js";
 import {

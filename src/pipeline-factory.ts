@@ -1,13 +1,12 @@
 import type { DataLoader } from "./data-loader.js";
+import { TranslationPipeline, type TranslationPipelineOptions } from "./pipeline/core.js";
 import {
-  TranslationPipeline,
   clearPipelineResourceCache,
   loadCachedMorphemeDictionary,
   loadCachedPatternDictionary,
   loadCachedCollocationDictionary,
-  loadCachedReanalysisDictionary,
-  type TranslationPipelineOptions
-} from "./pipeline/core.js";
+  loadCachedReanalysisDictionary
+} from "./pipeline/resource-cache.js";
 import { resolveDataDir } from "./pipeline/data-paths.js";
 import type { SudachiAnalyzer } from "./analyzer/index.js";
 import { LookupTables } from "./pipeline/lookup-tables.js";

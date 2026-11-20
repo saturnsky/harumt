@@ -5,18 +5,26 @@ import { type RuntimeHaruToken } from "../../../../../types/token.js";
 import { type Warning } from "../../../../../types/warning.js";
 import { type LookupTables } from "../../../../lookup-tables.js";
 import type { PassiveClass } from "../../../../voice-class.js";
-import { type AuxLayerNode, type AuxOpNode, type BenefactiveAspectOp, type NegationOp, type ProhibitionAspectOp, type ProjectedHostSegments, type RequestAspectOp, type ShortNegationPolicy, type SimpleAspectOp, type StemNode, type TenseOp, type VoiceOp } from "../grammar.js";
+import { type AuxLayerNode, type AuxOpNode, type BenefactiveAspectOp, type NegationOp, type PotentialKotoGaDekiruIdiomOp, type ProhibitionAspectOp, type ProjectedHostSegments, type RequestAspectOp, type ShortNegationPolicy, type SimpleAspectOp, type StemNode, type TenseOp, type VoiceOp } from "../grammar.js";
 import { isChainableAspectOpKind, isChainableHeadOp, isHeadOp, isOperatorWrapBoundaryHeadOp, isSimpleAspectOpKind, multiAspectPathCanUseOperatorFold, operatorCreatesPotentialPredicate, operatorCreatesSourceVerbalPredicate, sourceVerbalPredicateAfterAuxOp } from "../operator-head.js";
-import { isRequestCommandBaseOp } from "../inspect.js";
+import { isRequestCommandBaseOp, isBenefactiveAspectKind } from "../inspect.js";
 import { applyNegationChainToLemmaBase, hostProjectionSourceTrace, policyWithPrependedHostPrefix, projectedHostTraceSegment, scopeTopicTraceCarrierContraction, stemFusionSourceTrace, tracePrefixContractionForTarget, type AttributivePastProjection, type BaseResult, type BaseSourceTrace, type ChainSourceTrace, type ConnectiveBaseOverride, type FinalNegationLoweringPolicy, type KoreanLemmaPredicateBase, type KoreanPredicateBase, type NegationLoweringOptions, type OkBaseResult, type OpContext, type OperatorOp, predicateBasePolicyAllomorphHost, type PassiveStemOptions, type PredicateBasePolicy, type TailTraceSegment, type TailTraceSegmentKind, type TerminalRealization } from "./base-model.js";
 
 export { scopeTopicTraceCarrierContraction };
 export { isChainableHeadOp, isHeadOp, isOperatorWrapBoundaryHeadOp, isSimpleAspectOpKind, multiAspectPathCanUseOperatorFold };
-import { applyNonLastPrefixContractions, finalNegationLoweringForcesPast, lowerFinalNegationForCommittedBase, nounSubjectPart, obligationBase, prohibitionPredicateBase, scopeCarrierCopulaBase, simpleStemBaseResult } from "./base-support.js";
-import { conjectureBase, nounCopulaObligationBase } from "./connective-compose.js";
+import { applyNonLastPrefixContractions, finalNegationLoweringForcesPast, lowerFinalNegationForCommittedBase, nounSubjectPart, obligationBase, prohibitionPredicateBase, scopeCarrierCopulaBase, simpleStemBaseResult, copulaCarrierBaseForInterOp, stateChangeBase } from "./base-support.js";
+import { conjectureBase } from "./conjecture-compose.js";
+import { nounCopulaObligationBase } from "./connective-compose.js";
 import { pastNegStemAttributive } from "./final-forms.js";
 import { stemAllowsSahenShortNegationSplit } from "../short-negation-policy.js";
-import { aspectBaseResult, benefactiveBaseFromInput, benefactiveDesiderativeRequestBase, cannotRefrainNegativeDewaIrarenaiBase, completionTeIruNegativeAspectForComposedInput, copulaCarrierBaseForInterOp, copulaCarrierConjectureBase, decisionKotoNiSuruBase, degreeIntensifierBase, desiderativeBaseFromPredicateBase, desireBaseResult, experienceBase, forbiddenBase, inevitableZaruOEnaiBase, isBenefactiveAspectKind, limitNegationBaseFromPredicateBase, madeMoNaiBase, maiScopeCarrierBase, monoHostPredicateBase, methodYouGaNaiBase, miseruBase, modalBase, modalFinalChainPolicy, negativeNecessityKotoWaBase, negativeNecessitySumuBase, negativeTeAdverbialAspectBaseResult, nominalHostEvidentialLikenessBase, nodaCarrierAbsorbedByHostBoundNoun, nodaCarrierConjectureBase, nodaCarrierLikenessBase, nodaCarrierKamoBase, normalizeSimpleAspectForComposedInput, onlyOptionBase, outcomeKotoNiNaruBase, permissionBase, postverbAuxiliaryBaseResult, potentialBase, potentialDirectionalAspectBaseResult, potentialObjectBaseFromAttributive, predicateProjectionCarrierBase, predicateQuoteCarrierBase, predicateSuffixBaseResult, quotedPropositionLikenessBase, scopeBridgeBase, simpleAspectWithDropAuxSemantic, simpleAspectWithoutSemantic, soudaHearsayBaseFromPredicateBase, sourceVerbAdjectivalDirectionalAspectBaseResult, sourceVerbAdjectivalEllipticTeIruNegativeBaseResult, sourceVerbAdjectivalTeShimauBaseResult, sourceVerbAdjectivalTsutsuAruBaseResult, stateChangeBase, sufficiencyConditionalBase, teEvaluationBase, teHoshiiSourceTrace, teIruAuxiliaryNegationFocusParticle, tokoroBaseFromPredicateBase, voiceBase, wakeCarrierConjectureBase, wakeExplanatoryCitationBase, wakeImpossibleBase } from "./predicate-bases.js";
+import { aspectBaseResult, completionTeIruNegativeAspectForComposedInput, miseruBase, negativeTeAdverbialAspectBaseResult, normalizeSimpleAspectForComposedInput, potentialDirectionalAspectBaseResult, simpleAspectWithDropAuxSemantic, simpleAspectWithoutSemantic, sourceVerbAdjectivalDirectionalAspectBaseResult, sourceVerbAdjectivalEllipticTeIruNegativeBaseResult, sourceVerbAdjectivalTeShimauBaseResult, sourceVerbAdjectivalTsutsuAruBaseResult, teIruAuxiliaryNegationFocusParticle } from "./aspect-bases.js";
+import { benefactiveBaseFromInput, benefactiveDesiderativeRequestBase, potentialBase, potentialObjectBaseFromAttributive, voiceBase } from "./voice-benefactive-bases.js";
+import { cannotRefrainNegativeDewaIrarenaiBase, decisionKotoNiSuruBase, experienceBase, forbiddenBase, inevitableZaruOEnaiBase, madeMoNaiBase, methodYouGaNaiBase, negativeNecessityKotoWaBase, negativeNecessitySumuBase, onlyOptionBase, outcomeKotoNiNaruBase, permissionBase, sufficiencyConditionalBase, teEvaluationBase } from "./idiom-bases.js";
+import { copulaCarrierConjectureBase, limitNegationBaseFromPredicateBase, maiScopeCarrierBase, monoHostPredicateBase, modalBase, modalFinalChainPolicy, nominalHostEvidentialLikenessBase, nodaCarrierAbsorbedByHostBoundNoun, nodaCarrierConjectureBase, nodaCarrierLikenessBase, nodaCarrierKamoBase, quotedPropositionLikenessBase, soudaHearsayBaseFromPredicateBase, tokoroBaseFromPredicateBase, wakeCarrierConjectureBase, wakeExplanatoryCitationBase, wakeImpossibleBase } from "./modal-bases.js";
+import { degreeIntensifierBase, postverbAuxiliaryBaseResult } from "./postverb-auxiliary-bases.js";
+import { desiderativeBaseFromPredicateBase, desireBaseResult, teHoshiiSourceTrace } from "./desire-bases.js";
+import { predicateProjectionCarrierBase, predicateQuoteCarrierBase, predicateSuffixBaseResult } from "./predicate-bases.js";
+import { scopeBridgeBase } from "./scope-bridge-bases.js";
 
 export function operatorChainSlotForWrapOp(
   wrapOp: AuxOpNode | null,
@@ -269,76 +277,77 @@ export interface ChainContext {
   readonly passiveStemOptions: PassiveStemOptions;
 }
 
+function prependInputPolicy(
+  inputBase: KoreanLemmaPredicateBase,
+  base: KoreanPredicateBase,
+  options: { readonly carryInputPolicy?: boolean } = {}
+): PredicateBasePolicy | undefined {
+  if (inputBase.policy?.kind === "noun_copula_interop") {
+    return base.policy;
+  }
+  const policy = base.policy ?? (options.carryInputPolicy === false ? undefined : inputBase.policy);
+  if (policy?.kind === "te_iru_negative" && inputBase.prefix.length > 0) {
+    return {
+      ...policy,
+      stemPrefix: `${inputBase.prefix}${policy.stemPrefix ?? ""}`
+    };
+  }
+  if (policy?.kind === "te_iru_attributive_contraction") {
+    if (inputBase.prefix.length > 0) return undefined;
+    if (inputBase.policy !== undefined) return inputBase.policy;
+  }
+  return policy;
+}
+function prependInputPrefix(
+  inputBase: KoreanLemmaPredicateBase,
+  base: KoreanPredicateBase,
+  options: { readonly carryInputPolicy?: boolean } = {}
+): KoreanPredicateBase {
+  const policy = prependInputPolicy(inputBase, base, options);
+  if (policy === undefined && base.policy?.kind === "te_iru_attributive_contraction") {
+    return {
+      prefix: `${inputBase.prefix}${base.prefix}`,
+      final: base.final,
+      ...(base.capabilities === undefined ? {} : { capabilities: base.capabilities })
+    };
+  }
+  const shiftedPolicy = policy !== undefined && policy === base.policy
+    ? policyWithPrependedHostPrefix(policy, inputBase.prefix)
+    : policy;
+  return {
+    ...base,
+    prefix: `${inputBase.prefix}${base.prefix}`,
+    final: base.final,
+    ...(shiftedPolicy === undefined ? {} : { policy: shiftedPolicy })
+  };
+}
+function withInputPrefix(
+  inputBase: KoreanLemmaPredicateBase,
+  res: BaseResult,
+  options: { readonly carryInputPolicy?: boolean } = {}
+): BaseResult {
+  if (!res.ok) return res;
+  return {
+    ...res,
+    base: prependInputPrefix(inputBase, res.base, options),
+    ...(res.connectiveBaseOverride === undefined
+      ? {}
+      : {
+        connectiveBaseOverride: {
+          ...res.connectiveBaseOverride,
+          base: prependInputPrefix(inputBase, res.connectiveBaseOverride.base, options)
+        }
+      })
+  };
+}
+
 export function opToBase(
   op: OperatorOp,
   inputBase: KoreanLemmaPredicateBase,
   ctx: OpContext
 ): BaseResult {
-  const stemLemma = inputBase.final.lemma;
-  const stemIrregular = inputBase.final.irregular;
-  const isVerb = inputBase.final.isVerb;
   const opPreNeg = ctx.preModalNeg;
   const opPast = ctx.past;
-  const prependInputPolicy = (
-    base: KoreanPredicateBase,
-    options: { readonly carryInputPolicy?: boolean } = {}
-  ): PredicateBasePolicy | undefined => {
-    if (inputBase.policy?.kind === "noun_copula_interop") {
-      return base.policy;
-    }
-    const policy = base.policy ?? (options.carryInputPolicy === false ? undefined : inputBase.policy);
-    if (policy?.kind === "te_iru_negative" && inputBase.prefix.length > 0) {
-      return {
-        ...policy,
-        stemPrefix: `${inputBase.prefix}${policy.stemPrefix ?? ""}`
-      };
-    }
-    if (policy?.kind === "te_iru_attributive_contraction") {
-      if (inputBase.prefix.length > 0) return undefined;
-      if (inputBase.policy !== undefined) return inputBase.policy;
-    }
-    return policy;
-  };
-  const prependInputPrefix = (
-    base: KoreanPredicateBase,
-    options: { readonly carryInputPolicy?: boolean } = {}
-  ): KoreanPredicateBase => {
-    const policy = prependInputPolicy(base, options);
-    if (policy === undefined && base.policy?.kind === "te_iru_attributive_contraction") {
-      return {
-        prefix: `${inputBase.prefix}${base.prefix}`,
-        final: base.final,
-        ...(base.capabilities === undefined ? {} : { capabilities: base.capabilities })
-      };
-    }
-    const shiftedPolicy = policy !== undefined && policy === base.policy
-      ? policyWithPrependedHostPrefix(policy, inputBase.prefix)
-      : policy;
-    return {
-      ...base,
-      prefix: `${inputBase.prefix}${base.prefix}`,
-      final: base.final,
-      ...(shiftedPolicy === undefined ? {} : { policy: shiftedPolicy })
-    };
-  };
-  const withInputPrefix = (
-    res: BaseResult,
-    options: { readonly carryInputPolicy?: boolean } = {}
-  ): BaseResult => {
-    if (!res.ok) return res;
-    return {
-      ...res,
-      base: prependInputPrefix(res.base, options),
-      ...(res.connectiveBaseOverride === undefined
-        ? {}
-        : {
-          connectiveBaseOverride: {
-            ...res.connectiveBaseOverride,
-            base: prependInputPrefix(res.connectiveBaseOverride.base, options)
-          }
-        })
-    };
-  };
   switch (op.kind) {
     case "postverbAuxiliary":
       return postverbAuxiliaryBaseResult(op, inputBase, ctx);
@@ -362,859 +371,1014 @@ export function opToBase(
       });
     case "predicateSuffix":
       return predicateSuffixBaseResult(op, inputBase, ctx);
-    case "aspect": {
-      if (!isChainableAspectOpKind(op.aspect)) {
-        return { ok: false, reason: `aspect kind '${op.aspect}' not chainable — invariant violation` };
-      }
-      const simpleAspect = isSimpleAspectOpKind(op.aspect)
-        ? op as SimpleAspectOp
-        : null;
-      const simpleAspectForDropAux =
-        simpleAspect !== null &&
-          simpleAspect.aspect === "te_iru" &&
-          inputBase.policy?.kind === "accustomed_aspect_projection"
-          ? simpleAspectWithDropAuxSemantic(simpleAspect)
-          : simpleAspect;
-      if (
-        simpleAspect !== null &&
-        simpleAspect.aspect === "te_iru" &&
-        simpleAspect.auxiliaryHonorific === "respect" &&
-        (!isVerb || simpleAspectForDropAux?.semantic?.renderStrategy === "drop_aux") &&
-        opPreNeg === null &&
-        !opPast &&
-        inputBase.final.kind === "lemma"
-      ) {
-        return {
-          ok: true,
-          base: {
-            ...inputBase,
-            final: {
-              kind: "lemma",
-              lemma: `${conjugate(inputBase.final.lemma, inputBase.final.irregular, "(으)시")}다`,
-              irregular: null,
-              isVerb: inputBase.final.isVerb
-            }
-          },
-          chainOnFinalSupported: true
-        };
-      }
-      if (
-        op.aspect === "te_iru" &&
-        inputBase.final.lemma === "있다" &&
-        !inputBase.final.isVerb &&
-        opPreNeg === null
-      ) {
-        const focusParticle = simpleAspect === null
-          ? undefined
-          : teIruAuxiliaryNegationFocusParticle(simpleAspect);
-        return {
-          ok: true,
-          base: inputBase,
-          chainOnFinalSupported: inputBase.policy?.kind === "benefactive" && inputBase.policy.potential
-            ? false
-            : true,
-          ...(focusParticle === undefined
-            ? {}
-            : { finalNegationOptions: { firstNegationFocusParticle: focusParticle } }),
-          ...(inputBase.policy?.kind === "benefactive" && inputBase.policy.potential
-            ? { finalNegationLoweringPolicy: "potential_idiom" as const }
-            : {})
-        };
-      }
-      if (
-        op.aspect === "te_iru" &&
-        simpleAspectForDropAux?.semantic?.renderStrategy === "drop_aux"
-      ) {
-        const focusParticle = teIruAuxiliaryNegationFocusParticle(simpleAspectForDropAux);
-        return {
-          ok: true,
-          base: inputBase,
-          chainOnFinalSupported: true,
-          ...(focusParticle === undefined
-            ? {}
-            : { finalNegationOptions: { firstNegationFocusParticle: focusParticle } }),
-        };
-      }
-      if (
-        inputBase.policy?.kind === "accustomed_aspect_projection" &&
-        isSimpleAspectOpKind(op.aspect)
-      ) {
-        if (opPreNeg !== null) return { ok: false, reason: "stative postverb neg + aspect 영역 외" };
-        if (opPast) return { ok: false, reason: "stative postverb past + aspect 영역 외" };
-        const changedBase = stateChangeBase(inputBase, "adjectival");
-        if (!changedBase.final.isVerb) {
-          return { ok: false, reason: "stative postverb aspect change-base 영역 외" };
-        }
-        const aspectResult = aspectBaseResult(
-          simpleAspectWithoutSemantic(op as SimpleAspectOp),
-          changedBase.final.lemma,
-          changedBase.final.irregular,
-          ctx.lookups
-        );
-        if (!aspectResult.ok) return aspectResult;
-        const stativePrefix = `${changedBase.prefix}${aspectResult.base.prefix}`;
-        const stativeTrace = hostProjectionSourceTrace({
-          hostText: stativePrefix.trimEnd(),
-          inputPrefix: inputBase.prefix,
-          basePrefix: stativePrefix,
-          sourceTokens: op.source.tokens,
-          splitFinal: "none"
-        });
-        const { sourceTrace: _stativeCarried, ...stativeRest } = aspectResult;
-        void _stativeCarried;
-        return {
-          ...stativeRest,
-          base: {
-            ...aspectResult.base,
-            prefix: stativePrefix
-          },
-          ...(stativeTrace === undefined ? {} : { sourceTrace: stativeTrace })
-        };
-      }
-      if (opPreNeg === null && !opPast) {
-        const potentialDirection = potentialDirectionalAspectBaseResult(op as SimpleAspectOp, inputBase);
-        if (potentialDirection !== null) {
-          return potentialDirection;
-        }
-      }
-      if (
-        op.aspect === "te_shimau" &&
-        simpleAspect !== null &&
-        ctx.sourceStemIsVerb === true &&
-        !ctx.hasPriorChainOp &&
-        !isVerb &&
-        opPreNeg === null &&
-        !opPast
-      ) {
-        const bridged = sourceVerbAdjectivalTeShimauBaseResult(simpleAspect, inputBase);
-        if (bridged !== null) return bridged;
-      }
-      if (
-        op.aspect === "te_iru" &&
-        ctx.sourceStemIsSahenPredicate === true &&
-        !isVerb &&
-        opPreNeg === null &&
-        !opPast
-      ) {
-        return {
-          ok: true,
-          base: inputBase,
-          chainOnFinalSupported: true
-        };
-      }
-      if (
-        simpleAspect !== null &&
-        (ctx.sourceStemIsVerb === true || simpleAspect.ellipticTeIruSourceHost === "verbal_predicate") &&
-        !isVerb &&
-        opPreNeg === null &&
-        !opPast
-      ) {
-        const ellipticNegative = sourceVerbAdjectivalEllipticTeIruNegativeBaseResult(
-          simpleAspect,
-          inputBase,
-          ctx.lookups
-        );
-        if (ellipticNegative !== null) return withInputPrefix(ellipticNegative);
-        if (!ctx.hasPriorChainOp) {
-          const directional = sourceVerbAdjectivalDirectionalAspectBaseResult(simpleAspect, inputBase);
-          if (directional !== null) return directional;
-        }
-      }
-      const compositeInput = ctx.hasPriorChainOp === true;
-      if (
-        op.aspect === "te_iru" &&
-        op.collapsed === "honorific" &&
-        !isVerb &&
-        opPreNeg === null &&
-        !opPast
-      ) {
-        return { ok: true, base: inputBase, chainOnFinalSupported: true };
-      }
-      if (
-        simpleAspect !== null &&
-        ctx.sourceStemIsVerb === true &&
-        !ctx.hasPriorChainOp &&
-        !isVerb &&
-        opPreNeg === null &&
-        !opPast
-      ) {
-        const inchoative = sourceVerbAdjectivalTsutsuAruBaseResult(simpleAspect, inputBase);
-        if (inchoative !== null) return inchoative;
-      }
-      if (!isVerb && !compositeInput) return { ok: false, reason: "te-aspect on adj 영역 외" };
-      if (opPreNeg !== null) {
-        const teComplementHostIsVerbal = isVerb || ctx.sourceStemIsVerb === true;
-        if (
-          opPreNeg.chainDepth !== 1 ||
-          opPreNeg.chainPast ||
-          !teComplementHostIsVerbal
-        ) {
-          return { ok: false, reason: "V neg + aspect 영역 외" };
-        }
-        if (simpleAspect !== null) {
-          return negativeTeAdverbialAspectBaseResult(simpleAspect, inputBase, ctx.lookups);
-        }
-        if (isBenefactiveAspectKind(op.aspect)) {
-          const benefactive = op as BenefactiveAspectOp;
-          const prohibitionRequest =
-            benefactive.terminalMood === "imperative" ||
-            benefactive.requestEvidence === "terminal_question";
-          if (prohibitionRequest) {
-            return benefactiveBaseFromInput(benefactive, prohibitionPredicateBase(inputBase));
-          }
-          const negativeInput = applyNegationChainToLemmaBase(inputBase, opPreNeg);
-          if (negativeInput === null) {
-            return { ok: false, reason: "negative benefactive host lowering 영역 외" };
-          }
-          return benefactiveBaseFromInput(benefactive, negativeInput);
-        }
-        return { ok: false, reason: "V neg + aspect 영역 외" };
-      }
-      if (opPast) return { ok: false, reason: "V past + aspect 영역 외" };
-      if (isSimpleAspectOpKind(op.aspect)) {
-        if (
-          op.aspect === "te_shimau" &&
-          op.semantic?.renderStrategy === "passive_completion" &&
-          inputBase.policy?.kind === "voice" &&
-          inputBase.policy.voice === "passive" &&
-          inputBase.policy.adversativePassive === true &&
-          inputBase.final.lemma === "버리다"
-        ) {
-          return {
-            ok: true,
-            base: inputBase,
-            chainOnFinalSupported: true
-          };
-        }
-        const simpleAspect = normalizeSimpleAspectForComposedInput(
-          completionTeIruNegativeAspectForComposedInput(op as SimpleAspectOp, inputBase),
-          inputBase
-        );
-        const shouldDropInputCompletionPolicy =
-          simpleAspect.aspect === "te_iru" &&
-          inputBase.policy?.kind === "completion" &&
-          inputBase.policy.teIruNegativeStrategy === "preserve_aspect";
-        return withInputPrefix(
-          aspectBaseResult(simpleAspect, stemLemma, stemIrregular, ctx.lookups),
-          { carryInputPolicy: !shouldDropInputCompletionPolicy }
-        );
-      }
-      if (op.aspect === "te_hoshii") {
-        const desireBase = desiderativeBaseFromPredicateBase(inputBase, ctx.desiredPredicateNegation);
-        if (desireBase === null) {
-          return { ok: false, reason: "desired predicate negation + desiderative lowering 영역 외" };
-        }
-        const sourceTrace = teHoshiiSourceTrace(
-          desireBase,
-          op.source.tokens,
-          ctx.desiredPredicateNegation
-        );
-        return {
-          ok: true,
-          base: desireBase,
-          chainOnFinalSupported: true,
-          interOpPastProjection: "committed",
-          ...(sourceTrace === undefined ? {} : { sourceTrace })
-        };
-      }
-      if (op.aspect === "te_miseru") {
-        const base = miseruBase(op, stemLemma, stemIrregular);
-        const sourceTrace = stemFusionSourceTrace(base.prefix, op.source.tokens, { splitFinal: "last_token" });
-        return withInputPrefix({
-          ok: true,
-          base,
-          chainOnFinalSupported: true,
-          ...(sourceTrace === undefined ? {} : { sourceTrace })
-        });
-      }
-      if (isBenefactiveAspectKind(op.aspect)) {
-        return benefactiveBaseFromInput(op as BenefactiveAspectOp, inputBase);
-      }
-      return { ok: false, reason: `aspect kind '${op.aspect}' base 변환 미작성` };
-    }
-    case "desire": {
-      if (!isVerb && inputBase.prefix.length === 0) {
-        return { ok: false, reason: "desire on adj 영역 외 (タイ는 V 만)" };
-      }
-      if (opPreNeg !== null) return { ok: false, reason: "V neg + desire 비표준" };
-      if (inputBase.policy?.kind === "benefactive") {
-        if (inputBase.policy.potential || inputBase.policy.desireMode === "unsupported") {
-          return { ok: false, reason: "benefactive + desire policy 영역 외" };
-        }
-        if (inputBase.policy.desireMode === "request") {
-          const requested = benefactiveDesiderativeRequestBase(inputBase);
-          const requestBase = op.form === "tagaru"
-            ? { ...requested, policy: { kind: "desire" as const, nodaConnectiveFlatten: true as const } }
-            : requested;
-          const sourceTrace = hostProjectionSourceTrace({
-            hostText: requestBase.prefix.trimEnd(),
-            inputPrefix: inputBase.prefix,
-            basePrefix: requestBase.prefix,
-            sourceTokens: op.source.tokens,
-            splitFinal: "none"
-          });
-          return {
-            ok: true,
-            base: requestBase,
-            chainOnFinalSupported: true,
-            interOpPastProjection: "committed",
-            ...(sourceTrace === undefined ? {} : { sourceTrace })
-          };
-        }
-      }
-      const desireResult = desireBaseResult(stemLemma, stemIrregular);
-      if (!desireResult.ok) {
-        return desireResult;
-      }
-      return withInputPrefix({
-        ...desireResult,
-        ...(op.form === "tagaru" ? {
-          base: {
-            ...desireResult.base,
-            final: { kind: "lemma" as const, lemma: "싶어하다", irregular: "여" as const, isVerb: true }
-          }
-        } : {}),
-        sourceTrace: {
-          inputProjectionText: desireResult.base.prefix,
-          carrierPrefixSegments: [],
-          finalSourceTokens: op.source.tokens,
-          finalKind: "modal"
-        }
-      });
-    }
-    case "voice": {
-      if (opPreNeg !== null) return { ok: false, reason: "V neg + voice 비표준" };
-      const reportingStateBase = reportingPassiveStateBase(op, inputBase, ctx.nextOp);
-      if (reportingStateBase !== null) {
-        return reportingStateBase;
-      }
-      const reportingLabelBase = reportingPassiveLabelBase(op, inputBase);
-      if (reportingLabelBase !== null) {
-        return reportingLabelBase;
-      }
-      if (
-        op.voice === "passive" &&
-        inputBase.policy?.kind === "quoted_proposition" &&
-        inputBase.final.lemma === "하다"
-      ) {
-        return {
-          ok: true,
-          base: {
-            prefix: inputBase.prefix,
-            final: { kind: "lemma", lemma: "여겨지다", irregular: null, isVerb: true },
-            policy: { kind: "voice", voice: "passive", reportingPassive: true }
-          },
-          chainOnFinalSupported: true
-        };
-      }
-      if (op.voice === "passive" && inputBase.policy?.kind === "make_state_change") {
-        return {
-          ok: true,
-          base: {
-            prefix: inputBase.prefix,
-            final: { kind: "lemma", lemma: "되다", irregular: null, isVerb: true },
-            policy: { kind: "voice", voice: "passive", ...(op.passiveClass === undefined ? {} : { passiveClass: op.passiveClass }) }
-          },
-          chainOnFinalSupported: true
-        };
-      }
-      if (op.voice === "passive" && inputBase.policy?.kind === "causative") {
-        const passiveCausative = voiceBase({
-          voice: {
-            ...op,
-            voice: "causative_passive"
-          },
-          stemLemma: inputBase.policy.sourceLemma,
-          stemIrregular: inputBase.policy.sourceIrregular,
-          sahenShortNegationSplit: ctx.sahenShortNegationSplit,
-          isVerb: true,
-          passiveStemOptions: ctx.passiveStemOptions,
-          lookups: ctx.lookups
-        });
-        return passiveCausative.ok
-          ? { ...passiveCausative, chainOnFinalSupported: true }
-          : passiveCausative;
-      }
-      if (
-        op.voice === "passive" &&
-        inputBase.policy?.kind === "completion" &&
-        inputBase.policy.followingPassiveStrategy === "completion_causative"
-      ) {
-        return {
-          ok: true,
-          base: {
-            prefix: `${inputBase.policy.stemPrefix ?? ""}${conjugate(
-              inputBase.policy.stemLemma,
-              inputBase.policy.stemIrregular,
-              op.passiveClass === "causative_coercive" ? "아/어야" : "게"
-            )}${op.passiveClass === "causative_coercive" ? "만" : ""} `,
-            final: op.passiveClass === "causative_coercive"
-              ? { kind: "lemma", lemma: "하다", irregular: "여", isVerb: true }
-              : { kind: "lemma", lemma: "되다", irregular: null, isVerb: true },
-            policy: {
-              kind: "voice",
-              voice: "causative_passive",
-              ...(op.passiveClass === undefined ? {} : { passiveClass: op.passiveClass })
-            }
-          },
-          chainOnFinalSupported: true
-        };
-      }
-      const res = voiceBase({
-        voice: op,
-        stemLemma,
-        stemIrregular,
-        isVerb,
-        passiveStemOptions: ctx.passiveStemOptions,
-        lookups: ctx.lookups,
-        sahenShortNegationSplit: ctx.sahenShortNegationSplit,
-        sourceTokens: op.source.tokens
-      });
-      if (!res.ok) return res;
-      return withInputPrefix(res);
-    }
-    case "idiom": {
-      if (op.idiom === "wake_impossible") {
-        return wakeImpossibleBase({
-          op,
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          pastProjection: ctx.pastProjection
-        });
-      }
-      if (op.idiom === "obligation") {
-        if (
-          inputBase.policy?.kind === "noun_copula_interop" ||
-          inputBase.policy?.kind === "negative_noun_copula_interop"
-        ) {
-          return {
-            ok: true,
-            base: nounCopulaObligationBase(inputBase.policy.nounSurface, predicateBasePolicyAllomorphHost(inputBase)),
-            chainOnFinalSupported: true
-          };
-        }
-        const res = obligationBase({ obligation: op, stemLemma, stemIrregular, isVerb });
-        if (!res.ok) return res;
-        return withInputPrefix({ ...res, chainOnFinalSupported: true });
-      }
-      if (op.idiom === "forbidden") {
-        const res = forbiddenBase({ stemLemma, stemIrregular, isVerb, sourceTokens: op.source.tokens });
-        if (!res.ok) return res;
-        return withInputPrefix({ ...res, chainOnFinalSupported: true });
-      }
-      if (op.idiom === "degree_intensifier") {
-        return degreeIntensifierBase({
-          op,
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          lookups: ctx.lookups
-        });
-      }
-      if (op.idiom === "potential_koto_ga_dekiru") {
-        if (inputBase.policy?.kind === "potential") {
-          return {
-            ok: true,
-            base: inputBase,
-            chainOnFinalSupported: false,
-            finalNegationLoweringPolicy: "potential_idiom"
-          };
-        }
-        if (
-          inputBase.policy?.kind === "likeness" &&
-          inputBase.policy.potentialObjectAttributive !== undefined
-        ) {
-          const host = inputBase.policy.potentialObjectAttributive;
-          const stemAttr = `${conjugate(host.stemLemma, host.stemIrregular, "ㄹ/을")} 만한`;
-          return potentialObjectBaseFromAttributive({
-            stemAttr,
-            postIdiomChainDepth: 0,
-            particleKind: op.particleKind,
-            focusParticle: op.focusParticle,
-            stemLemma: host.stemLemma,
-            stemIrregular: host.stemIrregular
-          });
-        }
-        const sourceProjectionIsVerbalPredicate =
-          (ctx.sourceStemIsVerb ?? isVerb) ||
-          ctx.sourceStemIsSahenPredicate === true;
-        if (!isVerb && ctx.sourceStemIsSahenPredicate !== true) {
-          const stemAttr = pastNegStemAttributive({
-            stemLemma,
-            stemIrregular,
-            stemKind: "adj",
-            past: opPast,
-            preModalNeg: opPreNeg,
-            attrPolicy: "present",
-            useShortHint: false,
-            lookups: ctx.lookups,
-            sahenShortNegationSplit: ctx.sahenShortNegationSplit
-          });
-          return potentialObjectBaseFromAttributive({
-            stemAttr,
-            postIdiomChainDepth: 0,
-            particleKind: op.particleKind,
-            focusParticle: op.focusParticle,
-            stemLemma,
-            stemIrregular
-          });
-        }
-        const res = potentialBase({
-          stemLemma, stemIrregular, isVerb,
-          sourceStemIsVerb: sourceProjectionIsVerbalPredicate,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          postIdiomChainDepth: 0,
-          particleKind: op.particleKind,
-          focusParticle: op.focusParticle,
-          sourceTokens: op.source.tokens,
-          lookups: ctx.lookups,
-          sahenShortNegationSplit: ctx.sahenShortNegationSplit
-        });
-        if (!res.ok) return res;
-        return withInputPrefix({
-          ...res,
-          chainOnFinalSupported: false,
-          finalNegationLoweringPolicy: "potential_idiom"
-        });
-      }
-      if (op.idiom === "negative_necessity_koto_wa") {
-        return negativeNecessityKotoWaBase({
-          op,
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          pastProjection: ctx.pastProjection
-        });
-      }
-      if (op.idiom === "inevitable_zaru_o_enai") {
-        return inevitableZaruOEnaiBase({
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          pastProjection: ctx.pastProjection,
-          sourceTokens: op.source.tokens
-        });
-      }
-      if (op.idiom === "cannot_refrain_negative_dewa_irarenai") {
-        return cannotRefrainNegativeDewaIrarenaiBase({
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          pastProjection: ctx.pastProjection,
-          sourceTokens: op.source.tokens
-        });
-      }
-      if (op.idiom === "method_you_ga_nai") {
-        return methodYouGaNaiBase({
-          op,
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          pastProjection: ctx.pastProjection,
-          sourceTokens: op.source.tokens
-        });
-      }
-      if (op.idiom === "negative_necessity_made_mo") {
-        return madeMoNaiBase({
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          pastProjection: ctx.pastProjection,
-          sourceTokens: op.source.tokens
-        });
-      }
-      if (op.idiom === "permission") {
-        return permissionBase({
-          op,
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          lookups: ctx.lookups
-        });
-      }
-      if (op.idiom === "sufficiency_conditional") {
-        return sufficiencyConditionalBase({
-          op,
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          lookups: ctx.lookups
-        });
-      }
-      if (op.idiom === "te_evaluation") {
-        return teEvaluationBase({
-          op,
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          lookups: ctx.lookups
-        });
-      }
-      if (op.idiom === "negative_necessity_sumu") {
-        return negativeNecessitySumuBase({
-          op,
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          lookups: ctx.lookups
-        });
-      }
-      if (op.idiom === "only_option_shika_nai") {
-        return onlyOptionBase({
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          pastProjection: ctx.pastProjection,
-          lookups: ctx.lookups,
-          sourceTokens: op.source.tokens
-        });
-      }
-      if (op.idiom === "experience_koto_ga_aru") {
-        return experienceBase({
-          op,
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          pastProjection: ctx.pastProjection
-        });
-      }
-      if (op.idiom === "outcome_koto_ni_naru") {
-        return outcomeKotoNiNaruBase({
-          op,
-          inputBase,
-          preStemNeg: opPreNeg,
-          stemPast: opPast,
-          formal: ctx.formal,
-          pastProjection: ctx.pastProjection
-        });
-      }
-      return decisionKotoNiSuruBase({
-        inputBase,
-        preStemNeg: opPreNeg,
-        stemPast: opPast,
-        formal: ctx.formal,
-        sourceTokens: op.source.tokens
-      });
-    }
+    case "aspect":
+      return aspectOpBase(op, inputBase, ctx);
+    case "desire":
+      return desireOpBase(op, inputBase, ctx);
+    case "voice":
+      return voiceOpBase(op, inputBase, ctx);
+    case "idiom":
+      return idiomOpBase(op, inputBase, ctx);
     case "scopeBridge": {
       return scopeBridgeBase(op, inputBase, ctx);
     }
-    case "modal": {
-      if (
-        op.modal === "mai" &&
-        (inputBase.policy?.kind === "noun_copula_interop" ||
-          inputBase.policy?.kind === "negative_noun_copula_interop") &&
-        opPreNeg === null &&
-        !opPast
-      ) {
-        const noun = inputBase.policy.nounSurface;
-        const base = scopeCarrierCopulaBase("mai", "거", `${nounSubjectPart(noun, predicateBasePolicyAllomorphHost(inputBase))} 아닐 `);
-        return {
-          ok: true,
-          base,
-          ...modalFinalChainPolicy(base),
-          interOpPastProjection: "committed"
-        };
-      }
-      if (
-        op.modal === "noda" &&
-        inputBase.policy?.kind === "negative_noun_copula_interop" &&
-        ctx.nextOp?.kind === "conjecture" &&
-        opPreNeg === null &&
-        !opPast
-      ) {
-        return {
-          ok: true,
-          base: inputBase,
-          chainOnFinalSupported: true
-        };
-      }
-      if (op.modal === "tokoro") {
-        const tokoroProjectedBase = tokoroBaseFromPredicateBase({
-          modal: op,
-          base: inputBase,
-          preModalNeg: opPreNeg,
-          past: opPast,
-          formal: ctx.formal,
-          pastProjection: ctx.pastProjection
-        });
-        if (tokoroProjectedBase !== null) {
-          if (!tokoroProjectedBase.ok) return tokoroProjectedBase;
-          return {
-            ...tokoroProjectedBase,
-            ...modalFinalChainPolicy(tokoroProjectedBase.base),
-            interOpPastProjection: "committed"
-          };
-        }
-      }
-      if (op.modal === "limit_negation") {
-        const res = limitNegationBaseFromPredicateBase({
-          modal: op,
-          base: inputBase,
-          preNeg: opPreNeg,
-          past: opPast,
-          formal: ctx.formal,
-          lookups: ctx.lookups
-        });
-        if (!res.ok) return res;
-        return { ...res, ...modalFinalChainPolicy(res.base), interOpPastProjection: "committed" };
-      }
-      if (op.modal === "mono" && (op.reading === "admirative" || op.reading === "habitual")) {
-        const res = monoHostPredicateBase(op, inputBase, opPreNeg);
-        if (!res.ok) return res;
-        return { ...res, ...modalFinalChainPolicy(res.base), interOpPastProjection: "committed" };
-      }
-      if (op.modal === "souda_hearsay" && op.reading === "hearsay") {
-        const res = soudaHearsayBaseFromPredicateBase(inputBase, opPreNeg, opPast, ctx.lookups, op);
-        if (!res.ok) return res;
-        return { ...res, ...modalFinalChainPolicy(res.base), interOpPastProjection: "committed" };
-      }
-      if (op.modal === "noda" && opPreNeg === null && !opPast) {
-        const absorbed = nodaCarrierAbsorbedByHostBoundNoun(inputBase, op);
-        if (absorbed !== null) {
-          return { ...absorbed, ...modalFinalChainPolicy(absorbed.base), interOpPastProjection: "committed" };
-        }
-      }
-      if (op.modal === "kamo" && opPreNeg === null) {
-        const carrierKamo = nodaCarrierKamoBase(inputBase, ctx.formal, opPast, op.bare);
-        if (carrierKamo !== null) {
-          return {
-            ...carrierKamo,
-            ...modalFinalChainPolicy(carrierKamo.base),
-            interOpPastProjection: "committed"
-          };
-        }
-      }
-      if (op.modal === "wake") {
-        const wakeCitation = wakeExplanatoryCitationBase({
-          op, inputBase, preStemNeg: opPreNeg, stemPast: opPast, formal: ctx.formal
-        });
-        if (wakeCitation !== null) {
-          if (!wakeCitation.ok) return wakeCitation;
-          return {
-            ...wakeCitation,
-            ...modalFinalChainPolicy(wakeCitation.base),
-            interOpPastProjection: "committed"
-          };
-        }
-      }
-      if ((op.modal === "rashii" || op.modal === "youda") && opPreNeg === null && !opPast) {
-        const carrierLikeness = nodaCarrierLikenessBase(inputBase);
-        if (carrierLikeness !== null) {
-          return {
-            ...carrierLikeness,
-            ...modalFinalChainPolicy(carrierLikeness.base),
-            interOpPastProjection: "committed"
-          };
-        }
-        const quotedLikeness = quotedPropositionLikenessBase(inputBase, op, ctx.formal, ctx.pastProjection);
-        if (quotedLikeness !== null) {
-          return {
-            ...quotedLikeness,
-            ...modalFinalChainPolicy(quotedLikeness.base),
-            interOpPastProjection: "committed"
-          };
-        }
-      }
-      if (
-        op.modal === "rashii" &&
-        opPreNeg === null &&
-        !opPast &&
-        !ctx.hasPriorChainOp &&
-        inputBase.policy?.kind === "noun_copula_interop" &&
-        inputBase.policy.zeroCopula === true
-      ) {
-        const res = nominalHostEvidentialLikenessBase(inputBase.policy.nounSurface, op);
-        if (!res.ok) return res;
-        return { ...res, ...modalFinalChainPolicy(res.base), interOpPastProjection: "committed" };
-      }
-      if (op.modal === "mai" && opPreNeg === null && !opPast) {
-        const scopeMai = maiScopeCarrierBase(op, inputBase);
-        if (scopeMai !== null) {
-          if (!scopeMai.ok) return scopeMai;
-          return { ...scopeMai, ...modalFinalChainPolicy(scopeMai.base) };
-        }
-      }
-      const res = modalBase({
-        modal: op, stemLemma, stemIrregular,
-        stemKind: op.modal === "mai" ? (inputBase.final.isVerb ? "verb" : "adj") : (isVerb ? "verb" : "adj"),
-        preModalNeg: opPreNeg,
-        past: opPast,
-        pastProjection: ctx.pastProjection,
-        formal: ctx.formal,
-        ...(inputBase.policy === undefined ? {} : { inputPolicy: inputBase.policy }),
-        ...(ctx.sourceStemIsVerb === undefined ? {} : { sourceStemIsVerb: ctx.sourceStemIsVerb }),
-        sourceHostHasTeIruAspect: ctx.sourceHostHasTeIruAspect === true,
-        forbidShortNegation: ctx.forbidShortNegation,
-        preferShortLikenessNegation: ctx.preferShortLikenessNegation === true || opPreNeg !== null,
-        lookups: ctx.lookups,
-        sahenShortNegationSplit: ctx.sahenShortNegationSplit
-      });
-      if (!res.ok) return res;
-      return withInputPrefix({
-        ...res,
-        ...modalFinalChainPolicy(res.base),
-        interOpPastProjection: "committed"
-      });
-    }
-    case "conjecture": {
-      const copulaCarrierConjecture =
-        opPreNeg === null
-          ? (
-            (!opPast ? (nodaCarrierConjectureBase(inputBase, op) ?? wakeCarrierConjectureBase(inputBase, op)) : null) ??
-            copulaCarrierConjectureBase(inputBase, op, opPast)
-          )
-          : null;
-      if (copulaCarrierConjecture !== null) {
-        if (ctx.hasFollowingOp) {
-          if (ctx.nextOp?.kind === "predicateQuoteCarrier") {
-            return { ...copulaCarrierConjecture, chainOnFinalSupported: true };
-          }
-          return { ok: true, base: inputBase, chainOnFinalSupported: false };
-        }
-        return { ...copulaCarrierConjecture, chainOnFinalSupported: false };
-      }
-      const res = conjectureBase({
-        conjecture: op, stemLemma, stemIrregular, isVerb,
-        preModalNeg: opPreNeg, past: opPast,
-        shortNegationPolicy: ctx.shortNegationPolicy,
-        pastProjection: ctx.pastProjection
-      });
-      if (!res.ok) return res;
-      const prefixed = withInputPrefix({ ...res, chainOnFinalSupported: false });
-      if (
-        prefixed.ok &&
-        prefixed.base.policy?.kind === "negative_noun_copula_interop"
-      ) {
-        return {
-          ...prefixed,
-          base: {
-            ...prefixed.base,
-            policy: { ...prefixed.base.policy, conjectureHostPast: opPast }
-          }
-        };
-      }
-      return prefixed;
-    }
+    case "modal":
+      return modalOpBase(op, inputBase, ctx);
+    case "conjecture":
+      return conjectureOpBase(op, inputBase, ctx);
     default:
       return { ok: false, reason: `op kind not in chain dispatcher` };
   }
 }
+
+function aspectOpBase(
+  op: Extract<OperatorOp, { readonly kind: "aspect" }>,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult {
+  const isVerb = inputBase.final.isVerb;
+  const opPreNeg = ctx.preModalNeg;
+  const opPast = ctx.past;
+  if (!isChainableAspectOpKind(op.aspect)) {
+    return { ok: false, reason: `aspect kind '${op.aspect}' not chainable — invariant violation` };
+  }
+  const simpleAspect = isSimpleAspectOpKind(op.aspect)
+    ? op as SimpleAspectOp
+    : null;
+  const absorbed = aspectAbsorbedIntoHostBase(op, simpleAspect, inputBase, ctx);
+  if (absorbed !== null) return absorbed;
+  const bridged = aspectHostBridgeBase(op, simpleAspect, inputBase, ctx);
+  if (bridged !== null) return bridged;
+  const compositeInput = ctx.hasPriorChainOp === true;
+  if (!isVerb && !compositeInput) return { ok: false, reason: "te-aspect on adj 영역 외" };
+  if (opPreNeg !== null) {
+    return negativeHostAspectBase(op, simpleAspect, opPreNeg, inputBase, ctx);
+  }
+  if (opPast) return { ok: false, reason: "V past + aspect 영역 외" };
+  return composedAspectBase(op, inputBase, ctx);
+}
+
+function aspectAbsorbedIntoHostBase(
+  op: Extract<OperatorOp, { readonly kind: "aspect" }>,
+  simpleAspect: SimpleAspectOp | null,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult | null {
+  const isVerb = inputBase.final.isVerb;
+  const opPreNeg = ctx.preModalNeg;
+  const opPast = ctx.past;
+  const simpleAspectForDropAux =
+    simpleAspect !== null &&
+      simpleAspect.aspect === "te_iru" &&
+      inputBase.policy?.kind === "accustomed_aspect_projection"
+      ? simpleAspectWithDropAuxSemantic(simpleAspect)
+      : simpleAspect;
+  if (
+    simpleAspect !== null &&
+    simpleAspect.aspect === "te_iru" &&
+    simpleAspect.auxiliaryHonorific === "respect" &&
+    (!isVerb || simpleAspectForDropAux?.semantic?.renderStrategy === "drop_aux") &&
+    opPreNeg === null &&
+    !opPast &&
+    inputBase.final.kind === "lemma"
+  ) {
+    return {
+      ok: true,
+      base: {
+        ...inputBase,
+        final: {
+          kind: "lemma",
+          lemma: `${conjugate(inputBase.final.lemma, inputBase.final.irregular, "(으)시")}다`,
+          irregular: null,
+          isVerb: inputBase.final.isVerb
+        }
+      },
+      chainOnFinalSupported: true
+    };
+  }
+  if (
+    op.aspect === "te_iru" &&
+    inputBase.final.lemma === "있다" &&
+    !inputBase.final.isVerb &&
+    opPreNeg === null
+  ) {
+    const focusParticle = simpleAspect === null
+      ? undefined
+      : teIruAuxiliaryNegationFocusParticle(simpleAspect);
+    return {
+      ok: true,
+      base: inputBase,
+      chainOnFinalSupported: inputBase.policy?.kind === "benefactive" && inputBase.policy.potential
+        ? false
+        : true,
+      ...(focusParticle === undefined
+        ? {}
+        : { finalNegationOptions: { firstNegationFocusParticle: focusParticle } }),
+      ...(inputBase.policy?.kind === "benefactive" && inputBase.policy.potential
+        ? { finalNegationLoweringPolicy: "potential_idiom" as const }
+        : {})
+    };
+  }
+  if (
+    op.aspect === "te_iru" &&
+    simpleAspectForDropAux?.semantic?.renderStrategy === "drop_aux"
+  ) {
+    const focusParticle = teIruAuxiliaryNegationFocusParticle(simpleAspectForDropAux);
+    return {
+      ok: true,
+      base: inputBase,
+      chainOnFinalSupported: true,
+      ...(focusParticle === undefined
+        ? {}
+        : { finalNegationOptions: { firstNegationFocusParticle: focusParticle } }),
+    };
+  }
+  if (
+    inputBase.policy?.kind === "accustomed_aspect_projection" &&
+    isSimpleAspectOpKind(op.aspect)
+  ) {
+    if (opPreNeg !== null) return { ok: false, reason: "stative postverb neg + aspect 영역 외" };
+    if (opPast) return { ok: false, reason: "stative postverb past + aspect 영역 외" };
+    const changedBase = stateChangeBase(inputBase, "adjectival");
+    if (!changedBase.final.isVerb) {
+      return { ok: false, reason: "stative postverb aspect change-base 영역 외" };
+    }
+    const aspectResult = aspectBaseResult(
+      simpleAspectWithoutSemantic(op as SimpleAspectOp),
+      changedBase.final.lemma,
+      changedBase.final.irregular,
+      ctx.lookups
+    );
+    if (!aspectResult.ok) return aspectResult;
+    const stativePrefix = `${changedBase.prefix}${aspectResult.base.prefix}`;
+    const stativeTrace = hostProjectionSourceTrace({
+      hostText: stativePrefix.trimEnd(),
+      inputPrefix: inputBase.prefix,
+      basePrefix: stativePrefix,
+      sourceTokens: op.source.tokens,
+      splitFinal: "none"
+    });
+    const { sourceTrace: _stativeCarried, ...stativeRest } = aspectResult;
+    void _stativeCarried;
+    return {
+      ...stativeRest,
+      base: {
+        ...aspectResult.base,
+        prefix: stativePrefix
+      },
+      ...(stativeTrace === undefined ? {} : { sourceTrace: stativeTrace })
+    };
+  }
+  return null;
+}
+
+function aspectHostBridgeBase(
+  op: Extract<OperatorOp, { readonly kind: "aspect" }>,
+  simpleAspect: SimpleAspectOp | null,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult | null {
+  const isVerb = inputBase.final.isVerb;
+  const opPreNeg = ctx.preModalNeg;
+  const opPast = ctx.past;
+  if (opPreNeg === null && !opPast) {
+    const potentialDirection = potentialDirectionalAspectBaseResult(op as SimpleAspectOp, inputBase);
+    if (potentialDirection !== null) {
+      return potentialDirection;
+    }
+  }
+  if (
+    op.aspect === "te_shimau" &&
+    simpleAspect !== null &&
+    ctx.sourceStemIsVerb === true &&
+    !ctx.hasPriorChainOp &&
+    !isVerb &&
+    opPreNeg === null &&
+    !opPast
+  ) {
+    const bridged = sourceVerbAdjectivalTeShimauBaseResult(simpleAspect, inputBase);
+    if (bridged !== null) return bridged;
+  }
+  if (
+    op.aspect === "te_iru" &&
+    ctx.sourceStemIsSahenPredicate === true &&
+    !isVerb &&
+    opPreNeg === null &&
+    !opPast
+  ) {
+    return {
+      ok: true,
+      base: inputBase,
+      chainOnFinalSupported: true
+    };
+  }
+  if (
+    simpleAspect !== null &&
+    (ctx.sourceStemIsVerb === true || simpleAspect.ellipticTeIruSourceHost === "verbal_predicate") &&
+    !isVerb &&
+    opPreNeg === null &&
+    !opPast
+  ) {
+    const ellipticNegative = sourceVerbAdjectivalEllipticTeIruNegativeBaseResult(
+      simpleAspect,
+      inputBase,
+      ctx.lookups
+    );
+    if (ellipticNegative !== null) return withInputPrefix(inputBase, ellipticNegative);
+    if (!ctx.hasPriorChainOp) {
+      const directional = sourceVerbAdjectivalDirectionalAspectBaseResult(simpleAspect, inputBase);
+      if (directional !== null) return directional;
+    }
+  }
+  if (
+    op.aspect === "te_iru" &&
+    op.collapsed === "honorific" &&
+    !isVerb &&
+    opPreNeg === null &&
+    !opPast
+  ) {
+    return { ok: true, base: inputBase, chainOnFinalSupported: true };
+  }
+  if (
+    simpleAspect !== null &&
+    ctx.sourceStemIsVerb === true &&
+    !ctx.hasPriorChainOp &&
+    !isVerb &&
+    opPreNeg === null &&
+    !opPast
+  ) {
+    const inchoative = sourceVerbAdjectivalTsutsuAruBaseResult(simpleAspect, inputBase);
+    if (inchoative !== null) return inchoative;
+  }
+  return null;
+}
+
+function negativeHostAspectBase(
+  op: Extract<OperatorOp, { readonly kind: "aspect" }>,
+  simpleAspect: SimpleAspectOp | null,
+  opPreNeg: NegationOp,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult {
+  const isVerb = inputBase.final.isVerb;
+  const teComplementHostIsVerbal = isVerb || ctx.sourceStemIsVerb === true;
+  if (
+    opPreNeg.chainDepth !== 1 ||
+    opPreNeg.chainPast ||
+    !teComplementHostIsVerbal
+  ) {
+    return { ok: false, reason: "V neg + aspect 영역 외" };
+  }
+  if (simpleAspect !== null) {
+    return negativeTeAdverbialAspectBaseResult(simpleAspect, inputBase, ctx.lookups);
+  }
+  if (isBenefactiveAspectKind(op.aspect)) {
+    const benefactive = op as BenefactiveAspectOp;
+    const prohibitionRequest =
+      benefactive.terminalMood === "imperative" ||
+      benefactive.requestEvidence === "terminal_question";
+    if (prohibitionRequest) {
+      return benefactiveBaseFromInput(benefactive, prohibitionPredicateBase(inputBase));
+    }
+    const negativeInput = applyNegationChainToLemmaBase(inputBase, opPreNeg);
+    if (negativeInput === null) {
+      return { ok: false, reason: "negative benefactive host lowering 영역 외" };
+    }
+    return benefactiveBaseFromInput(benefactive, negativeInput);
+  }
+  return { ok: false, reason: "V neg + aspect 영역 외" };
+}
+
+function composedAspectBase(
+  op: Extract<OperatorOp, { readonly kind: "aspect" }>,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult {
+  const stemLemma = inputBase.final.lemma;
+  const stemIrregular = inputBase.final.irregular;
+  if (isSimpleAspectOpKind(op.aspect)) {
+    if (
+      op.aspect === "te_shimau" &&
+      op.semantic?.renderStrategy === "passive_completion" &&
+      inputBase.policy?.kind === "voice" &&
+      inputBase.policy.voice === "passive" &&
+      inputBase.policy.adversativePassive === true &&
+      inputBase.final.lemma === "버리다"
+    ) {
+      return {
+        ok: true,
+        base: inputBase,
+        chainOnFinalSupported: true
+      };
+    }
+    const simpleAspect = normalizeSimpleAspectForComposedInput(
+      completionTeIruNegativeAspectForComposedInput(op as SimpleAspectOp, inputBase),
+      inputBase
+    );
+    const shouldDropInputCompletionPolicy =
+      simpleAspect.aspect === "te_iru" &&
+      inputBase.policy?.kind === "completion" &&
+      inputBase.policy.teIruNegativeStrategy === "preserve_aspect";
+    return withInputPrefix(inputBase,
+      aspectBaseResult(simpleAspect, stemLemma, stemIrregular, ctx.lookups),
+      { carryInputPolicy: !shouldDropInputCompletionPolicy }
+    );
+  }
+  if (op.aspect === "te_hoshii") {
+    const desireBase = desiderativeBaseFromPredicateBase(inputBase, ctx.desiredPredicateNegation);
+    if (desireBase === null) {
+      return { ok: false, reason: "desired predicate negation + desiderative lowering 영역 외" };
+    }
+    const sourceTrace = teHoshiiSourceTrace(
+      desireBase,
+      op.source.tokens,
+      ctx.desiredPredicateNegation
+    );
+    return {
+      ok: true,
+      base: desireBase,
+      chainOnFinalSupported: true,
+      interOpPastProjection: "committed",
+      ...(sourceTrace === undefined ? {} : { sourceTrace })
+    };
+  }
+  if (op.aspect === "te_miseru") {
+    const base = miseruBase(op, stemLemma, stemIrregular);
+    const sourceTrace = stemFusionSourceTrace(base.prefix, op.source.tokens, { splitFinal: "last_token" });
+    return withInputPrefix(inputBase, {
+      ok: true,
+      base,
+      chainOnFinalSupported: true,
+      ...(sourceTrace === undefined ? {} : { sourceTrace })
+    });
+  }
+  if (isBenefactiveAspectKind(op.aspect)) {
+    return benefactiveBaseFromInput(op as BenefactiveAspectOp, inputBase);
+  }
+  return { ok: false, reason: `aspect kind '${op.aspect}' base 변환 미작성` };
+}
+
+function desireOpBase(
+  op: Extract<OperatorOp, { readonly kind: "desire" }>,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult {
+  const stemLemma = inputBase.final.lemma;
+  const stemIrregular = inputBase.final.irregular;
+  const isVerb = inputBase.final.isVerb;
+  const opPreNeg = ctx.preModalNeg;
+  if (!isVerb && inputBase.prefix.length === 0) {
+    return { ok: false, reason: "desire on adj 영역 외 (タイ는 V 만)" };
+  }
+  if (opPreNeg !== null) return { ok: false, reason: "V neg + desire 비표준" };
+  if (inputBase.policy?.kind === "benefactive") {
+    if (inputBase.policy.potential || inputBase.policy.desireMode === "unsupported") {
+      return { ok: false, reason: "benefactive + desire policy 영역 외" };
+    }
+    if (inputBase.policy.desireMode === "request") {
+      const requested = benefactiveDesiderativeRequestBase(inputBase);
+      const requestBase = op.form === "tagaru"
+        ? { ...requested, policy: { kind: "desire" as const, nodaConnectiveFlatten: true as const } }
+        : requested;
+      const sourceTrace = hostProjectionSourceTrace({
+        hostText: requestBase.prefix.trimEnd(),
+        inputPrefix: inputBase.prefix,
+        basePrefix: requestBase.prefix,
+        sourceTokens: op.source.tokens,
+        splitFinal: "none"
+      });
+      return {
+        ok: true,
+        base: requestBase,
+        chainOnFinalSupported: true,
+        interOpPastProjection: "committed",
+        ...(sourceTrace === undefined ? {} : { sourceTrace })
+      };
+    }
+  }
+  const desireResult = desireBaseResult(stemLemma, stemIrregular);
+  if (!desireResult.ok) {
+    return desireResult;
+  }
+  return withInputPrefix(inputBase, {
+    ...desireResult,
+    ...(op.form === "tagaru" ? {
+      base: {
+        ...desireResult.base,
+        final: { kind: "lemma" as const, lemma: "싶어하다", irregular: "여" as const, isVerb: true }
+      }
+    } : {}),
+    sourceTrace: {
+      inputProjectionText: desireResult.base.prefix,
+      carrierPrefixSegments: [],
+      finalSourceTokens: op.source.tokens,
+      finalKind: "modal"
+    }
+  });
+}
+
+function voiceOpBase(
+  op: Extract<OperatorOp, { readonly kind: "voice" }>,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult {
+  const stemLemma = inputBase.final.lemma;
+  const stemIrregular = inputBase.final.irregular;
+  const isVerb = inputBase.final.isVerb;
+  const opPreNeg = ctx.preModalNeg;
+  if (opPreNeg !== null) return { ok: false, reason: "V neg + voice 비표준" };
+  const reportingStateBase = reportingPassiveStateBase(op, inputBase, ctx.nextOp);
+  if (reportingStateBase !== null) {
+    return reportingStateBase;
+  }
+  const reportingLabelBase = reportingPassiveLabelBase(op, inputBase);
+  if (reportingLabelBase !== null) {
+    return reportingLabelBase;
+  }
+  if (
+    op.voice === "passive" &&
+    inputBase.policy?.kind === "quoted_proposition" &&
+    inputBase.final.lemma === "하다"
+  ) {
+    return {
+      ok: true,
+      base: {
+        prefix: inputBase.prefix,
+        final: { kind: "lemma", lemma: "여겨지다", irregular: null, isVerb: true },
+        policy: { kind: "voice", voice: "passive", reportingPassive: true }
+      },
+      chainOnFinalSupported: true
+    };
+  }
+  if (op.voice === "passive" && inputBase.policy?.kind === "make_state_change") {
+    return {
+      ok: true,
+      base: {
+        prefix: inputBase.prefix,
+        final: { kind: "lemma", lemma: "되다", irregular: null, isVerb: true },
+        policy: { kind: "voice", voice: "passive", ...(op.passiveClass === undefined ? {} : { passiveClass: op.passiveClass }) }
+      },
+      chainOnFinalSupported: true
+    };
+  }
+  if (op.voice === "passive" && inputBase.policy?.kind === "causative") {
+    const passiveCausative = voiceBase({
+      voice: {
+        ...op,
+        voice: "causative_passive"
+      },
+      stemLemma: inputBase.policy.sourceLemma,
+      stemIrregular: inputBase.policy.sourceIrregular,
+      sahenShortNegationSplit: ctx.sahenShortNegationSplit,
+      isVerb: true,
+      passiveStemOptions: ctx.passiveStemOptions,
+      lookups: ctx.lookups
+    });
+    return passiveCausative.ok
+      ? { ...passiveCausative, chainOnFinalSupported: true }
+      : passiveCausative;
+  }
+  if (
+    op.voice === "passive" &&
+    inputBase.policy?.kind === "completion" &&
+    inputBase.policy.followingPassiveStrategy === "completion_causative"
+  ) {
+    return {
+      ok: true,
+      base: {
+        prefix: `${inputBase.policy.stemPrefix ?? ""}${conjugate(
+          inputBase.policy.stemLemma,
+          inputBase.policy.stemIrregular,
+          op.passiveClass === "causative_coercive" ? "아/어야" : "게"
+        )}${op.passiveClass === "causative_coercive" ? "만" : ""} `,
+        final: op.passiveClass === "causative_coercive"
+          ? { kind: "lemma", lemma: "하다", irregular: "여", isVerb: true }
+          : { kind: "lemma", lemma: "되다", irregular: null, isVerb: true },
+        policy: {
+          kind: "voice",
+          voice: "causative_passive",
+          ...(op.passiveClass === undefined ? {} : { passiveClass: op.passiveClass })
+        }
+      },
+      chainOnFinalSupported: true
+    };
+  }
+  const res = voiceBase({
+    voice: op,
+    stemLemma,
+    stemIrregular,
+    isVerb,
+    passiveStemOptions: ctx.passiveStemOptions,
+    lookups: ctx.lookups,
+    sahenShortNegationSplit: ctx.sahenShortNegationSplit,
+    sourceTokens: op.source.tokens
+  });
+  if (!res.ok) return res;
+  return withInputPrefix(inputBase, res);
+}
+
+function idiomOpBase(
+  op: Extract<OperatorOp, { readonly kind: "idiom" }>,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult {
+  const stemLemma = inputBase.final.lemma;
+  const stemIrregular = inputBase.final.irregular;
+  const isVerb = inputBase.final.isVerb;
+  const opPreNeg = ctx.preModalNeg;
+  const opPast = ctx.past;
+  if (op.idiom === "wake_impossible") {
+    return wakeImpossibleBase({
+      op,
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      pastProjection: ctx.pastProjection
+    });
+  }
+  if (op.idiom === "obligation") {
+    if (
+      inputBase.policy?.kind === "noun_copula_interop" ||
+      inputBase.policy?.kind === "negative_noun_copula_interop"
+    ) {
+      return {
+        ok: true,
+        base: nounCopulaObligationBase(inputBase.policy.nounSurface, predicateBasePolicyAllomorphHost(inputBase)),
+        chainOnFinalSupported: true
+      };
+    }
+    const res = obligationBase({ obligation: op, stemLemma, stemIrregular, isVerb });
+    if (!res.ok) return res;
+    return withInputPrefix(inputBase, { ...res, chainOnFinalSupported: true });
+  }
+  if (op.idiom === "forbidden") {
+    const res = forbiddenBase({ stemLemma, stemIrregular, isVerb, sourceTokens: op.source.tokens });
+    if (!res.ok) return res;
+    return withInputPrefix(inputBase, { ...res, chainOnFinalSupported: true });
+  }
+  if (op.idiom === "degree_intensifier") {
+    return degreeIntensifierBase({
+      op,
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      lookups: ctx.lookups
+    });
+  }
+  if (op.idiom === "potential_koto_ga_dekiru") {
+    return potentialKotoGaDekiruIdiomBase(op, inputBase, ctx);
+  }
+  if (op.idiom === "negative_necessity_koto_wa") {
+    return negativeNecessityKotoWaBase({
+      op,
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      pastProjection: ctx.pastProjection
+    });
+  }
+  if (op.idiom === "inevitable_zaru_o_enai") {
+    return inevitableZaruOEnaiBase({
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      pastProjection: ctx.pastProjection,
+      sourceTokens: op.source.tokens
+    });
+  }
+  if (op.idiom === "cannot_refrain_negative_dewa_irarenai") {
+    return cannotRefrainNegativeDewaIrarenaiBase({
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      pastProjection: ctx.pastProjection,
+      sourceTokens: op.source.tokens
+    });
+  }
+  if (op.idiom === "method_you_ga_nai") {
+    return methodYouGaNaiBase({
+      op,
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      pastProjection: ctx.pastProjection,
+      sourceTokens: op.source.tokens
+    });
+  }
+  if (op.idiom === "negative_necessity_made_mo") {
+    return madeMoNaiBase({
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      pastProjection: ctx.pastProjection,
+      sourceTokens: op.source.tokens
+    });
+  }
+  if (op.idiom === "permission") {
+    return permissionBase({
+      op,
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      lookups: ctx.lookups
+    });
+  }
+  if (op.idiom === "sufficiency_conditional") {
+    return sufficiencyConditionalBase({
+      op,
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      lookups: ctx.lookups
+    });
+  }
+  if (op.idiom === "te_evaluation") {
+    return teEvaluationBase({
+      op,
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      lookups: ctx.lookups
+    });
+  }
+  if (op.idiom === "negative_necessity_sumu") {
+    return negativeNecessitySumuBase({
+      op,
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      lookups: ctx.lookups
+    });
+  }
+  if (op.idiom === "only_option_shika_nai") {
+    return onlyOptionBase({
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      pastProjection: ctx.pastProjection,
+      lookups: ctx.lookups,
+      sourceTokens: op.source.tokens
+    });
+  }
+  if (op.idiom === "experience_koto_ga_aru") {
+    return experienceBase({
+      op,
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      pastProjection: ctx.pastProjection
+    });
+  }
+  if (op.idiom === "outcome_koto_ni_naru") {
+    return outcomeKotoNiNaruBase({
+      op,
+      inputBase,
+      preStemNeg: opPreNeg,
+      stemPast: opPast,
+      formal: ctx.formal,
+      pastProjection: ctx.pastProjection
+    });
+  }
+  return decisionKotoNiSuruBase({
+    inputBase,
+    preStemNeg: opPreNeg,
+    stemPast: opPast,
+    formal: ctx.formal,
+    sourceTokens: op.source.tokens
+  });
+}
+
+function potentialKotoGaDekiruIdiomBase(
+  op: PotentialKotoGaDekiruIdiomOp,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult {
+  const stemLemma = inputBase.final.lemma;
+  const stemIrregular = inputBase.final.irregular;
+  const isVerb = inputBase.final.isVerb;
+  const opPreNeg = ctx.preModalNeg;
+  const opPast = ctx.past;
+  if (inputBase.policy?.kind === "potential") {
+    return {
+      ok: true,
+      base: inputBase,
+      chainOnFinalSupported: false,
+      finalNegationLoweringPolicy: "potential_idiom"
+    };
+  }
+  if (
+    inputBase.policy?.kind === "likeness" &&
+    inputBase.policy.potentialObjectAttributive !== undefined
+  ) {
+    const host = inputBase.policy.potentialObjectAttributive;
+    const stemAttr = `${conjugate(host.stemLemma, host.stemIrregular, "ㄹ/을")} 만한`;
+    return potentialObjectBaseFromAttributive({
+      stemAttr,
+      postIdiomChainDepth: 0,
+      particleKind: op.particleKind,
+      focusParticle: op.focusParticle,
+      stemLemma: host.stemLemma,
+      stemIrregular: host.stemIrregular
+    });
+  }
+  const sourceProjectionIsVerbalPredicate =
+    (ctx.sourceStemIsVerb ?? isVerb) ||
+    ctx.sourceStemIsSahenPredicate === true;
+  if (!isVerb && ctx.sourceStemIsSahenPredicate !== true) {
+    const stemAttr = pastNegStemAttributive({
+      stemLemma,
+      stemIrregular,
+      stemKind: "adj",
+      past: opPast,
+      preModalNeg: opPreNeg,
+      attrPolicy: "present",
+      useShortHint: false,
+      lookups: ctx.lookups,
+      sahenShortNegationSplit: ctx.sahenShortNegationSplit
+    });
+    return potentialObjectBaseFromAttributive({
+      stemAttr,
+      postIdiomChainDepth: 0,
+      particleKind: op.particleKind,
+      focusParticle: op.focusParticle,
+      stemLemma,
+      stemIrregular
+    });
+  }
+  const res = potentialBase({
+    stemLemma, stemIrregular, isVerb,
+    sourceStemIsVerb: sourceProjectionIsVerbalPredicate,
+    preStemNeg: opPreNeg,
+    stemPast: opPast,
+    postIdiomChainDepth: 0,
+    particleKind: op.particleKind,
+    focusParticle: op.focusParticle,
+    sourceTokens: op.source.tokens,
+    lookups: ctx.lookups,
+    sahenShortNegationSplit: ctx.sahenShortNegationSplit
+  });
+  if (!res.ok) return res;
+  return withInputPrefix(inputBase, {
+    ...res,
+    chainOnFinalSupported: false,
+    finalNegationLoweringPolicy: "potential_idiom"
+  });
+}
+
+function modalOpBase(
+  op: Extract<OperatorOp, { readonly kind: "modal" }>,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult {
+  const stemLemma = inputBase.final.lemma;
+  const stemIrregular = inputBase.final.irregular;
+  const isVerb = inputBase.final.isVerb;
+  const opPreNeg = ctx.preModalNeg;
+  const opPast = ctx.past;
+  const hostLowered = modalHostLoweringBase(op, inputBase, ctx);
+  if (hostLowered !== null) return hostLowered;
+  const carrierLikeness = modalCarrierLikenessBase(op, inputBase, ctx);
+  if (carrierLikeness !== null) return carrierLikeness;
+  const res = modalBase({
+    modal: op, stemLemma, stemIrregular,
+    stemKind: op.modal === "mai" ? (inputBase.final.isVerb ? "verb" : "adj") : (isVerb ? "verb" : "adj"),
+    preModalNeg: opPreNeg,
+    past: opPast,
+    pastProjection: ctx.pastProjection,
+    formal: ctx.formal,
+    ...(inputBase.policy === undefined ? {} : { inputPolicy: inputBase.policy }),
+    ...(ctx.sourceStemIsVerb === undefined ? {} : { sourceStemIsVerb: ctx.sourceStemIsVerb }),
+    sourceHostHasTeIruAspect: ctx.sourceHostHasTeIruAspect === true,
+    forbidShortNegation: ctx.forbidShortNegation,
+    preferShortLikenessNegation: ctx.preferShortLikenessNegation === true || opPreNeg !== null,
+    lookups: ctx.lookups,
+    sahenShortNegationSplit: ctx.sahenShortNegationSplit
+  });
+  if (!res.ok) return res;
+  return withInputPrefix(inputBase, {
+    ...res,
+    ...modalFinalChainPolicy(res.base),
+    interOpPastProjection: "committed"
+  });
+}
+
+function modalHostLoweringBase(
+  op: Extract<OperatorOp, { readonly kind: "modal" }>,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult | null {
+  const opPreNeg = ctx.preModalNeg;
+  const opPast = ctx.past;
+  if (
+    op.modal === "mai" &&
+    (inputBase.policy?.kind === "noun_copula_interop" ||
+      inputBase.policy?.kind === "negative_noun_copula_interop") &&
+    opPreNeg === null &&
+    !opPast
+  ) {
+    const noun = inputBase.policy.nounSurface;
+    const base = scopeCarrierCopulaBase("mai", "거", `${nounSubjectPart(noun, predicateBasePolicyAllomorphHost(inputBase))} 아닐 `);
+    return {
+      ok: true,
+      base,
+      ...modalFinalChainPolicy(base),
+      interOpPastProjection: "committed"
+    };
+  }
+  if (
+    op.modal === "noda" &&
+    inputBase.policy?.kind === "negative_noun_copula_interop" &&
+    ctx.nextOp?.kind === "conjecture" &&
+    opPreNeg === null &&
+    !opPast
+  ) {
+    return {
+      ok: true,
+      base: inputBase,
+      chainOnFinalSupported: true
+    };
+  }
+  if (op.modal === "tokoro") {
+    const tokoroProjectedBase = tokoroBaseFromPredicateBase({
+      modal: op,
+      base: inputBase,
+      preModalNeg: opPreNeg,
+      past: opPast,
+      formal: ctx.formal,
+      pastProjection: ctx.pastProjection
+    });
+    if (tokoroProjectedBase !== null) {
+      if (!tokoroProjectedBase.ok) return tokoroProjectedBase;
+      return {
+        ...tokoroProjectedBase,
+        ...modalFinalChainPolicy(tokoroProjectedBase.base),
+        interOpPastProjection: "committed"
+      };
+    }
+  }
+  if (op.modal === "limit_negation") {
+    const res = limitNegationBaseFromPredicateBase({
+      modal: op,
+      base: inputBase,
+      preNeg: opPreNeg,
+      past: opPast,
+      formal: ctx.formal,
+      lookups: ctx.lookups
+    });
+    if (!res.ok) return res;
+    return { ...res, ...modalFinalChainPolicy(res.base), interOpPastProjection: "committed" };
+  }
+  if (op.modal === "mono" && (op.reading === "admirative" || op.reading === "habitual")) {
+    const res = monoHostPredicateBase(op, inputBase, opPreNeg);
+    if (!res.ok) return res;
+    return { ...res, ...modalFinalChainPolicy(res.base), interOpPastProjection: "committed" };
+  }
+  if (op.modal === "souda_hearsay" && op.reading === "hearsay") {
+    const res = soudaHearsayBaseFromPredicateBase(inputBase, opPreNeg, opPast, ctx.lookups, op);
+    if (!res.ok) return res;
+    return { ...res, ...modalFinalChainPolicy(res.base), interOpPastProjection: "committed" };
+  }
+  if (op.modal === "noda" && opPreNeg === null && !opPast) {
+    const absorbed = nodaCarrierAbsorbedByHostBoundNoun(inputBase, op);
+    if (absorbed !== null) {
+      return { ...absorbed, ...modalFinalChainPolicy(absorbed.base), interOpPastProjection: "committed" };
+    }
+  }
+  if (op.modal === "kamo" && opPreNeg === null) {
+    const carrierKamo = nodaCarrierKamoBase(inputBase, ctx.formal, opPast, op.bare);
+    if (carrierKamo !== null) {
+      return {
+        ...carrierKamo,
+        ...modalFinalChainPolicy(carrierKamo.base),
+        interOpPastProjection: "committed"
+      };
+    }
+  }
+  return null;
+}
+
+function modalCarrierLikenessBase(
+  op: Extract<OperatorOp, { readonly kind: "modal" }>,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult | null {
+  const opPreNeg = ctx.preModalNeg;
+  const opPast = ctx.past;
+  if (op.modal === "wake") {
+    const wakeCitation = wakeExplanatoryCitationBase({
+      op, inputBase, preStemNeg: opPreNeg, stemPast: opPast, formal: ctx.formal
+    });
+    if (wakeCitation !== null) {
+      if (!wakeCitation.ok) return wakeCitation;
+      return {
+        ...wakeCitation,
+        ...modalFinalChainPolicy(wakeCitation.base),
+        interOpPastProjection: "committed"
+      };
+    }
+  }
+  if ((op.modal === "rashii" || op.modal === "youda") && opPreNeg === null && !opPast) {
+    const carrierLikeness = nodaCarrierLikenessBase(inputBase);
+    if (carrierLikeness !== null) {
+      return {
+        ...carrierLikeness,
+        ...modalFinalChainPolicy(carrierLikeness.base),
+        interOpPastProjection: "committed"
+      };
+    }
+    const quotedLikeness = quotedPropositionLikenessBase(inputBase, op, ctx.formal, ctx.pastProjection);
+    if (quotedLikeness !== null) {
+      return {
+        ...quotedLikeness,
+        ...modalFinalChainPolicy(quotedLikeness.base),
+        interOpPastProjection: "committed"
+      };
+    }
+  }
+  if (
+    op.modal === "rashii" &&
+    opPreNeg === null &&
+    !opPast &&
+    !ctx.hasPriorChainOp &&
+    inputBase.policy?.kind === "noun_copula_interop" &&
+    inputBase.policy.zeroCopula === true
+  ) {
+    const res = nominalHostEvidentialLikenessBase(inputBase.policy.nounSurface, op);
+    if (!res.ok) return res;
+    return { ...res, ...modalFinalChainPolicy(res.base), interOpPastProjection: "committed" };
+  }
+  if (op.modal === "mai" && opPreNeg === null && !opPast) {
+    const scopeMai = maiScopeCarrierBase(op, inputBase);
+    if (scopeMai !== null) {
+      if (!scopeMai.ok) return scopeMai;
+      return { ...scopeMai, ...modalFinalChainPolicy(scopeMai.base) };
+    }
+  }
+  return null;
+}
+
+function conjectureOpBase(
+  op: Extract<OperatorOp, { readonly kind: "conjecture" }>,
+  inputBase: KoreanLemmaPredicateBase,
+  ctx: OpContext
+): BaseResult {
+  const stemLemma = inputBase.final.lemma;
+  const stemIrregular = inputBase.final.irregular;
+  const isVerb = inputBase.final.isVerb;
+  const opPreNeg = ctx.preModalNeg;
+  const opPast = ctx.past;
+  const copulaCarrierConjecture =
+    opPreNeg === null
+      ? (
+        (!opPast ? (nodaCarrierConjectureBase(inputBase, op) ?? wakeCarrierConjectureBase(inputBase, op)) : null) ??
+        copulaCarrierConjectureBase(inputBase, op, opPast)
+      )
+      : null;
+  if (copulaCarrierConjecture !== null) {
+    if (ctx.hasFollowingOp) {
+      if (ctx.nextOp?.kind === "predicateQuoteCarrier") {
+        return { ...copulaCarrierConjecture, chainOnFinalSupported: true };
+      }
+      return { ok: true, base: inputBase, chainOnFinalSupported: false };
+    }
+    return { ...copulaCarrierConjecture, chainOnFinalSupported: false };
+  }
+  const res = conjectureBase({
+    conjecture: op, stemLemma, stemIrregular, isVerb,
+    preModalNeg: opPreNeg, past: opPast,
+    shortNegationPolicy: ctx.shortNegationPolicy,
+    pastProjection: ctx.pastProjection
+  });
+  if (!res.ok) return res;
+  const prefixed = withInputPrefix(inputBase, { ...res, chainOnFinalSupported: false });
+  if (
+    prefixed.ok &&
+    prefixed.base.policy?.kind === "negative_noun_copula_interop"
+  ) {
+    return {
+      ...prefixed,
+      base: {
+        ...prefixed.base,
+        policy: { ...prefixed.base.policy, conjectureHostPast: opPast }
+      }
+    };
+  }
+  return prefixed;
+}
+
 
 function reportingPassiveLabelBase(
   op: VoiceOp,
@@ -1291,6 +1455,35 @@ export interface ChainBaseResult {
   readonly chainSourceTrace?: ChainSourceTrace;
 }
 
+interface ChainBasesTraceState {
+  readonly tracePrefixSegments: TailTraceSegment[];
+  tracedPrefixText: string;
+  activeFinalSourceTokens: readonly RuntimeHaruToken[];
+  activeFinalKind: TailTraceSegmentKind;
+}
+
+interface ChainBasesFoldState {
+  currentBase: KoreanLemmaPredicateBase;
+  currentPreNeg: NegationOp | null;
+  currentPast: boolean;
+  currentPastProjection: AttributivePastProjection;
+  pendingDesiredPredicateNegation: NegationOp | null;
+  finalBase: KoreanPredicateBase | null;
+  lastChainOnFinalSupported: boolean;
+  lastFinalNegationOptions: NegationLoweringOptions | undefined;
+  lastFinalNegationLoweringPolicy: FinalNegationLoweringPolicy | undefined;
+  lastTerminalPrefixContraction: OkBaseResult["terminalPrefixContraction"] | undefined;
+  lastTerminalRealization: TerminalRealization | undefined;
+  lastConnectivePrefixContraction: OkBaseResult["connectivePrefixContraction"] | undefined;
+  pendingConnectivePrefixContraction: OkBaseResult["connectivePrefixContraction"] | undefined;
+  lastConnectiveBaseOverride: ConnectiveBaseOverride | undefined;
+  lastInterOpPastProjection: AttributivePastProjection | undefined;
+  lastProjectsAsStativePerfect: boolean;
+  currentSourceProjectionIsVerbalPredicate: boolean;
+  readonly preNegLoweredOnHostBase: Set<NegationOp>;
+}
+
+
 export function chainBases(
   ops: readonly OperatorOp[],
   stemLemma: string,
@@ -1343,327 +1536,390 @@ export function chainBases(
   let activeFinalKind: TailTraceSegmentKind = initialTraceMatches
     ? initialTrace.finalKind
     : "lexeme";
-  const appendTracePrefix = (
-    targetPrefix: string,
-    sourceTokens: readonly RuntimeHaruToken[],
-    kind: TailTraceSegmentKind,
-    projectionConfidence: TargetSegment["projectionConfidence"] = "semantic"
-  ): void => {
-    if (!targetPrefix.startsWith(tracedPrefixText)) {
-      const contracted = tracePrefixContractionForTarget(tracePrefixSegments, targetPrefix);
-      if (contracted !== null) {
-        tracePrefixSegments.length = 0;
-        tracePrefixSegments.push(...contracted);
-        tracedPrefixText = tracePrefixSegments.map((segment) => segment.text).join("");
-      }
-    }
-    if (targetPrefix === tracedPrefixText) {
-      return;
-    }
-    if (tracedPrefixText.startsWith(targetPrefix)) {
-      return;
-    }
-    if (!targetPrefix.startsWith(tracedPrefixText)) {
-      tracedPrefixText = targetPrefix;
-      tracePrefixSegments.length = 0;
-      tracePrefixSegments.push({
-        text: targetPrefix,
-        sourceTokens,
-        kind,
-        projectionConfidence: "fallback"
-      });
-      return;
-    }
-    const text = targetPrefix.slice(tracedPrefixText.length);
-    if (text.length > 0) {
-      tracePrefixSegments.push({ text, sourceTokens, kind, projectionConfidence });
-    }
-    tracedPrefixText = targetPrefix;
+  const trace: ChainBasesTraceState = { tracePrefixSegments, tracedPrefixText, activeFinalSourceTokens, activeFinalKind };
+  const fold: ChainBasesFoldState = {
+    currentBase,
+    currentPreNeg: ctx.preModalNeg,
+    currentPast: ctx.stemPast,
+    currentPastProjection: "lexical",
+    pendingDesiredPredicateNegation: null,
+    finalBase: null,
+    lastChainOnFinalSupported: true,
+    lastFinalNegationOptions: undefined,
+    lastFinalNegationLoweringPolicy: undefined,
+    lastTerminalPrefixContraction: undefined,
+    lastTerminalRealization: undefined,
+    lastConnectivePrefixContraction: undefined,
+    pendingConnectivePrefixContraction: undefined,
+    lastConnectiveBaseOverride: undefined,
+    lastInterOpPastProjection: undefined,
+    lastProjectsAsStativePerfect: false,
+    currentSourceProjectionIsVerbalPredicate:
+      (ctx.sourceStemIsVerb ?? isVerb) ||
+      ctx.sourceStemIsSahenPredicate === true,
+    preNegLoweredOnHostBase: new Set<NegationOp>()
   };
-  const appendTraceSegment = (segment: TailTraceSegment): void => {
-    if (segment.text.length === 0) {
-      return;
-    }
-    tracePrefixSegments.push(segment);
-    tracedPrefixText += segment.text;
-  };
-  let currentPreNeg = ctx.preModalNeg;
-  let currentPast = ctx.stemPast;
-  let currentPastProjection: AttributivePastProjection = "lexical";
-  let pendingDesiredPredicateNegation: NegationOp | null = null;
-  if (currentPreNeg !== null && negationFeedsNaideHoshii(currentPreNeg, ops[0])) {
-    if (currentPreNeg.chainDepth !== 1 || currentPreNeg.chainPast) {
-      return { ok: false, reason: "desired predicate negation before te_hoshii supports only single non-past negative" };
-    }
-    pendingDesiredPredicateNegation = currentPreNeg;
-    currentPreNeg = null;
+  const initialNegationFailure = applyChainInitialPreNegation(fold, ops, ctx, initialBaseRes);
+  if (initialNegationFailure !== null) {
+    return initialNegationFailure;
   }
-  const firstOpOwnsPreNegation =
-    ops[0]?.kind === "scopeBridge" &&
-    (ops[0].head === "koto" || ops[0].head === "implicit");
-  if (
-    currentPreNeg !== null &&
-    initialBaseRes.finalNegationLoweringPolicy !== undefined &&
-    !firstOpOwnsPreNegation
-  ) {
-    const lowered = lowerFinalNegationForCommittedBase(initialBaseRes, currentPreNeg, ctx.formal, ctx.lookups);
-    if (lowered === null) {
-      return { ok: false, reason: "stem final negation lowering before op 영역 외" };
-    }
-    currentBase = lowered;
-    const loweredForcesPast = finalNegationLoweringForcesPast(initialBaseRes, currentPreNeg.chainDepth);
-    currentPast = ctx.stemPast || currentPreNeg.chainPast || loweredForcesPast;
-    currentPastProjection = currentPast
-      ? (ops[0]?.kind === "conjecture" ? "committed" : "lexical")
-      : "lexical";
-    currentPreNeg = null;
-  }
-  let finalBase: KoreanPredicateBase | null = null;
-  let lastChainOnFinalSupported = true;
-  let lastFinalNegationOptions: NegationLoweringOptions | undefined;
-  let lastFinalNegationLoweringPolicy: FinalNegationLoweringPolicy | undefined;
-  let lastTerminalPrefixContraction: OkBaseResult["terminalPrefixContraction"] | undefined;
-  let lastTerminalRealization: TerminalRealization | undefined;
-  let lastConnectivePrefixContraction: OkBaseResult["connectivePrefixContraction"] | undefined;
-  let pendingConnectivePrefixContraction: OkBaseResult["connectivePrefixContraction"] | undefined;
-  let lastConnectiveBaseOverride: ConnectiveBaseOverride | undefined;
-  let lastInterOpPastProjection: AttributivePastProjection | undefined;
-  let lastProjectsAsStativePerfect = false;
-  let currentSourceProjectionIsVerbalPredicate =
-    (ctx.sourceStemIsVerb ?? isVerb) ||
-    ctx.sourceStemIsSahenPredicate === true;
-  const preNegLoweredOnHostBase = new Set<NegationOp>();
   for (let i = 0; i < ops.length; i++) {
-    const op = ops[i]!;
-    const isLast = i === ops.length - 1;
-    const ownedPreNeg = ctx.negBeforeChainIdx?.get(i) ?? null;
-    if (ownedPreNeg !== null && !preNegLoweredOnHostBase.has(ownedPreNeg)) {
-      if (currentPreNeg !== null) {
-        return { ok: false, reason: "multiple pre-reference NegationOps in same chain slot not supported" };
-      }
-      currentPreNeg = ownedPreNeg;
-    }
-    const negAfterCurrentOp = ctx.negAfterChainIdx.get(i) ?? null;
-    const desiredPredicateNegation = pendingDesiredPredicateNegation;
-    pendingDesiredPredicateNegation = null;
-    const previousOp = i > 0 ? ops[i - 1] : undefined;
-    const opCtx: OpContext = {
-      lookups: ctx.lookups,
-      chainIndex: i,
-      hasPriorChainOp: i > 0,
-      sourceStemIsVerb: currentSourceProjectionIsVerbalPredicate,
-      sourceStemIsVolitional: i === 0 && ctx.sourceStemIsVolitional === true,
-      sourceHostHasTeIruAspect:
-        previousOp?.kind === "aspect" && previousOp.aspect === "te_iru",
-      ...(ctx.sourceStemIsSahenPredicate === undefined
-        ? {}
-        : { sourceStemIsSahenPredicate: ctx.sourceStemIsSahenPredicate }),
-      ...(ctx.adverbialStemLemma === undefined ? {} : { adverbialStemLemma: ctx.adverbialStemLemma }),
-      preModalNeg: currentPreNeg,
-      past: currentPast,
-      pastProjection: currentPastProjection,
-      formal: ctx.formal,
-      hasFollowingOp: !isLast,
-      nextOp: ops[i + 1],
-      shortNegationPolicy: i === 0 ? ctx.shortNegationPolicy : undefined,
-      sahenShortNegationSplit,
-      ...(ctx.preferShortLikenessNegation === undefined
-        ? {}
-        : { preferShortLikenessNegation: ctx.preferShortLikenessNegation }),
-      passiveStemOptions: i === 0 ? ctx.passiveStemOptions : {},
-      forbidShortNegation: i > 0 && currentPreNeg !== null,
-      desiredPredicateNegation
-    };
-    const baseRes = opToBase(op, currentBase, opCtx);
-    if (!baseRes.ok) return baseRes;
-    currentSourceProjectionIsVerbalPredicate = sourceVerbalPredicateAfterAuxOp(
-      currentSourceProjectionIsVerbalPredicate,
-      op,
-    );
-    const sourceTrace = sourceTraceWithFinalNegationStem(baseRes, negAfterCurrentOp);
-    if (sourceTrace !== undefined) {
-      const inputProjectionTargetPrefix = `${currentBase.prefix}${sourceTrace.inputProjectionText}`;
-      const inputProjectionSourceTokens = i === 0
-        ? [
-          ...activeFinalSourceTokens,
-          ...(currentPreNeg?.source.tokens ?? []),
-          ...(ctx.stemPastSourceTokens ?? []),
-          ...(sourceTrace.inputProjectionExtraSourceTokens ?? [])
-        ]
-        : [
-          ...activeFinalSourceTokens,
-          ...(currentPreNeg?.source.tokens ?? []),
-          ...(sourceTrace.inputProjectionExtraSourceTokens ?? [])
-        ];
-      const inputProjectionSegments = i === 0
-        ? splitInitialLongNegationInputProjection(
-          sourceTrace.inputProjectionText,
-          currentBase,
-          activeFinalSourceTokens,
-          currentPreNeg,
-          ctx.stemPastSourceTokens,
-          activeFinalKind
-        )
-        : null;
-      const inputProjectionSegmentText = inputProjectionSegments
-        ?.map((segment) => segment.text)
-        .join("");
-      if (
-        inputProjectionSegments !== null &&
-        inputProjectionTargetPrefix.startsWith(tracedPrefixText) &&
-        inputProjectionTargetPrefix.slice(tracedPrefixText.length) === inputProjectionSegmentText
-      ) {
-        for (const segment of inputProjectionSegments) {
-          appendTraceSegment(segment);
-        }
-      } else {
-        appendTracePrefix(
-          inputProjectionTargetPrefix,
-          inputProjectionSourceTokens,
-          activeFinalKind
-        );
-      }
-      for (const segment of sourceTrace.carrierPrefixSegments) {
-        appendTraceSegment(segment);
-      }
-      appendTracePrefix(
-        baseRes.base.prefix,
-        sourceTrace.finalSourceTokens,
-        sourceTrace.finalKind ?? "modal"
-      );
-      activeFinalSourceTokens = sourceTrace.finalSourceTokens;
-      activeFinalKind = sourceTrace.finalKind ?? "modal";
-    } else {
-      const genericSourceTokens = [...activeFinalSourceTokens, ...op.source.tokens];
-      appendTracePrefix(
-        baseRes.base.prefix,
-        genericSourceTokens,
-        op.kind === "aspect" ? "aux" : "modal"
-      );
-      activeFinalSourceTokens = genericSourceTokens;
-      activeFinalKind = op.kind === "aspect" ? "aux" : "modal";
-    }
-    if (isLast) {
-      finalBase = baseRes.base;
-      lastChainOnFinalSupported = baseRes.chainOnFinalSupported ?? true;
-      lastFinalNegationOptions = baseRes.finalNegationOptions;
-      lastFinalNegationLoweringPolicy = baseRes.finalNegationLoweringPolicy;
-      lastTerminalPrefixContraction = baseRes.terminalPrefixContraction;
-      lastTerminalRealization = baseRes.terminalRealization;
-      lastConnectivePrefixContraction = baseRes.connectivePrefixContraction ?? pendingConnectivePrefixContraction;
-      lastConnectiveBaseOverride = baseRes.connectiveBaseOverride;
-      lastInterOpPastProjection = finalAttributivePastProjectionForChainOp(
-        op,
-        baseRes,
-        ctx.pastAfterChainIdx.has(i) || opCarriesIntrinsicPast(op)
-      );
-      lastProjectsAsStativePerfect = baseRes.interOpProjectionPolicy === "stative_perfect";
-    } else {
-      const admittedPreNegOfNextOp =
-        baseRes.finalNegationLoweringPolicy !== undefined &&
-          !operatorChainOpConsumesPrecedingNegation(ops[i + 1])
-          ? ctx.negBeforeChainIdx?.get(i + 1) ?? null
-          : null;
-      const negCarry = ctx.negAfterChainIdx.get(i) ?? admittedPreNegOfNextOp;
-      if (admittedPreNegOfNextOp !== null && negCarry === admittedPreNegOfNextOp) {
-        preNegLoweredOnHostBase.add(admittedPreNegOfNextOp);
-      }
-      pendingConnectivePrefixContraction =
-        baseRes.connectivePrefixContraction ?? pendingConnectivePrefixContraction;
-      if (negCarry !== null) {
-        if (negationFeedsNaideHoshii(negCarry, ops[i + 1])) {
-          if (negCarry.chainDepth !== 1 || negCarry.chainPast) {
-            return { ok: false, reason: "desired predicate negation before te_hoshii supports only single non-past negative" };
-          }
-          const interOpBase = copulaCarrierBaseForInterOp(baseRes.base, ctx.formal);
-          if (interOpBase === null) {
-            return { ok: false, reason: "desired predicate negation base projection 영역 외" };
-          }
-          currentBase = applyNonLastPrefixContractions(
-            interOpBase,
-            baseRes,
-            ctx.formal
-          );
-          appendTracePrefix(currentBase.prefix, activeFinalSourceTokens, activeFinalKind);
-          pendingDesiredPredicateNegation = negCarry;
-        } else {
-          const lowered = lowerFinalNegationForCommittedBase(baseRes, negCarry, ctx.formal, ctx.lookups);
-          if (lowered === null) {
-            return { ok: false, reason: "chain mid final negation lowering 영역 외" };
-          }
-          currentBase = applyNonLastPrefixContractions(lowered, baseRes, ctx.formal);
-          activeFinalSourceTokens = [...activeFinalSourceTokens, ...negCarry.source.tokens];
-          activeFinalKind = "aux";
-          appendTracePrefix(currentBase.prefix, activeFinalSourceTokens, activeFinalKind);
-        }
-        currentPreNeg = null;
-      } else {
-        const interOpBase = copulaCarrierBaseForInterOp(baseRes.base, ctx.formal);
-        if (interOpBase === null) {
-          return { ok: false, reason: "chain 중간 predicate base projection 영역 외" };
-        }
-        currentBase = applyNonLastPrefixContractions(
-          interOpBase,
-          baseRes,
-          ctx.formal
-        );
-        appendTracePrefix(currentBase.prefix, activeFinalSourceTokens, activeFinalKind);
-        currentPreNeg = null;
-      }
-      const projectsAsStativePerfect = baseRes.interOpProjectionPolicy === "stative_perfect";
-      const intrinsicPast = opCarriesIntrinsicPast(op);
-      const postOpTense = ctx.pastAfterChainIdx.get(i) ?? null;
-      const loweredForcesPast = negCarry === null
-        ? false
-        : finalNegationLoweringForcesPast(baseRes, negCarry.chainDepth);
-      currentPast = postOpTense !== null ||
-        (negCarry?.chainPast ?? false) ||
-        loweredForcesPast ||
-        intrinsicPast ||
-        projectsAsStativePerfect;
-      if (postOpTense !== null) {
-        activeFinalSourceTokens = [
-          ...activeFinalSourceTokens,
-          ...postOpTense.source.tokens
-        ];
-      }
-      currentPastProjection = currentPast
-        ? (ops[i + 1]?.kind === "conjecture" ? "committed" : (baseRes.interOpPastProjection ?? "lexical"))
-        : "lexical";
+    const opFailure = foldChainOp(fold, trace, ops, i, ctx, sahenShortNegationSplit);
+    if (opFailure !== null) {
+      return opFailure;
     }
   }
   const finalPastOp = ctx.pastAfterChainIdx.get(ops.length - 1) ?? null;
   const finalPast = finalPastOp !== null ||
     opCarriesIntrinsicPast(ops[ops.length - 1]!) ||
-    lastProjectsAsStativePerfect;
+    fold.lastProjectsAsStativePerfect;
   const finalNeg = ctx.negAfterChainIdx.get(ops.length - 1) ?? null;
   const finalTraceSourceTokens = [
-    ...activeFinalSourceTokens,
+    ...trace.activeFinalSourceTokens,
     ...(finalPastOp?.source.tokens ?? []),
     ...(finalNeg?.source.tokens ?? [])
   ];
   const result: ChainBaseResult = {
     ok: true,
-    base: finalBase!,
+    base: fold.finalBase!,
     finalPast,
     finalNeg,
-    chainOnFinalSupported: lastChainOnFinalSupported,
+    chainOnFinalSupported: fold.lastChainOnFinalSupported,
     chainSourceTrace: {
-      prefixSegments: tracePrefixSegments,
+      prefixSegments: trace.tracePrefixSegments,
       finalSourceTokens: finalTraceSourceTokens,
-      finalKind: activeFinalKind
+      finalKind: trace.activeFinalKind
     }
   };
   return {
     ...result,
-    ...(lastFinalNegationOptions === undefined ? {} : { finalNegationOptions: lastFinalNegationOptions }),
-    ...(lastFinalNegationLoweringPolicy === undefined ? {} : { finalNegationLoweringPolicy: lastFinalNegationLoweringPolicy }),
-    ...(lastTerminalPrefixContraction === undefined ? {} : { terminalPrefixContraction: lastTerminalPrefixContraction }),
-    ...(lastTerminalRealization === undefined ? {} : { terminalRealization: lastTerminalRealization }),
-    ...(lastConnectivePrefixContraction === undefined ? {} : { connectivePrefixContraction: lastConnectivePrefixContraction }),
-    ...(lastConnectiveBaseOverride === undefined ? {} : { connectiveBaseOverride: lastConnectiveBaseOverride }),
-    ...(lastInterOpPastProjection === undefined ? {} : { finalPastProjection: lastInterOpPastProjection })
+    ...(fold.lastFinalNegationOptions === undefined ? {} : { finalNegationOptions: fold.lastFinalNegationOptions }),
+    ...(fold.lastFinalNegationLoweringPolicy === undefined ? {} : { finalNegationLoweringPolicy: fold.lastFinalNegationLoweringPolicy }),
+    ...(fold.lastTerminalPrefixContraction === undefined ? {} : { terminalPrefixContraction: fold.lastTerminalPrefixContraction }),
+    ...(fold.lastTerminalRealization === undefined ? {} : { terminalRealization: fold.lastTerminalRealization }),
+    ...(fold.lastConnectivePrefixContraction === undefined ? {} : { connectivePrefixContraction: fold.lastConnectivePrefixContraction }),
+    ...(fold.lastConnectiveBaseOverride === undefined ? {} : { connectiveBaseOverride: fold.lastConnectiveBaseOverride }),
+    ...(fold.lastInterOpPastProjection === undefined ? {} : { finalPastProjection: fold.lastInterOpPastProjection })
   };
+}
+
+function appendChainTracePrefix(
+  trace: ChainBasesTraceState,
+  targetPrefix: string,
+  sourceTokens: readonly RuntimeHaruToken[],
+  kind: TailTraceSegmentKind,
+  projectionConfidence: TargetSegment["projectionConfidence"] = "semantic"
+): void {
+  if (!targetPrefix.startsWith(trace.tracedPrefixText)) {
+    const contracted = tracePrefixContractionForTarget(trace.tracePrefixSegments, targetPrefix);
+    if (contracted !== null) {
+      trace.tracePrefixSegments.length = 0;
+      trace.tracePrefixSegments.push(...contracted);
+      trace.tracedPrefixText = trace.tracePrefixSegments.map((segment) => segment.text).join("");
+    }
+  }
+  if (targetPrefix === trace.tracedPrefixText) {
+    return;
+  }
+  if (trace.tracedPrefixText.startsWith(targetPrefix)) {
+    return;
+  }
+  if (!targetPrefix.startsWith(trace.tracedPrefixText)) {
+    trace.tracedPrefixText = targetPrefix;
+    trace.tracePrefixSegments.length = 0;
+    trace.tracePrefixSegments.push({
+      text: targetPrefix,
+      sourceTokens,
+      kind,
+      projectionConfidence: "fallback"
+    });
+    return;
+  }
+  const text = targetPrefix.slice(trace.tracedPrefixText.length);
+  if (text.length > 0) {
+    trace.tracePrefixSegments.push({ text, sourceTokens, kind, projectionConfidence });
+  }
+  trace.tracedPrefixText = targetPrefix;
+}
+
+function appendChainTraceSegment(trace: ChainBasesTraceState, segment: TailTraceSegment): void {
+  if (segment.text.length === 0) {
+    return;
+  }
+  trace.tracePrefixSegments.push(segment);
+  trace.tracedPrefixText += segment.text;
+}
+
+function applyChainInitialPreNegation(
+  fold: ChainBasesFoldState,
+  ops: readonly OperatorOp[],
+  ctx: ChainContext,
+  initialBaseRes: BaseResult & { readonly ok: true }
+): { readonly ok: false; readonly reason: string } | null {
+  if (fold.currentPreNeg !== null && negationFeedsNaideHoshii(fold.currentPreNeg, ops[0])) {
+    if (fold.currentPreNeg.chainDepth !== 1 || fold.currentPreNeg.chainPast) {
+      return { ok: false, reason: "desired predicate negation before te_hoshii supports only single non-past negative" };
+    }
+    fold.pendingDesiredPredicateNegation = fold.currentPreNeg;
+    fold.currentPreNeg = null;
+  }
+  const firstOpOwnsPreNegation =
+    ops[0]?.kind === "scopeBridge" &&
+    (ops[0].head === "koto" || ops[0].head === "implicit");
+  if (
+    fold.currentPreNeg !== null &&
+    initialBaseRes.finalNegationLoweringPolicy !== undefined &&
+    !firstOpOwnsPreNegation
+  ) {
+    const lowered = lowerFinalNegationForCommittedBase(initialBaseRes, fold.currentPreNeg, ctx.formal, ctx.lookups);
+    if (lowered === null) {
+      return { ok: false, reason: "stem final negation lowering before op 영역 외" };
+    }
+    fold.currentBase = lowered;
+    const loweredForcesPast = finalNegationLoweringForcesPast(initialBaseRes, fold.currentPreNeg.chainDepth);
+    fold.currentPast = ctx.stemPast || fold.currentPreNeg.chainPast || loweredForcesPast;
+    fold.currentPastProjection = fold.currentPast
+      ? (ops[0]?.kind === "conjecture" ? "committed" : "lexical")
+      : "lexical";
+    fold.currentPreNeg = null;
+  }
+  return null;
+}
+
+function foldChainOp(
+  fold: ChainBasesFoldState,
+  trace: ChainBasesTraceState,
+  ops: readonly OperatorOp[],
+  i: number,
+  ctx: ChainContext,
+  sahenShortNegationSplit: boolean
+): { readonly ok: false; readonly reason: string } | null {
+  const op = ops[i]!;
+  const isLast = i === ops.length - 1;
+  const ownedPreNeg = ctx.negBeforeChainIdx?.get(i) ?? null;
+  if (ownedPreNeg !== null && !fold.preNegLoweredOnHostBase.has(ownedPreNeg)) {
+    if (fold.currentPreNeg !== null) {
+      return { ok: false, reason: "multiple pre-reference NegationOps in same chain slot not supported" };
+    }
+    fold.currentPreNeg = ownedPreNeg;
+  }
+  const negAfterCurrentOp = ctx.negAfterChainIdx.get(i) ?? null;
+  const desiredPredicateNegation = fold.pendingDesiredPredicateNegation;
+  fold.pendingDesiredPredicateNegation = null;
+  const previousOp = i > 0 ? ops[i - 1] : undefined;
+  const opCtx: OpContext = {
+    lookups: ctx.lookups,
+    chainIndex: i,
+    hasPriorChainOp: i > 0,
+    sourceStemIsVerb: fold.currentSourceProjectionIsVerbalPredicate,
+    sourceStemIsVolitional: i === 0 && ctx.sourceStemIsVolitional === true,
+    sourceHostHasTeIruAspect:
+      previousOp?.kind === "aspect" && previousOp.aspect === "te_iru",
+    ...(ctx.sourceStemIsSahenPredicate === undefined
+      ? {}
+      : { sourceStemIsSahenPredicate: ctx.sourceStemIsSahenPredicate }),
+    ...(ctx.adverbialStemLemma === undefined ? {} : { adverbialStemLemma: ctx.adverbialStemLemma }),
+    preModalNeg: fold.currentPreNeg,
+    past: fold.currentPast,
+    pastProjection: fold.currentPastProjection,
+    formal: ctx.formal,
+    hasFollowingOp: !isLast,
+    nextOp: ops[i + 1],
+    shortNegationPolicy: i === 0 ? ctx.shortNegationPolicy : undefined,
+    sahenShortNegationSplit,
+    ...(ctx.preferShortLikenessNegation === undefined
+      ? {}
+      : { preferShortLikenessNegation: ctx.preferShortLikenessNegation }),
+    passiveStemOptions: i === 0 ? ctx.passiveStemOptions : {},
+    forbidShortNegation: i > 0 && fold.currentPreNeg !== null,
+    desiredPredicateNegation
+  };
+  const baseRes = opToBase(op, fold.currentBase, opCtx);
+  if (!baseRes.ok) return baseRes;
+  fold.currentSourceProjectionIsVerbalPredicate = sourceVerbalPredicateAfterAuxOp(
+    fold.currentSourceProjectionIsVerbalPredicate,
+    op,
+  );
+  const sourceTrace = sourceTraceWithFinalNegationStem(baseRes, negAfterCurrentOp);
+  appendChainOpSourceTrace(fold, trace, op, i, ctx, baseRes, sourceTrace);
+  if (isLast) {
+    fold.finalBase = baseRes.base;
+    fold.lastChainOnFinalSupported = baseRes.chainOnFinalSupported ?? true;
+    fold.lastFinalNegationOptions = baseRes.finalNegationOptions;
+    fold.lastFinalNegationLoweringPolicy = baseRes.finalNegationLoweringPolicy;
+    fold.lastTerminalPrefixContraction = baseRes.terminalPrefixContraction;
+    fold.lastTerminalRealization = baseRes.terminalRealization;
+    fold.lastConnectivePrefixContraction = baseRes.connectivePrefixContraction ?? fold.pendingConnectivePrefixContraction;
+    fold.lastConnectiveBaseOverride = baseRes.connectiveBaseOverride;
+    fold.lastInterOpPastProjection = finalAttributivePastProjectionForChainOp(
+      op,
+      baseRes,
+      ctx.pastAfterChainIdx.has(i) || opCarriesIntrinsicPast(op)
+    );
+    fold.lastProjectsAsStativePerfect = baseRes.interOpProjectionPolicy === "stative_perfect";
+  } else {
+    const carryFailure = carryChainBaseToNextOp(fold, trace, ops, op, i, ctx, baseRes);
+    if (carryFailure !== null) {
+      return carryFailure;
+    }
+  }
+  return null;
+}
+
+function appendChainOpSourceTrace(
+  fold: ChainBasesFoldState,
+  trace: ChainBasesTraceState,
+  op: OperatorOp,
+  i: number,
+  ctx: ChainContext,
+  baseRes: OkBaseResult,
+  sourceTrace: ReturnType<typeof sourceTraceWithFinalNegationStem>
+): void {
+  if (sourceTrace !== undefined) {
+    const inputProjectionTargetPrefix = `${fold.currentBase.prefix}${sourceTrace.inputProjectionText}`;
+    const inputProjectionSourceTokens = i === 0
+      ? [
+        ...trace.activeFinalSourceTokens,
+        ...(fold.currentPreNeg?.source.tokens ?? []),
+        ...(ctx.stemPastSourceTokens ?? []),
+        ...(sourceTrace.inputProjectionExtraSourceTokens ?? [])
+      ]
+      : [
+        ...trace.activeFinalSourceTokens,
+        ...(fold.currentPreNeg?.source.tokens ?? []),
+        ...(sourceTrace.inputProjectionExtraSourceTokens ?? [])
+      ];
+    const inputProjectionSegments = i === 0
+      ? splitInitialLongNegationInputProjection(
+        sourceTrace.inputProjectionText,
+        fold.currentBase,
+        trace.activeFinalSourceTokens,
+        fold.currentPreNeg,
+        ctx.stemPastSourceTokens,
+        trace.activeFinalKind
+      )
+      : null;
+    const inputProjectionSegmentText = inputProjectionSegments
+      ?.map((segment) => segment.text)
+      .join("");
+    if (
+      inputProjectionSegments !== null &&
+      inputProjectionTargetPrefix.startsWith(trace.tracedPrefixText) &&
+      inputProjectionTargetPrefix.slice(trace.tracedPrefixText.length) === inputProjectionSegmentText
+    ) {
+      for (const segment of inputProjectionSegments) {
+        appendChainTraceSegment(trace, segment);
+      }
+    } else {
+      appendChainTracePrefix(trace, 
+        inputProjectionTargetPrefix,
+        inputProjectionSourceTokens,
+        trace.activeFinalKind
+      );
+    }
+    for (const segment of sourceTrace.carrierPrefixSegments) {
+      appendChainTraceSegment(trace, segment);
+    }
+    appendChainTracePrefix(trace, 
+      baseRes.base.prefix,
+      sourceTrace.finalSourceTokens,
+      sourceTrace.finalKind ?? "modal"
+    );
+    trace.activeFinalSourceTokens = sourceTrace.finalSourceTokens;
+    trace.activeFinalKind = sourceTrace.finalKind ?? "modal";
+  } else {
+    const genericSourceTokens = [...trace.activeFinalSourceTokens, ...op.source.tokens];
+    appendChainTracePrefix(trace, 
+      baseRes.base.prefix,
+      genericSourceTokens,
+      op.kind === "aspect" ? "aux" : "modal"
+    );
+    trace.activeFinalSourceTokens = genericSourceTokens;
+    trace.activeFinalKind = op.kind === "aspect" ? "aux" : "modal";
+  }
+}
+
+function carryChainBaseToNextOp(
+  fold: ChainBasesFoldState,
+  trace: ChainBasesTraceState,
+  ops: readonly OperatorOp[],
+  op: OperatorOp,
+  i: number,
+  ctx: ChainContext,
+  baseRes: OkBaseResult
+): { readonly ok: false; readonly reason: string } | null {
+  const admittedPreNegOfNextOp =
+    baseRes.finalNegationLoweringPolicy !== undefined &&
+      !operatorChainOpConsumesPrecedingNegation(ops[i + 1])
+      ? ctx.negBeforeChainIdx?.get(i + 1) ?? null
+      : null;
+  const negCarry = ctx.negAfterChainIdx.get(i) ?? admittedPreNegOfNextOp;
+  if (admittedPreNegOfNextOp !== null && negCarry === admittedPreNegOfNextOp) {
+    fold.preNegLoweredOnHostBase.add(admittedPreNegOfNextOp);
+  }
+  fold.pendingConnectivePrefixContraction =
+    baseRes.connectivePrefixContraction ?? fold.pendingConnectivePrefixContraction;
+  if (negCarry !== null) {
+    if (negationFeedsNaideHoshii(negCarry, ops[i + 1])) {
+      if (negCarry.chainDepth !== 1 || negCarry.chainPast) {
+        return { ok: false, reason: "desired predicate negation before te_hoshii supports only single non-past negative" };
+      }
+      const interOpBase = copulaCarrierBaseForInterOp(baseRes.base, ctx.formal);
+      if (interOpBase === null) {
+        return { ok: false, reason: "desired predicate negation base projection 영역 외" };
+      }
+      fold.currentBase = applyNonLastPrefixContractions(
+        interOpBase,
+        baseRes,
+        ctx.formal
+      );
+      appendChainTracePrefix(trace, fold.currentBase.prefix, trace.activeFinalSourceTokens, trace.activeFinalKind);
+      fold.pendingDesiredPredicateNegation = negCarry;
+    } else {
+      const lowered = lowerFinalNegationForCommittedBase(baseRes, negCarry, ctx.formal, ctx.lookups);
+      if (lowered === null) {
+        return { ok: false, reason: "chain mid final negation lowering 영역 외" };
+      }
+      fold.currentBase = applyNonLastPrefixContractions(lowered, baseRes, ctx.formal);
+      trace.activeFinalSourceTokens = [...trace.activeFinalSourceTokens, ...negCarry.source.tokens];
+      trace.activeFinalKind = "aux";
+      appendChainTracePrefix(trace, fold.currentBase.prefix, trace.activeFinalSourceTokens, trace.activeFinalKind);
+    }
+    fold.currentPreNeg = null;
+  } else {
+    const interOpBase = copulaCarrierBaseForInterOp(baseRes.base, ctx.formal);
+    if (interOpBase === null) {
+      return { ok: false, reason: "chain 중간 predicate base projection 영역 외" };
+    }
+    fold.currentBase = applyNonLastPrefixContractions(
+      interOpBase,
+      baseRes,
+      ctx.formal
+    );
+    appendChainTracePrefix(trace, fold.currentBase.prefix, trace.activeFinalSourceTokens, trace.activeFinalKind);
+    fold.currentPreNeg = null;
+  }
+  const projectsAsStativePerfect = baseRes.interOpProjectionPolicy === "stative_perfect";
+  const intrinsicPast = opCarriesIntrinsicPast(op);
+  const postOpTense = ctx.pastAfterChainIdx.get(i) ?? null;
+  const loweredForcesPast = negCarry === null
+    ? false
+    : finalNegationLoweringForcesPast(baseRes, negCarry.chainDepth);
+  fold.currentPast = postOpTense !== null ||
+    (negCarry?.chainPast ?? false) ||
+    loweredForcesPast ||
+    intrinsicPast ||
+    projectsAsStativePerfect;
+  if (postOpTense !== null) {
+    trace.activeFinalSourceTokens = [
+      ...trace.activeFinalSourceTokens,
+      ...postOpTense.source.tokens
+    ];
+  }
+  fold.currentPastProjection = fold.currentPast
+    ? (ops[i + 1]?.kind === "conjecture" ? "committed" : (baseRes.interOpPastProjection ?? "lexical"))
+    : "lexical";
+  return null;
 }
 
 function absorbedPassivePolicy(ctx: ChainContext, stemLemma: string): PredicateBasePolicy {

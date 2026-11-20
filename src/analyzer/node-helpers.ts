@@ -6,12 +6,13 @@ import {
   type SupplementalLexiconMemoryCache,
   type UserLexiconEntry
 } from "./dictionary.js";
-import { PageCachedFileSource } from "./node-dictionary-provider.js";
+import { openSharedSystemDictionarySource } from "./node-dictionary-provider.js";
 import type { DictionaryDataSource } from "./dictionary-provider.js";
 import { HaruDictionaryProvider } from "./haru-dictionary-provider.js";
 import { SudachiAnalyzer, type SudachiDictType } from "./index.js";
 import { resolveDefaultSystemDictPath } from "../system-dictionary-asset.js";
 import { UserDictionary, type UserDictEntry } from "../user-dictionary.js";
+import { isRecord } from "../utils/record.js";
 
 function systemIndexPath(systemDictPath: string): string {
   return systemDictPath.replace(/\.hrdic$/u, "") + ".hridx";
@@ -81,10 +82,6 @@ function normalizeUserDictEntry(entry: UserDictEntry): UserDictEntry {
   };
 }
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-
 function isUserDictEntry(value: unknown): value is UserDictEntry {
   return isRecord(value)
     && typeof value["japanese"] === "string"
@@ -104,26 +101,22 @@ export async function createSudachiAnalyzer(
 ): Promise<SudachiAnalyzer> {
   const systemDictPath = requireSudachiSystemDictPath(systemDictPathOption);
   const provider = new HaruDictionaryProvider(systemDictPath, {
-    openBinary: openBinaryOverride ?? ((path) => new PageCachedFileSource(path)),
+    openBinary: openBinaryOverride ?? openSharedSystemDictionarySource,
     readText: (path) => readFileSync(path, "utf8")
   });
   const config = configPath === undefined || configPath === null
     ? await provider.readConfiguration(systemDictPath)
     : new Config(JSON.parse(readFileSync(configPath, "utf8")));
   const dictionary = await Dictionary.fromConfig(config, provider);
-  if (supplementalLexicon !== undefined && supplementalLexicon.length > 0) {
-    if (supplementalMemoryCache === undefined) {
-      dictionary.addSupplementalLexicon(supplementalLexicon);
-    } else {
-      if (supplementalMemoryCache.resolved === undefined) {
-        const resolved = dictionary.resolveSupplementalLexicon(supplementalLexicon);
-        if (resolved !== undefined) {
-          supplementalMemoryCache.resolved = resolved;
-        }
+  if (supplementalMemoryCache?.resolved !== undefined) {
+    dictionary.addResolvedSupplementalLexicon(supplementalMemoryCache.resolved);
+  } else if (supplementalLexicon !== undefined && supplementalLexicon.length > 0) {
+    const resolved = dictionary.resolveSupplementalLexicon(supplementalLexicon);
+    if (resolved !== undefined) {
+      if (supplementalMemoryCache !== undefined) {
+        supplementalMemoryCache.resolved = resolved;
       }
-      if (supplementalMemoryCache.resolved !== undefined) {
-        dictionary.addResolvedSupplementalLexicon(supplementalMemoryCache.resolved);
-      }
+      dictionary.addResolvedSupplementalLexicon(resolved);
     }
   }
   if (userDictPath !== null) {

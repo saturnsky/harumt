@@ -1,8 +1,8 @@
 import type { RuntimeHaruToken } from "../../types/token.js";
 import { POS0, POS01, isBungoAssertiveCopulaAdnominalToken, 名詞, 助詞_終助詞 } from "../../types/pos.js";
-import { terminalSfpRunClosureAfter } from "../../transform/terminal-sfp-retag-closure.js";
-import type { ClauseLayout } from "../clause-layout/index.js";
-import { isFinitePredicateBoundaryLeft } from "../clause-layout/index.js";
+import { terminalSfpRunClosureAfter } from "../preprocess/terminal-sfp-retag-closure.js";
+import type { ClauseLayout } from "../clause-layout/final-layout.js";
+import { isFinitePredicateBoundaryLeft } from "../clause-layout/token-evidence.js";
 import { DETACHED_SEPARATIONS, separatedAs } from "../clause-layout/trivia.js";
 import {
   closesUtteranceAs,

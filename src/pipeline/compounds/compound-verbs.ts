@@ -1,9 +1,9 @@
-import { isKanji, kanjiPrefixCompatibleForReadingFallback } from "../../dictionary/morpheme.js";
+import { kanjiPrefixCompatibleForReadingFallback } from "../../dictionary/morpheme.js";
 import type { CompoundResolverDictionary } from "./index.js";
 import type { MorphemeEntry } from "../../types/dictionary.js";
 import type { RuntimeHaruToken } from "../../types/token.js";
 
-import { POS0, POS01, POS5A, isSahenCapableNominal, 動詞, 名詞_普通名詞, 連用形_ } from "../../types/pos.js";
+import { POS0, POS5A, isSahenCapableNominal, 動詞, 連用形_, isCommonNounToken } from "../../types/pos.js";
 import {
   compoundDispatchFormsForHint,
   compoundDispatchHintForForm,
@@ -12,6 +12,7 @@ import {
 } from "../head-tail/tail/predicate-root/postverb-auxiliary-table.js";
 import { compoundBlockedTailForms } from "./compound-following-forms.js";
 import { isDetachedFromPreviousToken, type ClauseAdjacencyToken } from "../clause-layout/trivia.js";
+import { containsKanji } from "../../utils/char-class.js";
 export interface CompoundVerbToken extends ClauseAdjacencyToken {
   readonly surface: string;
   readonly dictionaryForm: string;
@@ -373,7 +374,7 @@ function candidateFromStreamVv(tokens: readonly CompoundVerbToken[], idx: number
 function candidateFromNounIntensiveTail(tokens: readonly CompoundVerbToken[], idx: number): CompoundVerbCandidate | null {
   const head = tokens[idx];
   const tail = tokens[idx + 1];
-  if (head === undefined || tail === undefined || !(isPlainNoun(head) && isColloquialIntensiveTail(tail))) {
+  if (head === undefined || tail === undefined || !(isCommonNounToken(head) && isColloquialIntensiveTail(tail))) {
     return null;
   }
   return new CompoundVerbCandidate({
@@ -430,10 +431,6 @@ function isVerbRenyou(token: CompoundVerbToken): boolean {
 
 function isSahenNoun(token: CompoundVerbToken | undefined): boolean {
   return token !== undefined && isSahenCapableNominal(token);
-}
-
-function isPlainNoun(token: CompoundVerbToken): boolean {
-  return (token.pos & POS01) === 名詞_普通名詞;
 }
 
 function isSuruRenyou(token: CompoundVerbToken): boolean {
@@ -568,6 +565,3 @@ function runtimeCompatibleToken(token: CompoundVerbToken): RuntimeHaruToken {
   return runtime;
 }
 
-function containsKanji(text: string): boolean {
-  return Array.from(text).some(isKanji);
-}

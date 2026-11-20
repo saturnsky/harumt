@@ -1,4 +1,4 @@
-import type { BoundaryKind } from "./index.js";
+import type { BoundaryKind } from "./layout-types.js";
 import type { UtteranceClosureRunKind } from "./utterance-closure.js";
 
 export type JunctureVerdict = "boundary" | "cohesion" | "intra_word" | "undecided";
@@ -23,8 +23,6 @@ export type RenyouJunctureCohesionEvidence =
   | { readonly kind: "nominal_frame" }
   | { readonly kind: "nominal_suffix_head"; readonly suffixIdx: number }
   | { readonly kind: "nominal_compound_head"; readonly spanEnd: number };
-
-export type RenyouJunctureCohesionKind = RenyouJunctureCohesionEvidence["kind"];
 
 export interface RenyouJunctureEvidence {
   readonly kind: "renyouJuncture";
@@ -67,8 +65,6 @@ export type WhitespaceJunctureBoundaryEvidence =
   | { readonly kind: "utterance_closure_run"; readonly run: UtteranceClosureRunKind }
   | { readonly kind: "separated_finite" }
   | { readonly kind: "imperative_closure" };
-
-export type WhitespaceJunctureBoundaryKind = WhitespaceJunctureBoundaryEvidence["kind"];
 
 export type WhitespaceJunctureCohesionEvidence =
   | { readonly kind: "attributive_head_reach"; readonly headIdx: number }

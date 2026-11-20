@@ -1,4 +1,4 @@
-import { NASAL_VOCALIZATION_RUN_REASON, STANDALONE_SMALL_KANA_REASON } from "../../transform/youon-remerge.js";
+import { NASAL_VOCALIZATION_RUN_REASON, STANDALONE_SMALL_KANA_REASON } from "../preprocess/youon-remerge.js";
 import { applyInitialDueum, hanjaToHangul } from "../../generator/hanja.js";
 import { formatCounterPhrase, parseJapaneseNumber, readNumeralToken, sinoKorean } from "../../generator/numerals.js";
 import {
@@ -83,7 +83,7 @@ import {
   isKoreanNounAble,
   koreanNounLemma,
   isAuxiliaryStemToken,
-  isSymbolCharacterToken,
+  isSymbolCharacterToken, isProperPlaceNameToken,
 } from "../../types/pos.js";
 export type ChainSegment =
   | { readonly kind: "consume"; readonly text: string }
@@ -205,7 +205,6 @@ export function isNonLexicalSymbolToken(token: { readonly surface: string; reado
 
 export const NONPREDICATE_CONTENT_POS = new Set(["名詞", "代名詞", "副詞", "連体詞", "接続詞", "感動詞"]);
 export const NONPREDICATE_CONTENT_POS_BITS = (1 << 名詞) | (1 << 代名詞) | (1 << 副詞) | (1 << 連体詞) | (1 << 接続詞) | (1 << 感動詞);
-export const EXPAND_LAST_POS = new Set(["名詞", "動詞", "形容詞", "形状詞", "副詞", "連体詞", "代名詞", "接続詞", "感動詞"]);
 const FUNCTIONAL_SPLIT_POS_BITS = (1 << 助詞) | (1 << 助動詞);
 
 const SERU_CAUSATIVE_STEM_RESTORE: ReadonlyMap<string, {
@@ -639,7 +638,7 @@ export class PipelineFallbackMixin {
         result.push(token);
         continue;
       }
-      if (isPlaceProperNoun(token)) {
+      if (isProperPlaceNameToken(token)) {
         result.push(token);
         continue;
       }
@@ -1207,10 +1206,6 @@ function isRecoverableSplitContentToken(token: FallbackToken): boolean {
 function translationNameRole(translation: MorphemeSense): boolean | undefined {
   const value = translation.nameRole;
   return typeof value === "boolean" ? value : undefined;
-}
-
-function isPlaceProperNoun(token: FallbackToken): boolean {
-  return (token.pos & POS012) === 名詞_固有名詞_地名;
 }
 
 function makeFallbackToken(surface: string, reading: string, pos: readonly string[] | number): FallbackToken {

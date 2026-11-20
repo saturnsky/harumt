@@ -1,16 +1,11 @@
 
 import type { RenderPlan } from "../../types/render-plan.js";
 import type { RuntimeHaruToken } from "../../types/token.js";
-import { type PatternRuntimeToken } from "../pattern-runtime.js";
 import { firstTranslationCandidate } from "../candidate-runtime.js";
 import { isSahenBoundVerbAfterSahen } from "../predicate-helpers.js";
 import type { ContentResolverRuntimeAccess } from "./types.js";
 import { longNegativeLemma, stripFirstNegativeAux } from "../rendering/negative-polish.js";
-import { POS4, 助動詞_レル, 형용사 } from "../../types/pos.js";
-
-export function auxHasPassiveReru(auxTokens: readonly Pick<PatternRuntimeToken, "pos">[] | null | undefined): boolean {
-  return (auxTokens ?? []).some((token) => (token.pos & POS4) === 助動詞_レル);
-}
+import { 형용사 } from "../../types/pos.js";
 
 export async function sahenInfo(
   resolver: ContentResolverRuntimeAccess,

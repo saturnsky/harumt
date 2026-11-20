@@ -1,4 +1,4 @@
-import { roleCatNyaSuffix } from "../../../../../generator/aux-map.js";
+import { roleCatNyaSuffix, yoneConfirmSuffix } from "../../../../../generator/aux-map.js";
 import { conjugate, type IrregularType } from "../../../../../generator/conjugator.js";
 import { hasBatchim } from "../../../../../generator/hangul.js";
 import { hasAllomorphBatchim } from "../../../../../generator/particles.js";
@@ -6,17 +6,20 @@ import { POS5A, 意志推量形_ } from "../../../../../types/pos.js";
 import { type LookupTables } from "../../../../lookup-tables.js";
 import { quotedTerminalMoodComplementizer } from "../../../../semantics/sfp-quote-projection.js";
 import { assertNever, stemInflectionCarriesVolitionalMood, type AuxLayerNode, type AuxOpNode, type BenefactiveAspectOp, type ConjectureOp, type NegationOp, type OpSource, type ProhibitionAspectOp, type QuoteBoundaryFocusParticle, type RequestAspectOp, type SfpEffect, type SfpNode, type TailRoot, type TenseOp } from "../grammar.js";
-import { ensureQuestionPunctuation, lemmaPredicateBase, nounCopulaFinalAllomorphHost, opCarriesTerminalRolePoliteness, stemHasSahenSourcePredicate, stemHasSourceVerbalPredicate, type BaseResult, type KoreanPredicateBase, type NounCopulaPredicateBase, type OkBaseResult, type OperatorOp, type RenderContext, type RenderFailure, type RenderOutcome, type RenderSuccess, tracedSeg, withStemPrefixApplied } from "./base-model.js";
-import { applyExternalNegationDepthToPredicateBase, causativeItadakuCommitmentLemma, negativeNounCopulaBase, negativeNounCopulaChainBase, nounCopulaAllomorphHost, nounCopulaStemAllomorphHost, nounCopulaBase, nounCopulaBaseForCopula, nounCopulaPolarityBaseForCopula, nounSubjectPart, passiveStemOptionsForStem, simpleStemBaseResult } from "./base-support.js";
-import { applyNominalQuoteObjectFocus, applyQuoteBoundaryFocus, composeBaseWithPlainImperative, composeBaseWithTerminalChain, composeCommittedTailTerminal,composeNounCopulaBaseWithConjecture, composeNounCopulaConjectureQuestion, plainConjectureBase } from "./connective-compose.js";
+import { ensureQuestionPunctuation, lemmaPredicateBase, nounCopulaFinalAllomorphHost, opCarriesTerminalRolePoliteness, stemHasSahenSourcePredicate, stemHasSourceVerbalPredicate, type BaseResult, type KoreanPredicateBase, type OkBaseResult, type OperatorOp, type RenderContext, type RenderFailure, type RenderOutcome, type RenderSuccess, tracedSeg, withStemPrefixApplied } from "./base-model.js";
+import { applyExternalNegationDepthToPredicateBase, causativeItadakuCommitmentLemma, negativeNounCopulaChainBase, nounCopulaStemAllomorphHost, nounCopulaBase, nounCopulaBaseForCopula, nounCopulaPolarityBaseForCopula, passiveStemOptionsForStem, simpleStemBaseResult, copulaCarrierBaseForInterOp, committedTerminalRoleBase } from "./base-support.js";
+import { applyNominalQuoteObjectFocus, applyQuoteBoundaryFocus } from "./quote-complement-compose.js";
+import { composeBaseWithPlainImperative, composeBaseWithTerminalChain, composeCommittedTailTerminal } from "./predicate-terminal-compose.js";
+import { composeNounCopulaBaseWithConjecture } from "./noun-copula-conjecture-compose.js";
+import { composeNounCopulaConjectureQuestion, plainConjectureBase } from "./conjecture-compose.js";
 import { renderBenefactiveVolitionalQuestion, renderBenefactiveVolitionalResolution } from "./aspect-benefactive.js";
 import { composeFinalForm, composePastStemFinalForm, conjectureFinalForm, irregularFrom, nounToCopulaForm,
   nounToCopulaRebukeQuestionForm, opSourceIsVolitionalInChain } from "./final-forms.js";
 import { assignOperatorChainWrapSlots, chainBases, chainStemTraceFields, collectOperatorChain, commandTerminalBaseOperatorChain, isChainableHeadOp, isHeadOp, isRequestCommandAspectOp, requestBaseCanUseDirectAuxiliaryImperative } from "./op-chain.js";
 import { operatorCreatesSourceVerbalPredicate, sourceVerbalPredicateAfterAuxOp } from "../operator-head.js";
-import { committedTerminalRoleBase, copulaCarrierBaseForInterOp, isBenefactiveAspectKind, scopeBridgeBase } from "./predicate-bases.js";
+import { scopeBridgeBase } from "./scope-bridge-bases.js";
 import { baseResultForNounScopeBridge, projectPredicateCopulaLayer } from "./noun-copula.js";
-import { auxChainCarriesConjecture, negationOpAdmitsShortForm, sfpHasSelfDirectedConjectureRole } from "../inspect.js";
+import { auxChainCarriesConjecture, negationOpAdmitsShortForm, sfpHasSelfDirectedConjectureRole, isBenefactiveAspectKind } from "../inspect.js";
 import { resolveCandidateSetStem } from "../commit.js";
 import { buildRequestPredicateBase, reprojectCommandQuoteAttributiveForHeadPolicy } from "./command-render.js";
 import { attributiveProjectionPolicy } from "../attributive-head-policy.js";
@@ -1726,13 +1729,6 @@ function composeBaseWithDiscursiveSfp(
   return assertNever(effect);
 }
 
-function yoneConfirmSuffix(polite: boolean, formal: boolean): string {
-  if (!polite) {
-    return "지";
-  }
-  return formal ? "지요" : "죠";
-}
-
 function applyYoneConfirmSuffixToJiForm(jiForm: string, polite: boolean, formal: boolean): string {
   if (!polite) {
     return jiForm;
@@ -2329,7 +2325,7 @@ export function renderVolitionalQuestionSfp(
   return withStemPrefixApplied(renderBaseVolitionalQuestion(baseResult.base, volitionalPolite !== undefined));
 }
 
-function isSourceVolitionalChainableHead(op: AuxOpNode, ops: readonly AuxOpNode[]): boolean {
+export function isSourceVolitionalChainableHead(op: AuxOpNode, ops: readonly AuxOpNode[]): boolean {
   return isChainableHeadOp(op) && opSourceIsVolitionalInChain(op, ops);
 }
 

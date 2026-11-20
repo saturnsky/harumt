@@ -1,4 +1,4 @@
-import type { ClauseLayout } from "../../../clause-layout/index.js";
+import type { ClauseLayout } from "../../../clause-layout/final-layout.js";
 import { nextNonSpaceIndex } from "../../../clause-layout/trivia.js";
 import { quoteMarkerRelationAt } from "../../boundary/quote-marker.js";
 import { toiuAttributiveHeadIndex, toiuAttributiveTailEnd } from "../../../semantics/marker-roles.js";
@@ -21,7 +21,6 @@ import type {
   AuxOpNode,
   CandidateCapability,
   CarrierHeadContract,
-  CandidateSetStem,
   HeadHypothesisCandidate,
   HeadHypothesisCarrier,
   HeadTailEvidenceCandidateContractMaterializability,
@@ -45,7 +44,7 @@ import {
   headContractForConnective,
   headContractForPostverbAuxiliary,
   headContractForPredicateQuoteCarrier,
-  headContractForQuoteBoundary
+  headContractForQuoteBoundary, uniqueProjectionKinds
 } from "./head-contract-table.js";
 import {
   derivationalHostStemRootOf,
@@ -542,44 +541,6 @@ function candidateWasContextRejected(
   return rejectedStemCandidateIdentities.some((rejected) =>
     stemCandidateIdentitiesEqual(identity, rejected)
   );
-}
-
-function applyContractEligibility(
-  candidates: CandidateWorkState[],
-  carrier: HeadHypothesisCarrier,
-  input: TailEvidenceDecisionInput,
-  evidence: TailEvidenceContext,
-  contract: CarrierHeadContract,
-  rules: HeadTailEvidenceRuleDecision[]
-): { readonly narrowed: boolean } {
-  const ineligible: number[] = [];
-  const reasons = new Map<number, string>();
-  for (const candidate of candidates) {
-    if (candidate.pruned) continue;
-    if (eligibleRealizationChoices(input.stem, candidate, carrier, contract).length > 0) continue;
-    ineligible.push(candidate.hypothesis.index);
-    reasons.set(candidate.hypothesis.index, contractEligibilityRejectReason(candidate, carrier, contract));
-  }
-  if (ineligible.length === 0) {
-    return { narrowed: false };
-  }
-  const ruleName = contractEligibilityRuleName(input, evidence, carrier, contract);
-  const ruleReason = contractEligibilityRuleReason(input, evidence, carrier, contract);
-  for (const candidate of candidates) {
-    if (!ineligible.includes(candidate.hypothesis.index)) continue;
-    const reason = reasons.get(candidate.hypothesis.index) ?? "candidate has no realization choice accepted by tail head contract";
-    candidate.pruned = true;
-    candidate.pruneReason = ruleName === "required_incompatible_contract" ? reason : ruleReason;
-  }
-  rules.push({
-    rule: ruleName,
-    result: "pruned",
-    classification: "required",
-    effect: "prune",
-    reason: ruleReason,
-    candidateIndices: ineligible
-  });
-  return { narrowed: ineligible.length < candidates.length };
 }
 
 function contractCandidatePoolByPriorityGroup(
@@ -1464,9 +1425,13 @@ function structuralPredicateModifierContract(
     evidence.predicateContext.particleSurfaces.length + evidence.predicateContext.quoteHostPrefixParticleSurfaces.length > 0;
   const stateResultPredicateContext =
     hasStateResultTail(input.ops) && carrier.sourceCapabilities.naAdjectiveCapable;
+  const hostLayerFirstOp = input.ops[0];
+  const zeroCopulaPredicateContext =
+    clauseLayoutPredicateContext &&
+    (hostLayerFirstOp === undefined || hostLayerFirstOp.kind === "modal");
   const copulaPredicateContext =
     !naAttributiveNominalContext &&
-    hasCopulaPredicateContext(input.ops) &&
+    (hasCopulaPredicateContext(input.ops) || zeroCopulaPredicateContext) &&
     (
       carrier.sourceCapabilities.naAdjectiveCapable ||
       carrierHasDirectPredicateRealization(carrier)
@@ -2066,10 +2031,6 @@ function candidateChoiceProvidesInflectingPredicateLemma(
   }
 }
 
-function uniqueProjectionKinds(kinds: readonly HeadProjectionKind[]): HeadProjectionKind[] {
-  return kinds.filter((kind, index, all) => all.indexOf(kind) === index);
-}
-
 function realizationOrderGroups(contract: CarrierHeadContract): HeadProjectionKind[][] {
   return (contract.realizationOrder ?? [])
     .map(uniqueProjectionKinds)
@@ -2575,22 +2536,6 @@ function candidateWorkStateIdentity(candidate: CandidateWorkState): StemCandidat
   };
 }
 
-function candidateCanSurviveUnderContract(
-  stem: StemNode,
-  candidate: CandidateWorkState,
-  carrier: HeadHypothesisCarrier,
-  contract: CarrierHeadContract
-): boolean {
-  const choice = selectRealizationChoice(stem, candidate, carrier, contract);
-  return selectedStemCandidateCommitDecision(
-    stem,
-    candidate,
-    choice,
-    contract,
-    null
-  ).status !== "not_applicable";
-}
-
 function candidateCanEnterContractPool(
   stem: StemNode,
   candidate: CandidateWorkState,
@@ -3056,10 +3001,6 @@ function selectedChoiceIsAdverbialNominalFallback(
 }
 function stemCandidateMatches(left: StemCandidate, right: StemCandidate): boolean {
   return stemCandidateIdentitiesEqual(stemCandidateIdentity(left), stemCandidateIdentity(right));
-}
-
-function stemCandidateMatchesHypothesis(candidate: StemCandidate, hypothesis: HeadHypothesisCandidate): boolean {
-  return stemCandidateIdentityMatchesHypothesis(candidate, hypothesis);
 }
 
 function headHypothesisProjectionOrdinal(hypothesis: HeadHypothesisCandidate): number {

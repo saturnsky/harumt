@@ -7,14 +7,14 @@ import {
   nextNonSpaceIndex,
   previousNonSpaceIndex
 } from "../../clause-layout/trivia.js";
-import { findAdverbialModifierPredicate } from "../../clause-layout/index.js";
+import { findAdverbialModifierPredicate } from "../../clause-layout/adverbial-predicate.js";
 import { prenominalModifierChainHeadIndex } from "../../clause-layout/attributive-head.js";
 import {
   closesUtteranceForSpeakerDirection,
   collectUtteranceDirectionEvidence
 } from "../../clause-layout/speech-act.js";
 import type { RuntimeHaruToken } from "../../../types/token.js";
-import type { ClauseLayout } from "../../clause-layout/index.js";
+import type { ClauseLayout } from "../../clause-layout/final-layout.js";
 import { activeProtoClosedPropositionBeforeMarkerAt, activeProtoLayout } from "../../clause-layout/proto-state.js";
 import { enumerateClausePhrasesAfter, enumerateClausePhrasesBefore } from "../../clause-layout/phrase-enumeration.js";
 import { runClosesUtteranceAs, utteranceClosureRunAfter, type UtteranceClosureKind } from "../../clause-layout/utterance-closure.js";
@@ -22,13 +22,12 @@ import type { LookupTables } from "../../lookup-tables.js";
 import { quoteMarkerRelationAt } from "./quote-marker.js";
 import { parentheticalSpanEndingAt, parentheticalSpanStartingAt } from "./parenthetical.js";
 import { belongsToStructuralKaChoiceGroupAt } from "../../structural-relation/ka-parallel-ownership.js";
-import { isSayVerbToken, isSyntheticDeicticStemToken } from "../tail/predicate-root/classifiers/tokens.js";
+import { isSyntheticDeicticStemToken } from "../tail/predicate-root/classifiers/tokens.js";
+import { isSayVerbToken } from "../data/quoted-reporting-sets.js";
 import { looksQuestionTakingAfterViaLayout } from "../../quote/question-taking-enumeration.js";
 import { postKaTerminalSfpType } from "../../semantics/grammar-runtime.js";
 import {
-  isFusedSelfQuestionSfpSurface,
-  isKanaQuestionNaParticleSurface,
-  isTerminalNeSfpSurface
+  isFusedSelfQuestionSfpSurface
 } from "../../semantics/sfp-surface.js";
 import {
   isCounterCapableToken,
@@ -46,7 +45,6 @@ import {
   名詞,
   形状詞,
   助詞_格助詞,
-  助詞_係助詞,
   助詞_接続助詞,
   助詞_副助詞,
   助詞_終助詞,
@@ -145,6 +143,10 @@ export function kaOwnershipKindAt(
     return "speaker_acknowledgment";
   }
   return "question";
+}
+
+export function kaOwnershipIsLexicalUnitInternal(kind: KaOwnershipKind | null): boolean {
+  return kind === "kamo_modal" || kind === "self_question_kana" || kind === "wh_indefinite";
 }
 
 export function kaOwnershipKindBeforeAcknowledgmentAt(
@@ -917,7 +919,7 @@ class MaterializedCanonicalReformulationMarkerRelationIndex
 
 interface CanonicalReformulationRelationCacheBucket {
   readonly byProto: WeakMap<object, MaterializedCanonicalReformulationMarkerRelationIndex>;
-  withoutProto?: MaterializedCanonicalReformulationMarkerRelationIndex;
+  readonly withoutProto: WeakMap<LookupTables, MaterializedCanonicalReformulationMarkerRelationIndex>;
 }
 
 const canonicalReformulationRelationCache =
@@ -1007,11 +1009,11 @@ export function canonicalReformulationMarkerRelationIndex(
   const proto = activeProtoLayout();
   let bucket = canonicalReformulationRelationCache.get(tokens);
   if (bucket === undefined) {
-    bucket = { byProto: new WeakMap() };
+    bucket = { byProto: new WeakMap(), withoutProto: new WeakMap() };
     canonicalReformulationRelationCache.set(tokens, bucket);
   }
   const cached = proto === null
-    ? bucket.withoutProto
+    ? bucket.withoutProto.get(lookups)
     : bucket.byProto.get(proto);
   if (cached !== undefined) {
     return cached;
@@ -1024,7 +1026,7 @@ export function canonicalReformulationMarkerRelationIndex(
     }
   }
   if (proto === null) {
-    bucket.withoutProto = index;
+    bucket.withoutProto.set(lookups, index);
   } else {
     bucket.byProto.set(proto, index);
   }
@@ -1032,14 +1034,18 @@ export function canonicalReformulationMarkerRelationIndex(
 }
 
 export function cachedCanonicalReformulationMarkerRelationIndex(
-  tokens: readonly BoundaryToken[]
+  tokens: readonly BoundaryToken[],
+  lookups: LookupTables | undefined
 ): CanonicalReformulationMarkerRelationIndex | null {
   const bucket = canonicalReformulationRelationCache.get(tokens);
   if (bucket === undefined) {
     return null;
   }
   const proto = activeProtoLayout();
-  return (proto === null ? bucket.withoutProto : bucket.byProto.get(proto)) ?? null;
+  if (proto !== null) {
+    return bucket.byProto.get(proto) ?? null;
+  }
+  return lookups === undefined ? null : bucket.withoutProto.get(lookups) ?? null;
 }
 
 export interface SelfQuestionDiscourseSfpKaRelation {

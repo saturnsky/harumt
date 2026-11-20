@@ -8,10 +8,6 @@ export interface TranslationAccessEntry extends MorphemeEntry {
   committed?: boolean;
 }
 
-export interface CommittedTranslationEntry extends TranslationAccessEntry {
-  committed: true;
-}
-
 export function commitWinner<T extends MorphemeEntry & { senses?: readonly MorphemeSense[] }>(entry: T): T & { committed: true } {
   return {
     ...entry,

@@ -1,7 +1,7 @@
 
 import type { RenderPlan } from "../../types/render-plan.js";
 import { isPredicateHeadTailChainRenderPlan } from "../../types/render-plan.js";
-import { type ClauseLayout } from "../clause-layout/index.js";
+import type { ClauseLayout } from "../clause-layout/final-layout.js";
 import { previousNonSpaceIndex } from "../clause-layout/trivia.js";
 import { POS0, POS01, POS4, POS5, POS5A, inflectionClassName, isAdjectivalRenyouTeFormHostToken, isDesireAuxiliaryPos, isNaAdjCapable, 意志推量形_, 形状詞, 形容詞0, 助詞_係助詞, 助詞_接続助詞, 助詞_終助詞, 助動詞_ダ, 助動詞_ナイ, 命令形_, 連用形_ } from "../../types/pos.js";
 import { pairKey } from "../lookup-tables.js";

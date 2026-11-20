@@ -1,5 +1,5 @@
 
-import type { ClauseLayout } from "../clause-layout/index.js";
+import type { ClauseLayout } from "../clause-layout/final-layout.js";
 import {
   enumerateClausePhrasesBefore,
   type ClausePhraseItem,

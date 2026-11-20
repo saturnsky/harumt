@@ -3,7 +3,8 @@ import type { DekiruReading, RareruReading } from "../../types/pipeline.js";
 import type { RenderPlan, PredicateHeadTailChainRenderPlan, Voice } from "../../types/render-plan.js";
 import { isPredicateHeadTailChainRenderPlan } from "../../types/render-plan.js";
 import type { NumericTables } from "../../generator/numeric-lookup.js";
-import { isClausePunctuationToken, type Clause, type ClauseLayout } from "../clause-layout/index.js";
+import { isClausePunctuationToken } from "../clause-layout/index.js";
+import type { Clause, ClauseLayout } from "../clause-layout/final-layout.js";
 import {
   NOMINAL_KEIJOU_BITS,
   POS0,
@@ -28,12 +29,12 @@ import {
   補助記号,
   連用形_,
   명사,
-  NOMINAL_BITS, pos0in
+  NOMINAL_BITS, pos0in, isAdjectivalDerivationalSuffix
 } from "../../types/pos.js";
 import { findDekiruReferent } from "../semantics/dekiru.js";
 import { isGaNoConvertedSubjectParticle } from "../semantics/gano-conversion.js";
 import type { LookupTables } from "../lookup-tables.js";
-import { replaceLemmaRenderPlan, setForcePassiveRenderPlan } from "../rendering/render-plan.js";
+import { replaceLemmaRenderPlan, setForcePassiveRenderPlan } from "../rendering/render-plan-rewrite.js";
 import { getReferentTokenBeforeParticle, isAnimateReferentToken, isPersonCountBeforeDe, PredicateArgumentView } from "../semantics/helpers.js";
 import { hasRespectSubjectSignal } from "../semantics/honorific.js";
 import { caseParticleMarkerRelationForToken, copulaNiMarkerRelationForToken, kaMarkerRelationAt, predicateNominalizerRelationForToken } from "../head-tail/boundary/marker.js";
@@ -42,7 +43,6 @@ import { firstAuxLayer, tailRootHasQuestionSfp, tailRootVoiceOps } from "../head
 import { admittedNominalFrameMarkerEndsAt } from "../head-tail/tail/segments/nominal-frame.js";
 import type { RuntimeHaruToken } from "../../types/token.js";
 import { TokenCursor } from "../token-cursor.js";
-import { isAdjSuffixToken } from "../attributive.js";
 import { teDeContinuationRelationAt } from "../head-tail/tail/postverb-tail-classifier.js";
 import { TraceEvent, type TraceCollector } from "../trace.js";
 import { hasFollowingNegationAfter, type AuxLayerNode, type AuxOpNode, type TailNode, type VoiceOp } from "../head-tail/tail/predicate-root/grammar.js";
@@ -281,7 +281,7 @@ export function resolveDekiruReading(
 function hasDekiruPredicateSuffixCue(tokens: readonly CommitmentToken[], predIdx: number): boolean {
   const next = tokens[predIdx + 1];
   return next !== undefined &&
-    isAdjSuffixToken(next) &&
+    isAdjectivalDerivationalSuffix(next) &&
     predicateSuffixKindForDictionaryForm(next.dictionaryForm) !== null;
 }
 
@@ -363,8 +363,61 @@ export function resolveRareruReading(
   numeric: NumericTables,
   deferredObjectReadings: Map<number, DeferredRareruObjectState>
 ): void {
+  const r = gatherRareruReadingEvidence(span, predIdx, tokens, layout, contentMap, trace, lookups, numeric, deferredObjectReadings);
+  if (r === null) return;
+  const { hasAmbiguousDefaultWinner, resumesDeferredObject, hasRelativeHeadObject, hasGaNoConvertedSubject } = r;
+  if (resolveRareruByHonorificChainEvidence(r)) {
+    return;
+  }
+  if (resolveRareruByExplicitPassiveAgentMarker(r)) {
+    return;
+  }
+  if (resolveRareruByHonorificSubject(r)) {
+    return;
+  }
+  if (resolveRareruByHonorificFormulaicConstruction(r)) {
+    return;
+  }
+
+  if (
+    span.voice != null && !hasAmbiguousDefaultWinner && !resumesDeferredObject &&
+    !hasRelativeHeadObject && !hasGaNoConvertedSubject
+  ) {
+    return;
+  }
+
+  if (resolveRareruByPassivePotentialEvidence(r)) {
+    return;
+  }
+  if (resolveRareruByAbilityCue(r)) {
+    return;
+  }
+  if (resolveRareruByHonorificTransitivityCounterevidence(r)) {
+    return;
+  }
+
+  if (span.voice != null && !hasRelativeHeadObject && !resumesDeferredObject && !hasGaNoConvertedSubject) {
+    return;
+  }
+
+  resolveRareruByWeakEvidenceOrDefault(r);
+}
+
+type RareruReadingEvidence = NonNullable<ReturnType<typeof gatherRareruReadingEvidence>>;
+
+function gatherRareruReadingEvidence(
+  span: CommitmentSpan,
+  predIdx: number,
+  tokens: readonly CommitmentToken[],
+  layout: ClauseLayout,
+  contentMap: CommitmentContentMap,
+  trace: TraceCollector | null,
+  lookups: LookupTables,
+  numeric: NumericTables,
+  deferredObjectReadings: Map<number, DeferredRareruObjectState>
+) {
   const readings = deferredObjectReadings.get(predIdx)?.[0] ?? span.rareruReadings;
-  if (readings === undefined || readings.size === 0) return;
+  if (readings === undefined || readings.size === 0) return null;
   const resumesDeferredObject = deferredObjectReadings.has(predIdx);
   const predicateDictForms = passiveClassPredicateDictForms(span, tokens[predIdx]);
   const subjectArguments = honorificSubjectArgumentsForPredicate(
@@ -408,7 +461,7 @@ export function resolveRareruReading(
   const objectBorrowUnresolved = !resumesDeferredObject && (span.voice == null || hasAmbiguousDefaultWinner) && !hasDirectObjectArgument && !hasRelativeHeadObject && argumentView.hasUnresolvedConnectiveObjectBorrow(argumentsForPredicate);
   const blocksPassiveState = (hasDirectObjectArgument || objectBorrowUnresolved) && (!hasOwnSubject || subjectAnimacy !== "inanimate" || (resumesDeferredObject && abilityModalCueKind !== null) || hasOwnedDirectObject);
   if (objectBorrowUnresolved) deferredObjectReadings.set(predIdx, [new Set(updatedReadings), span.sourceCandidates ?? null]);
-  if (objectBorrowUnresolved && tailDefaultVoiceWithRetractedOpenEvidence(span, predIdx, tokens, particleIndices, layout, lookups) !== null) return;
+  if (objectBorrowUnresolved && tailDefaultVoiceWithRetractedOpenEvidence(span, predIdx, tokens, particleIndices, layout, lookups) !== null) return null;
   const hasAnimateNi = hasAnimateNiAgentParticle(tokens, particleIndices, lookups);
   const hasAnimateNiAgent = hasAnimateNi;
   const hasNiYotteMarker = hasNiYotteAgentMarker(tokens, particleIndices);
@@ -435,12 +488,40 @@ export function resolveRareruReading(
   if (hasRespectSubjectAbilityCue && honorificSubjectGaIdx !== null) {
     span.rareruAbilitySubjectParticleIdx = honorificSubjectGaIdx;
   }
+  return {
+    span, predIdx, tokens, layout, contentMap, trace, lookups, numeric,
+    resumesDeferredObject,
+    predicateDictForms,
+    hasRespectSubject,
+    hasHonorificSubject,
+    updatedReadings,
+    before,
+    particleIndices,
+    hasGaNoConvertedSubject,
+    subjectAnimacy,
+    hasAmbiguousDefaultWinner,
+    abilityModalCueKind,
+    hasRelativeHeadObject,
+    hasOwnedDirectObject,
+    objectBorrowUnresolved,
+    blocksPassiveState,
+    hasAnimateNi,
+    hasAnimateNiAgent,
+    hasNiYotteMarker,
+    hasAnimateKaraSource,
+    predicateInKaraSourceSet,
+    hasAnimateKaraMarker,
+    shouldDeferHonorificForAbility
+  };
+}
 
+function resolveRareruByHonorificChainEvidence(r: RareruReadingEvidence): boolean {
+  const { span, predIdx, tokens, layout, trace, lookups, predicateDictForms, hasRespectSubject, before, hasAnimateNiAgent, hasNiYotteMarker, hasAnimateKaraMarker } = r;
   const hasHonorificChainEvidence = tailChainHasHonorificRareruEvidence(span);
   if (hasHonorificChainEvidence) {
     if (rareruHonorificRewriteBlockedByCausativePassive(span)) {
       commitVoiceResolution(span, "passive", "causative_passive_preserved", predIdx, trace, layout);
-      return;
+      return true;
     }
     const hasHonorificActiveStructure = hasRespectSubject && (
       honorificActiveArgumentEvidence(span, predIdx, tokens, layout, lookups) !== null ||
@@ -475,19 +556,27 @@ export function resolveRareruReading(
         }, layout.clauseIndexOfPredicate(predIdx))
       ));
     }
-    return;
+    return true;
   }
+  return false;
+}
 
+function resolveRareruByExplicitPassiveAgentMarker(r: RareruReadingEvidence): boolean {
+  const { span, predIdx, layout, trace, hasAmbiguousDefaultWinner, hasNiYotteMarker, hasAnimateKaraMarker } = r;
   if (hasNiYotteMarker && (span.voice == null || hasAmbiguousDefaultWinner)) {
     commitVoiceResolution(span, "passive", "ni_yotte_agent", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (hasAnimateKaraMarker && (span.voice == null || hasAmbiguousDefaultWinner)) {
     commitVoiceResolution(span, "passive", "animate_kara_source", predIdx, trace, layout);
-    return;
+    return true;
   }
+  return false;
+}
 
+function resolveRareruByHonorificSubject(r: RareruReadingEvidence): boolean {
+  const { span, predIdx, layout, trace, lookups, hasHonorificSubject, updatedReadings, before, hasAnimateNi, hasNiYotteMarker, hasAnimateKaraMarker, shouldDeferHonorificForAbility } = r;
   if (
     updatedReadings.has("honorific") &&
     hasHonorificSubject &&
@@ -515,10 +604,14 @@ export function resolveRareruReading(
           }, layout.clauseIndexOfPredicate(predIdx))
         ));
       }
-      return;
+      return true;
     }
   }
+  return false;
+}
 
+function resolveRareruByHonorificFormulaicConstruction(r: RareruReadingEvidence): boolean {
+  const { span, predIdx, layout, trace, lookups, updatedReadings, before, hasAnimateNi, hasNiYotteMarker, hasAnimateKaraMarker } = r;
   if (
     updatedReadings.has("honorific") &&
     !hasAnimateNi &&
@@ -541,19 +634,16 @@ export function resolveRareruReading(
         }, layout.clauseIndexOfPredicate(predIdx))
       ));
     }
-    return;
+    return true;
   }
+  return false;
+}
 
-  if (
-    span.voice != null && !hasAmbiguousDefaultWinner && !resumesDeferredObject &&
-    !hasRelativeHeadObject && !hasGaNoConvertedSubject
-  ) {
-    return;
-  }
-
+function resolveRareruByPassivePotentialEvidence(r: RareruReadingEvidence): boolean {
+  const { span, predIdx, tokens, layout, contentMap, trace, lookups, numeric, predicateDictForms, particleIndices, subjectAnimacy, hasRelativeHeadObject, blocksPassiveState, hasAnimateNi } = r;
   if (hasAnimateNi) {
     commitVoiceResolution(span, "passive", "animate_ni", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (
@@ -561,59 +651,63 @@ export function resolveRareruReading(
     quotedPredicateCarrierVoicePrefersPassive(span)
   ) {
     commitVoiceResolution(span, "passive", "quoted_predicate_carrier", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (semanticFrameVoicePrefersPassive(span, predIdx, tokens, layout, contentMap, lookups, numeric)) {
     commitVoiceResolution(span, "passive", "semantic_frame_voice", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (lexicalCausativeRareruPrefersPassive(predicateDictForms, lookups)) {
     commitVoiceResolution(span, "passive", "lexical_causative_passive", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (predicateSuffixRareruPrefersPassive(span)) {
     commitVoiceResolution(span, "passive", "predicate_suffix_rareru", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (makeStateChangeRareruPrefersPassive(span)) {
     commitVoiceResolution(span, "passive", "make_state_change_passive", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (postverbAuxiliaryVoicePrefersPotential(span)) {
     commitVoiceResolution(span, "potential", "postverb_auxiliary_potential", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (teIruAuxiliaryVoicePrefersPotential(span)) {
     commitVoiceResolution(span, "potential", "te_iru_auxiliary_voice", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (possessorRareruPrefersPassive(span, predIdx, tokens, particleIndices, layout, lookups)) {
     commitVoiceResolution(span, "passive", "possessor_passive_evidence", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (classificationTargetRareruPrefersPassive(predicateDictForms, hasRelativeHeadObject || blocksPassiveState, tokens, particleIndices, lookups)) {
     commitVoiceResolution(span, "passive", "classification_target_ni", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (inanimateSubjectPastRareruPrefersPassive(span, blocksPassiveState, subjectAnimacy)) {
     commitVoiceResolution(span, "passive", "inanimate_subject_past_passive", predIdx, trace, layout);
-    return;
+    return true;
   }
 
   if (inanimateSubjectRenyouRareruPrefersPassive(span, predIdx, tokens, blocksPassiveState, layout, predicateDictForms, subjectAnimacy, lookups)) {
     commitVoiceResolution(span, "passive", "inanimate_subject_renyou_passive", predIdx, trace, layout);
-    return;
+    return true;
   }
+  return false;
+}
 
+function resolveRareruByAbilityCue(r: RareruReadingEvidence): boolean {
+  const { span, predIdx, tokens, layout, trace, lookups, predicateDictForms, abilityModalCueKind, hasOwnedDirectObject, objectBorrowUnresolved, hasAnimateNi, hasAnimateKaraSource, predicateInKaraSourceSet } = r;
   const abilityCueResolution = tryResolveRareruAbilityModalCue(span, predicateDictForms, {
     hasAnimateNi,
     hasAnimateKaraSource,
@@ -625,14 +719,18 @@ export function resolveRareruReading(
     commitVoiceResolution(span, "potential", "ability_modal_cue", predIdx, trace, layout, {
       modal_cue_kind: abilityCueResolution.modalCueKind
     });
-    return;
+    return true;
   }
 
   if (whFreeChoiceObjectPrefersPotential(predIdx, tokens, layout)) {
     commitVoiceResolution(span, "potential", "wh_free_choice_object", predIdx, trace, layout);
-    return;
+    return true;
   }
+  return false;
+}
 
+function resolveRareruByHonorificTransitivityCounterevidence(r: RareruReadingEvidence): boolean {
+  const { span, predIdx, layout, trace, hasRespectSubject, hasHonorificSubject, hasAnimateNiAgent, hasNiYotteMarker, hasAnimateKaraMarker } = r;
   if (
     hasRespectSubject &&
     !hasHonorificSubject &&
@@ -641,13 +739,13 @@ export function resolveRareruReading(
     !hasAnimateKaraMarker
   ) {
     commitVoiceResolution(span, "passive", "honorific_subject_transitivity_counterevidence", predIdx, trace, layout);
-    return;
+    return true;
   }
+  return false;
+}
 
-  if (span.voice != null && !hasRelativeHeadObject && !resumesDeferredObject && !hasGaNoConvertedSubject) {
-    return;
-  }
-
+function resolveRareruByWeakEvidenceOrDefault(r: RareruReadingEvidence): void {
+  const { span, predIdx, tokens, layout, trace, lookups, particleIndices, hasRelativeHeadObject, hasOwnedDirectObject, objectBorrowUnresolved } = r;
   if (teiruRareruPrefersPassive(span, hasOwnedDirectObject || objectBorrowUnresolved, lookups)) {
     commitVoiceResolution(span, "passive", "weak_passive_state", predIdx, trace, layout);
     return;

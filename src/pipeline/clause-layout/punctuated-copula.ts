@@ -1,5 +1,5 @@
 import type { RuntimeHaruToken } from "../../types/token.js";
-import type { BoundaryKind } from "./index.js";
+import type { BoundaryKind } from "./layout-types.js";
 import type { CopulaPauseBridgeEvidence } from "./punctuation.js";
 import { isClauseHardTerminalPunctuationToken } from "./punctuation.js";
 import { previousNonSpaceIndex } from "./trivia.js";

@@ -16,11 +16,11 @@ import {
   type HeadProfile,
   type HeadProfileDescriptor
 } from "../../profile.js";
-import { buildProtoLayout, isClausePunctuationToken, type ProjectionEvidenceLayout } from "../../../../clause-layout/index.js";
+import { isClausePunctuationToken, protoLayoutForTokens } from "../../../../clause-layout/index.js";
+import type { ProjectionEvidenceLayout } from "../../../../clause-layout/layout-types.js";
 import { nextNonSpaceIndex } from "../../../../clause-layout/trivia.js";
 import type { ContentResult } from "../../../../content-types.js";
 import type { LookupTables } from "../../../../lookup-tables.js";
-import { activeProtoLayout } from "../../../../clause-layout/proto-state.js";
 import type { NumericTables } from "../../../../../generator/numeric-lookup.js";
 import type {
   HostBearingLikenessModal,
@@ -54,13 +54,14 @@ import {
   tryMatchPredicateNominalHostFrame,
   type PredicateNominalHostFrameCandidate
 } from "./parser.js";
-import { nominalTerminalQuestionClaimsHeadAt, tryParseNominalHostLikenessContinuation } from "../../../tail/predicate-root/integration.js";
-import { parseTail } from "../../../tail/predicate-root/parser.js";
-import type { ParsedTailRoot, StemNode, TailRoot } from "../../../tail/predicate-root/grammar.js";
+import { nominalTerminalQuestionClaimsHeadAt } from "../../../tail/predicate-root/integration/head-admission.js";
+import { tryParseNominalHostLikenessContinuation } from "../../../tail/predicate-root/integration.js";
+import { parseTail } from "../../../tail/predicate-root/parse-tail.js";
+import type { ParsedTailRoot, TailRoot } from "../../../tail/predicate-root/grammar.js";
 import { cachedQuoteBindingForContentRoot } from "../../../../structural-relation/quote.js";
 import { stemSupportsAnyProjectionCategory, stemSupportsProjectionCategory } from "../../../tail/predicate-root/inspect.js";
 import { projectionOpContinuationCapabilityIds } from "../../capability.js";
-import type { NumericHostReservation } from "../../../tail/predicate-root/integration.js";
+import type { NumericHostReservation } from "../../../tail/predicate-root/integration/contracts.js";
 import {
   nominalFrameMarkerAdapterBlock,
   nominalPhraseFrameFollowingContentBlock,
@@ -74,7 +75,6 @@ import {
   _促音便,
   NOMINAL_BITS,
   POS0,
-  POS01,
   pos0in,
   POS5A,
   POS5B,
@@ -90,7 +90,7 @@ import {
   명사,
   조사,
   형용사,
-  구,
+  구
 } from "../../../../../types/pos.js";
 export type NominalTailChainTraceKind =
   | "nominal_tail_chain_renyou_nominal_head"
@@ -1331,7 +1331,7 @@ function followingPredicateEvidenceIndexAfter(
     ) => number | null;
   }) | undefined;
   const predicateIdx = typeof withPredicateEvidence?.followingPredicateEvidenceIndexAfter !== "function"
-    ? (activeProtoLayout() ?? buildProtoLayout(tokens, lookups)).followingPredicateEvidenceIndexAfter(tokens, tokenIdx, {
+    ? protoLayoutForTokens(tokens, lookups).followingPredicateEvidenceIndexAfter(tokens, tokenIdx, {
       limit,
       includeAuxiliary: true
     })

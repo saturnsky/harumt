@@ -3,14 +3,12 @@ import { tailParserHeadedPlanLifecycleHooks } from "../tail/predicate-root/plan-
 import {
   attachHeadedAssemblyUnitPlanLifecycle,
   createCommitmentDecisionLifecycleHook,
-  describeHeadedPlanLifecycleHooks,
   runHeadedContentPlanLifecycle,
   type HeadedPlanCarrier,
-  type HeadedPlanLifecycleHook,
-  type HeadedPlanLifecycleHookDescriptor
+  type HeadedPlanLifecycleHook
 } from "./hooks.js";
-import type { ClauseLayout } from "../../clause-layout/index.js";
-import type { CommitmentSpan } from "../../deferred-commitment.js";
+import type { ClauseLayout } from "../../clause-layout/final-layout.js";
+import type { CommitmentSpan } from "../../commitment/types.js";
 import type { RuntimeHaruToken } from "../../../types/token.js";
 import type { LookupTables } from "../../lookup-tables.js";
 import type { NumericTables } from "../../../generator/numeric-lookup.js";
@@ -21,10 +19,6 @@ const REGISTERED_HEADED_PLAN_LIFECYCLE_HOOKS: readonly HeadedPlanLifecycleHook[]
   ...nominalParserHeadedPlanLifecycleHooks(),
   createCommitmentDecisionLifecycleHook()
 ]);
-
-export function describeRegisteredHeadedPlanLifecycleHooks(): readonly HeadedPlanLifecycleHookDescriptor[] {
-  return describeHeadedPlanLifecycleHooks(REGISTERED_HEADED_PLAN_LIFECYCLE_HOOKS);
-}
 
 export function runRegisteredHeadedContentPlanLifecycle(options: {
   readonly tokens: readonly RuntimeHaruToken[];

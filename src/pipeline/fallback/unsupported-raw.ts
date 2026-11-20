@@ -1,5 +1,4 @@
 
-import type { RuleResult } from "../../types/pipeline.js";
 import type { Warning } from "../../types/warning.js";
 
 export interface RawSourceToken {
@@ -63,21 +62,5 @@ export function unsupportedGrammarRawWarning(
     opKind,
     ...(span === null || span === undefined ? {} : { span }),
     message
-  };
-}
-
-export function rawSourceSpanRuleResult(
-  tokens: readonly RawSourceToken[],
-  start: number,
-  consumed: number,
-  warnings: readonly Warning[]
-): RuleResult {
-  return {
-    consumed,
-    korean: rawSourceSurfaceText(tokens, start, consumed),
-    spaceAfter: true,
-    renderPlan: null,
-    warnings: [...warnings],
-    rawSourceSurface: true
   };
 }

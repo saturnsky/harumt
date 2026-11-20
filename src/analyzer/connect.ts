@@ -20,7 +20,7 @@
  * for HaruMT.
  */
 import { SudachiError } from "./error.js";
-import type { DictionaryDataSource } from "./dictionary-provider.js";
+import { readDictionarySection, type DictionaryDataSource } from "./dictionary-provider.js";
 
 export class ConnectionMatrix {
   readonly numLeft: number;
@@ -53,7 +53,7 @@ export class ConnectionMatrix {
       }).withContext("connection matrix");
     }
 
-    const bytes = source.slice(offset, byteLength);
+    const bytes = readDictionarySection(source, offset, byteLength);
     const matrix = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
     return new ConnectionMatrix(matrix, numLeft, numRight);
   }

@@ -1,28 +1,25 @@
 
+import { entryDerivations } from "../../dictionary/derivation.js";
 import { isPassiveTransitive } from "../../generator/aux-map.js";
 import type { MorphemeEntry } from "../../types/dictionary.js";
 import type { BenefactiveContext, DekiruReading, NareruReading, ParticleAssignment } from "../../types/pipeline.js";
 import { isPredicateHeadTailChainRenderPlan } from "../../types/render-plan.js";
-import { type Clause, type ClauseLayout } from "../clause-layout/index.js";
-import { isClauseSpaceOrAdverbToken, nextNonSpaceIndex, nextTransparentEvidenceIndex } from "../clause-layout/trivia.js";
+import type { Clause, ClauseLayout } from "../clause-layout/final-layout.js";
+import { nextNonSpaceIndex } from "../clause-layout/trivia.js";
 import { predicateNominalizerRelationForToken } from "../head-tail/boundary/marker.js";
 import { isGaNoConvertedSubjectParticle, noParticleShouldRemainNominalModifier } from "../semantics/gano-conversion.js";
 import { TokenCursor } from "../token-cursor.js";
 import {
   isNonIndependentVerbToken,
   POS0,
-  POS1,
   POS2,
   POS4,
   POS5A,
   サ変可能,
-  副詞可能,
   形状詞,
   助詞,
-  助数詞,
   助動詞,
   助動詞_タイ,
-  数詞,
   動詞,
   副詞,
   名詞,
@@ -35,11 +32,12 @@ import {
   isProperPersonNameToken,
   isProperPlaceNameToken,
   isSahenCapableNominal,
-  NOMINAL_BITS, pos0in
+  NOMINAL_BITS,
+  pos0in
 } from "../../types/pos.js";
 import { pairKey } from "../lookup-tables.js";
 import type { LookupTables } from "../lookup-tables.js";
-import { getReferentForms, getReferentIndexBeforeParticle, getReferentTokenBeforeParticle, isAnimateReferentBeforeNi, isAnimateReferentToken, isHumanCollectiveToken, isHumanReferentToken, isKaraIttePerspectiveTail, isKaraMitePerspectiveTail, isObliqueCaseChain, isPersonByContext, isPersonCountBeforeDe, isPlaceNoun, isQuantityMeasureToken, isTemporalArgumentToken, isTemporalConditionHeadNiContext, isTimeExpressionBeforeParticle, precedingIsIdiomNoun, PredicateArgumentView } from "../semantics/helpers.js";
+import { getReferentForms, getReferentIndexBeforeParticle, getReferentTokenBeforeParticle, isAnimateReferentBeforeNi, isAnimateReferentToken, isHumanCollectiveToken, isHumanReferentToken, isKaraIttePerspectiveTail, isKaraMitePerspectiveTail, isPersonByContext, isPersonCountBeforeDe, isPlaceNoun, isTemporalArgumentToken, isTemporalConditionHeadNiContext, isTimeExpressionBeforeParticle, precedingIsIdiomNoun, PredicateArgumentView } from "../semantics/helpers.js";
 import { isRespectReferentBeforeParticle, isRespectReferentToken } from "../semantics/honorific.js";
 import { caseParticleMarkerRelationForToken, nominalLinkMarkerRelationAt, topicFocusMarkerRelationForToken } from "../head-tail/boundary/marker.js";
 import { quoteMarkerRelationAt } from "../head-tail/boundary/quote-marker.js";
@@ -47,7 +45,8 @@ import { TraceEvent, type TraceCollector } from "../trace.js";
 import type { TailNode } from "../head-tail/tail/predicate-root/grammar.js";
 import { stemSupportsProjectionCategory } from "../head-tail/tail/predicate-root/inspect.js";
 import { COMMITMENT_SOURCE_CASE_REALIZATION, COMMITMENT_SOURCE_CAUSATIVE_NEUTRAL_TRIGGER, COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT, COMMITMENT_SOURCE_SLOT_REALIZATION, NO_EXPERIENCER_KEIJOUJI, PREDICATE_POS, type CasePreference, type CommitmentEntry, type CommitmentSpan, type CommitmentToken, type ParticleCommitmentContext, type SemanticFrameRuntimeMatch } from "./types.js";
-import { casePreferenceFromValue, extractKoreanLemma, extractSahenCompound, extractSahenNoun, hasAnimateNiAgentParticle, hasExplicitWoObject, isCommitmentCaseParticle, isCasePreferenceRecord, isCommitmentCaseParticleToken, passiveClassPredicateDictForms, runtimeTokens, selectedCommitmentCandidate, subjectAnimacyForPredicate, tailChainSupportPredicateDictForm, tailParserPredicateEventKey, traceDetail, withTraceClauseIdx, woObjectIsBodyPart } from "./span-evidence.js";
+import { casePreferenceFromValue, extractKoreanLemma, extractSahenCompound, extractSahenNoun, hasAnimateNiAgentParticle, hasExplicitWoObject, isCommitmentCaseParticle, isCasePreferenceRecord, isCommitmentCaseParticleToken, passiveClassPredicateDictForms, runtimeTokens, selectedCommitmentCandidate, spanPredicateIsVerbalSuffixDerivation, subjectAnimacyForPredicate, tailChainSupportPredicateDictForm, tailParserPredicateEventKey, traceDetail, withTraceClauseIdx, woObjectIsBodyPart } from "./span-evidence.js";
+import { argumentParticleIndicesForPredicate } from "./voice-reading-resolution.js";
 import { adversativePassiveWeatherBaseOverride, evaluateAdversativeEMode, evaluateIntransitiveAdversativeAgentPromotion, hasAdversativePassiveDeLocationSourceParticle, isAdversativePassiveDeLocationSource, isDeparturePassiveSourceWo, isObjectRetainingAdversativePassive, particlePrecedesSareruQuoteTail, passiveTransitiveOptions, setAdversativePassive, spanConsumesPassiveAux, spanIsPassive, spanPassiveAbsorbedFrameOwnsParticle } from "./passive-class.js";
 import { selectedSemanticFrameGaSlotAssignment, semanticFrameSlotForParticle, slotRealizationParticleCanBeCommitted, type SlotRealizationEffect } from "./semantic-frame.js";
 
@@ -318,6 +317,11 @@ export function commitParticleRoles(
     });
   }
 
+  const run: ParticleRoleCommitRun = {
+    baseCursor, tokens, span, particleIndices, options, committedRoles, lookups, semanticRoleAssignments,
+    predicateDictForm, predicateDictForms, supportPredicateDictForm, hasAnimateNiAgent, hasWoObject, passiveClass,
+    adversativeAgentPromoted
+  };
   for (const particleIdx of particleIndices) {
     const token = tokens[particleIdx];
     if (token === undefined) {
@@ -339,389 +343,359 @@ export function commitParticleRoles(
       traceClauseIdx: options.traceClauseIdx ?? null,
       lookups
     };
+    const p: ParticleRoleStep = { particleIdx, token, surface, referent, ctx };
 
-    if (particlePrecedesSareruQuoteTail(tokens, span, particleIdx)) {
-      if (
-        isCommitmentCaseParticleToken(token, particleIdx, "から", ["格助詞", "接続助詞"]) &&
-        !isKaraPerspectiveTail(baseCursor, particleIdx, lookups) &&
-        isTimeExpressionBeforeParticle(tokens, particleIdx, lookups, { clause: options.clause ?? null })
-      ) {
-        committedRoles[particleIdx] = { role: "temporal_source", korean: "부터", commitmentSource: COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT };
-        continue;
-      }
-      if (
-        isCommitmentCaseParticleToken(token, particleIdx, "より") &&
-        yoriPrefersTemporalSource(tokens, particleIdx, span, { clause: options.clause ?? null, lookups })
-      ) {
-        committedRoles[particleIdx] = { role: "temporal_source", korean: "부터", commitmentSource: COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT };
-        continue;
-      }
+    if (commitSareruQuoteTailParticle(run, p) === "continue") {
       continue;
     }
-
-    if (isCommitmentCaseParticleToken(token, particleIdx, "を") && spanIsPassive(span)) {
-      if (spanConsumesPassiveAux(span)) {
-        const semanticAssignment = semanticRoleAssignments.get(particleIdx);
-        if (semanticAssignment !== undefined) {
-          committedRoles[particleIdx] = semanticAssignment;
-          continue;
-        }
-        if (spanPassiveAbsorbedFrameOwnsParticle(span, surface)) {
-          continue;
-        }
-      }
-      if (passiveClass === "causative_coercive" || passiveClass === "causative_passive_neutral") {
-        continue;
-      }
-      if (isDeparturePassiveSourceWo(referent, predicateDictForms, lookups)) {
-        committedRoles[particleIdx] = { role: "departure_source", korean: "에서" };
-        continue;
-      }
-      if (passiveClass === "possessor") {
-        continue;
-      }
-      if (isObjectRetainingAdversativePassive(span, lookups)) {
-        continue;
-      }
-      const koreanLemma = extractKoreanLemma(span);
-      const sahenNoun = extractSahenNoun(span);
-      const sahenCompound = extractSahenCompound(span);
-      if (koreanLemma !== null && isPassiveTransitive(koreanLemma, passiveTransitiveOptions(sahenCompound, sahenNoun, lookups))) {
-        if (passiveClass === "adversative" && hasAnimateNiAgent && !woObjectIsBodyPart(tokens, particleIdx, lookups)) {
-          setAdversativePassive(span, { agentPromoted: adversativeAgentPromoted });
-        }
-        continue;
-      }
-      committedRoles[particleIdx] = { role: "theme_promoted", allomorphKey: "이/가" };
-      if (passiveClass === "adversative" && hasAnimateNiAgent) {
-        setAdversativePassive(span);
-      }
+    if (commitPassiveWoParticle(run, p) === "continue") {
       continue;
     }
-
-    if (isCommitmentCaseParticleToken(token, particleIdx, "が")) {
-      if (predicateDictForm === "欲しい" || predicateDictForm === "ほしい") {
-        const semanticFrameSlot = semanticFrameSlotForParticle(ctx);
-        if (semanticFrameSlot?.role === "holder" || semanticFrameSlot?.role === "experiencer") {
-          committedRoles[particleIdx] = {
-            role: `hoshii_${semanticFrameSlot.role}`,
-            allomorphKey: "이/가",
-            commitmentSource: "semantic_frame_slot"
-          };
-          continue;
-        }
-        if (shouldPreserveGaAsExperiencerForHeadGap(ctx, predicateDictForm)) {
-          committedRoles[particleIdx] = {
-            role: "hoshii_experiencer_head_gap",
-            allomorphKey: "이/가",
-            commitmentSource: "relative_head_gap"
-          };
-          continue;
-        }
-        const semanticAssignment = semanticRoleAssignments.get(particleIdx);
-        if (semanticAssignment !== undefined) {
-          committedRoles[particleIdx] = semanticAssignment;
-          continue;
-        }
-        committedRoles[particleIdx] = { role: "hoshii_object", allomorphKey: "을/를" };
-        continue;
-      }
-      if (spanHasDesireAux(tokens, span)) {
-        if (hasWoObject) {
-          committedRoles[particleIdx] = {
-            role: "desire_experiencer",
-            allomorphKey: "이/가",
-            commitmentSource: "desire_aux_experiencer_wo_coexists"
-          };
-          continue;
-        }
-        if (shouldPreserveGaAsDesireAuxExperiencer(ctx, predicateDictForm)) {
-          committedRoles[particleIdx] = {
-            role: "desire_experiencer",
-            allomorphKey: "이/가",
-            commitmentSource: "desire_aux_experiencer"
-          };
-          continue;
-        }
-        const semanticAssignment = semanticRoleAssignments.get(particleIdx);
-        if (semanticAssignment !== undefined) {
-          committedRoles[particleIdx] = semanticAssignment;
-          continue;
-        }
-        if (shouldPreserveGaAsExperiencerForHeadGap(ctx, predicateDictForm)) {
-          committedRoles[particleIdx] = {
-            role: "desire_experiencer_head_gap",
-            allomorphKey: "이/가",
-            commitmentSource: "relative_head_gap"
-          };
-          continue;
-        }
-        committedRoles[particleIdx] = { role: "desire_object", allomorphKey: "을/를" };
-        continue;
-      }
-      const dekiruAssignment = dekiruReadingParticleAssignment(ctx, span, particleIdx, predicateDictForm);
-      if (dekiruAssignment !== undefined) {
-        committedRoles[particleIdx] = dekiruAssignment;
-        continue;
-      }
-      if (spanIsKeijoujiPreferenceBecomePotential(tokens, span, particleIdx)) {
-        committedRoles[particleIdx] = { role: "keijouji_preference_become_potential_object", allomorphKey: "을/를" };
-        continue;
-      }
-      const potentialAssignment = potentialParticleAssignment(ctx, span, particleIdx);
-      if (potentialAssignment !== undefined) {
-        committedRoles[particleIdx] = potentialAssignment;
-        continue;
-      }
-      if (span.isKeijoujiVerbPredicate === true) {
-        const semanticAssignment = semanticRoleAssignments.get(particleIdx);
-        if (semanticAssignment !== undefined) {
-          committedRoles[particleIdx] = semanticAssignment;
-          continue;
-        }
-        const frameSlotAssignment = selectedSemanticFrameGaSlotAssignment(ctx);
-        if (frameSlotAssignment !== undefined) {
-          committedRoles[particleIdx] = frameSlotAssignment;
-          continue;
-        }
-        if (
-          (predicateDictForm === "好き" || predicateDictForm === "嫌い") &&
-          shouldPreserveGaAsPreferenceExperiencerForHeadGap(ctx)
-        ) {
-          committedRoles[particleIdx] = {
-            role: "keijouji_preference_experiencer_head_gap",
-            allomorphKey: "이/가",
-            commitmentSource: "relative_head_gap"
-          };
-          continue;
-        }
-        committedRoles[particleIdx] = { role: "keijouji_verb_object", allomorphKey: "을/를" };
-        continue;
-      }
-    }
-
-    if (
-      isCommitmentCaseParticleToken(token, particleIdx, "が") ||
-      isCommitmentCaseParticleToken(token, particleIdx, "を")
-    ) {
-      const explicitAssignment = explicitAuthorParticleAssignment(ctx);
-      if (explicitAssignment !== undefined) {
-        committedRoles[particleIdx] = explicitAssignment;
-        continue;
-      }
-      const semanticRole = semanticRoleParticleAssignment(ctx);
-      if (semanticRole !== undefined) {
-        committedRoles[particleIdx] = semanticRole;
-        continue;
-      }
-    }
-
-    if ((surface === "は" || surface === "も") && particleIdx === (span.benefactive?.recipientParticleIdx ?? null)) {
-      committedRoles[particleIdx] = {
-        role: "benefactive_recipient",
-        korean: surface === "も" ? "에게도" : "에게"
-      };
+    if (commitGaParticle(run, p) === "continue") {
       continue;
     }
-    if (surface === "は" || surface === "も") {
-      const semanticRole = semanticRoleParticleAssignment(ctx);
-      if (semanticRole?.commitmentSource === COMMITMENT_SOURCE_SLOT_REALIZATION) {
-        committedRoles[particleIdx] = semanticRole;
-        continue;
-      }
-    }
-
-    if (nominalLinkMarkerRelationAt(tokens, particleIdx, { consumers: ["deferred_commitment"] }) !== null) {
-      if (span.dekiruReferentParticleIdx === particleIdx) {
-        const dekiruAssignment = dekiruReadingParticleAssignment(ctx, span, particleIdx, predicateDictForm);
-        if (dekiruAssignment !== undefined) {
-          committedRoles[particleIdx] = dekiruAssignment;
-          continue;
-        }
-      }
-      if (isGaNoConvertedSubjectParticle(tokens, particleIdx, span.start, { clause: options.clause ?? null, lookups })) {
-        const potentialAssignment = potentialParticleAssignment(ctx, span, particleIdx);
-        if (potentialAssignment !== undefined) {
-          committedRoles[particleIdx] = potentialAssignment;
-          continue;
-        }
-      }
-      if (selectedFrameSlotClaimsParticleSurface(ctx, "の")) {
-        const frameAssignment = explicitAuthorParticleAssignment(ctx) ?? selectedSemanticFrameGaSlotAssignment(ctx);
-        if (frameAssignment !== undefined) {
-          committedRoles[particleIdx] = frameAssignment;
-          continue;
-        }
-      }
-      if (isLocalNoSubjectCandidate(tokens, particleIdx, span, { clause: options.clause ?? null, lookups })) {
-        committedRoles[particleIdx] = { role: "no_subject", allomorphKey: "이/가" };
-        continue;
-      }
-      if (isLocalNoExperiencerCandidate(tokens, particleIdx, predicateDictForm)) {
-        committedRoles[particleIdx] = { role: "no_experiencer", korean: "에게" };
-        continue;
-      }
-      const explicitAssignment = explicitAuthorParticleAssignment(ctx);
-      if (explicitAssignment !== undefined) {
-        committedRoles[particleIdx] = explicitAssignment;
-        continue;
-      }
-    }
-
-    if (isCommitmentCaseParticleToken(token, particleIdx, "から", ["格助詞", "接続助詞"])) {
-      if (
-        !isKaraPerspectiveTail(baseCursor, particleIdx, lookups) &&
-        isTimeExpressionBeforeParticle(tokens, particleIdx, lookups, { clause: options.clause ?? null })
-      ) {
-        committedRoles[particleIdx] = { role: "temporal_source", korean: "부터", commitmentSource: COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT };
-        continue;
-      }
-      const benefactiveAgentSubject = benefactiveAgentSubjectContext(span, particleIdx);
-      if (benefactiveAgentSubject !== null) {
-        committedRoles[particleIdx] = {
-          role: "benefactive_agent_subject",
-          allomorphKey: "이/가",
-          register: benefactiveAgentSubject.honorificLevel ?? "none"
-        };
-        continue;
-      }
-      const explicitAssignment = explicitAuthorParticleAssignment(ctx);
-      if (explicitAssignment !== undefined) {
-        committedRoles[particleIdx] = explicitAssignment;
-        continue;
-      }
-      const semanticRole = semanticRoleParticleAssignment(ctx);
-      if (semanticRole !== undefined) {
-        committedRoles[particleIdx] = semanticRole;
-        continue;
-      }
-      const neutralTrigger = causativeNeutralTriggerParticleAssignment(ctx, predicateDictForms);
-      if (neutralTrigger !== undefined) {
-        committedRoles[particleIdx] = neutralTrigger;
-        continue;
-      }
-      if (
-        !isKaraPerspectiveTail(baseCursor, particleIdx, lookups) &&
-        ((referent !== null && isHumanReferentToken(referent, lookups)) || isPersonByContext(tokens, particleIdx, lookups))
-      ) {
-        committedRoles[particleIdx] = { role: "human_source", korean: "에게서", commitmentSource: COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT };
-        continue;
-      }
-    }
-
-    if (isCommitmentCaseParticleToken(token, particleIdx, "より")) {
-      if (yoriPrefersTemporalSource(tokens, particleIdx, span, { clause: options.clause ?? null, lookups })) {
-        committedRoles[particleIdx] = { role: "temporal_source", korean: "부터", commitmentSource: COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT };
-        continue;
-      }
-      const explicitAssignment = explicitAuthorParticleAssignment(ctx);
-      if (explicitAssignment !== undefined) {
-        committedRoles[particleIdx] = explicitAssignment;
-        continue;
-      }
-    }
-
-    if (caseParticleMarkerRelationForToken(tokens[particleIdx], particleIdx, {
-      acceptedSurfaces: ["で"],
-      consumers: ["deferred_commitment"]
-    }) !== null) {
-      if (referent !== null && isHumanCollectiveToken(referent, lookups)) {
-        committedRoles[particleIdx] = { role: "human_collective_companion", korean: "함께", attachLeft: false };
-        continue;
-      }
-      if (referent !== null && isHumanReferentToken(referent, lookups)) {
-        committedRoles[particleIdx] = { role: "human_companion", allomorphKey: "과/와" };
-        continue;
-      }
-      if (isPersonCountBeforeDe(tokens, particleIdx, lookups)) {
-        committedRoles[particleIdx] = { role: "person_count_subject", allomorphKey: "이/가" };
-        continue;
-      }
-      if (passiveClass === "adversative" && referent !== null && isAdversativePassiveDeLocationSource(referent, lookups)) {
-        committedRoles[particleIdx] = { role: "adversative_passive_location", korean: "에서" };
-        continue;
-      }
-      if (lookups.DE_MOVEMENT_VERBS.has(predicateDictForm)) {
-        committedRoles[particleIdx] = { role: "movement_path", allomorphKey: "으로/로" };
-        continue;
-      }
-      const explicitAssignment = explicitAuthorParticleAssignment(ctx);
-      if (explicitAssignment !== undefined) {
-        committedRoles[particleIdx] = explicitAssignment;
-        continue;
-      }
-      const neutralTrigger = causativeNeutralTriggerParticleAssignment(ctx, predicateDictForms);
-      if (neutralTrigger !== undefined) {
-        committedRoles[particleIdx] = neutralTrigger;
-        continue;
-      }
-    }
-
-    const quoteToMarker = quoteMarkerRelationAt(tokens, particleIdx, { consumers: ["deferred_commitment"] });
-    if (
-      (quoteToMarker?.canonicalSurface === "と" && ((tokens[particleIdx]?.pos ?? 0) & POS0) === 助詞) ||
-      isCommitmentCaseParticleToken(token, particleIdx, "へ")
-    ) {
-      const explicitAssignment = explicitAuthorParticleAssignment(ctx);
-      if (explicitAssignment !== undefined) {
-        committedRoles[particleIdx] = explicitAssignment;
-      }
+    if (commitGaWoAuthorOrSemanticRole(run, p) === "continue") {
       continue;
     }
-
-    if (surface === "まで") {
-      const explicitAssignment = explicitAuthorParticleAssignment(ctx);
-      if (explicitAssignment !== undefined) {
-        committedRoles[particleIdx] = explicitAssignment;
-        continue;
-      }
-      const semanticRole = semanticRoleParticleAssignment(ctx);
-      if (semanticRole !== undefined) {
-        committedRoles[particleIdx] = semanticRole;
-        continue;
-      }
+    if (commitTopicFocusParticle(run, p) === "continue") {
+      continue;
+    }
+    if (commitNominalLinkNoParticle(run, p) === "continue") {
+      continue;
+    }
+    if (commitKaraParticle(run, p) === "continue") {
+      continue;
+    }
+    if (commitYoriParticle(run, p) === "continue") {
+      continue;
+    }
+    if (commitDeParticle(run, p) === "continue") {
+      continue;
+    }
+    if (commitQuoteToOrHeParticle(run, p) === "continue") {
+      continue;
+    }
+    if (commitMadeParticle(run, p) === "continue") {
+      continue;
     }
 
     if (!isCommitmentCaseParticleToken(token, particleIdx, "に")) {
       continue;
     }
 
-    if (isTimeExpressionBeforeParticle(tokens, particleIdx, lookups, { clause: options.clause ?? null })) {
-      const explicitAssignment = explicitAuthorParticleAssignment(ctx, { directCasePreference: true });
-      if (explicitAssignment !== undefined) {
-        committedRoles[particleIdx] = explicitAssignment;
-        continue;
+    if (commitNiParticleByFrame(run, p) === "continue") {
+      continue;
+    }
+    commitNiParticleByAnimacy(run, p);
+  }
+  return committedRoles;
+}
+
+interface ParticleRoleCommitRun {
+  readonly baseCursor: TokenCursor<CommitmentToken>;
+  readonly tokens: readonly CommitmentToken[];
+  readonly span: CommitmentSpan;
+  readonly particleIndices: readonly number[];
+  readonly options: Parameters<typeof commitParticleRoles>[4];
+  readonly committedRoles: Record<number, ParticleAssignment>;
+  readonly lookups: LookupTables;
+  readonly semanticRoleAssignments: ReadonlyMap<number, ParticleAssignment>;
+  readonly predicateDictForm: string;
+  readonly predicateDictForms: ReturnType<typeof passiveClassPredicateDictForms>;
+  readonly supportPredicateDictForm: ReturnType<typeof tailChainSupportPredicateDictForm>;
+  readonly hasAnimateNiAgent: boolean;
+  readonly hasWoObject: boolean;
+  readonly passiveClass: NonNullable<CommitmentSpan["passiveClass"]> | null;
+  readonly adversativeAgentPromoted: boolean;
+}
+
+interface ParticleRoleStep {
+  readonly particleIdx: number;
+  readonly token: CommitmentToken;
+  readonly surface: string;
+  readonly referent: ReturnType<typeof getReferentTokenBeforeParticle>;
+  readonly ctx: ParticleCommitmentContext;
+}
+
+type ParticleRoleSignal = "continue" | "next";
+
+function commitSareruQuoteTailParticle(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { baseCursor, tokens, span, options, committedRoles, lookups } = run;
+  const { particleIdx, token } = p;
+  if (particlePrecedesSareruQuoteTail(tokens, span, particleIdx)) {
+    if (
+      isCommitmentCaseParticleToken(token, particleIdx, "から", ["格助詞", "接続助詞"]) &&
+      !isKaraPerspectiveTail(baseCursor, particleIdx, lookups) &&
+      isTimeExpressionBeforeParticle(tokens, particleIdx, lookups, { clause: options.clause ?? null })
+    ) {
+      committedRoles[particleIdx] = { role: "temporal_source", korean: "부터", commitmentSource: COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT };
+      return "continue";
+    }
+    if (
+      isCommitmentCaseParticleToken(token, particleIdx, "より") &&
+      yoriPrefersTemporalSource(tokens, particleIdx, span, { clause: options.clause ?? null, lookups })
+    ) {
+      committedRoles[particleIdx] = { role: "temporal_source", korean: "부터", commitmentSource: COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT };
+      return "continue";
+    }
+    return "continue";
+  }
+  return "next";
+}
+
+function commitPassiveWoParticle(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { tokens, span, committedRoles, lookups, semanticRoleAssignments, predicateDictForms, hasAnimateNiAgent, passiveClass, adversativeAgentPromoted } = run;
+  const { particleIdx, token, surface, referent } = p;
+  if (isCommitmentCaseParticleToken(token, particleIdx, "を") && spanIsPassive(span)) {
+    if (spanConsumesPassiveAux(span)) {
+      const semanticAssignment = semanticRoleAssignments.get(particleIdx);
+      if (semanticAssignment !== undefined) {
+        committedRoles[particleIdx] = semanticAssignment;
+        return "continue";
       }
-      const semanticRole = semanticRoleParticleAssignment(ctx);
-      if (semanticRole !== undefined && semanticRole.role === "duration_span") {
-        committedRoles[particleIdx] = semanticRole;
+      if (spanPassiveAbsorbedFrameOwnsParticle(span, surface)) {
+        return "continue";
       }
-      continue;
     }
-
-    if (spanIsNareruBecomePotential(span)) {
-      committedRoles[particleIdx] = { role: "nareru_become_subject", allomorphKey: "이/가" };
-      continue;
+    if (passiveClass === "causative_coercive" || passiveClass === "causative_passive_neutral") {
+      return "continue";
     }
-
-    if (predicateDictForm === "向ける" && !particleIndices.some((idx) => isCommitmentCaseParticle(tokens, idx, "を"))) {
-      committedRoles[particleIdx] = { role: "ni_muketa_object", allomorphKey: "을/를" };
-      continue;
+    if (isDeparturePassiveSourceWo(referent, predicateDictForms, lookups)) {
+      committedRoles[particleIdx] = { role: "departure_source", korean: "에서" };
+      return "continue";
     }
-
-    const nextToken = tokens[particleIdx + 1];
-    if (nextToken?.dictionaryForm === "する" && nextToken.pos !== 0 && (nextToken.pos & POS5A) === 命令形_) {
-      continue;
+    if (passiveClass === "possessor") {
+      return "continue";
     }
-
-    if (predicateDictForm === "なる") {
-      const semanticRole = semanticRoleParticleAssignment(ctx);
-      if (semanticRole?.commitmentSource === COMMITMENT_SOURCE_SLOT_REALIZATION) {
-        committedRoles[particleIdx] = semanticRole;
+    if (isObjectRetainingAdversativePassive(span, lookups)) {
+      return "continue";
+    }
+    const koreanLemma = extractKoreanLemma(span);
+    const sahenNoun = extractSahenNoun(span);
+    const sahenCompound = extractSahenCompound(span);
+    if (koreanLemma !== null && isPassiveTransitive(koreanLemma, passiveTransitiveOptions(sahenCompound, sahenNoun, lookups))) {
+      if (passiveClass === "adversative" && hasAnimateNiAgent && !woObjectIsBodyPart(tokens, particleIdx, lookups)) {
+        setAdversativePassive(span, { agentPromoted: adversativeAgentPromoted });
       }
-      continue;
+      return "continue";
     }
+    committedRoles[particleIdx] = { role: "theme_promoted", allomorphKey: "이/가" };
+    if (passiveClass === "adversative" && hasAnimateNiAgent) {
+      setAdversativePassive(span);
+    }
+    return "continue";
+  }
+  return "next";
+}
 
+function commitGaParticle(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { tokens, span, committedRoles, semanticRoleAssignments, predicateDictForm, hasWoObject } = run;
+  const { particleIdx, token, ctx } = p;
+  if (isCommitmentCaseParticleToken(token, particleIdx, "が")) {
+    if ((predicateDictForm === "欲しい" || predicateDictForm === "ほしい") && !spanPredicateIsVerbalSuffixDerivation(span)) {
+      const semanticFrameSlot = semanticFrameSlotForParticle(ctx);
+      if (semanticFrameSlot?.role === "holder" || semanticFrameSlot?.role === "experiencer") {
+        committedRoles[particleIdx] = {
+          role: `hoshii_${semanticFrameSlot.role}`,
+          allomorphKey: "이/가",
+          commitmentSource: "semantic_frame_slot"
+        };
+        return "continue";
+      }
+      if (shouldPreserveGaAsExperiencerForHeadGap(ctx, predicateDictForm)) {
+        committedRoles[particleIdx] = {
+          role: "hoshii_experiencer_head_gap",
+          allomorphKey: "이/가",
+          commitmentSource: "relative_head_gap"
+        };
+        return "continue";
+      }
+      const semanticAssignment = semanticRoleAssignments.get(particleIdx);
+      if (semanticAssignment !== undefined) {
+        committedRoles[particleIdx] = semanticAssignment;
+        return "continue";
+      }
+      committedRoles[particleIdx] = { role: "hoshii_object", allomorphKey: "을/를" };
+      return "continue";
+    }
+    if (spanHasDesireAux(tokens, span)) {
+      if (hasWoObject) {
+        committedRoles[particleIdx] = {
+          role: "desire_experiencer",
+          allomorphKey: "이/가",
+          commitmentSource: "desire_aux_experiencer_wo_coexists"
+        };
+        return "continue";
+      }
+      if (shouldPreserveGaAsDesireAuxExperiencer(ctx, predicateDictForm)) {
+        committedRoles[particleIdx] = {
+          role: "desire_experiencer",
+          allomorphKey: "이/가",
+          commitmentSource: "desire_aux_experiencer"
+        };
+        return "continue";
+      }
+      const semanticAssignment = semanticRoleAssignments.get(particleIdx);
+      if (semanticAssignment !== undefined) {
+        committedRoles[particleIdx] = semanticAssignment;
+        return "continue";
+      }
+      if (shouldPreserveGaAsExperiencerForHeadGap(ctx, predicateDictForm)) {
+        committedRoles[particleIdx] = {
+          role: "desire_experiencer_head_gap",
+          allomorphKey: "이/가",
+          commitmentSource: "relative_head_gap"
+        };
+        return "continue";
+      }
+      committedRoles[particleIdx] = { role: "desire_object", allomorphKey: "을/를" };
+      return "continue";
+    }
+    const dekiruAssignment = dekiruReadingParticleAssignment(ctx, span, particleIdx, predicateDictForm);
+    if (dekiruAssignment !== undefined) {
+      committedRoles[particleIdx] = dekiruAssignment;
+      return "continue";
+    }
+    if (spanIsKeijoujiPreferenceBecomePotential(tokens, span, particleIdx)) {
+      committedRoles[particleIdx] = { role: "keijouji_preference_become_potential_object", allomorphKey: "을/를" };
+      return "continue";
+    }
+    const potentialAssignment = potentialParticleAssignment(ctx, span, particleIdx);
+    if (potentialAssignment !== undefined) {
+      committedRoles[particleIdx] = potentialAssignment;
+      return "continue";
+    }
+    if (span.isKeijoujiVerbPredicate === true) {
+      if (predicateDirectlyOwnsWoObject(ctx)) {
+        committedRoles[particleIdx] = {
+          role: "keijouji_experiencer",
+          allomorphKey: "이/가",
+          commitmentSource: "keijouji_experiencer_wo_coexists"
+        };
+        return "continue";
+      }
+      const semanticAssignment = semanticRoleAssignments.get(particleIdx);
+      if (semanticAssignment !== undefined) {
+        committedRoles[particleIdx] = semanticAssignment;
+        return "continue";
+      }
+      const frameSlotAssignment = selectedSemanticFrameGaSlotAssignment(ctx);
+      if (frameSlotAssignment !== undefined) {
+        committedRoles[particleIdx] = frameSlotAssignment;
+        return "continue";
+      }
+      if (
+        (predicateDictForm === "好き" || predicateDictForm === "嫌い") &&
+        shouldPreserveGaAsPreferenceExperiencerForHeadGap(ctx)
+      ) {
+        committedRoles[particleIdx] = {
+          role: "keijouji_preference_experiencer_head_gap",
+          allomorphKey: "이/가",
+          commitmentSource: "relative_head_gap"
+        };
+        return "continue";
+      }
+      committedRoles[particleIdx] = { role: "keijouji_verb_object", allomorphKey: "을/를" };
+      return "continue";
+    }
+  }
+  return "next";
+}
+
+function commitGaWoAuthorOrSemanticRole(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { committedRoles } = run;
+  const { particleIdx, token, ctx } = p;
+  if (
+    isCommitmentCaseParticleToken(token, particleIdx, "が") ||
+    isCommitmentCaseParticleToken(token, particleIdx, "を")
+  ) {
+    const explicitAssignment = explicitAuthorParticleAssignment(ctx);
+    if (explicitAssignment !== undefined) {
+      committedRoles[particleIdx] = explicitAssignment;
+      return "continue";
+    }
+    const semanticRole = semanticRoleParticleAssignment(ctx);
+    if (semanticRole !== undefined) {
+      committedRoles[particleIdx] = semanticRole;
+      return "continue";
+    }
+  }
+  return "next";
+}
+
+function commitTopicFocusParticle(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { span, committedRoles } = run;
+  const { particleIdx, surface, ctx } = p;
+  if ((surface === "は" || surface === "も") && particleIdx === (span.benefactive?.recipientParticleIdx ?? null)) {
+    committedRoles[particleIdx] = {
+      role: "benefactive_recipient",
+      korean: surface === "も" ? "에게도" : "에게"
+    };
+    return "continue";
+  }
+  if (surface === "は" || surface === "も") {
+    const semanticRole = semanticRoleParticleAssignment(ctx);
+    if (semanticRole?.commitmentSource === COMMITMENT_SOURCE_SLOT_REALIZATION) {
+      committedRoles[particleIdx] = semanticRole;
+      return "continue";
+    }
+  }
+  return "next";
+}
+
+function commitNominalLinkNoParticle(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { tokens, span, options, committedRoles, lookups, predicateDictForm } = run;
+  const { particleIdx, ctx } = p;
+  if (nominalLinkMarkerRelationAt(tokens, particleIdx, { consumers: ["deferred_commitment"] }) !== null) {
+    if (span.dekiruReferentParticleIdx === particleIdx) {
+      const dekiruAssignment = dekiruReadingParticleAssignment(ctx, span, particleIdx, predicateDictForm);
+      if (dekiruAssignment !== undefined) {
+        committedRoles[particleIdx] = dekiruAssignment;
+        return "continue";
+      }
+    }
+    if (isGaNoConvertedSubjectParticle(tokens, particleIdx, span.start, { clause: options.clause ?? null, lookups })) {
+      const potentialAssignment = potentialParticleAssignment(ctx, span, particleIdx);
+      if (potentialAssignment !== undefined) {
+        committedRoles[particleIdx] = potentialAssignment;
+        return "continue";
+      }
+    }
+    if (selectedFrameSlotClaimsParticleSurface(ctx, "の")) {
+      const frameAssignment = explicitAuthorParticleAssignment(ctx) ?? selectedSemanticFrameGaSlotAssignment(ctx);
+      if (frameAssignment !== undefined) {
+        committedRoles[particleIdx] = frameAssignment;
+        return "continue";
+      }
+    }
+    if (isLocalNoSubjectCandidate(tokens, particleIdx, span, { clause: options.clause ?? null, lookups })) {
+      committedRoles[particleIdx] = { role: "no_subject", allomorphKey: "이/가" };
+      return "continue";
+    }
+    if (isLocalNoExperiencerCandidate(tokens, particleIdx, predicateDictForm)) {
+      committedRoles[particleIdx] = { role: "no_experiencer", korean: "에게" };
+      return "continue";
+    }
+    const explicitAssignment = explicitAuthorParticleAssignment(ctx);
+    if (explicitAssignment !== undefined) {
+      committedRoles[particleIdx] = explicitAssignment;
+      return "continue";
+    }
+  }
+  return "next";
+}
+
+function commitKaraParticle(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { baseCursor, tokens, span, options, committedRoles, lookups, predicateDictForms } = run;
+  const { particleIdx, token, referent, ctx } = p;
+  if (isCommitmentCaseParticleToken(token, particleIdx, "から", ["格助詞", "接続助詞"])) {
+    if (
+      !isKaraPerspectiveTail(baseCursor, particleIdx, lookups) &&
+      isTimeExpressionBeforeParticle(tokens, particleIdx, lookups, { clause: options.clause ?? null })
+    ) {
+      committedRoles[particleIdx] = { role: "temporal_source", korean: "부터", commitmentSource: COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT };
+      return "continue";
+    }
     const benefactiveAgentSubject = benefactiveAgentSubjectContext(span, particleIdx);
     if (benefactiveAgentSubject !== null) {
       committedRoles[particleIdx] = {
@@ -729,117 +703,287 @@ export function commitParticleRoles(
         allomorphKey: "이/가",
         register: benefactiveAgentSubject.honorificLevel ?? "none"
       };
-      continue;
+      return "continue";
     }
-
     const explicitAssignment = explicitAuthorParticleAssignment(ctx);
     if (explicitAssignment !== undefined) {
       committedRoles[particleIdx] = explicitAssignment;
-      continue;
+      return "continue";
+    }
+    const semanticRole = semanticRoleParticleAssignment(ctx);
+    if (semanticRole !== undefined) {
+      committedRoles[particleIdx] = semanticRole;
+      return "continue";
     }
     const neutralTrigger = causativeNeutralTriggerParticleAssignment(ctx, predicateDictForms);
     if (neutralTrigger !== undefined) {
       committedRoles[particleIdx] = neutralTrigger;
-      continue;
+      return "continue";
     }
-    const allowedNiRole = semanticRoleParticleAssignment(ctx, {
-      allowedRoles: new Set([
-        "assignment",
-        "attention_object",
-        "awareness_target",
-        "dispatch_destination",
-        "event",
-        "office_role",
-        "perception_location",
-        "perception_stimulus",
-        "preference_target",
-        "rank_goal",
-        "seat_location",
-        "standard",
-        "state_entry",
-        "stimulus",
-        "trap_location",
-        "vehicle",
-        "platform",
-        "carrier",
-        "work_domain",
-        "work_start_object"
-      ])
-    });
-    if (allowedNiRole !== undefined) {
-      committedRoles[particleIdx] = allowedNiRole;
-      continue;
-    }
-
-    const stateReturnGoal = stateReturnGoalAssignment(ctx, predicateDictForms);
-    if (stateReturnGoal !== undefined) {
-      committedRoles[particleIdx] = stateReturnGoal;
-      continue;
-    }
-
-    const niLimitComplement = niLimitComplementParticleAssignment(ctx, predicateDictForms);
-    if (niLimitComplement !== undefined) {
-      committedRoles[particleIdx] = niLimitComplement;
-      continue;
-    }
-
-    if (isAnimateReferentBeforeNi(tokens, particleIdx, lookups)) {
-      if (passiveClass === "causative_coercive") {
-        committedRoles[particleIdx] = {
-          role: "causative_agent_subject",
-          allomorphKey: "이/가",
-          register: isRespectReferentBeforeParticle(tokens, particleIdx, lookups) ? "respect" : "none"
-        };
-        continue;
-      }
-      if (adversativeAgentPromoted) {
-        committedRoles[particleIdx] = {
-          role: "adversative_agent_subject",
-          allomorphKey: "이/가",
-          register: isRespectReferentBeforeParticle(tokens, particleIdx, lookups) ? "respect" : "none"
-        };
-        continue;
-      }
-      if (lookups.NI_ACCUSATIVE_PERSON.has(predicateDictForm)) {
-        committedRoles[particleIdx] = { role: "animate_object", allomorphKey: "을/를" };
-      } else {
-        const semanticRole = semanticRoleParticleAssignment(ctx);
-        if (semanticRole !== undefined) {
-          committedRoles[particleIdx] = {
-            ...semanticRole,
-            register: isRespectReferentBeforeParticle(tokens, particleIdx, lookups) ? "respect" : "none"
-          };
-          continue;
-        }
-        committedRoles[particleIdx] = {
-          role: "animate_recipient",
-          allomorphKey: "에게",
-          register: isRespectReferentBeforeParticle(tokens, particleIdx, lookups) ? "respect" : "none"
-        };
-      }
-      continue;
-    }
-
     if (
-      lookups.NI_ACCUSATIVE_UNIVERSAL.has(predicateDictForm) &&
-      !isTemporalConditionHeadBeforeNi(tokens, particleIdx, lookups)
+      !isKaraPerspectiveTail(baseCursor, particleIdx, lookups) &&
+      ((referent !== null && isHumanReferentToken(referent, lookups)) || isPersonByContext(tokens, particleIdx, lookups))
     ) {
-      committedRoles[particleIdx] = { role: "ni_object", allomorphKey: "을/를" };
-      continue;
-    }
-
-    if (
-      (
-        lookups.NI_INSTRUMENTAL_VERBS.has(predicateDictForm) ||
-        supportPredicateAllowsNiInstrument(tokens, particleIdx, supportPredicateDictForm, lookups)
-      ) &&
-      !precedingIsIdiomNoun(tokens, particleIdx, lookups) &&
-      !isTemporalConditionHeadBeforeNi(tokens, particleIdx, lookups)
-    ) {
-      committedRoles[particleIdx] = { role: "ni_instrument", allomorphKey: "으로/로" };
+      committedRoles[particleIdx] = { role: "human_source", korean: "에게서", commitmentSource: COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT };
+      return "continue";
     }
   }
-  return committedRoles;
+  return "next";
+}
+
+function commitYoriParticle(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { tokens, span, options, committedRoles, lookups } = run;
+  const { particleIdx, token, ctx } = p;
+  if (isCommitmentCaseParticleToken(token, particleIdx, "より")) {
+    if (yoriPrefersTemporalSource(tokens, particleIdx, span, { clause: options.clause ?? null, lookups })) {
+      committedRoles[particleIdx] = { role: "temporal_source", korean: "부터", commitmentSource: COMMITMENT_SOURCE_NOUN_SIDE_DEFAULT };
+      return "continue";
+    }
+    const explicitAssignment = explicitAuthorParticleAssignment(ctx);
+    if (explicitAssignment !== undefined) {
+      committedRoles[particleIdx] = explicitAssignment;
+      return "continue";
+    }
+  }
+  return "next";
+}
+
+function commitDeParticle(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { tokens, committedRoles, lookups, predicateDictForm, predicateDictForms, passiveClass } = run;
+  const { particleIdx, referent, ctx } = p;
+  if (caseParticleMarkerRelationForToken(tokens[particleIdx], particleIdx, {
+    acceptedSurfaces: ["で"],
+    consumers: ["deferred_commitment"]
+  }) !== null) {
+    if (referent !== null && isHumanCollectiveToken(referent, lookups)) {
+      committedRoles[particleIdx] = { role: "human_collective_companion", korean: "함께", attachLeft: false };
+      return "continue";
+    }
+    if (referent !== null && isHumanReferentToken(referent, lookups)) {
+      committedRoles[particleIdx] = { role: "human_companion", allomorphKey: "과/와" };
+      return "continue";
+    }
+    if (isPersonCountBeforeDe(tokens, particleIdx, lookups)) {
+      committedRoles[particleIdx] = { role: "person_count_subject", allomorphKey: "이/가" };
+      return "continue";
+    }
+    if (passiveClass === "adversative" && referent !== null && isAdversativePassiveDeLocationSource(referent, lookups)) {
+      committedRoles[particleIdx] = { role: "adversative_passive_location", korean: "에서" };
+      return "continue";
+    }
+    if (lookups.DE_MOVEMENT_VERBS.has(predicateDictForm)) {
+      committedRoles[particleIdx] = { role: "movement_path", allomorphKey: "으로/로" };
+      return "continue";
+    }
+    const explicitAssignment = explicitAuthorParticleAssignment(ctx);
+    if (explicitAssignment !== undefined) {
+      committedRoles[particleIdx] = explicitAssignment;
+      return "continue";
+    }
+    const neutralTrigger = causativeNeutralTriggerParticleAssignment(ctx, predicateDictForms);
+    if (neutralTrigger !== undefined) {
+      committedRoles[particleIdx] = neutralTrigger;
+      return "continue";
+    }
+  }
+  return "next";
+}
+
+function commitQuoteToOrHeParticle(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { tokens, committedRoles } = run;
+  const { particleIdx, token, ctx } = p;
+  const quoteToMarker = quoteMarkerRelationAt(tokens, particleIdx, { consumers: ["deferred_commitment"] });
+  if (
+    (quoteToMarker?.canonicalSurface === "と" && ((tokens[particleIdx]?.pos ?? 0) & POS0) === 助詞) ||
+    isCommitmentCaseParticleToken(token, particleIdx, "へ")
+  ) {
+    const explicitAssignment = explicitAuthorParticleAssignment(ctx);
+    if (explicitAssignment !== undefined) {
+      committedRoles[particleIdx] = explicitAssignment;
+    }
+    return "continue";
+  }
+  return "next";
+}
+
+function commitMadeParticle(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { committedRoles } = run;
+  const { particleIdx, surface, ctx } = p;
+  if (surface === "まで") {
+    const explicitAssignment = explicitAuthorParticleAssignment(ctx);
+    if (explicitAssignment !== undefined) {
+      committedRoles[particleIdx] = explicitAssignment;
+      return "continue";
+    }
+    const semanticRole = semanticRoleParticleAssignment(ctx);
+    if (semanticRole !== undefined) {
+      committedRoles[particleIdx] = semanticRole;
+      return "continue";
+    }
+  }
+  return "next";
+}
+
+function commitNiParticleByFrame(run: ParticleRoleCommitRun, p: ParticleRoleStep): ParticleRoleSignal {
+  const { tokens, span, particleIndices, options, committedRoles, lookups, predicateDictForm, predicateDictForms } = run;
+  const { particleIdx, ctx } = p;
+  if (isTimeExpressionBeforeParticle(tokens, particleIdx, lookups, { clause: options.clause ?? null })) {
+    const explicitAssignment = explicitAuthorParticleAssignment(ctx, { directCasePreference: true });
+    if (explicitAssignment !== undefined) {
+      committedRoles[particleIdx] = explicitAssignment;
+      return "continue";
+    }
+    const semanticRole = semanticRoleParticleAssignment(ctx);
+    if (semanticRole !== undefined && semanticRole.role === "duration_span") {
+      committedRoles[particleIdx] = semanticRole;
+    }
+    return "continue";
+  }
+
+  if (spanIsNareruBecomePotential(span)) {
+    committedRoles[particleIdx] = { role: "nareru_become_subject", allomorphKey: "이/가" };
+    return "continue";
+  }
+
+  if (predicateDictForm === "向ける" && !particleIndices.some((idx) => isCommitmentCaseParticle(tokens, idx, "を"))) {
+    committedRoles[particleIdx] = { role: "ni_muketa_object", allomorphKey: "을/를" };
+    return "continue";
+  }
+
+  const nextToken = tokens[particleIdx + 1];
+  if (nextToken?.dictionaryForm === "する" && nextToken.pos !== 0 && (nextToken.pos & POS5A) === 命令形_) {
+    return "continue";
+  }
+
+  if (predicateDictForm === "なる") {
+    const semanticRole = semanticRoleParticleAssignment(ctx);
+    if (semanticRole?.commitmentSource === COMMITMENT_SOURCE_SLOT_REALIZATION) {
+      committedRoles[particleIdx] = semanticRole;
+    }
+    return "continue";
+  }
+
+  const benefactiveAgentSubject = benefactiveAgentSubjectContext(span, particleIdx);
+  if (benefactiveAgentSubject !== null) {
+    committedRoles[particleIdx] = {
+      role: "benefactive_agent_subject",
+      allomorphKey: "이/가",
+      register: benefactiveAgentSubject.honorificLevel ?? "none"
+    };
+    return "continue";
+  }
+
+  const explicitAssignment = explicitAuthorParticleAssignment(ctx);
+  if (explicitAssignment !== undefined) {
+    committedRoles[particleIdx] = explicitAssignment;
+    return "continue";
+  }
+  const neutralTrigger = causativeNeutralTriggerParticleAssignment(ctx, predicateDictForms);
+  if (neutralTrigger !== undefined) {
+    committedRoles[particleIdx] = neutralTrigger;
+    return "continue";
+  }
+  const allowedNiRole = semanticRoleParticleAssignment(ctx, {
+    allowedRoles: new Set([
+      "assignment",
+      "attention_object",
+      "awareness_target",
+      "dispatch_destination",
+      "event",
+      "office_role",
+      "perception_location",
+      "perception_stimulus",
+      "preference_target",
+      "rank_goal",
+      "seat_location",
+      "standard",
+      "state_entry",
+      "stimulus",
+      "trap_location",
+      "vehicle",
+      "platform",
+      "carrier",
+      "work_domain",
+      "work_start_object"
+    ])
+  });
+  if (allowedNiRole !== undefined) {
+    committedRoles[particleIdx] = allowedNiRole;
+    return "continue";
+  }
+
+  const stateReturnGoal = stateReturnGoalAssignment(ctx, predicateDictForms);
+  if (stateReturnGoal !== undefined) {
+    committedRoles[particleIdx] = stateReturnGoal;
+    return "continue";
+  }
+
+  const niLimitComplement = niLimitComplementParticleAssignment(ctx, predicateDictForms);
+  if (niLimitComplement !== undefined) {
+    committedRoles[particleIdx] = niLimitComplement;
+    return "continue";
+  }
+  return "next";
+}
+
+function commitNiParticleByAnimacy(run: ParticleRoleCommitRun, p: ParticleRoleStep): void {
+  const { tokens, committedRoles, lookups, predicateDictForm, supportPredicateDictForm, passiveClass, adversativeAgentPromoted } = run;
+  const { particleIdx, ctx } = p;
+  if (isAnimateReferentBeforeNi(tokens, particleIdx, lookups)) {
+    if (passiveClass === "causative_coercive") {
+      committedRoles[particleIdx] = {
+        role: "causative_agent_subject",
+        allomorphKey: "이/가",
+        register: isRespectReferentBeforeParticle(tokens, particleIdx, lookups) ? "respect" : "none"
+      };
+      return;
+    }
+    if (adversativeAgentPromoted) {
+      committedRoles[particleIdx] = {
+        role: "adversative_agent_subject",
+        allomorphKey: "이/가",
+        register: isRespectReferentBeforeParticle(tokens, particleIdx, lookups) ? "respect" : "none"
+      };
+      return;
+    }
+    if (lookups.NI_ACCUSATIVE_PERSON.has(predicateDictForm)) {
+      committedRoles[particleIdx] = { role: "animate_object", allomorphKey: "을/를" };
+    } else {
+      const semanticRole = semanticRoleParticleAssignment(ctx);
+      if (semanticRole !== undefined) {
+        committedRoles[particleIdx] = {
+          ...semanticRole,
+          register: isRespectReferentBeforeParticle(tokens, particleIdx, lookups) ? "respect" : "none"
+        };
+        return;
+      }
+      committedRoles[particleIdx] = {
+        role: "animate_recipient",
+        allomorphKey: "에게",
+        register: isRespectReferentBeforeParticle(tokens, particleIdx, lookups) ? "respect" : "none"
+      };
+    }
+    return;
+  }
+
+  if (
+    lookups.NI_ACCUSATIVE_UNIVERSAL.has(predicateDictForm) &&
+    !isTemporalConditionHeadBeforeNi(tokens, particleIdx, lookups)
+  ) {
+    committedRoles[particleIdx] = { role: "ni_object", allomorphKey: "을/를" };
+    return;
+  }
+
+  if (
+    (
+      lookups.NI_INSTRUMENTAL_VERBS.has(predicateDictForm) ||
+      supportPredicateAllowsNiInstrument(tokens, particleIdx, supportPredicateDictForm, lookups)
+    ) &&
+    !precedingIsIdiomNoun(tokens, particleIdx, lookups) &&
+    !isTemporalConditionHeadBeforeNi(tokens, particleIdx, lookups)
+  ) {
+    committedRoles[particleIdx] = { role: "ni_instrument", allomorphKey: "으로/로" };
+  }
 }
 
 function stateReturnGoalAssignment(
@@ -1263,6 +1407,9 @@ function abilityArgumentRole(ctx: ParticleCommitmentContext): AbilityArgumentRol
   if (predicateOwnsExplicitWoObject(ctx)) {
     return "agent";
   }
+  if (abilityBaseVerbHasNoAnimateObjectSlot(ctx) && isAnimateAbilityArgumentToken(referent, ctx.lookups)) {
+    return "agent";
+  }
   if (!isStrongAbilityAgentToken(referent, ctx.lookups)) {
     return "object";
   }
@@ -1271,6 +1418,39 @@ function abilityArgumentRole(ctx: ParticleCommitmentContext): AbilityArgumentRol
     return "object";
   }
   return "agent";
+}
+
+function predicateDirectlyOwnsWoObject(ctx: ParticleCommitmentContext): boolean {
+  if (ctx.layout === null || ctx.predicateIdx === null) {
+    return false;
+  }
+  return hasExplicitWoObject(ctx.tokens, argumentParticleIndicesForPredicate(ctx.predicateIdx, ctx.tokens, ctx.layout));
+}
+
+function abilityBaseVerbHasNoAnimateObjectSlot(ctx: ParticleCommitmentContext): boolean {
+  const verbs = ctx.lookups.SEMANTIC_ANIMATE_GA_SUBJECT_VERBS;
+  return abilityBaseVerbForms(ctx.span, ctx.tokens[ctx.span.start]).some((form) => verbs.has(form));
+}
+
+function abilityBaseVerbForms(span: CommitmentSpan, token: CommitmentToken | undefined): readonly string[] {
+  const forms: string[] = [];
+  const add = (form: string | undefined): void => {
+    if (form !== undefined && form.length > 0 && !forms.includes(form)) {
+      forms.push(form);
+    }
+  };
+  add(token?.dictionaryForm);
+  const derivations = [selectedCommitmentCandidate(span)?.derivation, ...entryDerivations(span.entry)];
+  for (const derivation of derivations) {
+    if (derivation?.id === "potential") {
+      add(derivation.baseForm);
+    }
+  }
+  return forms;
+}
+
+function isAnimateAbilityArgumentToken(token: CommitmentToken, lookups: LookupTables): boolean {
+  return !isSahenCapableNominal(token) && (isAnimateReferentToken(token, lookups) || isHumanCollectiveToken(token, lookups));
 }
 
 function predicateOwnsExplicitWoObject(ctx: ParticleCommitmentContext): boolean {

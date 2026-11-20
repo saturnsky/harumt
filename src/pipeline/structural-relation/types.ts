@@ -1,5 +1,9 @@
 import type { RenderPlan } from "../../types/render-plan.js";
 import type { QuoteBoundaryFocusParticle, RequestQuoteTailKind, SfpNode } from "../head-tail/tail/predicate-root/grammar.js";
+import type { ClauseLayout } from "../clause-layout/final-layout.js";
+import type { ClauseToken } from "../clause-layout/layout-types.js";
+import type { LookupTables } from "../lookup-tables.js";
+import type { ContentMap } from "../particles/index.js";
 
 export type StructuralRelationRegister = "casual" | "formal";
 
@@ -412,8 +416,6 @@ export type StructuralRelationDiagnosticName =
   | "relation_conflict"
   | "projection_unavailable";
 
-export type StructuralRelationProvenance = "structural_relation_owner";
-
 export type StructuralRelationDiagnosticSeverity = "info" | "warning" | "error";
 
 export interface StructuralRelationDiagnostic {
@@ -426,4 +428,11 @@ export interface StructuralRelationDiagnostic {
   readonly clauseId?: string;
   readonly span?: StructuralRelationTokenSpan;
   readonly markerSpans?: readonly StructuralRelationMarkerSpan[];
+}
+
+export interface BuildStructuralRelationGraphOptions {
+  readonly tokens: readonly ClauseToken[];
+  readonly layout: ClauseLayout;
+  readonly contentMap: ContentMap;
+  readonly lookups: LookupTables;
 }

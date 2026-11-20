@@ -26,11 +26,6 @@ export interface ContentResolverEntry extends MorphemeEntry {
   readonly matchReason?: string;
 }
 
-export interface TranslationCandidateDedupeMarker {
-  readonly kind: "sense" | "frame";
-  readonly value: number | string;
-}
-
 export interface ContentPatternLike {
   readonly id: string;
   readonly mainVerbEnding?: string | null;

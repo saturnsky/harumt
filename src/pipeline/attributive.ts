@@ -24,7 +24,8 @@ import { activeProtoLayout } from "./clause-layout/proto-state.js";
 import { previousNonSpaceIndex } from "./clause-layout/trivia.js";
 import { isTekiDerivationSuffixToken } from "./head-tail/tail/predicate-root/derivational-suffix-table.js";
 import { PredicateArgumentView } from "./semantics/helpers.js";
-import type { ClauseLayout, ProtoClauseLayout } from "./clause-layout/index.js";
+import type { ClauseLayout } from "./clause-layout/final-layout.js";
+import type { ProtoClauseLayout } from "./clause-layout/proto-layout.js";
 import {
   isTokoroAboutToHeadContext,
   isTokoroAlmostHeadContext,
@@ -41,7 +42,6 @@ import { TokenCursor } from "./token-cursor.js";
 
 import {
   POS0,
-  POS01,
   POS1,
   POS2,
   POS4,
@@ -63,7 +63,6 @@ import {
   助動詞_ヌ,
   助動詞_レル,
   接続助詞,
-  接尾辞_形容詞的,
   動詞,
   文語助動詞_ベシ,
   補助記号,
@@ -72,7 +71,7 @@ import {
   동사,
   형용사,
   isNaAdjCapable,
-  NOMINAL_BITS, pos0in, INFLECTABLE_BITS
+  NOMINAL_BITS, pos0in, INFLECTABLE_BITS, isAdjectivalDerivationalSuffix
 } from "../types/pos.js";
 export type AttributiveToken = MatcherToken;
 
@@ -124,10 +123,6 @@ export function conjugateNegAttributive(lemma: string, irregular: IrregularType 
 
 export function hasRentaikei(token: Pick<AttributiveToken, "pos">): boolean {
   return (token.pos & POS5A) === 連体形_;
-}
-
-export function isAdjSuffixToken(token: Pick<AttributiveToken, "pos">): boolean {
-  return (token.pos & POS01) === 接尾辞_形容詞的;
 }
 
 export function nounCopulaGiReason(noun: string, auxTokens: readonly AttributiveToken[]): string | null {
@@ -362,7 +357,7 @@ export function resolveAttributive(
     });
   }
 
-  if (!hasRentaikei(contentToken) && !isPlainPredicateShushikei(contentToken) && !isAdjSuffixToken(contentToken)) {
+  if (!hasRentaikei(contentToken) && !isPlainPredicateShushikei(contentToken) && !isAdjectivalDerivationalSuffix(contentToken)) {
     return null;
   }
   if (koreanPos === 형용사) {

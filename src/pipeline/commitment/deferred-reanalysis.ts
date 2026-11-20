@@ -4,9 +4,9 @@ import type { NumericTables } from "../../generator/numeric-lookup.js";
 import type { LookupTables } from "../lookup-tables.js";
 import { matchCopulaNegation } from "../rules/copula.js";
 import { TokenCursor } from "../token-cursor.js";
-import type { Clause, ClauseLayout } from "../clause-layout/index.js";
+import type { Clause, ClauseLayout } from "../clause-layout/final-layout.js";
 import { enumerateClausePhrasesAfter, enumerateClausePhrasesBefore } from "../clause-layout/phrase-enumeration.js";
-import type { RuntimeHaruToken, TokenReanalysisProposal } from "../../types/token.js";
+import type { RuntimeHaruToken } from "../../types/token.js";
 
 import { isPredicateHeadTailChainRenderPlan } from "../../types/render-plan.js";
 import type { ReanalysisProposalResolution, ReanalysisResolutionRecord } from "../../types/reanalysis.js";

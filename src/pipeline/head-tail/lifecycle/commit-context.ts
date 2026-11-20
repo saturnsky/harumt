@@ -1,4 +1,4 @@
-import type { ClauseLayout } from "../../clause-layout/index.js";
+import type { ClauseLayout } from "../../clause-layout/final-layout.js";
 import type { ContextGrammar } from "../../context.js";
 import type { LookupTables } from "../../lookup-tables.js";
 import type { NumericTables } from "../../../generator/numeric-lookup.js";

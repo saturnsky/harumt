@@ -1,7 +1,7 @@
 import type { MorphemeDictionary } from "../dictionary/morpheme.js";
 import type { RuntimeHaruToken } from "../types/token.js";
 import { POS0, 名詞, 동사, 형용사 } from "../types/pos.js";
-import type { LexicalNominalHeadClaims } from "./clause-layout/index.js";
+import type { LexicalNominalHeadClaims } from "./clause-layout/layout-types.js";
 import type { LookupTables } from "./lookup-tables.js";
 import {
   adnominalNoRelationSlotAcceptsHost,

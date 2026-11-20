@@ -29,7 +29,7 @@ import {
   stemHasSourceVerbalPredicate
 } from "./inspect.js";
 import { isPlainTeHoshiiAspect, isQuoteTerminalOp } from "./production-admission-helpers.js";
-import { EXEMPLIFICATION_UTTERANCE_FINAL_CLOSURES, SEMANTIC_OPERATOR_OP_KINDS } from "./production-families.js";
+import { EXEMPLIFICATION_UTTERANCE_FINAL_CLOSURES, SEMANTIC_OPERATOR_OP_KINDS } from "./production-families/shared.js";
 import {
   normalizeProductionMatch,
   type ProductionRegistryMatch
@@ -61,30 +61,14 @@ import {
   passiveStemOptionsForStem,
   simpleStemBaseResult
 } from "./renderers/base-support.js";
-import {
-  benefactiveBaseFromInput,
-  desireBaseResult,
-  desiderativeBaseFromPredicateBase,
-  predicateQuoteCarrierBase
-} from "./renderers/predicate-bases.js";
-import {
-  attributiveBoundaryRequestsFutureProjection,
-  composeBaseWithPredicateProjectionQuoteAttributive,
-  composeCommittedBaseAttributive,
-  composeBaseWithRequestComplement,
-  composeCommittedTailTerminal,
-  composeCommittedTailConnective,
-  composeCommittedTailConnectiveWithNativeTrace,
-  composeCommittedVolitionalCohortativeQuoteAttributive,
-  composeCommittedVolitionalDeliberativeRetrospectiveQuotative,
-  composeCommittedVolitionalIntentQuoteAttributive,
-  composeCommittedVolitionalReformulationQuestion,
-  composeCommittedVolitionalRetrospectiveQuotative,
-  composeCommittedVolitionalRequestComplement,
-  composeCommittedVolitionalWishComplement,
-  projectBaseAttributive,
-  renderConjectureQuotativeFromStem
-} from "./renderers/connective-compose.js";
+import { benefactiveBaseFromInput } from "./renderers/voice-benefactive-bases.js";
+import { desireBaseResult, desiderativeBaseFromPredicateBase } from "./renderers/desire-bases.js";
+import { predicateQuoteCarrierBase } from "./renderers/predicate-bases.js";
+import { attributiveBoundaryRequestsFutureProjection, composeCommittedBaseAttributive, projectBaseAttributive } from "./renderers/predicate-base-projection.js";
+import { composeBaseWithPredicateProjectionQuoteAttributive, composeBaseWithRequestComplement, composeCommittedVolitionalCohortativeQuoteAttributive, composeCommittedVolitionalDeliberativeRetrospectiveQuotative, composeCommittedVolitionalIntentQuoteAttributive, composeCommittedVolitionalReformulationQuestion, composeCommittedVolitionalRetrospectiveQuotative, composeCommittedVolitionalRequestComplement, composeCommittedVolitionalWishComplement } from "./renderers/quote-complement-compose.js";
+import { composeCommittedTailTerminal } from "./renderers/predicate-terminal-compose.js";
+import { composeCommittedTailConnective, composeCommittedTailConnectiveWithNativeTrace } from "./renderers/connective-compose.js";
+import { renderConjectureQuotativeFromStem } from "./renderers/conjecture-compose.js";
 import { buildRequestPredicateBaseResult, buildRequestQuotedPropositionBase, reprojectCommandQuoteAttributiveForHeadPolicy, renderRequestAttributiveQuoteOnPredicateBase, renderRequestOnPredicateBase, renderRequestQuestionOnPredicateBase } from "./renderers/command-render.js";
 import { attributiveCommandBaseOperatorChain, chainBases, chainStemTraceFields, collectOperatorChain, commandTerminalBaseOperatorChain, isRequestCommandAspectOp, operatorChainSlotForWrapOp, requestBaseCanUseDirectAuxiliaryImperative } from "./renderers/op-chain.js";
 import {

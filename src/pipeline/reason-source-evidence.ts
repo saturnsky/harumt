@@ -11,7 +11,7 @@ export interface ReasonSourceToken {
 const STRICT_REASON_FINAL_SURFACES = new Set(["た"]);
 const STRICT_REASON_FINAL_DICTIONARY_FORMS = new Set(["た", "ある", "有る", "いる", "居る"]);
 
-function previousContentTokenIndex(
+export function previousContentTokenIndex(
   tokens: readonly ReasonSourceToken[],
   start: number,
   lowerBoundInclusive: number,

@@ -1,5 +1,5 @@
 
-import type { ClauseToken } from "./index.js";
+import type { ClauseToken } from "./layout-types.js";
 import { isClauseEvidenceTransparentPunctuation, isClauseHardTerminalPunctuationToken } from "./punctuation.js";
 import { nextNonSpaceIndex, previousNonSpaceIndex } from "./trivia.js";
 import {
@@ -11,6 +11,8 @@ import {
   isNaAdjCapable,
   isNegativeAuxiliaryPos,
   isSahenCapableNominal,
+  isLexicalPureNaAdjStem,
+  isTerminalOrAttributiveFormPredicateToken,
   isTerminalOrAttributiveInflection,
   isVerbPredicateToken,
   pos0in,
@@ -22,6 +24,7 @@ import {
 } from "../../types/pos.js";
 import { isWeakPunctuationToken } from "../head-tail/boundary/punctuation.js";
 import { CARRIER_ONLY_EQUIVALENCE_NOUNS } from "../head-tail/data/semantic-helper-sets.js";
+import { tokensShareLemma } from "../../types/token.js";
 
 export interface PairedVolitionalPredicateShape {
   readonly lemma: string;
@@ -430,4 +433,24 @@ function renyouFocusItemChainEndAfter<T extends ClauseToken>(
     chainEndIdx = nextIdx;
   }
   return (tokens[chainEndIdx]!.pos & POS5A) === 連用形_ ? chainEndIdx : null;
+}
+
+export function reduplicatedPredicatePairClass(
+  previous: ClauseToken,
+  token: ClauseToken
+): "pure_na_adj" | "inflected_predicate" | null {
+  if (!tokensShareLemma(token, previous)) {
+    return null;
+  }
+  if (isLexicalPureNaAdjStem(token) && isLexicalPureNaAdjStem(previous)) {
+    return "pure_na_adj";
+  }
+  if (
+    isTerminalOrAttributiveFormPredicateToken(previous) &&
+    isTerminalOrAttributiveFormPredicateToken(token) &&
+    previous.surface === token.surface
+  ) {
+    return "inflected_predicate";
+  }
+  return null;
 }

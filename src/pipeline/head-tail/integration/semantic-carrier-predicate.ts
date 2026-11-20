@@ -1,8 +1,8 @@
 import type { RenderPlan } from "../../../types/render-plan.js";
 import type { RuntimeHaruToken } from "../../../types/token.js";
-import type { ParsedTailRoot, TailRoot, VerbConjType } from "../tail/predicate-root/grammar.js";
+import type { ParsedTailRoot, TailRoot } from "../tail/predicate-root/grammar.js";
 import type { StemInput } from "../tail/predicate-root/parse-input.js";
-import { parseTail } from "../tail/predicate-root/parser.js";
+import { parseTail } from "../tail/predicate-root/parse-tail.js";
 import type { LookupTables } from "../../lookup-tables.js";
 import { isTameHead } from "../../lookup-tables.js";
 import { auxHasNegation, collectAuxTokens } from "../../matchers.js";
@@ -19,9 +19,10 @@ import {
   type SemanticCarrierPredicateRealizationSpec,
   type SemanticCarrierPredicateSpec
 } from "./semantic-carrier-predicate-table.js";
-import { POS0, POS4, is五段, is上一段, is下一段, カ行変格, サ行変格, 助詞, 動詞, 名詞, 補助記号, 동사, 형용사 } from "../../../types/pos.js";
+import { POS0, POS4, 助詞, 動詞, 名詞, 補助記号, 동사, 형용사 } from "../../../types/pos.js";
 import { createTenseOp } from "../tail/predicate-root/op-builders.js";
 import { cachedQuoteBindingForContentRoot } from "../../structural-relation/quote.js";
+import { mapConjType } from "../tail/predicate-root/grammar.js";
 
 export type SemanticCarrierPredicateTailKind = "connective" | "tame" | "nominal_ga" | "terminal";
 
@@ -291,21 +292,3 @@ function removeFirstSemanticCarrierNegationFromTail(
   return { node: { ...node, ops }, changed: true };
 }
 
-function mapConjType(jpConj: number): VerbConjType {
-  if (jpConj === 0) {
-    return "irregular";
-  }
-  if (is五段(jpConj)) {
-    return "godan";
-  }
-  if (is上一段(jpConj) || is下一段(jpConj)) {
-    return "ichidan";
-  }
-  if (jpConj === サ行変格) {
-    return "sahen";
-  }
-  if (jpConj === カ行変格) {
-    return "kahen";
-  }
-  return "irregular";
-}

@@ -1,8 +1,10 @@
-import type { ClauseLayout } from "../../clause-layout/index.js";
+import type { ClauseLayout } from "../../clause-layout/final-layout.js";
 import {
-  commitDecisions,
-  type CommitmentSpan
+  commitDecisions
 } from "../../deferred-commitment.js";
+import type {
+  CommitmentSpan
+} from "../../commitment/types.js";
 import type { RuntimeHaruToken } from "../../../types/token.js";
 import type { RenderPlan } from "../../../types/render-plan.js";
 import type { LookupTables } from "../../lookup-tables.js";
@@ -128,18 +130,6 @@ export function createCommitmentDecisionLifecycleHook(): HeadedPlanLifecycleHook
       );
     }
   };
-}
-
-export function describeHeadedPlanLifecycleHooks(
-  hooks: Iterable<HeadedPlanLifecycleHook>
-): readonly HeadedPlanLifecycleHookDescriptor[] {
-  return [...hooks].map(({ id, owner, contentOrder, assemblyOrder, description }) => ({
-    id,
-    owner,
-    ...(contentOrder === undefined ? {} : { contentOrder }),
-    ...(assemblyOrder === undefined ? {} : { assemblyOrder }),
-    description
-  }));
 }
 
 function commitHeadedContentDecisions(
